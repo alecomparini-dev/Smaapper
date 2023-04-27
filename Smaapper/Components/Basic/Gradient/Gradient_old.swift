@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Gradient {
+class Gradient_Old {
 
     enum Direction {
         case leftToRight
@@ -70,7 +70,7 @@ class Gradient {
         let gradient = CAGradientLayer()
         gradient.colors = colors.map { $0.cgColor }
         gradient.frame = elem.bounds
-        setGradientDirection(gradient)
+//        setGradientDirection(gradient)
         gradient.type = .axial
         elem.layer.insertSublayer(gradient, at: 0)
     }
@@ -79,8 +79,9 @@ class Gradient {
         configGradient(elem)
         let gradient = CAGradientLayer()
         gradient.colors = colors.map { $0.cgColor }
+        
         gradient.frame = elem.bounds
-        setGradientDirection(gradient)
+//        setGradientDirection(gradient)
         gradient.startPoint = gradientVM.point
         let endY = 0 + elem.frame.size.width / elem.frame.size.height / 2
         gradient.endPoint = CGPoint(x: 0, y: endY)
@@ -93,42 +94,6 @@ class Gradient {
         elem.layoutIfNeeded()
     }
     
-    private func setGradientDirection(_ gradient:CAGradientLayer) {
-
-        switch gradientVM.direction {
-            case .leftToRight:
-                gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-                gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-            
-            case .rightToLeft:
-                gradient.startPoint = CGPoint(x: 1.0, y: 0.5)
-                gradient.endPoint = CGPoint(x: 0.0, y: 0.5)
-            
-            case .topToBottom:
-                gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
-                gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
-            
-            case .bottomToTop:
-                gradient.startPoint = CGPoint(x: 0.5, y: 1.0)
-                gradient.endPoint = CGPoint(x: 0.5, y: 0.0)
-            
-            case .leftBottomToRightTop:
-                gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-                gradient.endPoint = CGPoint(x: 1.0, y: 0.0)
-            
-            case .leftTopToRightBottom:
-                gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-                gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-            
-            case .rightBottomToLeftTop:
-                gradient.startPoint = CGPoint(x: 1.0, y: 1.0)
-                gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
-            
-            case .rightTopToLeftBottom:
-                gradient.startPoint = CGPoint(x: 1.0, y: 0.0)
-                gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
-        }
-        
-    }
+    
     
 }

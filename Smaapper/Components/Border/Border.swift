@@ -66,10 +66,6 @@ class Border {
         return self
     }
     
-    func build() -> UIView {
-        return component
-    }
-    
     
 //  MARK: - Component Private Functions
     
@@ -81,27 +77,36 @@ class Border {
             switch corner {
             case .leftTop:
                 selection.insert(CACornerMask.layerMinXMinYCorner)
+            
             case .rightTop:
                 selection.insert(CACornerMask.layerMaxXMinYCorner)
+            
             case .leftBottom:
                 selection.insert(CACornerMask.layerMinXMaxYCorner)
+            
             case .rightBottom:
                 selection.insert(CACornerMask.layerMaxXMaxYCorner)
+            
             case .top:
                 selection.insert(CACornerMask.layerMinXMinYCorner)
                 selection.insert(CACornerMask.layerMaxXMinYCorner)
+            
             case .bottom:
                 selection.insert(CACornerMask.layerMinXMaxYCorner)
                 selection.insert(CACornerMask.layerMaxXMaxYCorner)
+            
             case .left:
                 selection.insert(CACornerMask.layerMinXMinYCorner)
                 selection.insert(CACornerMask.layerMinXMaxYCorner)
+            
             case .right:
                 selection.insert(CACornerMask.layerMaxXMinYCorner)
                 selection.insert(CACornerMask.layerMaxXMaxYCorner)
+            
             case .diagonalUp:
                 selection.insert(CACornerMask.layerMinXMaxYCorner)
                 selection.insert(CACornerMask.layerMaxXMinYCorner)
+            
             case .diagonalDown:
                 selection.insert(CACornerMask.layerMinXMinYCorner)
                 selection.insert(CACornerMask.layerMaxXMaxYCorner)

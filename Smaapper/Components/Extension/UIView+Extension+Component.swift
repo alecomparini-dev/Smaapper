@@ -40,7 +40,13 @@ extension UIView {
         let _ = border(Border(self))
         return self
     }
+
     
+//  MARK: - GRADIENT
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
     
 //  MARK: - Apply Constraints
     

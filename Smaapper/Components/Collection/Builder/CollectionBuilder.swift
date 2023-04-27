@@ -54,7 +54,6 @@ class CollectionBuilder: Base {
         buildRegisterCell()
         buildLayout()
         buildDelaysContentTouches()
-        super.buildBase()
         return self
     }
     
