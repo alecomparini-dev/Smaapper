@@ -20,7 +20,8 @@ class Gradient {
         case rightTopToLeftBottom
     }
     
-    private let gradient = CAGradientLayer()
+    private var isAxial = false
+    private var gradient = CAGradientLayer()
     private var component: UIView
     
     
@@ -33,19 +34,15 @@ class Gradient {
     
 //  MARK: - Set Properties
     
-    func setDirection(_ direction: Gradient.Direction) -> Self {
-        
-        return self
-    }
-    
     func setColor(_ colors: [UIColor]) -> Self {
-        gradient.colors = colors.map { $0.cgColor }
+        self.gradient.colors = colors.map { $0.cgColor }
         return self
     }
     
     func setAxialGradient(_ direction: Gradient.Direction ) -> Self {
         self.setGradientDirection(direction)
         self.setType(.axial)
+        self.isAxial = true
         return self
     }
     
@@ -120,6 +117,7 @@ class Gradient {
     }
     
     private func configGradient() {
+        gradient.cornerRadius = component.layer.cornerRadius
         component.backgroundColor = .clear
         component.layoutIfNeeded()
     }
@@ -131,22 +129,24 @@ class Gradient {
     private func applyGradient() {
         self.configGradient()
         gradient.frame = component.bounds
-        let endY = 0 + component.frame.size.width / component.frame.size.height / 2
-        gradient.endPoint = CGPoint(x: 0, y: endY)
+        if !isAxial {
+            let endY = 0 + component.frame.size.width / component.frame.size.height / 2
+            gradient.endPoint = CGPoint(x: 0, y: endY)
+        }
         self.setGradientOnComponent()
     }
     
     
     private func setType(_ type: CAGradientLayerType) {
-        gradient.type = type
+        self.gradient.type = type
     }
     
     private func setStartPoint(_ x: Double, _ y: Double) {
-        gradient.startPoint = CGPoint(x: x, y: y)
+        self.gradient.startPoint = CGPoint(x: x, y: y)
     }
     
     private func setEndPoint(_ x: Double, _ y: Double) {
-        gradient.endPoint = CGPoint(x: x, y: y)
+        self.gradient.endPoint = CGPoint(x: x, y: y)
     }
     
     

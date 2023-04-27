@@ -67,5 +67,4 @@ class Shadow {
         self.component.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    
 }
