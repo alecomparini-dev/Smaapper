@@ -8,22 +8,26 @@
 import UIKit
 
 
-class Button: UIButton {
+class Button: UIView {
     
+    private let button: UIButton
     private var activateDisabledButton: Bool = false
     private var constraintBuilder: StartOfConstraintsFlow?
     
-    override var isEnabled: Bool {
-        didSet {
-            disableButton(isEnabled)
-        }
-    }
+//    var isEnabled: Bool {
+//        didSet {
+//            disableButton(isEnabled)
+//        }
+//    }
     
     init() {
+        self.button = UIButton()
         super.init(frame: .zero)
+        self.initialization()
     }
     
     init(_ title: String) {
+        self.button = UIButton()
         super.init(frame: .zero)
         let _ = self.setTitle(title, .normal)
     }
@@ -32,34 +36,65 @@ class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func initialization() {
+        addSubview(button)
+        button.applyConstraints { build in
+            build.setTop.setBottom.setLeading.setTrailing.equalToSuperView
+        }
+    }
+    
     
 //  MARK: - Properties
+    
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
-        super.setTitle(title, for: state)
+        button.setTitle(title, for: state)
         return self
     }
     
     func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
-        super.setTitleColor(color, for: state)
+        button.setTitleColor(color, for: state)
         return self
     }
     
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            self.titleLabel?.font = font
+            button.titleLabel?.font = font
         }
         return self
     }
     
     func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
-        self.titleLabel?.textAlignment = alignment
+        button.titleLabel?.textAlignment = alignment
+        return self
+    }
+    
+    func setFloatButton() -> Self {
+        self.floatButton(button)
+        return self
+    }
+
+    func setHeight(_ height: CGFloat) -> Self {
+        DispatchQueue.main.async {
+            self.applyConstraints({ build in
+                build.setHeight.equalToConstant(height)
+            })
+        }
+        return self
+    }
+    
+    func setWidth(_ width: CGFloat) -> Self {
+        DispatchQueue.main.async {
+            self.applyConstraints({ build in
+                build.setWidth.equalToConstant(width)
+            })
+        }
         return self
     }
     
     public func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
         if startDisable {
-            isEnabled = false
+//            isEnabled = false
         }
         return self
     }
@@ -68,7 +103,7 @@ class Button: UIButton {
 //  MARK: - Action Area
     
     func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
-        self.addTarget(target, action: action, for: event )
+        button.addTarget(target, action: action, for: event )
         return self
     }
     
@@ -82,6 +117,16 @@ class Button: UIButton {
             return
         }
         self.alpha = 1
+    }
+    
+    
+    private func floatButton(_ button: UIButton) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.addSubview(button)
+            window.windowLevel = UIWindow.Level.alert + 1
+        }
+
     }
     
     
