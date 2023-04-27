@@ -62,7 +62,6 @@ class Table: Base {
         buildTransform()
         buildTableFooter()
         buildRegisterCell()
-        super.buildBase()
         return self
     }
     

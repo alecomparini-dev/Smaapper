@@ -16,7 +16,7 @@ class Shadow {
     init(_ component: UIView) {
         self.component = component
         self.setInitializers()
-        self.setDefault().end
+        let _ = self.setDefault()
     }
     
     required init?(coder: NSCoder) {
@@ -53,8 +53,6 @@ class Shadow {
     
     
 //  MARK: - Component private functions
-    
-    private var end: Void { return }
     
     func setDefault() -> Self {
         return self.setColor(ShadowDefault.color)
