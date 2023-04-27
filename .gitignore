@@ -1,5 +1,7 @@
 *.vscode
 
+Smaapper/*.DS_Store
+*/.DS_Store
 Smaapper/Components/**/*.DS_Store
 *.DS_Store
 /**/.DS_Store
