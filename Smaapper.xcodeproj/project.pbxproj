@@ -77,6 +77,7 @@
 		0234A94929FA9E8E008392EC /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A94829FA9E8E008392EC /* Gradient.swift */; };
 		0234A95729FAF7DF008392EC /* ButtonD3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95629FAF7DF008392EC /* ButtonD3.swift */; };
 		0234A95A29FAFB8D008392EC /* ButtonFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95929FAFB8D008392EC /* ButtonFloat.swift */; };
+		0234A95D29FB3E47008392EC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95C29FB3E47008392EC /* View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		0234A94829FA9E8E008392EC /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		0234A95629FAF7DF008392EC /* ButtonD3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonD3.swift; sourceTree = "<group>"; };
 		0234A95929FAFB8D008392EC /* ButtonFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFloat.swift; sourceTree = "<group>"; };
+		0234A95C29FB3E47008392EC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0234A95B29FB3E39008392EC /* View */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0234A8F929F9FD3A008392EC /* Base */,
 				0234A8C029F9FD3A008392EC /* Basic */,
@@ -702,6 +705,14 @@
 			path = ButtonFloat;
 			sourceTree = "<group>";
 		};
+		0234A95B29FB3E39008392EC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0234A95C29FB3E47008392EC /* View.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -852,6 +863,7 @@
 				0234A90429F9FD3A008392EC /* BorderDefault.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				0234A90929F9FD3A008392EC /* CollectionModel.swift in Sources */,
+				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A92629F9FD3A008392EC /* GradientModel.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A94129F9FD3A008392EC /* TableView.swift in Sources */,

@@ -8,26 +8,22 @@
 import UIKit
 
 
-class Button: UIView {
+class Button: UIButton {
     
-    private let button: UIButton
     private var activateDisabledButton: Bool = false
     private var constraintBuilder: StartOfConstraintsFlow?
     
-//    var isEnabled: Bool {
-//        didSet {
-//            disableButton(isEnabled)
-//        }
-//    }
+    override var isEnabled: Bool {
+        didSet {
+            disableButton(isEnabled)
+        }
+    }
     
     init() {
-        self.button = UIButton()
         super.init(frame: .zero)
-        self.initialization()
     }
     
     init(_ title: String) {
-        self.button = UIButton()
         super.init(frame: .zero)
         let _ = self.setTitle(title, .normal)
     }
@@ -36,40 +32,33 @@ class Button: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
-        addSubview(button)
-        button.applyConstraints { build in
-            build.setTop.setBottom.setLeading.setTrailing.equalToSuperView
-        }
-    }
-    
     
 //  MARK: - Properties
     
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
-        button.setTitle(title, for: state)
+        super.setTitle(title, for: state)
         return self
     }
     
     func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
-        button.setTitleColor(color, for: state)
+        super.setTitleColor(color, for: state)
         return self
     }
     
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            button.titleLabel?.font = font
+            self.titleLabel?.font = font
         }
         return self
     }
     
     func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
-        button.titleLabel?.textAlignment = alignment
+        self.titleLabel?.textAlignment = alignment
         return self
     }
     
     func setFloatButton() -> Self {
-        self.floatButton(button)
+        self.floatButton(self)
         return self
     }
 
@@ -94,7 +83,7 @@ class Button: UIView {
     public func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
         if startDisable {
-//            isEnabled = false
+            isEnabled = false
         }
         return self
     }
@@ -103,7 +92,7 @@ class Button: UIView {
 //  MARK: - Action Area
     
     func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
-        button.addTarget(target, action: action, for: event )
+        self.addTarget(target, action: action, for: event )
         return self
     }
     
