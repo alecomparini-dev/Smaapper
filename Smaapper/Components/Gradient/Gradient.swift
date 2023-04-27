@@ -117,6 +117,7 @@ class Gradient {
     }
     
     private func configGradient() {
+        gradient.cornerRadius = component.layer.cornerRadius
         component.backgroundColor = .clear
         component.layoutIfNeeded()
     }
