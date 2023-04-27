@@ -10,6 +10,7 @@ import UIKit
 class Shadow {
     
     private var component: UIView
+    private var shadowLayer: CAShapeLayer!
     
 //  MARK: - Initializers
     
@@ -66,6 +67,9 @@ class Shadow {
         self.component.layer.shouldRasterize = true
         self.component.layer.rasterizationScale = UIScreen.main.scale
     }
+    
+    
+
     
     
 }
