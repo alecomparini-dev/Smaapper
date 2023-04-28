@@ -63,7 +63,18 @@ class Home: UIView {
             }
             .setGradient { build in
                 build
-                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
+//                    .setColor([UIColor.HEX("#13547a"),UIColor.HEX("#50827c")]) // -> Aqua Splash
+//                    .setColor([UIColor.HEX("#df667b"),UIColor.HEX("#df6e9d")]) // -> Passionate Bed
+                    .setColor([UIColor.HEX("#09203f"),UIColor.HEX("#3e5a70")]) // -> Eternal Constance
+                    .setColor([UIColor.HEX("#009245"),UIColor.HEX("#FCEE21")]) // -> Luscious Lime
+                    .setColor([UIColor.HEX("#662D8C"),UIColor.HEX("#ED1E79")]) // -> Purple Lake **
+                    .setColor([UIColor.HEX("#614385"),UIColor.HEX("#516395")]) // -> Kashmir *
+                    .setColor([UIColor.HEX("#09203F"),UIColor.HEX("#537895")]) // -> Eternal Constance ***
+                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
+                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
+                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
+                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
+                    .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary **
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
@@ -72,7 +83,6 @@ class Home: UIView {
     
     lazy var buttomTest2: Button = {
         let btn = Button("TESTE3")
-
             .setBorder { build in
                 build
                     .setCornerRadius(18)
@@ -91,25 +101,29 @@ class Home: UIView {
     }()
     
     
-    lazy var buttomTest3D: Converter3D = {
-        let btn = Converter3D(UIImageView(image: UIImage(systemName: "square.stack.3d.forward.dottedline")))
-            .setComponent(Button()
-                .setBorder { build in
-                    build.setCornerRadius(15)
-                        .setColor(UIColor.HEX("#2d343d"))
-                        .setWidth(2)
-                }
-                .setTitle("C", .normal)
-                .setTitleColor(.white, .normal)
-                .setGradient { build in
-                    build
-                        .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
-                        .setAxialGradient(.leftTopToRightBottom)
-                        .apply()
-                }
-                .setBackgroundColor(.red)
-                .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
-            )
+    lazy var convertButton: Button = {
+        let btn = Button("TESTE3")
+            .setBorder { build in
+                build.setCornerRadius(15)
+                    .setColor(UIColor.HEX("#2d343d"))
+                    .setWidth(2)
+            }
+            .setTitle("C", .normal)
+            .setTitleColor(.white, .normal)
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+            .setBackgroundColor(.red)
+            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
+        return btn
+    }()
+    
+    
+    lazy var buttomTest3D: ElevationWrapper = {
+        let btn = ElevationWrapper(convertButton)
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-15)
                     .setTrailing.equalToSafeArea(-20)
