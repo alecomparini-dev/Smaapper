@@ -106,7 +106,7 @@ class Home: UIView {
             .setBorder { build in
                 build.setCornerRadius(15)
                     .setColor(UIColor.HEX("#2d343d"))
-                    .setWidth(2)
+                    .setWidth(1)
             }
             .setTitle("C", .normal)
             .setTitleColor(.white, .normal)

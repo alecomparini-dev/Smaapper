@@ -31,11 +31,11 @@ class ElevationWrapper: View {
 //  MARK: - Private Function Area
     
     private func buildComponet3D() {
-        let topShadow = createShadowLayer(.systemGray2.withAlphaComponent(0.15))
-        topShadow.shadowOffset = CGSize(width: -2, height: -2)
+        let topShadow = createShadowLayer(.white.withAlphaComponent(0.13))
+        topShadow.shadowOffset = CGSize(width: -5, height: -2)
         
-        let bottomShadow = createShadowLayer(.black.withAlphaComponent(0.5))
-        bottomShadow.shadowOffset = CGSize(width: 10, height: 6)
+        let bottomShadow = createShadowLayer(.black.withAlphaComponent(0.8))
+        bottomShadow.shadowOffset = CGSize(width: 8, height: 8)
         
         layer.insertSublayer(topShadow, at: 0)
         layer.insertSublayer(bottomShadow, at: 0)
@@ -55,7 +55,7 @@ class ElevationWrapper: View {
         shadowLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
                                                             width: self.frame.width ,
                                                             height: self.frame.height),
-                                        cornerRadius: self.layer.cornerRadius).cgPath
+                                        cornerRadius: component.layer.cornerRadius).cgPath
         
         shadowLayer.fillColor = UIColor.clear.cgColor
         shadowLayer.shadowColor = color.cgColor
