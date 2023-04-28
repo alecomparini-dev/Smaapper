@@ -41,7 +41,7 @@ class Home: UIView {
     lazy var buttomTest: Button = {
         let btn = Button("TESTE")
             .setHeight(50)
-            .setWidth(250)
+            .setWidth(280)
             .setShadow { build in
                 build
                     .setColor(.black)
@@ -56,8 +56,8 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-//                    .setBottom.equalToSafeArea(-1)
+//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
+                    .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
 //                    .setTrailing.setLeading.equalToSafeArea(30)
             }
@@ -93,7 +93,7 @@ class Home: UIView {
                 build
 //                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
                     .setBottom.equalToSafeArea(-10)
-                    .setTrailing.setLeading.equalToSafeArea(30)
+                    .setTrailing.setLeading.equalToSafeArea(10)
                     .setHeight.equalToConstant(60)
             }
             .setBackgroundColor(.yellow)
@@ -125,7 +125,7 @@ class Home: UIView {
     lazy var buttomTest3D: ElevationWrapper = {
         let btn = ElevationWrapper(convertButton)
             .setConstraints { build in
-                build.setBottom.equalToSafeArea(-15)
+                build.setBottom.equalToSafeArea(-650)
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(50)
@@ -142,71 +142,25 @@ class Home: UIView {
         buttomTest.applyConstraint()
         
 
-//        floatButton.add(insideTo: self)
-//        floatButton.applyConstraints { build in
-//            build.setBottom.equalToSafeArea(-15)
-//                .setTrailing.equalToSafeArea(-15)
-//                .setHeight.setWidth.equalToConstant(50)
-//        }
-//        buttomTest2.add(insideTo: self)
-//        buttomTest2.applyConstraint()
+        floatButton.add(insideTo: self)
+        floatButton.applyConstraints { build in
+            build.setBottom.equalToSafeArea(-15)
+                .setTrailing.equalToSafeArea(-10)
+                .setHeight.setWidth.equalToConstant(50)
+        }
+        
+        buttomTest2.add(insideTo: self)
+        buttomTest2.applyConstraint()
         
         buttomTest3D.add(insideTo: self)
         buttomTest3D.applyConstraint()
 
         
         
+        bringSubviewToFront(buttomTest2)
+        bringSubviewToFront(floatButton)
         bringSubviewToFront(buttomTest)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        let myButton = UIButton(type: .system)
-        myButton.setTitle("Teste", for: .normal)
-        myButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        myButton.setTitleColor(.black, for: .normal)
-
-        let buttonHeight: CGFloat = 50
-        let buttonWidth: CGFloat = 150
-
-        myButton.frame = CGRect(x: 50, y: 50, width: buttonWidth, height: buttonHeight)
-
-        let topShadowLayer = CALayer()
-        topShadowLayer.frame = CGRect(x: 0, y: -10, width: buttonWidth, height: buttonHeight + 10)
-        topShadowLayer.backgroundColor = UIColor.clear.cgColor
-        topShadowLayer.shadowColor = UIColor.white.cgColor
-        topShadowLayer.shadowOffset = CGSize(width: 0, height: -5)
-        topShadowLayer.shadowOpacity = 1.0
-        topShadowLayer.shadowRadius = 5
-
-        let bottomShadowLayer = CALayer()
-        bottomShadowLayer.frame = CGRect(x: 0, y: buttonHeight, width: buttonWidth, height: 10)
-        bottomShadowLayer.backgroundColor = UIColor.clear.cgColor
-        bottomShadowLayer.shadowColor = UIColor.yellow.cgColor
-        bottomShadowLayer.shadowOffset = CGSize(width: 0, height: 5)
-        bottomShadowLayer.shadowOpacity = 1.0
-        bottomShadowLayer.shadowRadius = 5
-
-        myButton.layer.insertSublayer(bottomShadowLayer, at: 0)
-        myButton.layer.insertSublayer(topShadowLayer, at: 0)
-
-        
-        
-        
-        myButton.add(insideTo: self)
-        myButton.applyConstraints { build in
-            build.setTop.setLeading.setTrailing.equalToSafeArea(10)
-                .setHeight.equalToConstant(60)
-        }
-        
-        
-        
-        
+        bringSubviewToFront(buttomTest3D)
         
         
     }
