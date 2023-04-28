@@ -24,8 +24,7 @@ class Label: UILabel {
     
     init(_ text: String) {
         super.init(frame: .zero)
-        let _ = self.setDefault()
-            .setText(text)
+        initialization()
     }
     
     convenience init(_ text: String, _ color: UIColor) {
@@ -38,11 +37,8 @@ class Label: UILabel {
         let _ = self.setTextAlignment(aligment)
     }
     
-
-//  MARK: - Properties Default
-    
-    func setDefault() -> Self {
-        return self.setColor(LabelDefault.color)
+    private func initialization() {
+        _ = self.setColor(LabelDefault.color)
             .setFont(LabelDefault.font)
             .setTextAlignment(LabelDefault.aligment)
             .setNumberOfLines(LabelDefault.numberOfLines)

@@ -8,7 +8,7 @@
 import UIKit
 
 class Home: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.HEX("#1c1e20")
@@ -25,23 +25,12 @@ class Home: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var floatButton: UIButton = {
-        let floatButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        floatButton.center = CGPoint(x: bounds.width - 50, y: bounds.height - 50)
-        floatButton.backgroundColor = .blue
-        floatButton.layer.cornerRadius = 30
-        floatButton.layer.shadowOpacity = 0.5
-        floatButton.layer.shadowRadius = 5
-        floatButton.layer.shadowOffset = CGSize(width: 0, height: 5)
-        
-        return floatButton
-    }()
-    
-    
-    lazy var buttomTest: Button = {
-        let btn = Button("TESTE")
+    lazy var buttom1: Button = {
+        let btn = Button("BUTTON 1")
             .setHeight(50)
             .setWidth(280)
+//            .setTitleColor(.red, .normal)
+            .setActivateDisabledButton(false)
             .setShadow { build in
                 build
                     .setColor(.black)
@@ -56,59 +45,40 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
+                //                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
                     .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
-//                    .setTrailing.setLeading.equalToSafeArea(30)
+                //                    .setTrailing.setLeading.equalToSafeArea(30)
             }
             .setGradient { build in
                 build
 //                    .setColor([UIColor.HEX("#13547a"),UIColor.HEX("#50827c")]) // -> Aqua Splash
 //                    .setColor([UIColor.HEX("#df667b"),UIColor.HEX("#df6e9d")]) // -> Passionate Bed
-                    .setColor([UIColor.HEX("#09203f"),UIColor.HEX("#3e5a70")]) // -> Eternal Constance
-                    .setColor([UIColor.HEX("#009245"),UIColor.HEX("#FCEE21")]) // -> Luscious Lime
-                    .setColor([UIColor.HEX("#662D8C"),UIColor.HEX("#ED1E79")]) // -> Purple Lake **
-                    .setColor([UIColor.HEX("#614385"),UIColor.HEX("#516395")]) // -> Kashmir *
-                    .setColor([UIColor.HEX("#09203F"),UIColor.HEX("#537895")]) // -> Eternal Constance ***
-                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
-                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
-                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
-                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
-                    .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary **
+//                    .setColor([UIColor.HEX("#09203f"),UIColor.HEX("#3e5a70")]) // -> Eternal Constance
+//                    .setColor([UIColor.HEX("#009245"),UIColor.HEX("#FCEE21")]) // -> Luscious Lime
+//                    .setColor([UIColor.HEX("#662D8C"),UIColor.HEX("#ED1E79")]) // -> Purple Lake **
+//                    .setColor([UIColor.HEX("#ED1E79"),UIColor.HEX("#662D8C")]) // -> Purple Lake INVERTIDO** <-
+//                    .setColor([UIColor.HEX("#614385"),UIColor.HEX("#516395")]) // -> Kashmir *
+//                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
+//                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
+//                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
+//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
+                    .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary VENCEDOR
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
         return btn
     }()
     
-    lazy var buttomTest2: Button = {
-        let btn = Button("TESTE3")
-            .setBorder { build in
-                build
-                    .setCornerRadius(18)
-                    .setColor(.white.withAlphaComponent(0.5))
-                    .setWidth(0.5)
-            }
-            .setConstraints { build in
-                build
-//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-                    .setBottom.equalToSafeArea(-10)
-                    .setTrailing.setLeading.equalToSafeArea(10)
-                    .setHeight.equalToConstant(60)
-            }
-            .setBackgroundColor(.yellow)
-        return btn
-    }()
-    
     
     lazy var convertButton: Button = {
-        let btn = Button("TESTE3")
+        let btn = Button()
             .setBorder { build in
                 build.setCornerRadius(15)
                     .setColor(UIColor.HEX("#2d343d"))
                     .setWidth(1)
             }
-            .setTitle("C", .normal)
+            .setTitle("2", .normal)
             .setTitleColor(.white, .normal)
             .setGradient { build in
                 build
@@ -133,34 +103,63 @@ class Home: UIView {
         return btn
     }()
     @objc func didTapFloatingButton() {
-            // Ação do botão flutuante
-            print("Floating button tapped!")
-        }
-
+        print("Floating button tapped!")
+        buttom1.isEnabled = !buttom1.isEnabled
+        buttomIMAGE.isEnabled = !buttomIMAGE.isEnabled
+    }
+    
+    
+    lazy var buttomIMAGE: ButtonImage = {
+        let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
+            .setHeight(50)
+            .setWidth(280)
+//            .setTitleSize(50)
+            .setTitleColor(.white, .normal)
+            .setTitle("Button Image", .normal)
+            .setActivateDisabledButton(false)
+            .setShadow { build in
+                build
+                    .setColor(.black)
+                    .setOffset(width: 3, height: 5)
+                    .setRadius(1)
+            }
+            .setBorder { build in
+                build
+                    .setCornerRadius(18)
+                    .setColor(.white.withAlphaComponent(0.5))
+                    .setWidth(0.5)
+            }
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
+//                    .setBottom.equalToSafeArea(-1)
+                    .setHorizontalAlignmentX.equalToSafeArea
+//                    .setTrailing.setLeading.equalToSafeArea(30)
+            }
+        return btn
+    }()
+    
     private func addElements() {
-        buttomTest.add(insideTo: self)
-        buttomTest.applyConstraint()
-        
-
-        floatButton.add(insideTo: self)
-        floatButton.applyConstraints { build in
-            build.setBottom.equalToSafeArea(-15)
-                .setTrailing.equalToSafeArea(-10)
-                .setHeight.setWidth.equalToConstant(50)
-        }
-        
-        buttomTest2.add(insideTo: self)
-        buttomTest2.applyConstraint()
+        buttom1.add(insideTo: self)
+        buttom1.applyConstraint()
         
         buttomTest3D.add(insideTo: self)
         buttomTest3D.applyConstraint()
-
         
+        buttomIMAGE.add(insideTo: self)
+        buttomIMAGE.applyConstraint()
         
-        bringSubviewToFront(buttomTest2)
-        bringSubviewToFront(floatButton)
-        bringSubviewToFront(buttomTest)
+        bringSubviewToFront(buttom1)
         bringSubviewToFront(buttomTest3D)
+        
+        
+        
         
         
     }
