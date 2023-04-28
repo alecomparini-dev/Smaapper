@@ -9,10 +9,10 @@ import UIKit
 
 class ElevationWrapper: View {
     
-    private let component: UIView
+    private let _component: UIView
     
     init(_ component: UIView) {
-        self.component = component
+        self._component = component
         super.init()
         self.initialization()
     }
@@ -27,6 +27,8 @@ class ElevationWrapper: View {
             self.buildComponet3D()
         }
     }
+    
+    var component: UIView { self._component }
     
 //  MARK: - Private Function Area
     

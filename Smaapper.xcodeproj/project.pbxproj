@@ -47,16 +47,10 @@
 		0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BC29F9FD3A008392EC /* ShadowDefault.swift */; };
 		0234A92229F9FD3A008392EC /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BD29F9FD3A008392EC /* Shadow.swift */; };
 		0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */; };
-		0234A92429F9FD3A008392EC /* GradientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8C329F9FD3A008392EC /* GradientViewModel.swift */; };
-		0234A92529F9FD3A008392EC /* Gradient_old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8C429F9FD3A008392EC /* Gradient_old.swift */; };
-		0234A92629F9FD3A008392EC /* GradientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8C629F9FD3A008392EC /* GradientModel.swift */; };
 		0234A92F29F9FD3A008392EC /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8D829F9FD3A008392EC /* TabBar.swift */; };
 		0234A93029F9FD3A008392EC /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8DA29F9FD3A008392EC /* TabBarViewModel.swift */; };
 		0234A93129F9FD3A008392EC /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8DC29F9FD3A008392EC /* TabBarModel.swift */; };
 		0234A93229F9FD3A008392EC /* TabBarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8DD29F9FD3A008392EC /* TabBarItemModel.swift */; };
-		0234A93329F9FD3A008392EC /* FontViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E029F9FD3A008392EC /* FontViewModel.swift */; };
-		0234A93429F9FD3A008392EC /* FontModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E229F9FD3A008392EC /* FontModel.swift */; };
-		0234A93529F9FD3A008392EC /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E329F9FD3A008392EC /* Font.swift */; };
 		0234A93629F9FD3A008392EC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E529F9FD3A008392EC /* Label.swift */; };
 		0234A93729F9FD3A008392EC /* LabelDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E629F9FD3A008392EC /* LabelDefault.swift */; };
 		0234A93829F9FD3A008392EC /* TextFieldImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E929F9FD3A008392EC /* TextFieldImage.swift */; };
@@ -78,6 +72,8 @@
 		0234A95A29FAFB8D008392EC /* ButtonFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95929FAFB8D008392EC /* ButtonFloat.swift */; };
 		0234A95D29FB3E47008392EC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95C29FB3E47008392EC /* View.swift */; };
 		0234A96029FB488A008392EC /* ElevationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95F29FB488A008392EC /* ElevationWrapper.swift */; };
+		0234A96329FC0659008392EC /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96229FC0659008392EC /* IconButton.swift */; };
+		0234A96629FC0820008392EC /* ButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,16 +138,10 @@
 		0234A8BC29F9FD3A008392EC /* ShadowDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDefault.swift; sourceTree = "<group>"; };
 		0234A8BD29F9FD3A008392EC /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowsScroll.swift; sourceTree = "<group>"; };
-		0234A8C329F9FD3A008392EC /* GradientViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientViewModel.swift; sourceTree = "<group>"; };
-		0234A8C429F9FD3A008392EC /* Gradient_old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradient_old.swift; sourceTree = "<group>"; };
-		0234A8C629F9FD3A008392EC /* GradientModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientModel.swift; sourceTree = "<group>"; };
 		0234A8D829F9FD3A008392EC /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		0234A8DA29F9FD3A008392EC /* TabBarViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		0234A8DC29F9FD3A008392EC /* TabBarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
 		0234A8DD29F9FD3A008392EC /* TabBarItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItemModel.swift; sourceTree = "<group>"; };
-		0234A8E029F9FD3A008392EC /* FontViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontViewModel.swift; sourceTree = "<group>"; };
-		0234A8E229F9FD3A008392EC /* FontModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontModel.swift; sourceTree = "<group>"; };
-		0234A8E329F9FD3A008392EC /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		0234A8E529F9FD3A008392EC /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		0234A8E629F9FD3A008392EC /* LabelDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelDefault.swift; sourceTree = "<group>"; };
 		0234A8E929F9FD3A008392EC /* TextFieldImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldImage.swift; sourceTree = "<group>"; };
@@ -173,6 +163,8 @@
 		0234A95929FAFB8D008392EC /* ButtonFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFloat.swift; sourceTree = "<group>"; };
 		0234A95C29FB3E47008392EC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		0234A95F29FB488A008392EC /* ElevationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationWrapper.swift; sourceTree = "<group>"; };
+		0234A96229FC0659008392EC /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		0234A96529FC0820008392EC /* ButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,8 +246,6 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0234A95E29FB432E008392EC /* ElevationWrapper */,
-				0234A95B29FB3E39008392EC /* View */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0234A8F929F9FD3A008392EC /* Base */,
 				0234A8C029F9FD3A008392EC /* Basic */,
@@ -263,6 +253,7 @@
 				0234A8EE29F9FD3A008392EC /* Button */,
 				0234A88F29F9FD3A008392EC /* Collection */,
 				0234A8A129F9FD3A008392EC /* Constraints */,
+				0234A95E29FB432E008392EC /* ElevationWrapper */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
 				0234A94729FA9E79008392EC /* Gradient */,
@@ -271,6 +262,7 @@
 				0234A8BB29F9FD3A008392EC /* Shadow */,
 				0234A8F129F9FD3A008392EC /* Table */,
 				0234A8E729F9FD3A008392EC /* TextField */,
+				0234A95B29FB3E39008392EC /* View */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -471,37 +463,9 @@
 		0234A8C029F9FD3A008392EC /* Basic */ = {
 			isa = PBXGroup;
 			children = (
-				0234A8C129F9FD3A008392EC /* Gradient */,
 				0234A8D729F9FD3A008392EC /* TabBar */,
-				0234A8DE29F9FD3A008392EC /* Font */,
 			);
 			path = Basic;
-			sourceTree = "<group>";
-		};
-		0234A8C129F9FD3A008392EC /* Gradient */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8C229F9FD3A008392EC /* ViewModel */,
-				0234A8C429F9FD3A008392EC /* Gradient_old.swift */,
-				0234A8C529F9FD3A008392EC /* Model */,
-			);
-			path = Gradient;
-			sourceTree = "<group>";
-		};
-		0234A8C229F9FD3A008392EC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8C329F9FD3A008392EC /* GradientViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0234A8C529F9FD3A008392EC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8C629F9FD3A008392EC /* GradientModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		0234A8D729F9FD3A008392EC /* TabBar */ = {
@@ -527,32 +491,6 @@
 			children = (
 				0234A8DC29F9FD3A008392EC /* TabBarModel.swift */,
 				0234A8DD29F9FD3A008392EC /* TabBarItemModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		0234A8DE29F9FD3A008392EC /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8DF29F9FD3A008392EC /* ViewModel */,
-				0234A8E129F9FD3A008392EC /* Model */,
-				0234A8E329F9FD3A008392EC /* Font.swift */,
-			);
-			path = Font;
-			sourceTree = "<group>";
-		};
-		0234A8DF29F9FD3A008392EC /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8E029F9FD3A008392EC /* FontViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		0234A8E129F9FD3A008392EC /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0234A8E229F9FD3A008392EC /* FontModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -596,6 +534,8 @@
 		0234A8EE29F9FD3A008392EC /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				0234A96429FC080D008392EC /* ButtonImage */,
+				0234A96129FC064D008392EC /* IconButton */,
 				0234A95829FAFB64008392EC /* ButtonFloat */,
 				0234A8EF29F9FD3A008392EC /* ButtonDefault.swift */,
 				0234A8F029F9FD3A008392EC /* Button.swift */,
@@ -711,6 +651,22 @@
 				0234A95F29FB488A008392EC /* ElevationWrapper.swift */,
 			);
 			path = ElevationWrapper;
+			sourceTree = "<group>";
+		};
+		0234A96129FC064D008392EC /* IconButton */ = {
+			isa = PBXGroup;
+			children = (
+				0234A96229FC0659008392EC /* IconButton.swift */,
+			);
+			path = IconButton;
+			sourceTree = "<group>";
+		};
+		0234A96429FC080D008392EC /* ButtonImage */ = {
+			isa = PBXGroup;
+			children = (
+				0234A96529FC0820008392EC /* ButtonImage.swift */,
+			);
+			path = ButtonImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -843,10 +799,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0234A92429F9FD3A008392EC /* GradientViewModel.swift in Sources */,
 				0234A94629F9FD3A008392EC /* HomeVC.swift in Sources */,
 				0234A95A29FAFB8D008392EC /* ButtonFloat.swift in Sources */,
-				0234A93429F9FD3A008392EC /* FontModel.swift in Sources */,
 				0234A94029F9FD3A008392EC /* TableModel.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
@@ -864,7 +818,6 @@
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				0234A90929F9FD3A008392EC /* CollectionModel.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
-				0234A92629F9FD3A008392EC /* GradientModel.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A94129F9FD3A008392EC /* TableView.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
@@ -881,9 +834,9 @@
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
 				0234A92F29F9FD3A008392EC /* TabBar.swift in Sources */,
 				0234A94329F9FD3A008392EC /* Base.swift in Sources */,
+				0234A96629FC0820008392EC /* ButtonImage.swift in Sources */,
 				0234A90729F9FD3A008392EC /* Collection.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
-				0234A92529F9FD3A008392EC /* Gradient_old.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				0234A90B29F9FD3A008392EC /* CollectionView.swift in Sources */,
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
@@ -891,12 +844,10 @@
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A93E29F9FD3A008392EC /* TableViewModel.swift in Sources */,
-				0234A93529F9FD3A008392EC /* Font.swift in Sources */,
 				0234A96029FB488A008392EC /* ElevationWrapper.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */,
 				0234A93029F9FD3A008392EC /* TabBarViewModel.swift in Sources */,
-				0234A93329F9FD3A008392EC /* FontViewModel.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
@@ -908,6 +859,7 @@
 				0234A93829F9FD3A008392EC /* TextFieldImage.swift in Sources */,
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,
+				0234A96329FC0659008392EC /* IconButton.swift in Sources */,
 				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

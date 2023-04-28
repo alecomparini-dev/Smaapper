@@ -23,13 +23,10 @@ class HomeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
-    @objc func floatButtonTapped() {
-        print("Float button tapped!")
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
-    
     
 }
