@@ -9,6 +9,9 @@ import UIKit
 
 class Home: UIView {
     
+    var acendeu = true
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.HEX("#1c1e20")
@@ -29,7 +32,7 @@ class Home: UIView {
         let btn = Button("BUTTON 1")
             .setHeight(50)
             .setWidth(280)
-//            .setTitleColor(.red, .normal)
+
             .setActivateDisabledButton(false)
             .setShadow { build in
                 build
@@ -86,7 +89,12 @@ class Home: UIView {
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
-            .setBackgroundColor(.red)
+            .setShadow({ build in
+                build.setColor(UIColor.HEX("#f8493c"))
+                    .setOpacity(1)
+                    .setRadius(2)
+                    .setOffset(width: 0, height: 0)
+            })
             .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
         return btn
     }()
@@ -106,15 +114,39 @@ class Home: UIView {
         print("Floating button tapped!")
         buttom1.isEnabled = !buttom1.isEnabled
         buttomIMAGE.isEnabled = !buttomIMAGE.isEnabled
+        
+        
+        
+        
+        if acendeu {
+            let test = buttomTest3D.component
+            test.setShadow({ build in
+                build.setColor(UIColor.HEX("#f8493c"))
+                    .setOpacity(0)
+                    .setRadius(0)
+                    .setOffset(width: 0, height: 0)
+            })
+        } else {
+            let test = buttomTest3D.component
+            test.setShadow({ build in
+                build.setColor(UIColor.HEX("#f8493c"))
+                    .setOpacity(1)
+                    .setRadius(2)
+                    .setOffset(width: 0, height: 0)
+            })
+        }
+        
+        acendeu = !acendeu
+        
     }
     
     
     lazy var buttomIMAGE: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
             .setHeight(50)
-            .setWidth(280)
-//            .setTitleSize(50)
-            .setTitleColor(.white, .normal)
+            .setWidth(200)
+            .setImageSize(50)
+//            .setPadding(80)
             .setTitle("Button Image", .normal)
             .setActivateDisabledButton(false)
             .setShadow { build in
@@ -160,6 +192,10 @@ class Home: UIView {
         
         
         
+        
+        
+        
+            
         
         
     }

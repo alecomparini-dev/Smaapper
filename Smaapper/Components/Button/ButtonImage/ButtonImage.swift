@@ -46,7 +46,7 @@ class ButtonImage: Button {
     private func initialization(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
         setImage(image, state, size)
         _ = setPadding(10)
-            .setTitleColor(titleColor(for: .normal) ?? .white, .normal)
+        tintColor = titleColor(for: .normal)
     }
     
     
@@ -63,17 +63,13 @@ class ButtonImage: Button {
         return self
     }
     
-//    func setColor( _ color: UIColor) -> Self {
-//        tintColor = color
-//        return self
-//    }
-    
-//    override func setTitle(_ title: String, _ state: UIControl.State) -> Self {
-//        _ = super.setTitle(title, state)
-//        configuration = config
-//        return self
-//    }
-//
+    func setImageSize( _ size: CGFloat) -> Self {
+        let img = ImageView(currentImage ?? UIImage())
+            .setSize(size)
+            .setContentMode(.scaleAspectFit)
+        setImage(img.image, for: .normal)
+        return self
+    }
     
 //  MARK: - Private Function Area
     

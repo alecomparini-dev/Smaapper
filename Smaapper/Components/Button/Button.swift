@@ -23,7 +23,7 @@ class Button: UIButton {
     var config: UIButton.Configuration {
         get { return self._config }
         set { self._config = newValue
-            tintColor = titleColor(for: .normal)
+//            tintColor = titleColor(for: .normal)
         }
     }
     
@@ -43,10 +43,9 @@ class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
+    internal func initialization() {
         _ = self.setTitleColor(ButtonDefault.color, .normal)
             .setFont(ButtonDefault.font)
-        setTintColor(ButtonDefault.color.withAlphaComponent(0.2))
     }
     
     
@@ -55,6 +54,19 @@ class Button: UIButton {
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
         super.setTitle(title, for: state)
         configuration = config
+        return self
+    }
+    
+    func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
+        super.setTitleColor(color, for: state)
+        if state == .normal {
+            _ = setTintColor(titleColor(for: .normal)!.withAlphaComponent(0.8))
+        }
+        return self
+    }
+    
+    func setTintColor(_ color: UIColor) -> Self {
+        tintColor = color
         return self
     }
     
@@ -68,11 +80,6 @@ class Button: UIButton {
         return self
     }
     
-    func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
-        super.setTitleColor(color, for: state)
-        return self
-    }
-    
     func setFont(_ font: UIFont?) -> Self {
         if let font {
             self.titleLabel?.font = font
@@ -82,11 +89,6 @@ class Button: UIButton {
     
     func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
         self.titleLabel?.textAlignment = alignment
-        return self
-    }
-    
-    func setFloatButton() -> Self {
-        self.floatButton(self)
         return self
     }
 
@@ -110,6 +112,7 @@ class Button: UIButton {
     
     public func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
+        _ = setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
         if startDisable {
             isEnabled = false
         }
@@ -126,28 +129,13 @@ class Button: UIButton {
     
     
 //  MARK: - Private Function Area
-    private func setTintColor(_ color: UIColor) {
-        tintColor = color
-    }
-    
     private func disableButton(_ isEnabled: Bool) {
         if (!self.activateDisabledButton) { return }
         if !isEnabled {
-            self.alpha = 0.7
+            self.alpha = 0.6
             return
         }
         self.alpha = 1
-    }
-    
-    private func floatButton(_ button: UIButton) {
-        print("ALTERAR !!! APRA O BRINGTOFRONT")
-        
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            window.addSubview(button)
-            window.windowLevel = UIWindow.Level.alert + 1
-        }
-
     }
     
     

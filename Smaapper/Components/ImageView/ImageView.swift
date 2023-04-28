@@ -43,8 +43,9 @@ class ImageView: UIImageView {
     }
     
     func setTintColor(_ color: UIColor) -> Self {
-        image = image?.withRenderingMode(.alwaysTemplate)
-        self.tintColor = color
+        self.image = image?.withRenderingMode(.alwaysTemplate)
+        self.image?.withTintColor(color)
+        tintColor = color
         return self
     }
     
