@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeVC: UIViewController {
-
+    
     lazy var home: Home = {
         let home = Home()
         home.translatesAutoresizingMaskIntoConstraints = false
@@ -20,9 +20,16 @@ class HomeVC: UIViewController {
         view = home
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
-
+    @objc func floatButtonTapped() {
+        print("Float button tapped!")
+    }
+    
+    
 }

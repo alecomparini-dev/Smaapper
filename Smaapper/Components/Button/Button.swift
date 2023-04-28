@@ -34,6 +34,7 @@ class Button: UIButton {
     
     
 //  MARK: - Properties
+    
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
         super.setTitle(title, for: state)
         return self
@@ -53,6 +54,29 @@ class Button: UIButton {
     
     func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
         self.titleLabel?.textAlignment = alignment
+        return self
+    }
+    
+    func setFloatButton() -> Self {
+        self.floatButton(self)
+        return self
+    }
+
+    func setHeight(_ height: CGFloat) -> Self {
+        DispatchQueue.main.async {
+            self.applyConstraints({ build in
+                build.setHeight.equalToConstant(height)
+            })
+        }
+        return self
+    }
+    
+    func setWidth(_ width: CGFloat) -> Self {
+        DispatchQueue.main.async {
+            self.applyConstraints({ build in
+                build.setWidth.equalToConstant(width)
+            })
+        }
         return self
     }
     
@@ -82,6 +106,16 @@ class Button: UIButton {
             return
         }
         self.alpha = 1
+    }
+    
+    
+    private func floatButton(_ button: UIButton) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.addSubview(button)
+            window.windowLevel = UIWindow.Level.alert + 1
+        }
+
     }
     
     
