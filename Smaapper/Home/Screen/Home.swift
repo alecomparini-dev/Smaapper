@@ -191,12 +191,5 @@ class Home: UIView {
         bringSubviewToFront(buttomTest3D)
         
         
-        
-        
-        
-        
-            
-        
-        
     }
 }
