@@ -67,8 +67,7 @@ class Gradient {
         }
         return self
     }
-    
-    
+        
 //  MARK: - Component Private Functions
     
     private func setGradientDirection(_ direction: Direction) {
@@ -118,12 +117,12 @@ class Gradient {
     
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
-        component.backgroundColor = .clear
+        component.backgroundColor = .none
         component.layoutIfNeeded()
     }
     
     private func setGradientOnComponent() {
-        component.layer.insertSublayer(gradient, at: 0)
+        component.layer.insertSublayer(gradient, at: 1)
     }
     
     private func applyGradient() {
@@ -151,3 +150,4 @@ class Gradient {
     
     
 }
+

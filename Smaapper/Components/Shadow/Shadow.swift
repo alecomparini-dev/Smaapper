@@ -10,11 +10,13 @@ import UIKit
 class Shadow {
     
     private var component: UIView
+    private let shadow: CALayer
     
 //  MARK: - Initializers
     
     init(_ component: UIView) {
         self.component = component
+        self.shadow = CALayer()
         self.setInitializers()
         let _ = self.setDefault()
     }
@@ -27,27 +29,27 @@ class Shadow {
 //  MARK: - Properties
     
     func setColor(_ color: UIColor) -> Self {
-        component.layer.shadowColor = color.cgColor
+        shadow.shadowColor = color.cgColor
         return self
     }
     
     func setOffset(width: Int, height: Int) -> Self {
-        component.layer.shadowOffset = CGSize(width: width, height: height)
+        shadow.shadowOffset = CGSize(width: width, height: height)
         return self
     }
     
     func setOffset(_ offSet: CGSize) -> Self {
-        component.layer.shadowOffset = offSet
+        shadow.shadowOffset = offSet
         return self
     }
     
     func setOpacity(_ opacity: Float) -> Self {
-        component.layer.shadowOpacity = opacity
+        shadow.shadowOpacity = opacity
         return self
     }
     
     func setRadius(_ radius: CGFloat) -> Self {
-        component.layer.shadowRadius = radius
+        shadow.shadowRadius = radius
         return self
     }
     
@@ -59,6 +61,18 @@ class Shadow {
             .setOffset(ShadowDefault.offset)
             .setOpacity(ShadowDefault.opacity)
             .setRadius(ShadowDefault.radius)
+    }
+    
+    func apply() -> Self {
+        DispatchQueue.main.async {
+            self.component.layoutIfNeeded()
+            self.shadow.frame = self.component.bounds
+            self.shadow.backgroundColor = UIColor.clear.cgColor
+            self.shadow.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
+                                                  cornerRadius: self.component.layer.cornerRadius).cgPath
+            self.component.layer.insertSublayer(self.shadow, at: 0)
+        }
+        return self
     }
     
     private func setInitializers() {

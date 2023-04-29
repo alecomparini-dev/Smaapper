@@ -9,12 +9,8 @@ import UIKit
 
 class Home: UIView {
     
-    var acendeu = true
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.HEX("#1c1e20")
         _ = self.setGradient { build in
             build
                 .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
@@ -32,13 +28,14 @@ class Home: UIView {
         let btn = Button("BUTTON 1")
             .setHeight(50)
             .setWidth(280)
-
+        
             .setActivateDisabledButton(false)
             .setShadow { build in
                 build
                     .setColor(.black)
-                    .setOffset(width: 3, height: 5)
+                    .setOffset(width: 5, height: 5)
                     .setRadius(1)
+                    .apply()
             }
             .setBorder { build in
                 build
@@ -48,8 +45,8 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-                //                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-                    .setBottom.equalToSafeArea(-1)
+                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
+                //                    .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
                 //                    .setTrailing.setLeading.equalToSafeArea(30)
             }
@@ -74,36 +71,11 @@ class Home: UIView {
     }()
     
     
-    lazy var convertButton: Button = {
-        let btn = Button()
-            .setBorder { build in
-                build.setCornerRadius(15)
-                    .setColor(UIColor.HEX("#2d343d"))
-                    .setWidth(1)
-            }
-            .setTitle("2", .normal)
-            .setTitleColor(.white, .normal)
-            .setGradient { build in
-                build
-                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
-                    .setAxialGradient(.leftTopToRightBottom)
-                    .apply()
-            }
-            .setShadow({ build in
-                build.setColor(UIColor.HEX("#f8493c"))
-                    .setOpacity(1)
-                    .setRadius(2)
-                    .setOffset(width: 0, height: 0)
-            })
-            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
-        return btn
-    }()
     
-    
-    lazy var buttomTest3D: ElevationWrapper = {
-        let btn = ElevationWrapper(convertButton)
+    lazy var buttomTest3D: Button3D = {
+        let btn = Button3D()
             .setConstraints { build in
-                build.setBottom.equalToSafeArea(-650)
+                build.setBottom.equalToSafeArea(-1)
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(50)
@@ -114,82 +86,70 @@ class Home: UIView {
         print("Floating button tapped!")
         buttom1.isEnabled = !buttom1.isEnabled
         buttomIMAGE.isEnabled = !buttomIMAGE.isEnabled
-        
-        
-        
-        
-        if acendeu {
-            let test = buttomTest3D.component
-            test.setShadow({ build in
-                build.setColor(UIColor.HEX("#f8493c"))
-                    .setOpacity(0)
-                    .setRadius(0)
-                    .setOffset(width: 0, height: 0)
-            })
-        } else {
-            let test = buttomTest3D.component
-            test.setShadow({ build in
-                build.setColor(UIColor.HEX("#f8493c"))
-                    .setOpacity(1)
-                    .setRadius(2)
-                    .setOffset(width: 0, height: 0)
-            })
-        }
-        
-        acendeu = !acendeu
-        
     }
     
     
     lazy var buttomIMAGE: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
-            .setHeight(50)
-            .setWidth(200)
+            .setTitle("Download", .normal)
+            .setHeight(45)
+            .setWidth(180)
             .setImageSize(50)
-//            .setPadding(80)
-            .setTitle("Button Image", .normal)
+            .setPadding(5)
             .setActivateDisabledButton(false)
-            .setShadow { build in
-                build
-                    .setColor(.black)
-                    .setOffset(width: 3, height: 5)
-                    .setRadius(1)
-            }
             .setBorder { build in
                 build
-                    .setCornerRadius(18)
+                    .setCornerRadius(20)
                     .setColor(.white.withAlphaComponent(0.5))
                     .setWidth(0.5)
             }
+            .setConstraints { build in
+                build
+                    .setTop.equalToSafeArea(10)
+                    .setTrailing.equalToSafeArea(-10)
+            }
             .setGradient { build in
                 build
-                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
+                    .setColor([UIColor.HEX("#ed56ff"),UIColor.HEX("#b023ff")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
-            .setConstraints { build in
+//            .setGradient { build in
+//                build
+//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
+//                    .setAxialGradient(.leftTopToRightBottom)
+//                    .apply()
+//            }
+            .setShadow { build in
                 build
-                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-//                    .setBottom.equalToSafeArea(-1)
-                    .setHorizontalAlignmentX.equalToSafeArea
-//                    .setTrailing.setLeading.equalToSafeArea(30)
+                    .setColor(.black)
+                    .setOffset(width: 5, height: 5)
+                    .setRadius(1)
+                    .apply()
             }
         return btn
     }()
     
+    
     private func addElements() {
-        buttom1.add(insideTo: self)
-        buttom1.applyConstraint()
+        
+        buttom1.layer.zPosition = 10000
+        
         
         buttomTest3D.add(insideTo: self)
         buttomTest3D.applyConstraint()
         
+        buttom1.add(insideTo: self)
+        buttom1.applyConstraint()
+        
         buttomIMAGE.add(insideTo: self)
         buttomIMAGE.applyConstraint()
         
-        bringSubviewToFront(buttom1)
-        bringSubviewToFront(buttomTest3D)
+        bringSubviewToFront(buttomIMAGE)
+        
         
         
     }
+    
 }
+
