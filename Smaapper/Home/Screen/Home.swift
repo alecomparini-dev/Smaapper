@@ -72,6 +72,59 @@ class Home: UIView {
     
     
     
+    
+    
+    lazy var buttomLaranja: Button = {
+        let btn = Button("HEADSET")
+            .setFont(UIFont.systemFont(ofSize: 17, weight: .black)) //--> NÃO ESTA FUNCIONANDO
+            .setHeight(110)
+            .setTitleAlignment(.left)
+            .setWidth(190)
+            .setTitleColor(UIColor.HEX("#ac5618"), .normal)
+            .setActivateDisabledButton(false)
+            .setBorder({ build in
+                build.setCornerRadius(20)
+                
+            })
+
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#ed904a").withAlphaComponent(0.8))
+                    .setOffset(width: -10, height: -2)
+                    .setOpacity(1)
+                    .setRadius(30)
+                    .apply()
+            }
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#000000"))
+                    .setOffset(width: 5, height: 5)
+                    .setRadius(2)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(buttom1, .bottom, 20)
+                    .setHorizontalAlignmentX.equalTo(buttom1)
+            }
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#ed8c48"),
+//                               UIColor.HEX("#ed904a"),
+//                               UIColor.HEX("#e4701c"),
+//                               UIColor.HEX("#f07012"),
+                               UIColor.HEX("#ed8c48"),
+                               UIColor.HEX("#db640e"),
+                               UIColor.HEX("#ff6b00"),
+                               UIColor.HEX("#ff6b00"),
+                               UIColor.HEX("#ff6b00")]) // -> Bloody Mary VENCEDOR
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+        return btn
+    }()
+    
+    
     lazy var buttomTest3D: Button3D = {
         let btn = Button3D()
             .setConstraints { build in
@@ -144,6 +197,9 @@ class Home: UIView {
         
         buttomIMAGE.add(insideTo: self)
         buttomIMAGE.applyConstraint()
+        
+        buttomLaranja.add(insideTo: self)
+        buttomLaranja.applyConstraint()
         
         bringSubviewToFront(buttomIMAGE)
         

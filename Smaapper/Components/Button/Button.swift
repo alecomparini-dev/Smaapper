@@ -87,11 +87,14 @@ class Button: UIButton {
         return self
     }
     
-    func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
-        self.titleLabel?.textAlignment = alignment
+    func setTitleAlignment(_ alignment: UIControl.ContentHorizontalAlignment) -> Self {
+        contentHorizontalAlignment = alignment
         return self
     }
-
+    // da pra usar como padding !!!
+//        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+//        configuration = config
+    
     func setHeight(_ height: CGFloat) -> Self {
         DispatchQueue.main.async {
             self.applyConstraints({ build in
