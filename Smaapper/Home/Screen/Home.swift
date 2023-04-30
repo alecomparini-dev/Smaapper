@@ -11,12 +11,6 @@ class Home: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        _ = self.setGradient { build in
-//            build
-//                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
-//                .setAxialGradient(.leftTopToRightBottom)
-//                .apply()
-//        }
         addElements()
     }
     
@@ -44,8 +38,8 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-                //                    .setBottom.equalToSafeArea(-1)
+//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
+                                    .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
                 //                    .setTrailing.setLeading.equalToSafeArea(30)
             }
@@ -70,7 +64,20 @@ class Home: UIView {
         return btn
     }()
     
-    
+    lazy var view: View = {
+        let view = View()
+            .setConstraints { build in
+                build.setTop.setLeading.setTrailing.setBottom.equalToSuperView
+            }
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+        
+        return view
+    }()
     
     
     
@@ -85,38 +92,38 @@ class Home: UIView {
             .setActivateDisabledButton(false)
             .setBorder({ build in
                 build.setCornerRadius(20)
-                    .setColor(UIColor.HEX("#f57f16"))
-                    .setWidth(1)
+                    .setColor(UIColor.HEX("#f57f16").withAlphaComponent(0.5))
+                    .setWidth(2)
                 
             })
-
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.6))
-                    .setOffset(width: -5, height: -4)
+                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.5))
+                    .setOffset(width: -2, height: -2)
                     .setOpacity(1)
                     .setRadius(20)
                     .apply()
             }
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#000000").withAlphaComponent(1))
+                    .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
                     .setOffset(width: 5, height: 5)
                     .setRadius(1)
                     .apply()
             }
-            .setShadow { build in
-                build
-                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
-                    .setOffset(width: 0, height: 0)
-                    .setOpacity(1)
-                    .setRadius(10)
-                    .apply()
-            }
+//            .setShadow { build in
+//                build
+//                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
+//                    .setOffset(width: 0, height: 0)
+//                    .setOpacity(1)
+//                    .setRadius(10)
+//                    .apply()
+//            }
             .setConstraints { build in
                 build
-                    .setTop.equalTo(buttom1, .bottom, 20)
-                    .setLeading.equalToSafeArea(20)
+//                    .setTop.equalTo(buttom1, .bottom, 20)
+                    .setVerticalAlignmentY.equalToSuperView
+                    .setLeading.equalToSafeArea(40)
             }
             .setGradient { build in
                 build
@@ -128,30 +135,30 @@ class Home: UIView {
         return btn
     }()
     
-    
+    //TODO: - FAZERRRRRR O WEIGHT DA IMAGEM !!!!!!!!!
     lazy var botaozim: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "chevron.forward")))
-            .setFont(UIFont.systemFont(ofSize: 21))
+            .setImageSize(15)
             .setTitleWeight(.black)
-            .setHeight(50)
-            .setWidth(50)
+            .setHeight(45)
+            .setWidth(45)
             .setTitleColor(UIColor.HEX("#FFFFFF") , .normal)
             .setBorder({ build in
-                build.setCornerRadius(25)
+                build.setCornerRadius(22.5)
             })
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.6))
+                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.3))
                     .setOffset(width: -5, height: -4)
                     .setOpacity(1)
-                    .setRadius(20)
+                    .setRadius(8)
                     .apply()
             }
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#000000").withAlphaComponent(1))
-                    .setOffset(width: 5, height: 5)
-                    .setRadius(1)
+                    .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
+                    .setOffset(width: 3, height: 3)
+                    .setRadius(3)
                     .apply()
             }
             .setShadow { build in
@@ -165,13 +172,14 @@ class Home: UIView {
             .setGradient { build in
                 build
                     .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
-                    .setAxialGradient(.leftTopToRightBottom)
+                    .setAxialGradient(.rightBottomToLeftTop)
                     .apply()
             }
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(buttomLaranja)
-                    .setLeading.equalTo(buttomLaranja, .trailing, 30)
+//                    .setVerticalAlignmentY.equalToSuperView
+                    .setLeading.equalTo(buttomLaranja, .trailing, 50)
             }
         return btn
     }()
@@ -233,6 +241,10 @@ class Home: UIView {
     private func addElements() {
         
 //        buttom1.layer.zPosition = 10000
+        
+        view.add(insideTo: self)
+        view.applyConstraint()
+        
         
         buttomDownload.add(insideTo: self)
         buttomDownload.applyConstraint()

@@ -117,11 +117,15 @@ class Gradient {
     
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
-        component.backgroundColor = .red
+        component.backgroundColor = .clear
         component.layoutIfNeeded()
     }
     
     private func setGradientOnComponent() {
+        if(type(of: component) == View.self) {
+            component.layer.insertSublayer(gradient, at: 0 )
+            return
+        }
         component.layer.insertSublayer(gradient, at: UInt32((component.layer.sublayers?.count ?? 0) - 2) )
 //        component.layer.insertSublayer(gradient, at: 0 )
 //        component.layer.addSublayer(gradient)
