@@ -11,12 +11,12 @@ class Home: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        _ = self.setGradient { build in
-            build
-                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
-                .setAxialGradient(.leftTopToRightBottom)
-                .apply()
-        }
+//        _ = self.setGradient { build in
+//            build
+//                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
+//                .setAxialGradient(.leftTopToRightBottom)
+//                .apply()
+//        }
         addElements()
     }
     
@@ -28,7 +28,6 @@ class Home: UIView {
         let btn = Button("BUTTON 1")
             .setHeight(50)
             .setWidth(280)
-        
             .setActivateDisabledButton(false)
             .setShadow { build in
                 build
@@ -63,6 +62,7 @@ class Home: UIView {
 //                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
 //                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
 //                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
+//                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")]) // --> top demaisssssss
                     .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary VENCEDOR
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -76,54 +76,105 @@ class Home: UIView {
     
     lazy var buttomLaranja: Button = {
         let btn = Button("HEADSET")
-            .setFont(UIFont.systemFont(ofSize: 17, weight: .black)) //--> NÃO ESTA FUNCIONANDO
-            .setHeight(110)
+            .setFont(UIFont.systemFont(ofSize: 21))
+            .setTitleWeight(.black)
+            .setHeight(100)
             .setTitleAlignment(.left)
-            .setWidth(190)
-            .setTitleColor(UIColor.HEX("#ac5618"), .normal)
+            .setWidth(170)
+            .setTitleColor(UIColor.HEX("#000000").withAlphaComponent(0.3) , .normal)
             .setActivateDisabledButton(false)
             .setBorder({ build in
                 build.setCornerRadius(20)
+                    .setColor(UIColor.HEX("#f57f16"))
+                    .setWidth(1)
                 
             })
 
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#ed904a").withAlphaComponent(0.8))
-                    .setOffset(width: -10, height: -2)
+                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.6))
+                    .setOffset(width: -5, height: -4)
                     .setOpacity(1)
-                    .setRadius(30)
+                    .setRadius(20)
                     .apply()
             }
             .setShadow { build in
                 build
-                    .setColor(UIColor.HEX("#000000"))
+                    .setColor(UIColor.HEX("#000000").withAlphaComponent(1))
                     .setOffset(width: 5, height: 5)
-                    .setRadius(2)
+                    .setRadius(1)
+                    .apply()
+            }
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
+                    .setOffset(width: 0, height: 0)
+                    .setOpacity(1)
+                    .setRadius(10)
                     .apply()
             }
             .setConstraints { build in
                 build
                     .setTop.equalTo(buttom1, .bottom, 20)
-                    .setHorizontalAlignmentX.equalTo(buttom1)
+                    .setLeading.equalToSafeArea(20)
             }
             .setGradient { build in
                 build
-                    .setColor([UIColor.HEX("#ed8c48"),
-//                               UIColor.HEX("#ed904a"),
-//                               UIColor.HEX("#e4701c"),
-//                               UIColor.HEX("#f07012"),
-                               UIColor.HEX("#ed8c48"),
-                               UIColor.HEX("#db640e"),
-                               UIColor.HEX("#ff6b00"),
-                               UIColor.HEX("#ff6b00"),
-                               UIColor.HEX("#ff6b00")]) // -> Bloody Mary VENCEDOR
+                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
+
         return btn
     }()
     
+    
+    lazy var botaozim: ButtonImage = {
+        let btn = ButtonImage(UIImageView(image: UIImage(systemName: "chevron.forward")))
+            .setFont(UIFont.systemFont(ofSize: 21))
+            .setTitleWeight(.black)
+            .setHeight(50)
+            .setWidth(50)
+            .setTitleColor(UIColor.HEX("#FFFFFF") , .normal)
+            .setBorder({ build in
+                build.setCornerRadius(25)
+            })
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.6))
+                    .setOffset(width: -5, height: -4)
+                    .setOpacity(1)
+                    .setRadius(20)
+                    .apply()
+            }
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#000000").withAlphaComponent(1))
+                    .setOffset(width: 5, height: 5)
+                    .setRadius(1)
+                    .apply()
+            }
+            .setShadow { build in
+                build
+                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
+                    .setOffset(width: 0, height: 0)
+                    .setOpacity(1)
+                    .setRadius(10)
+                    .apply()
+            }
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setVerticalAlignmentY.equalTo(buttomLaranja)
+                    .setLeading.equalTo(buttomLaranja, .trailing, 30)
+            }
+        return btn
+    }()
     
     lazy var buttomTest3D: Button3D = {
         let btn = Button3D()
@@ -138,11 +189,11 @@ class Home: UIView {
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
         buttom1.isEnabled = !buttom1.isEnabled
-        buttomIMAGE.isEnabled = !buttomIMAGE.isEnabled
+        buttomDownload.isEnabled = !buttomDownload.isEnabled
     }
     
     
-    lazy var buttomIMAGE: ButtonImage = {
+    lazy var buttomDownload: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
             .setTitle("Download", .normal)
             .setHeight(45)
@@ -167,12 +218,6 @@ class Home: UIView {
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
-//            .setGradient { build in
-//                build
-//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
-//                    .setAxialGradient(.leftTopToRightBottom)
-//                    .apply()
-//            }
             .setShadow { build in
                 build
                     .setColor(.black)
@@ -180,13 +225,17 @@ class Home: UIView {
                     .setRadius(1)
                     .apply()
             }
+
         return btn
     }()
     
     
     private func addElements() {
         
-        buttom1.layer.zPosition = 10000
+//        buttom1.layer.zPosition = 10000
+        
+        buttomDownload.add(insideTo: self)
+        buttomDownload.applyConstraint()
         
         
         buttomTest3D.add(insideTo: self)
@@ -195,13 +244,16 @@ class Home: UIView {
         buttom1.add(insideTo: self)
         buttom1.applyConstraint()
         
-        buttomIMAGE.add(insideTo: self)
-        buttomIMAGE.applyConstraint()
+
+        
         
         buttomLaranja.add(insideTo: self)
         buttomLaranja.applyConstraint()
         
-        bringSubviewToFront(buttomIMAGE)
+        botaozim.add(insideTo: self)
+        botaozim.applyConstraint()
+        
+//        bringSubviewToFront(buttomIMAGE)
         
         
         

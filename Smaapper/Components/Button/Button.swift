@@ -82,11 +82,27 @@ class Button: UIButton {
     
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            self.titleLabel?.font = font
+            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+                var attr = attrTransformer
+                attr.font = font
+                return attr
+            }
+            configuration = config
         }
         return self
     }
     
+    func setTitleWeight(_ weight: UIFont.Weight) -> Self {
+        
+        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+            var attr = attrTransformer
+            attr.font = UIFont.systemFont(ofSize: self.titleLabel?.font.pointSize ?? 17, weight: weight)
+            return attr
+        }
+        configuration = config
+        return self
+    }
+     
     func setTitleAlignment(_ alignment: UIControl.ContentHorizontalAlignment) -> Self {
         contentHorizontalAlignment = alignment
         return self
@@ -123,6 +139,18 @@ class Button: UIButton {
     }
     
     
+//  MARK: - COMMON FUNCTIONS
+    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+
+
 //  MARK: - Action Area
     
     func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {

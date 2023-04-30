@@ -26,6 +26,7 @@ class Gradient {
     
     
 //  MARK: - Initializers
+    
     init(_ component: UIView) {
         self.component = component
         self.initialization()
@@ -109,7 +110,6 @@ class Gradient {
         
     }
     
-    
     private func initialization() {
         self.setGradientDirection(.leftToRight)
         self.setType(.axial)
@@ -117,12 +117,14 @@ class Gradient {
     
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
-        component.backgroundColor = .none
+        component.backgroundColor = .red
         component.layoutIfNeeded()
     }
     
     private func setGradientOnComponent() {
-        component.layer.insertSublayer(gradient, at: 1)
+        component.layer.insertSublayer(gradient, at: UInt32((component.layer.sublayers?.count ?? 0) - 2) )
+//        component.layer.insertSublayer(gradient, at: 0 )
+//        component.layer.addSublayer(gradient)
     }
     
     private func applyGradient() {

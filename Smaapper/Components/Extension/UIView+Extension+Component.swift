@@ -28,23 +28,9 @@ extension UIView {
     }
     
     
-//  MARK: - SHADOW
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
-        let _ = shadow(Shadow(self))
-        return self
-    }
-    
-    
-//  MARK: - BORDER
+//  MARK: - SET BORDER
     func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
-        return self
-    }
-
-    
-//  MARK: - GRADIENT
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
         return self
     }
     
