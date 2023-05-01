@@ -178,25 +178,23 @@ class Home: UIView {
     }()
     
     lazy var buttom3D: Button3D = {
-        let btn = Button3D(ImageView(UIImage(systemName: "text.redaction")))
-            .setImageSize(15)
-            .setBackgroundColor(.red)
+        let btn = Button3D(UIImageView(image: UIImage(systemName: "mic.fill")))
             .setBorder({ build in
                 build.setCornerRadius(12)
             })
             .setGradient { build in
                 build
-                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
-                    .setColor([UIColor.HEX("#ed56ff"),UIColor.HEX("#b023ff")])
-                    .setAxialGradient(.rightBottomToLeftTop)
+                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
+                    .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-101)
-                    .setTrailing.equalToSafeArea(-20)
+                    .setLeading.equalToSafeArea(20)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(50)
             }
+            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
         return btn
     }()
     @objc func didTapFloatingButton() {
@@ -205,6 +203,23 @@ class Home: UIView {
         buttomDownload.isEnabled = !buttomDownload.isEnabled
     }
     
+    
+    lazy var buttomNormal: Button3D = {
+        let btn = Button3D()
+            .setTitle("Normal", .normal)
+            .setBorder({ build in
+                build.setCornerRadius(12)
+                    .setWidth(1)
+            })
+            .setConstraints { build in
+                build.setBottom.equalToSafeArea(-201)
+                    .setLeading.equalToSafeArea(20)
+                    .setHeight.equalToConstant(50)
+                    .setWidth.equalToConstant(250)
+            }
+            .setBackgroundColorLayer(.red)
+        return btn
+    }()
     
     lazy var buttomDownload: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
@@ -261,8 +276,10 @@ class Home: UIView {
         buttom1.add(insideTo: self)
         buttom1.applyConstraint()
         
-
+        buttomNormal.add(insideTo: self)
+        buttomNormal.applyConstraint()
         
+
         
         buttomLaranja.add(insideTo: self)
         buttomLaranja.applyConstraint()

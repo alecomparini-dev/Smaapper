@@ -22,6 +22,18 @@ extension UIView {
         return self
     }
     
+    func setBackgroundColorLayer(_ color: UIColor) -> Self {
+        DispatchQueue.main.async {
+            let layer = CALayer()
+            layer.frame = self.bounds
+            layer.cornerRadius = self.layer.cornerRadius
+            layer.backgroundColor = color.cgColor
+            self.layer.insertSublayer(layer, at: UInt32((self.layer.sublayers?.count ?? 1) - 1) )
+        }
+        
+        return self
+    }
+    
     func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
         self.isUserInteractionEnabled = interactionEnabled
         return self

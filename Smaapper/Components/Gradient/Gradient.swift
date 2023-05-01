@@ -122,13 +122,12 @@ class Gradient {
     }
     
     private func setGradientOnComponent() {
-        if(type(of: component) == View.self) {
-            component.layer.insertSublayer(gradient, at: 0 )
-            return
-        }
-        component.layer.insertSublayer(gradient, at: UInt32((component.layer.sublayers?.count ?? 0) - 2) )
-//        component.layer.insertSublayer(gradient, at: 0 )
-//        component.layer.addSublayer(gradient)
+        let positionGradient = calculatePositionGradient()
+        component.layer.insertSublayer(gradient, at: positionGradient)
+    }
+    
+    private func calculatePositionGradient() -> UInt32 {
+        return UInt32(self.component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
     }
     
     private func applyGradient() {

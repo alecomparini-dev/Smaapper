@@ -75,6 +75,7 @@
 		0234A96329FC0659008392EC /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96229FC0659008392EC /* IconButton.swift */; };
 		0234A96629FC0820008392EC /* ButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImage.swift */; };
 		0234A96929FD977D008392EC /* Button3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96829FD977D008392EC /* Button3D.swift */; };
+		026F79772A002EFD003947A6 /* Button3DDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F79762A002EFD003947A6 /* Button3DDefault.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		0234A96229FC0659008392EC /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		0234A96529FC0820008392EC /* ButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImage.swift; sourceTree = "<group>"; };
 		0234A96829FD977D008392EC /* Button3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button3D.swift; sourceTree = "<group>"; };
+		026F79762A002EFD003947A6 /* Button3DDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button3DDefault.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -676,6 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A96829FD977D008392EC /* Button3D.swift */,
+				026F79762A002EFD003947A6 /* Button3DDefault.swift */,
 			);
 			path = Button3D;
 			sourceTree = "<group>";
@@ -850,6 +853,7 @@
 				0234A90729F9FD3A008392EC /* Collection.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
+				026F79772A002EFD003947A6 /* Button3DDefault.swift in Sources */,
 				0234A90B29F9FD3A008392EC /* CollectionView.swift in Sources */,
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,

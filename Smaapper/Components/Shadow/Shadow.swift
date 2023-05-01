@@ -11,6 +11,8 @@ class Shadow {
     
     private var component: UIView
     private let shadow: CALayer
+    private var shadowAt: UInt32 = 0
+    private var isBringToFront: Bool = false
     
 //  MARK: - Initializers
     
@@ -52,6 +54,11 @@ class Shadow {
         return self
     }
     
+    func setBringToFront() -> Self {
+        self.isBringToFront = true
+        return self
+    }
+    
     
 //  MARK: - Component private functions
     
@@ -69,9 +76,17 @@ class Shadow {
             self.shadow.backgroundColor = UIColor.clear.cgColor
             self.shadow.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
                                                   cornerRadius: self.component.layer.cornerRadius).cgPath
-            self.component.layer.insertSublayer(self.shadow, at: 0)
+            self.insertSubLayer()
+            
         }
         return self
+    }
+    
+    private func insertSubLayer() {
+        if isBringToFront {
+            self.shadowAt = UInt32(self.component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
+        }
+        self.component.layer.insertSublayer(self.shadow, at: self.shadowAt)
     }
     
     private func shadowInitializers() {
@@ -79,7 +94,6 @@ class Shadow {
         self.component.layer.masksToBounds = false
         self.component.layer.shouldRasterize = true
         self.component.layer.rasterizationScale = UIScreen.main.scale
-        self.shadow.masksToBounds = false
         self.shadow.shouldRasterize = true
         self.shadow.rasterizationScale = UIScreen.main.scale
     }
