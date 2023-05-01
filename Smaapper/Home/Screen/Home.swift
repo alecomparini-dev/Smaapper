@@ -111,14 +111,6 @@ class Home: UIView {
                     .setRadius(1)
                     .apply()
             }
-//            .setShadow { build in
-//                build
-//                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
-//                    .setOffset(width: 0, height: 0)
-//                    .setOpacity(1)
-//                    .setRadius(10)
-//                    .apply()
-//            }
             .setConstraints { build in
                 build
 //                    .setTop.equalTo(buttom1, .bottom, 20)

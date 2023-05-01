@@ -22,9 +22,7 @@ class Button: UIButton {
     
     var config: UIButton.Configuration {
         get { return self._config }
-        set { self._config = newValue
-//            tintColor = titleColor(for: .normal)
-        }
+        set { self._config = newValue }
     }
     
 //  MARK: - Initializers
