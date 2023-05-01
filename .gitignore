@@ -1,5 +1,6 @@
 *.vscode
 
+
 Smaapper/*.DS_Store
 */.DS_Store
 Smaapper/Components/**/*.DS_Store
@@ -11,6 +12,8 @@ Smaapper/Components/**/*.DS_Store
 
 ## User settings
 xcuserdata/
+**/*xcuserdata/*
+**/xcuserdata/*
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
