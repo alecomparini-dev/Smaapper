@@ -55,8 +55,8 @@ class Home: UIView {
 //                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
 //                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
 //                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
-//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
 //                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")]) // --> top demaisssssss
+//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
                     .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary VENCEDOR
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -137,8 +137,8 @@ class Home: UIView {
     
     //TODO: - FAZERRRRRR O WEIGHT DA IMAGEM !!!!!!!!!
     lazy var botaozim: ButtonImage = {
-        let btn = ButtonImage(UIImageView(image: UIImage(systemName: "chevron.forward")))
-            .setImageSize(15)
+        let btn = ButtonImage(UIImageView(image: UIImage(systemName: "chevron.right")))
+            .setImageSize(13)
             .setTitleWeight(.black)
             .setHeight(45)
             .setWidth(45)
@@ -172,6 +172,7 @@ class Home: UIView {
             .setGradient { build in
                 build
                     .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
+                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
                     .setAxialGradient(.rightBottomToLeftTop)
                     .apply()
             }
