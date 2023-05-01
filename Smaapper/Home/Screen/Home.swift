@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Home: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
+class Home: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
