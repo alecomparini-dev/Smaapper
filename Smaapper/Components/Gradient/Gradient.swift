@@ -26,6 +26,7 @@ class Gradient {
     
     
 //  MARK: - Initializers
+    
     init(_ component: UIView) {
         self.component = component
         self.initialization()
@@ -67,8 +68,7 @@ class Gradient {
         }
         return self
     }
-    
-    
+        
 //  MARK: - Component Private Functions
     
     private func setGradientDirection(_ direction: Direction) {
@@ -110,7 +110,6 @@ class Gradient {
         
     }
     
-    
     private func initialization() {
         self.setGradientDirection(.leftToRight)
         self.setType(.axial)
@@ -123,7 +122,12 @@ class Gradient {
     }
     
     private func setGradientOnComponent() {
-        component.layer.insertSublayer(gradient, at: 0)
+        let positionGradient = calculatePositionGradient()
+        component.layer.insertSublayer(gradient, at: positionGradient)
+    }
+    
+    private func calculatePositionGradient() -> UInt32 {
+        return UInt32(self.component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
     }
     
     private func applyGradient() {
@@ -151,3 +155,4 @@ class Gradient {
     
     
 }
+

@@ -31,6 +31,10 @@ class ButtonImage: Button {
         self.initialization(image, state, size)
     }
     
+    override init() {
+        super.init()
+    }
+    
     convenience init(_ image: UIImageView, _ state: UIControl.State) {
         self.init(image, state, nil)
     }
@@ -74,11 +78,12 @@ class ButtonImage: Button {
 //  MARK: - Private Function Area
     
     private func setImage(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil, _ alignment: UISemanticContentAttribute = .forceLeftToRight ) {
+        guard let image = image.image else {return}
         if let size = size {
-            setImage(image.image!.withConfiguration(UIImage.SymbolConfiguration(pointSize: size)), for: state)
+            setImage(image.withConfiguration(UIImage.SymbolConfiguration(pointSize: size)), for: state)
             return
         }
-        setImage(image.image!, for: state)
+        setImage(image, for: state)
     }
         
 }

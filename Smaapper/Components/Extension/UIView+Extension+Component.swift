@@ -22,31 +22,30 @@ extension UIView {
         return self
     }
     
+    func setBackgroundColorLayer(_ color: UIColor) -> Self {
+        DispatchQueue.main.async {
+            let layer = CALayer()
+            layer.frame = self.bounds
+            layer.cornerRadius = self.layer.cornerRadius
+            layer.backgroundColor = color.cgColor
+            self.layer.insertSublayer(layer, at: UInt32((self.layer.sublayers?.count ?? 1) - 1) )
+        }
+        
+        return self
+    }
+    
     func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
         self.isUserInteractionEnabled = interactionEnabled
         return self
     }
     
     
-//  MARK: - SHADOW
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
-        let _ = shadow(Shadow(self))
-        return self
-    }
-    
-    
-//  MARK: - BORDER
+//  MARK: - SET BORDER
     func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
         return self
     }
-
     
-//  MARK: - GRADIENT
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
-        return self
-    }
     
 //  MARK: - Apply Constraints
     

@@ -22,9 +22,7 @@ class Button: UIButton {
     
     var config: UIButton.Configuration {
         get { return self._config }
-        set { self._config = newValue
-//            tintColor = titleColor(for: .normal)
-        }
+        set { self._config = newValue }
     }
     
 //  MARK: - Initializers
@@ -82,35 +80,36 @@ class Button: UIButton {
     
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            self.titleLabel?.font = font
+            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+                var attr = attrTransformer
+                attr.font = font
+                return attr
+            }
+            configuration = config
         }
         return self
     }
     
-    func setTitleAlignment(_ alignment: NSTextAlignment) -> Self {
-        self.titleLabel?.textAlignment = alignment
-        return self
-    }
-
-    func setHeight(_ height: CGFloat) -> Self {
-        DispatchQueue.main.async {
-            self.applyConstraints({ build in
-                build.setHeight.equalToConstant(height)
-            })
+    func setTitleWeight(_ weight: UIFont.Weight) -> Self {
+        
+        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+            var attr = attrTransformer
+            attr.font = UIFont.systemFont(ofSize: self.titleLabel?.font.pointSize ?? 17, weight: weight)
+            return attr
         }
+        configuration = config
         return self
     }
-    
-    func setWidth(_ width: CGFloat) -> Self {
-        DispatchQueue.main.async {
-            self.applyConstraints({ build in
-                build.setWidth.equalToConstant(width)
-            })
-        }
+     
+    func setTitleAlignment(_ alignment: UIControl.ContentHorizontalAlignment) -> Self {
+        contentHorizontalAlignment = alignment
         return self
     }
+// da pra usar como padding !!!
+//        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+//        configuration = config
     
-    public func setActivateDisabledButton(_ startDisable: Bool) -> Self {
+    func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
         _ = setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
         if startDisable {
@@ -118,8 +117,26 @@ class Button: UIButton {
         }
         return self
     }
+
+    func setFloatButton() -> Self {
+        self.layer.zPosition = 1000
+        return self
+    }
+
     
     
+//  MARK: - COMMON FUNCTIONS
+    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+
+
 //  MARK: - Action Area
     
     func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {

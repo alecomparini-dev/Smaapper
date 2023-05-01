@@ -52,11 +52,8 @@ class ElevationWrapper: View {
     
     
     private func createShadowLayer(_ color: UIColor) -> CAShapeLayer {
-        var shadowLayer: CAShapeLayer!
-        shadowLayer = CAShapeLayer()
-        shadowLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0,
-                                                            width: self.frame.width ,
-                                                            height: self.frame.height),
+        let shadowLayer: CAShapeLayer = CAShapeLayer()
+        shadowLayer.path = UIBezierPath(roundedRect: component.bounds,
                                         cornerRadius: component.layer.cornerRadius).cgPath
         
         shadowLayer.fillColor = UIColor.clear.cgColor
