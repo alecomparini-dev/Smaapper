@@ -105,29 +105,11 @@ class Button: UIButton {
         contentHorizontalAlignment = alignment
         return self
     }
-    // da pra usar como padding !!!
+// da pra usar como padding !!!
 //        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 //        configuration = config
     
-    func setHeight(_ height: CGFloat) -> Self {
-        DispatchQueue.main.async {
-            self.applyConstraints({ build in
-                build.setHeight.equalToConstant(height)
-            })
-        }
-        return self
-    }
-    
-    func setWidth(_ width: CGFloat) -> Self {
-        DispatchQueue.main.async {
-            self.applyConstraints({ build in
-                build.setWidth.equalToConstant(width)
-            })
-        }
-        return self
-    }
-    
-    public func setActivateDisabledButton(_ startDisable: Bool) -> Self {
+    func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
         _ = setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
         if startDisable {
@@ -135,6 +117,12 @@ class Button: UIButton {
         }
         return self
     }
+
+    func setFloatButton() -> Self {
+        self.layer.zPosition = 1000
+        return self
+    }
+
     
     
 //  MARK: - COMMON FUNCTIONS

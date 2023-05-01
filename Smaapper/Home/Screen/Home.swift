@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Home: UIView {
+class Home: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,8 +20,6 @@ class Home: UIView {
     
     lazy var buttom1: Button = {
         let btn = Button("BUTTON 1")
-            .setHeight(50)
-            .setWidth(280)
             .setActivateDisabledButton(false)
             .setShadow { build in
                 build
@@ -42,6 +40,8 @@ class Home: UIView {
                                     .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
                 //                    .setTrailing.setLeading.equalToSafeArea(30)
+                    .setHeight.equalToConstant(50)
+                    .setWidth.equalToConstant(280)
             }
             .setGradient { build in
                 build
@@ -85,9 +85,7 @@ class Home: UIView {
         let btn = Button("HEADSET")
             .setFont(UIFont.systemFont(ofSize: 21))
             .setTitleWeight(.black)
-            .setHeight(100)
             .setTitleAlignment(.left)
-            .setWidth(170)
             .setTitleColor(UIColor.HEX("#000000").withAlphaComponent(0.3) , .normal)
             .setActivateDisabledButton(false)
             .setBorder({ build in
@@ -116,6 +114,8 @@ class Home: UIView {
 //                    .setTop.equalTo(buttom1, .bottom, 20)
                     .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalToSafeArea(40)
+                    .setHeight.equalToConstant(100)
+                    .setWidth.equalToConstant(170)
             }
             .setGradient { build in
                 build
@@ -132,8 +132,6 @@ class Home: UIView {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "chevron.right")))
             .setImageSize(13)
             .setTitleWeight(.black)
-            .setHeight(45)
-            .setWidth(45)
             .setTitleColor(UIColor.HEX("#FFFFFF") , .normal)
             .setBorder({ build in
                 build.setCornerRadius(22.5)
@@ -173,6 +171,7 @@ class Home: UIView {
                     .setVerticalAlignmentY.equalTo(buttomLaranja)
 //                    .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalTo(buttomLaranja, .trailing, 50)
+                    .setHeight.setWidth.equalToConstant(45)
             }
         return btn
     }()
@@ -197,6 +196,7 @@ class Home: UIView {
             .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
         return btn
     }()
+    
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
         if !buttomDownload.isEnabled {
@@ -212,16 +212,14 @@ class Home: UIView {
         }else {
             buttom3D.removeShadowByID("light")
         }
-        
-        
+           
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
         
     }
     
-    
-    lazy var buttomNormal: Button3D = {
-        let btn = Button3D()
+    lazy var buttomNormal: Button = {
+        let btn = Button()
             .setTitle("Normal", .normal)
             .setBorder({ build in
                 build.setCornerRadius(12)
@@ -240,8 +238,6 @@ class Home: UIView {
     lazy var buttomDownload: ButtonImage = {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
             .setTitle("Download", .normal)
-            .setHeight(45)
-            .setWidth(180)
             .setImageSize(50)
             .setPadding(5)
             .setActivateDisabledButton(false)
@@ -255,6 +251,8 @@ class Home: UIView {
                 build
                     .setTop.equalToSafeArea(10)
                     .setTrailing.equalToSafeArea(-10)
+                    .setHeight.equalToConstant(45)
+                    .setWidth.equalToConstant(180)
             }
             .setGradient { build in
                 build
@@ -274,40 +272,75 @@ class Home: UIView {
     }()
     
     
-    private func addElements() {
+    lazy var floatButton: Button3D = {
+        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
+
         
-        buttom3D.layer.zPosition = 10000
+        let btn = Button3D(img)
+//            .setImageSize(20)
+            .setBorder({ build in
+                build.setCornerRadius(25)
+                    .setWidth(1)
+//                    .setColor(.systemGray.withAlphaComponent(0.2))
+                    .setColor(.white.withAlphaComponent(0.1))
+            })
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#212326"),UIColor.HEX("#494d55")])
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            }
+            .setConstraints { build in
+                build.setBottom.equalToSafeArea(-5)
+                    .setTrailing.equalToSafeArea(-20)
+                    .setHeight.setWidth.equalToConstant(60)
+            }
+            .setFloatButton()
+        return btn
+    }()
+    
+    
+    
+    private func addElements() {
         
         view.add(insideTo: self)
         view.applyConstraint()
         
         
-        buttomDownload.add(insideTo: self)
-        buttomDownload.applyConstraint()
+        floatButton.add(insideTo: self)
+        floatButton.applyConstraint()
         
         
-        buttom3D.add(insideTo: self)
-        buttom3D.applyConstraint()
+        //
+        //        buttomDownload.add(insideTo: self)
+        //        buttomDownload.applyConstraint()
+        //
+        //
+        //        buttom3D.add(insideTo: self)
+        //        buttom3D.applyConstraint()
+        //
+        //        buttom1.add(insideTo: self)
+        //        buttom1.applyConstraint()
+        //
+        //        buttomNormal.add(insideTo: self)
+        //        buttomNormal.applyConstraint()
+        //
+        //        buttomLaranja.add(insideTo: self)
+        //        buttomLaranja.applyConstraint()
+        //
+        //        botaozim.add(insideTo: self)
+        //        botaozim.applyConstraint()
         
-        buttom1.add(insideTo: self)
-        buttom1.applyConstraint()
         
-        buttomNormal.add(insideTo: self)
-        buttomNormal.applyConstraint()
         
-
-        
-        buttomLaranja.add(insideTo: self)
-        buttomLaranja.applyConstraint()
-        
-        botaozim.add(insideTo: self)
-        botaozim.applyConstraint()
-        
-//        bringSubviewToFront(buttomIMAGE)
-        
+        //        bringSubviewToFront(buttomIMAGE)
         
         
     }
+
     
+    
+    
+
 }
 
