@@ -17,8 +17,7 @@ class Shadow {
     init(_ component: UIView) {
         self.component = component
         self.shadow = CALayer()
-        self.setInitializers()
-        let _ = self.setDefault()
+        self.shadowInitializers()
     }
     
     required init?(coder: NSCoder) {
@@ -75,10 +74,14 @@ class Shadow {
         return self
     }
     
-    private func setInitializers() {
+    private func shadowInitializers() {
+        let _ = self.setDefault()
         self.component.layer.masksToBounds = false
         self.component.layer.shouldRasterize = true
         self.component.layer.rasterizationScale = UIScreen.main.scale
+        self.shadow.masksToBounds = false
+        self.shadow.shouldRasterize = true
+        self.shadow.rasterizationScale = UIScreen.main.scale
     }
     
 }

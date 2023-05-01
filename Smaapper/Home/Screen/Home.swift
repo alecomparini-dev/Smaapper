@@ -177,10 +177,22 @@ class Home: UIView {
         return btn
     }()
     
-    lazy var buttomTest3D: Button3D = {
-        let btn = Button3D()
+    lazy var buttom3D: Button3D = {
+        let btn = Button3D(ImageView(UIImage(systemName: "text.redaction")))
+            .setImageSize(15)
+            .setBackgroundColor(.red)
+            .setBorder({ build in
+                build.setCornerRadius(12)
+            })
+            .setGradient { build in
+                build
+                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
+                    .setColor([UIColor.HEX("#ed56ff"),UIColor.HEX("#b023ff")])
+                    .setAxialGradient(.rightBottomToLeftTop)
+                    .apply()
+            }
             .setConstraints { build in
-                build.setBottom.equalToSafeArea(-1)
+                build.setBottom.equalToSafeArea(-101)
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(50)
@@ -233,7 +245,7 @@ class Home: UIView {
     
     private func addElements() {
         
-//        buttom1.layer.zPosition = 10000
+        buttom3D.layer.zPosition = 10000
         
         view.add(insideTo: self)
         view.applyConstraint()
@@ -243,8 +255,8 @@ class Home: UIView {
         buttomDownload.applyConstraint()
         
         
-        buttomTest3D.add(insideTo: self)
-        buttomTest3D.applyConstraint()
+        buttom3D.add(insideTo: self)
+        buttom3D.applyConstraint()
         
         buttom1.add(insideTo: self)
         buttom1.applyConstraint()

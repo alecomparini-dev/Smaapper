@@ -31,6 +31,10 @@ class ButtonImage: Button {
         self.initialization(image, state, size)
     }
     
+    override init() {
+        super.init()
+    }
+    
     convenience init(_ image: UIImageView, _ state: UIControl.State) {
         self.init(image, state, nil)
     }

@@ -19,9 +19,11 @@ class ImageView: UIImageView {
         super.init(frame: .zero)
     }
     
-    convenience init(_ image: UIImage) {
+    convenience init(_ image: UIImage?) {
         self.init()
-        let _ = setImage(image)
+        if let image {
+            let _ = setImage(image)
+        }
     }
     
     required init?(coder: NSCoder) {
