@@ -59,6 +59,11 @@ class Shadow {
         return self
     }
     
+    func setID(_ id: String) -> Self {
+        shadow.name = id
+        return self
+    }
+    
     
 //  MARK: - Component private functions
     
@@ -73,14 +78,27 @@ class Shadow {
         DispatchQueue.main.async {
             self.component.layoutIfNeeded()
             self.shadow.frame = self.component.bounds
-            self.shadow.backgroundColor = UIColor.clear.cgColor
             self.shadow.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
                                                   cornerRadius: self.component.layer.cornerRadius).cgPath
             self.insertSubLayer()
-            
         }
         return self
     }
+//
+//    func applyToComponent() -> Self {
+////        self.shadow.frame = self.component.bounds
+////        self.component.layoutIfNeeded()
+//
+////        self.component.frame = self.component.bounds
+//        self.component.layer.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
+//                                              cornerRadius: self.component.layer.cornerRadius).cgPath
+//
+//        component.layer.shadowColor = shadow.shadowColor
+//        component.layer.shadowRadius = shadow.shadowRadius
+//        component.layer.shadowOffset = shadow.shadowOffset
+//        component.layer.shadowOpacity = shadow.shadowOpacity
+//        return self
+//    }
     
     private func insertSubLayer() {
         if isBringToFront {
@@ -96,6 +114,16 @@ class Shadow {
         self.component.layer.rasterizationScale = UIScreen.main.scale
         self.shadow.shouldRasterize = true
         self.shadow.rasterizationScale = UIScreen.main.scale
+    }
+    
+}
+
+
+extension UIView {
+    func removeShadowByID(_ id: String) {
+        if let layerToRemove = self.layer.sublayers?.first(where: { $0.name == id }) {
+            layerToRemove.removeFromSuperlayer()
+        }
     }
     
 }

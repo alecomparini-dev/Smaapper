@@ -199,8 +199,24 @@ class Home: UIView {
     }()
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
+        if !buttomDownload.isEnabled {
+            _ = buttom3D.setShadow { build in
+                build.setColor(UIColor.HEX("#ff6b00"))
+                    .setOffset(width: 0, height: 0)
+                    .setOpacity(1)
+                    .setRadius(2)
+                    .setBringToFront()
+                    .setID("light")
+                    .apply()
+            }
+        }else {
+            buttom3D.removeShadowByID("light")
+        }
+        
+        
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
+        
     }
     
     
