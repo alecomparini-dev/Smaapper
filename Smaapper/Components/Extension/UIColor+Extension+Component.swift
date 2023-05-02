@@ -40,6 +40,16 @@ extension UIColor {
         return HEXA(hexColor, 1.0)
     }
     
+    
+    var convertToHEX: String {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
+    }
+    
 }
 
 
@@ -48,4 +58,5 @@ extension String {
         let hexColorRegex = "^#([0-9A-Fa-f]{6})$"
         return NSPredicate(format: "SELF MATCHES %@", hexColorRegex).evaluate(with: self)
     }
+    
 }

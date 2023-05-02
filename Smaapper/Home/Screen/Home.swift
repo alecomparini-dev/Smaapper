@@ -377,39 +377,13 @@ class Home: UIView {
 //        }
         
             
-     
-        
         let originalColor = UIColor.HEX("#1d2021")
         let lightColor = originalColor.withBrightness()
         let darkColor = originalColor.withShadow()
 
-//        UIColor.HEX("#234F50")
-//        UIColor.HEX("#244f50")
         subMenu.setBackgroundColorLayer(UIColor.HEX("#1d2021"))
         menu.backgroundColor = UIColor.HEX("#0c0d0d")
 
-        
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-
-        let light = lightColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        var redInt = Int(red * 255)
-        var greenInt = Int(green * 255)
-        var blueInt = Int(blue * 255)
-
-        let lightString = String(format: "#%02X%02X%02X", redInt, greenInt, blueInt)
-        
-        let dark = darkColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        redInt = Int(red * 255)
-        greenInt = Int(green * 255)
-        blueInt = Int(blue * 255)
-        let darkString = String(format: "#%02X%02X%02X", redInt, greenInt, blueInt)
-        
-        print("darkColor :", darkString)
-        print("lightColor:", lightString)
-        
         
         let distance = 12 // min:5 a max:50
         let blur = 12.0 // min:0 a max:50
@@ -430,14 +404,10 @@ class Home: UIView {
                 .apply()
         }
         
-        
-        
-        
+        print(lightColor.convertToHEX)
+        print(darkColor.convertToHEX)
+                
     }
-
-    
-    
-    
 
 }
 
