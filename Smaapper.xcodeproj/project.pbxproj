@@ -75,6 +75,7 @@
 		0234A96629FC0820008392EC /* ButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImage.swift */; };
 		0234A96929FD977D008392EC /* Button3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96829FD977D008392EC /* Button3D.swift */; };
 		026F79772A002EFD003947A6 /* Button3DDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F79762A002EFD003947A6 /* Button3DDefault.swift */; };
+		026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F79792A007774003947A6 /* DropdownMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		0234A96529FC0820008392EC /* ButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImage.swift; sourceTree = "<group>"; };
 		0234A96829FD977D008392EC /* Button3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button3D.swift; sourceTree = "<group>"; };
 		026F79762A002EFD003947A6 /* Button3DDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button3DDefault.swift; sourceTree = "<group>"; };
+		026F79792A007774003947A6 /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				026F79782A00775E003947A6 /* DropdowMenu */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0234A8F929F9FD3A008392EC /* Base */,
 				0234A8C029F9FD3A008392EC /* Basic */,
@@ -672,6 +675,14 @@
 			path = Button3D;
 			sourceTree = "<group>";
 		};
+		026F79782A00775E003947A6 /* DropdowMenu */ = {
+			isa = PBXGroup;
+			children = (
+				026F79792A007774003947A6 /* DropdownMenu.swift */,
+			);
+			path = DropdowMenu;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -817,6 +828,7 @@
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
 				0234A91429F9FD3A008392EC /* EndOfConstraintsPositionFlow.swift in Sources */,
 				0234A93229F9FD3A008392EC /* TabBarItemModel.swift in Sources */,
+				026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */,
 				0234A90429F9FD3A008392EC /* BorderDefault.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				0234A90929F9FD3A008392EC /* CollectionModel.swift in Sources */,

@@ -199,19 +199,21 @@ class Home: UIView {
     
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
-        if !buttomDownload.isEnabled {
-            _ = buttom3D.setShadow { build in
-                build.setColor(UIColor.HEX("#ff6b00"))
-                    .setOffset(width: 0, height: 0)
-                    .setOpacity(1)
-                    .setRadius(2)
-                    .setBringToFront()
-                    .setID("light")
-                    .apply()
-            }
-        }else {
-            buttom3D.removeShadowByID("light")
+        _ = floatButton.setShadow { build in
+            build.setColor(UIColor.HEX("#ff6b00"))
+                .setOffset(width: 0, height: 0)
+                .setOpacity(1)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("light")
+                .apply()
         }
+//        if !buttomDownload.isEnabled {
+//
+//            }
+//        }else {
+//            floatButton.removeShadowByID("light")
+//        }
            
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
@@ -279,7 +281,7 @@ class Home: UIView {
         let btn = Button3D(img)
 //            .setImageSize(20)
             .setBorder({ build in
-                build.setCornerRadius(25)
+                build.setCornerRadius(19)
                     .setWidth(1)
 //                    .setColor(.systemGray.withAlphaComponent(0.2))
                     .setColor(.white.withAlphaComponent(0.1))
@@ -291,12 +293,40 @@ class Home: UIView {
                     .apply()
             }
             .setConstraints { build in
-                build.setBottom.equalToSafeArea(-5)
-                    .setTrailing.equalToSafeArea(-20)
+                build.setBottom.equalToSafeArea(-10)
+                    .setTrailing.equalToSafeArea(-10)
                     .setHeight.setWidth.equalToConstant(60)
             }
+            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
             .setFloatButton()
         return btn
+    }()
+    
+    
+    lazy var menu: DropdownMenu = {
+        let menu = DropdownMenu()
+            .setBorder({ build in
+                build.setCornerRadius(18)
+                    .setWidth(0)
+                    .setColor(.darkGray)
+            })
+        return menu
+    }()
+    
+    lazy var subMenu: DropdownMenu = {
+        let menu = DropdownMenu()
+            .setBorder({ build in
+                build.setCornerRadius(50)
+                    .setWidth(0)
+                    .setColor(.cyan)
+            })
+            .setConstraints { build in
+                build.setTop.equalToSafeArea(100)
+                    .setLeading.equalToSafeArea(100)
+                    .setWidth.equalToConstant(200)
+                    .setHeight.equalToConstant(200)
+            }
+        return menu
     }()
     
     
@@ -305,7 +335,6 @@ class Home: UIView {
         
         view.add(insideTo: self)
         view.applyConstraint()
-        
         
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
@@ -332,8 +361,76 @@ class Home: UIView {
         //        botaozim.applyConstraint()
         
         
+//        menu.add(insideTo: self)
+//        menu.applyConstraint()
         
-        //        bringSubviewToFront(buttomIMAGE)
+        subMenu.add(insideTo: self)
+        subMenu.applyConstraint()
+//
+//        DispatchQueue.main.async {
+//            self.menu.applyConstraints({ build in
+//                build.setBottom.equalTo(self.floatButton, .top)
+//                    .setTrailing.equalTo(self.floatButton, .trailing, -(self.floatButton.frame.width/3) )
+//                    .setWidth.equalToConstant(170)
+//                    .setHeight.equalToConstant(280)
+//            })
+//        }
+        
+            
+     
+        
+        let originalColor = UIColor.HEX("#1d2021")
+        let lightColor = originalColor.withBrightness()
+        let darkColor = originalColor.withShadow()
+
+//        UIColor.HEX("#234F50")
+//        UIColor.HEX("#244f50")
+        subMenu.setBackgroundColorLayer(UIColor.HEX("#1d2021"))
+        menu.backgroundColor = UIColor.HEX("#0c0d0d")
+
+        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        let light = lightColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        var redInt = Int(red * 255)
+        var greenInt = Int(green * 255)
+        var blueInt = Int(blue * 255)
+
+        let lightString = String(format: "#%02X%02X%02X", redInt, greenInt, blueInt)
+        
+        let dark = darkColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        redInt = Int(red * 255)
+        greenInt = Int(green * 255)
+        blueInt = Int(blue * 255)
+        let darkString = String(format: "#%02X%02X%02X", redInt, greenInt, blueInt)
+        
+        print("darkColor :", darkString)
+        print("lightColor:", lightString)
+        
+        
+        let distance = 12 // min:5 a max:50
+        let blur = 12.0 // min:0 a max:50
+        let intensity: Float = 0.66
+        _ = subMenu
+            .setShadow { build in
+                build.setColor(darkColor)
+                    .setOffset(width: distance, height: distance)
+                    .setOpacity(intensity)
+                    .setRadius(blur)
+                    .apply()
+            }
+            .setShadow { build in
+            build.setColor(lightColor)
+                .setOffset(width: -distance, height: -distance)
+                .setOpacity(intensity)
+                .setRadius(blur)
+                .apply()
+        }
+        
+        
         
         
     }
@@ -341,6 +438,30 @@ class Home: UIView {
     
     
     
+
+}
+
+extension UIColor {
+    func withShadow() -> UIColor {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+
+        let newBrightness = brightness * 0.42
+        return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
+    }
+    
+    func withBrightness() -> UIColor {
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var brightness: CGFloat = 0
+        var alpha: CGFloat = 0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        let newBrightness = brightness * 1.61
+        return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
+    }
 
 }
 
