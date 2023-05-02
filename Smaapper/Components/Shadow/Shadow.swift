@@ -77,7 +77,6 @@ class Shadow {
     func apply() -> Self {
         DispatchQueue.main.async {
             self.component.layoutIfNeeded()
-            self.shadow.frame = self.component.bounds
             self.shadow.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
                                                   cornerRadius: self.component.layer.cornerRadius).cgPath
             self.insertSubLayer()
