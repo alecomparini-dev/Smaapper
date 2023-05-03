@@ -121,15 +121,13 @@ class Gradient {
         component.layoutIfNeeded()
     }
     
-    private func setGradientOnComponent() {
-        let positionGradient = calculatePositionGradient()
-        component.layer.insertSublayer(gradient, at: positionGradient)
-    }
-    
+
     private func calculatePositionGradient() -> UInt32 {
         return UInt32(self.component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
     }
     
+    
+//  MARK: - Apply Gradient
     private func applyGradient() {
         self.configGradient()
         gradient.frame = component.bounds
@@ -138,6 +136,11 @@ class Gradient {
             gradient.endPoint = CGPoint(x: 0, y: endY)
         }
         self.setGradientOnComponent()
+    }
+    
+    private func setGradientOnComponent() {
+        let positionGradient = calculatePositionGradient()
+        component.layer.insertSublayer(gradient, at: positionGradient)
     }
     
     

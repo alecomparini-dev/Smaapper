@@ -14,7 +14,8 @@ class Home: UIView {
         addElements()
         _ = setGradient { build in
             build
-                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
+//                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
+                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
@@ -275,17 +276,20 @@ class Home: UIView {
                     .setColor(.white.withAlphaComponent(0.1))
             })
             .setNeumorphism { build in
-                build.setReferenceColor(UIColor.HEX("#242729"))
-                    .setShape(.none)
-                    .setIntensity(percent: 90)
+                build.setReferenceColor(UIColor.HEX("#a71c1b"))
+                    .setShape(.flat)
+                    .setIntensity(percent: 100)
+                    .setDistance(percent: 10)
+                    .setBlur(percent: 10)
                     .apply()
             }
-            .setGradient { build in
-                build
-                    .setColor([UIColor.HEX("#212326"),UIColor.HEX("#494d55")])
-                    .setAxialGradient(.leftTopToRightBottom)
-                    .apply()
-            }
+//            .setGradient { build in
+//                build
+////                    .setColor([UIColor.HEX("#212326"),UIColor.HEX("#494d55")])
+//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
+//                    .setAxialGradient(.leftTopToRightBottom)
+//                    .apply()
+//            }
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-10)
@@ -310,12 +314,15 @@ class Home: UIView {
     lazy var subMenu: DropdownMenu = {
         let menu = DropdownMenu()
             .setBorder({ build in
-                build.setCornerRadius(20)
+                build.setCornerRadius(40)
                     .setWidth(0)
                     .setColor(.cyan)
             })
             .setNeumorphism { build in
-                build.setReferenceColor(UIColor.HEX("#2e353d"))
+                build.setReferenceColor(UIColor.HEX("#a71c1b"))
+                    .setIntensity(percent: 100)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
                     .apply()
             }
             .setConstraints { build in
@@ -334,32 +341,33 @@ class Home: UIView {
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
 
-
-        buttomDownload.add(insideTo: self)
-        buttomDownload.applyConstraint()
-
-        buttom3D.add(insideTo: self)
-        buttom3D.applyConstraint()
-
-        buttom1.add(insideTo: self)
-        buttom1.applyConstraint()
-
-        buttomNormal.add(insideTo: self)
-        buttomNormal.applyConstraint()
-
-        buttomLaranja.add(insideTo: self)
-        buttomLaranja.applyConstraint()
-
-        botaozim.add(insideTo: self)
-        botaozim.applyConstraint()
+//
+//        buttomDownload.add(insideTo: self)
+//        buttomDownload.applyConstraint()
+//
+//        buttom3D.add(insideTo: self)
+//        buttom3D.applyConstraint()
+//
+//        buttom1.add(insideTo: self)
+//        buttom1.applyConstraint()
+//
+//        buttomNormal.add(insideTo: self)
+//        buttomNormal.applyConstraint()
+//
+//        buttomLaranja.add(insideTo: self)
+//        buttomLaranja.applyConstraint()
+//
+//        botaozim.add(insideTo: self)
+//        botaozim.applyConstraint()
         
         
         //DROPDOW MENU
-        menu.add(insideTo: self)
-        menu.applyConstraint()
+//        menu.add(insideTo: self)
+//        menu.applyConstraint()
         
         subMenu.add(insideTo: self)
         subMenu.applyConstraint()
+        
 
 //        DispatchQueue.main.async {
 //            self.menu.applyConstraints({ build in
@@ -372,33 +380,7 @@ class Home: UIView {
 //
             
 
-        
-        menu.backgroundColor = UIColor.HEX("#0c0d0d")
-        
-        let originalColor = UIColor.HEX("#1c1f20")
-        let lightColor = originalColor.getBrightness(1.61)
-        let darkColor = originalColor.getBrightness(0.42)
 
-//        _ = subMenu.setBackgroundColorLayer(originalColor)
-//
-//        let distance = 25 // min:5 a max:50
-//        let blur = 15.0 // min:0 a max:50
-//        let intensity: Float = 1
-//        _ = subMenu
-//            .setShadow { build in
-//                build.setColor(darkColor)
-//                    .setOffset(width: distance, height: distance)
-//                    .setOpacity(intensity)
-//                    .setRadius(blur)
-//                    .apply()
-//            }
-//            .setShadow { build in
-//            build.setColor(lightColor)
-//                .setOffset(width: -distance, height: -distance)
-//                .setOpacity(intensity)
-//                .setRadius(blur)
-//                .apply()
-//        }
         
                 
     }
