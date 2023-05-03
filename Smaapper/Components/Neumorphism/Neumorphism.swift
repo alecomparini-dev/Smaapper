@@ -24,31 +24,32 @@ class Neumorphism {
         case rightBottom
     }
     
-    private enum ShadeColor {
-        case light
-        case dark
-    }
     
     private let ratioOfSize = 0.08
     private let lightShadeColorPercentage = 1.61
     private let darkShadeColorPercentage = 0.42
     private let component: UIView
     private var referenceColor: UIColor?
-    private var lightShadeColor: UIColor?
-    private var darkShadeColor: UIColor?
+    private var _lightShadeColor: UIColor?
+    private var _darkShadeColor: UIColor?
     private var distance: CGFloat?
     private var blur: CGFloat?
     private var intensity: Float = 1
     private var shape: Shape = .flat
     private var lightPosition: LightPosition = .leftTop
-
     
+
     init(_ component: UIView) {
         self.component = component
     }
     
     
-//  MARK: - Set Properties
+//  MARK: - GET Properties
+    var darkShadeColor: UIColor {self._darkShadeColor ?? UIColor() }
+    var lightShadeColor: UIColor { self._lightShadeColor ?? UIColor() }
+    
+    
+//  MARK: - SET Properties
     
     func setReferenceColor(_ color: UIColor) -> Self {
         self.referenceColor = color
@@ -95,28 +96,33 @@ class Neumorphism {
     }
     
     func setLightShadeColor(_ color: UIColor) -> Self {
-        self.lightShadeColor = color
+        self._lightShadeColor = color
         return self
     }
     
     func setDarkShadeColor(_ color: UIColor) -> Self {
-        self.darkShadeColor = color
+        self._darkShadeColor = color
         return self
     }
     
+
+//  MARK: - APPLY Neumorphis
     
     func apply() -> Self {
         DispatchQueue.main.async {
-            let (lightColor, darkColor) = self.calculateShadeColor()
-            let (offSetDarkShadow, offSetLightShadow) = self.calculateLightPosition()
+            self.calculateShadeColorByColorReference()
+            self.applyShadow()
             self.applyShape()
-            self.applyDarkShadow(darkColor, offSetDarkShadow)
-            self.applyLightShadow(lightColor, offSetLightShadow)
         }
-        
         return self
     }
     
+    private func applyShadow() {
+        let (offSetDarkShadow, offSetLightShadow) = self.calculateLightPosition()
+        self.applyLightShadow(offSetLightShadow)
+        self.applyDarkShadow(offSetDarkShadow)
+        
+    }
     
 //  MARK: - Private Function Area
     
@@ -139,49 +145,13 @@ class Neumorphism {
     }
     
     
-    private func calculateDistance() -> CGFloat {
-        return self.distance ?? (self.component.frame.width * ratioOfSize)
-    }
     
-    private func calculateBlur() -> CGFloat {
-        return self.blur ?? (self.component.frame.width * ratioOfSize)
-    }
-
+//  MARK: - SHADOW AREA
     
-    private func calculateShadeColor() -> (UIColor, UIColor) {
-        let lightColor = getLightShadeColor()
-        let darkColor = getDarkShadeColor()
-        return (lightColor, darkColor)
-    }
-    
-    private func getLightShadeColor() -> UIColor {
-        if let lightShadeColor = self.lightShadeColor {
-            return lightShadeColor
-        }
-        return getShadeColorByColorReference(.light)
-    }
-    
-    private func getDarkShadeColor() -> UIColor {
-        if let darkShadeColor = self.darkShadeColor {
-            return darkShadeColor
-        }
-        return getShadeColorByColorReference(.dark)
-    }
-    
-    private func getShadeColorByColorReference(_ shadeColor: ShadeColor) -> UIColor {
-        guard let referenceColor = self.referenceColor else {return UIColor()}
-        switch shadeColor {
-            case .light:
-                return referenceColor.getBrightness(self.lightShadeColorPercentage)
-            case .dark:
-                return referenceColor.getBrightness(self.darkShadeColorPercentage)
-        }
-    }
-    
-    private func applyDarkShadow(_ darkColor: UIColor, _ offSetDarkShadow: CGSize) {
+    private func applyDarkShadow(_ offSetDarkShadow: CGSize) {
         _ = self.component
             .setShadow { build in
-                build.setColor(darkColor)
+                build.setColor(self.darkShadeColor)
                     .setOffset(offSetDarkShadow)
                     .setOpacity(self.intensity)
                     .setRadius(self.calculateBlur())
@@ -189,10 +159,10 @@ class Neumorphism {
             }
     }
     
-    private func applyLightShadow(_ lightColor: UIColor, _ offSetLightShadow: CGSize) {
+    private func applyLightShadow(_ offSetLightShadow: CGSize) {
         _ = self.component
             .setShadow { build in
-                build.setColor(lightColor)
+                build.setColor(self.lightShadeColor)
                     .setOffset(offSetLightShadow)
                     .setOpacity(self.intensity)
                     .setRadius(self.calculateBlur())
@@ -200,24 +170,100 @@ class Neumorphism {
             }
     }
     
+    private func calculateShadeColorByColorReference() {
+        calculateLightShade()
+        calculateDarkShade()
+        
+    }
+    
+    private func calculateDarkShade() {
+        if self._darkShadeColor != nil { return }
+        guard let referenceColor = self.referenceColor else {return }
+        _ = self.setDarkShadeColor(referenceColor.getBrightness(self.darkShadeColorPercentage))
+    }
+
+    private func calculateLightShade() {
+        if self._lightShadeColor != nil { return }
+        guard let referenceColor = self.referenceColor else {return }
+        _ = self.setLightShadeColor(referenceColor.getBrightness(self.lightShadeColorPercentage))
+
+    }
+
+
+//  MARK: - SHAPE AREA
+    
     private func applyShape() {
+        
         switch self.shape {
-          
-        case .flat:
-            _ = component.setBackgroundColorLayer(self.referenceColor ?? UIColor())
-            return
-        case .concave:
-            return
-        case .convex:
-            return
-        case .pressed:
-            return
-        case .none:
-            return
+            case .flat:
+                setShapeFlat()
+                return
+            case .concave:
+                setShapeConcave()
+                return
+            case .convex:
+                setShapeConvex()
+                return
+            case .pressed:
+                return
+            case .none:
+                return
         }
         
     }
     
+    private func getShapeColorByColorReference() -> (UIColor,UIColor) {
+        let dark = self.referenceColor!.getBrightness(0.80)
+        let light = self.referenceColor!.getBrightness(1.25)
+        return (dark,light)
+    }
+    
+    private func addShapeOnComponent(_ color: [UIColor]) {
+        _ = self.component
+            .setGradient { build in
+                build.setColor(color)
+                    .setAxialGradient(self.calculateGradientDirection())
+                    .apply()
+            }
+    }
+    
+    private func calculateGradientDirection() -> Gradient.Direction {
+        switch lightPosition {
+            case .leftTop:
+                return .leftTopToRightBottom
+            case .leftBottom:
+                return .leftBottomToRightTop
+            case .rightTop:
+                return .rightTopToLeftBottom
+            case .rightBottom:
+                return .rightBottomToLeftTop
+        }
+    }
+    
+    private func setShapeFlat() {
+        _ = component.setBackgroundColorLayer(self.referenceColor ?? UIColor())
+    }
+    
+    private func setShapeConcave() {
+        let (dark,light) = getShapeColorByColorReference()
+        self.addShapeOnComponent([dark,light])
+    }
+    
+    private func setShapeConvex() {
+        let (dark,light) = getShapeColorByColorReference()
+        self.addShapeOnComponent([light,dark])
+    }
+    
+    
+//  MARK: - Calculate Blur and Distance
+    
+    private func calculateDistance() -> CGFloat {
+        return self.distance ?? (self.component.frame.width * ratioOfSize)
+    }
+    
+    private func calculateBlur() -> CGFloat {
+        return self.blur ?? (self.component.frame.width * ratioOfSize)
+    }
     
 }
 

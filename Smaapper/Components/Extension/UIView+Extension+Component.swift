@@ -28,7 +28,8 @@ extension UIView {
             layer.frame = self.bounds
             layer.cornerRadius = self.layer.cornerRadius
             layer.backgroundColor = color.cgColor
-            self.layer.insertSublayer(layer, at: UInt32((self.layer.sublayers?.count ?? 1) - 1) )
+            let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
+            self.layer.insertSublayer(layer, at: position )
         }
         return self
     }

@@ -41,14 +41,18 @@ extension UIColor {
     }
     
     
-    var convertToHEX: String {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
-    }
+    var toHexString: String {
+        guard let components = self.cgColor.components, components.count >= 3 else {
+            return "#000000" // Retorna preto como valor padrão se não for possível obter os componentes RGB
+        }
+        
+        let r = max(0, min(255, Int(components[0] * 255.0)))
+        let g = max(0, min(255, Int(components[1] * 255.0)))
+        let b = max(0, min(255, Int(components[2] * 255.0)))
+        
+        return String(format: "#%02X%02X%02X", r, g, b)
+        
+        }
     
 }
 
