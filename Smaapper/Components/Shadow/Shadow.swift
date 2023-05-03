@@ -83,21 +83,6 @@ class Shadow {
         }
         return self
     }
-//
-//    func applyToComponent() -> Self {
-////        self.shadow.frame = self.component.bounds
-////        self.component.layoutIfNeeded()
-//
-////        self.component.frame = self.component.bounds
-//        self.component.layer.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
-//                                              cornerRadius: self.component.layer.cornerRadius).cgPath
-//
-//        component.layer.shadowColor = shadow.shadowColor
-//        component.layer.shadowRadius = shadow.shadowRadius
-//        component.layer.shadowOffset = shadow.shadowOffset
-//        component.layer.shadowOpacity = shadow.shadowOpacity
-//        return self
-//    }
     
     private func insertSubLayer() {
         if isBringToFront {

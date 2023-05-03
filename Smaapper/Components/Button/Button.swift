@@ -123,18 +123,6 @@ class Button: UIButton {
         return self
     }
 
-    
-    
-//  MARK: - COMMON FUNCTIONS
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
-        let _ = shadow(Shadow(self))
-        return self
-    }
-    
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
-        return self
-    }
 
 
 //  MARK: - Action Area

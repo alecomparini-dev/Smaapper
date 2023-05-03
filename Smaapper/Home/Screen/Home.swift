@@ -12,6 +12,13 @@ class Home: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addElements()
+        _ = setGradient { build in
+            build
+                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
+                .setAxialGradient(.leftTopToRightBottom)
+                .apply()
+        }
+            
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +48,7 @@ class Home: UIView {
                     .setHorizontalAlignmentX.equalToSafeArea
                 //                    .setTrailing.setLeading.equalToSafeArea(30)
                     .setHeight.equalToConstant(50)
-                    .setWidth.equalToConstant(280)
+                    .setWidth.equalToConstant(200)
             }
             .setGradient { build in
                 build
@@ -64,22 +71,6 @@ class Home: UIView {
         return btn
     }()
     
-    lazy var view: View = {
-        let view = View()
-            .setConstraints { build in
-                build.setTop.setLeading.setTrailing.setBottom.equalToSuperView
-            }
-            .setGradient { build in
-                build
-                    .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
-                    .setAxialGradient(.leftTopToRightBottom)
-                    .apply()
-            }
-        
-        return view
-    }()
-    
-    
     
     lazy var buttomLaranja: Button = {
         let btn = Button("HEADSET")
@@ -94,14 +85,24 @@ class Home: UIView {
                     .setWidth(2)
                 
             })
-            .setShadow { build in
+            .setNeumorphism({ build in
                 build
-                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.5))
-                    .setOffset(width: -2, height: -2)
-                    .setOpacity(1)
-                    .setRadius(20)
+                    .setShape(.none)
+                    .setLightShadeColor(UIColor.HEX("#f08b46").withAlphaComponent(0.8))
+                    .setDarkShadeColor(UIColor.black)
+                    .setIntensity(percent: 100)
+                    .setDistance(percent: 0)
+                    .setBlur(percent: 50)
                     .apply()
-            }
+            })
+//            .setShadow { build in
+//                build
+//                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.5))
+//                    .setOffset(width: -2, height: -2)
+//                    .setOpacity(1)
+//                    .setRadius(20)
+//                    .apply()
+//            }
             .setShadow { build in
                 build
                     .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
@@ -136,34 +137,17 @@ class Home: UIView {
             .setBorder({ build in
                 build.setCornerRadius(22.5)
             })
-            .setShadow { build in
-                build
-                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.3))
-                    .setOffset(width: -5, height: -4)
-                    .setOpacity(1)
-                    .setRadius(8)
+            .setNeumorphism({ build in
+                build.setReferenceColor(UIColor.HEX("#25282a"))
+                    .setShape(.none)
+                    .setIntensity(percent: 100)
                     .apply()
-            }
-            .setShadow { build in
-                build
-                    .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
-                    .setOffset(width: 3, height: 3)
-                    .setRadius(3)
-                    .apply()
-            }
-            .setShadow { build in
-                build
-                    .setColor(UIColor.HEX("#FFFFFF").withAlphaComponent(0.2))
-                    .setOffset(width: 0, height: 0)
-                    .setOpacity(1)
-                    .setRadius(10)
-                    .apply()
-            }
+            })
             .setGradient { build in
                 build
                     .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
                     .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
-                    .setAxialGradient(.rightBottomToLeftTop)
+                    .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
             .setConstraints { build in
@@ -176,14 +160,20 @@ class Home: UIView {
         return btn
     }()
     
-    lazy var buttom3D: Button3D = {
-        let btn = Button3D(UIImageView(image: UIImage(systemName: "mic.fill")))
+    lazy var buttom3D: ButtonImage = {
+        let btn = ButtonImage(UIImageView(image: UIImage(systemName: "mic.fill")))
             .setBorder({ build in
                 build.setCornerRadius(12)
             })
+            .setNeumorphism({ build in
+                build.setReferenceColor(UIColor.HEX("#222427"))
+                    .setShape(.none)
+                    .apply()
+            })
             .setGradient { build in
                 build
-                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
+//                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
+                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             }
@@ -199,21 +189,20 @@ class Home: UIView {
     
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
-        _ = floatButton.setShadow { build in
-            build.setColor(UIColor.HEX("#ff6b00"))
-                .setOffset(width: 0, height: 0)
-                .setOpacity(1)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("light")
-                .apply()
+        
+        if !buttomDownload.isEnabled {
+            _ = floatButton.setShadow { build in
+                build.setColor(UIColor.HEX("#ff6b00"))
+                    .setOffset(width: 0, height: 0)
+                    .setOpacity(1)
+                    .setRadius(3)
+                    .setBringToFront()
+                    .setID("light")
+                    .apply()
+            }
+        }else {
+            floatButton.removeShadowByID("light")
         }
-//        if !buttomDownload.isEnabled {
-//
-//            }
-//        }else {
-//            floatButton.removeShadowByID("light")
-//        }
            
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
@@ -274,18 +263,23 @@ class Home: UIView {
     }()
     
     
-    lazy var floatButton: Button3D = {
+    lazy var floatButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
 
-        
-        let btn = Button3D(img)
+        let btn = ButtonImage(img)
 //            .setImageSize(20)
             .setBorder({ build in
-                build.setCornerRadius(19)
-                    .setWidth(1)
-//                    .setColor(.systemGray.withAlphaComponent(0.2))
+                build.setCornerRadius(18)
+                    .setWidth(0)
+                    .setColor(.systemGray.withAlphaComponent(0.2))
                     .setColor(.white.withAlphaComponent(0.1))
             })
+            .setNeumorphism { build in
+                build.setReferenceColor(UIColor.HEX("#242729"))
+                    .setShape(.none)
+                    .setIntensity(percent: 90)
+                    .apply()
+            }
             .setGradient { build in
                 build
                     .setColor([UIColor.HEX("#212326"),UIColor.HEX("#494d55")])
@@ -316,12 +310,16 @@ class Home: UIView {
     lazy var subMenu: DropdownMenu = {
         let menu = DropdownMenu()
             .setBorder({ build in
-                build.setCornerRadius(50)
+                build.setCornerRadius(20)
                     .setWidth(0)
                     .setColor(.cyan)
             })
+            .setNeumorphism { build in
+                build.setReferenceColor(UIColor.HEX("#2e353d"))
+                    .apply()
+            }
             .setConstraints { build in
-                build.setTop.equalToSafeArea(100)
+                build.setTop.equalToSafeArea(80)
                     .setLeading.equalToSafeArea(100)
                     .setWidth.equalToConstant(200)
                     .setHeight.equalToConstant(200)
@@ -333,40 +331,36 @@ class Home: UIView {
     
     private func addElements() {
         
-        view.add(insideTo: self)
-        view.applyConstraint()
-        
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
+
+
+        buttomDownload.add(insideTo: self)
+        buttomDownload.applyConstraint()
+
+        buttom3D.add(insideTo: self)
+        buttom3D.applyConstraint()
+
+        buttom1.add(insideTo: self)
+        buttom1.applyConstraint()
+
+        buttomNormal.add(insideTo: self)
+        buttomNormal.applyConstraint()
+
+        buttomLaranja.add(insideTo: self)
+        buttomLaranja.applyConstraint()
+
+        botaozim.add(insideTo: self)
+        botaozim.applyConstraint()
         
         
-        //
-        //        buttomDownload.add(insideTo: self)
-        //        buttomDownload.applyConstraint()
-        //
-        //
-        //        buttom3D.add(insideTo: self)
-        //        buttom3D.applyConstraint()
-        //
-        //        buttom1.add(insideTo: self)
-        //        buttom1.applyConstraint()
-        //
-        //        buttomNormal.add(insideTo: self)
-        //        buttomNormal.applyConstraint()
-        //
-        //        buttomLaranja.add(insideTo: self)
-        //        buttomLaranja.applyConstraint()
-        //
-        //        botaozim.add(insideTo: self)
-        //        botaozim.applyConstraint()
-        
-        
-//        menu.add(insideTo: self)
-//        menu.applyConstraint()
+        //DROPDOW MENU
+        menu.add(insideTo: self)
+        menu.applyConstraint()
         
         subMenu.add(insideTo: self)
         subMenu.applyConstraint()
-//
+
 //        DispatchQueue.main.async {
 //            self.menu.applyConstraints({ build in
 //                build.setBottom.equalTo(self.floatButton, .top)
@@ -375,63 +369,40 @@ class Home: UIView {
 //                    .setHeight.equalToConstant(280)
 //            })
 //        }
-        
+//
             
-        let originalColor = UIColor.HEX("#1d2021")
-        let lightColor = originalColor.withBrightness()
-        let darkColor = originalColor.withShadow()
 
-        subMenu.setBackgroundColorLayer(UIColor.HEX("#1d2021"))
+        
         menu.backgroundColor = UIColor.HEX("#0c0d0d")
+        
+        let originalColor = UIColor.HEX("#1c1f20")
+        let lightColor = originalColor.getBrightness(1.61)
+        let darkColor = originalColor.getBrightness(0.42)
 
+//        _ = subMenu.setBackgroundColorLayer(originalColor)
+//
+//        let distance = 25 // min:5 a max:50
+//        let blur = 15.0 // min:0 a max:50
+//        let intensity: Float = 1
+//        _ = subMenu
+//            .setShadow { build in
+//                build.setColor(darkColor)
+//                    .setOffset(width: distance, height: distance)
+//                    .setOpacity(intensity)
+//                    .setRadius(blur)
+//                    .apply()
+//            }
+//            .setShadow { build in
+//            build.setColor(lightColor)
+//                .setOffset(width: -distance, height: -distance)
+//                .setOpacity(intensity)
+//                .setRadius(blur)
+//                .apply()
+//        }
         
-        let distance = 12 // min:5 a max:50
-        let blur = 12.0 // min:0 a max:50
-        let intensity: Float = 0.66
-        _ = subMenu
-            .setShadow { build in
-                build.setColor(darkColor)
-                    .setOffset(width: distance, height: distance)
-                    .setOpacity(intensity)
-                    .setRadius(blur)
-                    .apply()
-            }
-            .setShadow { build in
-            build.setColor(lightColor)
-                .setOffset(width: -distance, height: -distance)
-                .setOpacity(intensity)
-                .setRadius(blur)
-                .apply()
-        }
-        
-        print(lightColor.convertToHEX)
-        print(darkColor.convertToHEX)
                 
     }
 
 }
 
-extension UIColor {
-    func withShadow() -> UIColor {
-        var hue: CGFloat = 0
-        var saturation: CGFloat = 0
-        var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
-        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-
-        let newBrightness = brightness * 0.42
-        return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
-    }
-    
-    func withBrightness() -> UIColor {
-        var hue: CGFloat = 0
-        var saturation: CGFloat = 0
-        var brightness: CGFloat = 0
-        var alpha: CGFloat = 0
-        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        let newBrightness = brightness * 1.61
-        return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
-    }
-
-}
 

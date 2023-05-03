@@ -30,7 +30,6 @@ extension UIView {
             layer.backgroundColor = color.cgColor
             self.layer.insertSublayer(layer, at: UInt32((self.layer.sublayers?.count ?? 1) - 1) )
         }
-        
         return self
     }
     
@@ -43,6 +42,26 @@ extension UIView {
 //  MARK: - SET BORDER
     func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
+        return self
+    }
+    
+    
+//  MARK: - SET SHADOW
+    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+//  MARK: - SET NEUMORPHISM
+    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    
+//  MARK: - SET GRADIENT
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
         return self
     }
     
