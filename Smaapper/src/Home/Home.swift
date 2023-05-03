@@ -361,12 +361,12 @@ class Home: UIView {
 //        botaozim.applyConstraint()
         
         
-        //DROPDOW MENU
-//        menu.add(insideTo: self)
-//        menu.applyConstraint()
+//        DROPDOW MENU
+        menu.add(insideTo: self)
+        menu.applyConstraint()
         
-        subMenu.add(insideTo: self)
-        subMenu.applyConstraint()
+//        subMenu.add(insideTo: self)
+//        subMenu.applyConstraint()
         
 
 //        DispatchQueue.main.async {
