@@ -22,10 +22,10 @@ class View: UIView {
     
     
 //  MARK: - COMMON FUNCTIONS
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
-        return self
-    }
+//    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+//        let _ = gradient(Gradient(self))
+//        return self
+//    }
 
 //  MARK: - Constraints Area
     
