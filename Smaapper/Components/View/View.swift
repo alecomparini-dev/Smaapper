@@ -24,6 +24,7 @@ class View: UIView {
         Resize.resize(self)
     }
 
+
 //  MARK: - Constraints Area
     
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {

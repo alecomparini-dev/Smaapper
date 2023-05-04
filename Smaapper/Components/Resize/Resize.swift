@@ -14,17 +14,26 @@ class Resize {
             if layer.shadowOpacity > 0 {
                 layer.frame = comp.bounds
                 layer.shadowPath = UIBezierPath(roundedRect: comp.bounds, cornerRadius: comp.layer.cornerRadius).cgPath
+                return
             }
             if layer is CAShapeLayer {
                 layer.frame = comp.bounds
                 (layer as! CAShapeLayer).path = UIBezierPath(roundedRect: comp.bounds, cornerRadius: comp.layer.cornerRadius).cgPath
+                return
+            }
+            if layer is CAGradientLayer {
+                guard let layer = layer as? CAGradientLayer else { return }
+                CATransaction.begin()
+                CATransaction.setDisableActions(true)
+                layer.frame = comp.bounds
+                CATransaction.commit()
+                
+                return
             }
         })
-        
     }
     
 }
-
 
 
 

@@ -32,6 +32,10 @@ class Gradient {
         self.initialization()
     }
     
+    private func initialization() {
+        self.setGradientDirection(.leftToRight)
+        self.setType(.axial)
+    }
     
 //  MARK: - Set Properties
     
@@ -105,29 +109,25 @@ class Gradient {
             case .rightTopToLeftBottom:
                 setStartPoint(1.0, 0.0)
                 setEndPoint(0.0, 1.0)
-            
         }
         
     }
     
-    private func initialization() {
-        self.setGradientDirection(.leftToRight)
-        self.setType(.axial)
-    }
-    
+
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
-        component.backgroundColor = .clear
-        component.layoutIfNeeded()
+        gradient.shouldRasterize = true
+        gradient.rasterizationScale = UIScreen.main.scale
     }
     
 
-    private func calculatePositionGradient() -> UInt32 {
+    private func calculateIndexLayer() -> UInt32 {
         return UInt32(self.component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
     }
     
     
 //  MARK: - Apply Gradient
+    
     private func applyGradient() {
         self.configGradient()
         gradient.frame = component.bounds
@@ -139,8 +139,8 @@ class Gradient {
     }
     
     private func setGradientOnComponent() {
-        let positionGradient = calculatePositionGradient()
-        component.layer.insertSublayer(gradient, at: positionGradient)
+        let indexLayer = calculateIndexLayer()
+        component.layer.insertSublayer(gradient, at: indexLayer)
     }
     
     

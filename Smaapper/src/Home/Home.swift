@@ -324,7 +324,7 @@ class Home: UIView {
         let menu = DropdownMenu()
             .setBorder({ build in
                 build.setCornerRadius(18)
-                    .setWidth(2)
+                    .setWidth(0)
                     .setColor(UIColor.HEX("#a71c1b").withAlphaComponent(1))
             })
             .setNeumorphism { build in
@@ -339,8 +339,8 @@ class Home: UIView {
                     .setBlur(percent: 10)
                     .apply()
             }
-//            .setMenuHeight(100)
-//            .setMenuWidth(100)
+            .setMenuHeight(270)
+            .setMenuWidth(170)
 //            .setConstraints { build in
 //                build
 //                    .setBottom.equalTo(floatButton, .top, -15)
@@ -360,24 +360,24 @@ class Home: UIView {
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
 
-
-        buttomDownload.add(insideTo: self)
-        buttomDownload.applyConstraint()
-
-        buttom3D.add(insideTo: self)
-        buttom3D.applyConstraint()
-
-        buttom1.add(insideTo: self)
-        buttom1.applyConstraint()
-
-        buttomNormal.add(insideTo: self)
-        buttomNormal.applyConstraint()
-
-        buttomLaranja.add(insideTo: self)
-        buttomLaranja.applyConstraint()
-
-        botaozim.add(insideTo: self)
-        botaozim.applyConstraint()
+//
+//        buttomDownload.add(insideTo: self)
+//        buttomDownload.applyConstraint()
+//
+//        buttom3D.add(insideTo: self)
+//        buttom3D.applyConstraint()
+//
+//        buttom1.add(insideTo: self)
+//        buttom1.applyConstraint()
+//
+//        buttomNormal.add(insideTo: self)
+//        buttomNormal.applyConstraint()
+//
+//        buttomLaranja.add(insideTo: self)
+//        buttomLaranja.applyConstraint()
+//
+//        botaozim.add(insideTo: self)
+//        botaozim.applyConstraint()
         
         
 //        DROPDOW MENU
@@ -395,42 +395,52 @@ class Home: UIView {
         constraint.applyConstraint()
         
         menu.show()
+
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            print("entrouuu")
-            _ = self.menu.setMenuWidth(150)
-                .setMenuHeight(150)
-            self.menu.show()
-            
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            print("denovo")
-            _ = self.menu.setMenuWidth(50)
-                .setMenuHeight(100)
-            self.menu.show()
-            
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-            print("travez")
-            _ = self.menu.setMenuWidth(350)
-                .setMenuHeight(600)
-            self.menu.show()
-            
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-            print("travez")
-            _ = self.menu.setMenuWidth(100)
-                .setMenuHeight(100)
-            self.menu.show()
-            self.menu.layoutIfNeeded()
-            
-        }
-        
+//        temporizador()
         
                 
+    }
+    
+    
+    
+    
+    
+    
+    func temporizador() {
+        
+         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+             print("entrouuu")
+             _ = self.menu.setMenuWidth(150)
+                 .setMenuHeight(150)
+             self.menu.show()
+             
+         }
+         
+         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+             print("denovo")
+             _ = self.menu.setMenuWidth(50)
+                 .setMenuHeight(100)
+             self.menu.show()
+             
+         }
+         
+         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+             print("travez")
+             _ = self.menu.setMenuWidth(350)
+                 .setMenuHeight(600)
+             self.menu.show()
+             
+         }
+         
+         DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+             print("travez")
+             _ = self.menu.setMenuWidth(100)
+                 .setMenuHeight(100)
+             self.menu.show()
+             self.menu.layoutIfNeeded()
+             
+         }
     }
 
 }

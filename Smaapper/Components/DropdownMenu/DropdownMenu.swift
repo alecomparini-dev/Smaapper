@@ -78,11 +78,13 @@ class DropdownMenu: View {
             if let menuHeight = self.menuHeight {
                 if constraint.firstAttribute == .height {
                     constraint.constant = menuHeight
+                    Resize.resize(self)
                 }
             }
             if let menuWidth = self.menuWidth {
                 if constraint.firstAttribute == .width {
                     constraint.constant = menuWidth
+                    Resize.resize(self)
                 }
             }
         }
