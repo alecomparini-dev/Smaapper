@@ -17,7 +17,6 @@ class Table {
     
     
     
-    
 //  MARK: - SET PROPERTIES OF COMPONENT
     
     func setSeparatorStyle( _ separatorStyle: UITableViewCell.SeparatorStyle) -> Self {

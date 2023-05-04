@@ -14,8 +14,9 @@ class Home: UIView {
         addElements()
         _ = setGradient { build in
             build
-//                .setColor([UIColor.HEX("#1c1e20"), UIColor.HEX("#1c1e20"),  UIColor.HEX("#27292c")])
-                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
+//                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
+//                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
@@ -45,9 +46,9 @@ class Home: UIView {
             .setConstraints { build in
                 build
 //                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
-                                    .setBottom.equalToSafeArea(-1)
+                    .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
-                //                    .setTrailing.setLeading.equalToSafeArea(30)
+//                    .setTrailing.setLeading.equalToSafeArea(30)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(200)
             }
@@ -193,10 +194,10 @@ class Home: UIView {
         
         if !buttomDownload.isEnabled {
             _ = floatButton.setShadow { build in
-                build.setColor(UIColor.HEX("#ff6b00"))
+                build.setColor(UIColor.HEX("#ff710b"))
                     .setOffset(width: 0, height: 0)
                     .setOpacity(1)
-                    .setRadius(3)
+                    .setRadius(4)
                     .setBringToFront()
                     .setID("light")
                     .apply()
@@ -263,54 +264,6 @@ class Home: UIView {
         return btn
     }()
     
-    
-    lazy var floatButton: ButtonImage = {
-        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-
-        let btn = ButtonImage(img)
-//            .setImageSize(20)
-            .setBorder({ build in
-                build.setCornerRadius(18)
-                    .setWidth(0)
-                    .setColor(.systemGray.withAlphaComponent(0.2))
-                    .setColor(.white.withAlphaComponent(0.1))
-            })
-            .setNeumorphism { build in
-                build.setReferenceColor(UIColor.HEX("#a71c1b"))
-                    .setShape(.flat)
-                    .setIntensity(percent: 100)
-                    .setDistance(percent: 10)
-                    .setBlur(percent: 10)
-                    .apply()
-            }
-//            .setGradient { build in
-//                build
-////                    .setColor([UIColor.HEX("#212326"),UIColor.HEX("#494d55")])
-//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
-//                    .setAxialGradient(.leftTopToRightBottom)
-//                    .apply()
-//            }
-            .setConstraints { build in
-                build.setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-10)
-                    .setHeight.setWidth.equalToConstant(60)
-            }
-            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
-            .setFloatButton()
-        return btn
-    }()
-    
-    
-    lazy var menu: DropdownMenu = {
-        let menu = DropdownMenu()
-            .setBorder({ build in
-                build.setCornerRadius(18)
-                    .setWidth(0)
-                    .setColor(.darkGray)
-            })
-        return menu
-    }()
-    
     lazy var subMenu: DropdownMenu = {
         let menu = DropdownMenu()
             .setBorder({ build in
@@ -319,7 +272,7 @@ class Home: UIView {
                     .setColor(.cyan)
             })
             .setNeumorphism { build in
-                build.setReferenceColor(UIColor.HEX("#a71c1b"))
+                build.setReferenceColor(UIColor.HEX("#17191a"))
                     .setIntensity(percent: 100)
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
@@ -335,52 +288,147 @@ class Home: UIView {
     }()
     
     
+    lazy var floatButton: ButtonImage = {
+        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
+
+        let btn = ButtonImage(img)
+            .setBorder({ build in
+                build.setCornerRadius(18)
+                    .setWidth(0)
+                    .setColor(.systemGray.withAlphaComponent(0.2))
+                    .setColor(.white.withAlphaComponent(0.1))
+            })
+            .setNeumorphism { build in
+                build
+                    .setShape(.concave)
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(UIColor.HEX("#06312a"))
+//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
+//                    .setLightShadeColor(.black.withAlphaComponent(0))
+//                    .setDarkShadeColor(.black.withAlphaComponent(0))
+
+                    .apply()
+            }
+            .setConstraints { build in
+                build.setBottom.equalToSafeArea(-10)
+                    .setTrailing.equalToSafeArea(-15)
+                    .setHeight.setWidth.equalToConstant(60)
+            }
+            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
+            .setFloatButton()
+        return btn
+    }()
+    
+    
+    lazy var menu: DropdownMenu = {
+        let menu = DropdownMenu()
+            .setBorder({ build in
+                build.setCornerRadius(18)
+                    .setWidth(2)
+                    .setColor(UIColor.HEX("#a71c1b").withAlphaComponent(1))
+            })
+            .setNeumorphism { build in
+                build
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(UIColor.HEX("#06312a"))
+//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
+                    .setShape(.flat)
+                    .setLightPosition(.leftTop)
+//                    .setIntensity(percent: 100)
+                    .setDistance(percent: 0)
+                    .setBlur(percent: 10)
+                    .apply()
+            }
+//            .setMenuHeight(100)
+//            .setMenuWidth(100)
+//            .setConstraints { build in
+//                build
+//                    .setBottom.equalTo(floatButton, .top, -15)
+//                    .setTrailing.equalTo(floatButton, .trailing, -5)
+//                    .setHeight.equalToConstant(270)
+//                    .setWidth.equalToConstant(170)
+//            }
+        return menu
+    }()
+    
+
+    
+    
     
     private func addElements() {
         
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
 
-//
-//        buttomDownload.add(insideTo: self)
-//        buttomDownload.applyConstraint()
-//
-//        buttom3D.add(insideTo: self)
-//        buttom3D.applyConstraint()
-//
-//        buttom1.add(insideTo: self)
-//        buttom1.applyConstraint()
-//
-//        buttomNormal.add(insideTo: self)
-//        buttomNormal.applyConstraint()
-//
-//        buttomLaranja.add(insideTo: self)
-//        buttomLaranja.applyConstraint()
-//
-//        botaozim.add(insideTo: self)
-//        botaozim.applyConstraint()
+
+        buttomDownload.add(insideTo: self)
+        buttomDownload.applyConstraint()
+
+        buttom3D.add(insideTo: self)
+        buttom3D.applyConstraint()
+
+        buttom1.add(insideTo: self)
+        buttom1.applyConstraint()
+
+        buttomNormal.add(insideTo: self)
+        buttomNormal.applyConstraint()
+
+        buttomLaranja.add(insideTo: self)
+        buttomLaranja.applyConstraint()
+
+        botaozim.add(insideTo: self)
+        botaozim.applyConstraint()
         
         
 //        DROPDOW MENU
         menu.add(insideTo: self)
-        menu.applyConstraint()
+//        menu.applyConstraint()
         
-//        subMenu.add(insideTo: self)
-//        subMenu.applyConstraint()
         
-
-//        DispatchQueue.main.async {
-//            self.menu.applyConstraints({ build in
-//                build.setBottom.equalTo(self.floatButton, .top)
-//                    .setTrailing.equalTo(self.floatButton, .trailing, -(self.floatButton.frame.width/3) )
-//                    .setWidth.equalToConstant(170)
-//                    .setHeight.equalToConstant(280)
-//            })
-//        }
-//
+        let constraint = menu.setConstraints { build in
+            build
+                .setBottom.equalTo(floatButton, .top, -15)
+                .setTrailing.equalTo(floatButton, .trailing, -5)
+                .setHeight.equalToConstant(200)
+                .setWidth.equalToConstant(200)
+        }
+        constraint.applyConstraint()
+        
+        menu.show()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            print("entrouuu")
+            _ = self.menu.setMenuWidth(150)
+                .setMenuHeight(150)
+            self.menu.show()
             
-
-
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            print("denovo")
+            _ = self.menu.setMenuWidth(50)
+                .setMenuHeight(100)
+            self.menu.show()
+            
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+            print("travez")
+            _ = self.menu.setMenuWidth(350)
+                .setMenuHeight(600)
+            self.menu.show()
+            
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+            print("travez")
+            _ = self.menu.setMenuWidth(100)
+                .setMenuHeight(100)
+            self.menu.show()
+            self.menu.layoutIfNeeded()
+            
+        }
+        
         
                 
     }

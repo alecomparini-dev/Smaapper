@@ -24,10 +24,11 @@ extension UIView {
     
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
         DispatchQueue.main.async {
-            let layer = CALayer()
+            let layer = CAShapeLayer()
             layer.frame = self.bounds
             layer.cornerRadius = self.layer.cornerRadius
-            layer.backgroundColor = color.cgColor
+            layer.fillColor = color.cgColor
+//            layer.backgroundColor = color.cgColor
             let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
             self.layer.insertSublayer(layer, at: position )
         }
@@ -82,6 +83,10 @@ extension UIView {
         tap.cancelsTouchesInView = false
         self.addGestureRecognizer(tap)
     }
+    
+    
+
+
     
     
 }

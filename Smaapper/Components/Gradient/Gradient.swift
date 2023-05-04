@@ -31,7 +31,7 @@ class Gradient {
         self.component = component
         self.initialization()
     }
-
+    
     
 //  MARK: - Set Properties
     

@@ -19,13 +19,10 @@ class View: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
-//  MARK: - COMMON FUNCTIONS
-//    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-//        let _ = gradient(Gradient(self))
-//        return self
-//    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        Resize.resize(self)
+    }
 
 //  MARK: - Constraints Area
     
