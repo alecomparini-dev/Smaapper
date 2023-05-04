@@ -8,16 +8,13 @@
 import UIKit
 
 
-class Table: Base {
+class Table {
 
     private let table: TableView = TableView()
     private let tableVM = TableViewModel()
     
     var view: TableView { table }
     
-    init() {
-        super.init(table)
-    }
     
     
 //  MARK: - SET PROPERTIES OF COMPONENT

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CollectionBuilder: Base {
+class CollectionBuilder {
     
     
     private let collection: CollectionView
@@ -17,7 +17,6 @@ class CollectionBuilder: Base {
     init(_ collection: CollectionView, _ collectionVM: CollectionViewModel) {
         self.collection = collection
         self.collectionVM = collectionVM
-        super.init(self.collection)
     }
     
     

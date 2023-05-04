@@ -18,7 +18,7 @@ class Shadow {
     
     init(_ component: UIView) {
         self.component = component
-        self.shadow = CALayer()
+        self.shadow = CAShapeLayer()
         self.shadowInitializers()
     }
     
