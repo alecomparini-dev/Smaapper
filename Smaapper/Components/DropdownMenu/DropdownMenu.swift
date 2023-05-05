@@ -17,6 +17,8 @@ class DropdownMenu: View {
         case rightBottom
     }
     
+    
+    private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var itemsHeight: CGFloat = 35
     private var menuHeight: CGFloat?
@@ -29,6 +31,7 @@ class DropdownMenu: View {
     init(_ dropdownJson: [String: Any]? = nil) {
         self.dropdownJson = dropdownJson
         super.init()
+        self.initialization()
     }
     
     
@@ -36,6 +39,11 @@ class DropdownMenu: View {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    private func initialization() {
+        self.hide()
+        self.layer.zPosition = zPosition
+    }
     
     
 //  MARK: - Set Properties
@@ -50,12 +58,12 @@ class DropdownMenu: View {
         return self
     }
     
-    func setMenuHeight(_ height: CGFloat) -> Self {
+    func setHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
     }
     
-    func setMenuWidth(_ width: CGFloat) -> Self {
+    func setWidth(_ width: CGFloat) -> Self {
         self.menuWidth = width
         return self
     }
@@ -65,6 +73,8 @@ class DropdownMenu: View {
         return self
     }
     
+    
+//  MARK: - Show DropdownMenu
     func show(_ openingPoint: CGPoint) {
         self.openingPoint = openingPoint
         self.show()
@@ -74,23 +84,27 @@ class DropdownMenu: View {
         if self.dropdownJson != nil {
             dropdownMenuFromJson()
         }
+        self.isHidden = false
         for constraint in self.constraints {
             if let menuHeight = self.menuHeight {
                 if constraint.firstAttribute == .height {
                     constraint.constant = menuHeight
-                    Resize.resize(self)
                 }
             }
             if let menuWidth = self.menuWidth {
                 if constraint.firstAttribute == .width {
                     constraint.constant = menuWidth
-                    Resize.resize(self)
                 }
             }
         }
         
     }
 
+    func hide() {
+        self.isHidden = true
+    }
+    
+//  MARK: - Private Functions Area
     private func dropdownMenuFromJson() {
         let json = """
         [
