@@ -70,7 +70,7 @@ extension UIView {
     
 //  MARK: - Apply Constraints
     
-    func applyConstraints(_ buildConstraintFlow: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) {
+    func makeConstraints(_ buildConstraintFlow: (_ make: StartOfConstraintsFlow) -> StartOfConstraintsFlow) {
         let constraints = buildConstraintFlow(StartOfConstraintsFlow(self))
         constraints.applyConstraint()
     }

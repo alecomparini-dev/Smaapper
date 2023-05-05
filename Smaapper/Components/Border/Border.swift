@@ -59,7 +59,7 @@ class Border {
         component.clipsToBounds = true
         self.removeBorderStyleOfTextField()
         component.layer.cornerRadius = radius
-        component.layer.masksToBounds = false
+//        component.layer.masksToBounds = false
         //TODO: - OLHAR ESTE PROBLEMA DO MASK AFETANDO O DROPDOWN -
         return self
     }

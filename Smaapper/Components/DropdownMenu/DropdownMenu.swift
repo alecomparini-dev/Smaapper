@@ -51,7 +51,7 @@ class DropdownMenu: View {
         
         list.add(insideTo: self)
         
-        list.applyConstraints { build in
+        list.makeConstraints { build in
             build.setTop.setBottom.setLeading.setTrailing.equalToSuperView(10)
         }
         

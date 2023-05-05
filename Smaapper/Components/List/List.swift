@@ -78,7 +78,7 @@ extension List: UITableViewDelegate {
 extension List: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -91,17 +91,18 @@ extension List: UITableViewDataSource {
             .setTintColor(.white)
             .setBorder { build in
                 build.setColor(.yellow)
-                    .setWidth(1)
-            }
-            .setConstraints { build in
-                build.setWidth.equalToConstant(30)
+                    .setWidth(0)
             }
             
         
         let label = Label("Caralho")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 13, weight: .regular))
-            .setTextAlignment(.left)
+            .setTextAlignment(.center)
+            .setBorder { build in
+                build.setColor(.yellow)
+                    .setWidth(1)
+            }
         
         let listCellModel = ListCellModel(leftView: img, text: label, rightView: Label(""))
         

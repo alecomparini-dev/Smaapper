@@ -45,7 +45,7 @@ class ElevationWrapper: View {
     
     private func addComponent() {
         self.addSubview(component)
-        component.applyConstraints { build in
+        component.makeConstraints { build in
             build.setWidth.setHeight.equalToSuperView
         }
     }
