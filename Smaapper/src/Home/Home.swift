@@ -192,7 +192,6 @@ class Home: UIView {
     
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
-        
         if !buttomDownload.isEnabled {
             _ = floatButton.setShadow { build in
                 build.setColor(UIColor.HEX("#ff710b"))
@@ -228,7 +227,7 @@ class Home: UIView {
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(250)
             }
-            .setBackgroundColorLayer(.red)
+            .setBackgroundColor(.red)
         return btn
     }()
     
@@ -400,8 +399,9 @@ class Home: UIView {
         }
         constraint.applyConstraint()
 
+        menu.show()
         
-        temporizador()
+//        temporizador()
         
                 
     }

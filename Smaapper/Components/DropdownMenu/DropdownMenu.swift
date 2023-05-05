@@ -17,7 +17,6 @@ class DropdownMenu: View {
         case rightBottom
     }
     
-    
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var itemsHeight: CGFloat = 35
@@ -34,15 +33,28 @@ class DropdownMenu: View {
         self.initialization()
     }
     
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func initialization() {
         self.hide()
         self.layer.zPosition = zPosition
+        
+        let list = List()
+            .setBackgroundColor(.clear)
+            .setBorder { build in
+                build.setColor(.red)
+                    .setWidth(0)
+                    .setCornerRadius(20)
+            }
+        
+        list.add(insideTo: self)
+        
+        list.applyConstraints { build in
+            build.setTop.setBottom.setLeading.setTrailing.equalToSuperView(10)
+        }
+        
     }
     
     
@@ -81,6 +93,9 @@ class DropdownMenu: View {
     }
     
     func show() {
+        
+        
+//        dropdownMenuFromJson()
         if self.dropdownJson != nil {
             dropdownMenuFromJson()
         }
@@ -110,177 +125,177 @@ class DropdownMenu: View {
         [
             {
                 "section": "PRIMEIRA SECTION",
-                "trailing": "heart",
+                "rightImage": "heart",
                 "items": [
                     {
                         "title": "Categorias",
-                        "image": "trash",
+                        "leftImage": "trash",
                         "subMenu": [
                             {
                                 "section": "Utilidades",
-                                "trailing": "util",
+                                "rightImage": "util",
                                 "items": [
                                     {
                                         "title": "Alcool ou Gasolina",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Todo-List",
-                                        "image": "caracoroa"
+                                        "leftImage": "caracoroa"
                                     },
                                     {
                                         "title": "Timers",
-                                        "image": "velha"
+                                        "leftImage": "velha"
                                     },
                                     {
                                         "title": "Racha Conta",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     },
                                     {
                                         "title": "Leitor de QRCode/CodBar",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     },
                                     {
                                         "title": "Lembretes",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     },
                                     {
                                         "title": "Playlist Youtube",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     }
                                 ]
                             },
                             {
                                 "section": "Calculadoras",
-                                "trailing": "calc",
+                                "rightImage": "calc",
                                 "items": [
                                     {
                                         "title": "Regra de 3",
-                                        "image": "3"
+                                        "leftImage": "3"
                                     },
                                     {
                                         "title": "Mini Calculadora",
-                                        "image": "calc"
+                                        "leftImage": "calc"
                                     },
                                     {
                                         "title": "Calculadora IMC",
-                                        "image": "calc imc"
+                                        "leftImage": "calc imc"
                                     },
                                     {
                                         "title": "Calculadora de Churras",
-                                        "image": "calc chu"
+                                        "leftImage": "calc chu"
                                     },
                                     {
                                         "title": "Conversor de Medidas",
-                                        "image": "med"
+                                        "leftImage": "med"
                                     },
                                     {
                                         "title": "Calcula Gorjeta",
-                                        "image": "calc imc"
+                                        "leftImage": "calc imc"
                                     }
                                 ]
                             },
                             {
                                 "section": "AR - Realidade Aumentada",
-                                "trailing": "AR",
+                                "rightImage": "AR",
                                 "items": [
                                     {
                                         "title": "Fita Métrica",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Dados",
-                                        "image": "caracoroa"
+                                        "leftImage": "caracoroa"
                                     },
                                     {
                                         "title": "Qual é a Flor",
-                                        "image": "velha"
+                                        "leftImage": "velha"
                                     },
                                     {
                                         "title": "Qual é a Cor",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     },
                                     {
                                         "title": "Invisible Device",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     }
                                 ]
                             },
                             {
                                 "section": "Jogos/Entretenimentos",
-                                "trailing": "game",
+                                "rightImage": "game",
                                 "items": [
                                     {
                                         "title": "Forca",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Cara ou Coroa",
-                                        "image": "caracoroa"
+                                        "leftImage": "caracoroa"
                                     },
                                     {
                                         "title": "Jogo da Velha",
-                                        "image": "velha"
+                                        "leftImage": "velha"
                                     },
                                     {
                                         "title": "Pedra/Papel/Tesoura",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     },
                                     {
                                         "title": "Dados",
-                                        "image": "mic"
+                                        "leftImage": "mic"
                                     }
                                 ]
                             },
                             {
                                 "section": "SUB MENUS + SUB MENUS TESTE",
-                                "trailing": "i",
+                                "rightImage": "i",
                                 "items": [
                                     {
                                         "title": "Pergunte ao ChatGPR",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Horóscopo do Dia",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Clima Tempo",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Cotações",
-                                        "image": "forca",
+                                        "leftImage": "forca",
                                         "subMenu": [
                                             {
                                                 "section": "Europa",
-                                                "trailing": "help",
+                                                "rightImage": "help",
                                                 "items": [
                                                     {
                                                         "title": "Euro",
-                                                        "image": "alcool"
+                                                        "leftImage": "alcool"
                                                     },
                                                     {
                                                         "title": "Libras Esterlinas",
-                                                        "image": "libras"
+                                                        "leftImage": "libras"
                                                     },
                                                     {
                                                         "title": "Alemao",
-                                                        "image": "alemao"
+                                                        "leftImage": "alemao"
                                                     }
                                                 ]
                                             },
                                             {
                                                 "section": "Asia",
-                                                "trailing": "asia",
+                                                "rightImage": "asia",
                                                 "items": [
                                                     {
                                                         "title": "Xiaome rs",
-                                                        "image": "gas"
+                                                        "leftImage": "gas"
                                                     },
                                                     {
                                                         "title": "Sei lá mais qual",
-                                                        "image": "gas"
+                                                        "leftImage": "gas"
                                                     }
                                                 ]
                                             }
@@ -288,21 +303,21 @@ class DropdownMenu: View {
                                     },
                                     {
                                         "title": "Próximos Feriados",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     },
                                     {
                                         "title": "Recomendações de Filme",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     }
                                 ]
                             },
                             {
                                 "section": "Auto Ajuda",
-                                "trailing": "help",
+                                "rightImage": "help",
                                 "items": [
                                     {
                                         "title": "Músicas e Citações",
-                                        "image": "forca"
+                                        "leftImage": "forca"
                                     }
                                 ]
                             }
@@ -312,34 +327,34 @@ class DropdownMenu: View {
             },
             {
                 "section": "Recentes - SEGUNDA SECTION",
-                "trailing": "heart",
+                "rightImage": "heart",
                 "items": [
                     {
                         "title": "Regra de 3",
-                        "image": "mic",
-                        "trailing": "heart"
+                        "leftImage": "mic",
+                        "rightImage": "heart"
                     },
                     {
                         "title": "Alcool ou Gasolina",
-                        "image": "mic.fil",
+                        "leftImage": "mic.fil",
                         "subMenu": [
                             {
                                 "section": "Alcool",
-                                "trailing": "help",
+                                "rightImage": "help",
                                 "items": [
                                     {
                                         "title": "Falar Alcool",
-                                        "image": "alcool"
+                                        "leftImage": "alcool"
                                     }
                                 ]
                             },
                             {
                                 "section": "Gasolina",
-                                "trailing": "gas",
+                                "rightImage": "gas",
                                 "items": [
                                     {
                                         "title": "Falar Gasolina",
-                                        "image": "gas"
+                                        "leftImage": "gas"
                                     }
                                 ]
                             }
@@ -347,22 +362,22 @@ class DropdownMenu: View {
                     },
                     {
                         "title": "Fita Métrica",
-                        "image": "mic.fil",
-                        "trailing": "heart"
+                        "leftImage": "mic.fil",
+                        "rightImage": "heart"
                     }
                 ]
             },
             {
                 "section": "Cofigurações - TERCEIRA SECTION",
-                "trailing": "heart",
+                "rightImage": "heart",
                 "items": [
                     {
                         "title": "Perfil",
-                        "image": "mic"
+                        "leftImage": "mic"
                     },
                     {
                         "title": "Notificações",
-                        "image": "mic.fil"
+                        "leftImage": "mic.fil"
                     }
                 ]
             }
@@ -397,7 +412,7 @@ func printaDireitoSaporra(_ result: [DropdownMenuSection], _ tabPar: String = ""
     itemTab += "   "
     print("")
     result.forEach { menu in
-        print("\(tab)#", menu.section ?? ""/*, "-" , menu.trailing ?? ""*/)
+        print("\(tab)#", menu.section ?? ""/*, "-" , menu.rightImage ?? ""*/)
         
         menu.items?.forEach({ item in
             print("\(itemTab)->", /*item.image ?? "", "-" ,*/ item.title ?? "")
