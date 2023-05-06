@@ -46,6 +46,11 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
     }
 
+    var setPin: StartOfConstraintsPositionFlow<ConstraintsPositionX>  {
+        configStartFlow()
+        _ = setTop.setBottom.setLeading.setTrailing
+        return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
+    }
     
 //  MARK: - CONSTRAINTS SIZE FLOW
     
@@ -58,6 +63,12 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
     var setHeight: StartOfConstraintsSizeFlowProtocol {
         configStartFlow()
         constraintVM.mainAttribute(.height)
+        return StartOfConstraintsSizeFlow(self)
+    }
+    
+    var setSize: StartOfConstraintsSizeFlowProtocol {
+        configStartFlow()
+        _ = setHeight.setWidth
         return StartOfConstraintsSizeFlow(self)
     }
 
@@ -73,6 +84,12 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
     var setVerticalAlignmentY: StartOfConstraintsAlignmentFlowProtocol {
         configStartFlow()
         constraintVM.mainAttribute(.verticalY)
+        return StartOfConstraintsAlignmentFlow(self)
+    }
+    
+    var setCenterXY: StartOfConstraintsAlignmentFlowProtocol {
+        configStartFlow()
+        _ = setHorizontalAlignmentX.setVerticalAlignmentY
         return StartOfConstraintsAlignmentFlow(self)
     }
     
