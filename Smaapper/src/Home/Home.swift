@@ -391,10 +391,11 @@ class Home: UIView {
         
         let constraint = menu.setConstraints { build in
             build
-                .setBottom.equalTo(floatButton, .top, -15)
-                .setTrailing.equalTo(floatButton, .trailing, -5)
-                .setHeight.equalToConstant(200)
-                .setWidth.equalToConstant(200)
+//                .setPin.equalToSafeArea(10)
+                .setCenterXY.equalToSuperView
+//                .setBottom.equalTo(floatButton, .top, -15)
+//                .setTrailing.equalTo(floatButton, .trailing, -5)
+                .setSize.equalToConstant(200)
         }
         constraint.applyConstraint()
 
