@@ -53,9 +53,8 @@ class DropdownMenu: View {
         list.add(insideTo: self)
         
         list.makeConstraints { build in
-            build.setTop.setBottom.equalToSuperView(20)
-                .setLeading.equalToSuperView(10)
-                .setTrailing.equalToSuperView(-15)
+            build.setTop.setBottom.equalToSafeArea(20)
+                .setLeading.setTrailing.equalToSuperView(15)
         }
         
     }
@@ -95,13 +94,13 @@ class DropdownMenu: View {
         self.show()
     }
     
+    func hide() {
+        self.isHidden = true
+    }
+    
     func show() {
-        
-        
 //        dropdownMenuFromJson()
-        if self.dropdownJson != nil {
-            dropdownMenuFromJson()
-        }
+        
         self.isHidden = false
         for constraint in self.constraints {
             if let menuHeight = self.menuHeight {
@@ -118,9 +117,7 @@ class DropdownMenu: View {
         
     }
 
-    func hide() {
-        self.isHidden = true
-    }
+
     
 //  MARK: - Private Functions Area
     private func dropdownMenuFromJson() {

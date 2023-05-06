@@ -83,10 +83,14 @@ class ListCellView: View {
     
     private func configRightViewConstraint() {
         rightView.makeConstraints { make in
-            make.setTop.setBottom.equalToSuperView
-                .setTrailing.equalToSuperView
-                .setWidth.equalToConstant(15)
+            make.setTop.setBottom.setTrailing.equalToSuperView
+                .setWidth.equalToConstant(30)
         }
+        _ = rightView.setBorder { build in
+            build.setColor(.yellow)
+                .setWidth(0)
+        }
+        
     }
     
 //  MARK: - Add Component

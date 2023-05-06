@@ -13,7 +13,7 @@ class ListCell: UITableViewCell {
     lazy var screenCell: ListCellView = {
         let screen = ListCellView()
             .setConstraints { build in
-                build.setTop.setBottom.setLeading.setTrailing.equalToSuperView
+                build.setPin.equalToSuperView
             }
         return screen
     }()

@@ -292,7 +292,6 @@ class Home: UIView {
     
     lazy var floatButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-
         let btn = ButtonImage(img)
             .setBorder({ build in
                 build.setCornerRadius(18)
@@ -314,7 +313,7 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-15)
+                    .setTrailing.equalToSafeArea(-20)
                     .setHeight.setWidth.equalToConstant(60)
             }
             .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
@@ -392,10 +391,10 @@ class Home: UIView {
         let constraint = menu.setConstraints { build in
             build
 //                .setPin.equalToSafeArea(10)
-                .setCenterXY.equalToSuperView
-//                .setBottom.equalTo(floatButton, .top, -15)
-//                .setTrailing.equalTo(floatButton, .trailing, -5)
+//                .setCenterXY.equalToSuperView
                 .setSize.equalToConstant(200)
+                .setBottom.equalTo(floatButton, .top, -15)
+                .setTrailing.equalTo(floatButton, .trailing, -5)
         }
         constraint.applyConstraint()
 
@@ -437,8 +436,8 @@ class Home: UIView {
          DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
              print("travez")
              self.menu
-                 .setHeight(270)
-                 .setWidth(170)
+                 .setHeight(280)
+                 .setWidth(210)
                  .show()
          }
         
