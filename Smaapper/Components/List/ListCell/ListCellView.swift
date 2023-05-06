@@ -10,6 +10,7 @@ import UIKit
 class ListCellView: View {
     
     private let stackViewTag = 100
+    var cont = 1
     
     override init() {
         super.init()
@@ -17,8 +18,8 @@ class ListCellView: View {
         configConstraints()
         
         _ = self.setBorder { build in
-            build.setColor(.red)
-                .setWidth(1)
+            build.setColor(UIColor.HEX("#06312a"))
+                .setWidth(0)
         }
     }
     
@@ -26,93 +27,107 @@ class ListCellView: View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    lazy var leftView: View = {
-        let view = View()
-            .setBackgroundColor(.cyan)
-            .setConstraints { build in
-                build.setTop.setBottom.equalToSuperView
-                    .setLeading.equalToSuperView
-                    .setWidth.equalToConstant(30)
-            }
+    lazy var leftView: UIView = {
+        let view = UIView()
         return view
     }()
     
-    lazy var middleView: View = {
-        let view = View()
-            .setBackgroundColor(.white)
-            .setConstraints { build in
-                build.setTop.setBottom.equalToSuperView
-                    .setLeading.equalTo(leftView,.trailing, 2)
-                    .setTrailing.equalTo(rightView,.leading, -2)
-            }
-            
+    lazy var middleView: UIView = {
+        let view = UIView()
         return view
     }()
     
-    lazy var rightView: View = {
-        let view = View()
-            .setBorder({ build in
-                build.setColor(.yellow)
-                    .setWidth(1)
-            })
-            .setConstraints { build in
-                build.setTop.setBottom.equalToSuperView
-                    .setTrailing.equalToSuperView
-                    .setWidth.equalToConstant(30)
-            }
-            .setBackgroundColor(.yellow)
-            
+    lazy var rightView: UIView = {
+        let view = UIView()
         return view
     }()
     
+//  MARK: - Setup Cell
+    func setupCell(_ data: ListCellModel) {
+        addLeftView(data.leftView)
+        addTextToStackView(data.middleView)
+        addRightViewToStackView(data.rightView)
+    }
+  
     
+//  MARK: - Private Area
     private func addElements() {
         leftView.add(insideTo: self)
         middleView.add(insideTo: self)
         rightView.add(insideTo: self)
     }
-    
+
+//  MARK: - Config Constraints
+
+
     private func configConstraints() {
-        leftView.applyConstraint()
-        middleView.applyConstraint()
-        rightView.applyConstraint()
+        configLeftViewConstraint()
+        configMiddleViewConstraint()
+        configRightViewConstraint()
     }
     
-    
-    func setupCell(_ data: ListCellModel) {
-//        addLeftViewToStackView(data.leftView)
-//        addTextToStackView(data.text)
-//        addRightViewToStackView(data.rightView)
-    }
-    
-    
-    private func addLeftViewToStackView(_ leftView: UIView?) {
-        if let leftView {
-//            stackView.addArrangedSubview(leftView)
-            configWidthAnchor(leftView, 50)
+    private func configLeftViewConstraint() {
+        leftView.makeConstraints { make in
+            make.setTop.setBottom.equalToSuperView
+                .setLeading.equalToSuperView
+                .setWidth.equalToConstant(30)
         }
     }
     
-    private func addRightViewToStackView(_ rightView: UIView?) {
-        if let rightView {
-//            stackView.addArrangedSubview(rightView)
-            configWidthAnchor(rightView, 50)
+    private func configMiddleViewConstraint() {
+        middleView.makeConstraints { make in
+            make.setTop.setBottom.equalToSuperView
+                .setLeading.equalTo(leftView,.trailing, 2)
+                .setTrailing.equalTo(rightView,.leading, -2)
         }
     }
     
-    private func configWidthAnchor(_ view: UIView, _ constant: CGFloat) {
-        view.widthAnchor.constraint(lessThanOrEqualToConstant: constant).isActive = true
+    private func configRightViewConstraint() {
+        rightView.makeConstraints { make in
+            make.setTop.setBottom.equalToSuperView
+                .setTrailing.equalToSuperView
+                .setWidth.equalToConstant(20)
+        }
     }
     
-    private func addTextToStackView(_ text: Label) {
-        text.makeConstraints { make in
+//  MARK: - Add Component
+    
+    private func addLeftView(_ componentView: UIView?) {
+        if let componentView {
+            removeSubViews(self.leftView)
+            self.leftView.addSubview(componentView)
+            pinConstraint(componentView)
+        }
+    }
+    
+    private func addRightViewToStackView(_ componentView: UIView?) {
+        if let componentView {
+            removeSubViews(self.rightView)
+            self.leftView.addSubview(componentView)
+            pinConstraint(componentView)
+        }
+    }
+    
+    
+    private func addTextToStackView(_ text: UIView) {
+        cont += 1
+        _ = (text as! Label).setText("\((text as! Label).text ?? "") - \(cont)")
+        removeSubViews(middleView)
+        middleView.addSubview(text)
+        pinConstraint(text)
+    }
+
+    private func removeSubViews(_ view: UIView) {
+        view.subviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+    }
+    
+    private func pinConstraint(_ view: UIView) {
+        view.makeConstraints { make in
             make.setTop.setWidth.setLeading.setBottom.equalToSuperView
         }
     }
-    
-    
-    
     
     
 }

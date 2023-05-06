@@ -42,6 +42,7 @@ class DropdownMenu: View {
         self.layer.zPosition = zPosition
         
         let list = List()
+            .setSeparatorStyle(.none)
             .setBackgroundColor(.clear)
             .setBorder { build in
                 build.setColor(.red)

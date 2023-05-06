@@ -70,7 +70,7 @@ class List: UITableView {
 
 extension List: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
+        return 45
     }
     
 }
@@ -86,25 +86,25 @@ extension List: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
         
         let img = ImageView()
-            .setImage(UIImage(systemName: "trash"))
-            .setSize(15)
+            .setImage(UIImage(systemName: "person"))
+            .setContentMode(.center)
+            .setSize(18)
             .setTintColor(.white)
             .setBorder { build in
                 build.setColor(.yellow)
                     .setWidth(0)
             }
+            .setOnTap { imageView in
+                print("caralhoooo - \(indexPath.row)")
+            }
             
         
         let label = Label("Caralho")
             .setColor(.white)
-            .setFont(UIFont.systemFont(ofSize: 13, weight: .regular))
+            .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.center)
-            .setBorder { build in
-                build.setColor(.yellow)
-                    .setWidth(1)
-            }
         
-        let listCellModel = ListCellModel(leftView: img, text: label, rightView: Label(""))
+        let listCellModel = ListCellModel(leftView: img, middleView: label, rightView: Label(""))
         
         cell.setupCell(listCellModel)
         

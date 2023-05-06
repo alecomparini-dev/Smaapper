@@ -9,6 +9,6 @@ import UIKit
 
 struct ListCellModel {
     let leftView: UIView?
-    let text: Label
+    let middleView: UIView
     let rightView: UIView?
 }

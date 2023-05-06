@@ -344,8 +344,8 @@ class Home: UIView {
                     .setBlur(percent: 10)
                     .apply()
             }
-            .setHeight(270)
-            .setWidth(170)
+            .setHeight(280)
+            .setWidth(210)
 //            .setConstraints { build in
 //                build
 //                    .setBottom.equalTo(floatButton, .top, -15)
@@ -366,23 +366,23 @@ class Home: UIView {
         floatButton.applyConstraint()
 
 
-        buttomDownload.add(insideTo: self)
-        buttomDownload.applyConstraint()
-
-        buttom3D.add(insideTo: self)
-        buttom3D.applyConstraint()
-
-        buttom1.add(insideTo: self)
-        buttom1.applyConstraint()
-
-        buttomNormal.add(insideTo: self)
-        buttomNormal.applyConstraint()
-
-        buttomLaranja.add(insideTo: self)
-        buttomLaranja.applyConstraint()
-
-        botaozim.add(insideTo: self)
-        botaozim.applyConstraint()
+//        buttomDownload.add(insideTo: self)
+//        buttomDownload.applyConstraint()
+//
+//        buttom3D.add(insideTo: self)
+//        buttom3D.applyConstraint()
+//
+//        buttom1.add(insideTo: self)
+//        buttom1.applyConstraint()
+//
+//        buttomNormal.add(insideTo: self)
+//        buttomNormal.applyConstraint()
+//
+//        buttomLaranja.add(insideTo: self)
+//        buttomLaranja.applyConstraint()
+//
+//        botaozim.add(insideTo: self)
+//        botaozim.applyConstraint()
         
         
 //        DROPDOW MENU

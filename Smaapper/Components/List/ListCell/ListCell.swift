@@ -50,37 +50,7 @@ class ListCell: UITableViewCell {
     }
     
     
-    private func setContentModeToScaleAspectFit(_ imageView: UIImageView) {
-        imageView.contentMode = .scaleAspectFit
-    }
-    
-    
-//    private func configText() {
-//        let text = listCellModel?.text ?? Label()
-//        spacer.addSubview(text)
-//        text.makeConstraints { build in
-//            build.setLeading.setTrailing.equalToSuperView
-//                .setVerticalAlignmentY.equalToSuperView
-//        }
-//
-//        //TODO: - Acho que não será preciso -
-//        if listCellModel?.rightView == nil {
-//            text.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-//            text.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-//        } else {
-//            text.setContentCompressionResistancePriority(.required, for: .horizontal)
-//            text.setContentHuggingPriority(.required, for: .horizontal)
-//        }
-//    }
-    
-//    private func addStackView() {
-//        if let existingStackView = self.contentView.viewWithTag(100) as? UIStackView {
-//            existingStackView.removeFromSuperview()
-//            print("removeu")
-//        }
-//
-//        self.contentView.addSubview(stackView ?? UIStackView())
-//    }
+
     
     
 
