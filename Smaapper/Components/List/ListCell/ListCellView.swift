@@ -9,7 +9,6 @@ import UIKit
 
 class ListCellView: View {
     
-    private let stackViewTag = 100
     var cont = 1
     
     override init() {
@@ -86,7 +85,7 @@ class ListCellView: View {
         rightView.makeConstraints { make in
             make.setTop.setBottom.equalToSuperView
                 .setTrailing.equalToSuperView
-                .setWidth.equalToConstant(20)
+                .setWidth.equalToConstant(15)
         }
     }
     
@@ -103,7 +102,7 @@ class ListCellView: View {
     private func addRightViewToStackView(_ componentView: UIView?) {
         if let componentView {
             removeSubViews(self.rightView)
-            self.leftView.addSubview(componentView)
+            self.rightView.addSubview(componentView)
             pinConstraint(componentView)
         }
     }

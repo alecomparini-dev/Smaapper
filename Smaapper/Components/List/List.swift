@@ -99,12 +99,21 @@ extension List: UITableViewDataSource {
             }
             
         
-        let label = Label("Caralho")
+        let label = Label("Categorias")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
-            .setTextAlignment(.center)
+            .setTextAlignment(.left)
         
-        let listCellModel = ListCellModel(leftView: img, middleView: label, rightView: Label(""))
+        let imgRight = ImageView()
+            .setImage(UIImage(systemName: "chevron.forward"))
+            .setContentMode(.center)
+            .setSize(12)
+            .setTintColor(.white)
+            .setOnTap { imageView in
+                print("eh pra direita caralhooo - \(indexPath.row + 1)")
+            }
+        
+        let listCellModel = ListCellModel(leftView: img, middleView: label, rightView: imgRight)
         
         cell.setupCell(listCellModel)
         

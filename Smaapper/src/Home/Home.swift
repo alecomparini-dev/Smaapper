@@ -191,7 +191,6 @@ class Home: UIView {
     }()
     
     @objc func didTapFloatingButton() {
-        print("Floating button tapped!")
         if !buttomDownload.isEnabled {
             _ = floatButton.setShadow { build in
                 build.setColor(UIColor.HEX("#ff710b"))
@@ -328,7 +327,7 @@ class Home: UIView {
         let menu = DropdownMenu()
             .setBorder({ build in
                 build.setCornerRadius(18)
-                    .setWidth(0.5)
+                    .setWidth(0)
                     .setColor(UIColor.HEX("#a71c1b").withAlphaComponent(1))
             })
             .setNeumorphism { build in
