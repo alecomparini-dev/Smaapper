@@ -17,6 +17,7 @@ class Home: UIView {
 //                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
                 .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
 //                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
+//                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
@@ -191,7 +192,6 @@ class Home: UIView {
     
     @objc func didTapFloatingButton() {
         print("Floating button tapped!")
-        
         if !buttomDownload.isEnabled {
             _ = floatButton.setShadow { build in
                 build.setColor(UIColor.HEX("#ff710b"))
@@ -202,12 +202,15 @@ class Home: UIView {
                     .setID("light")
                     .apply()
             }
+            menu.show()
         }else {
             floatButton.removeShadowByID("light")
+            menu.hide()
         }
            
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
+        
         
     }
     
@@ -224,7 +227,7 @@ class Home: UIView {
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(250)
             }
-            .setBackgroundColorLayer(.red)
+            .setBackgroundColor(.red)
         return btn
     }()
     
@@ -304,6 +307,7 @@ class Home: UIView {
 //                    .setReferenceColor(UIColor.HEX("#17191a"))
                     .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
+//                    .setReferenceColor(UIColor.HEX("#343641"))
 //                    .setLightShadeColor(.black.withAlphaComponent(0))
 //                    .setDarkShadeColor(.black.withAlphaComponent(0))
 
@@ -332,15 +336,16 @@ class Home: UIView {
 //                    .setReferenceColor(UIColor.HEX("#17191a"))
                     .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
-                    .setShape(.flat)
+//                    .setReferenceColor(UIColor.HEX("#343641"))
+                    .setShape(.concave)
                     .setLightPosition(.leftTop)
 //                    .setIntensity(percent: 100)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
-            .setMenuHeight(270)
-            .setMenuWidth(170)
+            .setHeight(280)
+            .setWidth(210)
 //            .setConstraints { build in
 //                build
 //                    .setBottom.equalTo(floatButton, .top, -15)
@@ -360,7 +365,7 @@ class Home: UIView {
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
 
-//
+
 //        buttomDownload.add(insideTo: self)
 //        buttomDownload.applyConstraint()
 //
@@ -393,9 +398,8 @@ class Home: UIView {
                 .setWidth.equalToConstant(200)
         }
         constraint.applyConstraint()
-        
-        menu.show()
 
+        menu.show()
         
 //        temporizador()
         
@@ -411,36 +415,34 @@ class Home: UIView {
         
          DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
              print("entrouuu")
-             _ = self.menu.setMenuWidth(150)
-                 .setMenuHeight(150)
-             self.menu.show()
-             
+             self.menu.setWidth(150)
+                 .setHeight(150)
+                 .show()
          }
          
          DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
              print("denovo")
-             _ = self.menu.setMenuWidth(50)
-                 .setMenuHeight(100)
-             self.menu.show()
-             
+             self.menu.setWidth(50)
+                 .setHeight(100)
+                 .show()
          }
          
          DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
              print("travez")
-             _ = self.menu.setMenuWidth(350)
-                 .setMenuHeight(600)
-             self.menu.show()
-             
+             self.menu.setWidth(350)
+                 .setHeight(600)
+                 .show()
          }
          
          DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
              print("travez")
-             _ = self.menu.setMenuWidth(100)
-                 .setMenuHeight(100)
-             self.menu.show()
-             self.menu.layoutIfNeeded()
-             
+             self.menu
+                 .setHeight(270)
+                 .setWidth(170)
+                 .show()
          }
+        
+        
     }
 
 }

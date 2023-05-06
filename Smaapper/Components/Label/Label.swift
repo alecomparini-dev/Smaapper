@@ -22,8 +22,10 @@ class Label: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     init(_ text: String) {
         super.init(frame: .zero)
+        _ = self.setText(text)
         initialization()
     }
     
