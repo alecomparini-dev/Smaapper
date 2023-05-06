@@ -95,7 +95,7 @@ extension List: UITableViewDataSource {
                     .setWidth(0)
             }
             .setOnTap { imageView in
-                print("caralhoooo - \(indexPath.row)")
+                print("caralhoooo - \(indexPath.row + 1)")
             }
             
         
