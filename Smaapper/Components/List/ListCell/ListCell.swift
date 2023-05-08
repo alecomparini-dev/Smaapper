@@ -13,7 +13,7 @@ class ListCell: UITableViewCell {
     lazy var screenCell: ListCellView = {
         let screen = ListCellView()
             .setConstraints { build in
-                build.setTop.setBottom.setLeading.setTrailing.equalToSuperView
+                build.setPin.equalToSuperView
             }
         return screen
     }()
@@ -21,7 +21,6 @@ class ListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.initialization()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -39,8 +38,9 @@ class ListCell: UITableViewCell {
     
     
 //  MARK: - Private Functions Area
+    
     private func addScreenCell() {
-        self.contentView.addSubview(screenCell)
+        screenCell.add(insideTo: self.contentView)
         screenCell.applyConstraint()
     }
     

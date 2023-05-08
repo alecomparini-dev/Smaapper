@@ -22,6 +22,7 @@ class DropdownMenu: View {
     private var itemsHeight: CGFloat = 35
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
+    private var padding: UIEdgeInsets?
     private var openingPoint: CGPoint?
     
     private var sections: [DropdownMenuSection] = []
@@ -37,26 +38,25 @@ class DropdownMenu: View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
-        self.hide()
-        self.layer.zPosition = zPosition
-        
+    lazy var list: List = {
         let list = List()
+            .setShowsVerticalScrollIndicator(false)
             .setSeparatorStyle(.none)
+            .setRowHeight(50)
             .setBackgroundColor(.clear)
             .setBorder { build in
                 build.setColor(.red)
                     .setWidth(0)
-                    .setCornerRadius(20)
+                    .setCornerRadius(20) //-->
             }
-        
-        list.add(insideTo: self)
-        
-        list.makeConstraints { build in
-            build.setTop.setBottom.equalToSuperView(20)
-                .setLeading.equalToSuperView(10)
-                .setTrailing.equalToSuperView(-15)
-        }
+        return list
+    }()
+    
+    private func initialization() {
+        self.hide()
+        setTopMostPosition()
+        addListOnDropdownMenu()
+        configConstraints()
         
     }
     
@@ -88,6 +88,11 @@ class DropdownMenu: View {
         return self
     }
     
+    func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
+        self.padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        return self
+    }
+    
     
 //  MARK: - Show DropdownMenu
     func show(_ openingPoint: CGPoint) {
@@ -95,341 +100,373 @@ class DropdownMenu: View {
         self.show()
     }
     
-    func show() {
-        
-        
-//        dropdownMenuFromJson()
-        if self.dropdownJson != nil {
-            dropdownMenuFromJson()
-        }
-        self.isHidden = false
-        for constraint in self.constraints {
-            if let menuHeight = self.menuHeight {
-                if constraint.firstAttribute == .height {
-                    constraint.constant = menuHeight
-                }
-            }
-            if let menuWidth = self.menuWidth {
-                if constraint.firstAttribute == .width {
-                    constraint.constant = menuWidth
-                }
-            }
-        }
-        
-    }
-
     func hide() {
         self.isHidden = true
     }
     
+    func show() {
+        
+        dropdownMenuFromJson()
+        
+        list.show()
+        
+        self.isHidden = false
+        
+        
+    }
+
+
+    
 //  MARK: - Private Functions Area
+    private func setTopMostPosition() {
+        self.layer.zPosition = zPosition
+    }
+    
+    private func addListOnDropdownMenu() {
+        list.add(insideTo: self)
+    }
+    
+    private func configConstraints() {
+        list.makeConstraints { build in
+            build.setTop.equalToSafeArea(0)
+                .setBottom.equalToSafeArea(-20)
+                .setLeading.setTrailing.equalToSuperView(15)
+        }
+    }
+    
     private func dropdownMenuFromJson() {
         let json = """
-        [
+[
+    {
+        "section": "Section 1",
+        "rightImage": "heart",
+        "items": [
             {
-                "section": "PRIMEIRA SECTION",
-                "rightImage": "heart",
-                "items": [
+                "title": "Categorias",
+                "leftImage": "trash",
+                "subMenu": [
                     {
-                        "title": "Categorias",
-                        "leftImage": "trash",
-                        "subMenu": [
+                        "section": "Utilidades",
+                        "rightImage": "util",
+                        "items": [
                             {
-                                "section": "Utilidades",
-                                "rightImage": "util",
-                                "items": [
-                                    {
-                                        "title": "Alcool ou Gasolina",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Todo-List",
-                                        "leftImage": "caracoroa"
-                                    },
-                                    {
-                                        "title": "Timers",
-                                        "leftImage": "velha"
-                                    },
-                                    {
-                                        "title": "Racha Conta",
-                                        "leftImage": "mic"
-                                    },
-                                    {
-                                        "title": "Leitor de QRCode/CodBar",
-                                        "leftImage": "mic"
-                                    },
-                                    {
-                                        "title": "Lembretes",
-                                        "leftImage": "mic"
-                                    },
-                                    {
-                                        "title": "Playlist Youtube",
-                                        "leftImage": "mic"
-                                    }
-                                ]
+                                "title": "Alcool ou Gasolina",
+                                "leftImage": "forca"
                             },
                             {
-                                "section": "Calculadoras",
-                                "rightImage": "calc",
-                                "items": [
-                                    {
-                                        "title": "Regra de 3",
-                                        "leftImage": "3"
-                                    },
-                                    {
-                                        "title": "Mini Calculadora",
-                                        "leftImage": "calc"
-                                    },
-                                    {
-                                        "title": "Calculadora IMC",
-                                        "leftImage": "calc imc"
-                                    },
-                                    {
-                                        "title": "Calculadora de Churras",
-                                        "leftImage": "calc chu"
-                                    },
-                                    {
-                                        "title": "Conversor de Medidas",
-                                        "leftImage": "med"
-                                    },
-                                    {
-                                        "title": "Calcula Gorjeta",
-                                        "leftImage": "calc imc"
-                                    }
-                                ]
+                                "title": "Todo-List",
+                                "leftImage": "caracoroa"
                             },
                             {
-                                "section": "AR - Realidade Aumentada",
-                                "rightImage": "AR",
-                                "items": [
-                                    {
-                                        "title": "Fita Métrica",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Dados",
-                                        "leftImage": "caracoroa"
-                                    },
-                                    {
-                                        "title": "Qual é a Flor",
-                                        "leftImage": "velha"
-                                    },
-                                    {
-                                        "title": "Qual é a Cor",
-                                        "leftImage": "mic"
-                                    },
-                                    {
-                                        "title": "Invisible Device",
-                                        "leftImage": "mic"
-                                    }
-                                ]
+                                "title": "Timers",
+                                "leftImage": "velha"
                             },
                             {
-                                "section": "Jogos/Entretenimentos",
-                                "rightImage": "game",
-                                "items": [
-                                    {
-                                        "title": "Forca",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Cara ou Coroa",
-                                        "leftImage": "caracoroa"
-                                    },
-                                    {
-                                        "title": "Jogo da Velha",
-                                        "leftImage": "velha"
-                                    },
-                                    {
-                                        "title": "Pedra/Papel/Tesoura",
-                                        "leftImage": "mic"
-                                    },
-                                    {
-                                        "title": "Dados",
-                                        "leftImage": "mic"
-                                    }
-                                ]
+                                "title": "Racha Conta",
+                                "leftImage": "mic"
                             },
                             {
-                                "section": "SUB MENUS + SUB MENUS TESTE",
-                                "rightImage": "i",
-                                "items": [
+                                "title": "Leitor de QRCode/CodBar",
+                                "leftImage": "mic"
+                            },
+                            {
+                                "title": "Lembretes",
+                                "leftImage": "mic"
+                            },
+                            {
+                                "title": "Playlist Youtube",
+                                "leftImage": "mic"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Calculadoras",
+                        "rightImage": "calc",
+                        "items": [
+                            {
+                                "title": "Regra de 3",
+                                "leftImage": "3"
+                            },
+                            {
+                                "title": "Mini Calculadora",
+                                "leftImage": "calc"
+                            },
+                            {
+                                "title": "Calculadora IMC",
+                                "leftImage": "calc imc"
+                            },
+                            {
+                                "title": "Calculadora de Churras",
+                                "leftImage": "calc chu"
+                            },
+                            {
+                                "title": "Conversor de Medidas",
+                                "leftImage": "med"
+                            },
+                            {
+                                "title": "Calcula Gorjeta",
+                                "leftImage": "calc imc"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "AR - Realidade Aumentada",
+                        "rightImage": "AR",
+                        "items": [
+                            {
+                                "title": "Fita Métrica",
+                                "leftImage": "forca"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "caracoroa"
+                            },
+                            {
+                                "title": "Qual é a Flor",
+                                "leftImage": "velha"
+                            },
+                            {
+                                "title": "Qual é a Cor",
+                                "leftImage": "mic"
+                            },
+                            {
+                                "title": "Invisible Device",
+                                "leftImage": "mic"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Jogos/Entretenimentos",
+                        "rightImage": "game",
+                        "items": [
+                            {
+                                "title": "Forca",
+                                "leftImage": "forca"
+                            },
+                            {
+                                "title": "Cara ou Coroa",
+                                "leftImage": "caracoroa"
+                            },
+                            {
+                                "title": "Jogo da Velha",
+                                "leftImage": "velha"
+                            },
+                            {
+                                "title": "Pedra/Papel/Tesoura",
+                                "leftImage": "mic"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "mic"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "SUB MENUS + SUB MENUS TESTE",
+                        "rightImage": "i",
+                        "items": [
+                            {
+                                "title": "Pergunte ao ChatGPR",
+                                "leftImage": "forca"
+                            },
+                            {
+                                "title": "Horóscopo do Dia",
+                                "leftImage": "forca"
+                            },
+                            {
+                                "title": "Clima Tempo",
+                                "leftImage": "forca"
+                            },
+                            {
+                                "title": "Cotações",
+                                "leftImage": "forca",
+                                "subMenu": [
                                     {
-                                        "title": "Pergunte ao ChatGPR",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Horóscopo do Dia",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Clima Tempo",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Cotações",
-                                        "leftImage": "forca",
-                                        "subMenu": [
+                                        "section": "Europa",
+                                        "rightImage": "help",
+                                        "items": [
                                             {
-                                                "section": "Europa",
-                                                "rightImage": "help",
-                                                "items": [
-                                                    {
-                                                        "title": "Euro",
-                                                        "leftImage": "alcool"
-                                                    },
-                                                    {
-                                                        "title": "Libras Esterlinas",
-                                                        "leftImage": "libras"
-                                                    },
-                                                    {
-                                                        "title": "Alemao",
-                                                        "leftImage": "alemao"
-                                                    }
-                                                ]
+                                                "title": "Euro",
+                                                "leftImage": "alcool"
                                             },
                                             {
-                                                "section": "Asia",
-                                                "rightImage": "asia",
-                                                "items": [
-                                                    {
-                                                        "title": "Xiaome rs",
-                                                        "leftImage": "gas"
-                                                    },
-                                                    {
-                                                        "title": "Sei lá mais qual",
-                                                        "leftImage": "gas"
-                                                    }
-                                                ]
+                                                "title": "Libras Esterlinas",
+                                                "leftImage": "libras"
+                                            },
+                                            {
+                                                "title": "Alemao",
+                                                "leftImage": "alemao"
                                             }
                                         ]
                                     },
                                     {
-                                        "title": "Próximos Feriados",
-                                        "leftImage": "forca"
-                                    },
-                                    {
-                                        "title": "Recomendações de Filme",
-                                        "leftImage": "forca"
+                                        "section": "Asia",
+                                        "rightImage": "asia",
+                                        "items": [
+                                            {
+                                                "title": "Xiaome rs",
+                                                "leftImage": "gas"
+                                            },
+                                            {
+                                                "title": "Sei lá mais qual",
+                                                "leftImage": "gas"
+                                            }
+                                        ]
                                     }
                                 ]
                             },
                             {
-                                "section": "Auto Ajuda",
-                                "rightImage": "help",
-                                "items": [
-                                    {
-                                        "title": "Músicas e Citações",
-                                        "leftImage": "forca"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "section": "Recentes - SEGUNDA SECTION",
-                "rightImage": "heart",
-                "items": [
-                    {
-                        "title": "Regra de 3",
-                        "leftImage": "mic",
-                        "rightImage": "heart"
-                    },
-                    {
-                        "title": "Alcool ou Gasolina",
-                        "leftImage": "mic.fil",
-                        "subMenu": [
-                            {
-                                "section": "Alcool",
-                                "rightImage": "help",
-                                "items": [
-                                    {
-                                        "title": "Falar Alcool",
-                                        "leftImage": "alcool"
-                                    }
-                                ]
+                                "title": "Próximos Feriados",
+                                "leftImage": "forca"
                             },
                             {
-                                "section": "Gasolina",
-                                "rightImage": "gas",
-                                "items": [
-                                    {
-                                        "title": "Falar Gasolina",
-                                        "leftImage": "gas"
-                                    }
-                                ]
+                                "title": "Recomendações de Filme",
+                                "leftImage": "forca"
                             }
                         ]
                     },
                     {
-                        "title": "Fita Métrica",
-                        "leftImage": "mic.fil",
-                        "rightImage": "heart"
-                    }
-                ]
-            },
-            {
-                "section": "Cofigurações - TERCEIRA SECTION",
-                "rightImage": "heart",
-                "items": [
-                    {
-                        "title": "Perfil",
-                        "leftImage": "mic"
-                    },
-                    {
-                        "title": "Notificações",
-                        "leftImage": "mic.fil"
+                        "section": "Auto Ajuda",
+                        "rightImage": "help",
+                        "items": [
+                            {
+                                "title": "Músicas e Citações",
+                                "leftImage": "forca"
+                            }
+                        ]
                     }
                 ]
             }
         ]
+    },
+    {
+        "section": "Recentes",
+        "rightImage": "heart",
+        "items": [
+            {
+                "title": "Regra de 3",
+                "leftImage": "mic",
+                "rightImage": "heart"
+            },
+            {
+                "title": "Alcool ou Gasolina",
+                "leftImage": "mic.fil",
+                "subMenu": [
+                    {
+                        "section": "Alcool",
+                        "rightImage": "help",
+                        "items": [
+                            {
+                                "title": "Falar Alcool",
+                                "leftImage": "alcool"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Gasolina",
+                        "rightImage": "gas",
+                        "items": [
+                            {
+                                "title": "Falar Gasolina",
+                                "leftImage": "gas"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Fita Métrica",
+                "leftImage": "mic.fil",
+                "rightImage": "heart"
+            }
+        ]
+    }
+]
 """.data(using: .utf8)
 
-        
-        
-//        if let dropdownJson = self.dropdownJson {
             do {
-//                let jsonData = try JSONSerialization.data(withJSONObject: dropdownJson, options: [])
                 let result = try JSONDecoder().decode(Dropdown.self, from: json!)
                 printaDireitoSaporra(result)
             } catch {
                 print(error)
             }
-//        }
     }
     
-}
-
-
-
-
-
-
-func printaDireitoSaporra(_ result: [DropdownMenuSection], _ tabPar: String = "", _ tabItem: String = "") {
-    var tab = tabPar
-    var itemTab = tabItem
     
-    tab += "  "
-    itemTab += "   "
-    print("")
-    result.forEach { menu in
-        print("\(tab)#", menu.section ?? ""/*, "-" , menu.rightImage ?? ""*/)
+    
+    func printaDireitoSaporra(_ result: [DropdownMenuSection], _ tabPar: String = "", _ tabItem: String = "") {
+        var tab = tabPar
+        var itemTab = tabItem
         
-        menu.items?.forEach({ item in
-            print("\(itemTab)->", /*item.image ?? "", "-" ,*/ item.title ?? "")
-            
-            if item.subMenu?.count ?? 0 > 0 {
-                printaDireitoSaporra(item.subMenu ?? [], tab, itemTab)
-            }
-            
-        })
-        
+        tab += "  "
+        itemTab += "   "
         print("")
+        result.forEach { menu in
+            print("\(tab)#", menu.section ?? ""/*, "-" , menu.rightImage ?? ""*/)
+
+            menu.items?.forEach({ item in
+                print("\(itemTab)->", /*item.image ?? "", "-" ,*/ item.title ?? "")
+
+//                if item.subMenu?.count ?? 0 > 0 {
+//                    printaDireitoSaporra(item.subMenu ?? [], tab, itemTab)
+//                }
+
+            })
+
+            print("")
+        }
+
+        createdRowList(result)
+                
+    }
+    
+    
+    
+    private func createdRowList(_ result: [DropdownMenuSection]) {
+        result.forEach { section in
+            let middle = createMiddleSectionView(section)
+            _ = list.setRow( isSection: true , leftView: nil, middleView: middle, rightView: nil) { row, section in
+                print(row, section ?? "")
+            }
+            section.items?.forEach({ row in
+                let middle = createMiddleRowView(row)
+                _ = list.setRow( isSection: false, leftView: nil, middleView: middle, rightView: nil) { row, section in
+                    print(row, section ?? "")
+                }
+            })
+        }
+        
+    }
+    
+    private func createMiddleRowView(_ row: DropdownMenuItem) -> UIView {
+        let label = Label(row.title ?? "")
+            .setColor(.white)
+            .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
+            .setTextAlignment(.left)
+        
+        return label
+    }
+    
+    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView {
+        let label = Label(section.section ?? "")
+            .setColor(UIColor.systemGray)
+            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
+            .setTextAlignment(.left)
+        
+        return label
     }
     
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
