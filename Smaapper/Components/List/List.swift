@@ -15,12 +15,13 @@ import UIKit
 
 class List: UITableView {
 
-//    typealias completionRow = ((_ row: Int) -> Void)
-    
+    typealias onTapRow = ((_ section: Int, _ row: Int) -> Void)
+
+    private var onTapRow: onTapRow?
     private var sections = [Section]()
     
-    init() {
-        super.init(frame: .zero, style: .plain)
+    init(_ style: UITableView.Style) {
+        super.init(frame: .zero, style: style)
         self.initialization()
     }
     
@@ -37,6 +38,16 @@ class List: UITableView {
     
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
+        return self
+    }
+    
+    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
+        self.sectionHeaderHeight = height
+        return self
+    }
+    
+    func setSectionFooterHeight(_ height: CGFloat) -> Self {
+        self.sectionFooterHeight = height
         return self
     }
     
@@ -62,6 +73,11 @@ class List: UITableView {
     
     func setSection(_ section: Section) -> Self {
         self.sections.append(section)
+        return self
+    }
+    
+    func setOnTapRow(_ closure: @escaping onTapRow) -> Self {
+        self.onTapRow = closure
         return self
     }
     
@@ -94,6 +110,36 @@ class List: UITableView {
 
 extension List: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return calculateHeightForHeaderInSection(section)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return calculateHeihtForFooterInSection(section)
+    }
+    
+    private func calculateHeihtForFooterInSection(_ section: Int) -> CGFloat {
+        if isSectionEmpty(sections[section]) {
+            return 0
+        }
+        return self.sectionFooterHeight
+    }
+    
+    private func calculateHeightForHeaderInSection(_ section: Int) -> CGFloat {
+        if isSectionEmpty(sections[section]) {
+            return 1
+        }
+        return self.sectionHeaderHeight
+    }
+    
+    private func isSectionEmpty(_ section: Section) -> Bool {
+        if section.leftView == nil &&
+            section.middleView == nil &&
+            section.rightView == nil {
+            return true
+        }
+        return false
+    }
 }
 
 //  MARK: - Extension Data Source
@@ -109,26 +155,27 @@ extension List: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.sections[section].leftView
+        let cell = ListCell()
+        cell.setupCell(self.sections[section].leftView,
+                       self.sections[section].middleView,
+                       self.sections[section].rightView)
+        return cell
     }
     
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
-        
         cell.setupCell(
             self.sections[indexPath.section].rows[indexPath.row].leftView,
             self.sections[indexPath.section].rows[indexPath.row].middleView,
             self.sections[indexPath.section].rows[indexPath.row].rightView
         )
-        
         return cell 
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        rows[indexPath.row].completion(indexPath.row)
+        if let onTapRow = self.onTapRow {
+            onTapRow(indexPath.section, indexPath.row)
+        }
     }
     
 }

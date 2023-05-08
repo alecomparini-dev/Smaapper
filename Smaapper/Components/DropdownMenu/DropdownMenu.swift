@@ -39,10 +39,15 @@ class DropdownMenu: View {
     }
     
     lazy var list: List = {
-        let list = List()
+        let list = List(.grouped)
             .setShowsVerticalScrollIndicator(false)
             .setSeparatorStyle(.none)
-            .setRowHeight(50)
+            .setRowHeight(45)
+            .setSectionHeaderHeight(30)
+            .setSectionFooterHeight(20)
+            .setOnTapRow({ section, row in
+                print("section: \(section), row: \(row)")
+            })
             .setBackgroundColor(.clear)
             .setBorder { build in
                 build.setColor(.red)
@@ -128,8 +133,7 @@ class DropdownMenu: View {
     
     private func configConstraints() {
         list.makeConstraints { build in
-            build.setTop.equalToSafeArea(0)
-                .setBottom.equalToSafeArea(-20)
+            build.setTop.setBottom.equalToSafeArea(20)
                 .setLeading.setTrailing.equalToSuperView(15)
         }
     }
@@ -138,8 +142,7 @@ class DropdownMenu: View {
         let json = """
 [
     {
-        "section": "Section 1",
-        "rightImage": "heart",
+        
         "items": [
             {
                 "title": "Categorias",
@@ -382,7 +385,7 @@ class DropdownMenu: View {
         ]
     },
     {
-        "section": "Cofigurações",
+        "section": "Configurações",
         "rightImage": "heart",
         "items": [
             {
@@ -442,11 +445,12 @@ class DropdownMenu: View {
             
             _ = list.setSection(section)
             
-            sec.items?.forEach({ row in
-                let leftRowView = createLeftRowView(row, 1)
-                let middleRowView = createMiddleRowView(row, 1)
+            sec.items?.enumerated().forEach({ (index, row) in
+                let leftRowView = createLeftRowView(row, index)
+                let middleRowView = createMiddleRowView(row, index)
+                let rightRowView = createRightRowView(row, index)
                 _ = section
-                    .setRow(leftView: leftRowView, middleView: middleRowView)
+                    .setRow(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
             })
             
         }
@@ -466,7 +470,7 @@ class DropdownMenu: View {
         let img = ImageView()
             .setImage(UIImage(systemName: "person"))
             .setContentMode(.center)
-            .setSize(18)
+            .setSize(20)
             .setTintColor(.white)
             .setBorder { build in
                 build.setColor(.yellow)
@@ -479,10 +483,37 @@ class DropdownMenu: View {
         return img
     }
     
-    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView {
+    
+    private func createRightRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
+        guard let subMenu = row.subMenu else {return nil}
+        
+        if !subMenu.isEmpty {
+            let img = ImageView()
+                .setImage(UIImage(systemName: "chevron.forward"))
+                .setContentMode(.center)
+                .setWeight(.black)
+                .setSize(16)
+                .setTintColor(.white)
+                .setBorder { build in
+                    build.setColor(.yellow)
+                        .setWidth(0)
+                }
+                .setOnTap { img in
+                    print("SubMenu Porra ! - \(index)")
+                }
+            
+            return img
+        }
+        
+        return nil
+        
+    }
+    
+    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView? {
+        if section.section == nil { return nil}
         let label = Label(section.section ?? "")
             .setColor(UIColor.systemGray)
-            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
+            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
             .setTextAlignment(.left)
         
         return label

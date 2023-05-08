@@ -394,7 +394,7 @@ class Home: UIView {
 //                .setCenterXY.equalToSuperView
 //                .setSize.equalToConstant(200)
                 .setHeight.equalToConstant(300)
-                .setWidth.equalToConstant(220)
+                .setWidth.equalToConstant(250)
                 .setBottom.equalTo(floatButton, .top, -10)
                 .setTrailing.equalTo(floatButton, .trailing, -5)
         }
