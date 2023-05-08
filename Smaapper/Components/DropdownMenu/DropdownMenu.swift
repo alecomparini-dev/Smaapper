@@ -404,9 +404,8 @@ class DropdownMenu: View {
         result.forEach { menu in
             print("\(tab)#", menu.section ?? ""/*, "-" , menu.rightImage ?? ""*/)
 
-            menu.items?.forEach({ item in
+            menu.items?.enumerated().forEach({ (index, item) in
                 print("\(itemTab)->", /*item.image ?? "", "-" ,*/ item.title ?? "")
-
 //                if item.subMenu?.count ?? 0 > 0 {
 //                    printaDireitoSaporra(item.subMenu ?? [], tab, itemTab)
 //                }
@@ -425,26 +424,45 @@ class DropdownMenu: View {
     private func createdRowList(_ result: [DropdownMenuSection]) {
         result.forEach { section in
             let middle = createMiddleSectionView(section)
-            _ = list.setRow( isSection: true , leftView: nil, middleView: middle, rightView: nil) { row, section in
-                print(row, section ?? "")
+            _ = list.setRow(leftView: nil, middleView: middle, rightView: nil) { row in
+                print("section: ->",  row)
             }
-            section.items?.forEach({ row in
-                let middle = createMiddleRowView(row)
-                _ = list.setRow( isSection: false, leftView: nil, middleView: middle, rightView: nil) { row, section in
-                    print(row, section ?? "")
+            
+            section.items?.enumerated().forEach({ (index, row) in
+                let left = createLeftRowView(row, index)
+                let middle = createMiddleRowView(row, index)
+                _ = list.setRow(leftView: left, middleView: middle, rightView: nil) { row in
+                    print("row: ->",  row)
                 }
             })
         }
         
     }
     
-    private func createMiddleRowView(_ row: DropdownMenuItem) -> UIView {
+    private func createMiddleRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
         let label = Label(row.title ?? "")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.left)
         
         return label
+    }
+    
+    private func createLeftRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
+        let img = ImageView()
+            .setImage(UIImage(systemName: "person"))
+            .setContentMode(.center)
+            .setSize(18)
+            .setTintColor(.white)
+            .setBorder { build in
+                build.setColor(.yellow)
+                    .setWidth(0)
+            }
+            .setOnTap { img in
+                print("caralhoooo - \(index)")
+            }
+        
+        return img
     }
     
     private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView {
@@ -458,6 +476,31 @@ class DropdownMenu: View {
     
     
 }
+
+
+
+//        let img = ImageView()
+//            .setImage(UIImage(systemName: "person"))
+//            .setContentMode(.center)
+//            .setSize(18)
+//            .setTintColor(.white)
+//            .setBorder { build in
+//                build.setColor(.yellow)
+//                    .setWidth(0)
+//            }
+//            .setOnTap { imageView in
+//                print("caralhoooo - \(indexPath.row + 1)")
+//            }
+            
+        
+//        let imgRight = ImageView()
+//            .setImage(UIImage(systemName: "chevron.forward"))
+//            .setContentMode(.center)
+//            .setSize(12)
+//            .setTintColor(.white)
+//            .setOnTap { imageView in
+//                print("eh pra direita caralhooo - \(indexPath.row + 1)")
+//            }
 
 
 

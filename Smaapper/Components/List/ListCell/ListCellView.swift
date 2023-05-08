@@ -66,12 +66,7 @@ class ListCellView: View {
     private func configLeftViewConstraint() {
         leftView.makeConstraints { make in
             make.setTop.setBottom.equalToSuperView
-                .setLeading.equalToSuperView(10)
-        }
-        if ((self.data?.isSection) != nil) {
-            leftView.makeConstraints { make in
-                make.setLeading.equalToSuperView
-            }
+                .setLeading.equalToSuperView(30)
         }
         
         if self.data?.leftView == nil {
@@ -99,28 +94,16 @@ class ListCellView: View {
 //  MARK: - Add Component
     
     private func addLeftView() {
+        removeSubViews(self.leftView)
         if let componentView = data?.leftView {
-            removeSubViews(self.leftView)
             self.leftView.addSubview(componentView)
             pinConstraint(componentView)
         }
-//        configLeftViewConstraint()
-        
-        for constraint in self.constraints {
-            if constraint.firstAttribute == .leading {
-                if let isSection = self.data?.isSection {
-                    if isSection {
-                        constraint.constant = 0
-                    }
-                }
-            }
-        }
-        
     }
     
     private func addRightViewToStackView() {
+        removeSubViews(self.rightView)
         if let componentView = data?.rightView {
-            removeSubViews(self.rightView)
             self.rightView.addSubview(componentView)
             pinConstraint(componentView)
         }
