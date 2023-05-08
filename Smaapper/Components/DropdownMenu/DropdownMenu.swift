@@ -10,12 +10,15 @@ import UIKit
 
 class DropdownMenu: View {
     
+    typealias onTapDropdownMenu = ((_ section: Int, _ row: Int) -> Void)
     enum PositionMenu {
         case leftTop
         case leftBottom
         case rightTop
         case rightBottom
     }
+    
+    private var onTap: onTapDropdownMenu?
     
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
@@ -46,13 +49,15 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setOnTapRow({ section, row in
-                print("section: \(section), row: \(row)")
+                if let onTap = self.onTap {
+                    onTap(section, row)
+                }
             })
             .setBackgroundColor(.clear)
             .setBorder { build in
                 build.setColor(.red)
                     .setWidth(0)
-                    .setCornerRadius(20) //-->
+                    .setCornerRadius(20)
             }
         return list
     }()
@@ -95,6 +100,11 @@ class DropdownMenu: View {
     
     func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        return self
+    }
+    
+    func setOnTapDropdownMenu(_ closure: @escaping onTapDropdownMenu) -> Self {
+        self.onTap = closure
         return self
     }
     
@@ -142,7 +152,8 @@ class DropdownMenu: View {
         let json = """
 [
     {
-        
+        "section": "Apps",
+        "rightImage": "heart",
         "items": [
             {
                 "title": "Categorias",

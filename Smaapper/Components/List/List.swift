@@ -7,11 +7,6 @@
 
 import UIKit
 
-//protocol ListComponent {
-//    var leftView: UIView? {get set}
-//    var middleView: UIView? {get set}
-//    var rightView: UIView? {get set}
-//}
 
 class List: UITableView {
 
@@ -82,14 +77,12 @@ class List: UITableView {
     }
     
     
+//  MARK: - Show List
+    
     func show() {
         self.RegisterCell()
         delegate = self
         dataSource = self
-        
-//        self.rows.forEach { row in
-//            print(row.middleView)
-//        }
     }
 
     

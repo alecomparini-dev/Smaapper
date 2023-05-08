@@ -21,6 +21,7 @@ class ListCellView: View {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
 //  MARK: - Setup Cell
     func setupCell(_ leftView: UIView?, _ middleView: UIView?, _ rightView: UIView?) {
         self.leftViewCell = leftView
@@ -58,7 +59,7 @@ class ListCellView: View {
         self.middleViewCell?.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
-                .setLeading.equalTo(self.leftViewCell!,.trailing, 2)
+                .setLeading.equalTo(self.leftViewCell!, .trailing, 2)
                 .setTrailing.equalTo(self.rightViewCell!, .leading, -2)
         }
     }
@@ -77,7 +78,6 @@ class ListCellView: View {
         }
     }
     
-    
     private func removeSubViews(_ view: UIView) {
         view.subviews.forEach { subView in
             subView.removeFromSuperview()
@@ -94,30 +94,3 @@ class ListCellView: View {
 }
 
 
-//private func configLeftViewConstraint() {
-//    leftView.makeConstraints { make in
-//        make.setTop.setBottom.equalToSuperView
-//            .setLeading.equalToSuperView(30)
-//    }
-//
-//    if self.data?.leftView == nil {
-//        leftView.makeConstraints { make in
-//            make.setWidth.equalToConstant(0)
-//        }
-//    }
-//}
-//
-//private func configMiddleViewConstraint() {
-//    middleView.makeConstraints { make in
-//        make.setTop.setBottom.equalToSuperView
-//            .setLeading.equalTo(leftView,.trailing, 2)
-//            .setTrailing.equalTo(rightView,.leading, -2)
-//    }
-//}
-//
-//private func configRightViewConstraint() {
-//    rightView.makeConstraints { make in
-//        make.setTop.setBottom.setTrailing.equalToSuperView
-//            .setWidth.equalToConstant(30)
-//    }
-//}
