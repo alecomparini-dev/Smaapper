@@ -14,8 +14,8 @@ class Home: UIView {
         addElements()
         _ = setGradient { build in
             build
-                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
-//                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
+//                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
 //                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
 //                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
@@ -302,8 +302,8 @@ class Home: UIView {
             .setNeumorphism { build in
                 build
                     .setShape(.concave)
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
 //                    .setLightShadeColor(.black.withAlphaComponent(0))
@@ -331,19 +331,19 @@ class Home: UIView {
             })
             .setNeumorphism { build in
                 build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
-                    .setShape(.flat)
+                    .setShape(.concave)
                     .setLightPosition(.leftTop)
 //                    .setIntensity(percent: 100)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
-            .setHeight(280)
-            .setWidth(210)
+            .setHeight(300)
+            .setWidth(220)
 //            .setConstraints { build in
 //                build
 //                    .setBottom.equalTo(floatButton, .top, -15)
@@ -392,8 +392,10 @@ class Home: UIView {
             build
 //                .setPin.equalToSafeArea(10)
 //                .setCenterXY.equalToSuperView
-                .setSize.equalToConstant(200)
-                .setBottom.equalTo(floatButton, .top, -15)
+//                .setSize.equalToConstant(200)
+                .setHeight.equalToConstant(300)
+                .setWidth.equalToConstant(220)
+                .setBottom.equalTo(floatButton, .top, -10)
                 .setTrailing.equalTo(floatButton, .trailing, -5)
         }
         constraint.applyConstraint()
@@ -405,6 +407,12 @@ class Home: UIView {
                 
     }
     
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        print(location)
+    }
     
     
     

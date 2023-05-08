@@ -26,7 +26,7 @@ class View: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         Resize.resize(self)
-        print(self)
+//        print(self)
     }
 
 

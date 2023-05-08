@@ -10,16 +10,12 @@ import UIKit
 class ListCellView: View {
     
     var cont = 1
+    private var data: ListCellModel?
     
     override init() {
         super.init()
         addElements()
         configConstraints()
-        
-        _ = self.setBorder { build in
-            build.setColor(UIColor.HEX("#06312a"))
-                .setWidth(0)
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -41,11 +37,13 @@ class ListCellView: View {
         return view
     }()
     
+    
 //  MARK: - Setup Cell
     func setupCell(_ data: ListCellModel) {
-        addLeftView(data.leftView)
-        addTextToStackView(data.middleView)
-        addRightViewToStackView(data.rightView)
+        self.data = data
+        addLeftView()
+        addMiddleView()
+        addRightViewToStackView()
     }
   
     
@@ -56,8 +54,8 @@ class ListCellView: View {
         rightView.add(insideTo: self)
     }
 
+    
 //  MARK: - Config Constraints
-
 
     private func configConstraints() {
         configLeftViewConstraint()
@@ -68,8 +66,18 @@ class ListCellView: View {
     private func configLeftViewConstraint() {
         leftView.makeConstraints { make in
             make.setTop.setBottom.equalToSuperView
-                .setLeading.equalToSuperView
-                .setWidth.equalToConstant(30)
+                .setLeading.equalToSuperView(10)
+        }
+        if ((self.data?.isSection) != nil) {
+            leftView.makeConstraints { make in
+                make.setLeading.equalToSuperView
+            }
+        }
+        
+        if self.data?.leftView == nil {
+            leftView.makeConstraints { make in
+                make.setWidth.equalToConstant(0)
+            }
         }
     }
     
@@ -86,38 +94,45 @@ class ListCellView: View {
             make.setTop.setBottom.setTrailing.equalToSuperView
                 .setWidth.equalToConstant(30)
         }
-        _ = rightView.setBorder { build in
-            build.setColor(.yellow)
-                .setWidth(0)
-        }
-        
     }
     
 //  MARK: - Add Component
     
-    private func addLeftView(_ componentView: UIView?) {
-        if let componentView {
+    private func addLeftView() {
+        if let componentView = data?.leftView {
             removeSubViews(self.leftView)
             self.leftView.addSubview(componentView)
             pinConstraint(componentView)
         }
+//        configLeftViewConstraint()
+        
+        for constraint in self.constraints {
+            if constraint.firstAttribute == .leading {
+                if let isSection = self.data?.isSection {
+                    if isSection {
+                        constraint.constant = 0
+                    }
+                }
+            }
+        }
+        
     }
     
-    private func addRightViewToStackView(_ componentView: UIView?) {
-        if let componentView {
+    private func addRightViewToStackView() {
+        if let componentView = data?.rightView {
             removeSubViews(self.rightView)
             self.rightView.addSubview(componentView)
             pinConstraint(componentView)
         }
     }
     
-    
-    private func addTextToStackView(_ text: UIView) {
-        cont += 1
-        _ = (text as! Label).setText("\((text as! Label).text ?? "") - \(cont)")
-        removeSubViews(middleView)
-        middleView.addSubview(text)
-        pinConstraint(text)
+    private func addMiddleView() {
+        if let middleView = data?.middleView {
+            removeSubViews(self.middleView)
+            self.middleView.addSubview(middleView)
+            pinConstraint(middleView)
+        }
+        
     }
 
     private func removeSubViews(_ view: UIView) {
