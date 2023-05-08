@@ -32,8 +32,8 @@ class ListCell: UITableViewCell {
         configCell()
     }
     
-    public func setupCell(_ listCellModel: ListCellModel) {
-        screenCell.setupCell(listCellModel)
+    func setupCell(_ leftView: UIView?, _ middleView: UIView?, _ rightView: UIView?) {
+        screenCell.setupCell(leftView, middleView, rightView)
     }
     
     
@@ -48,10 +48,6 @@ class ListCell: UITableViewCell {
         self.selectionStyle = .none
         self.backgroundColor = .clear
     }
-    
-    
-
-    
     
 
 }

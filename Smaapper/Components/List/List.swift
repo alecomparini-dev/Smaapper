@@ -7,11 +7,17 @@
 
 import UIKit
 
+//protocol ListComponent {
+//    var leftView: UIView? {get set}
+//    var middleView: UIView? {get set}
+//    var rightView: UIView? {get set}
+//}
+
 class List: UITableView {
 
-    typealias completionRow = ((_ row: Int) -> Void)
+//    typealias completionRow = ((_ row: Int) -> Void)
     
-    private var rows: [ListCellModel] = []
+    private var sections = [Section]()
     
     init() {
         super.init(frame: .zero, style: .plain)
@@ -54,20 +60,20 @@ class List: UITableView {
         return self
     }
     
-    func setRow(leftView: UIView?, middleView: UIView, rightView: UIView?, completion: @escaping completionRow) -> Self {
-        let cell = ListCellModel(leftView: leftView, middleView: middleView, rightView: rightView, completion:  completion)
-        self.rows.append(cell)
+    func setSection(_ section: Section) -> Self {
+        self.sections.append(section)
         return self
     }
+    
     
     func show() {
         self.RegisterCell()
         delegate = self
         dataSource = self
         
-        self.rows.forEach { row in
-            print(row.middleView)
-        }
+//        self.rows.forEach { row in
+//            print(row.middleView)
+//        }
     }
 
     
@@ -94,9 +100,16 @@ extension List: UITableViewDelegate {
 
 extension List: UITableViewDataSource {
     
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rows.count
+        return self.sections[section].rows.count
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.sections[section].leftView
     }
     
 
@@ -104,14 +117,18 @@ extension List: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
         
-        cell.setupCell(rows[indexPath.row])
+        cell.setupCell(
+            self.sections[indexPath.section].rows[indexPath.row].leftView,
+            self.sections[indexPath.section].rows[indexPath.row].middleView,
+            self.sections[indexPath.section].rows[indexPath.row].rightView
+        )
         
         return cell 
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        rows[indexPath.row].completion(indexPath.row)
+//        rows[indexPath.row].completion(indexPath.row)
     }
     
 }

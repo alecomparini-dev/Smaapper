@@ -380,6 +380,20 @@ class DropdownMenu: View {
                 "rightImage": "heart"
             }
         ]
+    },
+    {
+        "section": "Cofigurações",
+        "rightImage": "heart",
+        "items": [
+            {
+                "title": "Perfil",
+                "leftImage": "mic"
+            },
+            {
+                "title": "Notificações",
+                "leftImage": "mic.fil"
+            }
+        ]
     }
 ]
 """.data(using: .utf8)
@@ -422,19 +436,19 @@ class DropdownMenu: View {
     
     
     private func createdRowList(_ result: [DropdownMenuSection]) {
-        result.forEach { section in
-            let middle = createMiddleSectionView(section)
-            _ = list.setRow(leftView: nil, middleView: middle, rightView: nil) { row in
-                print("section: ->",  row)
-            }
+        result.forEach { sec in
+            let middleSection = createMiddleSectionView(sec)
+            let section = Section(leftView: nil, middleView: middleSection)
             
-            section.items?.enumerated().forEach({ (index, row) in
-                let left = createLeftRowView(row, index)
-                let middle = createMiddleRowView(row, index)
-                _ = list.setRow(leftView: left, middleView: middle, rightView: nil) { row in
-                    print("row: ->",  row)
-                }
+            _ = list.setSection(section)
+            
+            sec.items?.forEach({ row in
+                let leftRowView = createLeftRowView(row, 1)
+                let middleRowView = createMiddleRowView(row, 1)
+                _ = section
+                    .setRow(leftView: leftRowView, middleView: middleRowView)
             })
+            
         }
         
     }
