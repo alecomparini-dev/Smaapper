@@ -201,10 +201,10 @@ class Home: UIView {
                     .setID("light")
                     .apply()
             }
-            menu.show()
+            dropdownMenu.show()
         }else {
             floatButton.removeShadowByID("light")
-            menu.hide()
+            dropdownMenu.hide()
         }
            
         buttom1.isEnabled = !buttom1.isEnabled
@@ -322,13 +322,31 @@ class Home: UIView {
     }()
     
     
-    lazy var menu: DropdownMenu = {
-        let menu = DropdownMenu()
+    lazy var dropdownMenu: DropdownMenu = {
+        let menu = createDropdownMenu()
+        _ = menu.setConstraints { build in
+            build
+                .setBottom.equalTo(floatButton, .top, -15)
+                .setTrailing.equalTo(floatButton, .trailing, -5)
+                .setHeight.equalToConstant(300)
+                .setWidth.equalToConstant(240)
+        }
+        _ = menu.setOnTapDropdownMenu { section, row in
+            print("sectionCaralho: \(section) - Linha Porra: \(row)")
+        }
+        
+        menu.setLayoutSubMenu(createDropdownMenu())
+        return menu
+    }()
+    
+    private func createDropdownMenu() -> DropdownMenu {
+        return DropdownMenu()
             .setBorder({ build in
-                build.setCornerRadius(18)
-                    .setWidth(0)
-                    .setColor(UIColor.HEX("#a71c1b").withAlphaComponent(1))
+                build
+                    .setCornerRadius(18)
             })
+            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
+            .setPaddingColuns(left: 5, right: 5)
             .setNeumorphism { build in
                 build
 //                    .setReferenceColor(UIColor.HEX("#17191a"))
@@ -337,25 +355,12 @@ class Home: UIView {
 //                    .setReferenceColor(UIColor.HEX("#343641"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-//                    .setIntensity(percent: 100)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
-            .setHeight(300)
-            .setWidth(220)
-//            .setConstraints { build in
-//                build
-//                    .setBottom.equalTo(floatButton, .top, -15)
-//                    .setTrailing.equalTo(floatButton, .trailing, -5)
-//                    .setHeight.equalToConstant(270)
-//                    .setWidth.equalToConstant(170)
-//            }
-        return menu
-    }()
-    
-
-    
+            
+    }
     
     
     private func addElements() {
@@ -363,7 +368,7 @@ class Home: UIView {
         floatButton.add(insideTo: self)
         floatButton.applyConstraint()
 
-
+//
 //        buttomDownload.add(insideTo: self)
 //        buttomDownload.applyConstraint()
 //
@@ -384,26 +389,11 @@ class Home: UIView {
         
         
 //        DROPDOW MENU
-        menu.add(insideTo: self)
-//        menu.applyConstraint()
-        
-        
-        let constraint = menu.setConstraints { build in
-            build
-//                .setPin.equalToSafeArea(10)
-//                .setCenterXY.equalToSuperView
-//                .setSize.equalToConstant(200)
-                .setHeight.equalToConstant(300)
-                .setWidth.equalToConstant(250)
-                .setBottom.equalTo(floatButton, .top, -10)
-                .setTrailing.equalTo(floatButton, .trailing, -5)
-        }
-        constraint.applyConstraint()
+        dropdownMenu.add(insideTo: self)
+        dropdownMenu.applyConstraint()
 
-        menu.show()
-        
-//        temporizador()
-        
+        dropdownMenu.setDropdownMenuFromJson(getJson().data(using: .utf8)!)
+        dropdownMenu.show()
                 
     }
     
@@ -416,41 +406,180 @@ class Home: UIView {
     
     
     
-    
-    
-    func temporizador() {
-        
-         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-             print("entrouuu")
-             self.menu.setWidth(150)
-                 .setHeight(150)
-                 .show()
-         }
-         
-         DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-             print("denovo")
-             self.menu.setWidth(50)
-                 .setHeight(100)
-                 .show()
-         }
-         
-         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-             print("travez")
-             self.menu.setWidth(350)
-                 .setHeight(600)
-                 .show()
-         }
-         
-         DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-             print("travez")
-             self.menu
-                 .setHeight(280)
-                 .setWidth(210)
-                 .show()
-         }
-        
-        
+
+}
+
+
+//"leftImage": "rectangle.grid.2x2",
+
+public func getJson() -> String{
+    return """
+[
+    {
+        "section": "Utilities",
+        "rightImage": "util",
+        "items": [
+            {
+                "title": "Alcool ou Gasolina",
+                "leftImage": "fuelpump.fill"
+            },
+            {
+                "title": "Todo-List",
+                "leftImage": "list.bullet.clipboard.fill",
+                "rightImage": "checklist"
+            },
+            {
+                "title": "Timers",
+                "leftImage": "timer.circle.fill"
+            },
+            {
+                "title": "Racha Conta",
+                "leftImage": "dollarsign.arrow.circlepath",
+                "rightImage": "person.2.gobackward"
+            },
+            {
+                "title": "Leitor de QRCode/CodBar",
+                "leftImage": "qrcode.viewfinder"
+            },
+            {
+                "title": "Lembretes",
+                "leftImage": "note.text",
+                "rightImage": "list.clipboard.fill"
+            },
+            {
+                "title": "Playlist Youtube",
+                "leftImage": "play.square.stack.fill",
+                "rightImage": "play.rectangle.on.rectangle.fill"
+            }
+        ]
+    },
+    {
+        "section": "Calculadoras",
+        "rightImage": "calc",
+        "items": [
+            {
+                "title": "Regra de 3",
+                "leftImage": "3.square.fill"
+            },
+            {
+                "title": "Mini Calculadora",
+                "leftImage": "plusminus.circle.fill",
+                "rightImage": "plus.rectangle.fill"
+            },
+            {
+                "title": "Calculadora IMC",
+                "leftImage": "scalemass.fill"
+            },
+            {
+                "title": "Calculadora de Churras",
+                "leftImage": "flame.fill"
+            },
+            {
+                "title": "Conversor de Medidas",
+                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
+            },
+            {
+                "title": "Calcula Gorjeta",
+                "leftImage": "percent"
+            }
+        ]
+    },
+    {
+        "section": "AR - Realidade Aumentada",
+        "rightImage": "AR",
+        "items": [
+            {
+                "title": "Fita Métrica",
+                "leftImage": "ruler.fill"
+            },
+            {
+                "title": "Dados",
+                "leftImage": "dice.fill"
+            },
+            {
+                "title": "Qual é a Flor",
+                "leftImage": "leaf.fill"
+            },
+            {
+                "title": "Qual é a Cor",
+                "leftImage": "paintpalette.fill"
+            },
+            {
+                "title": "Invisible Device",
+                "leftImage": "wand.and.stars.inverse"
+            }
+        ]
+    },
+    {
+        "section": "Jogos/Entretenimentos",
+        "rightImage": "game",
+        "items": [
+            {
+                "title": "Forca",
+                "leftImage": "figure.mixed.cardio"
+            },
+            {
+                "title": "Cara ou Coroa",
+                "leftImage": "caracoroa"
+            },
+            {
+                "title": "Jogo da Velha",
+                "leftImage": "number.square.fill"
+            },
+            {
+                "title": "Pedra/Papel/Tesoura",
+                "leftImage": "scissors.badge.ellipsis"
+            },
+            {
+                "title": "Dados",
+                "leftImage": "dice.fill"
+            }
+        ]
+    },
+    {
+        "section": "Informativos",
+        "rightImage": "i",
+        "items": [
+            {
+                "title": "Pergunte ao ChatGPT",
+                "leftImage": "message.and.waveform.fill"
+            },
+            {
+                "title": "Horóscopo do Dia",
+                "leftImage": "bubbles.and.sparkles.fill",
+                "rightImage": "sparkles"
+            },
+            {
+                "title": "Clima Tempo",
+                "leftImage": "cloud.sun.fill"
+            },
+            {
+                "title": "Cotações",
+                "leftImage": "dollarsign.circle"
+            },
+            {
+                "title": "Próximos Feriados",
+                "leftImage": "calendar.badge.exclamationmark"
+            },
+            {
+                "title": "Recomendações de Filme",
+                "leftImage": "film.stack.fill"
+            }
+        ]
+    },
+    {
+        "section": "Auto Ajuda",
+        "rightImage": "help",
+        "items": [
+            {
+                "title": "Músicas e Citações 􀼺􀉞􀉛",
+                "leftImage": "bookmark.square.fill",
+                "rightImage": "book.fill"
+            }
+        ]
     }
+]
+"""
 
 }
 
