@@ -520,7 +520,7 @@ public func getJson() -> String{
             },
             {
                 "title": "Cara ou Coroa",
-                "leftImage": "caracoroa"
+                "leftImage": "cedisign.circle.fill"
             },
             {
                 "title": "Jogo da Velha",
@@ -532,7 +532,7 @@ public func getJson() -> String{
             },
             {
                 "title": "Dados",
-                "leftImage": "dice.fill"
+                "leftImage": "die.face.6.fill"
             }
         ]
     },
