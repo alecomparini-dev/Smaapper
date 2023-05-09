@@ -332,7 +332,7 @@ class Home: UIView {
                 .setWidth.equalToConstant(240)
         }
         _ = menu.setOnTapDropdownMenu { section, row in
-            print("sectionCaralho: \(section) - Linha Porra: \(row)")
+//            print("sectionCaralho: \(section) - Linha Porra: \(row)")
         }
         menu.setLayoutSubMenu(createDropdownMenu())
         return menu
@@ -358,6 +358,7 @@ class Home: UIView {
                     .setBlur(percent: 10)
                     .apply()
             }
+            
             
     }
     
@@ -397,13 +398,6 @@ class Home: UIView {
     }
     
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        print(#function, location)
-    }
-    
-    
     
 
 }

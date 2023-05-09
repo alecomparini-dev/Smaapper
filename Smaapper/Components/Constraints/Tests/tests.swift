@@ -987,7 +987,7 @@ func test_Size_Size_Position_Position_Position_Position_equalTo() {
         .setBottom
         .setLeading
         .setTrailing
-        .equalTo(Label("caralho que top"))
+        .equalTo(Label("que top"))
     
         .setWidth
         .setHeight

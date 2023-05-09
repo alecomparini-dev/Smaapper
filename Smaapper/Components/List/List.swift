@@ -101,6 +101,12 @@ class List: UITableView {
 
 //  MARK: - Extension Delegate
 
+//extension List: UIGestureRecognizerDelegate {
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+//        return true
+//    }
+//}
+
 extension List: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -133,6 +139,8 @@ extension List: UITableViewDelegate {
         }
         return false
     }
+    
+
 }
 
 //  MARK: - Extension Data Source
@@ -170,5 +178,7 @@ extension List: UITableViewDataSource {
             onTapRow(indexPath.section, indexPath.row)
         }
     }
+    
+
     
 }

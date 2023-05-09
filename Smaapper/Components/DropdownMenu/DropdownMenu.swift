@@ -10,7 +10,6 @@ import UIKit
 
 class DropdownMenu: View {
     
-    
     typealias onTapDropdownMenuAlias = ((_ section: Int, _ row: Int) -> Void)
     enum PositionMenu {
         case leftTop
@@ -23,6 +22,7 @@ class DropdownMenu: View {
     private var layoutSubMenu: DropdownMenu?
     
     private var location: CGPoint?
+    
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var itemsHeight: CGFloat = 35
@@ -80,7 +80,6 @@ class DropdownMenu: View {
         setTopMostPosition()
         addListOnDropdownMenu()
         configTouchInList()
-        
     }
 
     
@@ -133,7 +132,10 @@ class DropdownMenu: View {
     
     func setLayoutSubMenu(_ layoutSubMenu: DropdownMenu) {
         self.layoutSubMenu = layoutSubMenu
-        self.layoutSubMenu?.add(insideTo: self.superview ?? self)
+        DispatchQueue.main.async {
+            self.layoutSubMenu?.add(insideTo: self.superview! )
+        }
+        
     }
     
     
@@ -144,41 +146,32 @@ class DropdownMenu: View {
         list.show()
         self.isHidden = false
         
+//        self.layoutSubMenu?.frame = CGRect(x: 0, y: 0, width: 350, height: 600)
+//        self.layoutSubMenu?.frame.origin = self.location ?? CGPoint()
         
-        print("------------- TUDO FINALIZADO ----------------")
-        self.layoutSubMenu?.frame = CGRect(x: 0, y: 0, width: 350, height: 600)
-        
-        
-        print(#function,self.location ?? CGPoint())
-        self.layoutSubMenu?.frame.origin = self.location ?? CGPoint()
-        
-        
-//
-//
-//        self.layoutSubMenu?.makeConstraints { make in
-//            make.setTop.setLeading.setTrailing.equalToSafeArea(60)
-//                .setHeight.equalToConstant(400)
-//        }
+        DispatchQueue.main.async {
+            self.layoutSubMenu?.makeConstraints({ make in
+                make.setTop.setLeading.setTrailing.equalToSuperView(10)
+                    .setHeight.equalToConstant(100)
+            })
+        }
         
     }
 
-    func hide() {
+    func hide() {   
         self.isHidden = true
     }
     
 //  MARK: - Private Functions Area
     private func configTouchInList() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
-        (list as UIView).isUserInteractionEnabled = true
-        tap.cancelsTouchesInView = false
-        (list as UIView).addGestureRecognizer(tap)
-    }
-    @objc func tableViewTapped(sender: UITapGestureRecognizer) {
-        let point = sender.location(in: nil)
-        print(point)
-        if let indexPath = list.indexPathForRow(at: point) {
-            print("O toque ocorreu na célula da seção \(indexPath.section) e linha \(indexPath.row)")
-        }
+
+        _ = TapGesture(list)
+            .setClosure(closure: { location, state in
+                return
+            })
+        
+        
+
     }
     
     private func setTopMostPosition() {
@@ -249,30 +242,20 @@ class DropdownMenu: View {
                 build.setColor(.yellow)
                     .setWidth(0)
             }
-            .setOnTap { img in
-                print("caralhoooo - \(index)")
-            }
-        
         return img
     }
     
     private func createRightRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
         guard let subMenu = row.subMenu else {return nil}
-        
         if !subMenu.isEmpty {
             let img = ImageView()
                 .setImage(UIImage(systemName: "chevron.forward"))
                 .setContentMode(.center)
                 .setSize(16)
                 .setTintColor(.white)
-                .setOnTap { img in
-                    print("SubMenu Porra ! - \(index)")
-                }
             return img
         }
-        
         return nil
-        
     }
     
     private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView? {
