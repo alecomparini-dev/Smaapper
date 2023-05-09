@@ -17,6 +17,7 @@ class ApplyConstraints {
     
     func apply() {
         constraints.forEach { constraint in
+            constraint.mainElement.translatesAutoresizingMaskIntoConstraints = false
             validateElementIsAdded(constraint.mainElement)
             decideWitchConstraintToCall(constraint)
         }
@@ -46,7 +47,6 @@ class ApplyConstraints {
                            constant: setupConstant(constraint, mainAttr)
         )
         
-        constraint.mainElement.translatesAutoresizingMaskIntoConstraints = false
         layoutConstraint.isActive = true
         
 //        print("""

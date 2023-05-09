@@ -7,14 +7,16 @@
 
 import UIKit
 
+
 class List: UITableView {
 
-    typealias completionRow = ((_ row: Int, _ section: Int?) -> Void)?
+    typealias onTapRow = ((_ section: Int, _ row: Int) -> Void)
+
+    private var onTapRow: onTapRow?
+    private var sections = [Section]()
     
-    private var rows: [ListCellModel] = []
-    
-    init() {
-        super.init(frame: .zero, style: .plain)
+    init(_ style: UITableView.Style) {
+        super.init(frame: .zero, style: style)
         self.initialization()
     }
     
@@ -23,7 +25,6 @@ class List: UITableView {
     }
     
     private func initialization() {
-        self.RegisterCell()
         self.setDefaultValues()
     }
     
@@ -32,6 +33,16 @@ class List: UITableView {
     
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
+        return self
+    }
+    
+    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
+        self.sectionHeaderHeight = height
+        return self
+    }
+    
+    func setSectionFooterHeight(_ height: CGFloat) -> Self {
+        self.sectionFooterHeight = height
         return self
     }
     
@@ -55,19 +66,23 @@ class List: UITableView {
         return self
     }
     
-    func setRow(isSection: Bool, leftView: UIView?, middleView: UIView, rightView: UIView?, completion: completionRow) -> Self {
-        let cell = ListCellModel(isSection: isSection, leftView: leftView, middleView: middleView, rightView: rightView, completion:  completion)
-        self.rows.append(cell)
+    func setSection(_ section: Section) -> Self {
+        self.sections.append(section)
         return self
     }
     
+    func setOnTapRow(_ closure: @escaping onTapRow) -> Self {
+        self.onTapRow = closure
+        return self
+    }
+    
+    
+//  MARK: - Show List
+    
     func show() {
+        self.RegisterCell()
         delegate = self
         dataSource = self
-        
-        self.rows.forEach { row in
-            print(row.middleView)
-        }
     }
 
     
@@ -80,6 +95,7 @@ class List: UITableView {
     private func RegisterCell() {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
     }
+    
 
 }
 
@@ -87,102 +103,72 @@ class List: UITableView {
 
 extension List: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return calculateHeightForHeaderInSection(section)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return calculateHeihtForFooterInSection(section)
+    }
+    
+    private func calculateHeihtForFooterInSection(_ section: Int) -> CGFloat {
+        if isSectionEmpty(sections[section]) {
+            return 0
+        }
+        return self.sectionFooterHeight
+    }
+    
+    private func calculateHeightForHeaderInSection(_ section: Int) -> CGFloat {
+        if isSectionEmpty(sections[section]) {
+            return 1
+        }
+        return self.sectionHeaderHeight
+    }
+    
+    private func isSectionEmpty(_ section: Section) -> Bool {
+        if section.leftView == nil &&
+            section.middleView == nil &&
+            section.rightView == nil {
+            return true
+        }
+        return false
+    }
 }
 
 //  MARK: - Extension Data Source
 
 extension List: UITableViewDataSource {
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return self.rows.filter({ $0.isSection == true }).count
-//    }
-    
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        switch section {
-//        case 0:
-//            return self.rows[0].middleView
-//        case 1:
-//            return self.rows[2].middleView
-//        case 2:
-//            return self.rows[6].middleView
-//        default:
-//            return nil
-//        }
-//    }
-    
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.sections.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch section {
-//        case 0:
-//            return 1
-//
-//        case 1:
-//            return 3
-//
-//        case 2:
-//            return 2
-//
-//        default:
-//            return 1
-//        }
-        
-        return self.rows.count
-        
+        return self.sections[section].rows.count
     }
     
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        if section == 0, let headerView = view as? UITableViewHeaderFooterView {
-//            headerView.contentView.backgroundColor = .red
-//        }
-//    }
-//
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = ListCell()
+        cell.setupCell(self.sections[section].leftView,
+                       self.sections[section].middleView,
+                       self.sections[section].rightView)
+        return cell
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
-        
-//        let img = ImageView()
-//            .setImage(UIImage(systemName: "person"))
-//            .setContentMode(.center)
-//            .setSize(18)
-//            .setTintColor(.white)
-//            .setBorder { build in
-//                build.setColor(.yellow)
-//                    .setWidth(0)
-//            }
-//            .setOnTap { imageView in
-//                print("caralhoooo - \(indexPath.row + 1)")
-//            }
-            
-        
-//        let imgRight = ImageView()
-//            .setImage(UIImage(systemName: "chevron.forward"))
-//            .setContentMode(.center)
-//            .setSize(12)
-//            .setTintColor(.white)
-//            .setOnTap { imageView in
-//                print("eh pra direita caralhooo - \(indexPath.row + 1)")
-//            }
-        
-        let left = rows[indexPath.row].leftView
-        let mid = rows[indexPath.row].middleView
-        let right = rows[indexPath.row].rightView
-        let listCellModel = ListCellModel(isSection: rows[indexPath.row].isSection, leftView: left, middleView: mid, rightView: right) { row, section in
-            print(row, section ?? "")
-        }
-        
-        cell.setupCell(listCellModel)
-        
-        print("seção: \(indexPath.section) - row: \(indexPath.row)  ")
-        
+        cell.setupCell(
+            self.sections[indexPath.section].rows[indexPath.row].leftView,
+            self.sections[indexPath.section].rows[indexPath.row].middleView,
+            self.sections[indexPath.section].rows[indexPath.row].rightView
+        )
         return cell 
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("linha clicada: \(indexPath.row) da seção: \(indexPath.section) ")
+        if let onTapRow = self.onTapRow {
+            onTapRow(indexPath.section, indexPath.row)
+        }
     }
-
+    
 }

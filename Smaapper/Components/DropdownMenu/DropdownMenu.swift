@@ -10,6 +10,8 @@ import UIKit
 
 class DropdownMenu: View {
     
+    
+    typealias onTapDropdownMenu = ((_ section: Int, _ row: Int) -> Void)
     enum PositionMenu {
         case leftTop
         case leftBottom
@@ -17,12 +19,16 @@ class DropdownMenu: View {
         case rightBottom
     }
     
+    private var onTap: onTapDropdownMenu?
+    private var layoutSubMenu: DropdownMenu?
+    
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var itemsHeight: CGFloat = 35
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
-    private var padding: UIEdgeInsets?
+    private var paddingMenu: UIEdgeInsets?
+    private var paddingCells: UIEdgeInsets?
     private var openingPoint: CGPoint?
     
     private var sections: [DropdownMenuSection] = []
@@ -39,15 +45,29 @@ class DropdownMenu: View {
     }
     
     lazy var list: List = {
-        let list = List()
+        let list = List(.grouped)
             .setShowsVerticalScrollIndicator(false)
             .setSeparatorStyle(.none)
-            .setRowHeight(50)
+            .setRowHeight(45)
+            .setSectionHeaderHeight(30)
+            .setSectionFooterHeight(20)
+            .setOnTapRow({ section, row in
+                if let onTap = self.onTap {
+                    guard let layoutSubMenu = self.layoutSubMenu else {return }
+                    if (layoutSubMenu.isHidden ) {
+                        layoutSubMenu.show()
+                    } else {
+                        layoutSubMenu.hide()
+                        return
+                    }
+                    onTap(section, row)
+                }
+            })
             .setBackgroundColor(.clear)
             .setBorder { build in
                 build.setColor(.red)
                     .setWidth(0)
-                    .setCornerRadius(20) //-->
+                    .setCornerRadius(20)
             }
         return list
     }()
@@ -56,7 +76,6 @@ class DropdownMenu: View {
         self.hide()
         setTopMostPosition()
         addListOnDropdownMenu()
-        configConstraints()
         
     }
     
@@ -88,34 +107,52 @@ class DropdownMenu: View {
         return self
     }
     
-    func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        self.padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+    func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
+        self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
+    }
+    
+    func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
+        self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
+        return self
+    }
+    
+    func setOnTapDropdownMenu(_ closure: @escaping onTapDropdownMenu) -> Self {
+        self.onTap = closure
+        return self
+    }
+    
+    func setDropdownMenuFromJson(_ json: Data) {
+        dropdownMenuFromJson(json)
+    }
+    
+    func setLayoutSubMenu(_ layoutSubMenu: DropdownMenu) {
+        self.layoutSubMenu = layoutSubMenu
     }
     
     
 //  MARK: - Show DropdownMenu
-    func show(_ openingPoint: CGPoint) {
-        self.openingPoint = openingPoint
-        self.show()
-    }
-    
-    func hide() {
-        self.isHidden = true
-    }
     
     func show() {
-        
-        dropdownMenuFromJson()
-        
+        configConstraints()
         list.show()
-        
         self.isHidden = false
         
         
+        print("------------- TUDO FINALIZADO ----------------")
+
+        
+        self.layoutSubMenu?.add(insideTo: self.superview ?? self)
+        self.layoutSubMenu?.makeConstraints { make in
+            make.setTop.setLeading.setTrailing.equalToSafeArea(60)
+                .setHeight.equalToConstant(400)
+        }
+        
     }
 
-
+    func hide() {
+        self.isHidden = true
+    }
     
 //  MARK: - Private Functions Area
     private func setTopMostPosition() {
@@ -127,318 +164,45 @@ class DropdownMenu: View {
     }
     
     private func configConstraints() {
-        list.makeConstraints { build in
-            build.setTop.equalToSafeArea(0)
-                .setBottom.equalToSafeArea(-20)
-                .setLeading.setTrailing.equalToSuperView(15)
+        guard let padding = self.paddingMenu else {return}
+        self.list.makeConstraints { build in
+            build.setTop.equalToSuperView(padding.top)
+                .setBottom.equalToSuperView(-padding.bottom)
+                .setLeading.equalToSuperView(padding.left)
+                .setTrailing.equalToSuperView(-padding.right)
         }
     }
     
-    private func dropdownMenuFromJson() {
-        let json = """
-[
-    {
-        "section": "Section 1",
-        "rightImage": "heart",
-        "items": [
-            {
-                "title": "Categorias",
-                "leftImage": "trash",
-                "subMenu": [
-                    {
-                        "section": "Utilidades",
-                        "rightImage": "util",
-                        "items": [
-                            {
-                                "title": "Alcool ou Gasolina",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Todo-List",
-                                "leftImage": "caracoroa"
-                            },
-                            {
-                                "title": "Timers",
-                                "leftImage": "velha"
-                            },
-                            {
-                                "title": "Racha Conta",
-                                "leftImage": "mic"
-                            },
-                            {
-                                "title": "Leitor de QRCode/CodBar",
-                                "leftImage": "mic"
-                            },
-                            {
-                                "title": "Lembretes",
-                                "leftImage": "mic"
-                            },
-                            {
-                                "title": "Playlist Youtube",
-                                "leftImage": "mic"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Calculadoras",
-                        "rightImage": "calc",
-                        "items": [
-                            {
-                                "title": "Regra de 3",
-                                "leftImage": "3"
-                            },
-                            {
-                                "title": "Mini Calculadora",
-                                "leftImage": "calc"
-                            },
-                            {
-                                "title": "Calculadora IMC",
-                                "leftImage": "calc imc"
-                            },
-                            {
-                                "title": "Calculadora de Churras",
-                                "leftImage": "calc chu"
-                            },
-                            {
-                                "title": "Conversor de Medidas",
-                                "leftImage": "med"
-                            },
-                            {
-                                "title": "Calcula Gorjeta",
-                                "leftImage": "calc imc"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "AR - Realidade Aumentada",
-                        "rightImage": "AR",
-                        "items": [
-                            {
-                                "title": "Fita Métrica",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Dados",
-                                "leftImage": "caracoroa"
-                            },
-                            {
-                                "title": "Qual é a Flor",
-                                "leftImage": "velha"
-                            },
-                            {
-                                "title": "Qual é a Cor",
-                                "leftImage": "mic"
-                            },
-                            {
-                                "title": "Invisible Device",
-                                "leftImage": "mic"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Jogos/Entretenimentos",
-                        "rightImage": "game",
-                        "items": [
-                            {
-                                "title": "Forca",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Cara ou Coroa",
-                                "leftImage": "caracoroa"
-                            },
-                            {
-                                "title": "Jogo da Velha",
-                                "leftImage": "velha"
-                            },
-                            {
-                                "title": "Pedra/Papel/Tesoura",
-                                "leftImage": "mic"
-                            },
-                            {
-                                "title": "Dados",
-                                "leftImage": "mic"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "SUB MENUS + SUB MENUS TESTE",
-                        "rightImage": "i",
-                        "items": [
-                            {
-                                "title": "Pergunte ao ChatGPR",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Horóscopo do Dia",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Clima Tempo",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Cotações",
-                                "leftImage": "forca",
-                                "subMenu": [
-                                    {
-                                        "section": "Europa",
-                                        "rightImage": "help",
-                                        "items": [
-                                            {
-                                                "title": "Euro",
-                                                "leftImage": "alcool"
-                                            },
-                                            {
-                                                "title": "Libras Esterlinas",
-                                                "leftImage": "libras"
-                                            },
-                                            {
-                                                "title": "Alemao",
-                                                "leftImage": "alemao"
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "section": "Asia",
-                                        "rightImage": "asia",
-                                        "items": [
-                                            {
-                                                "title": "Xiaome rs",
-                                                "leftImage": "gas"
-                                            },
-                                            {
-                                                "title": "Sei lá mais qual",
-                                                "leftImage": "gas"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "title": "Próximos Feriados",
-                                "leftImage": "forca"
-                            },
-                            {
-                                "title": "Recomendações de Filme",
-                                "leftImage": "forca"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Auto Ajuda",
-                        "rightImage": "help",
-                        "items": [
-                            {
-                                "title": "Músicas e Citações",
-                                "leftImage": "forca"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "section": "Recentes",
-        "rightImage": "heart",
-        "items": [
-            {
-                "title": "Regra de 3",
-                "leftImage": "mic",
-                "rightImage": "heart"
-            },
-            {
-                "title": "Alcool ou Gasolina",
-                "leftImage": "mic.fil",
-                "subMenu": [
-                    {
-                        "section": "Alcool",
-                        "rightImage": "help",
-                        "items": [
-                            {
-                                "title": "Falar Alcool",
-                                "leftImage": "alcool"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Gasolina",
-                        "rightImage": "gas",
-                        "items": [
-                            {
-                                "title": "Falar Gasolina",
-                                "leftImage": "gas"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Fita Métrica",
-                "leftImage": "mic.fil",
-                "rightImage": "heart"
-            }
-        ]
-    }
-]
-""".data(using: .utf8)
-
-            do {
-                let result = try JSONDecoder().decode(Dropdown.self, from: json!)
-                printaDireitoSaporra(result)
-            } catch {
-                print(error)
-            }
-    }
-    
-    
-    
-    func printaDireitoSaporra(_ result: [DropdownMenuSection], _ tabPar: String = "", _ tabItem: String = "") {
-        var tab = tabPar
-        var itemTab = tabItem
-        
-        tab += "  "
-        itemTab += "   "
-        print("")
-        result.forEach { menu in
-            print("\(tab)#", menu.section ?? ""/*, "-" , menu.rightImage ?? ""*/)
-
-            menu.items?.forEach({ item in
-                print("\(itemTab)->", /*item.image ?? "", "-" ,*/ item.title ?? "")
-
-//                if item.subMenu?.count ?? 0 > 0 {
-//                    printaDireitoSaporra(item.subMenu ?? [], tab, itemTab)
-//                }
-
-            })
-
-            print("")
+    private func dropdownMenuFromJson(_ json: Data) {
+        do {
+            let result = try JSONDecoder().decode(Dropdown.self, from: json)
+            createdRowList(result)
+        } catch {
+            print(error)
         }
-
-        createdRowList(result)
-                
     }
     
     
-    
-    private func createdRowList(_ result: [DropdownMenuSection]) {
-        result.forEach { section in
-            let middle = createMiddleSectionView(section)
-            _ = list.setRow( isSection: true , leftView: nil, middleView: middle, rightView: nil) { row, section in
-                print(row, section ?? "")
-            }
-            section.items?.forEach({ row in
-                let middle = createMiddleRowView(row)
-                _ = list.setRow( isSection: false, leftView: nil, middleView: middle, rightView: nil) { row, section in
-                    print(row, section ?? "")
-                }
+    private func createdRowList(_ menu: [DropdownMenuSection]) {
+        menu.forEach { sectionMenu in
+            let section = Section(leftView: nil,
+                                  middleView: createMiddleSectionView(sectionMenu))
+            
+            _ = list.setSection(section)
+            
+            sectionMenu.items?.enumerated().forEach({ (index, row) in
+                let leftRowView = createLeftRowView(row, index)
+                let middleRowView = createMiddleRowView(row, index)
+                let rightRowView = createRightRowView(row, index)
+                _ = section
+                    .setRow(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
             })
+            
         }
         
     }
     
-    private func createMiddleRowView(_ row: DropdownMenuItem) -> UIView {
+    private func createMiddleRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
         let label = Label(row.title ?? "")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
@@ -447,10 +211,49 @@ class DropdownMenu: View {
         return label
     }
     
-    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView {
+    private func createLeftRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
+        guard let leftImage = row.leftImage else {return nil}
+
+        let img = ImageView()
+            .setImage(UIImage(systemName: leftImage))
+            .setContentMode(.center)
+            .setSize(20)
+            .setTintColor(.white)
+            .setBorder { build in
+                build.setColor(.yellow)
+                    .setWidth(0)
+            }
+            .setOnTap { img in
+                print("caralhoooo - \(index)")
+            }
+        
+        return img
+    }
+    
+    private func createRightRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
+        guard let subMenu = row.subMenu else {return nil}
+        
+        if !subMenu.isEmpty {
+            let img = ImageView()
+                .setImage(UIImage(systemName: "chevron.forward"))
+                .setContentMode(.center)
+                .setSize(16)
+                .setTintColor(.white)
+                .setOnTap { img in
+                    print("SubMenu Porra ! - \(index)")
+                }
+            return img
+        }
+        
+        return nil
+        
+    }
+    
+    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView? {
+        if section.section == nil { return nil}
         let label = Label(section.section ?? "")
             .setColor(UIColor.systemGray)
-            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
+            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
             .setTextAlignment(.left)
         
         return label
@@ -458,15 +261,6 @@ class DropdownMenu: View {
     
     
 }
-
-
-
-
-
-
-
-
-
 
 
 
