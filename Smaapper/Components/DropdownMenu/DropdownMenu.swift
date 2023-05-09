@@ -11,7 +11,7 @@ import UIKit
 class DropdownMenu: View {
     
     
-    typealias onTapDropdownMenu = ((_ section: Int, _ row: Int) -> Void)
+    typealias onTapDropdownMenuAlias = ((_ section: Int, _ row: Int) -> Void)
     enum PositionMenu {
         case leftTop
         case leftBottom
@@ -19,9 +19,10 @@ class DropdownMenu: View {
         case rightBottom
     }
     
-    private var onTap: onTapDropdownMenu?
+    private var onTapDropdownMenu: onTapDropdownMenuAlias?
     private var layoutSubMenu: DropdownMenu?
     
+    private var location: CGPoint?
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var itemsHeight: CGFloat = 35
@@ -52,15 +53,16 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setOnTapRow({ section, row in
-                if let onTap = self.onTap {
-                    guard let layoutSubMenu = self.layoutSubMenu else {return }
-                    if (layoutSubMenu.isHidden ) {
-                        layoutSubMenu.show()
-                    } else {
-                        layoutSubMenu.hide()
-                        return
+                if let onTapDropdown = self.onTapDropdownMenu {
+                    if let layoutSubMenu = self.layoutSubMenu {
+                        if (layoutSubMenu.isHidden ) {
+                            layoutSubMenu.show()
+                        } else {
+                            layoutSubMenu.hide()
+                            return
+                        }
                     }
-                    onTap(section, row)
+                    onTapDropdown(section, row)
                 }
             })
             .setBackgroundColor(.clear)
@@ -72,12 +74,15 @@ class DropdownMenu: View {
         return list
     }()
     
+    
     private func initialization() {
         self.hide()
         setTopMostPosition()
         addListOnDropdownMenu()
+        configTouchInList()
         
     }
+
     
     
 //  MARK: - Set Properties
@@ -117,8 +122,8 @@ class DropdownMenu: View {
         return self
     }
     
-    func setOnTapDropdownMenu(_ closure: @escaping onTapDropdownMenu) -> Self {
-        self.onTap = closure
+    func setOnTapDropdownMenu(_ closure: @escaping onTapDropdownMenuAlias) -> Self {
+        self.onTapDropdownMenu = closure
         return self
     }
     
@@ -128,6 +133,7 @@ class DropdownMenu: View {
     
     func setLayoutSubMenu(_ layoutSubMenu: DropdownMenu) {
         self.layoutSubMenu = layoutSubMenu
+        self.layoutSubMenu?.add(insideTo: self.superview ?? self)
     }
     
     
@@ -140,13 +146,19 @@ class DropdownMenu: View {
         
         
         print("------------- TUDO FINALIZADO ----------------")
-
+        self.layoutSubMenu?.frame = CGRect(x: 0, y: 0, width: 350, height: 600)
         
-        self.layoutSubMenu?.add(insideTo: self.superview ?? self)
-        self.layoutSubMenu?.makeConstraints { make in
-            make.setTop.setLeading.setTrailing.equalToSafeArea(60)
-                .setHeight.equalToConstant(400)
-        }
+        
+        print(#function,self.location ?? CGPoint())
+        self.layoutSubMenu?.frame.origin = self.location ?? CGPoint()
+        
+        
+//
+//
+//        self.layoutSubMenu?.makeConstraints { make in
+//            make.setTop.setLeading.setTrailing.equalToSafeArea(60)
+//                .setHeight.equalToConstant(400)
+//        }
         
     }
 
@@ -155,6 +167,20 @@ class DropdownMenu: View {
     }
     
 //  MARK: - Private Functions Area
+    private func configTouchInList() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableViewTapped))
+        (list as UIView).isUserInteractionEnabled = true
+        tap.cancelsTouchesInView = false
+        (list as UIView).addGestureRecognizer(tap)
+    }
+    @objc func tableViewTapped(sender: UITapGestureRecognizer) {
+        let point = sender.location(in: nil)
+        print(point)
+        if let indexPath = list.indexPathForRow(at: point) {
+            print("O toque ocorreu na célula da seção \(indexPath.section) e linha \(indexPath.row)")
+        }
+    }
+    
     private func setTopMostPosition() {
         self.layer.zPosition = zPosition
     }

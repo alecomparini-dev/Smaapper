@@ -66,6 +66,12 @@ extension UIView {
         let _ = gradient(Gradient(self))
         return self
     }
+
+//  MARK: - SET TAP GESTURE
+    func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self))
+        return self
+    }
     
     
 //  MARK: - Apply Constraints

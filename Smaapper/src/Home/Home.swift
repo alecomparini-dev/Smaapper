@@ -334,7 +334,6 @@ class Home: UIView {
         _ = menu.setOnTapDropdownMenu { section, row in
             print("sectionCaralho: \(section) - Linha Porra: \(row)")
         }
-        
         menu.setLayoutSubMenu(createDropdownMenu())
         return menu
     }()
@@ -401,7 +400,7 @@ class Home: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        print(location)
+        print(#function, location)
     }
     
     
