@@ -519,7 +519,7 @@ public func getJson() -> String{
                 "leftImage": "figure.mixed.cardio"
             },
             {
-                "title": "Cara ou Coroa ",
+                "title": "Cara ou Coroa",
                 "leftImage": "cedisign.circle.fill"
             },
             {
