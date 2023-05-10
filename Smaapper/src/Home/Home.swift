@@ -409,165 +409,208 @@ public func getJson() -> String{
     return """
 [
     {
-        "section": "Utilities",
-        "rightImage": "util",
+        "section": "Apps",
         "items": [
             {
-                "title": "Alcool ou Gasolina",
-                "leftImage": "fuelpump.fill"
-            },
-            {
-                "title": "Todo-List",
-                "leftImage": "list.bullet.clipboard.fill",
-                "rightImage": "checklist"
-            },
-            {
-                "title": "Timers",
-                "leftImage": "timer.circle.fill"
-            },
-            {
-                "title": "Racha Conta",
-                "leftImage": "dollarsign.arrow.circlepath",
-                "rightImage": "person.2.gobackward"
-            },
-            {
-                "title": "Leitor de QRCode/CodBar",
-                "leftImage": "qrcode.viewfinder"
-            },
-            {
-                "title": "Lembretes",
-                "leftImage": "note.text",
-                "rightImage": "list.clipboard.fill"
-            },
-            {
-                "title": "Playlist Youtube",
-                "leftImage": "play.square.stack.fill",
-                "rightImage": "play.rectangle.on.rectangle.fill"
+                "title": "Categories",
+                "leftImage": "rectangle.grid.2x2.fill",
+                "subMenu": [
+                    {
+                        "section": "Utilities",
+                        "rightImage": "util",
+                        "items": [
+                            {
+                                "title": "Alcool ou Gasolina",
+                                "leftImage": "fuelpump.fill"
+                            },
+                            {
+                                "title": "Todo-List",
+                                "leftImage": "list.bullet.clipboard.fill",
+                                "rightImage": "checklist"
+                            },
+                            {
+                                "title": "Timers",
+                                "leftImage": "timer.circle.fill"
+                            },
+                            {
+                                "title": "Racha Conta",
+                                "leftImage": "dollarsign.arrow.circlepath",
+                                "rightImage": "person.2.gobackward"
+                            },
+                            {
+                                "title": "Leitor de QRCode/CodBar",
+                                "leftImage": "qrcode.viewfinder"
+                            },
+                            {
+                                "title": "Lembretes",
+                                "leftImage": "note.text",
+                                "rightImage": "list.clipboard.fill"
+                            },
+                            {
+                                "title": "Playlist Youtube",
+                                "leftImage": "play.square.stack.fill",
+                                "rightImage": "play.rectangle.on.rectangle.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Calculadoras",
+                        "rightImage": "calc",
+                        "items": [
+                            {
+                                "title": "Regra de 3",
+                                "leftImage": "3.square.fill"
+                            },
+                            {
+                                "title": "Mini Calculadora",
+                                "leftImage": "plusminus.circle.fill",
+                                "rightImage": "plus.rectangle.fill"
+                            },
+                            {
+                                "title": "Calculadora IMC",
+                                "leftImage": "scalemass.fill"
+                            },
+                            {
+                                "title": "Calculadora de Churras",
+                                "leftImage": "flame.fill"
+                            },
+                            {
+                                "title": "Conversor de Medidas",
+                                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
+                            },
+                            {
+                                "title": "Calcula Gorjeta",
+                                "leftImage": "percent"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "AR - Realidade Aumentada",
+                        "rightImage": "AR",
+                        "items": [
+                            {
+                                "title": "Fita Métrica",
+                                "leftImage": "ruler.fill"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "dice.fill"
+                            },
+                            {
+                                "title": "Qual é a Flor",
+                                "leftImage": "leaf.fill"
+                            },
+                            {
+                                "title": "Qual é a Cor",
+                                "leftImage": "paintpalette.fill"
+                            },
+                            {
+                                "title": "Invisible Device",
+                                "leftImage": "wand.and.stars.inverse"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Jogos/Entretenimentos",
+                        "rightImage": "game",
+                        "items": [
+                            {
+                                "title": "Forca",
+                                "leftImage": "figure.mixed.cardio"
+                            },
+                            {
+                                "title": "Cara ou Coroa",
+                                "leftImage": "cedisign.circle.fill"
+                            },
+                            {
+                                "title": "Jogo da Velha",
+                                "leftImage": "number.square.fill"
+                            },
+                            {
+                                "title": "Pedra/Papel/Tesoura",
+                                "leftImage": "scissors.badge.ellipsis"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "die.face.6.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Informativos",
+                        "rightImage": "i",
+                        "items": [
+                            {
+                                "title": "Pergunte ao ChatGPT",
+                                "leftImage": "message.and.waveform.fill"
+                            },
+                            {
+                                "title": "Horóscopo do Dia",
+                                "leftImage": "bubbles.and.sparkles.fill",
+                                "rightImage": "sparkles"
+                            },
+                            {
+                                "title": "Clima Tempo",
+                                "leftImage": "cloud.sun.fill"
+                            },
+                            {
+                                "title": "Cotações",
+                                "leftImage": "dollarsign.circle"
+                            },
+                            {
+                                "title": "Próximos Feriados",
+                                "leftImage": "calendar.badge.exclamationmark"
+                            },
+                            {
+                                "title": "Recomendações de Filme",
+                                "leftImage": "film.stack.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Auto Ajuda",
+                        "rightImage": "help",
+                        "items": [
+                            {
+                                "title": "Músicas e Citações 􀼺􀉞􀉛",
+                                "leftImage": "bookmark.square.fill",
+                                "rightImage": "book.fill"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
     {
-        "section": "Calculadoras",
-        "rightImage": "calc",
+        "section": "Recentes",
+        "rightImage": "heart",
         "items": [
             {
                 "title": "Regra de 3",
                 "leftImage": "3.square.fill"
             },
             {
-                "title": "Mini Calculadora",
-                "leftImage": "plusminus.circle.fill",
-                "rightImage": "plus.rectangle.fill"
+                "title": "Álcool ou Gasolina",
+                "leftImage": "fuelpump.fill"
             },
-            {
-                "title": "Calculadora IMC",
-                "leftImage": "scalemass.fill"
-            },
-            {
-                "title": "Calculadora de Churras",
-                "leftImage": "flame.fill"
-            },
-            {
-                "title": "Conversor de Medidas",
-                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
-            },
-            {
-                "title": "Calcula Gorjeta",
-                "leftImage": "percent"
-            }
-        ]
-    },
-    {
-        "section": "AR - Realidade Aumentada",
-        "rightImage": "AR",
-        "items": [
             {
                 "title": "Fita Métrica",
                 "leftImage": "ruler.fill"
-            },
-            {
-                "title": "Dados",
-                "leftImage": "dice.fill"
-            },
-            {
-                "title": "Qual é a Flor",
-                "leftImage": "leaf.fill"
-            },
-            {
-                "title": "Qual é a Cor",
-                "leftImage": "paintpalette.fill"
-            },
-            {
-                "title": "Invisible Device",
-                "leftImage": "wand.and.stars.inverse"
             }
         ]
     },
     {
-        "section": "Jogos/Entretenimentos",
-        "rightImage": "game",
+        "section": "Configurações",
+        "rightImage": "heart",
         "items": [
             {
-                "title": "Forca",
-                "leftImage": "figure.mixed.cardio"
+                "title": "Perfil",
+                "leftImage": "mic"
             },
             {
-                "title": "Cara ou Coroa",
-                "leftImage": "cedisign.circle.fill"
-            },
-            {
-                "title": "Jogo da Velha",
-                "leftImage": "number.square.fill"
-            },
-            {
-                "title": "Pedra/Papel/Tesoura",
-                "leftImage": "scissors.badge.ellipsis"
-            },
-            {
-                "title": "Dados",
-                "leftImage": "die.face.6.fill"
-            }
-        ]
-    },
-    {
-        "section": "Informativos",
-        "rightImage": "i",
-        "items": [
-            {
-                "title": "Pergunte ao ChatGPT",
-                "leftImage": "message.and.waveform.fill"
-            },
-            {
-                "title": "Horóscopo do Dia",
-                "leftImage": "bubbles.and.sparkles.fill",
-                "rightImage": "sparkles"
-            },
-            {
-                "title": "Clima Tempo",
-                "leftImage": "cloud.sun.fill"
-            },
-            {
-                "title": "Cotações",
-                "leftImage": "dollarsign.circle"
-            },
-            {
-                "title": "Próximos Feriados",
-                "leftImage": "calendar.badge.exclamationmark"
-            },
-            {
-                "title": "Recomendações de Filme",
-                "leftImage": "film.stack.fill"
-            }
-        ]
-    },
-    {
-        "section": "Auto Ajuda",
-        "rightImage": "help",
-        "items": [
-            {
-                "title": "Músicas e Citações 􀼺􀉞􀉛",
-                "leftImage": "bookmark.square.fill",
-                "rightImage": "book.fill"
+                "title": "Notificações",
+                "leftImage": "mic.fil"
             }
         ]
     }

@@ -10,9 +10,9 @@ import UIKit
 
 class List: UITableView {
 
-    typealias onTapRow = ((_ section: Int, _ row: Int) -> Void)
+    typealias didSelectRow = ((_ section: Int, _ row: Int) -> Void)
 
-    private var onTapRow: onTapRow?
+    private var didSelectRow: didSelectRow?
     private var sections = [Section]()
     
     init(_ style: UITableView.Style) {
@@ -71,8 +71,8 @@ class List: UITableView {
         return self
     }
     
-    func setOnTapRow(_ closure: @escaping onTapRow) -> Self {
-        self.onTapRow = closure
+    func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
+        self.didSelectRow = closure
         return self
     }
     
@@ -100,12 +100,6 @@ class List: UITableView {
 }
 
 //  MARK: - Extension Delegate
-
-//extension List: UIGestureRecognizerDelegate {
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return true
-//    }
-//}
 
 extension List: UITableViewDelegate {
     
@@ -174,8 +168,8 @@ extension List: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let onTapRow = self.onTapRow {
-            onTapRow(indexPath.section, indexPath.row)
+        if let didSelectRow = self.didSelectRow {
+            didSelectRow(indexPath.section, indexPath.row)
         }
     }
     

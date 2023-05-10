@@ -8,17 +8,17 @@
 import UIKit
 
 class TapGesture {
-    typealias closureTapGestureAlias = (_ location: CGPoint?, _ state: UIGestureRecognizer.State) -> Void
+    typealias closureTapGestureAlias = (_ tapGesture: TapGesture) -> Void
     
     enum GestureRelativeTo {
         case superview
-        case screen
+        case window
     }
     
     private var action: closureTapGestureAlias?
     
     private var onTapGesture: OnTapGesture?
-    private var state: [UIGestureRecognizer.State] = []
+    private var states: [UIGestureRecognizer.State] = []
     private var gestureRelative: TapGesture.GestureRelativeTo = .superview
     private weak var component: UIView?
     
@@ -39,35 +39,37 @@ class TapGesture {
     
 //  MARK: - GET Function
     func getTouchedPositionRelative(to relative: TapGesture.GestureRelativeTo) -> CGPoint {
+        guard let onTapGesture = self.onTapGesture else {return CGPoint()}
         switch relative {
             case .superview:
-                return CGPoint()
-            case .screen:
-                return CGPoint()
+                return onTapGesture.touchPositionSuperView
+            case .window:
+                return onTapGesture.touchPositionWindow
         }
     }
     
     func getTouchedComponent() -> UIView {
-        return UIView()
+        return self.component ?? UIView()
     }
     
     func getState() -> UIGestureRecognizer.State {
-        return .began
+        guard let onTapGesture = self.onTapGesture else {return .failed}
+        return onTapGesture.getState
     }
     
 
 //  MARK: - Set Properties
 
-    func setClosure(closure: @escaping closureTapGestureAlias) -> Self {
+    func setAction(closure: @escaping closureTapGestureAlias) -> Self {
         self.action = closure
-        if let onTapGesture = self.onTapGesture {
-            self.component?.addGestureRecognizer(onTapGesture)
-        }
+//        if let onTapGesture = self.onTapGesture {
+//            self.component?.addGestureRecognizer(onTapGesture)
+//        }
         return self
     }
     
-    func setStateGesture(_ state: [UIGestureRecognizer.State]) -> Self {
-        self.state = state
+    func setStateGesture(_ states: [UIGestureRecognizer.State]) -> Self {
+        _ = self.onTapGesture?.setStates(states)
         return self
     }
     
@@ -77,13 +79,8 @@ class TapGesture {
     }
     
     
-//  MARK: - Apply TapGesture
-    func applyGesture() {
-        
-    }
-
-    
 //  MARK: - Private Functions Area
+    
     private func setDefaultValues() {
         _ = setStateGesture([TapGestureDefault.state])
     }
@@ -95,14 +92,19 @@ class TapGesture {
     private func createOnTapGesture() {
         self.onTapGesture = OnTapGesture(target: self, action: #selector(tapped))
             .setAction(closure: getOnTapGesture)
+            .setStates(self.states)
         
         self.onTapGesture?.cancelsTouchesInView = false
         
+        if let onTapGesture = self.onTapGesture {
+            self.component?.addGestureRecognizer(onTapGesture)
+        }
     }
     
-    
     private func getOnTapGesture(_ onTapGesture: OnTapGesture) {
-        print(onTapGesture)
+        if let action = self.action {
+            action(self)
+        }
     }
     
     
@@ -114,14 +116,20 @@ class TapGesture {
 
 //  MARK: - ONTAPGESTURE CLASS ---------------------------------------------------------------------------------------
 
-fileprivate class OnTapGesture: UIGestureRecognizer {
+fileprivate class OnTapGesture: UITapGestureRecognizer {
     
     typealias onTapGestureCompletionAlias = (_ onTapGesture: OnTapGesture) -> Void
     
     private var action: onTapGestureCompletionAlias?
-    var touchPositionScreen: CGPoint?
-    var touchPositionSuperView: CGPoint?
-    var getState: UIGestureRecognizer.State? {return self.state}
+    private var _touchPositionSuperView: CGPoint?
+    private var _touchPositionWindow: CGPoint?
+    private var states: [UIGestureRecognizer.State] = []
+
+    
+//  MARK: - GET Functions
+    var getState: UIGestureRecognizer.State {self.state}
+    var touchPositionSuperView: CGPoint { return self._touchPositionSuperView ?? CGPoint()}
+    var touchPositionWindow: CGPoint { return self._touchPositionWindow ?? CGPoint()}
     
 
 //  MARK: - Set Action
@@ -130,37 +138,40 @@ fileprivate class OnTapGesture: UIGestureRecognizer {
         return self
     }
     
+    func setStates(_ states: [UIGestureRecognizer.State]) -> Self {
+        self.states = states
+        return self
+    }
+    
     
 //  MARK: - Override Functions Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        guard let touch = touches.first else { return }
-        self.touchPositionSuperView = touch.location(in: self.view?.superview)
-        self.touchPositionScreen = touch.location(in: nil)
+        setTouchPositions(touches)
         self.state = .began
         callAction()
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        guard let touch = touches.first else { return }
-        self.touchPositionScreen = touch.location(in: self.view?.window)
+        if !self.states.contains(.changed) {return}
+        setTouchPositions(touches)
         self.state = .changed
         callAction()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        guard let touch = touches.first else { return }
-        self.touchPositionScreen = touch.location(in: self.view?.window)
+        if !self.states.contains(.ended) {return}
+        setTouchPositions(touches)
         self.state = .ended
         callAction()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        self.touchPositionScreen = nil
+        if !self.states.contains(.cancelled) {return}
+        self._touchPositionSuperView = nil
+        self._touchPositionWindow = nil
         self.state = .cancelled
         callAction()
     }
-    
-    
     
     
 //  MARK: - Private Function Area
@@ -168,6 +179,12 @@ fileprivate class OnTapGesture: UIGestureRecognizer {
         if let action = self.action {
             action(self)
         }
+    }
+    
+    private func setTouchPositions(_ touches: Set<UITouch>) {
+        guard let touch = touches.first else { return }
+        self._touchPositionSuperView = touch.location(in: self.view?.superview)
+        self._touchPositionWindow = touch.location(in: nil)
     }
 }
 
