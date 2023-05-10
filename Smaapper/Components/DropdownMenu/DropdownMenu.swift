@@ -31,7 +31,6 @@ class DropdownMenu: View {
     private var paddingCells: UIEdgeInsets?
     private var openingPoint: CGPoint?
     
-    private var sections: [DropdownMenuSection] = []
     
     override init() {
         super.init(frame: .zero)
