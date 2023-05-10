@@ -78,11 +78,11 @@ class List: UITableView {
     }
     
     func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
-        let row = RowModel(leftView: leftView, middleView: middleView, rightView: rightView)
+        let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
         section.rows.append(row)
     }
     
-    func setRowInSection(_ section: Section, _ row: RowModel) {
+    func setRowInSection(_ section: Section, _ row: Row) {
         section.rows.append(row)
     }
     

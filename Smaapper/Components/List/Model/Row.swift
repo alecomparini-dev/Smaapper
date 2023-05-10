@@ -13,9 +13,3 @@ struct Row {
     let rightView: UIView?
 }
 
-
-struct RowModel {
-    let leftView: UIView?
-    let middleView: UIView
-    let rightView: UIView?
-}

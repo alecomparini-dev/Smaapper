@@ -19,10 +19,9 @@ class DropdownMenu: View {
         case rightBottom
     }
     
-    private var result: [DropdownMenuSection] = []
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
-    private var layoutSubMenu: DropdownMenu?
+
     
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
@@ -86,11 +85,6 @@ class DropdownMenu: View {
         return self
     }
     
-    func setSections(_ menuSection: DropdownMenuSection) -> Self {
-        self.sections.append(menuSection)
-        return self
-    }
-    
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
@@ -101,20 +95,28 @@ class DropdownMenu: View {
         return self
     }
     
-    func setOnTapDropdownMenu(_ closure: @escaping onTapDropdownMenuAlias) -> Self {
+    
+//  MARK: - SET Data In List
+    
+    func setSectionInDropdown(_ section: Section) {
+        list.setSectionInList(section)
+    }
+    
+    func setRowInSection(_ section: Section, _ row: Row) {
+        list.setRowInSection(section, row)
+    }
+    
+    func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
+        let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
+        section.rows.append(row)
+    }
+    
+    
+    
+//  MARK: - Actions
+    func setAction(_ closure: @escaping onTapDropdownMenuAlias) -> Self {
         self.onTapDropdownMenu = closure
         return self
-    }
-    
-    func setDropdownMenuFromJson(_ json: Data) {
-        dropdownMenuFromJson(json)
-    }
-    
-    func setLayoutSubMenu(_ layoutSubMenu: DropdownMenu) {
-        self.layoutSubMenu = layoutSubMenu
-        DispatchQueue.main.async {
-            self.layoutSubMenu?.add(insideTo: self.superview! )
-        }
     }
     
     
@@ -152,6 +154,49 @@ class DropdownMenu: View {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private var result: [DropdownMenuSection] = []
+    
+    func setDropdownMenuFromJson(_ json: Data) {
+        dropdownMenuFromJson(json)
+    }
+    
+    
     private func dropdownMenuFromJson(_ json: Data) {
         do {
             self.result = try JSONDecoder().decode(Dropdown.self, from: json)
@@ -166,20 +211,18 @@ class DropdownMenu: View {
         menu.forEach { sectionMenu in
             let section = Section(leftView: nil,
                                   middleView: createMiddleSectionView(sectionMenu))
-            
-            list.setSectionInList(section)
+
+            setSectionInDropdown(section)
             
             sectionMenu.items?.enumerated().forEach({ (index, row) in
                 let leftRowView = createLeftRowView(row, index)
                 let middleRowView = createMiddleRowView(row, index)
                 let rightRowView = createRightRowView(row, index)
                 
-                let row = RowModel(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
-                list.setRowInSection(section, row)
+                let row = Row(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
+                setRowInSection(section, row)
             })
-            
         }
-        
     }
     
     private func createMiddleRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
@@ -187,7 +230,6 @@ class DropdownMenu: View {
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
             .setTextAlignment(.left)
-        
         return label
     }
     
@@ -197,12 +239,8 @@ class DropdownMenu: View {
         let img = ImageView()
             .setImage(UIImage(systemName: leftImage))
             .setContentMode(.center)
-            .setSize(20)
-            .setTintColor(.white)
-            .setBorder { build in
-                build.setColor(.yellow)
-                    .setWidth(0)
-            }
+            .setSize(18)
+            .setTintColor(.white.withAlphaComponent(0.8))
         return img
     }
     
@@ -212,8 +250,8 @@ class DropdownMenu: View {
             let img = ImageView()
                 .setImage(UIImage(systemName: "chevron.forward"))
                 .setContentMode(.center)
-                .setSize(16)
-                .setTintColor(.white)
+                .setSize(14)
+                .setTintColor(.white.withAlphaComponent(0.4))
             return img
         }
         return nil

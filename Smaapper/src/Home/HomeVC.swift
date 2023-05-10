@@ -20,7 +20,6 @@ class HomeVC: UIViewController {
         view = home
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

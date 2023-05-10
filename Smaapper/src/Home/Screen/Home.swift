@@ -12,16 +12,16 @@ class Home: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addElements()
+        addBackgroundColor()
+    }
+    
+    private func addBackgroundColor() {
         _ = setGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
-//                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
-//                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
-//                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
-            
     }
     
     required init?(coder: NSCoder) {
@@ -46,27 +46,13 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
                     .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
-//                    .setTrailing.setLeading.equalToSafeArea(30)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(200)
             }
             .setGradient { build in
                 build
-//                    .setColor([UIColor.HEX("#13547a"),UIColor.HEX("#50827c")]) // -> Aqua Splash
-//                    .setColor([UIColor.HEX("#df667b"),UIColor.HEX("#df6e9d")]) // -> Passionate Bed
-//                    .setColor([UIColor.HEX("#09203f"),UIColor.HEX("#3e5a70")]) // -> Eternal Constance
-//                    .setColor([UIColor.HEX("#009245"),UIColor.HEX("#FCEE21")]) // -> Luscious Lime
-//                    .setColor([UIColor.HEX("#662D8C"),UIColor.HEX("#ED1E79")]) // -> Purple Lake **
-//                    .setColor([UIColor.HEX("#ED1E79"),UIColor.HEX("#662D8C")]) // -> Purple Lake INVERTIDO** <-
-//                    .setColor([UIColor.HEX("#614385"),UIColor.HEX("#516395")]) // -> Kashmir *
-//                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
-//                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
-//                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
-//                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")]) // --> top demaisssssss
-//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
                     .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary VENCEDOR
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -195,11 +181,8 @@ class Home: UIView {
             floatButton.removeShadowByID("light")
             dropdownMenu.hide()
         }
-           
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
-        
-        
     }
     
     lazy var buttomNormal: Button = {
@@ -292,12 +275,6 @@ class Home: UIView {
                 build
                     .setShape(.concave)
                     .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
-//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
-//                    .setReferenceColor(UIColor.HEX("#343641"))
-//                    .setLightShadeColor(.black.withAlphaComponent(0))
-//                    .setDarkShadeColor(.black.withAlphaComponent(0))
-
                     .apply()
             }
             .setConstraints { build in
@@ -320,10 +297,9 @@ class Home: UIView {
                 .setHeight.equalToConstant(300)
                 .setWidth.equalToConstant(240)
         }
-        _ = menu.setOnTapDropdownMenu { section, row in
+        _ = menu.setAction { section, row in
 //            print("sectionCaralho: \(section) - Linha Porra: \(row)")
         }
-        menu.setLayoutSubMenu(createDropdownMenu())
         return menu
     }()
     
@@ -339,17 +315,12 @@ class Home: UIView {
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
-//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
-//                    .setReferenceColor(UIColor.HEX("#343641"))
                     .setShape(.flat)
                     .setLightPosition(.leftTop)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
-            
-            
     }
     
     
@@ -402,7 +373,7 @@ public func getJson() -> String{
         "section": "Apps",
         "items": [
             {
-                "title": "Categories",
+                "title": "Notificações",
                 "leftImage": "rectangle.grid.2x2.fill",
                 "subMenu": [
                     {
@@ -577,15 +548,15 @@ public func getJson() -> String{
         "rightImage": "heart",
         "items": [
             {
-                "title": "Regra de 3",
+                "title": "Celular",
                 "leftImage": "3.square.fill"
             },
             {
-                "title": "Álcool ou Gasolina",
+                "title": "Som e Tato",
                 "leftImage": "fuelpump.fill"
             },
             {
-                "title": "Fita Métrica",
+                "title": "Central de Controle",
                 "leftImage": "ruler.fill"
             }
         ]

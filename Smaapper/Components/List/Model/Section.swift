@@ -11,7 +11,7 @@ class Section {
     let leftView: UIView?
     let middleView: UIView?
     let rightView: UIView?
-    var rows = [RowModel]()
+    var rows = [Row]()
     
     init(leftView: UIView? = nil, middleView: UIView? = nil, rightView: UIView? = nil) {
         self.leftView = leftView
