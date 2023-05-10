@@ -7,21 +7,21 @@
 
 import UIKit
 
-class Home: UIView {
+class HomeViewTests: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addElements()
+        addBackgroundColor()
+    }
+    
+    private func addBackgroundColor() {
         _ = setGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
-//                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
-//                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
-//                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
-            
     }
     
     required init?(coder: NSCoder) {
@@ -46,27 +46,13 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-//                    .setVerticalAlignmentY.setHorizontalAlignmentX.equalToSuperView
                     .setBottom.equalToSafeArea(-1)
                     .setHorizontalAlignmentX.equalToSafeArea
-//                    .setTrailing.setLeading.equalToSafeArea(30)
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(200)
             }
             .setGradient { build in
                 build
-//                    .setColor([UIColor.HEX("#13547a"),UIColor.HEX("#50827c")]) // -> Aqua Splash
-//                    .setColor([UIColor.HEX("#df667b"),UIColor.HEX("#df6e9d")]) // -> Passionate Bed
-//                    .setColor([UIColor.HEX("#09203f"),UIColor.HEX("#3e5a70")]) // -> Eternal Constance
-//                    .setColor([UIColor.HEX("#009245"),UIColor.HEX("#FCEE21")]) // -> Luscious Lime
-//                    .setColor([UIColor.HEX("#662D8C"),UIColor.HEX("#ED1E79")]) // -> Purple Lake **
-//                    .setColor([UIColor.HEX("#ED1E79"),UIColor.HEX("#662D8C")]) // -> Purple Lake INVERTIDO** <-
-//                    .setColor([UIColor.HEX("#614385"),UIColor.HEX("#516395")]) // -> Kashmir *
-//                    .setColor([UIColor.HEX("#067D68"),UIColor.HEX("#50D5B7")]) // -> PENSAR
-//                    .setColor([UIColor.HEX("#2E3192"),UIColor.HEX("#1BFFFF")]) // -> Ocean Blue
-//                    .setColor([UIColor.HEX("#667eea"),UIColor.HEX("#764ba2")]) // -> Plum Plate *****
-//                    .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")]) // --> top demaisssssss
-//                    .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")]) //--> Favorito de todos
                     .setColor([UIColor.HEX("#FF512F"),UIColor.HEX("#DD2476")]) // -> Bloody Mary VENCEDOR
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -195,11 +181,8 @@ class Home: UIView {
             floatButton.removeShadowByID("light")
             dropdownMenu.hide()
         }
-           
         buttom1.isEnabled = !buttom1.isEnabled
         buttomDownload.isEnabled = !buttomDownload.isEnabled
-        
-        
     }
     
     lazy var buttomNormal: Button = {
@@ -292,12 +275,6 @@ class Home: UIView {
                 build
                     .setShape(.concave)
                     .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
-//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
-//                    .setReferenceColor(UIColor.HEX("#343641"))
-//                    .setLightShadeColor(.black.withAlphaComponent(0))
-//                    .setDarkShadeColor(.black.withAlphaComponent(0))
-
                     .apply()
             }
             .setConstraints { build in
@@ -320,10 +297,9 @@ class Home: UIView {
                 .setHeight.equalToConstant(300)
                 .setWidth.equalToConstant(240)
         }
-        _ = menu.setOnTapDropdownMenu { section, row in
+        _ = menu.setAction { section, row in
 //            print("sectionCaralho: \(section) - Linha Porra: \(row)")
         }
-        menu.setLayoutSubMenu(createDropdownMenu())
         return menu
     }()
     
@@ -339,17 +315,12 @@ class Home: UIView {
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setReferenceColor(UIColor.HEX("#06312a"))
-//                    .setReferenceColor(UIColor.HEX("#a71c1b"))
-//                    .setReferenceColor(UIColor.HEX("#343641"))
                     .setShape(.flat)
                     .setLightPosition(.leftTop)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
-            
-            
     }
     
     
@@ -382,8 +353,6 @@ class Home: UIView {
         dropdownMenu.add(insideTo: self)
         dropdownMenu.applyConstraint()
 
-        dropdownMenu.setDropdownMenuFromJson(getJson().data(using: .utf8)!)
-        dropdownMenu.show()
                 
     }
     
@@ -391,222 +360,4 @@ class Home: UIView {
     
 
 }
-
-
-//"leftImage": "rectangle.grid.2x2",
-
-public func getJson() -> String{
-    return """
-[
-    {
-        "section": "Apps",
-        "items": [
-            {
-                "title": "Categories",
-                "leftImage": "rectangle.grid.2x2.fill",
-                "subMenu": [
-                    {
-                        "section": "Utilities",
-                        "rightImage": "util",
-                        "items": [
-                            {
-                                "title": "Alcool ou Gasolina",
-                                "leftImage": "fuelpump.fill"
-                            },
-                            {
-                                "title": "Todo-List",
-                                "leftImage": "list.bullet.clipboard.fill",
-                                "rightImage": "checklist"
-                            },
-                            {
-                                "title": "Timers",
-                                "leftImage": "timer.circle.fill"
-                            },
-                            {
-                                "title": "Racha Conta",
-                                "leftImage": "dollarsign.arrow.circlepath",
-                                "rightImage": "person.2.gobackward"
-                            },
-                            {
-                                "title": "Leitor de QRCode/CodBar",
-                                "leftImage": "qrcode.viewfinder"
-                            },
-                            {
-                                "title": "Lembretes",
-                                "leftImage": "note.text",
-                                "rightImage": "list.clipboard.fill"
-                            },
-                            {
-                                "title": "Playlist Youtube",
-                                "leftImage": "play.square.stack.fill",
-                                "rightImage": "play.rectangle.on.rectangle.fill"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Calculadoras",
-                        "rightImage": "calc",
-                        "items": [
-                            {
-                                "title": "Regra de 3",
-                                "leftImage": "3.square.fill"
-                            },
-                            {
-                                "title": "Mini Calculadora",
-                                "leftImage": "plusminus.circle.fill",
-                                "rightImage": "plus.rectangle.fill"
-                            },
-                            {
-                                "title": "Calculadora IMC",
-                                "leftImage": "scalemass.fill"
-                            },
-                            {
-                                "title": "Calculadora de Churras",
-                                "leftImage": "flame.fill"
-                            },
-                            {
-                                "title": "Conversor de Medidas",
-                                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
-                            },
-                            {
-                                "title": "Calcula Gorjeta",
-                                "leftImage": "percent"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "AR - Realidade Aumentada",
-                        "rightImage": "AR",
-                        "items": [
-                            {
-                                "title": "Fita Métrica",
-                                "leftImage": "ruler.fill"
-                            },
-                            {
-                                "title": "Dados",
-                                "leftImage": "dice.fill"
-                            },
-                            {
-                                "title": "Qual é a Flor",
-                                "leftImage": "leaf.fill"
-                            },
-                            {
-                                "title": "Qual é a Cor",
-                                "leftImage": "paintpalette.fill"
-                            },
-                            {
-                                "title": "Invisible Device",
-                                "leftImage": "wand.and.stars.inverse"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Jogos/Entretenimentos",
-                        "rightImage": "game",
-                        "items": [
-                            {
-                                "title": "Forca",
-                                "leftImage": "figure.mixed.cardio"
-                            },
-                            {
-                                "title": "Cara ou Coroa",
-                                "leftImage": "cedisign.circle.fill"
-                            },
-                            {
-                                "title": "Jogo da Velha",
-                                "leftImage": "number.square.fill"
-                            },
-                            {
-                                "title": "Pedra/Papel/Tesoura",
-                                "leftImage": "scissors.badge.ellipsis"
-                            },
-                            {
-                                "title": "Dados",
-                                "leftImage": "die.face.6.fill"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Informativos",
-                        "rightImage": "i",
-                        "items": [
-                            {
-                                "title": "Pergunte ao ChatGPT",
-                                "leftImage": "message.and.waveform.fill"
-                            },
-                            {
-                                "title": "Horóscopo do Dia",
-                                "leftImage": "bubbles.and.sparkles.fill",
-                                "rightImage": "sparkles"
-                            },
-                            {
-                                "title": "Clima Tempo",
-                                "leftImage": "cloud.sun.fill"
-                            },
-                            {
-                                "title": "Cotações",
-                                "leftImage": "dollarsign.circle"
-                            },
-                            {
-                                "title": "Próximos Feriados",
-                                "leftImage": "calendar.badge.exclamationmark"
-                            },
-                            {
-                                "title": "Recomendações de Filme",
-                                "leftImage": "film.stack.fill"
-                            }
-                        ]
-                    },
-                    {
-                        "section": "Auto Ajuda",
-                        "rightImage": "help",
-                        "items": [
-                            {
-                                "title": "Músicas e Citações 􀼺􀉞􀉛",
-                                "leftImage": "bookmark.square.fill",
-                                "rightImage": "book.fill"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "section": "Recentes",
-        "rightImage": "heart",
-        "items": [
-            {
-                "title": "Regra de 3",
-                "leftImage": "3.square.fill"
-            },
-            {
-                "title": "Álcool ou Gasolina",
-                "leftImage": "fuelpump.fill"
-            },
-            {
-                "title": "Fita Métrica",
-                "leftImage": "ruler.fill"
-            }
-        ]
-    },
-    {
-        "section": "Configurações",
-        "rightImage": "heart",
-        "items": [
-            {
-                "title": "Perfil",
-                "leftImage": "mic"
-            },
-            {
-                "title": "Notificações",
-                "leftImage": "mic.fil"
-            }
-        ]
-    }
-]
-"""
-
-}
-
 
