@@ -11,7 +11,7 @@ import UIKit
 class HomeViewModel {
     
     
-    func getMenumFromJson() {
+    func getDropdownMenuHomeFromJson() {
         
     }
     

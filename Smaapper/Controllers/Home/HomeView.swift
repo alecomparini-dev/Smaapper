@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Home: UIView {
+class HomeView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,22 +89,7 @@ class Home: UIView {
     
     
     lazy var dropdownMenu: DropdownMenu = {
-        let menu = createDropdownMenu()
-        _ = menu.setConstraints { build in
-            build
-                .setBottom.equalTo(floatButton, .top, -15)
-                .setTrailing.equalTo(floatButton, .trailing, -5)
-                .setHeight.equalToConstant(300)
-                .setWidth.equalToConstant(240)
-        }
-        _ = menu.setAction { section, row in
-//            print("sectionCaralho: \(section) - Linha Porra: \(row)")
-        }
-        return menu
-    }()
-    
-    private func createDropdownMenu() -> DropdownMenu {
-        return DropdownMenu()
+        let menu = DropdownMenu()
             .setBorder({ build in
                 build
                     .setCornerRadius(18)
@@ -121,7 +106,19 @@ class Home: UIView {
                     .setBlur(percent: 10)
                     .apply()
             }
-    }
+        .setConstraints { build in
+            build
+                .setBottom.equalTo(floatButton, .top, -15)
+                .setTrailing.equalTo(floatButton, .trailing, -5)
+                .setHeight.equalToConstant(300)
+                .setWidth.equalToConstant(240)
+        }
+        _ = menu.setAction { section, row in
+//            print("sectionCaralho: \(section) - Linha Porra: \(row)")
+        }
+        return menu
+    }()
+    
     
     
     private func addElements() {

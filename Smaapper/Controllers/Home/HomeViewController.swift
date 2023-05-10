@@ -9,8 +9,8 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    lazy var home: Home = {
-        let home = Home()
+    lazy var home: HomeView = {
+        let home = HomeView()
         home.translatesAutoresizingMaskIntoConstraints = false
         return home
     }()

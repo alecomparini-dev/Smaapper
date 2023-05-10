@@ -189,7 +189,7 @@ class DropdownMenu: View {
     
     
     
-    private var result: [DropdownMenuSection] = []
+    private var result: [SectionDropdownMenuModel] = []
     
     func setDropdownMenuFromJson(_ json: Data) {
         dropdownMenuFromJson(json)
@@ -198,7 +198,7 @@ class DropdownMenu: View {
     
     private func dropdownMenuFromJson(_ json: Data) {
         do {
-            self.result = try JSONDecoder().decode(Dropdown.self, from: json)
+            self.result = try JSONDecoder().decode(DropdownMenuModel.self, from: json)
             createdRowList(self.result)
         } catch {
             print(error)
@@ -206,7 +206,7 @@ class DropdownMenu: View {
     }
     
     
-    private func createdRowList(_ menu: [DropdownMenuSection]) {
+    private func createdRowList(_ menu: [SectionDropdownMenuModel]) {
         menu.forEach { sectionMenu in
             let section = Section(leftView: nil,
                                   middleView: createMiddleSectionView(sectionMenu))
@@ -224,7 +224,7 @@ class DropdownMenu: View {
         }
     }
     
-    private func createMiddleRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
+    private func createMiddleRowView(_ row: RowDropdownMenuModel, _ index: Int) -> UIView {
         let label = Label(row.title ?? "")
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
@@ -232,7 +232,7 @@ class DropdownMenu: View {
         return label
     }
     
-    private func createLeftRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
+    private func createLeftRowView(_ row: RowDropdownMenuModel, _ index: Int) -> UIView? {
         guard let leftImage = row.leftImage else {return nil}
 
         let img = ImageView()
@@ -243,7 +243,7 @@ class DropdownMenu: View {
         return img
     }
     
-    private func createRightRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView? {
+    private func createRightRowView(_ row: RowDropdownMenuModel, _ index: Int) -> UIView? {
         guard let subMenu = row.subMenu else {return nil}
         if !subMenu.isEmpty {
             let img = ImageView()
@@ -256,7 +256,7 @@ class DropdownMenu: View {
         return nil
     }
     
-    private func createMiddleSectionView(_ section: DropdownMenuSection) -> UIView? {
+    private func createMiddleSectionView(_ section: SectionDropdownMenuModel) -> UIView? {
         if section.section == nil { return nil}
         
         let label = Label(section.section ?? "")
