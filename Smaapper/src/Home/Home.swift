@@ -14,8 +14,8 @@ class Home: UIView {
         addElements()
         _ = setGradient { build in
             build
-//                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
-                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
+                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+//                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
 //                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
 //                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
@@ -98,14 +98,6 @@ class Home: UIView {
                     .setBlur(percent: 50)
                     .apply()
             })
-//            .setShadow { build in
-//                build
-//                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.5))
-//                    .setOffset(width: -2, height: -2)
-//                    .setOpacity(1)
-//                    .setRadius(20)
-//                    .apply()
-//            }
             .setShadow { build in
                 build
                     .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
@@ -115,7 +107,6 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-//                    .setTop.equalTo(buttom1, .bottom, 20)
                     .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalToSafeArea(40)
                     .setHeight.equalToConstant(100)
@@ -156,7 +147,6 @@ class Home: UIView {
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(buttomLaranja)
-//                    .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalTo(buttomLaranja, .trailing, 50)
                     .setHeight.setWidth.equalToConstant(45)
             }
@@ -175,7 +165,6 @@ class Home: UIView {
             })
             .setGradient { build in
                 build
-//                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
                     .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -302,8 +291,8 @@ class Home: UIView {
             .setNeumorphism { build in
                 build
                     .setShape(.concave)
-//                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setReferenceColor(UIColor.HEX("#06312a"))
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
 //                    .setLightShadeColor(.black.withAlphaComponent(0))
@@ -332,7 +321,7 @@ class Home: UIView {
                 .setWidth.equalToConstant(240)
         }
         _ = menu.setOnTapDropdownMenu { section, row in
-            print("sectionCaralho: \(section) - Linha Porra: \(row)")
+//            print("sectionCaralho: \(section) - Linha Porra: \(row)")
         }
         menu.setLayoutSubMenu(createDropdownMenu())
         return menu
@@ -344,20 +333,22 @@ class Home: UIView {
                 build
                     .setCornerRadius(18)
             })
+            .setRowHeight(45)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
             .setPaddingColuns(left: 5, right: 5)
             .setNeumorphism { build in
                 build
-//                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setReferenceColor(UIColor.HEX("#06312a"))
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
-                    .setShape(.concave)
+                    .setShape(.flat)
                     .setLightPosition(.leftTop)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
                     .apply()
             }
+            
             
     }
     
@@ -397,13 +388,6 @@ class Home: UIView {
     }
     
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
-        print(#function, location)
-    }
-    
-    
     
 
 }
@@ -415,165 +399,208 @@ public func getJson() -> String{
     return """
 [
     {
-        "section": "Utilities",
-        "rightImage": "util",
+        "section": "Apps",
         "items": [
             {
-                "title": "Alcool ou Gasolina",
-                "leftImage": "fuelpump.fill"
-            },
-            {
-                "title": "Todo-List",
-                "leftImage": "list.bullet.clipboard.fill",
-                "rightImage": "checklist"
-            },
-            {
-                "title": "Timers",
-                "leftImage": "timer.circle.fill"
-            },
-            {
-                "title": "Racha Conta",
-                "leftImage": "dollarsign.arrow.circlepath",
-                "rightImage": "person.2.gobackward"
-            },
-            {
-                "title": "Leitor de QRCode/CodBar",
-                "leftImage": "qrcode.viewfinder"
-            },
-            {
-                "title": "Lembretes",
-                "leftImage": "note.text",
-                "rightImage": "list.clipboard.fill"
-            },
-            {
-                "title": "Playlist Youtube",
-                "leftImage": "play.square.stack.fill",
-                "rightImage": "play.rectangle.on.rectangle.fill"
+                "title": "Categories",
+                "leftImage": "rectangle.grid.2x2.fill",
+                "subMenu": [
+                    {
+                        "section": "Utilities",
+                        "rightImage": "util",
+                        "items": [
+                            {
+                                "title": "Alcool ou Gasolina",
+                                "leftImage": "fuelpump.fill"
+                            },
+                            {
+                                "title": "Todo-List",
+                                "leftImage": "list.bullet.clipboard.fill",
+                                "rightImage": "checklist"
+                            },
+                            {
+                                "title": "Timers",
+                                "leftImage": "timer.circle.fill"
+                            },
+                            {
+                                "title": "Racha Conta",
+                                "leftImage": "dollarsign.arrow.circlepath",
+                                "rightImage": "person.2.gobackward"
+                            },
+                            {
+                                "title": "Leitor de QRCode/CodBar",
+                                "leftImage": "qrcode.viewfinder"
+                            },
+                            {
+                                "title": "Lembretes",
+                                "leftImage": "note.text",
+                                "rightImage": "list.clipboard.fill"
+                            },
+                            {
+                                "title": "Playlist Youtube",
+                                "leftImage": "play.square.stack.fill",
+                                "rightImage": "play.rectangle.on.rectangle.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Calculadoras",
+                        "rightImage": "calc",
+                        "items": [
+                            {
+                                "title": "Regra de 3",
+                                "leftImage": "3.square.fill"
+                            },
+                            {
+                                "title": "Mini Calculadora",
+                                "leftImage": "plusminus.circle.fill",
+                                "rightImage": "plus.rectangle.fill"
+                            },
+                            {
+                                "title": "Calculadora IMC",
+                                "leftImage": "scalemass.fill"
+                            },
+                            {
+                                "title": "Calculadora de Churras",
+                                "leftImage": "flame.fill"
+                            },
+                            {
+                                "title": "Conversor de Medidas",
+                                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
+                            },
+                            {
+                                "title": "Calcula Gorjeta",
+                                "leftImage": "percent"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "AR - Realidade Aumentada",
+                        "rightImage": "AR",
+                        "items": [
+                            {
+                                "title": "Fita Métrica",
+                                "leftImage": "ruler.fill"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "dice.fill"
+                            },
+                            {
+                                "title": "Qual é a Flor",
+                                "leftImage": "leaf.fill"
+                            },
+                            {
+                                "title": "Qual é a Cor",
+                                "leftImage": "paintpalette.fill"
+                            },
+                            {
+                                "title": "Invisible Device",
+                                "leftImage": "wand.and.stars.inverse"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Jogos/Entretenimentos",
+                        "rightImage": "game",
+                        "items": [
+                            {
+                                "title": "Forca",
+                                "leftImage": "figure.mixed.cardio"
+                            },
+                            {
+                                "title": "Cara ou Coroa",
+                                "leftImage": "cedisign.circle.fill"
+                            },
+                            {
+                                "title": "Jogo da Velha",
+                                "leftImage": "number.square.fill"
+                            },
+                            {
+                                "title": "Pedra/Papel/Tesoura",
+                                "leftImage": "scissors.badge.ellipsis"
+                            },
+                            {
+                                "title": "Dados",
+                                "leftImage": "die.face.6.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Informativos",
+                        "rightImage": "i",
+                        "items": [
+                            {
+                                "title": "Pergunte ao ChatGPT",
+                                "leftImage": "message.and.waveform.fill"
+                            },
+                            {
+                                "title": "Horóscopo do Dia",
+                                "leftImage": "bubbles.and.sparkles.fill",
+                                "rightImage": "sparkles"
+                            },
+                            {
+                                "title": "Clima Tempo",
+                                "leftImage": "cloud.sun.fill"
+                            },
+                            {
+                                "title": "Cotações",
+                                "leftImage": "dollarsign.circle"
+                            },
+                            {
+                                "title": "Próximos Feriados",
+                                "leftImage": "calendar.badge.exclamationmark"
+                            },
+                            {
+                                "title": "Recomendações de Filme",
+                                "leftImage": "film.stack.fill"
+                            }
+                        ]
+                    },
+                    {
+                        "section": "Auto Ajuda",
+                        "rightImage": "help",
+                        "items": [
+                            {
+                                "title": "Músicas e Citações 􀼺􀉞􀉛",
+                                "leftImage": "bookmark.square.fill",
+                                "rightImage": "book.fill"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
     {
-        "section": "Calculadoras",
-        "rightImage": "calc",
+        "section": "Recentes",
+        "rightImage": "heart",
         "items": [
             {
                 "title": "Regra de 3",
                 "leftImage": "3.square.fill"
             },
             {
-                "title": "Mini Calculadora",
-                "leftImage": "plusminus.circle.fill",
-                "rightImage": "plus.rectangle.fill"
+                "title": "Álcool ou Gasolina",
+                "leftImage": "fuelpump.fill"
             },
-            {
-                "title": "Calculadora IMC",
-                "leftImage": "scalemass.fill"
-            },
-            {
-                "title": "Calculadora de Churras",
-                "leftImage": "flame.fill"
-            },
-            {
-                "title": "Conversor de Medidas",
-                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
-            },
-            {
-                "title": "Calcula Gorjeta",
-                "leftImage": "percent"
-            }
-        ]
-    },
-    {
-        "section": "AR - Realidade Aumentada",
-        "rightImage": "AR",
-        "items": [
             {
                 "title": "Fita Métrica",
                 "leftImage": "ruler.fill"
-            },
-            {
-                "title": "Dados",
-                "leftImage": "dice.fill"
-            },
-            {
-                "title": "Qual é a Flor",
-                "leftImage": "leaf.fill"
-            },
-            {
-                "title": "Qual é a Cor",
-                "leftImage": "paintpalette.fill"
-            },
-            {
-                "title": "Invisible Device",
-                "leftImage": "wand.and.stars.inverse"
             }
         ]
     },
     {
-        "section": "Jogos/Entretenimentos",
-        "rightImage": "game",
+        "section": "Configurações",
+        "rightImage": "heart",
         "items": [
             {
-                "title": "Forca",
-                "leftImage": "figure.mixed.cardio"
+                "title": "Perfil",
+                "leftImage": "mic"
             },
             {
-                "title": "Cara ou Coroa",
-                "leftImage": "cedisign.circle.fill"
-            },
-            {
-                "title": "Jogo da Velha",
-                "leftImage": "number.square.fill"
-            },
-            {
-                "title": "Pedra/Papel/Tesoura",
-                "leftImage": "scissors.badge.ellipsis"
-            },
-            {
-                "title": "Dados",
-                "leftImage": "die.face.6.fill"
-            }
-        ]
-    },
-    {
-        "section": "Informativos",
-        "rightImage": "i",
-        "items": [
-            {
-                "title": "Pergunte ao ChatGPT",
-                "leftImage": "message.and.waveform.fill"
-            },
-            {
-                "title": "Horóscopo do Dia",
-                "leftImage": "bubbles.and.sparkles.fill",
-                "rightImage": "sparkles"
-            },
-            {
-                "title": "Clima Tempo",
-                "leftImage": "cloud.sun.fill"
-            },
-            {
-                "title": "Cotações",
-                "leftImage": "dollarsign.circle"
-            },
-            {
-                "title": "Próximos Feriados",
-                "leftImage": "calendar.badge.exclamationmark"
-            },
-            {
-                "title": "Recomendações de Filme",
-                "leftImage": "film.stack.fill"
-            }
-        ]
-    },
-    {
-        "section": "Auto Ajuda",
-        "rightImage": "help",
-        "items": [
-            {
-                "title": "Músicas e Citações 􀼺􀉞􀉛",
-                "leftImage": "bookmark.square.fill",
-                "rightImage": "book.fill"
+                "title": "Notificações",
+                "leftImage": "mic.fil"
             }
         ]
     }

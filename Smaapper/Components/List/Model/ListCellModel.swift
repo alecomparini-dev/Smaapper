@@ -20,16 +20,15 @@ class Section {
         self.rightView = rightView
     }
     
-    func setRow(leftView: UIView? = nil, middleView: UIView, rightView: UIView? = nil) -> Self {
+    func setRow(leftView: UIView? = nil, middleView: UIView, rightView: UIView? = nil) {
         let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
-        self.rows.append(row)
-        return self
+        rows.append(row)
     }
     
 }
 
 
-class Row {
+struct Row {
     let leftView: UIView?
     let middleView: UIView
     let rightView: UIView?

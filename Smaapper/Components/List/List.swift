@@ -10,23 +10,19 @@ import UIKit
 
 class List: UITableView {
 
-    typealias onTapRow = ((_ section: Int, _ row: Int) -> Void)
+    typealias didSelectRow = ((_ section: Int, _ row: Int) -> Void)
 
-    private var onTapRow: onTapRow?
+    private var didSelectRow: didSelectRow?
     private var sections = [Section]()
     
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
-        self.initialization()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
-        self.setDefaultValues()
-    }
     
     
 //  MARK: - SET Properties
@@ -66,15 +62,16 @@ class List: UITableView {
         return self
     }
     
-    func setSection(_ section: Section) -> Self {
-        self.sections.append(section)
+    func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
+        self.didSelectRow = closure
         return self
     }
     
-    func setOnTapRow(_ closure: @escaping onTapRow) -> Self {
-        self.onTapRow = closure
-        return self
+    func setSection(_ section: Section) {
+        self.sections.append(section)
     }
+    
+    
     
     
 //  MARK: - Show List
@@ -87,10 +84,6 @@ class List: UITableView {
 
     
 //  MARK: - Private Function Area
-    
-    private func setDefaultValues() {
-        _ = setRowHeight(ListDefault.rowHeight)
-    }
     
     private func RegisterCell() {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
@@ -133,6 +126,8 @@ extension List: UITableViewDelegate {
         }
         return false
     }
+    
+
 }
 
 //  MARK: - Extension Data Source
@@ -166,9 +161,11 @@ extension List: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let onTapRow = self.onTapRow {
-            onTapRow(indexPath.section, indexPath.row)
+        if let didSelectRow = self.didSelectRow {
+            didSelectRow(indexPath.section, indexPath.row)
         }
     }
+    
+
     
 }

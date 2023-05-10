@@ -8,8 +8,10 @@
 import UIKit
 
 class ImageView: UIImageView {
+    typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
     
-    private var tapAction: ((_ imageView: UIImageView) -> Void)?
+    
+    private var tapAction: tapActionClosureAlias?
     private var constraintBuilder: StartOfConstraintsFlow?
     
     
@@ -63,9 +65,9 @@ class ImageView: UIImageView {
     
     
 //  MARK: - ACTIONS
-    func setOnTap(completion: @escaping (_ imageView: UIImageView) -> Void ) -> Self {
+    func setOnTap(completion: @escaping tapActionClosureAlias ) -> Self {
         self.tapAction = completion
-        isUserInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(ontapped))
         addGestureRecognizer(tap)
         return self
