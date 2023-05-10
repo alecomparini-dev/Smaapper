@@ -8,10 +8,10 @@
 import Foundation
 
 
-typealias DropdownMenuModel = [SectionDropdownMenuModel]
+typealias DropdownMenuData = [SectionDropdownMenuData]
 
-struct SectionDropdownMenuModel: Codable {
+struct SectionDropdownMenuData: Codable {
     let section: String?
     let trailing: String?
-    let items: [RowDropdownMenuModel]?
+    let items: [RowDropdownMenuData]?
 }

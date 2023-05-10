@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct RowDropdownMenuModel: Codable {
+struct RowDropdownMenuData: Codable {
     let title: String?
     let leftImage: String?
     let rightImage: String?
-    let subMenu: [SectionDropdownMenuModel]?
+    let subMenu: DropdownMenuData?
 }
