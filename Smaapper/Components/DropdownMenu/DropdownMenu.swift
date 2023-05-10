@@ -10,10 +10,8 @@ import UIKit
 
 class DropdownMenu: View {
     
-    var seila = false
-    
-    
     typealias onTapDropdownMenuAlias = ((_ section: Int, _ row: Int) -> Void)
+    
     enum PositionMenu {
         case leftTop
         case leftBottom
@@ -26,11 +24,8 @@ class DropdownMenu: View {
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
     private var layoutSubMenu: DropdownMenu?
     
-    private var location: CGPoint?
-    
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
-    private var itemsHeight: CGFloat = 35
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
     private var paddingMenu: UIEdgeInsets?
@@ -38,11 +33,9 @@ class DropdownMenu: View {
     private var openingPoint: CGPoint?
     
     private var sections: [DropdownMenuSection] = []
-    private let dropdownJson: [String: Any]?
     
-    init(_ dropdownJson: [String: Any]? = nil) {
-        self.dropdownJson = dropdownJson
-        super.init()
+    override init() {
+        super.init(frame: .zero)
         self.initialization()
     }
     
@@ -54,61 +47,12 @@ class DropdownMenu: View {
         let list = List(.grouped)
             .setShowsVerticalScrollIndicator(false)
             .setSeparatorStyle(.none)
-            .setRowHeight(45)
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                if let onTapDropdown = self.onTapDropdownMenu {
-                    if let layoutSubMenu = self.layoutSubMenu {
-                        if (layoutSubMenu.isHidden ) {
-                            layoutSubMenu.show()
-                        } else {
-                            layoutSubMenu.hide()
-                            return
-                        }
-                    }
-                    onTapDropdown(section, row)
-                }
+                print(section, row)
             })
             .setBackgroundColor(.clear)
-            .setBorder { build in
-                build.setColor(.red)
-                    .setWidth(0)
-                    .setCornerRadius(20)
-            }
-            .setTapGesture { build in
-                build
-                    .setAction(closure: { tapGesture in
-                        let position = tapGesture.getTouchedPositionRelative(to: .superview)
-                        let dropFrame = self.bounds
-                        let comp = tapGesture.getTouchedComponent()
-                        let delta = dropFrame.origin.y - position.y
-                        print(dropFrame.origin.y)
-                        print(position.y)
-//
-//                        if let layoutSubMenu = self.layoutSubMenu {
-//                            for constraint in layoutSubMenu.constraints {
-//                                if constraint.firstAttribute == .bottom {
-//                                    constraint.constant = -position.y
-//                                    self.seila = true
-//                                }
-//                            }
-//                        }
-                        
-                        if !self.seila {
-                            self.layoutSubMenu?.makeConstraints({ make in
-                                make.setTop.equalToSafeArea(20)
-                                    .setBottom.equalToSafeArea(-200)
-                                    .setLeading.equalToSafeArea(20)
-                                    .setWidth.equalToConstant(275)
-    //                                .setHeight.equalToConstant(500)
-                            })
-                        }
-                        
-                        self.layoutSubMenu?.createdRowList(self.result[0].items?[0].subMenu ?? [])
-
-                    })
-            }
         return list
     }()
     
@@ -116,7 +60,6 @@ class DropdownMenu: View {
     private func initialization() {
         self.hide()
         setTopMostPosition()
-        addListOnDropdownMenu()
     }
 
     
@@ -128,8 +71,8 @@ class DropdownMenu: View {
         return self
     }
     
-    func setItemsHeight(_ height: CGFloat) -> Self {
-        self.itemsHeight = height
+    func setRowHeight(_ height: CGFloat) -> Self {
+        _ = list.setRowHeight(height)
         return self
     }
     
@@ -178,22 +121,16 @@ class DropdownMenu: View {
 //  MARK: - Show DropdownMenu
     
     func show() {
+        addListOnDropdownMenu()
         configConstraints()
         list.show()
         self.isHidden = false
-//
-//        DispatchQueue.main.async {
-//            self.layoutSubMenu?.makeConstraints({ make in
-//                make.setTop.setLeading.setTrailing.equalToSuperView(10)
-//                    .setHeight.equalToConstant(100)
-//            })
-//        }
-        
     }
 
     func hide() {   
         self.isHidden = true
     }
+    
     
 //  MARK: - Private Functions Area
     
@@ -230,14 +167,14 @@ class DropdownMenu: View {
             let section = Section(leftView: nil,
                                   middleView: createMiddleSectionView(sectionMenu))
             
-            _ = list.setSection(section)
+            list.setSection(section)
             
             sectionMenu.items?.enumerated().forEach({ (index, row) in
                 let leftRowView = createLeftRowView(row, index)
                 let middleRowView = createMiddleRowView(row, index)
                 let rightRowView = createRightRowView(row, index)
-                _ = section
-                    .setRow(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
+                
+                section.setRow(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
             })
             
         }

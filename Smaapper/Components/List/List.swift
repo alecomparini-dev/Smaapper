@@ -17,16 +17,12 @@ class List: UITableView {
     
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
-        self.initialization()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
-        self.setDefaultValues()
-    }
     
     
 //  MARK: - SET Properties
@@ -66,15 +62,16 @@ class List: UITableView {
         return self
     }
     
-    func setSection(_ section: Section) -> Self {
-        self.sections.append(section)
-        return self
-    }
-    
     func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
         self.didSelectRow = closure
         return self
     }
+    
+    func setSection(_ section: Section) {
+        self.sections.append(section)
+    }
+    
+    
     
     
 //  MARK: - Show List
@@ -87,10 +84,6 @@ class List: UITableView {
 
     
 //  MARK: - Private Function Area
-    
-    private func setDefaultValues() {
-        _ = setRowHeight(ListDefault.rowHeight)
-    }
     
     private func RegisterCell() {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)

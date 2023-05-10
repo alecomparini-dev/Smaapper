@@ -14,8 +14,8 @@ class Home: UIView {
         addElements()
         _ = setGradient { build in
             build
-//                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
-                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
+                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+//                .setColor([UIColor.HEX("#06312a"), UIColor.HEX("#06312a"),  UIColor.HEX("#06312a")])
 //                .setColor([UIColor.HEX("#a71c1b"), UIColor.HEX("#a71c1b"),  UIColor.HEX("#a71c1b")])
 //                .setColor([UIColor.HEX("#343641"), UIColor.HEX("#343641"),  UIColor.HEX("#343641")])
                 .setAxialGradient(.leftTopToRightBottom)
@@ -98,14 +98,6 @@ class Home: UIView {
                     .setBlur(percent: 50)
                     .apply()
             })
-//            .setShadow { build in
-//                build
-//                    .setColor(UIColor.HEX("#ed8f4b").withAlphaComponent(0.5))
-//                    .setOffset(width: -2, height: -2)
-//                    .setOpacity(1)
-//                    .setRadius(20)
-//                    .apply()
-//            }
             .setShadow { build in
                 build
                     .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
@@ -115,7 +107,6 @@ class Home: UIView {
             }
             .setConstraints { build in
                 build
-//                    .setTop.equalTo(buttom1, .bottom, 20)
                     .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalToSafeArea(40)
                     .setHeight.equalToConstant(100)
@@ -156,7 +147,6 @@ class Home: UIView {
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(buttomLaranja)
-//                    .setVerticalAlignmentY.equalToSuperView
                     .setLeading.equalTo(buttomLaranja, .trailing, 50)
                     .setHeight.setWidth.equalToConstant(45)
             }
@@ -175,7 +165,6 @@ class Home: UIView {
             })
             .setGradient { build in
                 build
-//                    .setColor([UIColor.HEX("#22272e"),UIColor.HEX("#2d343d")])
                     .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
@@ -302,8 +291,8 @@ class Home: UIView {
             .setNeumorphism { build in
                 build
                     .setShape(.concave)
-//                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setReferenceColor(UIColor.HEX("#06312a"))
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
 //                    .setLightShadeColor(.black.withAlphaComponent(0))
@@ -344,15 +333,16 @@ class Home: UIView {
                 build
                     .setCornerRadius(18)
             })
+            .setRowHeight(45)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
             .setPaddingColuns(left: 5, right: 5)
             .setNeumorphism { build in
                 build
-//                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setReferenceColor(UIColor.HEX("#06312a"))
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setReferenceColor(UIColor.HEX("#06312a"))
 //                    .setReferenceColor(UIColor.HEX("#a71c1b"))
 //                    .setReferenceColor(UIColor.HEX("#343641"))
-                    .setShape(.concave)
+                    .setShape(.flat)
                     .setLightPosition(.leftTop)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
