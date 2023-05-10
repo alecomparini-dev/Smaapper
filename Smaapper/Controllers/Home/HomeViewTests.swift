@@ -353,8 +353,6 @@ class HomeViewTests: UIView {
         dropdownMenu.add(insideTo: self)
         dropdownMenu.applyConstraint()
 
-        dropdownMenu.setDropdownMenuFromJson(getJson().data(using: .utf8)!)
-        dropdownMenu.show()
                 
     }
     
