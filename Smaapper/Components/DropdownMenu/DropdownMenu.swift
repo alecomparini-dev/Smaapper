@@ -167,14 +167,15 @@ class DropdownMenu: View {
             let section = Section(leftView: nil,
                                   middleView: createMiddleSectionView(sectionMenu))
             
-            list.setSection(section)
+            list.setSectionInList(section)
             
             sectionMenu.items?.enumerated().forEach({ (index, row) in
                 let leftRowView = createLeftRowView(row, index)
                 let middleRowView = createMiddleRowView(row, index)
                 let rightRowView = createRightRowView(row, index)
                 
-                section.setRow(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
+                let row = RowModel(leftView: leftRowView, middleView: middleRowView, rightView: rightRowView)
+                list.setRowInSection(section, row)
             })
             
         }
@@ -183,8 +184,8 @@ class DropdownMenu: View {
     
     private func createMiddleRowView(_ row: DropdownMenuItem, _ index: Int) -> UIView {
         let label = Label(row.title ?? "")
-            .setColor(.white)
-            .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
+            .setColor(.white.withAlphaComponent(0.9))
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
             .setTextAlignment(.left)
         
         return label

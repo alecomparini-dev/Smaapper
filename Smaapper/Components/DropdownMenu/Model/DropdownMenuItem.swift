@@ -10,7 +10,7 @@ import Foundation
 struct DropdownMenuItem: Codable {
     let title: String?
     let leftImage: String?
-    let subMenu: [DropdownMenuSection]?
     let rightImage: String?
+    let subMenu: [DropdownMenuSection]?
 }
 

@@ -15,6 +15,12 @@ class List: UITableView {
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
     
+    
+    
+    private var list = [Section]()
+    
+    
+    
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
     }
@@ -67,10 +73,18 @@ class List: UITableView {
         return self
     }
     
-    func setSection(_ section: Section) {
+    func setSectionInList(_ section: Section) {
         self.sections.append(section)
     }
     
+    func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
+        let row = RowModel(leftView: leftView, middleView: middleView, rightView: rightView)
+        section.rows.append(row)
+    }
+    
+    func setRowInSection(_ section: Section, _ row: RowModel) {
+        section.rows.append(row)
+    }
     
     
     
@@ -78,8 +92,7 @@ class List: UITableView {
     
     func show() {
         self.RegisterCell()
-        delegate = self
-        dataSource = self
+        self.setDelegate()
     }
 
     
@@ -89,6 +102,10 @@ class List: UITableView {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
     }
     
+    private func setDelegate() {
+        delegate = self
+        dataSource = self
+    }
 
 }
 
