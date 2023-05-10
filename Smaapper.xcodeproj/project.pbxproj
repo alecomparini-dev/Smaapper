@@ -75,6 +75,9 @@
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
 		02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4392A0BE74D00D75D9F /* RowDropdownMenuModel.swift */; };
 		02C5F43C2A0BEC1200D75D9F /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F43B2A0BEC1200D75D9F /* HomeViewTests.swift */; };
+		02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4472A0C1A9500D75D9F /* HomeService.swift */; };
+		02C5F44A2A0C1B1700D75D9F /* GenericService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4492A0C1B1700D75D9F /* GenericService.swift */; };
+		02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */ = {isa = PBXBuildFile; fileRef = 02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */; };
 		02C9C9E22A05392400AA1370 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E12A05392400AA1370 /* Section.swift */; };
 		02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E52A058FB700AA1370 /* ListCellView.swift */; };
 		02C9C9E82A072B4200AA1370 /* ListDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E72A072B4200AA1370 /* ListDefault.swift */; };
@@ -167,6 +170,9 @@
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
 		02C5F4392A0BE74D00D75D9F /* RowDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowDropdownMenuModel.swift; sourceTree = "<group>"; };
 		02C5F43B2A0BEC1200D75D9F /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
+		02C5F4472A0C1A9500D75D9F /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		02C5F4492A0C1B1700D75D9F /* GenericService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericService.swift; sourceTree = "<group>"; };
+		02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DropdownMenuData.json; sourceTree = "<group>"; };
 		02C9C9E12A05392400AA1370 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		02C9C9E52A058FB700AA1370 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
 		02C9C9E72A072B4200AA1370 /* ListDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDefault.swift; sourceTree = "<group>"; };
@@ -218,10 +224,11 @@
 			children = (
 				0234A88929F9FD3A008392EC /* Components */,
 				026F797E2A02A53B003947A6 /* Controllers */,
-				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
-				0234A5FE29F9F310008392EC /* Info.plist */,
+				02C5F4412A0BF4D100D75D9F /* Models */,
+				02C5F4452A0C1A7200D75D9F /* Service */,
 				02C5F43F2A0BF3AF00D75D9F /* Resources */,
+				0234A5FE29F9F310008392EC /* Info.plist */,
 			);
 			path = Smaapper;
 			sourceTree = "<group>";
@@ -579,7 +586,6 @@
 				02C5F43B2A0BEC1200D75D9F /* HomeViewTests.swift */,
 				0234A90129F9FD3A008392EC /* HomeView.swift */,
 				0234A90229F9FD3A008392EC /* HomeViewController.swift */,
-				02C5F4362A0BE73300D75D9F /* Menu */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -648,13 +654,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		02C5F4362A0BE73300D75D9F /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +665,7 @@
 		02C5F43F2A0BF3AF00D75D9F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02C5F44B2A0C1C9300D75D9F /* Json */,
 				0234A5F929F9F310008392EC /* Assets.xcassets */,
 				0234A5F029F9F30F008392EC /* AppDelegate.swift */,
 				0234A5FB29F9F310008392EC /* LaunchScreen.storyboard */,
@@ -705,6 +705,31 @@
 				02C5F4432A0BF62500D75D9F /* DropdownMenu */,
 			);
 			path = Codable;
+			sourceTree = "<group>";
+		};
+		02C5F4452A0C1A7200D75D9F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				02C5F4462A0C1A8800D75D9F /* HomeService */,
+				02C5F4492A0C1B1700D75D9F /* GenericService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		02C5F4462A0C1A8800D75D9F /* HomeService */ = {
+			isa = PBXGroup;
+			children = (
+				02C5F4472A0C1A9500D75D9F /* HomeService.swift */,
+			);
+			path = HomeService;
+			sourceTree = "<group>";
+		};
+		02C5F44B2A0C1C9300D75D9F /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */,
+			);
+			path = Json;
 			sourceTree = "<group>";
 		};
 		02C9C9E02A052ED600AA1370 /* OverlayLayer */ = {
@@ -841,6 +866,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */,
 				0234A5FD29F9F310008392EC /* LaunchScreen.storyboard in Resources */,
 				0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */,
 			);
@@ -878,10 +904,12 @@
 				0234A93229F9FD3A008392EC /* TabBarItemModel.swift in Sources */,
 				026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */,
 				0234A90429F9FD3A008392EC /* BorderDefault.swift in Sources */,
+				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,
 				02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */,
 				0234A90929F9FD3A008392EC /* CollectionModel.swift in Sources */,
+				02C5F44A2A0C1B1700D75D9F /* GenericService.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A94129F9FD3A008392EC /* TableView.swift in Sources */,

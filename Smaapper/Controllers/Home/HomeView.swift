@@ -105,6 +105,24 @@ class HomeView: UIView {
     }()
     
     
+    lazy var leftView: ImageView = {
+        let img = ImageView()
+            .setContentMode(.center)
+            .setSize(18)
+            .setTintColor(.white.withAlphaComponent(0.8))
+        return img
+    }()
+    
+    
+    lazy var sectionView: Label = {
+        let label = Label()
+            .setColor(.white.withAlphaComponent(0.9))
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
+            .setTextAlignment(.left)
+        return label
+    }()
+    
+    
 //  MARK: - Objc Functions Area
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
@@ -127,6 +145,41 @@ class HomeView: UIView {
     func turnOffMenuButton() {
         menuButton.removeShadowByID(idShadowEnableFloatButton)
     }
+
+    func createLeftRowView(_ systemNameImage: String) -> UIView {
+        let img = ImageView()
+            .setImage(UIImage(systemName: systemNameImage))
+            .setContentMode(.center)
+            .setSize(18)
+            .setTintColor(.white.withAlphaComponent(0.8))
+        return img
+    }
+    
+    func createMiddleRowView(_ text: String) -> UIView {
+        let label = Label(text)
+            .setColor(.white.withAlphaComponent(0.9))
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
+            .setTextAlignment(.left)
+        return label
+    }
+    
+    func createMiddleSectionView(_ text: String) -> UIView {
+        let label = Label(text)
+            .setColor(UIColor.systemGray)
+            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
+            .setTextAlignment(.left)
+        return label
+    }
+    
+
+    func createRightRowView(_ systemNameImage: String) -> UIView {
+        let img = ImageView()
+            .setImage(UIImage(systemName: systemNameImage))
+            .setContentMode(.center)
+            .setSize(14)
+            .setTintColor(.white.withAlphaComponent(0.4))
+        return img
+    }
     
     
 //  MARK: - Private Function Area
@@ -139,6 +192,8 @@ class HomeView: UIView {
                 .apply()
         }
     }
+    
+    
     
     private func addElements() {
         menuButton.add(insideTo: self)
