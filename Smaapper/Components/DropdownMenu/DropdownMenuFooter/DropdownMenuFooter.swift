@@ -13,6 +13,8 @@ class DropdownMenuFooter: DropdownMenu {
     
     private var footerHeight: CGFloat = 50
     private var footerGradient: Gradient?
+    private var componentsFooter: [UIView] = []
+    
     
 //  MARK: - Initializers
     
@@ -29,7 +31,10 @@ class DropdownMenuFooter: DropdownMenu {
 //  MARK: - Components
     lazy var stackView: UIStackView = {
         let sv = UIStackView()
-        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.distribution = .fillEqually
+        sv.axis = .horizontal
+        sv.alignment = .center
+        sv.spacing = 5
         return sv
     }()
     
@@ -45,15 +50,51 @@ class DropdownMenuFooter: DropdownMenu {
         return self
     }
     
+    func setPaddingFooter() -> Self {
+        
+        return self
+    }
+    
+    func setComponentView(_ componentView: UIView) -> Self {
+        self.componentsFooter.append(componentView)
+        return self
+    }
+    
+    
+    
+//  MARK: - APPLY Dropdown Footer
     override func show() {
-        applyOnce()
+        applyOnceConfig()
         super.show()
     }
     
     
 //  MARK: - Private Functions Area
     
-    private func applyOnce() {
+    private func createView() -> View {
+        let view = View()
+            .setConstraints { build in
+                build.setTop.setBottom.equalToSuperView
+            }
+        return view
+    }
+    
+    
+    private func addComponentsOnFooter() {
+        self.componentsFooter.forEach { comp in
+//            let view = createView()
+//            comp.add(insideTo: view)
+            self.stackView.addArrangedSubview(comp)
+//            view.applyConstraint()
+            comp.makeConstraints { make in
+//                make.setPin.equalToSuperView(5)
+                make.setTop.setBottom.equalToSuperView
+            }
+        }
+    }
+    
+    
+    private func applyOnceConfig() {
         if !alreadyApplied {
             configDropdownMenuFooter()
             self.alreadyApplied = true
@@ -69,13 +110,14 @@ class DropdownMenuFooter: DropdownMenu {
         configCornerRadius()
         configFooter()
         configGradient()
+        addComponentsOnFooter()
         
         _ = stackView
 //            .setShadow({ build in
 //                build
 //                    .setColor(UIColor.HEX("#ec9355"))
 //                    .setOffset(width: 150, height: -50)
-//                    .setRadius(80)
+//                    .setBlur(60)
 //                    .setOpacity(0.7)
 //                    .setCornerRadius(0)
 //                    .setShadowHeight(80)
@@ -120,7 +162,6 @@ class DropdownMenuFooter: DropdownMenu {
     
     private func configGradient() {
         if let footerGradient = self.footerGradient {
-//            stackView.setNeedsLayout()
             stackView.layoutIfNeeded()
             _ = footerGradient.apply(stackView)
         }

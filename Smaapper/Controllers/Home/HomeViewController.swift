@@ -28,6 +28,10 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         configDelegate()
         fetchDropdownMenu()
+        
+        //retirar !!!
+        openCloseDropdownMenu()
+        turnOnOffMenuButton()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -40,12 +40,10 @@ class HomeView: UIView {
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.convex)
+                    .setShape(.concave)
                     .setLightPosition(.rightBottom)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
-//                    .setLightShadeColor(.black)
-//                    .setDarkShadeColor(.black)
                     .apply()
             }
             .setConstraints { build in
@@ -61,6 +59,9 @@ class HomeView: UIView {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
+            .setComponentView(configButton)
+            .setComponentView(configButton2)
+            .setComponentView(configButton3)
         return menu
     }()
     
@@ -86,6 +87,30 @@ class HomeView: UIView {
             }
             .addTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
+        return btn
+    }()
+    
+    lazy var configButton: ButtonImage = {
+        let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
+            .setImageWeight(.medium)
+            .setImageSize(16)
+            .setTitleColor(UIColor.HEX("#131415"), .normal)
+        return btn
+    }()
+    
+    lazy var configButton2: ButtonImage = {
+        let btn = ButtonImage(ImageView(UIImage(systemName: "trash")))
+            .setImageSize(12)
+            .setImageWeight(.bold)
+            .setTitleColor(UIColor.HEX("#131415"), .normal)
+        return btn
+    }()
+    
+    lazy var configButton3: ButtonImage = {
+        let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
+            .setImageWeight(.thin)
+            .setImageSize(15)
+            .setTitleColor(UIColor.HEX("#131415"), .normal)
         return btn
     }()
     

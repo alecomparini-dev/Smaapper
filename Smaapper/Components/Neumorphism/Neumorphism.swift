@@ -28,11 +28,13 @@ class Neumorphism {
     private let ratioOfSize = 0.08
 //    private let lightShadeColorPercentage = 1.61
 //    private let darkShadeColorPercentage = 0.42
+//    private let darkShapeColorByColorReferencePercentage = 0.80
+//    private let lightShapeColorByColorReferencePercentage = 1.25
     private let lightShadeColorPercentage = 1.61
-    private let darkShadeColorPercentage = 0.20
-    private let darkShapeColorByColorReferencePercentage = 0.6
-    private let lightShapeColorByColorReferencePercentage = 1.51
-    
+    private let darkShadeColorPercentage = 0.15
+    private let darkShapeColorByColorReferencePercentage = 0.70
+    private let lightShapeColorByColorReferencePercentage = 1.75
+
     
     private let component: UIView
     private var referenceColor: UIColor?
