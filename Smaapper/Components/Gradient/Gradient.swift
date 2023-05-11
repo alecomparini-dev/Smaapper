@@ -116,6 +116,7 @@ class Gradient {
 
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
+        gradient.maskedCorners = component.layer.maskedCorners
         gradient.shouldRasterize = true
         gradient.rasterizationScale = UIScreen.main.scale
     }

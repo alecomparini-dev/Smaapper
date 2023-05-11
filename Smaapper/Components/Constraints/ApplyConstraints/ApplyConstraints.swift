@@ -48,19 +48,6 @@ class ApplyConstraints {
         )
         
         layoutConstraint.isActive = true
-        
-//        print("""
-//
-//   -> item: \(constraint.mainElement),
-//   -> attribute: \(mainAttr.toNSLayoutConstraintAttribute()),
-//   -> relatedBy: \(constraint.relation.toNSLayoutConstraintRelation()),
-//   -> toItem: \(String(describing: setupToItem(constraint))),
-//   -> attribute: \(constraint.toAttribute?.toNSLayoutConstraintAttribute() ?? mainAttr.toNSLayoutConstraintAttribute()),
-//   -> multiplier: \(constraint.multiplier),
-//   -> constant: \(setupConstant(constraint, mainAttr))
-//
-//
-//""")
 
     }
     

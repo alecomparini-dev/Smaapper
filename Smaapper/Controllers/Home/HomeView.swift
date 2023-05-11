@@ -50,8 +50,8 @@ class HomeView: UIView {
                 build
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.equalToConstant(300)
-                    .setWidth.equalToConstant(240)
+                    .setHeight.equalToConstant(390)
+                    .setWidth.equalToConstant(250)
             }
         return menu
     }()
