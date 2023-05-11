@@ -44,14 +44,22 @@ class HomeView: UIView {
                     .setLightPosition(.leftTop)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
+//                    .setLightShadeColor(.black)
+//                    .setDarkShadeColor(.black)
                     .apply()
             }
             .setConstraints { build in
                 build
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.equalToConstant(390)
-                    .setWidth.equalToConstant(250)
+                    .setHeight.equalToConstant(400)
+                    .setWidth.equalToConstant(255)
+            }
+            .setFooterHeight(65)
+            .setFooterGradient { build in
+                build
+                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
+                    .setAxialGradient(.rightBottomToLeftTop)
             }
         return menu
     }()
@@ -81,22 +89,6 @@ class HomeView: UIView {
         return btn
     }()
     
-    lazy var leftView: ImageView = {
-        let img = ImageView()
-            .setContentMode(.center)
-            .setSize(18)
-            .setTintColor(.white.withAlphaComponent(0.8))
-        return img
-    }()
-    
-    lazy var sectionView: Label = {
-        let label = Label()
-            .setColor(.white.withAlphaComponent(0.9))
-            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
-            .setTextAlignment(.left)
-        return label
-    }()
-    
     
 //  MARK: - Objc Functions Area
     
@@ -111,7 +103,7 @@ class HomeView: UIView {
             build.setColor(UIColor.HEX("#ff710b"))
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)
-                .setRadius(4)
+                .setBlur(4)
                 .setBringToFront()
                 .setID(idShadowEnableFloatButton)
                 .apply()

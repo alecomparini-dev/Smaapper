@@ -35,7 +35,7 @@ class HomeViewTests: UIView {
                 build
                     .setColor(.black)
                     .setOffset(width: 5, height: 5)
-                    .setRadius(1)
+                    .setBlur(1)
                     .apply()
             }
             .setBorder { build in
@@ -88,7 +88,7 @@ class HomeViewTests: UIView {
                 build
                     .setColor(UIColor.HEX("#000000").withAlphaComponent(0.8))
                     .setOffset(width: 5, height: 5)
-                    .setRadius(1)
+                    .setBlur(1)
                     .apply()
             }
             .setConstraints { build in
@@ -171,7 +171,7 @@ class HomeViewTests: UIView {
                 build.setColor(UIColor.HEX("#ff710b"))
                     .setOffset(width: 0, height: 0)
                     .setOpacity(1)
-                    .setRadius(4)
+                    .setBlur(4)
                     .setBringToFront()
                     .setID("light")
                     .apply()
@@ -231,7 +231,7 @@ class HomeViewTests: UIView {
                 build
                     .setColor(.black)
                     .setOffset(width: 5, height: 5)
-                    .setRadius(1)
+                    .setBlur(1)
                     .apply()
             }
 

@@ -32,6 +32,10 @@ class Gradient {
         self.initialization()
     }
     
+    convenience init() {
+        self.init(UIView())
+    }
+    
     private func initialization() {
         self.setGradientDirection(.leftToRight)
         self.setType(.axial)
@@ -68,6 +72,14 @@ class Gradient {
 //  MARK: - Apply Gradient
     func apply() -> Self {
         DispatchQueue.main.async() {
+            self.applyGradient()
+        }
+        return self
+    }
+    
+    func apply(_ component: UIView) -> Self {
+        DispatchQueue.main.async() {
+            self.component = component
             self.applyGradient()
         }
         return self
@@ -119,6 +131,7 @@ class Gradient {
         gradient.maskedCorners = component.layer.maskedCorners
         gradient.shouldRasterize = true
         gradient.rasterizationScale = UIScreen.main.scale
+        gradient.backgroundColor = .none
     }
     
 

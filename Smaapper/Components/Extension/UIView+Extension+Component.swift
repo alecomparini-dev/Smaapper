@@ -27,6 +27,7 @@ extension UIView {
             let layer = CAShapeLayer()
             layer.frame = self.bounds
             layer.cornerRadius = self.layer.cornerRadius
+            layer.maskedCorners = self.layer.maskedCorners
             layer.fillColor = color.cgColor
             layer.backgroundColor = color.cgColor
             let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
