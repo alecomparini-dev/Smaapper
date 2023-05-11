@@ -40,8 +40,8 @@ class HomeView: UIView {
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.flat)
-                    .setLightPosition(.leftTop)
+                    .setShape(.convex)
+                    .setLightPosition(.rightBottom)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
 //                    .setLightShadeColor(.black)

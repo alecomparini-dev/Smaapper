@@ -26,8 +26,14 @@ class Neumorphism {
     
     
     private let ratioOfSize = 0.08
+//    private let lightShadeColorPercentage = 1.61
+//    private let darkShadeColorPercentage = 0.42
     private let lightShadeColorPercentage = 1.61
-    private let darkShadeColorPercentage = 0.42
+    private let darkShadeColorPercentage = 0.20
+    private let darkShapeColorByColorReferencePercentage = 0.6
+    private let lightShapeColorByColorReferencePercentage = 1.51
+    
+    
     private let component: UIView
     private var referenceColor: UIColor?
     private var _lightShadeColor: UIColor?
@@ -213,8 +219,8 @@ class Neumorphism {
     }
     
     private func getShapeColorByColorReference() -> (UIColor,UIColor) {
-        let dark = self.referenceColor!.getBrightness(0.80)
-        let light = self.referenceColor!.getBrightness(1.25)
+        let dark = self.referenceColor!.getBrightness(darkShapeColorByColorReferencePercentage)
+        let light = self.referenceColor!.getBrightness(lightShapeColorByColorReferencePercentage)
         return (dark,light)
     }
     
