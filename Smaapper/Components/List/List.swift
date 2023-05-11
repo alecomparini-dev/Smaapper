@@ -16,11 +16,6 @@ class List: UITableView {
     private var sections = [Section]()
     
     
-    
-    private var list = [Section]()
-    
-    
-    
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
     }
@@ -28,7 +23,6 @@ class List: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     
 //  MARK: - SET Properties
@@ -118,12 +112,15 @@ extension List: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return calculateHeihtForFooterInSection(section)
+        return calculeteHeightForFooterInSection(section)
     }
     
-    private func calculateHeihtForFooterInSection(_ section: Int) -> CGFloat {
+    private func calculeteHeightForFooterInSection(_ section: Int) -> CGFloat {
         if isSectionEmpty(sections[section]) {
             return 0
+        }
+        if isLastSection(section) {
+            return 1
         }
         return self.sectionFooterHeight
     }
@@ -142,6 +139,10 @@ extension List: UITableViewDelegate {
             return true
         }
         return false
+    }
+    
+    private func isLastSection(_ section: Int) -> Bool {
+        return sections.count == section + 1
     }
     
 

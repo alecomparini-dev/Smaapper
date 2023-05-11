@@ -28,31 +28,8 @@ class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var subMenu: DropdownMenu = {
-        let menu = DropdownMenu()
-            .setBorder({ build in
-                build.setCornerRadius(40)
-                    .setWidth(0)
-                    .setColor(.cyan)
-            })
-            .setNeumorphism { build in
-                build.setReferenceColor(UIColor.HEX("#17191a"))
-                    .setIntensity(percent: 100)
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .apply()
-            }
-            .setConstraints { build in
-                build.setTop.equalToSafeArea(80)
-                    .setLeading.equalToSafeArea(100)
-                    .setWidth.equalToConstant(200)
-                    .setHeight.equalToConstant(200)
-            }
-        return menu
-    }()
-    
-    lazy var dropdownMenu: DropdownMenu = {
-        let menu = DropdownMenu()
+    lazy var dropdownMenu: DropdownMenuFooter = {
+        let menu = DropdownMenuFooter()
             .setBorder({ build in
                 build
                     .setCornerRadius(18)
@@ -104,7 +81,6 @@ class HomeView: UIView {
         return btn
     }()
     
-    
     lazy var leftView: ImageView = {
         let img = ImageView()
             .setContentMode(.center)
@@ -112,7 +88,6 @@ class HomeView: UIView {
             .setTintColor(.white.withAlphaComponent(0.8))
         return img
     }()
-    
     
     lazy var sectionView: Label = {
         let label = Label()
@@ -124,6 +99,7 @@ class HomeView: UIView {
     
     
 //  MARK: - Objc Functions Area
+    
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
     }
@@ -192,8 +168,6 @@ class HomeView: UIView {
                 .apply()
         }
     }
-    
-    
     
     private func addElements() {
         menuButton.add(insideTo: self)

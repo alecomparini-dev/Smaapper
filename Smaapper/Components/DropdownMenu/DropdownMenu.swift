@@ -22,12 +22,11 @@ class DropdownMenu: View {
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
 
-    
     private var zPosition: CGFloat = 10001
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
-    private var paddingMenu: UIEdgeInsets?
+    var paddingMenu: UIEdgeInsets?
     private var paddingCells: UIEdgeInsets?
     private var openingPoint: CGPoint?
     
