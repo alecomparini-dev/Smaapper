@@ -151,7 +151,7 @@ class HomeView: UIView {
     func createMiddleRowView(_ text: String) -> UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
-            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
             .setTextAlignment(.left)
         return label
     }
@@ -163,13 +163,13 @@ class HomeView: UIView {
             .setTextAlignment(.left)
         return label
     }
-    
 
     func createRightRowView(_ systemNameImage: String) -> UIView {
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(14)
+            .setWeight(.regular)
             .setTintColor(.white.withAlphaComponent(0.4))
         return img
     }

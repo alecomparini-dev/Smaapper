@@ -100,10 +100,10 @@ class ImageView: UIImageView {
             self.size = image?.size.width
         }
         if let weight {
-            self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size!, weight: weight ))
+            self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size ?? 17, weight: weight ))
             return
         }
-        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize:20 ))
+        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size ?? 17 ))
     }
     
 }
