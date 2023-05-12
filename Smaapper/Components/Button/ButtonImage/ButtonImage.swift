@@ -14,6 +14,7 @@ class ButtonImage: Button {
     enum Position {
         case leading
         case trailing
+        case bottom
         
         func toSemanticContentAttribute() -> UISemanticContentAttribute {
             switch self {
@@ -21,6 +22,8 @@ class ButtonImage: Button {
                 return .forceLeftToRight
             case .trailing:
                 return .forceRightToLeft
+            case .bottom:
+                return .unspecified
             }
         }
     }
@@ -28,20 +31,21 @@ class ButtonImage: Button {
     private var imgWithConfiguration: ImageView?
     
 //  MARK: - Initializers
-    
+
     init(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
         super.init()
         self.initialization(image, state, size)
-    }
-    
-    override init() {
-        super.init()
     }
     
     convenience init(_ image: UIImageView, _ state: UIControl.State) {
         self.init(image, state, nil)
     }
     
+    convenience init(_ image: UIImageView, _ title: String) {
+        self.init(image, .normal, nil)
+        _ = setTitle(title, .normal)
+    }
+
     convenience init(_ image: UIImageView) {
         self.init(image, .normal, nil)
     }
@@ -75,7 +79,6 @@ class ButtonImage: Button {
         let img = imgWithConfiguration.setSize(size)
             .setContentMode(.scaleAspectFit)
         setImage(img.image, for: .normal)
-        
         return self
     }
     

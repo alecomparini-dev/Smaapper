@@ -20,7 +20,7 @@ class Button: UIButton {
         }
     }
     
-    var config: UIButton.Configuration {
+    internal var config: UIButton.Configuration {
         get { return self._config }
         set { self._config = newValue }
     }
@@ -48,6 +48,12 @@ class Button: UIButton {
     
     
 //  MARK: - Properties
+    
+    
+    
+    
+    
+    
     
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
         super.setTitle(title, for: state)
@@ -91,7 +97,6 @@ class Button: UIButton {
     }
     
     func setTitleWeight(_ weight: UIFont.Weight) -> Self {
-        
         config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
             attr.font = UIFont.systemFont(ofSize: self.titleLabel?.font.pointSize ?? 17, weight: weight)
@@ -105,10 +110,7 @@ class Button: UIButton {
         contentHorizontalAlignment = alignment
         return self
     }
-// da pra usar como padding !!!
-//        config.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-//        configuration = config
-    
+
     func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
         _ = setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)

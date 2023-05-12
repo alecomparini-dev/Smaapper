@@ -61,7 +61,8 @@ class HomeView: UIView {
             }
             .setComponentView(configButton)
             .setComponentView(configButton2)
-            .setComponentView(configButton3)
+//            .setComponentView(configButton3)
+            .setComponentView(configButton4_1)
         return menu
     }()
     
@@ -113,7 +114,51 @@ class HomeView: UIView {
             .setTitleColor(UIColor.HEX("#131415"), .normal)
         return btn
     }()
+
     
+    lazy var configButton4: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "gearshape")))
+            .setImageWeight(.bold)
+            .setImageSize(35)
+            .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitle("Config", .normal)
+            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
+        return btn
+    }()
+    
+    lazy var configButton4_1: UIButton = {
+//    let button = UIButton(type: .system)
+//        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)
+//        let image = UIImage(systemName: "heart.fill", withConfiguration: config)
+//        button.setImage(image, for: .normal)
+//        button.setTitle("Button", for: .normal)
+//        var configuration = button.configuration
+//        configuration?.imagePadding = 16
+//        configuration?.titlePadding = 10
+//
+//        button.configuration = configuration
+//
+//        button.configuration?.imagePlacement = .top
+        
+        
+        let button = UIButton(type: .system)
+        let image = ImageView(UIImage(systemName: "gearshape"))
+            .setSize(15)
+        
+        button.setTitle("Config", for: .normal)
+        
+        button.configuration = UIButton.Configuration.plain()
+        button.configuration?.baseBackgroundColor = .clear
+        button.configuration?.baseForegroundColor = UIColor.HEX("#131415")
+        button.configuration?.cornerStyle = .dynamic
+        
+        button.configuration?.image = image.image
+        
+        button.configuration?.imagePlacement = .top
+        button.configuration?.imagePadding = 1
+        
+        return button
+    }()
     
 //  MARK: - Objc Functions Area
     
@@ -139,6 +184,18 @@ class HomeView: UIView {
         menuButton.removeShadowByID(idShadowEnableFloatButton)
     }
 
+    
+//  MARK: - Create Section Menu
+    func createMiddleSectionView(_ text: String) -> UIView {
+        let label = Label(text)
+            .setColor(UIColor.systemGray)
+            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
+            .setTextAlignment(.left)
+        return label
+    }
+
+    
+//  MARK: - Create Rows Menu
     func createLeftRowView(_ systemNameImage: String) -> UIView {
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
@@ -152,17 +209,11 @@ class HomeView: UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
+//            .setFont(UIFont.preferredFont(forTextStyle: .callout))
             .setTextAlignment(.left)
         return label
     }
     
-    func createMiddleSectionView(_ text: String) -> UIView {
-        let label = Label(text)
-            .setColor(UIColor.systemGray)
-            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
-            .setTextAlignment(.left)
-        return label
-    }
 
     func createRightRowView(_ systemNameImage: String) -> UIView {
         let img = ImageView()
@@ -173,6 +224,7 @@ class HomeView: UIView {
             .setTintColor(.white.withAlphaComponent(0.4))
         return img
     }
+
     
     
 //  MARK: - Private Function Area
@@ -180,8 +232,9 @@ class HomeView: UIView {
     private func addBackgroundColor() {
         _ = self.setGradient { build in
             build
-                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+                .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
+                .setAxialGradient(.topToBottom)
                 .apply()
         }
     }
