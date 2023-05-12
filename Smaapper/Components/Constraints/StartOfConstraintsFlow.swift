@@ -46,10 +46,10 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
     }
 
-    var setPin: StartOfConstraintsPositionFlow<ConstraintsPositionX>  {
+    var setPin: EndOfConstraintsPositionFlow  {
         configStartFlow()
         _ = setTop.setBottom.setLeading.setTrailing
-        return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
+        return EndOfConstraintsPositionFlow(self)
     }
     
 //  MARK: - CONSTRAINTS SIZE FLOW

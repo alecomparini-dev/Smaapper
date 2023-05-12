@@ -10,6 +10,8 @@ import UIKit
 class ImageView: UIImageView {
     typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
     
+    private var size: CGFloat?
+    private var weight: UIImage.SymbolWeight?
     
     private var tapAction: tapActionClosureAlias?
     private var constraintBuilder: StartOfConstraintsFlow?
@@ -54,12 +56,14 @@ class ImageView: UIImageView {
     }
     
     func setSize(_ size: CGFloat) -> Self {
-        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size))
+        self.size = size
+        setImageWithConfiguration()
         return self
     }
     
     func setWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(weight: weight))
+        self.weight = weight
+        setImageWithConfiguration()
         return self
     }
     
@@ -87,6 +91,19 @@ class ImageView: UIImageView {
     
     func applyConstraint() {
         self.constraintBuilder?.applyConstraint()
+    }
+    
+//  MARK: - Private Function Area
+    
+    private func setImageWithConfiguration() {
+        if size == nil {
+            self.size = image?.size.width
+        }
+        if let weight {
+            self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size!, weight: weight ))
+            return
+        }
+        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize:20 ))
     }
     
 }

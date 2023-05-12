@@ -8,6 +8,7 @@
 import UIKit
 
 
+
 class ButtonImage: Button {
     
     enum Position {
@@ -23,6 +24,8 @@ class ButtonImage: Button {
             }
         }
     }
+    
+    private var imgWithConfiguration: ImageView?
     
 //  MARK: - Initializers
     
@@ -68,17 +71,27 @@ class ButtonImage: Button {
     }
     
     func setImageSize( _ size: CGFloat) -> Self {
-        let img = ImageView(currentImage ?? UIImage())
-            .setSize(size)
+        guard let imgWithConfiguration else {return self}
+        let img = imgWithConfiguration.setSize(size)
             .setContentMode(.scaleAspectFit)
+        setImage(img.image, for: .normal)
+        
+        return self
+    }
+    
+    func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
+        guard let imgWithConfiguration else {return self}
+        let img = imgWithConfiguration.setWeight(weight)
         setImage(img.image, for: .normal)
         return self
     }
+
     
 //  MARK: - Private Function Area
     
     private func setImage(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil, _ alignment: UISemanticContentAttribute = .forceLeftToRight ) {
         guard let image = image.image else {return}
+        self.imgWithConfiguration = ImageView(image)
         if let size = size {
             setImage(image.withConfiguration(UIImage.SymbolConfiguration(pointSize: size)), for: state)
             return

@@ -10,9 +10,12 @@ import UIKit
 class Shadow {
     
     private var component: UIView
-    private let shadow: CALayer
+    private let shadow: CAShapeLayer
     private var shadowAt: UInt32 = 0
     private var isBringToFront: Bool = false
+    private var cornerRadius: CGFloat?
+    private var shadowHeight: CGFloat?
+    private var shadowWidth: CGFloat?
     
 //  MARK: - Initializers
     
@@ -49,13 +52,28 @@ class Shadow {
         return self
     }
     
-    func setRadius(_ radius: CGFloat) -> Self {
-        shadow.shadowRadius = radius
+    func setBlur(_ blur: CGFloat) -> Self {
+        shadow.shadowRadius = blur
+        return self
+    }
+    
+    func setCornerRadius(_ cornerRadius: CGFloat) -> Self {
+        shadow.cornerRadius = cornerRadius
         return self
     }
     
     func setBringToFront() -> Self {
         self.isBringToFront = true
+        return self
+    }
+    
+    func setShadowHeight(_ height: CGFloat) -> Self {
+        self.shadowHeight = height
+        return self
+    }
+    
+    func setShadowWidth(_ width: CGFloat) -> Self {
+        self.shadowWidth = width
         return self
     }
     
@@ -71,17 +89,52 @@ class Shadow {
         return self.setColor(ShadowDefault.color)
             .setOffset(ShadowDefault.offset)
             .setOpacity(ShadowDefault.opacity)
-            .setRadius(ShadowDefault.radius)
+            .setBlur(ShadowDefault.radius)
     }
     
     func apply() -> Self {
         DispatchQueue.main.async {
             self.component.layoutIfNeeded()
-            self.shadow.shadowPath = UIBezierPath(roundedRect: self.component.bounds,
-                                                  cornerRadius: self.component.layer.cornerRadius).cgPath
+            self.shadow.frame = self.component.bounds
+//            self.shadow.cornerRadius = self.component.layer.cornerRadius
+//            self.shadow.maskedCorners = self.component.layer.maskedCorners
+            
+            self.shadow.shadowPath = self.calculateShadowPath()
             self.insertSubLayer()
         }
         return self
+    }
+    
+    private func getCornerRadius() -> CGFloat {
+        if let cornerRadius {
+            return cornerRadius
+        }
+        return self.component.layer.cornerRadius
+    }
+    
+    private func calculateShadowPath() -> CGPath {
+        let cornerRadius = self.getCornerRadius()
+        let shadowHeight = self.getShadowHeight()
+        let shadowWidth  = self.getShadowWidth()
+        
+        return UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0),
+                                                size: CGSize(width: shadowWidth,
+                                                             height: shadowHeight)),
+                            cornerRadius: cornerRadius).cgPath
+    }
+    
+    private func getShadowHeight() -> CGFloat {
+        if let shadowHeight {
+            return shadowHeight
+        }
+        return self.component.frame.height
+    }
+    
+    private func getShadowWidth() -> CGFloat {
+        if let shadowWidth {
+            return shadowWidth
+        }
+        return self.component.frame.width
     }
     
     private func insertSubLayer() {
