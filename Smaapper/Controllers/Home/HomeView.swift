@@ -108,7 +108,7 @@ class HomeView: UIView {
     
     lazy var configButton3: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.thin)
+            .setImageWeight(.bold)
             .setImageSize(15)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
         return btn
