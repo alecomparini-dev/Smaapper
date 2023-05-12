@@ -59,16 +59,16 @@ class HomeView: UIView {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
-            .setComponentView(configButton)
-            .setComponentView(configButton2)
-//            .setComponentView(configButton3)
-            .setComponentView(configButton4_1)
+            .setFooterComponent(configButton)
+            .setFooterComponent(configButton2)
+            .setFooterComponent(configButton4)
         return menu
     }()
     
     lazy var menuButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImage(img)
+            .setImageColor(.white)
             .setBorder({ build in
                 build.setCornerRadius(18)
                     .setWidth(0)
@@ -94,74 +94,42 @@ class HomeView: UIView {
     lazy var configButton: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
             .setImageWeight(.medium)
-            .setImageSize(16)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Perfil", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
     
     lazy var configButton2: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "trash")))
-            .setImageSize(12)
-            .setImageWeight(.bold)
+        let btn = ButtonImage(ImageView(UIImage(systemName: "rectangle.stack")))
+            .setImageWeight(.medium)
+            .setImageSize(16)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Recent", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
     
-    lazy var configButton3: ButtonImage = {
+    
+    lazy var configButton4: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.bold)
-            .setImageSize(15)
+            .setImageWeight(.medium)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Settings", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
 
     
-    lazy var configButton4: IconButton = {
-        let btn = IconButton(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.bold)
-            .setImageSize(35)
-            .setTitleColor(UIColor.HEX("#131415"), .normal)
-            .setTitle("Config", .normal)
-            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
-        return btn
-    }()
-    
-    lazy var configButton4_1: UIButton = {
-//    let button = UIButton(type: .system)
-//        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)
-//        let image = UIImage(systemName: "heart.fill", withConfiguration: config)
-//        button.setImage(image, for: .normal)
-//        button.setTitle("Button", for: .normal)
-//        var configuration = button.configuration
-//        configuration?.imagePadding = 16
-//        configuration?.titlePadding = 10
-//
-//        button.configuration = configuration
-//
-//        button.configuration?.imagePlacement = .top
-        
-        
-        let button = UIButton(type: .system)
-        let image = ImageView(UIImage(systemName: "gearshape"))
-            .setSize(15)
-        
-        button.setTitle("Config", for: .normal)
-        
-        button.configuration = UIButton.Configuration.plain()
-        button.configuration?.baseBackgroundColor = .clear
-        button.configuration?.baseForegroundColor = UIColor.HEX("#131415")
-        button.configuration?.cornerStyle = .dynamic
-        
-        button.configuration?.image = image.image
-        
-        button.configuration?.imagePlacement = .top
-        button.configuration?.imagePadding = 1
-        
-        return button
-    }()
-    
 //  MARK: - Objc Functions Area
-    
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
     }

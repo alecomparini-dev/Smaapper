@@ -30,7 +30,7 @@ class IconButton: ButtonImage {
     
 //  MARK: - Set
     
-    override func setAlignment(_ alignment: ButtonImage.Position) -> Self {
+    override func setImagePlacement(_ alignment: NSDirectionalRectEdge) -> Self {
         print("It is not possible to change the alignment of the image on the Icon Button")
         return self
     }

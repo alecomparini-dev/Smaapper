@@ -10,9 +10,6 @@ import UIKit
 class ImageView: UIImageView {
     typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
     
-    private var size: CGFloat?
-    private var weight: UIImage.SymbolWeight?
-    
     private var tapAction: tapActionClosureAlias?
     private var constraintBuilder: StartOfConstraintsFlow?
     
@@ -26,7 +23,7 @@ class ImageView: UIImageView {
     convenience init(_ image: UIImage?) {
         self.init()
         if let image {
-            let _ = setImage(image)
+            setImage(image)
         }
     }
     
@@ -36,6 +33,7 @@ class ImageView: UIImageView {
     
     
 //  MARK: - Properties
+    @discardableResult
     func setImage(_ image: UIImage?) -> Self {
         if let image {
             self.image = image
@@ -43,11 +41,13 @@ class ImageView: UIImageView {
         return self
     }
     
+    @discardableResult
     func setContentMode(_ contentMode: UIView.ContentMode) -> Self {
         self.contentMode = contentMode
         return self
     }
     
+    @discardableResult
     func setTintColor(_ color: UIColor) -> Self {
         self.image = image?.withRenderingMode(.alwaysTemplate)
         self.image?.withTintColor(color)
@@ -55,15 +55,14 @@ class ImageView: UIImageView {
         return self
     }
     
+    
     func setSize(_ size: CGFloat) -> Self {
-        self.size = size
-        setImageWithConfiguration()
+        self.image = image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: size))
         return self
     }
     
     func setWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        self.weight = weight
-        setImageWithConfiguration()
+        self.image = image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: weight))
         return self
     }
     
@@ -92,18 +91,6 @@ class ImageView: UIImageView {
     func applyConstraint() {
         self.constraintBuilder?.applyConstraint()
     }
-    
-//  MARK: - Private Function Area
-    
-    private func setImageWithConfiguration() {
-        if size == nil {
-            self.size = image?.size.width
-        }
-        if let weight {
-            self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size ?? 17, weight: weight ))
-            return
-        }
-        self.image = image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size ?? 17 ))
-    }
+
     
 }

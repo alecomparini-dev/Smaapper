@@ -50,7 +50,7 @@ class DropdownMenuFooter: DropdownMenu {
         return self
     }
     
-    func setComponentView(_ componentView: UIView) -> Self {
+    func setFooterComponent(_ componentView: UIView) -> Self {
         self.componentsFooter.append(componentView)
         return self
     }
@@ -68,14 +68,28 @@ class DropdownMenuFooter: DropdownMenu {
     
     private func addComponentsOnFooter() {
         self.componentsFooter.forEach { component in
-            self.stackView.addArrangedSubview(component)
+            let view = createView()
+            component.add(insideTo: view)
+            self.stackView.addArrangedSubview(view)
+            view.applyConstraint()
             makeConstraint(component)
         }
     }
     
+    private func createView() -> View {
+        return View()
+            .setConstraints { build in
+                build.setTop
+                    .setBottom.equalToSuperView
+            }
+    }
+    
+    
     private func makeConstraint(_ component: UIView) {
         component.makeConstraints { make in
-            make.setTop.setBottom.equalToSuperView
+            make.setTop.equalToSuperView(5)
+                .setBottom.equalToSuperView
+                .setLeading.setTrailing.equalToSuperView
         }
     }
     
@@ -115,7 +129,8 @@ class DropdownMenuFooter: DropdownMenu {
     
     private func configConstraint() {
         stackView.makeConstraints { make in
-            make.setBottom.setLeading.setTrailing.equalToSuperView
+            make
+                .setBottom.setLeading.setTrailing.equalToSuperView
                 .setHeight.equalToConstant(self.footerHeight)
         }
     }

@@ -34,7 +34,7 @@ class Button: UIButton {
     
     convenience init(_ title: String) {
         self.init()
-        let _ = self.setTitle(title, .normal)
+        self.setTitle(title, .normal)
     }
     
     required init?(coder: NSCoder) {
@@ -42,84 +42,82 @@ class Button: UIButton {
     }
     
     internal func initialization() {
-        _ = self.setTitleColor(ButtonDefault.color, .normal)
+        configuration = config
+        self.setTitleColor(ButtonDefault.color, .normal)
             .setFont(ButtonDefault.font)
     }
     
     
 //  MARK: - Properties
     
-    
-    
-    
-    
-    
-    
+    @discardableResult
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
         super.setTitle(title, for: state)
-        configuration = config
         return self
     }
-    
+
+    @discardableResult
     func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
         super.setTitleColor(color, for: state)
-        if state == .normal {
-            _ = setTintColor(titleColor(for: .normal)!.withAlphaComponent(0.8))
-        }
         return self
     }
     
+
+    @discardableResult
     func setTintColor(_ color: UIColor) -> Self {
         tintColor = color
         return self
     }
     
+    @discardableResult
     func setTitleSize(_ ofSize: CGFloat) -> Self {
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+        configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
             attr.font = UIFont.systemFont(ofSize: ofSize)
             return attr
         }
-        configuration = config
         return self
     }
     
+    @discardableResult
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+            configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
                 var attr = attrTransformer
                 attr.font = font
                 return attr
             }
-            configuration = config
         }
         return self
     }
     
+    @discardableResult
     func setTitleWeight(_ weight: UIFont.Weight) -> Self {
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+        configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
             attr.font = UIFont.systemFont(ofSize: self.titleLabel?.font.pointSize ?? 17, weight: weight)
             return attr
         }
-        configuration = config
         return self
     }
      
+    @discardableResult
     func setTitleAlignment(_ alignment: UIControl.ContentHorizontalAlignment) -> Self {
         contentHorizontalAlignment = alignment
         return self
     }
 
+    @discardableResult
     func setActivateDisabledButton(_ startDisable: Bool) -> Self {
         self.activateDisabledButton = true
-        _ = setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
+        setTitleColor(titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
         if startDisable {
             isEnabled = false
         }
         return self
     }
 
+    @discardableResult
     func setFloatButton() -> Self {
         self.layer.zPosition = 1000
         return self
@@ -128,7 +126,7 @@ class Button: UIButton {
 
 
 //  MARK: - Action Area
-    
+    @discardableResult
     func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
         self.addTarget(target, action: action, for: event )
         return self
@@ -147,7 +145,7 @@ class Button: UIButton {
     
     
 //  MARK: - Constraint Area
-    
+    @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self.constraintBuilder = builderConstraint(StartOfConstraintsFlow(self))
         return self
