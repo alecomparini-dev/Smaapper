@@ -11,37 +11,26 @@ import UIKit
 
 class ButtonImage: Button {
     
-    enum Position {
-        case leading
-        case trailing
-        
-        func toSemanticContentAttribute() -> UISemanticContentAttribute {
-            switch self {
-            case .leading:
-                return .forceLeftToRight
-            case .trailing:
-                return .forceRightToLeft
-            }
-        }
-    }
+   
     
     private var imgWithConfiguration: ImageView?
     
 //  MARK: - Initializers
-    
+
     init(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
         super.init()
         self.initialization(image, state, size)
-    }
-    
-    override init() {
-        super.init()
     }
     
     convenience init(_ image: UIImageView, _ state: UIControl.State) {
         self.init(image, state, nil)
     }
     
+    convenience init(_ image: UIImageView, _ title: String) {
+        self.init(image, .normal, nil)
+        setTitle(title, .normal)
+    }
+
     convenience init(_ image: UIImageView) {
         self.init(image, .normal, nil)
     }
@@ -51,52 +40,53 @@ class ButtonImage: Button {
     }
     
     private func initialization(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
-        setImage(image, state, size)
-        _ = setPadding(10)
-        tintColor = titleColor(for: .normal)
+        setImageButton(image)
+            .setImageSize(size)
+            .setImagePadding(5)
     }
     
     
 //  MARK: - Properties
-    
-    func setAlignment(_ alignment: ButtonImage.Position ) -> Self {
-        semanticContentAttribute = alignment.toSemanticContentAttribute()
+    @discardableResult
+    func setImageButton(_ image: UIImageView) -> Self {
+        guard let image = image.image else {return self}
+        super.configuration?.image = image
+        super.setImage(image, for: .normal)
         return self
     }
     
-    func setPadding(_ padding: CGFloat) -> Self {
-        super.config.imagePadding = padding
-        configuration = config
+    @discardableResult
+    func setImagePlacement(_ alignment: NSDirectionalRectEdge ) -> Self {
+        super.configuration?.imagePlacement = alignment
         return self
     }
     
-    func setImageSize( _ size: CGFloat) -> Self {
-        guard let imgWithConfiguration else {return self}
-        let img = imgWithConfiguration.setSize(size)
-            .setContentMode(.scaleAspectFit)
-        setImage(img.image, for: .normal)
-        
+    @discardableResult
+    func setImageColor(_ color: UIColor) -> Self {
+        configuration?.baseForegroundColor = color
         return self
     }
     
+    @discardableResult
+    func setImageSize( _ size: CGFloat? ) -> Self {
+        guard let size else {return self}
+        let img = ImageView(configuration?.image).setSize(size)
+        setImageButton(img)
+        return self
+    }
+    
+    @discardableResult
     func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        guard let imgWithConfiguration else {return self}
-        let img = imgWithConfiguration.setWeight(weight)
-        setImage(img.image, for: .normal)
+        let img = ImageView(configuration?.image).setWeight(weight)
+        setImageButton(img)
         return self
     }
 
-    
-//  MARK: - Private Function Area
-    
-    private func setImage(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil, _ alignment: UISemanticContentAttribute = .forceLeftToRight ) {
-        guard let image = image.image else {return}
-        self.imgWithConfiguration = ImageView(image)
-        if let size = size {
-            setImage(image.withConfiguration(UIImage.SymbolConfiguration(pointSize: size)), for: state)
-            return
-        }
-        setImage(image, for: state)
+
+    @discardableResult
+    func setImagePadding(_ padding: CGFloat) -> Self {
+        super.configuration?.imagePadding = padding
+        return self
     }
         
 }

@@ -59,15 +59,16 @@ class HomeView: UIView {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
-            .setComponentView(configButton)
-            .setComponentView(configButton2)
-            .setComponentView(configButton3)
+            .setFooterComponent(configButton)
+            .setFooterComponent(configButton2)
+            .setFooterComponent(configButton4)
         return menu
     }()
     
     lazy var menuButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImage(img)
+            .setImageColor(.white)
             .setBorder({ build in
                 build.setCornerRadius(18)
                     .setWidth(0)
@@ -93,30 +94,42 @@ class HomeView: UIView {
     lazy var configButton: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
             .setImageWeight(.medium)
-            .setImageSize(16)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Perfil", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
     
     lazy var configButton2: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "trash")))
-            .setImageSize(12)
-            .setImageWeight(.bold)
+        let btn = ButtonImage(ImageView(UIImage(systemName: "rectangle.stack")))
+            .setImageWeight(.medium)
+            .setImageSize(16)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Recent", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
     
-    lazy var configButton3: ButtonImage = {
+    
+    lazy var configButton4: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.bold)
-            .setImageSize(15)
+            .setImageWeight(.medium)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleSize(12)
+            .setImageColor(UIColor.HEX("#131415"))
+            .setTitle("Settings", .normal)
+            .setImagePlacement(.top)
         return btn
     }()
-    
+
     
 //  MARK: - Objc Functions Area
-    
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
     }
@@ -139,6 +152,18 @@ class HomeView: UIView {
         menuButton.removeShadowByID(idShadowEnableFloatButton)
     }
 
+    
+//  MARK: - Create Section Menu
+    func createMiddleSectionView(_ text: String) -> UIView {
+        let label = Label(text)
+            .setColor(UIColor.systemGray)
+            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
+            .setTextAlignment(.left)
+        return label
+    }
+
+    
+//  MARK: - Create Rows Menu
     func createLeftRowView(_ systemNameImage: String) -> UIView {
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
@@ -152,17 +177,11 @@ class HomeView: UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
+//            .setFont(UIFont.preferredFont(forTextStyle: .callout))
             .setTextAlignment(.left)
         return label
     }
     
-    func createMiddleSectionView(_ text: String) -> UIView {
-        let label = Label(text)
-            .setColor(UIColor.systemGray)
-            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
-            .setTextAlignment(.left)
-        return label
-    }
 
     func createRightRowView(_ systemNameImage: String) -> UIView {
         let img = ImageView()
@@ -173,6 +192,7 @@ class HomeView: UIView {
             .setTintColor(.white.withAlphaComponent(0.4))
         return img
     }
+
     
     
 //  MARK: - Private Function Area
@@ -180,8 +200,9 @@ class HomeView: UIView {
     private func addBackgroundColor() {
         _ = self.setGradient { build in
             build
-                .setColor([UIColor.HEX("#17191a"), UIColor.HEX("#17191a"),  UIColor.HEX("#17191a")])
+                .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
+                .setAxialGradient(.topToBottom)
                 .apply()
         }
     }

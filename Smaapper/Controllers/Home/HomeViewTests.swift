@@ -206,7 +206,7 @@ class HomeViewTests: UIView {
         let btn = ButtonImage(UIImageView(image: UIImage(systemName: "arrow.down.to.line")))
             .setTitle("Download", .normal)
             .setImageSize(50)
-            .setPadding(5)
+            .setImagePadding(5)
             .setActivateDisabledButton(false)
             .setBorder { build in
                 build

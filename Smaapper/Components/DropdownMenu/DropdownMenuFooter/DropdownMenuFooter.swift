@@ -50,12 +50,7 @@ class DropdownMenuFooter: DropdownMenu {
         return self
     }
     
-    func setPaddingFooter() -> Self {
-        
-        return self
-    }
-    
-    func setComponentView(_ componentView: UIView) -> Self {
+    func setFooterComponent(_ componentView: UIView) -> Self {
         self.componentsFooter.append(componentView)
         return self
     }
@@ -71,28 +66,32 @@ class DropdownMenuFooter: DropdownMenu {
     
 //  MARK: - Private Functions Area
     
-    private func createView() -> View {
-        let view = View()
-            .setConstraints { build in
-                build.setTop.setBottom.equalToSuperView
-            }
-        return view
-    }
-    
-    
     private func addComponentsOnFooter() {
-        self.componentsFooter.forEach { comp in
-//            let view = createView()
-//            comp.add(insideTo: view)
-            self.stackView.addArrangedSubview(comp)
-//            view.applyConstraint()
-            comp.makeConstraints { make in
-//                make.setPin.equalToSuperView(5)
-                make.setTop.setBottom.equalToSuperView
-            }
+        self.componentsFooter.forEach { component in
+            let view = createView()
+            component.add(insideTo: view)
+            self.stackView.addArrangedSubview(view)
+            view.applyConstraint()
+            makeConstraint(component)
         }
     }
     
+    private func createView() -> View {
+        return View()
+            .setConstraints { build in
+                build.setTop
+                    .setBottom.equalToSuperView
+            }
+    }
+    
+    
+    private func makeConstraint(_ component: UIView) {
+        component.makeConstraints { make in
+            make.setTop.equalToSuperView(5)
+                .setBottom.equalToSuperView
+                .setLeading.setTrailing.equalToSuperView
+        }
+    }
     
     private func applyOnceConfig() {
         if !alreadyApplied {
@@ -111,19 +110,11 @@ class DropdownMenuFooter: DropdownMenu {
         configFooter()
         configGradient()
         addComponentsOnFooter()
-        
+        addShadowOnFooter()
+    }
+    
+    private func addShadowOnFooter() {
         _ = stackView
-//            .setShadow({ build in
-//                build
-//                    .setColor(UIColor.HEX("#ec9355"))
-//                    .setOffset(width: 150, height: -50)
-//                    .setBlur(60)
-//                    .setOpacity(0.7)
-//                    .setCornerRadius(0)
-//                    .setShadowHeight(80)
-//                    .setShadowWidth(50)
-//                    .apply()
-//            })
             .setShadow({ build in
                 build
                     .setColor(.black)
@@ -134,12 +125,12 @@ class DropdownMenuFooter: DropdownMenu {
                     .setShadowHeight(10)
                     .apply()
             })
-            
     }
     
     private func configConstraint() {
         stackView.makeConstraints { make in
-            make.setBottom.setLeading.setTrailing.equalToSuperView
+            make
+                .setBottom.setLeading.setTrailing.equalToSuperView
                 .setHeight.equalToConstant(self.footerHeight)
         }
     }
