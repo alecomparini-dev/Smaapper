@@ -59,8 +59,8 @@ class HomeView: UIView {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
-            .setFooterComponent(configButton)
-            .setFooterComponent(configButton2)
+            .setFooterComponent(profileButton)
+            .setFooterComponent(recentButton)
             .setFooterComponent(configButton4)
         return menu
     }()
@@ -91,38 +91,40 @@ class HomeView: UIView {
         return btn
     }()
     
-    lazy var configButton: ButtonImage = {
+    lazy var profileButton: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
-            .setImageWeight(.medium)
+            .setImageWeight(.regular)
             .setImageSize(18)
-            .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#131415"))
-            .setTitle("Perfil", .normal)
+            .setImageColor(UIColor.HEX("#0f1010"))
+            .setTitle("Profile", .normal)
             .setImagePlacement(.top)
         return btn
     }()
     
-    lazy var configButton2: ButtonImage = {
+
+    lazy var recentButton: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "rectangle.stack")))
-            .setImageWeight(.medium)
+            .setImageWeight(.regular)
             .setImageSize(16)
-            .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#131415"))
+            .setImageColor(UIColor.HEX("#0f1010"))
             .setTitle("Recent", .normal)
             .setImagePlacement(.top)
+        print("CORRIGIR A PORRA DO SIZE DO TITLE E WEIGHT")
         return btn
     }()
     
     
     lazy var configButton4: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.medium)
+            .setImageWeight(.regular)
             .setImageSize(18)
-            .setTitleColor(UIColor.HEX("#131415"), .normal)
+            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#131415"))
+            .setImageColor(UIColor.HEX("#0f1010"))
             .setTitle("Settings", .normal)
             .setImagePlacement(.top)
         return btn
@@ -177,7 +179,6 @@ class HomeView: UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
-//            .setFont(UIFont.preferredFont(forTextStyle: .callout))
             .setTextAlignment(.left)
         return label
     }
