@@ -12,6 +12,8 @@ class List: UITableView {
 
     typealias didSelectRow = ((_ section: Int, _ row: Int) -> Void)
 
+    private var alreadyApplied = false
+    
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
     
@@ -23,45 +25,52 @@ class List: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
 //  MARK: - SET Properties
-    
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
         self.sectionHeaderHeight = height
         return self
     }
     
+    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         self.sectionFooterHeight = height
         return self
     }
     
+    @discardableResult
     func setSeparatorStyle(_ style: UITableViewCell.SeparatorStyle) -> Self {
         self.separatorStyle = style
         return self
     }
     
+    @discardableResult
     func setShowsVerticalScrollIndicator(_ flag: Bool) -> Self {
         self.showsVerticalScrollIndicator = flag
         return self
     }
     
+    @discardableResult
     func setIsScrollEnabled(_ flag: Bool) -> Self {
         self.isScrollEnabled = flag
         return self
     }
     
+    @discardableResult
     func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
+    @discardableResult
     func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
         self.didSelectRow = closure
         return self
@@ -83,14 +92,24 @@ class List: UITableView {
     
     
 //  MARK: - Show List
-    
     func show() {
-        self.RegisterCell()
-        self.setDelegate()
+        applyOnceConfig()
+        self.isHidden = false
     }
 
+    func hide() {
+        self.isHidden = true
+    }
     
 //  MARK: - Private Function Area
+    
+    private func applyOnceConfig() {
+        if !alreadyApplied {
+            self.RegisterCell()
+            self.setDelegate()
+            alreadyApplied = true
+        }
+    }
     
     private func RegisterCell() {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
@@ -187,3 +206,5 @@ extension List: UITableViewDataSource {
 
     
 }
+
+

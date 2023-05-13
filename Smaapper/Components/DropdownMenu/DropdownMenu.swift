@@ -18,7 +18,7 @@ class DropdownMenu: View {
         case rightTop
         case rightBottom
     }
-    
+    private var alreadyApplied = false
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
 
@@ -33,7 +33,7 @@ class DropdownMenu: View {
     
     override init() {
         super.init(frame: .zero)
-        self.initialization()
+        self.hide()
     }
     
     required init?(coder: NSCoder) {
@@ -47,47 +47,47 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                print(section, row)
+                if let onTapDropdownMenu = self.onTapDropdownMenu {
+                    onTapDropdownMenu(section,row)
+                }
             })
             .setBackgroundColor(.clear)
         return list
     }()
     
     
-    private func initialization() {
-        self.hide()
-        setTopMostPosition()
-    }
-
-    
-    
 //  MARK: - Set Properties
-    
+    @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
         self.positionOpenMenu = position
         return self
     }
     
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         _ = list.setRowHeight(height)
         return self
     }
     
+    @discardableResult
     func setHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
     }
     
+    @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         self.menuWidth = width
         return self
     }
     
+    @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
+    @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
         self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
@@ -121,18 +121,27 @@ class DropdownMenu: View {
 //  MARK: - Show DropdownMenu
     
     func show() {
-        addListOnDropdownMenu()
-        configConstraints()
+        applyOnceConfig()
         list.show()
         self.isHidden = false
     }
 
-    func hide() {   
+    func hide() {
+        list.hide()
         self.isHidden = true
     }
     
     
 //  MARK: - Private Functions Area
+    
+    private func applyOnceConfig() {
+        if !alreadyApplied {
+            setTopMostPosition()
+            self.addListOnDropdownMenu()
+            self.configConstraints()
+            alreadyApplied = true
+        }
+    }
     
     private func setTopMostPosition() {
         self.layer.zPosition = zPosition

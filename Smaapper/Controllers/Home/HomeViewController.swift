@@ -9,9 +9,7 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    enum K {
-        static let favorites = "Favorites"
-    }
+    static let favorites = "Favorites"
     
     private let viewModel = HomeViewModel()
     
@@ -146,7 +144,7 @@ class HomeVC: UIViewController {
     
     private func addHeartToFavorites() -> UIView? {
         guard let dropdownMenu else { return nil }
-        if (dropdownMenu[self.indexSection].section == HomeVC.K.favorites) {
+        if (dropdownMenu[self.indexSection].section == HomeVC.favorites) {
             return homeScreen.createRightRowView("heart.fill", .white.withAlphaComponent(0.8))
         }
         return nil
@@ -157,6 +155,10 @@ class HomeVC: UIViewController {
 
 //  MARK: - Extension HomeViewDelegate
 extension HomeVC: HomeViewDelegate {
+    func dropdownMenuTapped(_ section: Int, _ row: Int) {
+        print("DELEGATE BOMBANDO CARALHO", section, row)
+    }
+    
     func menuButtonTapped() {
         openCloseDropdownMenu()
         turnOnOffMenuButton()

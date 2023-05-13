@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeViewDelegate: AnyObject {
     func menuButtonTapped()
+    func dropdownMenuTapped(_ section: Int, _ row: Int)
 }
 
 class HomeView: UIView {
@@ -63,9 +64,13 @@ class HomeView: UIView {
             .setFooterComponent(settingsButton)
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
-            
+            .setAction(dropdownMenuTapped)
         return menu
     }()
+    
+    private func dropdownMenuTapped(_ section: Int, _ row: Int) {
+        delegate?.dropdownMenuTapped(section, row)
+    }
     
     lazy var menuButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
@@ -93,42 +98,38 @@ class HomeView: UIView {
         return btn
     }()
     
-    lazy var profileButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
+    lazy var profileButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "person")), "Profile")
             .setImageWeight(.regular)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-            .setTitle("Profile", .normal)
-            .setImagePlacement(.top)
         return btn
     }()
     
 
-    lazy var recentButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "rectangle.stack")))
+    lazy var recentButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
             .setImageWeight(.regular)
             .setImageSize(16)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
+            .setTitleWeight(.thin)
             .setImageColor(UIColor.HEX("#0f1010"))
             .setTitle("Recent", .normal)
-            .setImagePlacement(.top)
         print("CORRIGIR A PORRA DO SIZE DO TITLE E WEIGHT")
         return btn
     }()
     
     
-    lazy var settingsButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
+    lazy var settingsButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
             .setImageWeight(.regular)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-            .setTitle("Settings", .normal)
-            .setImagePlacement(.top)
         return btn
     }()
 
