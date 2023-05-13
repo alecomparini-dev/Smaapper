@@ -11,11 +11,11 @@
                         "rightImage": "util",
                         "items": [
                             {
-                                "title": "Alcool ou Gasolina",
+                                "title": "Alcohol or Gasoline",
                                 "leftImage": "fuelpump.fill"
                             },
                             {
-                                "title": "Todo-List",
+                                "title": "TODO-List",
                                 "leftImage": "list.bullet.clipboard.fill",
                                 "rightImage": "checklist"
                             },
@@ -29,11 +29,11 @@
                                 "rightImage": "person.2.gobackward"
                             },
                             {
-                                "title": "Leitor de QRCode/CodBar",
+                                "title": "QRCode Reader",
                                 "leftImage": "qrcode.viewfinder"
                             },
                             {
-                                "title": "Lembretes",
+                                "title": "Reminders",
                                 "leftImage": "note.text",
                                 "rightImage": "list.clipboard.fill"
                             },
@@ -45,54 +45,54 @@
                         ]
                     },
                     {
-                        "section": "Calculadoras",
+                        "section": "Calculators",
                         "rightImage": "calc",
                         "items": [
                             {
-                                "title": "Regra de 3",
+                                "title": "Rule of 3",
                                 "leftImage": "3.square.fill"
                             },
                             {
-                                "title": "Mini Calculadora",
+                                "title": "Calculator",
                                 "leftImage": "plusminus.circle.fill",
                                 "rightImage": "plus.rectangle.fill"
                             },
                             {
-                                "title": "Calculadora IMC",
+                                "title": "BMI Calculator",
                                 "leftImage": "scalemass.fill"
                             },
                             {
-                                "title": "Calculadora de Churras",
+                                "title": "Barbecue Calculator",
                                 "leftImage": "flame.fill"
                             },
                             {
-                                "title": "Conversor de Medidas",
+                                "title": "Unit Converter",
                                 "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
                             },
                             {
-                                "title": "Calcula Gorjeta",
+                                "title": "Tip Calculator",
                                 "leftImage": "percent"
                             }
                         ]
                     },
                     {
-                        "section": "AR - Realidade Aumentada",
+                        "section": "AR - Augmented Reality",
                         "rightImage": "AR",
                         "items": [
                             {
-                                "title": "Fita Métrica",
+                                "title": "Tape Measure",
                                 "leftImage": "ruler.fill"
                             },
                             {
-                                "title": "Dados",
+                                "title": "Dice",
                                 "leftImage": "dice.fill"
                             },
                             {
-                                "title": "Qual é a Flor",
+                                "title": "What Flower",
                                 "leftImage": "leaf.fill"
                             },
                             {
-                                "title": "Qual é a Cor",
+                                "title": "What Color",
                                 "leftImage": "paintpalette.fill"
                             },
                             {
@@ -102,68 +102,68 @@
                         ]
                     },
                     {
-                        "section": "Jogos/Entretenimentos",
+                        "section": "Games/Entertainment",
                         "rightImage": "game",
                         "items": [
                             {
-                                "title": "Forca",
+                                "title": "Hangman",
                                 "leftImage": "figure.mixed.cardio"
                             },
                             {
-                                "title": "Cara ou Coroa",
+                                "title": "Coin Toss",
                                 "leftImage": "cedisign.circle.fill"
                             },
                             {
-                                "title": "Jogo da Velha",
+                                "title": "Tic-Tac-Toe",
                                 "leftImage": "number.square.fill"
                             },
                             {
-                                "title": "Pedra/Papel/Tesoura",
+                                "title": "Rock/Paper/Scissors",
                                 "leftImage": "scissors.badge.ellipsis"
                             },
                             {
-                                "title": "Dados",
+                                "title": "Dices",
                                 "leftImage": "die.face.6.fill"
                             }
                         ]
                     },
                     {
-                        "section": "Informativos",
+                        "section": "Informations",
                         "rightImage": "i",
                         "items": [
                             {
-                                "title": "Pergunte ao ChatGPT",
+                                "title": "Ask ChatGPT",
                                 "leftImage": "message.and.waveform.fill"
                             },
                             {
-                                "title": "Horóscopo do Dia",
+                                "title": "Horoscope of the Day",
                                 "leftImage": "bubbles.and.sparkles.fill",
                                 "rightImage": "sparkles"
                             },
                             {
-                                "title": "Clima Tempo",
+                                "title": "Weather Forecast",
                                 "leftImage": "cloud.sun.fill"
                             },
                             {
-                                "title": "Cotações",
+                                "title": "Stock quotes",
                                 "leftImage": "dollarsign.circle"
                             },
                             {
-                                "title": "Próximos Feriados",
+                                "title": "Upcoming Holidays",
                                 "leftImage": "calendar.badge.exclamationmark"
                             },
                             {
-                                "title": "Recomendações de Filme",
+                                "title": "Movie/Series Recommendations",
                                 "leftImage": "film.stack.fill"
                             }
                         ]
                     },
                     {
-                        "section": "Auto Ajuda",
+                        "section": "Self-help",
                         "rightImage": "help",
                         "items": [
                             {
-                                "title": "Músicas e Citações 􀼺􀉞􀉛",
+                                "title": "Music and quotes",
                                 "leftImage": "bookmark.square.fill",
                                 "rightImage": "book.fill"
                             }
@@ -182,11 +182,11 @@
                 "leftImage": "3.square.fill"
             },
             {
-                "title": "Álcool ou Gasolina",
+                "title": "Alcohol or Gasoline",
                 "leftImage": "fuelpump.fill"
             },
             {
-                "title": "Fita Métrica",
+                "title": "Tape Measure",
                 "leftImage": "ruler.fill"
             }
         ]

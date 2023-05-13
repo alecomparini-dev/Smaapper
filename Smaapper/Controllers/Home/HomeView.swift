@@ -44,6 +44,7 @@ class HomeView: UIView {
                     .setLightPosition(.rightBottom)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
+//                    .setLightShadeColor(.black)
                     .apply()
             }
             .setConstraints { build in
@@ -59,9 +60,10 @@ class HomeView: UIView {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
+            .setFooterComponent(settingsButton)
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
-            .setFooterComponent(configButton4)
+            
         return menu
     }()
     
@@ -118,7 +120,7 @@ class HomeView: UIView {
     }()
     
     
-    lazy var configButton4: ButtonImage = {
+    lazy var settingsButton: ButtonImage = {
         let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
             .setImageWeight(.regular)
             .setImageSize(18)
@@ -184,13 +186,13 @@ class HomeView: UIView {
     }
     
 
-    func createRightRowView(_ systemNameImage: String) -> UIView {
+    func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(14)
             .setWeight(.regular)
-            .setTintColor(.white.withAlphaComponent(0.4))
+            .setTintColor(color)
         return img
     }
 

@@ -9,10 +9,17 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    enum K {
+        static let favorites = "Favorites"
+    }
+    
     private let viewModel = HomeViewModel()
     
+    private var dropdownMenu: DropdownMenuData?
     private var turnOnMenuButton = false
     private var openDropdownMenu = false
+    private var indexSection = 0
+    private var indexRow = 0
     
     lazy var homeScreen: HomeView = {
         let home = HomeView()
@@ -74,13 +81,16 @@ class HomeVC: UIViewController {
                 return
             }
             if let result {
-                self.populateDropdownMenu(result)
+                self.dropdownMenu = result
+                self.populateDropdownMenu()
             }
         }
     }
     
-    private func populateDropdownMenu(_ dropdownMenu: DropdownMenuData) {
-        dropdownMenu.forEach { sectionMenu in
+    private func populateDropdownMenu() {
+        guard let dropdownMenu else {return }
+        dropdownMenu.enumerated().forEach { (index,sectionMenu) in
+            self.indexSection = index
             let section = populateSection(sectionMenu.section)
             if let rows = sectionMenu.items {
                 populateRowsOfSection(section, rows)
@@ -96,7 +106,8 @@ class HomeVC: UIViewController {
     }
     
     private func populateRowsOfSection(_ section: Section, _ rows: [RowDropdownMenuData] ) {
-        rows.forEach { row in
+        rows.enumerated().forEach { (index,row) in
+            self.indexRow = index
             let row: Row = self.createRowView(row)
             homeScreen.dropdownMenu.setRowInSection(section, row)
         }
@@ -105,7 +116,7 @@ class HomeVC: UIViewController {
     private func createRowView(_ row: RowDropdownMenuData) -> Row {
         let leftView = createLeftView(row.leftImage)
         let middleView = createMiddleView(row.title)
-        let rightView = createRightView(row.subMenu)
+        let rightView = createRightView(row)
         return Row(leftView: leftView, middleView: middleView, rightView: rightView)
     }
     
@@ -119,10 +130,24 @@ class HomeVC: UIViewController {
         return homeScreen.createMiddleRowView(title)
     }
     
-    private func createRightView(_ subMenu: DropdownMenuData?) -> UIView? {
-        guard let subMenu else { return nil }
+    private func createRightView(_ row: RowDropdownMenuData) -> UIView? {
+        if let subMenu = row.subMenu {
+            return addChevronToSubMenu(subMenu)
+        }
+        return addHeartToFavorites()
+    }
+    
+    private func addChevronToSubMenu(_ subMenu: DropdownMenuData ) -> UIView? {
         if !subMenu.isEmpty {
-            return homeScreen.createRightRowView("chevron.forward")
+            return homeScreen.createRightRowView("chevron.forward", .white.withAlphaComponent(0.4))
+        }
+        return nil
+    }
+    
+    private func addHeartToFavorites() -> UIView? {
+        guard let dropdownMenu else { return nil }
+        if (dropdownMenu[self.indexSection].section == HomeVC.K.favorites) {
+            return homeScreen.createRightRowView("heart.fill", .white.withAlphaComponent(0.8))
         }
         return nil
     }
