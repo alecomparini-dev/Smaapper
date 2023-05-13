@@ -14,12 +14,14 @@ class Button: UIButton {
     private var activateDisabledButton: Bool = false
     private var constraintBuilder: StartOfConstraintsFlow?
     
+    
     override var isEnabled: Bool {
         didSet {
             disableButton(isEnabled)
         }
     }
     
+    private var titleWeight: UIFont.Weight = .regular
     internal var config: UIButton.Configuration {
         get { return self._config }
         set { self._config = newValue }
@@ -41,7 +43,7 @@ class Button: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal func initialization() {
+    private func initialization() {
         configuration = config
         self.setTitleColor(ButtonDefault.color, .normal)
             .setFont(ButtonDefault.font)
@@ -70,16 +72,6 @@ class Button: UIButton {
     }
     
     @discardableResult
-    func setTitleSize(_ ofSize: CGFloat) -> Self {
-        configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
-            var attr = attrTransformer
-            attr.font = UIFont.systemFont(ofSize: ofSize)
-            return attr
-        }
-        return self
-    }
-    
-    @discardableResult
     func setFont(_ font: UIFont?) -> Self {
         if let font {
             configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
@@ -92,10 +84,23 @@ class Button: UIButton {
     }
     
     @discardableResult
-    func setTitleWeight(_ weight: UIFont.Weight) -> Self {
+    func setTitleSize(_ ofSize: CGFloat) -> Self {
         configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
-            attr.font = UIFont.systemFont(ofSize: self.titleLabel?.font.pointSize ?? 17, weight: weight)
+            attr.font = .systemFont(ofSize: ofSize, weight: self.titleWeight)
+            return attr
+        }
+        titleLabel?.font = UIFont.systemFont(ofSize: ofSize)
+        return self
+    }
+    
+    @discardableResult
+    func setTitleWeight(_ weight: UIFont.Weight) -> Self {
+        self.titleWeight = weight
+        let fontSize = self.titleLabel?.font.pointSize
+        configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+            var attr = attrTransformer
+            attr.font = UIFont.systemFont(ofSize: fontSize ?? 0, weight: weight)
             return attr
         }
         return self

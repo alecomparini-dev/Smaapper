@@ -12,6 +12,7 @@ class IconButton: ButtonImage {
     
     init(_ image: UIImageView) {
         super.init(image, .normal, nil)
+        self.initializationIconButton()
     }
 
     convenience init(_ image: UIImageView, _ title: String) {
@@ -23,8 +24,7 @@ class IconButton: ButtonImage {
         fatalError("init(coder:) has not been implemented")
     }
     
-    internal override func initialization() {
-        super.initialization()
+    private func initializationIconButton() {
         super.setImagePlacement(.top)
     }
 

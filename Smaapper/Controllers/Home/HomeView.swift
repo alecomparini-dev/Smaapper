@@ -62,8 +62,9 @@ class HomeView: UIView {
                     .setAxialGradient(.rightBottomToLeftTop)
             }
             .setFooterComponent(settingsButton)
-            .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
+            .setFooterComponent(profileButton)
+            
             .setAction(dropdownMenuTapped)
         return menu
     }()
@@ -115,10 +116,8 @@ class HomeView: UIView {
             .setImageSize(16)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
-            .setTitleWeight(.thin)
-            .setImageColor(UIColor.HEX("#0f1010"))
             .setTitle("Recent", .normal)
-        print("CORRIGIR A PORRA DO SIZE DO TITLE E WEIGHT")
+            .setImageColor(UIColor.HEX("#0f1010"))
         return btn
     }()
     
