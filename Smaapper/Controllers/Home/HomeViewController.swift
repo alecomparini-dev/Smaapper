@@ -9,12 +9,12 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    static let favorites = "Favorites"
-    static let categories = "Categories"
+    static let favoritesID = "Favorites"
+    static let categoriesID = "Categories"
     
     private let viewModel = HomeViewModel()
     
-    private var dropdownMenu: DropdownMenuData?
+    private var resultDropdownMenu: DropdownMenuData?
     private var turnOnMenuButton = false
     private var openDropdownMenu = false
     private var indexSection = 0
@@ -37,8 +37,8 @@ class HomeVC: UIViewController {
         fetchDropdownMenu()
         
         //retirar !!!
-        openCloseDropdownMenu()
-        turnOnOffMenuButton()
+//        openCloseDropdownMenu()
+//        turnOnOffMenuButton()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,12 +54,7 @@ class HomeVC: UIViewController {
     
     
     private func openCloseDropdownMenu() {
-        if openDropdownMenu {
-            homeScreen.dropdownMenu.hide()
-        } else {
-            homeScreen.dropdownMenu.show()
-        }
-        openDropdownMenu = !openDropdownMenu
+        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
     }
     
     private func turnOnOffMenuButton() {
@@ -77,19 +72,19 @@ class HomeVC: UIViewController {
     private func fetchDropdownMenu() {
         viewModel.fetchDropdownMenu(.file) { result, error in
             if error != nil {
-                print(error?.localizedDescription ?? "")
+                print(#function, #file, error?.localizedDescription ?? "")
                 return
             }
             if let result {
-                self.dropdownMenu = result
+                self.resultDropdownMenu = result
                 self.populateDropdownMenu()
             }
         }
     }
     
     private func populateDropdownMenu() {
-        guard let dropdownMenu else {return }
-        dropdownMenu.enumerated().forEach { (index,sectionMenu) in
+        guard let resultDropdownMenu else {return }
+        resultDropdownMenu.enumerated().forEach { (index,sectionMenu) in
             self.indexSection = index
             let section = populateSection(sectionMenu.section)
             if let rows = sectionMenu.items {
@@ -145,8 +140,8 @@ class HomeVC: UIViewController {
     }
     
     private func addHeartToFavorites() -> UIView? {
-        guard let dropdownMenu else { return nil }
-        if (dropdownMenu[self.indexSection].section == HomeVC.favorites) {
+        guard let resultDropdownMenu else { return nil }
+        if (resultDropdownMenu[self.indexSection].section == HomeVC.favoritesID) {
             return homeScreen.createRightRowView("heart.fill", .white.withAlphaComponent(0.8))
         }
         return nil
@@ -156,9 +151,10 @@ class HomeVC: UIViewController {
 
 
 //  MARK: - Extension HomeViewDelegate
+
 extension HomeVC: HomeViewDelegate {
-    func dropdownMenuTapped(_ section: Int, _ row: Int) {
-        self.rowTapped = (section,row)
+    func dropdownMenuTapped(_ rowTapped: (section: Int, row: Int)) {
+        self.rowTapped = rowTapped
         print(self.rowTapped)
         openCategories()
     }
@@ -168,11 +164,10 @@ extension HomeVC: HomeViewDelegate {
         turnOnOffMenuButton()
     }
     
-    
     private func openCategories() {
-        guard let dropdownMenu else {return}
-        guard let items = dropdownMenu[rowTapped.section].items else { return }
-        if items[rowTapped.row].title == HomeVC.categories {
+        guard let resultDropdownMenu else {return}
+        guard let items = resultDropdownMenu[rowTapped.section].items else { return }
+        if items[rowTapped.row].title == HomeVC.categoriesID {
             guard let subMenu = items[rowTapped.row].subMenu else { return }
             let categoriesVC = CategoriesViewController(subMenu)
             present(categoriesVC, animated: true)

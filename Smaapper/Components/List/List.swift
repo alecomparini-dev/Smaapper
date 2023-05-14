@@ -10,9 +10,10 @@ import UIKit
 
 class List: UITableView {
 
-    typealias didSelectRow = ((_ section: Int, _ row: Int) -> Void)
+    typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
 
     private var alreadyApplied = false
+    private var _isShow = false
     
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
@@ -90,8 +91,17 @@ class List: UITableView {
     }
     
     
-    
 //  MARK: - Show List
+    
+    var isShow: Bool {
+        get { return self._isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            self.isHidden = !self._isShow
+        }
+    }
+    
     func show() {
         applyOnceConfig()
         self.isHidden = false
@@ -104,7 +114,7 @@ class List: UITableView {
 //  MARK: - Private Function Area
     
     private func applyOnceConfig() {
-        if !alreadyApplied {
+        if self._isShow && !alreadyApplied {
             self.RegisterCell()
             self.setDelegate()
             alreadyApplied = true
@@ -199,7 +209,7 @@ extension List: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let didSelectRow = self.didSelectRow {
-            didSelectRow(indexPath.section, indexPath.row)
+            didSelectRow((indexPath.section, indexPath.row))
         }
     }
     

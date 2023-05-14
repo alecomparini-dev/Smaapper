@@ -17,11 +17,9 @@ class CategoriesViewController: UIViewController {
         return home
     }()
     
-
     init(_ categories: DropdownMenuData) {
         self.categories = categories
         super.init(nibName: nil, bundle: nil)
-        self.printarsaporra()
     }
     
     required init?(coder: NSCoder) {
@@ -36,17 +34,5 @@ class CategoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    
-    private func printarsaporra() {
-        categories.forEach { menu in
-            print(menu.section ?? "" )
-            
-            menu.items?.forEach({ item in
-                print(" -", item.title ?? "" )
-            })
-        }
-    }
-    
     
 }

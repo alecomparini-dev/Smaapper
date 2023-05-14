@@ -10,7 +10,7 @@ import UIKit
 
 class DropdownMenu: View {
     
-    typealias onTapDropdownMenuAlias = ((_ section: Int, _ row: Int) -> Void)
+    typealias onTapDropdownMenuAlias = ((_ rowTapped :(section: Int, row: Int)) -> Void)
     
     enum PositionMenu {
         case leftTop
@@ -19,6 +19,7 @@ class DropdownMenu: View {
         case rightBottom
     }
     private var alreadyApplied = false
+    private var _isShow = false
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
 
@@ -33,7 +34,6 @@ class DropdownMenu: View {
     
     override init() {
         super.init(frame: .zero)
-        self.hide()
     }
     
     required init?(coder: NSCoder) {
@@ -48,7 +48,7 @@ class DropdownMenu: View {
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
                 if let onTapDropdownMenu = self.onTapDropdownMenu {
-                    onTapDropdownMenu(section,row)
+                    onTapDropdownMenu((section,row))
                 }
             })
             .setBackgroundColor(.clear)
@@ -120,22 +120,22 @@ class DropdownMenu: View {
     
 //  MARK: - Show DropdownMenu
     
-    func show() {
-        applyOnceConfig()
-        list.show()
-        self.isHidden = false
-    }
-
-    func hide() {
-        list.hide()
-        self.isHidden = true
+    var isShow: Bool {
+        get {
+            return self._isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            list.isShow = newValue
+            self.isHidden = !self._isShow
+        }
     }
     
     
 //  MARK: - Private Functions Area
     
     private func applyOnceConfig() {
-        if !alreadyApplied {
+        if self._isShow && !alreadyApplied {
             setTopMostPosition()
             self.addListOnDropdownMenu()
             self.configConstraints()

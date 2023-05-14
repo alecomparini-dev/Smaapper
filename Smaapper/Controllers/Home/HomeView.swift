@@ -9,7 +9,7 @@ import UIKit
 
 protocol HomeViewDelegate: AnyObject {
     func menuButtonTapped()
-    func dropdownMenuTapped(_ section: Int, _ row: Int)
+    func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
 }
 
 class HomeView: UIView {
@@ -36,8 +36,9 @@ class HomeView: UIView {
                     .setCornerRadius(18)
             })
             .setRowHeight(45)
+            .setFooterHeight(65)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setPaddingColuns(left: 5, right: 5)
+            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
@@ -45,7 +46,6 @@ class HomeView: UIView {
                     .setLightPosition(.rightBottom)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
-//                    .setLightShadeColor(.black)
                     .apply()
             }
             .setConstraints { build in
@@ -55,7 +55,6 @@ class HomeView: UIView {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
-            .setFooterHeight(65)
             .setFooterGradient { build in
                 build
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
@@ -65,11 +64,12 @@ class HomeView: UIView {
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
             .setAction(dropdownMenuTapped)
+        menu.isShow = false
         return menu
     }()
     
-    private func dropdownMenuTapped(_ section: Int, _ row: Int) {
-        delegate?.dropdownMenuTapped(section, row)
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
     }
     
     lazy var menuButton: ButtonImage = {

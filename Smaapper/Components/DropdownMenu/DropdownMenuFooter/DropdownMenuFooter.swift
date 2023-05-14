@@ -10,6 +10,7 @@ import UIKit
 class DropdownMenuFooter: DropdownMenu {
     
     private var alreadyApplied = false
+    private var _isShow = false
     
     private var footerHeight: CGFloat = 50
     private var footerGradient: Gradient?
@@ -58,10 +59,15 @@ class DropdownMenuFooter: DropdownMenu {
     
     
 //  MARK: - APPLY Dropdown Footer
-    override func show() {
-        applyOnceConfig()
-        super.show()
+    override var isShow: Bool {
+        get { return _isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            super.isShow = self._isShow
+        }
     }
+
     
     
 //  MARK: - Private Functions Area
@@ -94,7 +100,7 @@ class DropdownMenuFooter: DropdownMenu {
     }
     
     private func applyOnceConfig() {
-        if !alreadyApplied {
+        if self._isShow && !alreadyApplied {
             configDropdownMenuFooter()
             self.alreadyApplied = true
         }
