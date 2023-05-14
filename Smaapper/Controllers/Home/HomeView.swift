@@ -62,9 +62,8 @@ class HomeView: UIView {
                     .setAxialGradient(.rightBottomToLeftTop)
             }
             .setFooterComponent(settingsButton)
-            .setFooterComponent(recentButton)
             .setFooterComponent(profileButton)
-            
+            .setFooterComponent(recentButton)
             .setAction(dropdownMenuTapped)
         return menu
     }()
@@ -101,7 +100,7 @@ class HomeView: UIView {
     
     lazy var profileButton: IconButton = {
         let btn = IconButton(ImageView(UIImage(systemName: "person")), "Profile")
-            .setImageWeight(.regular)
+            .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
@@ -112,8 +111,8 @@ class HomeView: UIView {
 
     lazy var recentButton: IconButton = {
         let btn = IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
-            .setImageWeight(.regular)
-            .setImageSize(16)
+            .setImageWeight(.medium)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setTitle("Recent", .normal)
@@ -124,7 +123,7 @@ class HomeView: UIView {
     
     lazy var settingsButton: IconButton = {
         let btn = IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
-            .setImageWeight(.regular)
+            .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)

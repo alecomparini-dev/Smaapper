@@ -10,6 +10,7 @@ import UIKit
 class HomeVC: UIViewController {
     
     static let favorites = "Favorites"
+    static let categories = "Categories"
     
     private let viewModel = HomeViewModel()
     
@@ -18,6 +19,7 @@ class HomeVC: UIViewController {
     private var openDropdownMenu = false
     private var indexSection = 0
     private var indexRow = 0
+    private var rowTapped: (section: Int, row: Int) = (0,0)
     
     lazy var homeScreen: HomeView = {
         let home = HomeView()
@@ -156,12 +158,26 @@ class HomeVC: UIViewController {
 //  MARK: - Extension HomeViewDelegate
 extension HomeVC: HomeViewDelegate {
     func dropdownMenuTapped(_ section: Int, _ row: Int) {
-        print("DELEGATE BOMBANDO CARALHO", section, row)
+        self.rowTapped = (section,row)
+        print(self.rowTapped)
+        openCategories()
     }
     
     func menuButtonTapped() {
         openCloseDropdownMenu()
         turnOnOffMenuButton()
+    }
+    
+    
+    private func openCategories() {
+        guard let dropdownMenu else {return}
+        guard let items = dropdownMenu[rowTapped.section].items else { return }
+        if items[rowTapped.row].title == HomeVC.categories {
+            guard let subMenu = items[rowTapped.row].subMenu else { return }
+            let categoriesVC = CategoriesViewController(subMenu)
+            present(categoriesVC, animated: true)
+        }
+        
     }
     
 }

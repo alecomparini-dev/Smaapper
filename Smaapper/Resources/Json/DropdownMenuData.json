@@ -196,11 +196,11 @@
         "rightImage": "heart",
         "items": [
             {
-                "title": "Perfil",
+                "title": "Profile",
                 "leftImage": "mic"
             },
             {
-                "title": "Notificações",
+                "title": "Notifications",
                 "leftImage": "mic.fil"
             }
         ]
