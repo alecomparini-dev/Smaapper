@@ -30,27 +30,30 @@ class DropdownMenuFooter: DropdownMenu {
     
 
 //  MARK: - Components
-    lazy var stackView: UIStackView = {
-        let sv = UIStackView()
-        sv.distribution = .fillEqually
-        sv.axis = .horizontal
-        sv.alignment = .center
-        sv.spacing = 5
+    lazy var stackView: Stack = {
+        let sv = Stack()
+            .setDistribution(.fillEqually)
+            .setAxis(.horizontal)
+            .setAlignment(.center)
+            .setSpacing(5)
         return sv
     }()
     
     
 //  MARK: - SET Properties
+    @discardableResult
     func setFooterHeight(_ footerHeight: CGFloat) -> Self {
         self.footerHeight = footerHeight
         return self
     }
     
+    @discardableResult
     func setFooterGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
         self.footerGradient = gradient(Gradient(stackView))
         return self
     }
     
+    @discardableResult
     func setFooterComponent(_ componentView: UIView) -> Self {
         self.componentsFooter.append(componentView)
         return self
@@ -67,7 +70,6 @@ class DropdownMenuFooter: DropdownMenu {
             super.isShow = self._isShow
         }
     }
-
     
     
 //  MARK: - Private Functions Area
@@ -76,22 +78,21 @@ class DropdownMenuFooter: DropdownMenu {
         self.componentsFooter.forEach { component in
             let view = createView()
             component.add(insideTo: view)
-            self.stackView.addArrangedSubview(view)
+            view.add(insideTo: stackView)
             view.applyConstraint()
-            makeConstraint(component)
+            makeConstraintComponent(component)
         }
     }
     
     private func createView() -> View {
         return View()
             .setConstraints { build in
-                build.setTop
-                    .setBottom.equalToSuperView
+                build.setTop.setBottom.equalToSuperView
             }
     }
     
     
-    private func makeConstraint(_ component: UIView) {
+    private func makeConstraintComponent(_ component: UIView) {
         component.makeConstraints { make in
             make.setTop.equalToSuperView(5)
                 .setBottom.equalToSuperView
@@ -136,7 +137,7 @@ class DropdownMenuFooter: DropdownMenu {
     private func configConstraint() {
         stackView.makeConstraints { make in
             make
-                .setBottom.setLeading.setTrailing.equalToSuperView
+                .setPinBottom.equalToSuperView
                 .setHeight.equalToConstant(self.footerHeight)
         }
     }

@@ -179,7 +179,7 @@ class HomeView: UIView {
     func createMiddleRowView(_ text: String) -> UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
-            .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
+            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
         return label
     }

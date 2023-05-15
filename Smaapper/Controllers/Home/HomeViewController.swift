@@ -35,10 +35,11 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         configDelegate()
         fetchDropdownMenu()
+        configHeightRowsOfDropdowMenu()
         
         //retirar !!!
-//        openCloseDropdownMenu()
-//        turnOnOffMenuButton()
+        openCloseDropdownMenu()
+        turnOnOffMenuButton()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -80,6 +81,12 @@ class HomeVC: UIViewController {
                 self.populateDropdownMenu()
             }
         }
+    }
+    
+    private func configHeightRowsOfDropdowMenu() {
+        guard let resultDropdownMenu else {return }
+        let lastSection = resultDropdownMenu.count - 1
+        homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
     }
     
     private func populateDropdownMenu() {
@@ -129,7 +136,8 @@ class HomeVC: UIViewController {
         if let subMenu = row.subMenu {
             return addChevronToSubMenu(subMenu)
         }
-        return addHeartToFavorites()
+        guard let rightImage = row.rightImage else { return nil }
+        return homeScreen.createRightRowView(rightImage, .white)
     }
     
     private func addChevronToSubMenu(_ subMenu: DropdownMenuData ) -> UIView? {

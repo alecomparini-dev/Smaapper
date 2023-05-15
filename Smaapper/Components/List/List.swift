@@ -14,6 +14,9 @@ class List: UITableView {
 
     private var alreadyApplied = false
     private var _isShow = false
+    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
+    private var customSectionFooterHeight: [Int : CGFloat] = [:]
+//    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
     
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
@@ -42,8 +45,20 @@ class List: UITableView {
     }
     
     @discardableResult
+    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
+        self.customSectionHeaderHeight.updateValue(height, forKey: forSection)
+        return self
+    }
+    
+    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         self.sectionFooterHeight = height
+        return self
+    }
+    
+    @discardableResult
+    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
+        self.customSectionFooterHeight.updateValue(height, forKey: forSection)
         return self
     }
     
@@ -137,29 +152,13 @@ class List: UITableView {
 extension List: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return calculateHeightForHeaderInSection(section)
+        return self.customSectionHeaderHeight[section] ?? self.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return calculeteHeightForFooterInSection(section)
+        return self.customSectionFooterHeight[section] ?? self.sectionFooterHeight
     }
     
-    private func calculeteHeightForFooterInSection(_ section: Int) -> CGFloat {
-        if isSectionEmpty(sections[section]) {
-            return 0
-        }
-        if isLastSection(section) {
-            return 1
-        }
-        return self.sectionFooterHeight
-    }
-    
-    private func calculateHeightForHeaderInSection(_ section: Int) -> CGFloat {
-        if isSectionEmpty(sections[section]) {
-            return 1
-        }
-        return self.sectionHeaderHeight
-    }
     
     private func isSectionEmpty(_ section: Section) -> Bool {
         if section.leftView == nil &&

@@ -178,20 +178,30 @@
         "rightImage": "heart",
         "items": [
             {
-                "title": "Your Favorites Apps",
-                "leftImage": "heart.fill",
-                "rightImage": "ellipsis"
+                "title": "Rule of Three",
+                "leftImage": "3.square.fill"
+            },
+            {
+                "title": "Alcohol or Gasoline",
+                "leftImage": "fuelpump.fill"
+            },
+            {
+                "title": "Tape Measure",
+                "leftImage": "ruler.fill"
             }
         ]
     },
     {
-        "section": "Recent",
+        "section": "Settings",
         "rightImage": "heart",
         "items": [
             {
-                "title": "Your Recent Apps",
-                "leftImage": "rectangle.stack.fill",
-                "rightImage": "ellipsis"
+                "title": "Profile",
+                "leftImage": "mic"
+            },
+            {
+                "title": "Notifications",
+                "leftImage": "mic.fil"
             }
         ]
     }

@@ -65,12 +65,12 @@ class DropdownMenu: View {
     
     @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        _ = list.setRowHeight(height)
+        list.setRowHeight(height)
         return self
     }
     
     @discardableResult
-    func setHeight(_ height: CGFloat) -> Self {
+    func setDropdownMenuHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
     }
@@ -92,6 +92,32 @@ class DropdownMenu: View {
         self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
+    
+    
+    @discardableResult
+    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
+        list.setSectionHeaderHeight(height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionFooterHeight(_ height: CGFloat) -> Self {
+        list.setSectionFooterHeight(height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
+        list.setSectionHeaderHeight(forSection: forSection, height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
+        list.setSectionFooterHeight(forSection: forSection, height)
+        return self
+    }
+    
     
     
 //  MARK: - SET Data In List
@@ -136,10 +162,10 @@ class DropdownMenu: View {
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            setTopMostPosition()
+            self.setTopMostPosition()
             self.addListOnDropdownMenu()
             self.configConstraints()
-            alreadyApplied = true
+            self.alreadyApplied = true
         }
     }
     
