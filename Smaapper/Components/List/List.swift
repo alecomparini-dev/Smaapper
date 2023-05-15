@@ -11,12 +11,15 @@ import UIKit
 class List: UITableView {
 
     typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
-
+    
+    private var constraintsFlow: StartOfConstraintsFlow?
+    
     private var alreadyApplied = false
     private var _isShow = false
     private var customSectionHeaderHeight: [Int : CGFloat] = [:]
     private var customSectionFooterHeight: [Int : CGFloat] = [:]
-//    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
+    private var widthLeftCell: CGFloat = 35
+    private var widthRightCell: CGFloat = 35
     
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
@@ -35,6 +38,12 @@ class List: UITableView {
     @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
+        return self
+    }
+    
+    //TODO: - Fazer !!
+    func setCustomRowHeight(_ height: CGFloat) -> Self {
+        
         return self
     }
     
@@ -92,6 +101,19 @@ class List: UITableView {
         return self
     }
     
+//  MARK: - Contraints Area
+    @discardableResult
+    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
+        return self
+    }
+    
+    func applyConstraint() {
+        self.constraintsFlow?.applyConstraint()
+    }
+    
+//  MARK: - Populate List
+    
     func setSectionInList(_ section: Section) {
         self.sections.append(section)
     }
@@ -106,6 +128,8 @@ class List: UITableView {
     }
     
     
+
+    
 //  MARK: - Show List
     
     var isShow: Bool {
@@ -115,15 +139,6 @@ class List: UITableView {
             applyOnceConfig()
             self.isHidden = !self._isShow
         }
-    }
-    
-    func show() {
-        applyOnceConfig()
-        self.isHidden = false
-    }
-
-    func hide() {
-        self.isHidden = true
     }
     
 //  MARK: - Private Function Area
@@ -198,6 +213,8 @@ extension List: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
+        cell.setWidthLeftColumnCell(35)
+            .setWidthRightColumnCell(30)
         cell.setupCell(
             self.sections[indexPath.section].rows[indexPath.row].leftView,
             self.sections[indexPath.section].rows[indexPath.row].middleView,

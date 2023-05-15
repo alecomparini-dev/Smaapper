@@ -32,6 +32,19 @@ class ListCell: UITableViewCell {
         configCell()
     }
     
+//  MARK: - SET Properties
+    @discardableResult
+    func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
+        screenCell.setWidthLeftColumnCell(width)
+        return self
+    }
+    
+    @discardableResult
+    func setWidthRightColumnCell(_ width:  CGFloat) -> Self {
+        screenCell.setWidthRightColumnCell(width)
+        return self
+    }
+
     func setupCell(_ leftView: UIView?, _ middleView: UIView?, _ rightView: UIView?) {
         screenCell.setupCell(leftView, middleView, rightView)
     }

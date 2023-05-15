@@ -8,10 +8,13 @@
 import UIKit
 
 class ListCellView: View {
-    
+
     private var leftViewCell: UIView?
     private var middleViewCell: UIView?
     private var rightViewCell: UIView?
+    
+    private var widthLeftColumnCell: CGFloat = 35
+    private var widthRightColumnCell: CGFloat = 35
     
     override init() {
         super.init()
@@ -21,6 +24,20 @@ class ListCellView: View {
         fatalError("init(coder:) has not been implemented")
     }
     
+
+//  MARK: - SET Properties
+    @discardableResult
+    internal func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
+        self.widthLeftColumnCell = width
+        return self
+    }
+    
+    @discardableResult
+    internal func setWidthRightColumnCell(_ width:  CGFloat) -> Self {
+        self.widthRightColumnCell = width
+        return self
+    }
+                                                  
     
 //  MARK: - Setup Cell
     func setupCell(_ leftView: UIView?, _ middleView: UIView?, _ rightView: UIView?) {
@@ -37,17 +54,16 @@ class ListCellView: View {
 //  MARK: - Private Functions Area
     
     private func addLeftView() {
-        var width: CGFloat = 35
         if self.leftViewCell == nil {
             self.leftViewCell = UIView()
-            width = 0
+            self.widthLeftColumnCell = 0
         }
         self.leftViewCell?.add(insideTo: self)
         self.leftViewCell?.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
                 .setLeading.equalToSuperView
-                .setWidth.equalToConstant(width)
+                .setWidth.equalToConstant(self.widthLeftColumnCell)
         }
     }
     
@@ -65,16 +81,15 @@ class ListCellView: View {
     }
     
     private func addRightView() {
-        var width: CGFloat = 25
         if self.rightViewCell == nil {
             self.rightViewCell = UIView()
-            width = 0
+            self.widthRightColumnCell = 0
         }
         self.rightViewCell?.add(insideTo: self)
         self.rightViewCell?.makeConstraints { make in
             make
                 .setTop.setBottom.setTrailing.equalToSuperView
-                .setWidth.equalToConstant(width)
+                .setWidth.equalToConstant(self.widthRightColumnCell)
         }
     }
     
