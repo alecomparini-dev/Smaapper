@@ -10,8 +10,14 @@ import UIKit
 
 class List: UITableView {
 
-    typealias didSelectRow = ((_ section: Int, _ row: Int) -> Void)
+    typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
 
+    private var alreadyApplied = false
+    private var _isShow = false
+    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
+    private var customSectionFooterHeight: [Int : CGFloat] = [:]
+//    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
+    
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
     
@@ -23,45 +29,64 @@ class List: UITableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     
 //  MARK: - SET Properties
-    
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
         self.sectionHeaderHeight = height
         return self
     }
     
+    @discardableResult
+    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
+        self.customSectionHeaderHeight.updateValue(height, forKey: forSection)
+        return self
+    }
+    
+    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         self.sectionFooterHeight = height
         return self
     }
     
+    @discardableResult
+    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
+        self.customSectionFooterHeight.updateValue(height, forKey: forSection)
+        return self
+    }
+    
+    @discardableResult
     func setSeparatorStyle(_ style: UITableViewCell.SeparatorStyle) -> Self {
         self.separatorStyle = style
         return self
     }
     
+    @discardableResult
     func setShowsVerticalScrollIndicator(_ flag: Bool) -> Self {
         self.showsVerticalScrollIndicator = flag
         return self
     }
     
+    @discardableResult
     func setIsScrollEnabled(_ flag: Bool) -> Self {
         self.isScrollEnabled = flag
         return self
     }
     
+    @discardableResult
     func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
+    @discardableResult
     func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
         self.didSelectRow = closure
         return self
@@ -81,16 +106,35 @@ class List: UITableView {
     }
     
     
-    
 //  MARK: - Show List
     
+    var isShow: Bool {
+        get { return self._isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            self.isHidden = !self._isShow
+        }
+    }
+    
     func show() {
-        self.RegisterCell()
-        self.setDelegate()
+        applyOnceConfig()
+        self.isHidden = false
     }
 
+    func hide() {
+        self.isHidden = true
+    }
     
 //  MARK: - Private Function Area
+    
+    private func applyOnceConfig() {
+        if self._isShow && !alreadyApplied {
+            self.RegisterCell()
+            self.setDelegate()
+            alreadyApplied = true
+        }
+    }
     
     private func RegisterCell() {
         self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
@@ -108,29 +152,13 @@ class List: UITableView {
 extension List: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return calculateHeightForHeaderInSection(section)
+        return self.customSectionHeaderHeight[section] ?? self.sectionHeaderHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return calculeteHeightForFooterInSection(section)
+        return self.customSectionFooterHeight[section] ?? self.sectionFooterHeight
     }
     
-    private func calculeteHeightForFooterInSection(_ section: Int) -> CGFloat {
-        if isSectionEmpty(sections[section]) {
-            return 0
-        }
-        if isLastSection(section) {
-            return 1
-        }
-        return self.sectionFooterHeight
-    }
-    
-    private func calculateHeightForHeaderInSection(_ section: Int) -> CGFloat {
-        if isSectionEmpty(sections[section]) {
-            return 1
-        }
-        return self.sectionHeaderHeight
-    }
     
     private func isSectionEmpty(_ section: Section) -> Bool {
         if section.leftView == nil &&
@@ -180,10 +208,12 @@ extension List: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let didSelectRow = self.didSelectRow {
-            didSelectRow(indexPath.section, indexPath.row)
+            didSelectRow((indexPath.section, indexPath.row))
         }
     }
     
 
     
 }
+
+

@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeViewDelegate: AnyObject {
     func menuButtonTapped()
+    func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
 }
 
 class HomeView: UIView {
@@ -35,8 +36,9 @@ class HomeView: UIView {
                     .setCornerRadius(18)
             })
             .setRowHeight(45)
+            .setFooterHeight(65)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setPaddingColuns(left: 5, right: 5)
+            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
@@ -44,7 +46,6 @@ class HomeView: UIView {
                     .setLightPosition(.rightBottom)
                     .setDistance(percent: 0)
                     .setBlur(percent: 10)
-//                    .setLightShadeColor(.black)
                     .apply()
             }
             .setConstraints { build in
@@ -54,7 +55,6 @@ class HomeView: UIView {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
-            .setFooterHeight(65)
             .setFooterGradient { build in
                 build
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
@@ -63,9 +63,14 @@ class HomeView: UIView {
             .setFooterComponent(settingsButton)
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
-            
+            .setAction(dropdownMenuTapped)
+        menu.isShow = false
         return menu
     }()
+    
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
+    }
     
     lazy var menuButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
@@ -93,42 +98,36 @@ class HomeView: UIView {
         return btn
     }()
     
-    lazy var profileButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "person")))
-            .setImageWeight(.regular)
+    lazy var profileButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "person")), "Profile")
+            .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-            .setTitle("Profile", .normal)
-            .setImagePlacement(.top)
         return btn
     }()
     
 
-    lazy var recentButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "rectangle.stack")))
-            .setImageWeight(.regular)
-            .setImageSize(16)
+    lazy var recentButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
+            .setImageWeight(.medium)
+            .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#0f1010"))
             .setTitle("Recent", .normal)
-            .setImagePlacement(.top)
-        print("CORRIGIR A PORRA DO SIZE DO TITLE E WEIGHT")
+            .setImageColor(UIColor.HEX("#0f1010"))
         return btn
     }()
     
     
-    lazy var settingsButton: ButtonImage = {
-        let btn = ButtonImage(ImageView(UIImage(systemName: "gearshape")))
-            .setImageWeight(.regular)
+    lazy var settingsButton: IconButton = {
+        let btn = IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
+            .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-            .setTitle("Settings", .normal)
-            .setImagePlacement(.top)
         return btn
     }()
 
@@ -180,7 +179,7 @@ class HomeView: UIView {
     func createMiddleRowView(_ text: String) -> UIView {
         let label = Label(text)
             .setColor(.white.withAlphaComponent(0.9))
-            .setFont(UIFont.systemFont(ofSize: 15, weight: .light))
+            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
         return label
     }

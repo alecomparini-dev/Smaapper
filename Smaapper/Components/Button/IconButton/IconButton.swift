@@ -25,6 +25,7 @@ class IconButton: ButtonImage {
     }
     
     private func initializationIconButton() {
+        super.setImagePlacement(.top)
     }
 
     

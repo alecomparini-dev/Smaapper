@@ -10,7 +10,7 @@ import UIKit
 
 class DropdownMenu: View {
     
-    typealias onTapDropdownMenuAlias = ((_ section: Int, _ row: Int) -> Void)
+    typealias onTapDropdownMenuAlias = ((_ rowTapped :(section: Int, row: Int)) -> Void)
     
     enum PositionMenu {
         case leftTop
@@ -18,7 +18,8 @@ class DropdownMenu: View {
         case rightTop
         case rightBottom
     }
-    
+    private var alreadyApplied = false
+    private var _isShow = false
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
 
@@ -33,7 +34,6 @@ class DropdownMenu: View {
     
     override init() {
         super.init(frame: .zero)
-        self.initialization()
     }
     
     required init?(coder: NSCoder) {
@@ -47,51 +47,77 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                print(section, row)
+                if let onTapDropdownMenu = self.onTapDropdownMenu {
+                    onTapDropdownMenu((section,row))
+                }
             })
             .setBackgroundColor(.clear)
         return list
     }()
     
     
-    private func initialization() {
-        self.hide()
-        setTopMostPosition()
-    }
-
-    
-    
 //  MARK: - Set Properties
-    
+    @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
         self.positionOpenMenu = position
         return self
     }
     
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        _ = list.setRowHeight(height)
+        list.setRowHeight(height)
         return self
     }
     
-    func setHeight(_ height: CGFloat) -> Self {
+    @discardableResult
+    func setDropdownMenuHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
     }
     
+    @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         self.menuWidth = width
         return self
     }
     
+    @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
+    @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
         self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
+    
+    
+    @discardableResult
+    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
+        list.setSectionHeaderHeight(height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionFooterHeight(_ height: CGFloat) -> Self {
+        list.setSectionFooterHeight(height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
+        list.setSectionHeaderHeight(forSection: forSection, height)
+        return self
+    }
+    
+    @discardableResult
+    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
+        list.setSectionFooterHeight(forSection: forSection, height)
+        return self
+    }
+    
     
     
 //  MARK: - SET Data In List
@@ -120,19 +146,28 @@ class DropdownMenu: View {
     
 //  MARK: - Show DropdownMenu
     
-    func show() {
-        addListOnDropdownMenu()
-        configConstraints()
-        list.show()
-        self.isHidden = false
-    }
-
-    func hide() {   
-        self.isHidden = true
+    var isShow: Bool {
+        get {
+            return self._isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            list.isShow = newValue
+            self.isHidden = !self._isShow
+        }
     }
     
     
 //  MARK: - Private Functions Area
+    
+    private func applyOnceConfig() {
+        if self._isShow && !alreadyApplied {
+            self.setTopMostPosition()
+            self.addListOnDropdownMenu()
+            self.configConstraints()
+            self.alreadyApplied = true
+        }
+    }
     
     private func setTopMostPosition() {
         self.layer.zPosition = zPosition

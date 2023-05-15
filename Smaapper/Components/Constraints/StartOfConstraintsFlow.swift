@@ -45,10 +45,34 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         constraintVM.mainAttribute(.trailing)
         return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
     }
-
+    
     var setPin: EndOfConstraintsPositionFlow  {
         configStartFlow()
         _ = setTop.setBottom.setLeading.setTrailing
+        return EndOfConstraintsPositionFlow(self)
+    }
+    
+    var setPinBottom: EndOfConstraintsPositionFlow  {
+        configStartFlow()
+        _ = setBottom.setLeading.setTrailing
+        return EndOfConstraintsPositionFlow(self)
+    }
+    
+    var setPinTop: EndOfConstraintsPositionFlow  {
+        configStartFlow()
+        _ = setTop.setLeading.setTrailing
+        return EndOfConstraintsPositionFlow(self)
+    }
+    
+    var setPinLeft: EndOfConstraintsPositionFlow  {
+        configStartFlow()
+        _ = setTop.setBottom.setLeading
+        return EndOfConstraintsPositionFlow(self)
+    }
+    
+    var setPinRight: EndOfConstraintsPositionFlow  {
+        configStartFlow()
+        _ = setTop.setBottom.setTrailing
         return EndOfConstraintsPositionFlow(self)
     }
     

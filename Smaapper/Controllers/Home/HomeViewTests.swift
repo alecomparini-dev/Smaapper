@@ -166,23 +166,6 @@ class HomeViewTests: UIView {
     }()
     
     @objc func didTapFloatingButton() {
-        if !buttomDownload.isEnabled {
-            _ = floatButton.setShadow { build in
-                build.setColor(UIColor.HEX("#ff710b"))
-                    .setOffset(width: 0, height: 0)
-                    .setOpacity(1)
-                    .setBlur(4)
-                    .setBringToFront()
-                    .setID("light")
-                    .apply()
-            }
-            dropdownMenu.show()
-        }else {
-            floatButton.removeShadowByID("light")
-            dropdownMenu.hide()
-        }
-        buttom1.isEnabled = !buttom1.isEnabled
-        buttomDownload.isEnabled = !buttomDownload.isEnabled
     }
     
     lazy var buttomNormal: Button = {
