@@ -10,7 +10,7 @@ import UIKit
 class TextFieldPassword: TextFieldImage {
     
     init() {
-        super.init(image: UIImage(systemName: "eye.slash") ?? UIImage(), position: .right, margin: 10)
+        super.init(image: ImageView(UIImage(systemName: "eye.slash")), position: .right, margin: 10)
         let _ = self.setIsSecureText(true)
             .setOnTapImage(completion: openCloseEyes(_:))
     }

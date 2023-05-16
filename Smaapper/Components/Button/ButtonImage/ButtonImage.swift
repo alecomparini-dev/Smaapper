@@ -11,8 +11,6 @@ import UIKit
 
 class ButtonImage: Button {
     
-   
-    
     private var imgWithConfiguration: ImageView?
     
 //  MARK: - Initializers
@@ -40,14 +38,13 @@ class ButtonImage: Button {
     }
     
     private func initialization(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
-        setImageButton(image)
+        _ = setImageButton(image)
             .setImageSize(size)
             .setImagePadding(5)
     }
     
     
 //  MARK: - Properties
-    @discardableResult
     func setImageButton(_ image: UIImageView) -> Self {
         guard let image = image.image else {return self}
         super.configuration?.image = image
@@ -55,35 +52,30 @@ class ButtonImage: Button {
         return self
     }
     
-    @discardableResult
     func setImagePlacement(_ alignment: NSDirectionalRectEdge ) -> Self {
         super.configuration?.imagePlacement = alignment
         return self
     }
     
-    @discardableResult
     func setImageColor(_ color: UIColor) -> Self {
-        configuration?.baseForegroundColor = color
+        super.configuration?.baseForegroundColor = color
         return self
     }
     
-    @discardableResult
     func setImageSize( _ size: CGFloat? ) -> Self {
         guard let size else {return self}
-        let img = ImageView(configuration?.image).setSize(size)
-        setImageButton(img)
+        let img = ImageView(super.configuration?.image).setSize(size)
+        _ = setImageButton(img)
         return self
     }
     
-    @discardableResult
     func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        let img = ImageView(configuration?.image).setWeight(weight)
-        setImageButton(img)
+        let img = ImageView(super.configuration?.image).setWeight(weight)
+        _ = setImageButton(img)
         return self
     }
 
 
-    @discardableResult
     func setImagePadding(_ padding: CGFloat) -> Self {
         super.configuration?.imagePadding = padding
         return self

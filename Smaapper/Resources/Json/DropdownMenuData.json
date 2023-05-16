@@ -12,35 +12,38 @@
                         "items": [
                             {
                                 "title": "Alcohol or Gasoline",
-                                "leftImage": "fuelpump.fill"
+                                "leftImage": "fuelpump.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "TODO-List",
                                 "leftImage": "list.bullet.clipboard.fill",
-                                "rightImage": "checklist"
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Timers",
-                                "leftImage": "timer.circle.fill"
+                                "leftImage": "timer.circle.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
-                                "title": "Racha Conta",
-                                "leftImage": "dollarsign.arrow.circlepath",
-                                "rightImage": "person.2.gobackward"
+                                "title": "Split Bill",
+                                "leftImage": "person.2.gobackward",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "QRCode Reader",
-                                "leftImage": "qrcode.viewfinder"
+                                "leftImage": "qrcode.viewfinder",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Reminders",
                                 "leftImage": "note.text",
-                                "rightImage": "list.clipboard.fill"
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Playlist Youtube",
                                 "leftImage": "play.square.stack.fill",
-                                "rightImage": "play.rectangle.on.rectangle.fill"
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     },
@@ -50,28 +53,33 @@
                         "items": [
                             {
                                 "title": "Rule of 3",
-                                "leftImage": "3.square.fill"
+                                "leftImage": "3.square.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Calculator",
                                 "leftImage": "plusminus.circle.fill",
-                                "rightImage": "plus.rectangle.fill"
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "BMI Calculator",
-                                "leftImage": "scalemass.fill"
+                                "leftImage": "scalemass.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Barbecue Calculator",
-                                "leftImage": "flame.fill"
+                                "leftImage": "flame.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Unit Converter",
-                                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill"
+                                "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Tip Calculator",
-                                "leftImage": "percent"
+                                "leftImage": "percent",
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     },
@@ -81,23 +89,28 @@
                         "items": [
                             {
                                 "title": "Tape Measure",
-                                "leftImage": "ruler.fill"
+                                "leftImage": "ruler.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Dice",
-                                "leftImage": "dice.fill"
+                                "leftImage": "dice.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "What Flower",
-                                "leftImage": "leaf.fill"
+                                "leftImage": "leaf.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "What Color",
-                                "leftImage": "paintpalette.fill"
+                                "leftImage": "paintpalette.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Invisible Device",
-                                "leftImage": "wand.and.stars.inverse"
+                                "leftImage": "wand.and.stars.inverse",
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     },
@@ -107,23 +120,28 @@
                         "items": [
                             {
                                 "title": "Hangman",
-                                "leftImage": "figure.mixed.cardio"
+                                "leftImage": "figure.mixed.cardio",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Coin Toss",
-                                "leftImage": "cedisign.circle.fill"
+                                "leftImage": "cedisign.circle.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Tic-Tac-Toe",
-                                "leftImage": "number.square.fill"
+                                "leftImage": "number.square.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Rock/Paper/Scissors",
-                                "leftImage": "scissors.badge.ellipsis"
+                                "leftImage": "scissors.badge.ellipsis",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Dices",
-                                "leftImage": "die.face.6.fill"
+                                "leftImage": "die.face.6.fill",
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     },
@@ -133,28 +151,33 @@
                         "items": [
                             {
                                 "title": "Ask ChatGPT",
-                                "leftImage": "message.and.waveform.fill"
+                                "leftImage": "message.and.waveform.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Horoscope of the Day",
                                 "leftImage": "bubbles.and.sparkles.fill",
-                                "rightImage": "sparkles"
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Weather Forecast",
-                                "leftImage": "cloud.sun.fill"
+                                "leftImage": "cloud.sun.fill",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Stock quotes",
-                                "leftImage": "dollarsign.circle"
+                                "leftImage": "dollarsign.circle",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Upcoming Holidays",
-                                "leftImage": "calendar.badge.exclamationmark"
+                                "leftImage": "calendar.badge.exclamationmark",
+                                "rightImage": "chevron.forward"
                             },
                             {
                                 "title": "Movie/Series Recommendations",
-                                "leftImage": "film.stack.fill"
+                                "leftImage": "film.stack.fill",
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     },
@@ -164,8 +187,8 @@
                         "items": [
                             {
                                 "title": "Music and quotes",
-                                "leftImage": "bookmark.square.fill",
-                                "rightImage": "book.fill"
+                                "leftImage": "book.fill",
+                                "rightImage": "chevron.forward"
                             }
                         ]
                     }

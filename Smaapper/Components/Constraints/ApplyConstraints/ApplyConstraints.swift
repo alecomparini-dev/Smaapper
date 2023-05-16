@@ -48,16 +48,16 @@ class ApplyConstraints {
         )
         
         layoutConstraint.isActive = true
-
     }
     
     private func setupConstant(_ constraint: ConstraintsViewModel, _ mainAttr: ConstraintsAttribute) -> CGFloat {
         if (constraint.mainAttribute.count > 1) {
             if mainAttr == .bottom || mainAttr == .trailing {
-                return constraint.constant! * -1
+                let const = constraint.constant ?? 0
+                return (const > 0) ? -const : 0.0
             }
         }
-        return constraint.constant!
+        return constraint.constant ?? 0
     }
     
     private func setupToItem(_ constraint: ConstraintsViewModel) -> Any? {
@@ -80,11 +80,5 @@ class ApplyConstraints {
         return superView
     }
     
-    
-//    private func setupToAttribute(_ constraint: ConstraintsViewModel, _ mainAttr: ConstraintsAttribute) -> NSLayoutConstraint.Attribute {
-//        if (constraint.mainAttribute.count > 0) {
-//            return mainAttr.toNSLayoutConstraintAttribute()
-//        }
-//    }
     
 }

@@ -77,8 +77,8 @@ class HomeViewTests: UIView {
             .setNeumorphism({ build in
                 build
                     .setShape(.none)
-                    .setLightShadeColor(UIColor.HEX("#f08b46").withAlphaComponent(0.8))
-                    .setDarkShadeColor(UIColor.black)
+                    .setShadowColor(to: .light, UIColor.HEX("#f08b46").withAlphaComponent(0.8))
+                    .setShadowColor(to: .dark, UIColor.black)
                     .setIntensity(percent: 100)
                     .setDistance(percent: 0)
                     .setBlur(percent: 50)
@@ -161,7 +161,7 @@ class HomeViewTests: UIView {
                     .setHeight.equalToConstant(50)
                     .setWidth.equalToConstant(50)
             }
-            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
+            .setTarget(self, #selector(didTapFloatingButton), .touchUpInside)
         return btn
     }()
     
@@ -265,7 +265,7 @@ class HomeViewTests: UIView {
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.setWidth.equalToConstant(60)
             }
-            .addTarget(self, #selector(didTapFloatingButton), .touchUpInside)
+            .setTarget(self, #selector(didTapFloatingButton), .touchUpInside)
             .setFloatButton()
         return btn
     }()

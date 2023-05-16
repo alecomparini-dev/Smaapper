@@ -132,7 +132,7 @@ class Button: UIButton {
 
 //  MARK: - Action Area
     @discardableResult
-    func addTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
+    func setTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
         self.addTarget(target, action: action, for: event )
         return self
     }

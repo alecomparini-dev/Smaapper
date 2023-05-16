@@ -13,7 +13,8 @@ class ListCell: UITableViewCell {
     lazy var screenCell: ListCellView = {
         let screen = ListCellView()
             .setConstraints { build in
-                build.setPin.equalToSuperView
+                build
+                    .setPin.equalToSuperView
             }
         return screen
     }()
@@ -33,15 +34,18 @@ class ListCell: UITableViewCell {
     }
     
 //  MARK: - SET Properties
-    @discardableResult
     func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
-        screenCell.setWidthLeftColumnCell(width)
+        _ = screenCell.setWidthLeftColumnCell(width)
         return self
     }
     
-    @discardableResult
-    func setWidthRightColumnCell(_ width:  CGFloat) -> Self {
-        screenCell.setWidthRightColumnCell(width)
+    func setWidthRightColumnCell(_ width: CGFloat) -> Self {
+        _ = screenCell.setWidthRightColumnCell(width)
+        return self
+    }
+    
+    func setBackgroundColorCell(_ color: UIColor) -> Self {
+        _ = screenCell.setBackgroundColorCell(color)
         return self
     }
 
@@ -60,6 +64,8 @@ class ListCell: UITableViewCell {
     private func configCell() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
+        
+        
     }
     
 

@@ -12,11 +12,13 @@ protocol ComponentsProtocol {
 }
 
 class TextField: UITextField {
-    private var constraintBuilder: StartOfConstraintsFlow?
-    private let paddingConst: CGFloat = 5
+    
+    enum Position {
+         case left
+         case right
+     }
     
     static private var currentMainWindow: UIWindow?
-    
     static private func hideKeyboardWhenViewTapped() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let mainWindow = windowScene.windows.first {
@@ -26,23 +28,23 @@ class TextField: UITextField {
         }
     }
     
-    enum Position {
-         case left
-         case right
-     }
+    private var constraintBuilder: StartOfConstraintsFlow?
+    private let paddingConst: CGFloat = 5
+    private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
+    
     
 //  MARK: - Initializers
     
     init() {
         super.init(frame: .zero)
-        let _ = self.setDefault()
+        self.setDefault()
         addHideKeyboardWhenTouchReturn()
     }
     
     init(_ placeHolder: String) {
         super.init(frame: .zero)
-        let _ = self.setDefault()
-            .setPlaceHolder(placeHolder)
+        self.setDefault()
+        _ = setPlaceHolder(placeHolder)
         addHideKeyboardWhenTouchReturn()
     }
     
@@ -53,9 +55,8 @@ class TextField: UITextField {
     
 
 //  MARK: - Properties Default
-    
-    func setDefault() -> Self {
-        return self.setAutoCapitalization(TextFieldDefault.autoCapitalization)
+    private func setDefault() {
+        _ = self.setAutoCapitalization(TextFieldDefault.autoCapitalization)
             .setAutoCorrectionType(TextFieldDefault.autoCorrectionType)
             .setPlaceHolderColor(TextFieldDefault.placeHolderColor)
             .setKeyboardType(TextFieldDefault.keyboardType)
@@ -66,22 +67,33 @@ class TextField: UITextField {
     
 //  MARK: - Properties
     func setPlaceHolder(_ placeholder: String) -> Self {
-        self.placeholder = placeholder
+        self.attributedPlaceholder = NSAttributedString (
+            string: placeholder,
+            attributes: self.attributesPlaceholder)
         return self
     }
     
+    func setPlaceHolderColor(_ placeHolderColor: UIColor) -> Self {
+        self.attributesPlaceholder.updateValue(placeHolderColor, forKey: .foregroundColor)
+        self.attributedPlaceholder = NSAttributedString (
+            string: self.placeholder ?? "" ,
+            attributes: self.attributesPlaceholder)
+        return self
+    }
+    
+    func setPlaceHolderSize(_ size: CGFloat) -> Self {
+        self.attributesPlaceholder.updateValue(UIFont.systemFont(ofSize: size), forKey: .font)
+        self.attributedPlaceholder = NSAttributedString (
+            string: self.placeholder ?? "" ,
+            attributes: self.attributesPlaceholder)
+        return self
+    }
+
     func setAttributedPlaceHolder(_ attributes: NSMutableAttributedString) -> Self {
         self.attributedPlaceholder = attributes
         return self
     }
-
-    func setPlaceHolderColor(_ placeHolderColor: UIColor) -> Self {
-        self.attributedPlaceholder = NSAttributedString (
-            string: self.placeholder ?? "" ,
-            attributes: [ NSAttributedString.Key.foregroundColor : placeHolderColor ])
-        return self
-    }
-   
+    
     func setTextColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
         return self
@@ -147,7 +159,6 @@ class TextField: UITextField {
 
     
 //  MARK: - Constraints Area
-    
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self.constraintBuilder = builderConstraint(StartOfConstraintsFlow(self))
         return self

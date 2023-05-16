@@ -57,64 +57,54 @@ class DropdownMenu: View {
     
     
 //  MARK: - Set Properties
-    @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
         self.positionOpenMenu = position
         return self
     }
     
-    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        list.setRowHeight(height)
+        _ = list.setRowHeight(height)
         return self
     }
     
-    @discardableResult
     func setDropdownMenuHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
     }
     
-    @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         self.menuWidth = width
         return self
     }
     
-    @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
-    @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
         self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
     
     
-    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        list.setSectionHeaderHeight(height)
+        _ = list.setSectionHeaderHeight(height)
         return self
     }
     
-    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        list.setSectionFooterHeight(height)
+        _ = list.setSectionFooterHeight(height)
         return self
     }
     
-    @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        list.setSectionHeaderHeight(forSection: forSection, height)
+        _ = list.setSectionHeaderHeight(forSection: forSection, height)
         return self
     }
     
-    @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        list.setSectionFooterHeight(forSection: forSection, height)
+        _ = list.setSectionFooterHeight(forSection: forSection, height)
         return self
     }
     
