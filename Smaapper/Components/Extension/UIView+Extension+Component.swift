@@ -17,11 +17,13 @@ extension UIView {
         element.addSubview(self)
     }
     
+    @discardableResult
     public func setBackgroundColor(_ color: UIColor) -> Self {
         self.backgroundColor = color
         return self
     }
     
+    @discardableResult
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
         DispatchQueue.main.async {
             let layer = CAShapeLayer()
@@ -36,6 +38,7 @@ extension UIView {
         return self
     }
     
+    @discardableResult
     func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
         self.isUserInteractionEnabled = interactionEnabled
         return self
@@ -43,6 +46,7 @@ extension UIView {
     
     
 //  MARK: - SET BORDER
+    @discardableResult
     func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
         return self
@@ -50,12 +54,14 @@ extension UIView {
     
     
 //  MARK: - SET SHADOW
+    @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
         let _ = shadow(Shadow(self))
         return self
     }
     
 //  MARK: - SET NEUMORPHISM
+    @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
         let _ = neumorphism(Neumorphism(self))
         return self
@@ -63,12 +69,14 @@ extension UIView {
     
     
 //  MARK: - SET GRADIENT
+    @discardableResult
     func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
         let _ = gradient(Gradient(self))
         return self
     }
 
 //  MARK: - SET TAP GESTURE
+    @discardableResult
     func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
         let _ = gesture(TapGesture(self))
         return self

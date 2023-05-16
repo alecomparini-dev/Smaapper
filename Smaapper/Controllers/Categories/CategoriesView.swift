@@ -18,7 +18,6 @@ class CategoriesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addBackgroundColor()
         addElements()
         applyConstraints()
     }
@@ -26,6 +25,20 @@ class CategoriesView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    lazy var viewGradient: View = {
+        let view = View()
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .apply()
+            })
+            .setConstraints { build in
+                build.setPin.equalToSuperView
+            }
+        return view
+    }()
     
     lazy var closeModalCategories: IconButton = {
         let img = ImageView(UIImage(systemName: "chevron.down"))
@@ -56,7 +69,7 @@ class CategoriesView: UIView {
             .setTextAlignment(.left)
             .setConstraints { build in
                 build
-                    .setTop.equalToSafeArea(12)
+                    .setVerticalAlignmentY.equalTo(closeModalCategories)
                     .setLeading.equalTo(closeModalCategories, .trailing,5)
             }
         return label
@@ -120,7 +133,7 @@ class CategoriesView: UIView {
             })
             .setConstraints { build in
                 build.setTop.equalTo(titleLabel, .bottom, 25)
-                    .setLeading.setTrailing.equalToSafeArea(40)
+                    .setLeading.setTrailing.equalToSuperView(40)
                     .setHeight.equalToConstant(40)
             }
         return tf
@@ -169,7 +182,7 @@ class CategoriesView: UIView {
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(20)
-            .setTintColor(.white.withAlphaComponent(0.8))
+            .setTintColor(.white.withAlphaComponent(0.9))
         
         img.add(insideTo: view)
         img.makeConstraints { make in
@@ -182,7 +195,7 @@ class CategoriesView: UIView {
     func createMiddleRowView(_ text: String) -> UIView {
         let label = Label("  \(text)")
             .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.3))
-            .setColor(.white.withAlphaComponent(0.9))
+            .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
         return label
@@ -191,8 +204,7 @@ class CategoriesView: UIView {
     
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
         let view = View()
-//            .setBackgroundColor(UIColor.HEX("#2b2f30"))
-            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.3))
+            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.2))
             
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
@@ -220,34 +232,24 @@ class CategoriesView: UIView {
 //  MARK: - Private Functions Area
     
     private func addElements() {
-        titleLabel.add(insideTo: self)
+        viewGradient.add(insideTo: self)
         closeModalCategories.add(insideTo: self)
+        titleLabel.add(insideTo: self)
         underLineTitle.add(insideTo: self)
         searchTextField.add(insideTo: self)
-        list.add(insideTo: self)
+        list.add(insideTo: viewGradient)
     }
     
     private func applyConstraints() {
+        viewGradient.applyConstraint()
         closeModalCategories.applyConstraint()
         titleLabel.applyConstraint()
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
+        
     }
-    
-    private func addBackgroundColor() {
-        _ = self.setGradient { build in
-            build
-                .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
-                .setAxialGradient(.leftTopToRightBottom)
-//                .setAxialGradient(.topToBottom)
-                .apply()
-        }
-    }
-    
-    
     
 
-    
     
 }

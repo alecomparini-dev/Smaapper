@@ -62,6 +62,7 @@ class HomeView: UIView {
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
             .setAction(dropdownMenuTapped)
+        
         return menu
     }()
     

@@ -28,6 +28,7 @@ class List: UITableView {
     
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
+//        isHidden = false
     }
     
     required init?(coder: NSCoder) {

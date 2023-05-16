@@ -28,7 +28,10 @@ class HomeVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view = homeScreen
+        view.addSubview(homeScreen)
+        homeScreen.makeConstraints { make in
+            make.setPin.equalToSuperView
+        }
     }
     
     override func viewDidLoad() {
@@ -36,15 +39,14 @@ class HomeVC: UIViewController {
         configDelegate()
         fetchDropdownMenu()
         configHeightOfDropdowMenu()
+        homeScreen.dropdownMenu.isShow = false
         
         //retirar !!!
-        self.openCloseDropdownMenu()
-        self.turnOnOffMenuButton()
-        
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.dropdownMenuTapped((0,0))
-        }
+//        self.openCloseDropdownMenu()
+//        self.turnOnOffMenuButton()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//            self.dropdownMenuTapped((0,0))
+//        }
         
     }
     

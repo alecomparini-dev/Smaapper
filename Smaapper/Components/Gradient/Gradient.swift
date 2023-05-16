@@ -43,11 +43,13 @@ class Gradient {
     
 //  MARK: - Set Properties
     
+    @discardableResult
     func setColor(_ colors: [UIColor]) -> Self {
         self.gradient.colors = colors.map { $0.cgColor }
         return self
     }
     
+    @discardableResult
     func setAxialGradient(_ direction: Gradient.Direction ) -> Self {
         self.setGradientDirection(direction)
         self.setType(.axial)
@@ -55,12 +57,14 @@ class Gradient {
         return self
     }
     
+    @discardableResult
     func setConicGradient(_ startPoint: CGPoint) -> Self {
         self.setStartPoint(startPoint.x, startPoint.y)
         self.setType(.conic)
         return self
     }
     
+    @discardableResult
     func setRadialGradient(_ startPoint: CGPoint) -> Self {
         self.setStartPoint(startPoint.x, startPoint.y)
         self.setType(.radial)
@@ -70,6 +74,7 @@ class Gradient {
     
     
 //  MARK: - Apply Gradient
+    @discardableResult
     func apply() -> Self {
         DispatchQueue.main.async() {
             self.applyGradient()
@@ -77,6 +82,7 @@ class Gradient {
         return self
     }
     
+    @discardableResult
     func apply(_ component: UIView) -> Self {
         DispatchQueue.main.async() {
             self.component = component

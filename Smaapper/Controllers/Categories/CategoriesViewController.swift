@@ -22,8 +22,6 @@ class CategoriesViewController: UIViewController {
     required init(_ categories: DropdownMenuData) {
         self.categories = categories
         super.init(nibName: nil, bundle: nil)
-        populateListCategories()
-        configDelegate()
     }
     
     required init?(coder: NSCoder) {
@@ -32,11 +30,17 @@ class CategoriesViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        view = screen
+        view.addSubview(screen)
+        screen.makeConstraints { make in
+            make.setPin.equalToSuperView
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        populateListCategories()
+        configDelegate()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

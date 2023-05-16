@@ -87,7 +87,6 @@ class DropdownMenu: View {
         return self
     }
     
-    
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
         _ = list.setSectionHeaderHeight(height)
         return self
