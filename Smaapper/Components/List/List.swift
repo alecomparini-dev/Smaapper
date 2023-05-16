@@ -18,8 +18,9 @@ class List: UITableView {
     private var _isShow = false
     private var customSectionHeaderHeight: [Int : CGFloat] = [:]
     private var customSectionFooterHeight: [Int : CGFloat] = [:]
-    private var widthLeftCell: CGFloat = 35
-    private var widthRightCell: CGFloat = 35
+    private var widthLeftColumnCell: CGFloat = 35
+    private var widthRightColumnCell: CGFloat = 35
+    private var backgroundColorCell: UIColor = .clear
     
     private var didSelectRow: didSelectRow?
     private var sections = [Section]()
@@ -35,7 +36,6 @@ class List: UITableView {
 
     
 //  MARK: - SET Properties
-    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
         return self
@@ -43,66 +43,65 @@ class List: UITableView {
     
     //TODO: - Fazer !!
     func setCustomRowHeight(_ height: CGFloat) -> Self {
-        
         return self
     }
     
-    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
         self.sectionHeaderHeight = height
         return self
     }
     
-    @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
         self.customSectionHeaderHeight.updateValue(height, forKey: forSection)
         return self
     }
     
-    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         self.sectionFooterHeight = height
         return self
     }
     
-    @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
         self.customSectionFooterHeight.updateValue(height, forKey: forSection)
         return self
     }
     
-    @discardableResult
+    func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
+        self.widthLeftColumnCell = width
+        return self
+    }
+    
+    func setWidthRightColumnCell(_ width: CGFloat) -> Self {
+        self.widthRightColumnCell = width
+        return self
+    }
+    
+    func setBackgroundColorCell(_ color: UIColor) -> Self {
+        self.backgroundColorCell = color
+        return self
+    }
+    
     func setSeparatorStyle(_ style: UITableViewCell.SeparatorStyle) -> Self {
         self.separatorStyle = style
         return self
     }
     
-    @discardableResult
     func setShowsVerticalScrollIndicator(_ flag: Bool) -> Self {
         self.showsVerticalScrollIndicator = flag
         return self
     }
     
-    @discardableResult
     func setIsScrollEnabled(_ flag: Bool) -> Self {
         self.isScrollEnabled = flag
         return self
     }
     
-    @discardableResult
-    func setPadding(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        self.contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
-        return self
-    }
-    
-    @discardableResult
     func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
         self.didSelectRow = closure
         return self
     }
     
 //  MARK: - Contraints Area
-    @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
         return self
@@ -126,8 +125,6 @@ class List: UITableView {
     func setRowInSection(_ section: Section, _ row: Row) {
         section.rows.append(row)
     }
-    
-    
 
     
 //  MARK: - Show List
@@ -175,20 +172,7 @@ extension List: UITableViewDelegate {
     }
     
     
-    private func isSectionEmpty(_ section: Section) -> Bool {
-        if section.leftView == nil &&
-            section.middleView == nil &&
-            section.rightView == nil {
-            return true
-        }
-        return false
-    }
     
-    private func isLastSection(_ section: Int) -> Bool {
-        return sections.count == section + 1
-    }
-    
-
 }
 
 //  MARK: - Extension Data Source
@@ -213,8 +197,12 @@ extension List: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
-        cell.setWidthLeftColumnCell(35)
-            .setWidthRightColumnCell(30)
+        
+        _ = cell
+            .setWidthLeftColumnCell(self.widthLeftColumnCell)
+            .setWidthRightColumnCell(self.widthRightColumnCell)
+            .setBackgroundColorCell(self.backgroundColorCell)
+        
         cell.setupCell(
             self.sections[indexPath.section].rows[indexPath.row].leftView,
             self.sections[indexPath.section].rows[indexPath.row].middleView,

@@ -17,13 +17,13 @@ class ImageView: UIImageView {
 //  MARK: - Initializers
     
     init() {
-        super.init(frame: .zero)
+        super.init(frame: .null)
     }
     
     convenience init(_ image: UIImage?) {
         self.init()
         if let image {
-            setImage(image)
+            _ = setImage(image)
         }
     }
     
@@ -33,7 +33,6 @@ class ImageView: UIImageView {
     
     
 //  MARK: - Properties
-    @discardableResult
     func setImage(_ image: UIImage?) -> Self {
         if let image {
             self.image = image
@@ -41,13 +40,11 @@ class ImageView: UIImageView {
         return self
     }
     
-    @discardableResult
     func setContentMode(_ contentMode: UIView.ContentMode) -> Self {
         self.contentMode = contentMode
         return self
     }
     
-    @discardableResult
     func setTintColor(_ color: UIColor) -> Self {
         self.image = image?.withRenderingMode(.alwaysTemplate)
         self.image?.withTintColor(color)

@@ -9,6 +9,11 @@ import UIKit
 
 class Neumorphism {
     
+    enum Shadow {
+        case light
+        case dark
+    }
+    
     enum Shape {
         case flat
         case concave
@@ -25,7 +30,6 @@ class Neumorphism {
     }
     
     
-    private let ratioOfSize = 0.08
 //    private let lightShadeColorPercentage = 1.61
 //    private let darkShadeColorPercentage = 0.42
 //    private let darkShapeColorByColorReferencePercentage = 0.80
@@ -38,82 +42,150 @@ class Neumorphism {
     
     private let component: UIView
     private var referenceColor: UIColor?
-    private var _lightShadeColor: UIColor?
-    private var _darkShadeColor: UIColor?
-    private var distance: CGFloat?
-    private var blur: CGFloat?
-    private var intensity: Float = 1
+    
+    private var lightShadowColor: UIColor?
+    private var darkShadowColor: UIColor?
+    
+    private var darkShadowDistance: CGFloat = 0
+    private var lightShadowDistance: CGFloat = 0
+    
+    private var lightShadowBlur: CGFloat = 0
+    private var darkShadowBlur: CGFloat = 0
+    
+    private var lightShadowIntensity: Float = 0
+    private var darkShadowIntensity: Float = 0
+    
     private var shape: Shape = .flat
     private var lightPosition: LightPosition = .leftTop
     
 
     init(_ component: UIView) {
         self.component = component
+        self.initialization()
     }
     
-    
-//  MARK: - GET Properties
-    var darkShadeColor: UIColor {self._darkShadeColor ?? UIColor() }
-    var lightShadeColor: UIColor { self._lightShadeColor ?? UIColor() }
-    
+    private func initialization() {
+        _ = setBlur(percent: 10)
+            .setDistance(percent: 10)
+            .setIntensity(percent: 100)
+    }
+   
     
 //  MARK: - SET Properties
-    
+
     func setReferenceColor(_ color: UIColor) -> Self {
         self.referenceColor = color
         return self
     }
 
-    func setDistance(percent distance: CGFloat) -> Self {
-        let maxDistance = 50.0
-        if !(0.0...100.0).contains(distance) {
-            print("Allowed values for distance 0.0...100.0. Default 10")
-            return self
+    func setShadowColor(to shadow: Neumorphism.Shadow, _ color: UIColor) -> Self {
+        switch shadow {
+            case .light:
+                self.lightShadowColor = color
+            case .dark:
+                self.darkShadowColor = color
         }
-        self.distance = max(distance * maxDistance / 100, 5.0)
-        return self
-    }
-    
-    func setBlur(percent blur: CGFloat) -> Self {
-        let maxBlur = 50.0
-        if !(0.0...100.0).contains(distance ?? 10) {
-            print("Allowed values for blur 0.0...100.0%. Default 10")
-            return self
-        }
-        self.blur = blur * maxBlur / 100
         return self
     }
 
-    func setIntensity(percent intensity: Float) -> Self {
-        if !(0.0...100.0).contains(intensity) {
-            print("Allowed values for intensity 0.0...100.0%. Default 1")
+    func setShadowColor(_ color: UIColor) -> Self {
+        self.lightShadowColor = color
+        self.darkShadowColor = color
+        return self
+    }
+
+    func setDistance(percent distance: CGFloat) -> Self {
+        if !validatePercent("distance", distance, 10) {
             return self
         }
-        self.intensity = intensity / 100
+        let distance = calculateRatioPercent(50, distance)
+        self.lightShadowDistance = distance
+        self.darkShadowDistance = distance
+        return self
+    }
+
+    func setDistance(to: Neumorphism.Shadow, percent distance: CGFloat) -> Self {
+        if !validatePercent("distance", distance, 10) {
+            return self
+        }
+        let distance = calculateRatioPercent(50, distance)
+        switch to {
+            case .light:
+                self.lightShadowDistance = distance
+            case .dark:
+                self.darkShadowDistance = distance
+        }
+        return self
+    }
+
+    func setBlur(percent blur: CGFloat) -> Self {
+        if !validatePercent("blur", blur, 10) {
+            return self
+        }
+        let blur = calculateRatioPercent(50, blur)
+        self.lightShadowBlur = blur
+        self.darkShadowBlur = blur
+        return self
+    }
+
+    func setBlur(to: Neumorphism.Shadow, percent blur: CGFloat) -> Self {
+        if !validatePercent("blur", blur, 10) {
+            return self
+        }
+        let blur = calculateRatioPercent(50, blur)
+        switch to {
+            case .light:
+                self.lightShadowBlur = blur
+            case .dark:
+                self.darkShadowBlur = blur
+        }
         return self
     }
     
+    func setIntensity(percent intensity: CGFloat) -> Self {
+        if !validatePercent("intensity", intensity, 100) {
+            return self
+        }
+        let intensity =  Float(calculateRatioPercent(100, intensity))
+        self.darkShadowIntensity = intensity
+        self.lightShadowIntensity = intensity
+        return self
+    }
+
+    func setIntensity(to: Neumorphism.Shadow, percent intensity: CGFloat) -> Self {
+        if !validatePercent("intensity", intensity, 100) {
+            return self
+        }
+        let intensity = Float(calculateRatioPercent(100, intensity))
+        switch to {
+        case .light:
+            self.lightShadowIntensity = intensity
+        case .dark:
+            self.darkShadowIntensity = intensity
+        }
+        
+        return self
+    }
+    
+    private func validatePercent(_ property: String , _ percent: CGFloat, _ defaultPercent: CGFloat ) -> Bool {
+        if !(0.0...100.0).contains(percent) {
+            print("Allowed values for \(property) 0.0...100.0%. Default \(defaultPercent)%")
+            return false
+        }
+        return true
+    }
+
     func setShape(_ shape: Shape) -> Self {
         self.shape = shape
         return self
     }
-    
+
     func setLightPosition(_ lightPosition: LightPosition) -> Self {
         self.lightPosition = lightPosition
         return self
     }
     
-    func setLightShadeColor(_ color: UIColor) -> Self {
-        self._lightShadeColor = color
-        return self
-    }
     
-    func setDarkShadeColor(_ color: UIColor) -> Self {
-        self._darkShadeColor = color
-        return self
-    }
-    
-
 //  MARK: - APPLY Neumorphis
     
     func apply() -> Self {
@@ -134,22 +206,37 @@ class Neumorphism {
     
 //  MARK: - Private Function Area
     
+    private func calculateRatioPercent(_ max: CGFloat, _ percent: CGFloat) -> CGFloat {
+        return percent * max / 100
+    }
+    
     private func calculateLightPosition() -> (CGSize, CGSize) {
-        let distance = calculateDistance()
+        let darkDistance = self.darkShadowDistance
+        let lightDistance = self.lightShadowDistance
         
         switch self.lightPosition {
             case .leftTop:
-                return (CGSize(width: distance, height: distance), CGSize(width: -distance, height: -distance))
+                let darkOffset = CGSize(width: darkDistance, height: darkDistance)
+                let lightOffset = CGSize(width: -lightDistance, height: -lightDistance)
+                return (darkOffset, lightOffset)
             
             case .leftBottom:
-                return (CGSize(width: distance, height: -distance), CGSize(width: -distance, height: distance))
+                let darkOffset = CGSize(width: darkDistance, height: -darkDistance)
+                let lightOffset = CGSize(width: -lightDistance, height: lightDistance)
+                return (darkOffset, lightOffset)
             
             case .rightTop:
-                return (CGSize(width: -distance, height: distance), CGSize(width: distance, height: -distance))
+                let darkOffset = CGSize(width: -darkDistance, height: darkDistance)
+                let lightOffset = CGSize(width: lightDistance, height: -lightDistance)
+                return (darkOffset, lightOffset)
             
             case .rightBottom:
-                return (CGSize(width: -distance, height: -distance), CGSize(width: distance, height: distance))
+                let darkOffset = CGSize(width: -darkDistance, height: -darkDistance)
+                let lightOffset = CGSize(width: lightDistance, height: lightDistance)
+                return (darkOffset, lightOffset)
         }
+        
+        
     }
     
     
@@ -159,10 +246,10 @@ class Neumorphism {
     private func applyDarkShadow(_ offSetDarkShadow: CGSize) {
         _ = self.component
             .setShadow { build in
-                build.setColor(self.darkShadeColor)
+                build.setColor(self.darkShadowColor ?? .clear)
                     .setOffset(offSetDarkShadow)
-                    .setOpacity(self.intensity)
-                    .setBlur(self.calculateBlur())
+                    .setOpacity(self.darkShadowIntensity)
+                    .setBlur(self.darkShadowBlur)
                     .apply()
             }
     }
@@ -170,10 +257,10 @@ class Neumorphism {
     private func applyLightShadow(_ offSetLightShadow: CGSize) {
         _ = self.component
             .setShadow { build in
-                build.setColor(self.lightShadeColor)
+                build.setColor(self.lightShadowColor ?? .clear)
                     .setOffset(offSetLightShadow)
-                    .setOpacity(self.intensity)
-                    .setBlur(self.calculateBlur())
+                    .setOpacity(self.lightShadowIntensity)
+                    .setBlur(self.lightShadowBlur)
                     .apply()
             }
     }
@@ -185,15 +272,15 @@ class Neumorphism {
     }
     
     private func calculateDarkShade() {
-        if self._darkShadeColor != nil { return }
+        if self.darkShadowColor != nil { return }
         guard let referenceColor = self.referenceColor else {return }
-        _ = self.setDarkShadeColor(referenceColor.getBrightness(self.darkShadeColorPercentage))
+        _ = self.setShadowColor(to: .dark, referenceColor.getBrightness(self.darkShadeColorPercentage))
     }
 
     private func calculateLightShade() {
-        if self._lightShadeColor != nil { return }
+        if self.lightShadowColor != nil { return }
         guard let referenceColor = self.referenceColor else {return }
-        _ = self.setLightShadeColor(referenceColor.getBrightness(self.lightShadeColorPercentage))
+        _ = self.setShadowColor(to: .light, referenceColor.getBrightness(self.lightShadeColorPercentage))
 
     }
 
@@ -260,17 +347,6 @@ class Neumorphism {
     private func setShapeConvex() {
         let (dark,light) = getShapeColorByColorReference()
         self.addShapeOnComponent([light,dark])
-    }
-    
-    
-//  MARK: - Calculate Blur and Distance
-    
-    private func calculateDistance() -> CGFloat {
-        return self.distance ?? (self.component.frame.width * ratioOfSize)
-    }
-    
-    private func calculateBlur() -> CGFloat {
-        return self.blur ?? (self.component.frame.width * ratioOfSize)
     }
     
 }

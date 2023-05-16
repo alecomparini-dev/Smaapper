@@ -61,7 +61,6 @@
 		0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A90229F9FD3A008392EC /* HomeViewController.swift */; };
 		0234A94929FA9E8E008392EC /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A94829FA9E8E008392EC /* Gradient.swift */; };
 		0234A95D29FB3E47008392EC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95C29FB3E47008392EC /* View.swift */; };
-		0234A96029FB488A008392EC /* ElevationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95F29FB488A008392EC /* ElevationWrapper.swift */; };
 		0234A96329FC0659008392EC /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96229FC0659008392EC /* IconButton.swift */; };
 		0234A96629FC0820008392EC /* ButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImage.swift */; };
 		024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A62A0FDB3C00A39584 /* CategoriesView.swift */; };
@@ -157,7 +156,6 @@
 		0234A90229F9FD3A008392EC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0234A94829FA9E8E008392EC /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		0234A95C29FB3E47008392EC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		0234A95F29FB488A008392EC /* ElevationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevationWrapper.swift; sourceTree = "<group>"; };
 		0234A96229FC0659008392EC /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		0234A96529FC0820008392EC /* ButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImage.swift; sourceTree = "<group>"; };
 		024F18A62A0FDB3C00A39584 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
@@ -253,7 +251,6 @@
 				0234A88F29F9FD3A008392EC /* Collection */,
 				0234A8A129F9FD3A008392EC /* Constraints */,
 				026F79782A00775E003947A6 /* DropdownMenu */,
-				0234A95E29FB432E008392EC /* ElevationWrapper */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
 				0234A94729FA9E79008392EC /* Gradient */,
@@ -571,14 +568,6 @@
 				0234A95C29FB3E47008392EC /* View.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		0234A95E29FB432E008392EC /* ElevationWrapper */ = {
-			isa = PBXGroup;
-			children = (
-				0234A95F29FB488A008392EC /* ElevationWrapper.swift */,
-			);
-			path = ElevationWrapper;
 			sourceTree = "<group>";
 		};
 		0234A96129FC064D008392EC /* IconButton */ = {
@@ -940,7 +929,6 @@
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
-				0234A96029FB488A008392EC /* ElevationWrapper.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */,
 				0234A93029F9FD3A008392EC /* TabBarViewModel.swift in Sources */,

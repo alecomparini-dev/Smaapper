@@ -14,9 +14,9 @@ protocol HomeViewDelegate: AnyObject {
 
 class HomeView: UIView {
     
-    private let idShadowEnableFloatButton = "shadowFloatButtonID"
+    weak var delegate: HomeViewDelegate?
     
-    var delegate: HomeViewDelegate?
+    private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,8 +44,6 @@ class HomeView: UIView {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
-                    .setDistance(percent: 0)
-                    .setBlur(percent: 10)
                     .apply()
             }
             .setConstraints { build in
@@ -64,7 +62,6 @@ class HomeView: UIView {
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
             .setAction(dropdownMenuTapped)
-        menu.isShow = false
         return menu
     }()
     
@@ -84,8 +81,9 @@ class HomeView: UIView {
             })
             .setNeumorphism { build in
                 build
-                    .setShape(.concave)
                     .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
                     .apply()
             }
             .setConstraints { build in
@@ -93,7 +91,7 @@ class HomeView: UIView {
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.setWidth.equalToConstant(60)
             }
-            .addTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
         return btn
     }()
@@ -184,7 +182,6 @@ class HomeView: UIView {
         return label
     }
     
-
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
         let img = ImageView()
             .setImage(UIImage(systemName: systemNameImage))
@@ -204,7 +201,7 @@ class HomeView: UIView {
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
-                .setAxialGradient(.topToBottom)
+//                .setAxialGradient(.topToBottom)
                 .apply()
         }
     }

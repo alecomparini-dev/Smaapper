@@ -41,19 +41,16 @@ class DropdownMenuFooter: DropdownMenu {
     
     
 //  MARK: - SET Properties
-    @discardableResult
     func setFooterHeight(_ footerHeight: CGFloat) -> Self {
         self.footerHeight = footerHeight
         return self
     }
     
-    @discardableResult
     func setFooterGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
         self.footerGradient = gradient(Gradient(stackView))
         return self
     }
     
-    @discardableResult
     func setFooterComponent(_ componentView: UIView) -> Self {
         self.componentsFooter.append(componentView)
         return self

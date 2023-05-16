@@ -15,11 +15,6 @@ class TextFieldImage: TextField {
     
     private var onTapAction: ((_ imageView: UIImageView) -> Void)?
     
-    enum Constants {
-        static let margin: Int = 10
-        static let imageTag: Int = 1
-    }
-    
     private var paddingView = UIView(frame: .zero)
     private let imageView: UIImageView
     private let position: TextField.Position
@@ -28,15 +23,15 @@ class TextFieldImage: TextField {
     
 //  MARK: - Initializers
     
-    init(image: UIImage, position: TextField.Position, margin: Int? = Constants.margin) {
-        self.imageView = UIImageView(image: image)
+    init(image: ImageView, position: TextField.Position, margin: Int = 10) {
+        self.imageView =  image
         self.position = position
-        self.margin = margin ?? Constants.margin
+        self.margin = margin
         super.init("")
-        self.setImage( self.imageView, position, margin ?? Constants.margin)
+        self.setImage( self.imageView, position, margin)
     }
     
-    convenience init(_ image: UIImage) {
+    convenience init(_ image: ImageView) {
         self.init(image: image, position: .left)
     }
 
@@ -81,7 +76,7 @@ class TextFieldImage: TextField {
     }
     
     private func createPaddingView(_ image: UIImageView, _ margin: Int) -> UIView {
-        return UIView(frame: CGRect(x: 0, y: 0, width: Int(image.image?.size.width ?? 0) + Constants.margin, height: Int(self.frame.height)))
+        return UIView(frame: CGRect(x: 0, y: 0, width: Int(image.image?.size.width ?? 0) + self.margin, height: Int(self.frame.height)))
     }
     
     private func setFrameImage(_ image: UIImageView) {

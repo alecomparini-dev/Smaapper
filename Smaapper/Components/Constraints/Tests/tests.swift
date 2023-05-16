@@ -469,7 +469,7 @@ func test_verticalY_equalTo() {
         .equalTo(Label(""), 7799)
     
         .setVerticalAlignmentY
-        .equalTo(TextFieldImage(UIImage(systemName: "trash")!))
+        .equalTo(Label(""))
 
     
     flow.applyConstraint()

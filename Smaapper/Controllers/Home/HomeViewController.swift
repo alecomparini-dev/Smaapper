@@ -35,11 +35,17 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         configDelegate()
         fetchDropdownMenu()
-        configHeightRowsOfDropdowMenu()
+        configHeightOfDropdowMenu()
         
         //retirar !!!
-        openCloseDropdownMenu()
-        turnOnOffMenuButton()
+        self.openCloseDropdownMenu()
+        self.turnOnOffMenuButton()
+        
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.dropdownMenuTapped((0,0))
+        }
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -47,7 +53,7 @@ class HomeVC: UIViewController {
     }
     
     
-    //  MARK: - Private Function Area
+//  MARK: - Private Function Area
     
     private func configDelegate() {
         homeScreen.delegate = self
@@ -68,7 +74,7 @@ class HomeVC: UIViewController {
     }
     
     
-    //  MARK: - Populate DropdowMenu
+//  MARK: - Populate DropdowMenu
     
     private func fetchDropdownMenu() {
         viewModel.fetchDropdownMenu(.file) { result, error in
@@ -83,10 +89,10 @@ class HomeVC: UIViewController {
         }
     }
     
-    private func configHeightRowsOfDropdowMenu() {
+    private func configHeightOfDropdowMenu() {
         guard let resultDropdownMenu else {return }
         let lastSection = resultDropdownMenu.count - 1
-        homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
+        _ = homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
     }
     
     private func populateDropdownMenu() {
@@ -155,6 +161,12 @@ class HomeVC: UIViewController {
         return nil
     }
     
+    private func showCategoriesViewController(_ subMenu: DropdownMenuData) {
+        let categoriesVC = CategoriesViewController(subMenu)
+        categoriesVC.modalPresentationStyle = .fullScreen
+        present(categoriesVC, animated: true)
+    }
+    
 }
 
 
@@ -163,7 +175,6 @@ class HomeVC: UIViewController {
 extension HomeVC: HomeViewDelegate {
     func dropdownMenuTapped(_ rowTapped: (section: Int, row: Int)) {
         self.rowTapped = rowTapped
-        print(self.rowTapped)
         openCategories()
     }
     
@@ -177,10 +188,10 @@ extension HomeVC: HomeViewDelegate {
         guard let items = resultDropdownMenu[rowTapped.section].items else { return }
         if items[rowTapped.row].title == HomeVC.categoriesID {
             guard let subMenu = items[rowTapped.row].subMenu else { return }
-            let categoriesVC = CategoriesViewController(subMenu)
-            present(categoriesVC, animated: true)
+            showCategoriesViewController(subMenu)
         }
         
     }
+    
     
 }

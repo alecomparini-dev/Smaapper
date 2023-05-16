@@ -26,15 +26,18 @@ class ListCellView: View {
     
 
 //  MARK: - SET Properties
-    @discardableResult
     internal func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
         self.widthLeftColumnCell = width
         return self
     }
     
-    @discardableResult
     internal func setWidthRightColumnCell(_ width:  CGFloat) -> Self {
         self.widthRightColumnCell = width
+        return self
+    }
+    
+    func setBackgroundColorCell(_ color: UIColor) -> Self {
+        self.backgroundColor = color
         return self
     }
                                                   
@@ -61,7 +64,8 @@ class ListCellView: View {
         self.leftViewCell?.add(insideTo: self)
         self.leftViewCell?.makeConstraints { make in
             make
-                .setTop.setBottom.equalToSuperView
+                .setTop
+                .setBottom
                 .setLeading.equalToSuperView
                 .setWidth.equalToConstant(self.widthLeftColumnCell)
         }
@@ -75,8 +79,8 @@ class ListCellView: View {
         self.middleViewCell?.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
-                .setLeading.equalTo(self.leftViewCell!, .trailing, 2)
-                .setTrailing.equalTo(self.rightViewCell!, .leading, -2)
+                .setLeading.equalTo(self.leftViewCell!, .trailing)
+                .setTrailing.equalTo(self.rightViewCell!, .leading)
         }
     }
     
@@ -85,23 +89,24 @@ class ListCellView: View {
             self.rightViewCell = UIView()
             self.widthRightColumnCell = 0
         }
+        
         self.rightViewCell?.add(insideTo: self)
         self.rightViewCell?.makeConstraints { make in
             make
-                .setTop.setBottom.setTrailing.equalToSuperView
+                .setTop.equalToSafeArea
+                .setBottom.equalToSafeArea
+                .setTrailing.equalToSuperView
                 .setWidth.equalToConstant(self.widthRightColumnCell)
         }
+        
+
     }
+    
+    
     
     private func removeSubViews(_ view: UIView) {
         view.subviews.forEach { subView in
             subView.removeFromSuperview()
-        }
-    }
-    
-    private func pinConstraint(_ view: UIView) {
-        view.makeConstraints { make in
-            make.setTop.setWidth.setLeading.setBottom.equalToSuperView
         }
     }
     
