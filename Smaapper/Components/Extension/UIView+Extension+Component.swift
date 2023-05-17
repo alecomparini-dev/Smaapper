@@ -45,49 +45,41 @@ extension UIView {
     }
     
     
-//  MARK: - SET BORDER
-    @discardableResult
-    func setBorder(_ border: (_ build: Border) -> Border) -> Self {
-        let _ = border(Border(self))
-        return self
-    }
-    
-    
-//  MARK: - SET SHADOW
-    @discardableResult
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow )  -> Self {
-        let _ = shadow(Shadow(self))
-        return self
-    }
-    
-//  MARK: - SET NEUMORPHISM
-    @discardableResult
-    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
-        return self
-    }
-    
-    
-//  MARK: - SET GRADIENT
-    @discardableResult
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
-        return self
-    }
-
-//  MARK: - SET TAP GESTURE
-    @discardableResult
-    func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        let _ = gesture(TapGesture(self))
-        return self
-    }
-    
-    
 //  MARK: - Apply Constraints
     
     func makeConstraints(_ buildConstraintFlow: (_ make: StartOfConstraintsFlow) -> StartOfConstraintsFlow) {
         let constraints = buildConstraintFlow(StartOfConstraintsFlow(self))
         constraints.applyConstraint()
+    }
+    
+    @discardableResult
+    func makeBorder(_ border: (Border) -> Border) -> Self {
+        _ = border(Border(self))
+        return self
+    }
+    
+    @discardableResult
+    func makeShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+        let shadow = shadow(Shadow(self))
+        return self
+    }
+    
+    @discardableResult
+    func makeNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+        _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    @discardableResult
+    func makeGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+        let gradient = gradient(Gradient(self))
+        return self
+    }
+    
+    @discardableResult
+    func makeTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+        _ = gesture(TapGesture(self))
+        return self
     }
     
     
@@ -100,8 +92,7 @@ extension UIView {
     }
     
     
-
-
-    
+ 
     
 }
+

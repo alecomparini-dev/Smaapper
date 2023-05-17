@@ -12,6 +12,7 @@ protocol ComponentsProtocol {
 }
 
 class TextField: UITextField {
+    internal var constraintsFlow: StartOfConstraintsFlow?
     
     enum Position {
          case left
@@ -28,7 +29,6 @@ class TextField: UITextField {
         }
     }
     
-    private var constraintBuilder: StartOfConstraintsFlow?
     private let paddingConst: CGFloat = 5
     private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
     
@@ -44,7 +44,7 @@ class TextField: UITextField {
     init(_ placeHolder: String) {
         super.init(frame: .zero)
         self.setDefault()
-        _ = setPlaceHolder(placeHolder)
+        setPlaceHolder(placeHolder)
         addHideKeyboardWhenTouchReturn()
     }
     
@@ -56,7 +56,7 @@ class TextField: UITextField {
 
 //  MARK: - Properties Default
     private func setDefault() {
-        _ = self.setAutoCapitalization(TextFieldDefault.autoCapitalization)
+        self.setAutoCapitalization(TextFieldDefault.autoCapitalization)
             .setAutoCorrectionType(TextFieldDefault.autoCorrectionType)
             .setPlaceHolderColor(TextFieldDefault.placeHolderColor)
             .setKeyboardType(TextFieldDefault.keyboardType)
@@ -66,6 +66,7 @@ class TextField: UITextField {
     
     
 //  MARK: - Properties
+    @discardableResult
     func setPlaceHolder(_ placeholder: String) -> Self {
         self.attributedPlaceholder = NSAttributedString (
             string: placeholder,
@@ -73,6 +74,7 @@ class TextField: UITextField {
         return self
     }
     
+    @discardableResult
     func setPlaceHolderColor(_ placeHolderColor: UIColor) -> Self {
         self.attributesPlaceholder.updateValue(placeHolderColor, forKey: .foregroundColor)
         self.attributedPlaceholder = NSAttributedString (
@@ -81,6 +83,7 @@ class TextField: UITextField {
         return self
     }
     
+    @discardableResult
     func setPlaceHolderSize(_ size: CGFloat) -> Self {
         self.attributesPlaceholder.updateValue(UIFont.systemFont(ofSize: size), forKey: .font)
         self.attributedPlaceholder = NSAttributedString (
@@ -89,56 +92,67 @@ class TextField: UITextField {
         return self
     }
 
+    @discardableResult
     func setAttributedPlaceHolder(_ attributes: NSMutableAttributedString) -> Self {
         self.attributedPlaceholder = attributes
         return self
     }
     
+    @discardableResult
     func setTextColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
         return self
     }
     
+    @discardableResult
     func setKeyboardType(_ keyboardType: UIKeyboardType) -> Self {
         self.keyboardType = keyboardType
         return self
     }
 
+    @discardableResult
     func setText(_ text: String) -> Self {
         self.text = text
         return self
     }
     
+    @discardableResult
     func setAlignment(_ textAlignment: NSTextAlignment) -> Self {
         self.textAlignment = textAlignment
         return self
     }
     
+    @discardableResult
     func setIsSecureText(_ flag: Bool) -> Self {
         self.isSecureTextEntry = flag
         return self
     }
     
+    @discardableResult
     func setAutoCapitalization(_ autoCapitalizationType: UITextAutocapitalizationType) -> Self {
         self.autocapitalizationType = autoCapitalizationType
         return self
     }
     
+    @discardableResult
     func setAutoCorrectionType(_ autoCorrectionType: UITextAutocorrectionType) -> Self {
         self.autocorrectionType = autoCorrectionType
         return self
     }
     
+    @discardableResult
     func setTintColor(_ tintColor: UIColor) -> Self {
         self.tintColor = tintColor
         return self
     }
     
+    @discardableResult
     func setFont(_ font: UIFont?) -> Self {
         if let font { self.font = font }
         return self
     }
     
+    @discardableResult
     func setPadding(_ padding: CGFloat, _ position: TextField.Position) -> Self {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 0))
         addPaddingToTextField(paddingView, position)
@@ -157,19 +171,9 @@ class TextField: UITextField {
         
     }
 
-    
-//  MARK: - Constraints Area
-    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintBuilder = builderConstraint(StartOfConstraintsFlow(self))
-        return self
-    }
-    
-    func applyConstraint() {
-        self.constraintBuilder?.applyConstraint()
-    }
+
     
 //  MARK: - ACTIONS THIS COMPONENT
-    
     private func addHideKeyboardWhenTouchReturn(){
         self.addTarget(self, action: #selector(textFieldDidEndOnExit), for: .editingDidEndOnExit)
         TextField.hideKeyboardWhenViewTapped()
@@ -182,3 +186,52 @@ class TextField: UITextField {
     
     
 }
+
+
+//  MARK: - Extension BaseComponentProtocol
+extension TextField: BaseComponentProtocol {
+    
+    @discardableResult
+    func setBorder(_ border: (Border) -> Border) -> Self {
+        let _ = border(Border(self))
+        return self
+    }
+    
+    @discardableResult
+    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    @discardableResult
+    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    @discardableResult
+    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+    
+    @discardableResult
+    func setTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self))
+        return self
+    }
+    
+//  MARK: - Constraint Area
+    @discardableResult
+    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
+        return self
+    }
+    
+    func applyConstraint() {
+        self.constraintsFlow?.applyConstraint()
+    }
+    
+}
+
+

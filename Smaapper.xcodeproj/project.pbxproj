@@ -68,6 +68,7 @@
 		0281DAD32A13F6F700E44F04 /* Dock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD22A13F6F700E44F04 /* Dock.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DAD82A140DF100E44F04 /* DockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD72A140DF100E44F04 /* DockCellView.swift */; };
+		0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADA2A15378300E44F04 /* BaseProtocol.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -162,6 +163,7 @@
 		0281DAD22A13F6F700E44F04 /* Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dock.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DAD72A140DF100E44F04 /* DockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCellView.swift; sourceTree = "<group>"; };
+		0281DADA2A15378300E44F04 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0281DAD92A15376D00E44F04 /* BaseProtocol */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0234A88A29F9FD3A008392EC /* Border */,
 				0234A8EE29F9FD3A008392EC /* Button */,
@@ -610,6 +613,14 @@
 			path = DockCell;
 			sourceTree = "<group>";
 		};
+		0281DAD92A15376D00E44F04 /* BaseProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				0281DADA2A15378300E44F04 /* BaseProtocol.swift */,
+			);
+			path = BaseProtocol;
+			sourceTree = "<group>";
+		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,8 +736,8 @@
 		02C9C9E92A0A774F00AA1370 /* TapGesture */ = {
 			isa = PBXGroup;
 			children = (
-				02C9C9EA2A0A776600AA1370 /* TapGesture.swift */,
 				02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */,
+				02C9C9EA2A0A776600AA1370 /* TapGesture.swift */,
 			);
 			path = TapGesture;
 			sourceTree = "<group>";
@@ -744,8 +755,8 @@
 			children = (
 				02C9C9E42A058FA500AA1370 /* ListCell */,
 				02C9C9E32A05392A00AA1370 /* Model */,
-				02F45AFA2A046F720096A75A /* List.swift */,
 				02C9C9E72A072B4200AA1370 /* ListDefault.swift */,
+				02F45AFA2A046F720096A75A /* List.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -906,6 +917,7 @@
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
+				0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,

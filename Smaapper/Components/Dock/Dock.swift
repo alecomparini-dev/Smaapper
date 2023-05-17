@@ -9,8 +9,6 @@ import UIKit
 
 class Dock: View {
     
-    private var constraintsFlow: StartOfConstraintsFlow?
-    
     private var _isShow = false
     private var alreadyApplied = false
     

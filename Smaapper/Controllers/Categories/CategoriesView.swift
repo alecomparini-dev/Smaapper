@@ -12,7 +12,7 @@ protocol CategoriesViewDelegate: AnyObject {
     func closeModalTapped()
 }
 
-class CategoriesView: UIView {
+class CategoriesView: View {
     
     weak var delegate: CategoriesViewDelegate?
     
@@ -174,7 +174,7 @@ class CategoriesView: UIView {
     
     
 //  MARK: - Create Rows Menu
-    func createLeftRowView(_ systemNameImage: String) -> UIView {
+    func createLeftRowView(_ systemNameImage: String) -> View {
         let view = View()
             .setBackgroundColor(UIColor.HEX("#2b2f30"))
         
@@ -222,7 +222,7 @@ class CategoriesView: UIView {
     }
 
     func setCornerRadiusOnView(_ view: UIView, _ corner: [Border.Corner]) {
-        _ = view.setBorder { build in
+        _ = view.makeBorder { build in
             build
                 .setCornerRadius(12)
                 .setWhichCornersWillBeRounded(corner)

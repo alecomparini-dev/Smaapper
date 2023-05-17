@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewTests: UIView {
+class HomeViewTests: View {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

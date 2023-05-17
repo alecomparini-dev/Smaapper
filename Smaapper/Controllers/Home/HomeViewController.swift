@@ -22,7 +22,7 @@ class HomeVC: UIViewController {
     private var rowTapped: (section: Int, row: Int) = (0,0)
     
     lazy var homeScreen: HomeView = {
-        let home = HomeView()
+        let home = HomeView(frame: .zero)
         return home
     }()
     
