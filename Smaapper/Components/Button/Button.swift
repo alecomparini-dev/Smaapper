@@ -12,8 +12,7 @@ class Button: UIButton {
     
     private var _config = UIButton.Configuration.plain()
     private var activateDisabledButton: Bool = false
-    private var constraintBuilder: StartOfConstraintsFlow?
-    
+    internal var constraintsFlow: StartOfConstraintsFlow?
     
     override var isEnabled: Bool {
         didSet {
@@ -149,16 +148,52 @@ class Button: UIButton {
     }
     
     
+}
+
+//  MARK: - Extension BaseComponentProtocol
+extension Button: BaseComponentProtocol {
+    
+    @discardableResult
+    func setBorder(_ border: (Border) -> Border) -> Self {
+        let _ = border(Border(self))
+        return self
+    }
+    
+    @discardableResult
+    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    @discardableResult
+    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    @discardableResult
+    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+    
+    @discardableResult
+    func setTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self))
+        return self
+    }
+    
 //  MARK: - Constraint Area
     @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintBuilder = builderConstraint(StartOfConstraintsFlow(self))
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
         return self
     }
     
     func applyConstraint() {
-        self.constraintBuilder?.applyConstraint()
+        self.constraintsFlow?.applyConstraint()
     }
     
-    
 }
+
+

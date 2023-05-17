@@ -15,7 +15,7 @@ class CategoriesViewController: UIViewController {
     private var indexRow = 0
     
     lazy var screen: CategoriesView = {
-        let home = CategoriesView()
+        let home = CategoriesView(frame: .zero)
         return home
     }()
     

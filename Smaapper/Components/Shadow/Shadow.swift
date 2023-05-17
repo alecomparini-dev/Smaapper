@@ -32,51 +32,61 @@ class Shadow {
     
 //  MARK: - Properties
     
+    @discardableResult
     func setColor(_ color: UIColor) -> Self {
         shadow.shadowColor = color.cgColor
         return self
     }
     
+    @discardableResult
     func setOffset(width: Int, height: Int) -> Self {
         shadow.shadowOffset = CGSize(width: width, height: height)
         return self
     }
     
+    @discardableResult
     func setOffset(_ offSet: CGSize) -> Self {
         shadow.shadowOffset = offSet
         return self
     }
     
+    @discardableResult
     func setOpacity(_ opacity: Float) -> Self {
         shadow.shadowOpacity = opacity
         return self
     }
     
+    @discardableResult
     func setBlur(_ blur: CGFloat) -> Self {
         shadow.shadowRadius = blur
         return self
     }
     
+    @discardableResult
     func setCornerRadius(_ cornerRadius: CGFloat) -> Self {
         shadow.cornerRadius = cornerRadius
         return self
     }
     
+    @discardableResult
     func setBringToFront() -> Self {
         self.isBringToFront = true
         return self
     }
     
+    @discardableResult
     func setShadowHeight(_ height: CGFloat) -> Self {
         self.shadowHeight = height
         return self
     }
     
+    @discardableResult
     func setShadowWidth(_ width: CGFloat) -> Self {
         self.shadowWidth = width
         return self
     }
     
+    @discardableResult
     func setID(_ id: String) -> Self {
         shadow.name = id
         return self
@@ -84,7 +94,7 @@ class Shadow {
     
     
 //  MARK: - Component private functions
-    
+    @discardableResult
     func setDefault() -> Self {
         return self.setColor(ShadowDefault.color)
             .setOffset(ShadowDefault.offset)
@@ -96,9 +106,6 @@ class Shadow {
         DispatchQueue.main.async {
             self.component.layoutIfNeeded()
             self.shadow.frame = self.component.bounds
-//            self.shadow.cornerRadius = self.component.layer.cornerRadius
-//            self.shadow.maskedCorners = self.component.layer.maskedCorners
-            
             self.shadow.shadowPath = self.calculateShadowPath()
             self.insertSubLayer()
         }

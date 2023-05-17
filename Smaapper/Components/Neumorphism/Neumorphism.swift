@@ -245,7 +245,7 @@ class Neumorphism {
     
     private func applyDarkShadow(_ offSetDarkShadow: CGSize) {
         _ = self.component
-            .setShadow { build in
+            .makeShadow { build in
                 build.setColor(self.darkShadowColor ?? .clear)
                     .setOffset(offSetDarkShadow)
                     .setOpacity(self.darkShadowIntensity)
@@ -256,7 +256,7 @@ class Neumorphism {
     
     private func applyLightShadow(_ offSetLightShadow: CGSize) {
         _ = self.component
-            .setShadow { build in
+            .makeShadow { build in
                 build.setColor(self.lightShadowColor ?? .clear)
                     .setOffset(offSetLightShadow)
                     .setOpacity(self.lightShadowIntensity)
@@ -315,7 +315,7 @@ class Neumorphism {
     
     private func addShapeOnComponent(_ color: [UIColor]) {
         _ = self.component
-            .setGradient { build in
+            .makeGradient { build in
                 build.setColor(color)
                     .setAxialGradient(self.calculateGradientDirection())
                     .apply()

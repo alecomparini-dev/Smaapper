@@ -60,19 +60,19 @@ class TapGesture {
 
 //  MARK: - Set Properties
 
+    @discardableResult
     func setAction(closure: @escaping closureTapGestureAlias) -> Self {
         self.action = closure
-//        if let onTapGesture = self.onTapGesture {
-//            self.component?.addGestureRecognizer(onTapGesture)
-//        }
         return self
     }
     
+    @discardableResult
     func setStateGesture(_ states: [UIGestureRecognizer.State]) -> Self {
         _ = self.onTapGesture?.setStates(states)
         return self
     }
     
+    @discardableResult
     func setTouchPositionRelative(to relative: TapGesture.GestureRelativeTo) -> Self {
         self.gestureRelative = relative
         return self
@@ -114,7 +114,7 @@ class TapGesture {
 
 
 
-//  MARK: - ONTAPGESTURE CLASS ---------------------------------------------------------------------------------------
+//  MARK: - ONTAPGESTURE CLASS ---
 
 fileprivate class OnTapGesture: UITapGestureRecognizer {
     

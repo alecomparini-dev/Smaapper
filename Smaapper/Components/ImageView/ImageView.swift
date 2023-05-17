@@ -9,12 +9,12 @@ import UIKit
 
 class ImageView: UIImageView {
     typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
+    internal var constraintsFlow: StartOfConstraintsFlow?
     
     private var tapAction: tapActionClosureAlias?
-    private var constraintBuilder: StartOfConstraintsFlow?
     
     
-//  MARK: - Initializers
+    //  MARK: - Initializers
     
     init() {
         super.init(frame: .null)
@@ -32,7 +32,7 @@ class ImageView: UIImageView {
     }
     
     
-//  MARK: - Properties
+    //  MARK: - Properties
     func setImage(_ image: UIImage?) -> Self {
         if let image {
             self.image = image
@@ -64,7 +64,7 @@ class ImageView: UIImageView {
     }
     
     
-//  MARK: - ACTIONS
+    //  MARK: - ACTIONS
     func setOnTap(completion: @escaping tapActionClosureAlias ) -> Self {
         self.tapAction = completion
         self.isUserInteractionEnabled = true
@@ -78,16 +78,51 @@ class ImageView: UIImageView {
     }
     
     
+}
+
+//  MARK: - Extension BaseComponentProtocol
+extension ImageView: BaseComponentProtocol {
     
-//  MARK: - Constraints Area
+    @discardableResult
+    func setBorder(_ border: (Border) -> Border) -> Self {
+        let _ = border(Border(self))
+        return self
+    }
+    
+    @discardableResult
+    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    @discardableResult
+    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    @discardableResult
+    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+    
+    @discardableResult
+    func setTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self))
+        return self
+    }
+    
+//  MARK: - Constraint Area
+    @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintBuilder = builderConstraint(StartOfConstraintsFlow(self))
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
         return self
     }
     
     func applyConstraint() {
-        self.constraintBuilder?.applyConstraint()
+        self.constraintsFlow?.applyConstraint()
     }
-
     
 }
+

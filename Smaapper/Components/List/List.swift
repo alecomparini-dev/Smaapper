@@ -11,8 +11,7 @@ import UIKit
 class List: UITableView {
 
     typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
-    
-    private var constraintsFlow: StartOfConstraintsFlow?
+    internal var constraintsFlow: StartOfConstraintsFlow?
     
     private var alreadyApplied = false
     private var _isShow = false
@@ -115,17 +114,7 @@ class List: UITableView {
         self.didSelectRow = closure
         return self
     }
-    
-//  MARK: - Contraints Area
-    @discardableResult
-    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
-        return self
-    }
-    
-    func applyConstraint() {
-        self.constraintsFlow?.applyConstraint()
-    }
+
     
 //  MARK: - Populate List
     
@@ -175,8 +164,55 @@ class List: UITableView {
 
 }
 
-//  MARK: - Extension Delegate
+//  MARK: - Extension BaseComponentProtocol
+extension List: BaseComponentProtocol {
+    
+    @discardableResult
+    func setBorder(_ border: (Border) -> Border) -> Self {
+        let _ = border(Border(self))
+        return self
+    }
+    
+    @discardableResult
+    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+        let _ = shadow(Shadow(self))
+        return self
+    }
+    
+    @discardableResult
+    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self))
+        return self
+    }
+    
+    @discardableResult
+    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self))
+        return self
+    }
+    
+    @discardableResult
+    func setTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self))
+        return self
+    }
+    
+//  MARK: - Constraint Area
+    @discardableResult
+    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
+        return self
+    }
+    
+    func applyConstraint() {
+        self.constraintsFlow?.applyConstraint()
+    }
+    
+}
 
+
+
+//  MARK: - Extension Delegate
 extension List: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -186,7 +222,6 @@ extension List: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return self.customSectionFooterHeight[section] ?? self.sectionFooterHeight
     }
-    
     
     
 }

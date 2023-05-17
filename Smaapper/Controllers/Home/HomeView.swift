@@ -12,7 +12,7 @@ protocol HomeViewDelegate: AnyObject {
     func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
 }
 
-class HomeView: UIView {
+class HomeView: View {
     
     weak var delegate: HomeViewDelegate?
     
