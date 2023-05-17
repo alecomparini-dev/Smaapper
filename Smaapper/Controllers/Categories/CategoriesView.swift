@@ -133,7 +133,7 @@ class CategoriesView: View {
             })
             .setConstraints { build in
                 build.setTop.equalTo(titleLabel, .bottom, 25)
-                    .setLeading.setTrailing.equalToSuperView(40)
+                    .setLeading.setTrailing.equalToSafeArea(40)
                     .setHeight.equalToConstant(40)
             }
         return tf

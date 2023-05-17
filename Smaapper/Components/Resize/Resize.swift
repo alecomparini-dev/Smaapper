@@ -27,7 +27,6 @@ class Resize {
                 CATransaction.setDisableActions(true)
                 layer.frame = comp.bounds
                 CATransaction.commit()
-                
                 return
             }
         })

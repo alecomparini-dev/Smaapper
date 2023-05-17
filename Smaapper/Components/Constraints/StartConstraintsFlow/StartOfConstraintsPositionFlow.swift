@@ -113,6 +113,28 @@ class StartOfConstraintsPositionFlow<C>: StartOfConstraintsPositionFlowProtocol 
         return constraintsFlow
     }
     
+    var greaterThanOrEqualToSafeArea: StartOfConstraintsFlow {
+        constraintVM.greaterThanOrEqualToSafearea()
+        return constraintsFlow
+    }
+    
+    func greaterThanOrEqualToSafeArea(_ constant: CGFloat) -> StartOfConstraintsFlow {
+        constraintVM.greaterThanOrEqualToSafearea(constant)
+        return constraintsFlow
+    }
+    
+    var lessThanOrEqualToSafeArea: StartOfConstraintsFlow {
+        constraintVM.lessThanOrEqualToSafearea()
+        return constraintsFlow
+    }
+    
+    func lessThanOrEqualToSafeArea(_ constant: CGFloat) -> StartOfConstraintsFlow {
+        constraintVM.lessThanOrEqualToSafearea(constant)
+        return constraintsFlow
+    }
+    
+    
+//  MARK: - SUPER VIEW AREA
     var equalToSuperView: StartOfConstraintsFlow {
         constraintVM.equalToSuperView()
         return constraintsFlow
@@ -122,6 +144,31 @@ class StartOfConstraintsPositionFlow<C>: StartOfConstraintsPositionFlowProtocol 
         constraintVM.equalToSuperView(constant)
         return constraintsFlow
     }
+    
+    
+    var greaterThanOrEqualToSuperView: StartOfConstraintsFlow {
+        constraintVM.greaterThanOrEqualToSuperView()
+        return constraintsFlow
+    }
+    
+    func greaterThanOrEqualToSuperView(_ constant: CGFloat) -> StartOfConstraintsFlow {
+        constraintVM.greaterThanOrEqualToSuperView(constant)
+        return constraintsFlow
+    }
+    
+    
+    var lessThanOrEqualToSuperView: StartOfConstraintsFlow{
+        constraintVM.lessThanOrEqualToSuperView()
+        return constraintsFlow
+    }
+    
+    func lessThanOrEqualToSuperView(_ constant: CGFloat) -> StartOfConstraintsFlow {
+        constraintVM.lessThanOrEqualToSuperView(constant)
+        return constraintsFlow
+    }
+    
+    
+    
     
 }
 

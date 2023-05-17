@@ -46,13 +46,6 @@ class HomeView: View {
                     .setLightPosition(.rightBottom)
                     .apply()
             }
-            .setConstraints { build in
-                build
-                    .setBottom.equalTo(menuButton, .top, -15)
-                    .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.equalToConstant(400)
-                    .setWidth.equalToConstant(255)
-            }
             .setFooterGradient { build in
                 build
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
@@ -62,7 +55,14 @@ class HomeView: View {
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
             .setAction(dropdownMenuTapped)
-        
+            .setConstraints { build in
+                build
+                    .setTop.lessThanOrEqualToSuperView(15)
+                    .setBottom.equalTo(menuButton, .top, -15)
+                    .setTrailing.equalTo(menuButton, .trailing, -5)
+                    .setHeight.equalToConstant(400)
+                    .setWidth.equalToConstant(255)
+            }
         return menu
     }()
     
@@ -74,6 +74,7 @@ class HomeView: View {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImage(img)
             .setImageColor(.white)
+            .setImageSize(14)
             .setBorder({ build in
                 build.setCornerRadius(14)
                     .setWidth(0)
@@ -141,8 +142,7 @@ class HomeView: View {
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(15)
-                    .setTop.equalTo(menuButton, .top , -5)
-                    .setBottom.equalTo(menuButton, .bottom, 5)
+                    .setTop.setBottom.equalTo(menuButton)
                     .setTrailing.equalTo(menuButton, .leading, -10)
             }
         return dock
@@ -216,11 +216,10 @@ class HomeView: View {
 //  MARK: - Private Function Area
 
     private func addBackgroundColor() {
-        _ = self.setGradient { build in
+        _ = self.makeGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
-//                .setAxialGradient(.topToBottom)
                 .apply()
         }
     }
@@ -239,59 +238,6 @@ class HomeView: View {
         
         
     }
-    
-    
-    
-    
-    func testeScrollView() {
-        
-        
-        let containerView = UIView()
-        containerView.backgroundColor = .red
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        addSubview(containerView)
-        containerView.addSubview(dock)
-        
-        
-        containerView.makeConstraints { make in
-            make
-                .setBottom.equalToSafeArea(0)
-                .setLeading.equalToSafeArea(10)
-                .setTrailing.equalTo(menuButton, .leading,-10)
-                .setHeight.equalToConstant(60)
-        }
-        
-        
-        
-        dock.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dock.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            dock.heightAnchor.constraint(equalTo: containerView.heightAnchor),
-//            dock.widthAnchor.constraint(equalToConstant: 300),
-            dock.widthAnchor.constraint(equalTo: containerView.widthAnchor),
-        ])
-        
-        
-        
-        DispatchQueue.main.async {
-            let bounds = containerView.bounds
-            print(bounds)
-        }
-        
-        
-    }
-    
-    
-    
-    func createImage() -> UIImageView{
-        let imageView = UIImageView(image: UIImage(systemName: "mic"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }
-    
     
 }
 

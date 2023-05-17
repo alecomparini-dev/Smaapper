@@ -31,16 +31,13 @@ class ConstraintsViewModel {
     }
     
     var typeElement: ConstraintsTypeElement { model.typeElement }
-    func equalToSafeArea(_ constant: CGFloat = 0) {
-        model.typeElement = .safeArea
-        updateRelations(.equalTo, constant)
-    }
     
-    func equalToSuperView(_ constant: CGFloat = 0) {
-        model.typeElement = .superView
-        updateRelations(.equalTo, constant)
-    }
     
+    
+    
+    
+    
+
     var relation: ConstraintsRelations { model.relation }
     
     func equalTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
@@ -49,26 +46,55 @@ class ConstraintsViewModel {
     func equalTo(_ element: UIView, _ constant: CGFloat? = nil) {
         updateRelations(.equalTo, element, nil, constant)
     }
-    
+    func greaterThanOrEqualTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
+        updateRelations(.greaterThanOrEqualTo, element, attribute, constant)
+    }
     func lessThanOrEqualTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
         updateRelations(.lessThanOrEqualTo, element, attribute, constant)
     }
     
-    func greaterThanOrEqualTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
-        updateRelations(.greaterThanOrEqualTo, element, attribute, constant)
+
+//  MARK: - SAFE AREA
+    func equalToSafeArea(_ constant: CGFloat = 0) {
+        model.typeElement = .safeArea
+        updateRelations(.equalTo, constant)
+    }
+    func lessThanOrEqualToSafearea(_ constant: CGFloat = 0) {
+        model.typeElement = .safeArea
+        updateRelations(.lessThanOrEqualTo, constant)
+    }
+    func greaterThanOrEqualToSafearea(_ constant: CGFloat = 0) {
+        model.typeElement = .safeArea
+        updateRelations(.greaterThanOrEqualTo, constant)
     }
     
+
+//  MARK: - SUPERVIEW
+    func equalToSuperView(_ constant: CGFloat = 0) {
+        model.typeElement = .superView
+        updateRelations(.equalTo, constant)
+    }
+    func lessThanOrEqualToSuperView(_ constant: CGFloat = 0) {
+        model.typeElement = .superView
+        updateRelations(.lessThanOrEqualTo, constant)
+    }
+    func greaterThanOrEqualToSuperView(_ constant: CGFloat = 0) {
+        model.typeElement = .superView
+        updateRelations(.greaterThanOrEqualTo, constant)
+    }
+    
+    
+//  MARK: - Constant
     func equalToConstant(_ constant: CGFloat) {
         updateRelations(.equalTo, constant)
     }
-    
     func lessThanOrEqualToConstant(_ constant: CGFloat) {
         updateRelations(.lessThanOrEqualTo, constant)
     }
-    
     func greaterThanOrEqualToConstant(_ constant: CGFloat) {
         updateRelations(.greaterThanOrEqualTo, constant)
     }
+    
     
     var toItem: UIView? {
         get { model.toItem }
