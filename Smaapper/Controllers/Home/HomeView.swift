@@ -75,7 +75,7 @@ class HomeView: UIView {
         let btn = ButtonImage(img)
             .setImageColor(.white)
             .setBorder({ build in
-                build.setCornerRadius(18)
+                build.setCornerRadius(14)
                     .setWidth(0)
                     .setColor(.systemGray.withAlphaComponent(0.2))
                     .setColor(.white.withAlphaComponent(0.1))
@@ -90,7 +90,7 @@ class HomeView: UIView {
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-20)
-                    .setHeight.setWidth.equalToConstant(60)
+                    .setHeight.setWidth.equalToConstant(50)
             }
             .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
@@ -128,6 +128,24 @@ class HomeView: UIView {
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
         return btn
+    }()
+    
+    
+    lazy var dock: Dock = {
+        let dock = Dock()
+            .setBorder({ build in
+                build.setColor(.darkGray)
+                    .setWidth(1)
+                    .setCornerRadius(10)
+            })
+            .setConstraints { build in
+                build
+                    .setLeading.equalToSafeArea(15)
+                    .setTop.equalTo(menuButton, .top , -5)
+                    .setBottom.equalTo(menuButton, .bottom, 5)
+                    .setTrailing.equalTo(menuButton, .leading, -10)
+            }
+        return dock
     }()
 
     
@@ -210,13 +228,70 @@ class HomeView: UIView {
     private func addElements() {
         menuButton.add(insideTo: self)
         dropdownMenu.add(insideTo: self)
+        dock.add(insideTo: self)
     }
     
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
+        dock.applyConstraint()
+        dock.isShow = true
+        
+        
     }
     
-
+    
+    
+    
+    func testeScrollView() {
+        
+        
+        let containerView = UIView()
+        containerView.backgroundColor = .red
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        addSubview(containerView)
+        containerView.addSubview(dock)
+        
+        
+        containerView.makeConstraints { make in
+            make
+                .setBottom.equalToSafeArea(0)
+                .setLeading.equalToSafeArea(10)
+                .setTrailing.equalTo(menuButton, .leading,-10)
+                .setHeight.equalToConstant(60)
+        }
+        
+        
+        
+        dock.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dock.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            dock.heightAnchor.constraint(equalTo: containerView.heightAnchor),
+//            dock.widthAnchor.constraint(equalToConstant: 300),
+            dock.widthAnchor.constraint(equalTo: containerView.widthAnchor),
+        ])
+        
+        
+        
+        DispatchQueue.main.async {
+            let bounds = containerView.bounds
+            print(bounds)
+        }
+        
+        
+    }
+    
+    
+    
+    func createImage() -> UIImageView{
+        let imageView = UIImageView(image: UIImage(systemName: "mic"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }
+    
+    
 }
 

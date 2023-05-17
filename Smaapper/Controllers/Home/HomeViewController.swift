@@ -32,6 +32,7 @@ class HomeVC: UIViewController {
         homeScreen.makeConstraints { make in
             make.setPin.equalToSuperView
         }
+        
     }
     
     override func viewDidLoad() {
@@ -42,11 +43,11 @@ class HomeVC: UIViewController {
         homeScreen.dropdownMenu.isShow = false
         
         //retirar !!!
-//        self.openCloseDropdownMenu()
-//        self.turnOnOffMenuButton()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            self.dropdownMenuTapped((0,0))
-//        }
+        //        self.openCloseDropdownMenu()
+        //        self.turnOnOffMenuButton()
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        //            self.dropdownMenuTapped((0,0))
+        //        }
         
     }
     
@@ -55,7 +56,7 @@ class HomeVC: UIViewController {
     }
     
     
-//  MARK: - Private Function Area
+    //  MARK: - Private Function Area
     
     private func configDelegate() {
         homeScreen.delegate = self
@@ -76,7 +77,7 @@ class HomeVC: UIViewController {
     }
     
     
-//  MARK: - Populate DropdowMenu
+    //  MARK: - Populate DropdowMenu
     
     private func fetchDropdownMenu() {
         viewModel.fetchDropdownMenu(.file) { result, error in
@@ -168,6 +169,13 @@ class HomeVC: UIViewController {
         categoriesVC.modalPresentationStyle = .fullScreen
         present(categoriesVC, animated: true)
     }
+    
+    
+    
+    
+    
+    
+    
     
 }
 
