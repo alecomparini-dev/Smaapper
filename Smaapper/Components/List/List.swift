@@ -37,72 +37,87 @@ class List: UITableView {
 
     
 //  MARK: - SET Properties
+    
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         self.rowHeight = height
         return self
     }
     
     //TODO: - Fazer !!
+    @discardableResult
     func setCustomRowHeight(_ height: CGFloat) -> Self {
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
         self.sectionHeaderHeight = height
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
         self.customSectionHeaderHeight.updateValue(height, forKey: forSection)
         return self
     }
     
+    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         self.sectionFooterHeight = height
         return self
     }
     
+    @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
         self.customSectionFooterHeight.updateValue(height, forKey: forSection)
         return self
     }
     
+    @discardableResult
     func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
         self.widthLeftColumnCell = width
         return self
     }
     
+    @discardableResult
     func setWidthRightColumnCell(_ width: CGFloat) -> Self {
         self.widthRightColumnCell = width
         return self
     }
     
+    @discardableResult
     func setBackgroundColorCell(_ color: UIColor) -> Self {
         self.backgroundColorCell = color
         return self
     }
     
+    @discardableResult
     func setSeparatorStyle(_ style: UITableViewCell.SeparatorStyle) -> Self {
         self.separatorStyle = style
         return self
     }
     
+    @discardableResult
     func setShowsVerticalScrollIndicator(_ flag: Bool) -> Self {
         self.showsVerticalScrollIndicator = flag
         return self
     }
     
+    @discardableResult
     func setIsScrollEnabled(_ flag: Bool) -> Self {
         self.isScrollEnabled = flag
         return self
     }
     
+    @discardableResult
     func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
         self.didSelectRow = closure
         return self
     }
     
 //  MARK: - Contraints Area
+    @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
         return self
@@ -217,8 +232,6 @@ extension List: UITableViewDataSource {
             didSelectRow((indexPath.section, indexPath.row))
         }
     }
-    
-
     
 }
 

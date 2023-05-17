@@ -24,7 +24,7 @@ class ListCellView: View {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+//  TODO: - REFACTOR: REMOVE THIS FUNCTION, IT SHOULD BE IN LISTCELL
 //  MARK: - SET Properties
     internal func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
         self.widthLeftColumnCell = width
@@ -101,8 +101,6 @@ class ListCellView: View {
         
 
     }
-    
-    
     
     private func removeSubViews(_ view: UIView) {
         view.subviews.forEach { subView in
