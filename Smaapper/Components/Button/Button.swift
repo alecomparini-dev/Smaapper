@@ -123,7 +123,7 @@ class Button: UIButton {
 
     @discardableResult
     func setFloatButton() -> Self {
-        self.layer.zPosition = 1000
+        self.layer.zPosition = 10000
         return self
     }
 

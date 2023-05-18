@@ -69,6 +69,7 @@
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DAD82A140DF100E44F04 /* DockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD72A140DF100E44F04 /* DockCellView.swift */; };
 		0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADA2A15378300E44F04 /* BaseProtocol.swift */; };
+		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -164,6 +165,7 @@
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DAD72A140DF100E44F04 /* DockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCellView.swift; sourceTree = "<group>"; };
 		0281DADA2A15378300E44F04 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
+		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -244,8 +246,9 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAD92A15376D00E44F04 /* BaseProtocol */,
 				0234A8B729F9FD3A008392EC /* Alert */,
+				0281DAD92A15376D00E44F04 /* BaseProtocol */,
+				0281DADC2A16682B00E44F04 /* Blur */,
 				0234A88A29F9FD3A008392EC /* Border */,
 				0234A8EE29F9FD3A008392EC /* Button */,
 				0234A88F29F9FD3A008392EC /* Collection */,
@@ -259,7 +262,6 @@
 				0234A8E429F9FD3A008392EC /* Label */,
 				02F45AF92A046F630096A75A /* List */,
 				026F797B2A0172AE003947A6 /* Neumorphism */,
-				02C9C9E02A052ED600AA1370 /* OverlayLayer */,
 				02F45AF62A043F760096A75A /* Resize */,
 				0234A8BB29F9FD3A008392EC /* Shadow */,
 				024F18AA2A11257000A39584 /* Stack */,
@@ -621,6 +623,14 @@
 			path = BaseProtocol;
 			sourceTree = "<group>";
 		};
+		0281DADC2A16682B00E44F04 /* Blur */ = {
+			isa = PBXGroup;
+			children = (
+				0281DADD2A16683A00E44F04 /* Blur.swift */,
+			);
+			path = Blur;
+			sourceTree = "<group>";
+		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -706,13 +716,6 @@
 				02C5F4552A0C559400D75D9F /* DropdownMenuFooter.swift */,
 			);
 			path = DropdownMenuFooter;
-			sourceTree = "<group>";
-		};
-		02C9C9E02A052ED600AA1370 /* OverlayLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = OverlayLayer;
 			sourceTree = "<group>";
 		};
 		02C9C9E32A05392A00AA1370 /* Model */ = {
@@ -890,6 +893,7 @@
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
+				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				0234A93929F9FD3A008392EC /* TextFieldPassword.swift in Sources */,

@@ -24,10 +24,6 @@ class HomeView: View {
         addElements()
         applyConstraints()
         
-        
-        
-//        testeCaralho()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -96,8 +92,9 @@ class HomeView: View {
             .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
             .setConstraints { build in
-                build.setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-20)
+                build
+                    .setBottom.equalToSafeArea(-10)
+                    .setTrailing.equalToSafeArea(-15)
                     .setHeight.setWidth.equalToConstant(60)
             }
 
@@ -136,37 +133,26 @@ class HomeView: View {
     
     lazy var dock: Dock = {
         let dock = Dock()
-            .setSize(CGSize(width: 50, height: 50))
+//            .setSize(CGSize(width: 40 , height: 40))
+//            .setBlur(true)
             .setBorder({ build in
                 build
                     .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
                     .setCornerRadius(12)
             })
-            .setShadow({ build in
-                build.setColor(.red)
-                    .setBlur(50)
-                    .setOpacity(1)
-//                    .setCornerRadius(12)
-                    .setOffset(width: 0, height: 0)
-                    .apply()
-            })
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)
-                    .setTop.equalTo(menuButton, .top, 5)
-                    .setBottom.equalTo(menuButton, .bottom, -5)
-                    .setTrailing.equalTo(menuButton, .leading, -10)
-                    .setVerticalAlignmentY.equalTo(menuButton)
-                    
+//                    .setTop.equalTo(menuButton, .top)
+                    .setHeight.equalToConstant(50)
+//                    .setBottom.equalTo(menuButton, .bottom, -2)
+                    .setBottom.equalToSafeArea(-3)
+//                    .setTrailing.equalTo(menuButton, .leading, -15)
             }
-//            .setNeumorphism { build in
-//                build
-//                    .setReferenceColor(UIColor.HEX("#17191a"))
-//                    .setShape(.concave)
-//                    .setLightPosition(.leftTop)
-//                    .apply()
-//            }
+
+            
+
         return dock
     }()
 
@@ -238,50 +224,71 @@ class HomeView: View {
         self.makeGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
+//                .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
+//                .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
     }
     
     private func addElements() {
-        menuButton.add(insideTo: self)
         dropdownMenu.add(insideTo: self)
         dock.add(insideTo: self)
+        menuButton.add(insideTo: self)
     }
     
     private func applyConstraints() {
-        menuButton.applyConstraint()
+       menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
+        
+        
     }
     
-    private func createIconsDock(_ systemNameImage: String) -> IconButton {
+    func createIconsDock(_ systemNameImage: String) -> UIView {
         let img = ImageView(UIImage(systemName: systemNameImage))
-        let btn = IconButton(img)
-            .setImageSize(15)
-            .setImageColor(.white)
-            
+        let btn = UIView()
+//            .setImageSize(15)
+//            .setImageColor(.white)
+////            .setBackgroundColor(.red)
+//            .setBorder({ build in
+//                build.setCornerRadius(8)
+//            })
+//            .setNeumorphism { build in
+//                build
+//                    .setReferenceColor(.red)
+//                    .setIntensity(percent: 100)
+//                    .setLightPosition(.leftTop)
+//                    .setBlur(percent: 5)
+//                    .setDistance(percent: 5)
+//                    .apply()
+//            }
+//
+        
+        btn.makeNeumorphism { make in
+            make
+                .setReferenceColor(.red)
+                .setIntensity(percent: 100)
+                .setLightPosition(.leftTop)
+                .setBlur(percent: 5)
+                .setDistance(percent: 5)
+                .setShape(.flat)
+                .apply()
+        }
+        btn.makeBorder { make in
+            make
+                .setCornerRadius(10)
+                .setWidth(1)
+                .setColor(.red)
+        }
+//        btn.setBackgroundColor(.cyan)
+
             
         return btn
     }
     
     
-    
-    
-    
-    func testeCaralho() {
-        let translucentBlurView = VibrantView()
-        addSubview(translucentBlurView)
-//        translucentBlurView.layer.zPosition = -1
-        translucentBlurView.makeConstraints { make in
-            make
-                .setBottom.equalToSafeArea(5)
-//                .setLeading.equalToSafeArea(5)
-                .setTrailing.equalToSafeArea(-5)
-                .setHeight.equalToConstant(60)
-                .setWidth.equalToConstant(250)
-        }
-    }
+
     
     
     
@@ -295,41 +302,3 @@ class HomeView: View {
 
 
 
-class VibrantView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupVibrancyEffect()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupVibrancyEffect()
-        
-    }
-    
-    private func setupVibrancyEffect() {
-        
-        
-        // Cria um efeito de blur com o estilo .regular
-        let blurEffect = UIBlurEffect(style: .systemThickMaterialDark)
-
-        // Cria a visual effect view com o efeito de blur
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-//        blurView.alpha = 0.9
-        blurView.backgroundColor = .red
-
-        // Adiciona a visual effect view como subview e ajusta as restrições
-        addSubview(blurView)
-        NSLayoutConstraint.activate([
-            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            blurView.topAnchor.constraint(equalTo: topAnchor),
-            blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-
-
-        
-        
-    }
-}
