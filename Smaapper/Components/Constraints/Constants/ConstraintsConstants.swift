@@ -18,7 +18,7 @@ enum ConstraintsRelations {
         case .equalTo:
             return .equal
         case .lessThanOrEqualTo:
-            return .greaterThanOrEqual
+            return .lessThanOrEqual
         case .greaterThanOrEqualTo:
             return .greaterThanOrEqual
         }

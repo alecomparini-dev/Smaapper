@@ -11,34 +11,40 @@ class Dock: View {
     
     private var _isShow = false
     private var alreadyApplied = false
-    
     private var dockViewBounds = CGRect()
 
     private let layout: UICollectionViewFlowLayout
     private let container = UIView()
-    private var customConstraintWidthCollectioin: NSLayoutConstraint = NSLayoutConstraint()
+    private var customConstraintWidthCollection: NSLayoutConstraint = NSLayoutConstraint()
+    private var isUserInteractionEnabledItems = false
     
     private var items: [IconButton] = [
         IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.cicle"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
+        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
+        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
         IconButton(UIImageView(image: UIImage(systemName: "person")))
     ]
     private var customItemSize: [Int:CGSize] = [:]
     private var itemsSize = CGSize(width: 50, height: 50)
 
-    let collection: UICollectionView
+    private let collection: UICollectionView
     
     override init() {
         self.layout = UICollectionViewFlowLayout()
         self.collection = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
-        super.init()
+        super.init(frame: .zero)
         self.initialization()
     }
     
@@ -47,14 +53,17 @@ class Dock: View {
     }
     
     private func initialization() {
-        self.collection.setCollectionViewLayout(self.layout, animated: true)
+        self.collection.backgroundColor = .clear
         self.layout.scrollDirection = .horizontal
-        self.customConstraintWidthCollectioin = self.collection.widthAnchor.constraint(equalToConstant: 0)
+        self.collection.setCollectionViewLayout(self.layout, animated: true)
+        self.customConstraintWidthCollection = self.collection.widthAnchor.constraint(equalToConstant: 0)
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 0, left: 10, bottom: 0, rigth: 10)
+        self.setShowsHorizontalScrollIndicator(false)
         
-        self.collection.backgroundColor = .red
     }
+    
+    var content: UIView { self.collection}
     
     var isShow: Bool {
         get { return self._isShow}
@@ -64,7 +73,6 @@ class Dock: View {
             self.isHidden = !_isShow
         }
     }
-    
 
     
 //  MARK: - SET Properties
@@ -111,18 +119,59 @@ class Dock: View {
         return self
     }
     
-
+    @discardableResult
+    func setIsUserInteractionEnabledItems(_ isUserInteractionEnabled: Bool) -> Self {
+        self.isUserInteractionEnabledItems = isUserInteractionEnabled
+        return self
+    }
+    
+    
+    
+    
+    @discardableResult
+    override func setBorder(_ border: (_ build: Border) -> Border) -> Self {
+        let _ = border(Border(self.container))
+        return self
+    }
+    
+    @discardableResult
+    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
+        let _ = shadow(Shadow(self.container))
+        return self
+    }
+    
+    @discardableResult
+    override func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
+        let _ = neumorphism(Neumorphism(self.container))
+        return self
+    }
+    
+    @discardableResult
+    override func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        let _ = gradient(Gradient(self.container))
+        return self
+    }
+    
+    @discardableResult
+    override func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
+        let _ = gesture(TapGesture(self.container))
+        return self
+    }
+    
+    
+    
     
 //  MARK: - Private Function Area
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            self.RegisterCell()
             DispatchQueue.main.async {
                 self.configCollection()
+                self.RegisterCell()
                 self.setDelegate()
+                self.alreadyApplied = true
             }
-            alreadyApplied = true
+            
         }
     }
     
@@ -140,28 +189,35 @@ class Dock: View {
         configConstraintsCollection()
     }
     
-    
     private func addCollectionInDockView() {
-        self.collection.add(insideTo: self)
+        container.add(insideTo: self)
+        self.collection.add(insideTo: container)
     }
     
     private func configConstraintsCollection() {
+        self.container.makeConstraints { make in
+            make
+                .setPin.equalTo(self)
+        }
+        
         self.collection.makeConstraints { make in
             make
-                .setHorizontalAlignmentX.equalTo(self)
-                .setHeight.equalTo(self)
+                .setTop.equalTo(container, .top)
+                .setHorizontalAlignmentX.equalTo(container)
+                .setHeight.equalTo(container)
         }
-        self.customConstraintWidthCollectioin.isActive = true
-        configConstraintWidthCollection()
+        
+        self.customConstraintWidthCollection.isActive = true
+        configConstraintWidthContainer()
     }
     
-    private func configConstraintWidthCollection() {
+    private func configConstraintWidthContainer() {
         self.dockViewBounds = self.bounds
         let sizeAllItems = self.calculateSizeAllItems()
         if sizeAllItems >= self.dockViewBounds.width {
-            self.customConstraintWidthCollectioin.constant = self.dockViewBounds.width
+            self.customConstraintWidthCollection.constant = self.dockViewBounds.width
         } else {
-            self.customConstraintWidthCollectioin.constant = sizeAllItems
+            self.customConstraintWidthCollection.constant = sizeAllItems
         }
     }
     
@@ -200,12 +256,20 @@ class Dock: View {
 }
 
 
-//  MARK: - Extension Delegate
-extension Dock: UICollectionViewDelegate {
-    
+
+//  MARK: - Extension Delegate Flow Layout
+extension Dock: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return self.customItemSize[indexPath.row] ?? itemsSize
     }
+    
+}
+
+
+//  MARK: - Extension Delegate
+extension Dock: UICollectionViewDelegate {
+    
+    
     
 }
 
@@ -222,21 +286,19 @@ extension Dock: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
         
-        cell.setupCell(self.items[indexPath.row])
+        let item = self.items[indexPath.row]
+        item.isUserInteractionEnabled = self.isUserInteractionEnabledItems
+        cell.setupCell(item)
         
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
-    
 }
 
-//  MARK: - Extension FlowLayout
-extension Dock: UICollectionViewDelegateFlowLayout {
-    
 
-    
-}
