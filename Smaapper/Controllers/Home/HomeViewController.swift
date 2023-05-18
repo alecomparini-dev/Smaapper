@@ -14,6 +14,8 @@ class HomeVC: UIViewController {
     
     private let viewModel = HomeViewModel()
     
+    private var adjustTrailingDock = NSLayoutConstraint()
+    
     private var resultDropdownMenu: DropdownMenuData?
     private var turnOnMenuButton = false
     private var openDropdownMenu = false
@@ -39,7 +41,9 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         configDelegate()
         fetchDropdownMenu()
-        configHeightOfDropdowMenu()
+        configRowsHeightOfDropdowMenu()
+        setConstraintAlignmentHorizontalDock()
+        
         homeScreen.dropdownMenu.isShow = false
         
         //retirar !!!
@@ -49,6 +53,10 @@ class HomeVC: UIViewController {
         //            self.dropdownMenuTapped((0,0))
         //        }
         
+        
+        addItemsDock()
+        
+        adjustAlignmentOfDock()
         homeScreen.dock.isShow = true
         
     }
@@ -59,6 +67,11 @@ class HomeVC: UIViewController {
     
     
     //  MARK: - Private Function Area
+    private func setConstraintAlignmentHorizontalDock() {
+        self.adjustTrailingDock = homeScreen.dock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        adjustTrailingDock.isActive = true
+    }
+    
     
     private func configDelegate() {
         homeScreen.delegate = self
@@ -94,7 +107,7 @@ class HomeVC: UIViewController {
         }
     }
     
-    private func configHeightOfDropdowMenu() {
+    private func configRowsHeightOfDropdowMenu() {
         guard let resultDropdownMenu else {return }
         let lastSection = resultDropdownMenu.count - 1
         _ = homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
@@ -170,6 +183,37 @@ class HomeVC: UIViewController {
         let categoriesVC = CategoriesViewController(subMenu)
         categoriesVC.modalPresentationStyle = .fullScreen
         present(categoriesVC, animated: true)
+    }
+    
+    
+    private func adjustAlignmentOfDock() {
+    
+        if homeScreen.dock.getItems().count == 4 {
+            self.adjustTrailingDock.constant = -50
+        }
+        
+        if homeScreen.dock.getItems().count > 4 {
+            self.adjustTrailingDock.constant = -90
+        }
+        
+    }
+    
+    
+    private func addItemsDock() {
+        
+        let win1 = homeScreen.createIconsDock("trash")
+        let win2 = homeScreen.createIconsDock("person")
+        let win3 = homeScreen.createIconsDock("mic")
+        let win4 = homeScreen.createIconsDock("person.circle")
+        
+        homeScreen.dock.setItems(win2)
+        
+        win3.add(insideTo: homeScreen)
+        win3.makeConstraints { make in
+            make.setPinTop.equalToSafeArea(100)
+                .setHeight.equalToConstant(50)
+        }
+        
     }
     
     

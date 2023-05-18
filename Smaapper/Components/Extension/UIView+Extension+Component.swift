@@ -62,19 +62,19 @@ extension UIView {
     
     @discardableResult
     func makeShadow(_ shadow: (_ make: Shadow) -> Shadow) -> Self {
-        let shadow = shadow(Shadow(self))
+        _ = shadow(Shadow(self))
         return self
     }
     
     @discardableResult
     func makeNeumorphism(_ neumorphism: (_ make: Neumorphism) -> Neumorphism) -> Self {
-        _ = neumorphism(Neumorphism(self))
+        let neu = neumorphism(Neumorphism(self))
         return self
     }
     
     @discardableResult
     func makeGradient(_ gradient: (_ make: Gradient) -> Gradient) -> Self {
-        let gradient = gradient(Gradient(self))
+        _ = gradient(Gradient(self))
         return self
     }
     
@@ -84,6 +84,11 @@ extension UIView {
         return self
     }
     
+    @discardableResult
+    func makeBlur(_ blur: (_ make: Blur) -> Blur) -> Self {
+        _ = blur(Blur(self))
+        return self
+    }
     
 //  MARK: - hideKeyboardWhenViewTapped
     

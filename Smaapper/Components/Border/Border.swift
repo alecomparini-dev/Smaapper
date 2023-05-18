@@ -55,12 +55,9 @@ class Border {
     }
     
     func setCornerRadius(_ radius: CGFloat) -> Self {
-//        component.layer.masksToBounds = true
         component.clipsToBounds = true
         self.removeBorderStyleOfTextField()
         component.layer.cornerRadius = radius
-//        component.layer.masksToBounds = false
-        //TODO: - OLHAR ESTE PROBLEMA DO MASK AFETANDO O DROPDOWN -
         return self
     }
     

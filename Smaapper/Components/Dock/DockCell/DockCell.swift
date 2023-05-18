@@ -21,11 +21,12 @@ class DockCell: UICollectionViewCell {
     }
     
     
-    func setupCell(_ iconButton: IconButton) {
+    func setupCell(_ iconButton: UIView) {
         removeSubViews(contentView)
-        iconButton.add(insideTo: self.contentView)
+        iconButton.add(insideTo: self)
+        
         iconButton.makeConstraints { make in
-            make.setPin.equalToSafeArea
+            make.setPin.equalTo(self)
         }
     }
     

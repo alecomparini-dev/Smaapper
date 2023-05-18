@@ -12,31 +12,14 @@ class Dock: View {
     private var _isShow = false
     private var alreadyApplied = false
     private var dockViewBounds = CGRect()
-
+    private var blurEnabled = false
     private var container = UIView()
     
     private let layout: UICollectionViewFlowLayout
     private var customConstraintWidthCollection: NSLayoutConstraint = NSLayoutConstraint()
     private var isUserInteractionEnabledItems = false
     
-    private var items: [IconButton] = [
-//        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person")))
-    ]
+    private var items: [UIView] = []
     private var customItemSize: [Int:CGSize] = [:]
     private var itemsSize = CGSize(width: 50, height: 50)
     private let marginContainer: CGFloat = 8
@@ -54,13 +37,35 @@ class Dock: View {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func createIconsDock(_ systemNameImage: String) -> IconButton {
+        let img = ImageView(UIImage(systemName: systemNameImage))
+        let btn = IconButton(img)
+            .setImageSize(15)
+            .setImageColor(.white)
+//            .setBackgroundColor(.red)
+            .setBorder({ build in
+                build.setCornerRadius(8)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(.red)
+                    .setIntensity(percent: 100)
+                    .setLightPosition(.leftTop)
+                    .setBlur(percent: 5)
+                    .setDistance(percent: 5)
+                    .apply()
+            }
+            
+        return btn
+    }
+    
     private func initialization() {
         self.collection.backgroundColor = .clear
         self.layout.scrollDirection = .horizontal
         self.collection.setCollectionViewLayout(self.layout, animated: true)
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 0, left: 0, bottom: 0, rigth: 0)
-        self.setShowsHorizontalScrollIndicator(false)
+        self.setShowsHorizontalScrollIndicator(false)    
         
     }
     
@@ -75,11 +80,16 @@ class Dock: View {
         }
     }
 
+//  MARK: - GET Properties
+    func getItems() -> [UIView] {
+        return self.items
+    }
+    
     
 //  MARK: - SET Properties
 
     @discardableResult
-    func setItems(_ item: IconButton) -> Self {
+    func setItems(_ item: UIView) -> Self {
         self.items.append(item)
         return self
     }
@@ -126,39 +136,44 @@ class Dock: View {
         return self
     }
     
+    @discardableResult
+    func setBlur(_ flag: Bool) -> Self {
+        self.blurEnabled = flag
+        return self
+    }
+    
+    
+//  MARK: - OVVERRIDE Base Component
     
     @discardableResult
     override func setBorder(_ border: (_ build: Border) -> Border) -> Self {
-        let _ = border(Border(self.container))
+        _ = border(Border(self.container))
         return self
     }
-    
-    @discardableResult
-    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self.container))
-        let _ = shadow(Shadow(self.collection))
-        return self
-    }
-    
+   
     @discardableResult
     override func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self.container))
+        _ = neumorphism(Neumorphism(self.container))
         return self
     }
     
     @discardableResult
     override func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self.container))
+        _ = gradient(Gradient(self.container))
         return self
     }
     
     @discardableResult
-    override func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        let _ = gesture(TapGesture(self.container))
+    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
+
+        self.content.makeShadow { make in
+            make.setColor(.red)
+                .setOffset(width: 10, height: 10)
+                .apply()
+            
+        }
         return self
     }
-    
-    
     
     
 //  MARK: - Private Function Area
@@ -185,8 +200,10 @@ class Dock: View {
     }
     
     private func configDock() {
+        applyBlur()
         addElementsInDock()
         configConstraints()
+        
     }
     
     private func addElementsInDock() {
@@ -261,6 +278,15 @@ class Dock: View {
     
     private func calculateItemSizeExcludingCustomItemSize() -> CGFloat {
         return (self.items.count - self.customItemSize.count).toCGFloat * itemsSize.width
+    }
+    
+    
+    private func applyBlur() {
+        if !blurEnabled { return }
+        container.makeBlur { make in
+            make.setStyle(.dark)
+                .apply()
+        }
     }
     
 }
