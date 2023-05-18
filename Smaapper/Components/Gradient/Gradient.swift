@@ -71,6 +71,12 @@ class Gradient {
         return self
     }
     
+    @discardableResult
+    func setOpacity(_ opacity: Float) -> Self {
+        self.gradient.opacity = opacity
+        return self
+    }
+    
     
     
 //  MARK: - Apply Gradient

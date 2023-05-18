@@ -13,31 +13,33 @@ class Dock: View {
     private var alreadyApplied = false
     private var dockViewBounds = CGRect()
 
+    private var container = UIView()
+    
     private let layout: UICollectionViewFlowLayout
-    private let container = UIView()
     private var customConstraintWidthCollection: NSLayoutConstraint = NSLayoutConstraint()
     private var isUserInteractionEnabledItems = false
     
     private var items: [IconButton] = [
+//        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
         IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person.fill"))),
-        IconButton(UIImageView(image: UIImage(systemName: "person.circle"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
-        IconButton(UIImageView(image: UIImage(systemName: "mic"))),
-        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
+//        IconButton(UIImageView(image: UIImage(systemName: "trash"))),
         IconButton(UIImageView(image: UIImage(systemName: "person")))
     ]
     private var customItemSize: [Int:CGSize] = [:]
     private var itemsSize = CGSize(width: 50, height: 50)
+    private let marginContainer: CGFloat = 8
 
     private let collection: UICollectionView
     
@@ -56,9 +58,8 @@ class Dock: View {
         self.collection.backgroundColor = .clear
         self.layout.scrollDirection = .horizontal
         self.collection.setCollectionViewLayout(self.layout, animated: true)
-        self.customConstraintWidthCollection = self.collection.widthAnchor.constraint(equalToConstant: 0)
         self.setMinimumLineSpacing(10)
-        self.setContentInset(top: 0, left: 10, bottom: 0, rigth: 10)
+        self.setContentInset(top: 0, left: 0, bottom: 0, rigth: 0)
         self.setShowsHorizontalScrollIndicator(false)
         
     }
@@ -126,8 +127,6 @@ class Dock: View {
     }
     
     
-    
-    
     @discardableResult
     override func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self.container))
@@ -137,6 +136,7 @@ class Dock: View {
     @discardableResult
     override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
         let _ = shadow(Shadow(self.container))
+        let _ = shadow(Shadow(self.collection))
         return self
     }
     
@@ -166,7 +166,7 @@ class Dock: View {
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
             DispatchQueue.main.async {
-                self.configCollection()
+                self.configDock()
                 self.RegisterCell()
                 self.setDelegate()
                 self.alreadyApplied = true
@@ -184,35 +184,45 @@ class Dock: View {
         collection.dataSource = self
     }
     
-    private func configCollection() {
-        addCollectionInDockView()
-        configConstraintsCollection()
+    private func configDock() {
+        addElementsInDock()
+        configConstraints()
     }
     
-    private func addCollectionInDockView() {
+    private func addElementsInDock() {
         container.add(insideTo: self)
-        self.collection.add(insideTo: container)
+        collection.add(insideTo: container)
+    }
+    
+    
+    private func configConstraints() {
+        configConstraintsContainer()
+        configConstraintsCollection()
+        
+    }
+    
+    private func configConstraintsContainer() {
+        self.dockViewBounds = self.bounds
+        customConstraintWidthCollection = self.container.widthAnchor.constraint(equalToConstant: 0)
+        customConstraintWidthCollection.isActive = true
+        container.makeConstraints { make in
+            make
+                .setTop.equalTo(self, .top)
+                .setHorizontalAlignmentX.equalTo(self)
+                .setHeight.equalTo(self)
+        }
+        configConstraintWidthCollection()
     }
     
     private func configConstraintsCollection() {
-        self.container.makeConstraints { make in
-            make
-                .setPin.equalTo(self)
-        }
-        
         self.collection.makeConstraints { make in
             make
-                .setTop.equalTo(container, .top)
-                .setHorizontalAlignmentX.equalTo(container)
-                .setHeight.equalTo(container)
+                .setTop.setBottom.equalToSuperView
+                .setLeading.setTrailing.equalToSuperView(marginContainer)
         }
-        
-        self.customConstraintWidthCollection.isActive = true
-        configConstraintWidthContainer()
     }
     
-    private func configConstraintWidthContainer() {
-        self.dockViewBounds = self.bounds
+    private func configConstraintWidthCollection() {
         let sizeAllItems = self.calculateSizeAllItems()
         if sizeAllItems >= self.dockViewBounds.width {
             self.customConstraintWidthCollection.constant = self.dockViewBounds.width
@@ -225,7 +235,7 @@ class Dock: View {
         let spacing = calculateLineSpacing()
         let contentInset = calculateContentInset()
         let itemSize = calculateItemSize()
-        return itemSize + spacing + contentInset
+        return itemSize + spacing + contentInset + (marginContainer*2)
     }
     
     private func calculateLineSpacing() -> CGFloat {

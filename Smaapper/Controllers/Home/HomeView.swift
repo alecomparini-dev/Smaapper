@@ -26,7 +26,7 @@ class HomeView: View {
         
         
         
-        testeCaralho()
+//        testeCaralho()
         
     }
     
@@ -98,7 +98,7 @@ class HomeView: View {
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-20)
-                    .setHeight.setWidth.equalToConstant(50)
+                    .setHeight.setWidth.equalToConstant(60)
             }
 
     }()
@@ -139,23 +139,34 @@ class HomeView: View {
             .setSize(CGSize(width: 50, height: 50))
             .setBorder({ build in
                 build
-                    .setColor(.darkGray)
-                    .setWidth(0)
-                    .setCornerRadius(8)
+                    .setColor(.white.withAlphaComponent(0.1))
+                    .setWidth(1)
+                    .setCornerRadius(12)
+            })
+            .setShadow({ build in
+                build.setColor(.red)
+                    .setBlur(50)
+                    .setOpacity(1)
+//                    .setCornerRadius(12)
+                    .setOffset(width: 0, height: 0)
+                    .apply()
             })
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)
-                    .setTop.setBottom.equalTo(menuButton)
+                    .setTop.equalTo(menuButton, .top, 5)
+                    .setBottom.equalTo(menuButton, .bottom, -5)
                     .setTrailing.equalTo(menuButton, .leading, -10)
+                    .setVerticalAlignmentY.equalTo(menuButton)
+                    
             }
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .apply()
-            }
+//            .setNeumorphism { build in
+//                build
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setShape(.concave)
+//                    .setLightPosition(.leftTop)
+//                    .apply()
+//            }
         return dock
     }()
 
@@ -259,9 +270,9 @@ class HomeView: View {
     
     
     func testeCaralho() {
-        let translucentBlurView = TranslucentBlurView()
+        let translucentBlurView = VibrantView()
         addSubview(translucentBlurView)
-        translucentBlurView.layer.zPosition = 500000000
+//        translucentBlurView.layer.zPosition = -1
         translucentBlurView.makeConstraints { make in
             make
                 .setBottom.equalToSafeArea(5)
@@ -284,29 +295,30 @@ class HomeView: View {
 
 
 
-class TranslucentBlurView: UIView {
+class VibrantView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupBlurView()
+        setupVibrancyEffect()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupBlurView()
+        setupVibrancyEffect()
+        
     }
     
-    private func setupBlurView() {
-        // Cria um efeito de blur com o estilo desejado
-        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+    private func setupVibrancyEffect() {
         
+        
+        // Cria um efeito de blur com o estilo .regular
+        let blurEffect = UIBlurEffect(style: .systemThickMaterialDark)
+
         // Cria a visual effect view com o efeito de blur
         let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.backgroundColor = .clear
-        blurView.alpha = 0.98
-
-        
         blurView.translatesAutoresizingMaskIntoConstraints = false
-        
+//        blurView.alpha = 0.9
+        blurView.backgroundColor = .red
+
         // Adiciona a visual effect view como subview e ajusta as restrições
         addSubview(blurView)
         NSLayoutConstraint.activate([
@@ -315,5 +327,9 @@ class TranslucentBlurView: UIView {
             blurView.topAnchor.constraint(equalTo: topAnchor),
             blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+
+
+        
+        
     }
 }
