@@ -47,37 +47,39 @@ extension UIView {
     
 //  MARK: - Apply Constraints
     
-    func makeConstraints(_ buildConstraintFlow: (_ make: StartOfConstraintsFlow) -> StartOfConstraintsFlow) {
+    @discardableResult
+    func makeConstraints(_ buildConstraintFlow: (_ make: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         let constraints = buildConstraintFlow(StartOfConstraintsFlow(self))
         constraints.applyConstraint()
+        return self
     }
     
     @discardableResult
-    func makeBorder(_ border: (Border) -> Border) -> Self {
+    func makeBorder(_ border: (_ make: Border) -> Border) -> Self {
         _ = border(Border(self))
         return self
     }
     
     @discardableResult
-    func makeShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+    func makeShadow(_ shadow: (_ make: Shadow) -> Shadow) -> Self {
         let shadow = shadow(Shadow(self))
         return self
     }
     
     @discardableResult
-    func makeNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+    func makeNeumorphism(_ neumorphism: (_ make: Neumorphism) -> Neumorphism) -> Self {
         _ = neumorphism(Neumorphism(self))
         return self
     }
     
     @discardableResult
-    func makeGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+    func makeGradient(_ gradient: (_ make: Gradient) -> Gradient) -> Self {
         let gradient = gradient(Gradient(self))
         return self
     }
     
     @discardableResult
-    func makeTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+    func makeTapGesture(_ gesture: (_ make: TapGesture) -> TapGesture) -> Self {
         _ = gesture(TapGesture(self))
         return self
     }

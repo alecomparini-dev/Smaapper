@@ -45,31 +45,31 @@ class Stack: UIStackView {
 extension Stack: BaseComponentProtocol {
     
     @discardableResult
-    func setBorder(_ border: (Border) -> Border) -> Self {
+    func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
         return self
     }
     
     @discardableResult
-    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
+    func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
         let _ = shadow(Shadow(self))
         return self
     }
     
     @discardableResult
-    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
+    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
         let _ = neumorphism(Neumorphism(self))
         return self
     }
     
     @discardableResult
-    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
         let _ = gradient(Gradient(self))
         return self
     }
     
     @discardableResult
-    func setTapGesture(_ gesture: (TapGesture) -> TapGesture) -> Self {
+    func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
         let _ = gesture(TapGesture(self))
         return self
     }

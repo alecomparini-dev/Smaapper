@@ -23,6 +23,11 @@ class HomeView: View {
         addBackgroundColor()
         addElements()
         applyConstraints()
+        
+        
+        
+//        testeCaralho()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +35,7 @@ class HomeView: View {
     }
     
     lazy var dropdownMenu: DropdownMenuFooter = {
-        let menu = DropdownMenuFooter()
+        return DropdownMenuFooter()
             .setBorder({ build in
                 build
                     .setCornerRadius(18)
@@ -57,13 +62,13 @@ class HomeView: View {
             .setAction(dropdownMenuTapped)
             .setConstraints { build in
                 build
-                    .setTop.lessThanOrEqualToSuperView(15)
+                    .setTop.greaterThanOrEqualToSafeArea(10)
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
+//                    .setHeight.greaterThanOrEqualToSafeArea(-100)
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
-        return menu
     }()
     
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
@@ -72,7 +77,7 @@ class HomeView: View {
     
     lazy var menuButton: ButtonImage = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-        let btn = ButtonImage(img)
+        return ButtonImage(img)
             .setImageColor(.white)
             .setImageSize(14)
             .setBorder({ build in
@@ -88,63 +93,80 @@ class HomeView: View {
                     .setLightPosition(.leftTop)
                     .apply()
             }
+            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            .setFloatButton()
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-20)
-                    .setHeight.setWidth.equalToConstant(50)
+                    .setHeight.setWidth.equalToConstant(60)
             }
-            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
-            .setFloatButton()
-        return btn
+
     }()
     
     lazy var profileButton: IconButton = {
-        let btn = IconButton(ImageView(UIImage(systemName: "person")), "Profile")
+        return IconButton(ImageView(UIImage(systemName: "person")), "Profile")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-        return btn
     }()
     
 
     lazy var recentButton: IconButton = {
-        let btn = IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
+        return IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setTitle("Recent", .normal)
             .setImageColor(UIColor.HEX("#0f1010"))
-        return btn
     }()
     
     
     lazy var settingsButton: IconButton = {
-        let btn = IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
+        return IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
-        return btn
     }()
     
     
     lazy var dock: Dock = {
         let dock = Dock()
+            .setSize(CGSize(width: 50, height: 50))
             .setBorder({ build in
-                build.setColor(.darkGray)
+                build
+                    .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
-                    .setCornerRadius(10)
+                    .setCornerRadius(12)
+            })
+            .setShadow({ build in
+                build.setColor(.red)
+                    .setBlur(50)
+                    .setOpacity(1)
+//                    .setCornerRadius(12)
+                    .setOffset(width: 0, height: 0)
+                    .apply()
             })
             .setConstraints { build in
                 build
-                    .setLeading.equalToSafeArea(15)
-                    .setTop.setBottom.equalTo(menuButton)
+                    .setLeading.equalToSafeArea(20)
+                    .setTop.equalTo(menuButton, .top, 5)
+                    .setBottom.equalTo(menuButton, .bottom, -5)
                     .setTrailing.equalTo(menuButton, .leading, -10)
+                    .setVerticalAlignmentY.equalTo(menuButton)
+                    
             }
+//            .setNeumorphism { build in
+//                build
+//                    .setReferenceColor(UIColor.HEX("#17191a"))
+//                    .setShape(.concave)
+//                    .setLightPosition(.leftTop)
+//                    .apply()
+//            }
         return dock
     }()
 
@@ -174,49 +196,46 @@ class HomeView: View {
 
     
 //  MARK: - Create Section Menu
+    
     func createMiddleSectionView(_ text: String) -> UIView {
-        let label = Label(text)
+        return Label(text)
             .setColor(UIColor.systemGray)
             .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
             .setTextAlignment(.left)
-        return label
     }
 
     
 //  MARK: - Create Rows Menu
+    
     func createLeftRowView(_ systemNameImage: String) -> UIView {
-        let img = ImageView()
+        return ImageView()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(18)
             .setTintColor(.white.withAlphaComponent(0.8))
-        return img
     }
     
     func createMiddleRowView(_ text: String) -> UIView {
-        let label = Label(text)
+        return Label(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
-        return label
     }
     
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
-        let img = ImageView()
+        return ImageView()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(14)
             .setWeight(.regular)
             .setTintColor(color)
-        return img
     }
-
     
     
 //  MARK: - Private Function Area
 
     private func addBackgroundColor() {
-        _ = self.makeGradient { build in
+        self.makeGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
@@ -234,10 +253,83 @@ class HomeView: View {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        dock.isShow = true
-        
-        
     }
+    
+    private func createIconsDock(_ systemNameImage: String) -> IconButton {
+        let img = ImageView(UIImage(systemName: systemNameImage))
+        let btn = IconButton(img)
+            .setImageSize(15)
+            .setImageColor(.white)
+            
+            
+        return btn
+    }
+    
+    
+    
+    
+    
+    func testeCaralho() {
+        let translucentBlurView = VibrantView()
+        addSubview(translucentBlurView)
+//        translucentBlurView.layer.zPosition = -1
+        translucentBlurView.makeConstraints { make in
+            make
+                .setBottom.equalToSafeArea(5)
+//                .setLeading.equalToSafeArea(5)
+                .setTrailing.equalToSafeArea(-5)
+                .setHeight.equalToConstant(60)
+                .setWidth.equalToConstant(250)
+        }
+    }
+    
+    
     
 }
 
+
+
+
+
+
+
+
+
+class VibrantView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupVibrancyEffect()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupVibrancyEffect()
+        
+    }
+    
+    private func setupVibrancyEffect() {
+        
+        
+        // Cria um efeito de blur com o estilo .regular
+        let blurEffect = UIBlurEffect(style: .systemThickMaterialDark)
+
+        // Cria a visual effect view com o efeito de blur
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+//        blurView.alpha = 0.9
+        blurView.backgroundColor = .red
+
+        // Adiciona a visual effect view como subview e ajusta as restrições
+        addSubview(blurView)
+        NSLayoutConstraint.activate([
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+
+
+        
+        
+    }
+}

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class View: UIView {
+class View: UIView, BaseComponentProtocol {
     internal var constraintsFlow: StartOfConstraintsFlow?
     
     init() {
@@ -26,17 +26,11 @@ class View: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         Resize.resize(self)
-        print("remover layoutsubviews" , self)
+//        print("remover layoutsubviews" , self)
     }
 
     
-}
 
-
-
-//  MARK: - Extension BaseComponentProtocol
-extension View: BaseComponentProtocol {
-    
     @discardableResult
     func setBorder(_ border: (Border) -> Border) -> Self {
         let _ = border(Border(self))

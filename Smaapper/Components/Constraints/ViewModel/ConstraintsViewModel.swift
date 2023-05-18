@@ -32,11 +32,6 @@ class ConstraintsViewModel {
     
     var typeElement: ConstraintsTypeElement { model.typeElement }
     
-    
-    
-    
-    
-    
 
     var relation: ConstraintsRelations { model.relation }
     

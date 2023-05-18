@@ -49,6 +49,8 @@ class HomeVC: UIViewController {
         //            self.dropdownMenuTapped((0,0))
         //        }
         
+        homeScreen.dock.isShow = true
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -169,12 +171,6 @@ class HomeVC: UIViewController {
         categoriesVC.modalPresentationStyle = .fullScreen
         present(categoriesVC, animated: true)
     }
-    
-    
-    
-    
-    
-    
     
     
 }
