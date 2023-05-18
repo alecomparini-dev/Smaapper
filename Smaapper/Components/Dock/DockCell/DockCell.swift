@@ -14,6 +14,7 @@ class DockCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+
     }
     
     required init?(coder: NSCoder) {
@@ -21,12 +22,11 @@ class DockCell: UICollectionViewCell {
     }
     
     
-    func setupCell(_ iconButton: UIView) {
+    func setupCell(_ iconButton: IconButton) {
         removeSubViews(contentView)
-        iconButton.add(insideTo: self)
-        
+        iconButton.add(insideTo: self.contentView)
         iconButton.makeConstraints { make in
-            make.setPin.equalTo(self)
+            make.setPin.equalToSuperView
         }
     }
     

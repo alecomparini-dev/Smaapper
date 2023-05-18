@@ -19,7 +19,7 @@ class Dock: View {
     private var customConstraintWidthCollection: NSLayoutConstraint = NSLayoutConstraint()
     private var isUserInteractionEnabledItems = false
     
-    private var items: [UIView] = []
+    private var items: [IconButton] = [IconButton]()
     private var customItemSize: [Int:CGSize] = [:]
     private var itemsSize = CGSize(width: 50, height: 50)
     private let marginContainer: CGFloat = 8
@@ -37,34 +37,12 @@ class Dock: View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func createIconsDock(_ systemNameImage: String) -> IconButton {
-        let img = ImageView(UIImage(systemName: systemNameImage))
-        let btn = IconButton(img)
-            .setImageSize(15)
-            .setImageColor(.white)
-//            .setBackgroundColor(.red)
-            .setBorder({ build in
-                build.setCornerRadius(8)
-            })
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(.red)
-                    .setIntensity(percent: 100)
-                    .setLightPosition(.leftTop)
-                    .setBlur(percent: 5)
-                    .setDistance(percent: 5)
-                    .apply()
-            }
-            
-        return btn
-    }
-    
     private func initialization() {
         self.collection.backgroundColor = .clear
         self.layout.scrollDirection = .horizontal
         self.collection.setCollectionViewLayout(self.layout, animated: true)
         self.setMinimumLineSpacing(10)
-        self.setContentInset(top: 0, left: 0, bottom: 0, rigth: 0)
+//        self.setContentInset(top: 0, left: 0, bottom: 0, rigth: 0)
         self.setShowsHorizontalScrollIndicator(false)    
         
     }
@@ -89,8 +67,8 @@ class Dock: View {
 //  MARK: - SET Properties
 
     @discardableResult
-    func setItems(_ item: UIView) -> Self {
-        self.items.append(item)
+    func setItems(_ item: IconButton) -> Self {
+        items.append(item)
         return self
     }
     
@@ -334,7 +312,7 @@ extension Dock: UICollectionViewDataSource {
         print(indexPath.row)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
-    
+
 }
 
 
