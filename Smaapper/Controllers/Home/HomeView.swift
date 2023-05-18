@@ -23,6 +23,11 @@ class HomeView: View {
         addBackgroundColor()
         addElements()
         applyConstraints()
+        
+        
+        
+        testeCaralho()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -60,8 +65,8 @@ class HomeView: View {
                     .setTop.greaterThanOrEqualToSafeArea(10)
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.greaterThanOrEqualToSafeArea(-100)
-//                    .setHeight.lessThanOrEqualToConstant(400)
+//                    .setHeight.greaterThanOrEqualToSafeArea(-100)
+                    .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
     }()
@@ -88,13 +93,14 @@ class HomeView: View {
                     .setLightPosition(.leftTop)
                     .apply()
             }
+            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            .setFloatButton()
             .setConstraints { build in
                 build.setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-20)
                     .setHeight.setWidth.equalToConstant(50)
             }
-            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
-            .setFloatButton()
+
     }()
     
     lazy var profileButton: IconButton = {
@@ -130,7 +136,6 @@ class HomeView: View {
     
     lazy var dock: Dock = {
         let dock = Dock()
-            .setBackgroundColor(.red)
             .setSize(CGSize(width: 50, height: 50))
             .setBorder({ build in
                 build
@@ -249,5 +254,66 @@ class HomeView: View {
         return btn
     }
     
+    
+    
+    
+    
+    func testeCaralho() {
+        let translucentBlurView = TranslucentBlurView()
+        addSubview(translucentBlurView)
+        translucentBlurView.layer.zPosition = 500000000
+        translucentBlurView.makeConstraints { make in
+            make
+                .setBottom.equalToSafeArea(5)
+//                .setLeading.equalToSafeArea(5)
+                .setTrailing.equalToSafeArea(-5)
+                .setHeight.equalToConstant(60)
+                .setWidth.equalToConstant(250)
+        }
+    }
+    
+    
+    
 }
 
+
+
+
+
+
+
+
+
+class TranslucentBlurView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupBlurView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupBlurView()
+    }
+    
+    private func setupBlurView() {
+        // Cria um efeito de blur com o estilo desejado
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        
+        // Cria a visual effect view com o efeito de blur
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.backgroundColor = .clear
+        blurView.alpha = 0.98
+
+        
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Adiciona a visual effect view como subview e ajusta as restrições
+        addSubview(blurView)
+        NSLayoutConstraint.activate([
+            blurView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            blurView.topAnchor.constraint(equalTo: topAnchor),
+            blurView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+}
