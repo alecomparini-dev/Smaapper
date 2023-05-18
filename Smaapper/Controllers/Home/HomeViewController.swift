@@ -53,11 +53,21 @@ class HomeVC: UIViewController {
         //            self.dropdownMenuTapped((0,0))
         //        }
         
+
+    }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        addItemsDock()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.addItemsDock()
+                self.adjustAlignmentOfDock()
+                self.homeScreen.dockIsShow(true)
+
+//        }
         
-        adjustAlignmentOfDock()
-        homeScreen.dock.isShow = true
         
     }
     
@@ -188,11 +198,11 @@ class HomeVC: UIViewController {
     
     private func adjustAlignmentOfDock() {
     
-        if homeScreen.dock.getItems().count == 4 {
+        if homeScreen.getItemsDock().count == 4 {
             self.adjustTrailingDock.constant = -50
         }
         
-        if homeScreen.dock.getItems().count > 4 {
+        if homeScreen.getItemsDock().count > 4 {
             self.adjustTrailingDock.constant = -90
         }
         
@@ -206,10 +216,12 @@ class HomeVC: UIViewController {
         let win3 = homeScreen.createIconsDock("mic")
         let win4 = homeScreen.createIconsDock("person.circle")
         
-        homeScreen.dock.setItems(win2)
+        homeScreen.setItemsDock(win1)
+        homeScreen.setItemsDock(win2)
+        homeScreen.setItemsDock(win3)
         
-        win3.add(insideTo: homeScreen)
-        win3.makeConstraints { make in
+        win4.add(insideTo: homeScreen)
+        win4.makeConstraints { make in
             make.setPinTop.equalToSafeArea(100)
                 .setHeight.equalToConstant(50)
         }

@@ -133,28 +133,33 @@ class HomeView: View {
     
     lazy var dock: Dock = {
         let dock = Dock()
-//            .setSize(CGSize(width: 40 , height: 40))
-//            .setBlur(true)
+            .setSize(CGSize(width: 50 , height: 45))
+            .setMinimumLineSpacing(12)
+            .setBlur(true)
             .setBorder({ build in
                 build
                     .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
                     .setCornerRadius(12)
             })
+            .setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)
-//                    .setTop.equalTo(menuButton, .top)
-                    .setHeight.equalToConstant(50)
-//                    .setBottom.equalTo(menuButton, .bottom, -2)
+                    .setHeight.equalToConstant(65)
                     .setBottom.equalToSafeArea(-3)
-//                    .setTrailing.equalTo(menuButton, .leading, -15)
             }
-
-            
-
         return dock
     }()
+    func setItemsDock(_ view: IconButton) {
+        dock.setItems(view)
+    }
+    func getItemsDock() -> [UIView] {
+        return dock.getItems()
+    }
+    func dockIsShow(_ flag: Bool) {
+        dock.isShow = flag
+    }
 
     
 //  MARK: - Objc Functions Area
@@ -245,45 +250,25 @@ class HomeView: View {
         
     }
     
-    func createIconsDock(_ systemNameImage: String) -> UIView {
+    func createIconsDock(_ systemNameImage: String) -> IconButton {
         let img = ImageView(UIImage(systemName: systemNameImage))
-        let btn = UIView()
-//            .setImageSize(15)
-//            .setImageColor(.white)
-////            .setBackgroundColor(.red)
-//            .setBorder({ build in
-//                build.setCornerRadius(8)
-//            })
-//            .setNeumorphism { build in
-//                build
-//                    .setReferenceColor(.red)
-//                    .setIntensity(percent: 100)
-//                    .setLightPosition(.leftTop)
-//                    .setBlur(percent: 5)
-//                    .setDistance(percent: 5)
-//                    .apply()
-//            }
-//
-        
-        btn.makeNeumorphism { make in
-            make
-                .setReferenceColor(.red)
-                .setIntensity(percent: 100)
-                .setLightPosition(.leftTop)
-                .setBlur(percent: 5)
-                .setDistance(percent: 5)
-                .setShape(.flat)
-                .apply()
-        }
-        btn.makeBorder { make in
-            make
-                .setCornerRadius(10)
-                .setWidth(1)
-                .setColor(.red)
-        }
-//        btn.setBackgroundColor(.cyan)
-
-            
+        let btn = IconButton(img)
+            .setImageColor(.white)
+            .setImageSize(14)
+            .setNeumorphism { make in
+                make
+                    .setReferenceColor(UIColor.HEX("#17191a").getBrightness(1.9))
+                    .setIntensity(percent: 100)
+                    .setLightPosition(.leftTop)
+                    .setBlur(percent: 0)
+                    .setDistance(percent: 0)
+                    .setShape(.convex)
+                    .apply()
+            }
+            .setBorder { make in
+                make
+                    .setCornerRadius(8)
+            }
         return btn
     }
     
