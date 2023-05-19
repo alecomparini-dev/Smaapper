@@ -9,10 +9,14 @@ import UIKit
 
 
 class Button: UIButton {
+    internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
+    
     
     private var _config = UIButton.Configuration.plain()
     private var activateDisabledButton: Bool = false
-    internal var constraintsFlow: StartOfConstraintsFlow?
+    
     
     override var isEnabled: Bool {
         didSet {
@@ -152,7 +156,7 @@ class Button: UIButton {
 
 //  MARK: - Extension BaseComponentProtocol
 extension Button: BaseComponentProtocol {
-    
+
     @discardableResult
     func setBorder(_ border: (_ build: Border) -> Border) -> Self {
         let _ = border(Border(self))
@@ -161,14 +165,20 @@ extension Button: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

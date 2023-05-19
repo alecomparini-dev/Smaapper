@@ -102,13 +102,12 @@ class Shadow {
             .setBlur(ShadowDefault.radius)
     }
     
+    @discardableResult
     func apply() -> Self {
-        DispatchQueue.main.async {
-            self.component.layoutIfNeeded()
-            self.shadow.frame = self.component.bounds
-            self.shadow.shadowPath = self.calculateShadowPath()
-            self.insertSubLayer()
-        }
+        self.component.layoutIfNeeded()
+        self.shadow.frame = self.component.bounds
+        self.shadow.shadowPath = self.calculateShadowPath()
+        self.insertSubLayer()
         return self
     }
     

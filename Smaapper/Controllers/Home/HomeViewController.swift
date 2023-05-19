@@ -53,6 +53,8 @@ class HomeVC: UIViewController {
         //            self.dropdownMenuTapped((0,0))
         //        }
         
+        
+        homeScreen.applyStyle()
 
     }
     
@@ -61,14 +63,13 @@ class HomeVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.addItemsDock()
-                self.adjustAlignmentOfDock()
-                self.homeScreen.dockIsShow(true)
-
-//        }
-        
-        
+        DispatchQueue.main.async {
+            self.homeScreen.dockIsShow(true)
+            self.adjustAlignmentOfDock()
+            self.addItemsDock()
+            
+            
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -216,9 +217,15 @@ class HomeVC: UIViewController {
         let win3 = homeScreen.createIconsDock("mic")
         let win4 = homeScreen.createIconsDock("person.circle")
         
+        
+        
+        win1.applyNeumorphism()
+        win4.applyNeumorphism()
         homeScreen.setItemsDock(win1)
         homeScreen.setItemsDock(win2)
         homeScreen.setItemsDock(win3)
+        
+        
         
         win4.add(insideTo: homeScreen)
         win4.makeConstraints { make in

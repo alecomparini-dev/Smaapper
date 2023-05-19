@@ -23,7 +23,6 @@ class HomeView: View {
         addBackgroundColor()
         addElements()
         applyConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +44,6 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
-                    .apply()
             }
             .setFooterGradient { build in
                 build
@@ -82,13 +80,6 @@ class HomeView: View {
                     .setColor(.systemGray.withAlphaComponent(0.2))
                     .setColor(.white.withAlphaComponent(0.1))
             })
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .apply()
-            }
             .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
             .setConstraints { build in
@@ -96,6 +87,12 @@ class HomeView: View {
                     .setBottom.equalToSafeArea(-10)
                     .setTrailing.equalToSafeArea(-15)
                     .setHeight.setWidth.equalToConstant(60)
+            }
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
             }
 
     }()
@@ -229,8 +226,6 @@ class HomeView: View {
         self.makeGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
-//                .setColor([UIColor.HEX("#f92900"),UIColor.HEX("#b02300")])
-//                .setColor([UIColor.HEX("#ec9355"),UIColor.HEX("#ff6b00")])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
@@ -243,36 +238,43 @@ class HomeView: View {
     }
     
     private func applyConstraints() {
-       menuButton.applyConstraint()
+        menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        
-        
     }
+    
+    func applyStyle() {
+        self.applyNeumorphismStyle()
+    }
+    
+    private func applyNeumorphismStyle() {
+        menuButton.applyNeumorphism()
+        dropdownMenu.applyNeumorphism()
+    }
+    
     
     func createIconsDock(_ systemNameImage: String) -> IconButton {
         let img = ImageView(UIImage(systemName: systemNameImage))
         let btn = IconButton(img)
             .setImageColor(.white)
             .setImageSize(14)
-            .setNeumorphism { make in
-                make
-                    .setReferenceColor(UIColor.HEX("#17191a").getBrightness(1.9))
-                    .setIntensity(percent: 100)
-                    .setLightPosition(.leftTop)
-                    .setBlur(percent: 0)
-                    .setDistance(percent: 0)
-                    .setShape(.convex)
-                    .apply()
-            }
             .setBorder { make in
                 make
                     .setCornerRadius(8)
+                    .setWidth(1)
             }
+            .setNeumorphism({ build in
+                build.setReferenceColor(UIColor.HEX("#2b2f30"))
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 0.7)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark , percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .dark, percent: 5)
+            })
         return btn
     }
-    
-    
 
     
     

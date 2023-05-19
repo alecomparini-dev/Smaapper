@@ -79,21 +79,17 @@ class Gradient {
     
     
     
-//  MARK: - Apply Gradient
+    //  MARK: - Apply Gradient
     @discardableResult
     func apply() -> Self {
-        DispatchQueue.main.async() {
-            self.applyGradient()
-        }
+        self.applyGradient()
         return self
     }
     
     @discardableResult
     func apply(_ component: UIView) -> Self {
-        DispatchQueue.main.async() {
-            self.component = component
-            self.applyGradient()
-        }
+        self.component = component
+        self.applyGradient()
         return self
     }
         

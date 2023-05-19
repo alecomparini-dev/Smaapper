@@ -25,16 +25,14 @@ extension UIView {
     
     @discardableResult
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
-        DispatchQueue.main.async {
-            let layer = CAShapeLayer()
-            layer.frame = self.bounds
-            layer.cornerRadius = self.layer.cornerRadius
-            layer.maskedCorners = self.layer.maskedCorners
-            layer.fillColor = color.cgColor
-            layer.backgroundColor = color.cgColor
-            let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
-            self.layer.insertSublayer(layer, at: position )
-        }
+        let layer = CAShapeLayer()
+        layer.frame = self.bounds
+        layer.cornerRadius = self.layer.cornerRadius
+        layer.maskedCorners = self.layer.maskedCorners
+        layer.fillColor = color.cgColor
+        layer.backgroundColor = color.cgColor
+        let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
+        self.layer.insertSublayer(layer, at: position )
         return self
     }
     
@@ -69,6 +67,7 @@ extension UIView {
     @discardableResult
     func makeNeumorphism(_ neumorphism: (_ make: Neumorphism) -> Neumorphism) -> Self {
         let neu = neumorphism(Neumorphism(self))
+        neu.apply()
         return self
     }
     

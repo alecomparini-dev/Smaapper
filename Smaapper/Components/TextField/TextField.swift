@@ -13,6 +13,8 @@ protocol ComponentsProtocol {
 
 class TextField: UITextField {
     internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
     
     enum Position {
          case left
@@ -199,14 +201,20 @@ extension TextField: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

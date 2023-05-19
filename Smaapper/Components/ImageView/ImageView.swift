@@ -8,9 +8,11 @@
 import UIKit
 
 class ImageView: UIImageView {
-    typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
     internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
     
+    typealias tapActionClosureAlias = (_ imageView: UIImageView) -> Void
     private var tapAction: tapActionClosureAlias?
     
     
@@ -91,14 +93,20 @@ extension ImageView: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

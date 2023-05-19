@@ -41,6 +41,16 @@ class CategoriesViewController: UIViewController {
         super.viewDidLoad()
         populateListCategories()
         configDelegate()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        DispatchQueue.main.async {
+            self.screen.applyStyle()
+//        }
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
