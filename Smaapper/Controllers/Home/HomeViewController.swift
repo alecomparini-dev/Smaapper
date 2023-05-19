@@ -52,12 +52,17 @@ class HomeVC: UIViewController {
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         //            self.dropdownMenuTapped((0,0))
         //        }
-        
-        
-        homeScreen.applyStyle()
 
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        DispatchQueue.main.async {
+            self.homeScreen.applyStyle()
+        }
+        
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {

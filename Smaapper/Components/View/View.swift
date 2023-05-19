@@ -12,6 +12,7 @@ class View: UIView, BaseComponentProtocol {
     internal var constraintsFlow: StartOfConstraintsFlow?
     internal var shadow: Shadow?
     internal var neumorphism: Neumorphism?
+    internal var gradient: Gradient?
     
     init() {
         super.init(frame: .zero)
@@ -58,8 +59,11 @@ class View: UIView, BaseComponentProtocol {
     
     @discardableResult
     func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
+        self.gradient = gradient(Gradient(self))
         return self
+    }
+    func applyGradient() {
+        self.gradient?.apply()
     }
     
     @discardableResult

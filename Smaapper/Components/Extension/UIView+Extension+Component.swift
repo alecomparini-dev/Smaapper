@@ -66,8 +66,7 @@ extension UIView {
     
     @discardableResult
     func makeNeumorphism(_ neumorphism: (_ make: Neumorphism) -> Neumorphism) -> Self {
-        let neu = neumorphism(Neumorphism(self))
-        neu.apply()
+        _ = neumorphism(Neumorphism(self))
         return self
     }
     

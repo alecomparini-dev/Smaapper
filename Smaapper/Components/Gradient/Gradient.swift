@@ -151,13 +151,15 @@ class Gradient {
 //  MARK: - Apply Gradient
     
     private func applyGradient() {
-        self.configGradient()
-        gradient.frame = component.bounds
-        if !isAxial {
-            let endY = 0 + component.frame.size.width / component.frame.size.height / 2
-            gradient.endPoint = CGPoint(x: 0, y: endY)
+        DispatchQueue.main.async {
+            self.configGradient()
+            self.gradient.frame = self.component.bounds
+            if !self.isAxial {
+                let endY = 0 + self.component.frame.size.width / self.component.frame.size.height / 2
+                self.gradient.endPoint = CGPoint(x: 0, y: endY)
+            }
+            self.setGradientOnComponent()
         }
-        self.setGradientOnComponent()
     }
     
     private func setGradientOnComponent() {

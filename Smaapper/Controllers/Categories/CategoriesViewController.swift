@@ -30,6 +30,7 @@ class CategoriesViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        print(#function)
         view.addSubview(screen)
         screen.makeConstraints { make in
             make.setPin.equalToSuperView
@@ -39,18 +40,31 @@ class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function)
         populateListCategories()
         configDelegate()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-//        DispatchQueue.main.async {
-            self.screen.applyStyle()
-//        }
-        
+        print(#function)
+        self.screen.applyStyle()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function)
+//        self.screen.applyStyle()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print(#function)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

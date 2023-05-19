@@ -40,6 +40,11 @@ class CategoriesView: View {
         return view
     }()
     
+//    lazy var viewToTextField: <#type name#> = {
+//        <#statements#>
+//        return <#value#>
+//    }()
+    
     lazy var closeModalCategories: IconButton = {
         let img = ImageView(UIImage(systemName: "chevron.down"))
         let btn = IconButton(img)
@@ -119,6 +124,8 @@ class CategoriesView: View {
             .setTextColor(.white.withAlphaComponent(0.8))
             .setBorder({ build in
                 build.setCornerRadius(8)
+                    .setWidth(1)
+                    .setColor(.yellow)
             })
             .setConstraints { build in
                 build.setTop.equalTo(titleLabel, .bottom, 25)
@@ -137,6 +144,27 @@ class CategoriesView: View {
             })
         return tf
     }()
+    
+//    lazy var searchTextField: View = {
+//        let tf = View()
+////            .setBorder({ build in
+////                build.setCornerRadius(8)
+////                    .setWidth(1)
+////                    .setColor(.yellow)
+////            })
+////            .setNeumorphism({ build in
+////                build
+////        .setReferenceColor(UIColor.HEX("#2b2f30"))
+////                    .setShape(.concave)
+////                    .setLightPosition(.leftTop)
+////                    .setIntensity(to: .light, percent: 0.7)
+////                    .setBlur(to: .light, percent: 3)
+////                    .setBlur(to: .dark , percent: 5)
+////                    .setDistance(to: .light, percent: 3)
+////                    .setDistance(to: .dark, percent: 5)
+////            })
+//        return tf
+//    }()
     
     lazy var list: List = {
         let list = List(.grouped)
@@ -244,12 +272,16 @@ class CategoriesView: View {
     }
     
     private func applyConstraints() {
+        
+        
         viewGradient.applyConstraint()
         closeModalCategories.applyConstraint()
         titleLabel.applyConstraint()
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
+        
+        
     }
     
 
