@@ -14,7 +14,8 @@ class DockCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        self.clipsToBounds = false
+        self.layer.masksToBounds = false
     }
     
     required init?(coder: NSCoder) {
@@ -22,7 +23,7 @@ class DockCell: UICollectionViewCell {
     }
     
     
-    func setupCell(_ iconButton: IconButton) {
+    func setupCell(_ iconButton: UIView) {
         removeSubViews(contentView)
         iconButton.add(insideTo: self.contentView)
         iconButton.makeConstraints { make in

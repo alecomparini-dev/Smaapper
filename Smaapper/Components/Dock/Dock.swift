@@ -9,6 +9,13 @@ import UIKit
 
 class Dock: View {
     
+    typealias cellCallbackAlias = (_ indexItem: Int) -> UIView
+    typealias numberOfItemsCallbackAlias = () -> Int
+    
+    private let numberOfItemsCallback: numberOfItemsCallbackAlias
+    private let cellCallback: cellCallbackAlias
+    private let hierarchy: CGFloat = 1100
+    
     private var _isShow = false
     private var alreadyApplied = false
     private var dockViewBounds = CGRect()
@@ -16,17 +23,19 @@ class Dock: View {
     private var container = UIView()
     
     private let layout: UICollectionViewFlowLayout
-    private var customConstraintWidthCollection: NSLayoutConstraint = NSLayoutConstraint()
+    private var customConstraintWidthContainer: NSLayoutConstraint = NSLayoutConstraint()
     private var isUserInteractionEnabledItems = false
     
-    private var items: [IconButton] = [IconButton]()
     private var customItemSize: [Int:CGSize] = [:]
     private var itemsSize = CGSize(width: 50, height: 50)
     private let marginContainer: CGFloat = 8
 
     private let collection: UICollectionView
     
-    override init() {
+    
+    init(numberOfItemsCallback: @escaping () -> Int, cellCallback: @escaping cellCallbackAlias ) {
+        self.numberOfItemsCallback = numberOfItemsCallback
+        self.cellCallback = cellCallback
         self.layout = UICollectionViewFlowLayout()
         self.collection = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
         super.init(frame: .zero)
@@ -43,8 +52,8 @@ class Dock: View {
         self.collection.setCollectionViewLayout(self.layout, animated: true)
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
-        self.setShowsHorizontalScrollIndicator(false)    
-        
+        self.setShowsHorizontalScrollIndicator(false)
+        self.layer.zPosition = hierarchy
     }
     
     var content: UIView { self.collection}
@@ -58,19 +67,9 @@ class Dock: View {
         }
     }
 
-//  MARK: - GET Properties
-    func getItems() -> [UIView] {
-        return self.items
-    }
-    
     
 //  MARK: - SET Properties
 
-    @discardableResult
-    func setItems(_ item: IconButton) -> Self {
-        items.append(item)
-        return self
-    }
     
     @discardableResult
     func setSize(indexItem: Int, _ size: CGSize) -> Self {
@@ -141,17 +140,15 @@ class Dock: View {
         return self
     }
     
-    @discardableResult
-    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-
-        self.content.makeShadow { make in
-            make.setColor(.red)
-                .setOffset(width: 10, height: 10)
-                .apply()
-            
-        }
-        return self
-    }
+//    @discardableResult
+//    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
+//        self.collection.makeShadow { make in
+//            make.setColor(.red)
+//                .setOffset(width: 10, height: 10)
+//                .apply()
+//        }
+//        return self
+//    }
     
     
 //  MARK: - Private Function Area
@@ -198,8 +195,8 @@ class Dock: View {
     
     private func configConstraintsContainer() {
         self.dockViewBounds = self.bounds
-        customConstraintWidthCollection = self.container.widthAnchor.constraint(equalToConstant: 0)
-        customConstraintWidthCollection.isActive = true
+        customConstraintWidthContainer = self.container.widthAnchor.constraint(equalToConstant: 0)
+        customConstraintWidthContainer.isActive = true
         container.makeConstraints { make in
             make
                 .setTop.equalTo(self, .top)
@@ -220,9 +217,9 @@ class Dock: View {
     private func configConstraintWidthCollection() {
         let sizeAllItems = self.calculateSizeAllItems()
         if sizeAllItems >= self.dockViewBounds.width {
-            self.customConstraintWidthCollection.constant = self.dockViewBounds.width
+            self.customConstraintWidthContainer.constant = self.dockViewBounds.width
         } else {
-            self.customConstraintWidthCollection.constant = sizeAllItems
+            self.customConstraintWidthContainer.constant = sizeAllItems
         }
     }
     
@@ -234,8 +231,9 @@ class Dock: View {
     }
     
     private func calculateLineSpacing() -> CGFloat {
-        if self.items.count > 1 {
-            return (self.items.count.toCGFloat - 1) * layout.minimumLineSpacing
+        let numberOfItems = self.numberOfItemsCallback()
+        if numberOfItems > 1 {
+            return (numberOfItems.toCGFloat - 1) * layout.minimumLineSpacing
         }
         return 0.0
     }
@@ -255,7 +253,7 @@ class Dock: View {
     }
     
     private func calculateItemSizeExcludingCustomItemSize() -> CGFloat {
-        return (self.items.count - self.customItemSize.count).toCGFloat * itemsSize.width
+        return (self.numberOfItemsCallback() - self.customItemSize.count).toCGFloat * itemsSize.width
     }
     
     
@@ -292,14 +290,15 @@ extension Dock: UICollectionViewDelegate {
 extension Dock: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return self.numberOfItemsCallback()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
         
-        let item = self.items[indexPath.row]
+        let item = self.cellCallback(indexPath.row)
+        
         item.isUserInteractionEnabled = self.isUserInteractionEnabledItems
         cell.setupCell(item)
         

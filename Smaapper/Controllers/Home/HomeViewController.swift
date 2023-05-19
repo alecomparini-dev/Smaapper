@@ -12,6 +12,10 @@ class HomeVC: UIViewController {
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
     
+    private let iconsDock = ["paperplane.fill","scribble", "mic", "person", "eraser.fill",
+                             "xmark.seal", "arrow.up.heart"
+    ]
+    
     private let viewModel = HomeViewModel()
     
     private var adjustTrailingDock = NSLayoutConstraint()
@@ -43,35 +47,25 @@ class HomeVC: UIViewController {
         fetchDropdownMenu()
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
-        
         homeScreen.dropdownMenu.isShow = false
         
-        //retirar !!!
-        //        self.openCloseDropdownMenu()
-        //        self.turnOnOffMenuButton()
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        //            self.dropdownMenuTapped((0,0))
-        //        }
+//retirar !!!
+//        self.openCloseDropdownMenu()
+//        self.turnOnOffMenuButton()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//            self.dropdownMenuTapped((0,0))
+//        }
         
-
-
-
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        adjustAlignmentOfDock()
+        homeScreen.dock.isShow = true
+        
     }
 
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.async {
-            self.homeScreen.dockIsShow(true)
-            self.adjustAlignmentOfDock()
-            self.addItemsDock()
-        }
-    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -84,11 +78,9 @@ class HomeVC: UIViewController {
         adjustTrailingDock.isActive = true
     }
     
-    
     private func configDelegate() {
         homeScreen.delegate = self
     }
-    
     
     private func openCloseDropdownMenu() {
         homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
@@ -200,35 +192,12 @@ class HomeVC: UIViewController {
     
     private func adjustAlignmentOfDock() {
     
-        if homeScreen.getItemsDock().count == 4 {
+        if iconsDock.count == 4 {
             self.adjustTrailingDock.constant = -50
         }
         
-        if homeScreen.getItemsDock().count > 4 {
+        if iconsDock.count > 4 {
             self.adjustTrailingDock.constant = -90
-        }
-        
-    }
-    
-    
-    private func addItemsDock() {
-        
-        let win1 = homeScreen.createIconsDock("trash")
-        let win2 = homeScreen.createIconsDock("person")
-        let win3 = homeScreen.createIconsDock("mic")
-        let win4 = homeScreen.createIconsDock("person.circle")
-        
-        
-        homeScreen.setItemsDock(win1)
-        homeScreen.setItemsDock(win2)
-        homeScreen.setItemsDock(win3)
-        
-        
-        
-        win4.add(insideTo: homeScreen)
-        win4.makeConstraints { make in
-            make.setPinTop.equalToSafeArea(100)
-                .setHeight.equalToConstant(50)
         }
         
     }
@@ -240,6 +209,14 @@ class HomeVC: UIViewController {
 //  MARK: - Extension HomeViewDelegate
 
 extension HomeVC: HomeViewDelegate {
+    func numberOfItemsCallback() -> Int {
+        return self.iconsDock.count
+    }
+    
+    func cellCalback(_ indexCell: Int) -> UIView {
+        return homeScreen.createIconsDock(iconsDock[indexCell])
+    }
+    
     func dropdownMenuTapped(_ rowTapped: (section: Int, row: Int)) {
         self.rowTapped = rowTapped
         openCategories()
