@@ -67,9 +67,10 @@
 		026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* Neumorphism.swift */; };
 		0281DAD32A13F6F700E44F04 /* Dock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD22A13F6F700E44F04 /* Dock.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
-		0281DAD82A140DF100E44F04 /* DockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD72A140DF100E44F04 /* DockCellView.swift */; };
 		0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADA2A15378300E44F04 /* BaseProtocol.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
+		0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatWindow.swift */; };
+		0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleWindow.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -162,9 +163,10 @@
 		026F797C2A0172D0003947A6 /* Neumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neumorphism.swift; sourceTree = "<group>"; };
 		0281DAD22A13F6F700E44F04 /* Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dock.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
-		0281DAD72A140DF100E44F04 /* DockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCellView.swift; sourceTree = "<group>"; };
 		0281DADA2A15378300E44F04 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
+		0281DAE02A18089800E44F04 /* FloatWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindow.swift; sourceTree = "<group>"; };
+		0281DAE32A180A8300E44F04 /* TitleWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWindow.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				026F79782A00775E003947A6 /* DropdownMenu */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
+				0281DADF2A18087800E44F04 /* FloatWindow */,
 				0234A94729FA9E79008392EC /* Gradient */,
 				0234A88D29F9FD3A008392EC /* ImageView */,
 				0234A8E429F9FD3A008392EC /* Label */,
@@ -607,7 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				0281DAD52A1409CD00E44F04 /* DockCell.swift */,
-				0281DAD72A140DF100E44F04 /* DockCellView.swift */,
 			);
 			path = DockCell;
 			sourceTree = "<group>";
@@ -626,6 +628,23 @@
 				0281DADD2A16683A00E44F04 /* Blur.swift */,
 			);
 			path = Blur;
+			sourceTree = "<group>";
+		};
+		0281DADF2A18087800E44F04 /* FloatWindow */ = {
+			isa = PBXGroup;
+			children = (
+				0281DAE22A180A7500E44F04 /* TitleWindow */,
+				0281DAE02A18089800E44F04 /* FloatWindow.swift */,
+			);
+			path = FloatWindow;
+			sourceTree = "<group>";
+		};
+		0281DAE22A180A7500E44F04 /* TitleWindow */ = {
+			isa = PBXGroup;
+			children = (
+				0281DAE32A180A8300E44F04 /* TitleWindow.swift */,
+			);
+			path = TitleWindow;
 			sourceTree = "<group>";
 		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
@@ -877,6 +896,7 @@
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
+				0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */,
 				0234A91429F9FD3A008392EC /* EndOfConstraintsPositionFlow.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */,
@@ -918,6 +938,7 @@
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
+				0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */,
 				0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
@@ -925,7 +946,6 @@
 				0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */,
-				0281DAD82A140DF100E44F04 /* DockCellView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
 				0281DAD32A13F6F700E44F04 /* Dock.swift in Sources */,
 				0234A93729F9FD3A008392EC /* LabelDefault.swift in Sources */,

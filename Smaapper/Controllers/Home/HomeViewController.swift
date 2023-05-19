@@ -12,9 +12,29 @@ class HomeVC: UIViewController {
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
     
-    private let iconsDock = ["paperplane.fill","scribble", "mic", "person", "eraser.fill",
-                             "xmark.seal", "arrow.up.heart"
-    ]
+    private let iconsDock = ["paperplane.fill",
+                             "scribble",
+                             "light.beacon.max.fill",
+                             "door.left.hand.closed",
+                             "eraser.fill",
+                             "xmark.seal",
+                             "light.beacon.max.fill",
+                             "door.left.hand.closed",
+                             "eraser.fill",
+                             "xmark.seal",
+                             "light.beacon.max.fill",
+                             "door.left.hand.closed",
+                             "eraser.fill",
+                             "xmark.seal",
+                             "light.beacon.max.fill",
+                             "door.left.hand.closed",
+                             "eraser.fill",
+                             "xmark.seal",
+                             "light.beacon.max.fill",
+                             "door.left.hand.closed",
+                             "eraser.fill",
+                             "xmark.seal",
+                             "bolt.horizontal" ]
     
     private let viewModel = HomeViewModel()
     

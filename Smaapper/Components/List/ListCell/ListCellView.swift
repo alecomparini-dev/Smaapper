@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListCellView: View {
+internal class ListCellView: View {
 
     private var leftViewCell: UIView?
     private var middleViewCell: UIView?
@@ -26,16 +26,19 @@ class ListCellView: View {
     
 //  TODO: - REFACTOR: REMOVE THIS FUNCTION, IT SHOULD BE IN LISTCELL
 //  MARK: - SET Properties
+    @discardableResult
     internal func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
         self.widthLeftColumnCell = width
         return self
     }
     
+    @discardableResult
     internal func setWidthRightColumnCell(_ width:  CGFloat) -> Self {
         self.widthRightColumnCell = width
         return self
     }
     
+    @discardableResult
     func setBackgroundColorCell(_ color: UIColor) -> Self {
         self.backgroundColor = color
         return self

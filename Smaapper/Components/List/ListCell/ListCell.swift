@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListCell: UITableViewCell {
+internal class ListCell: UITableViewCell {
     static let identifier: String = String(describing: ListCell.self)
     
     lazy var screenCell: ListCellView = {
@@ -33,19 +33,21 @@ class ListCell: UITableViewCell {
         configCell()
     }
     
+    
 //  MARK: - SET Properties
+    
     func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
-        _ = screenCell.setWidthLeftColumnCell(width)
+        screenCell.setWidthLeftColumnCell(width)
         return self
     }
     
     func setWidthRightColumnCell(_ width: CGFloat) -> Self {
-        _ = screenCell.setWidthRightColumnCell(width)
+        screenCell.setWidthRightColumnCell(width)
         return self
     }
     
     func setBackgroundColorCell(_ color: UIColor) -> Self {
-        _ = screenCell.setBackgroundColorCell(color)
+        screenCell.setBackgroundColorCell(color)
         return self
     }
 
@@ -64,8 +66,6 @@ class ListCell: UITableViewCell {
     private func configCell() {
         self.selectionStyle = .none
         self.backgroundColor = .clear
-        
-        
     }
     
 
