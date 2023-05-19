@@ -10,6 +10,8 @@ import UIKit
 protocol HomeViewDelegate: AnyObject {
     func menuButtonTapped()
     func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
+    func numberOfItemsCallback() -> Int
+    func cellCalback(_ indexCell: Int) -> UIView
 }
 
 class HomeView: View {
@@ -44,6 +46,7 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
+                    .apply()
             }
             .setFooterGradient { build in
                 build
@@ -93,6 +96,7 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
+                    .apply()
             }
 
     }()
@@ -129,31 +133,34 @@ class HomeView: View {
     
     
     lazy var dock: Dock = {
-        let dock = Dock()
-            .setSize(CGSize(width: 50 , height: 45))
+        let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: cellCalback)
+            .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true)
             .setBorder({ build in
                 build
                     .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
-                    .setCornerRadius(12)
+                    .setCornerRadius(15)
             })
-            .setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
+            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)
-                    .setHeight.equalToConstant(65)
-                    .setBottom.equalToSafeArea(-3)
+                    .setHeight.equalToConstant(60)
+                    .setVerticalAlignmentY.equalTo(menuButton)
             }
         return dock
     }()
-    func setItemsDock(_ view: IconButton) {
-        dock.setItems(view)
+    
+    private func numberOfItemsCallback() -> Int {
+        return delegate?.numberOfItemsCallback() ?? 0
     }
-    func getItemsDock() -> [UIView] {
-        return dock.getItems()
+    
+    private func cellCalback(_ indexCell: Int) -> UIView {
+        return delegate?.cellCalback(indexCell) ?? UIView()
     }
+    
     func dockIsShow(_ flag: Bool) {
         dock.isShow = flag
     }
@@ -241,15 +248,18 @@ class HomeView: View {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-    }
-    
-    func applyStyle() {
-        self.applyNeumorphismStyle()
-    }
-    
-    private func applyNeumorphismStyle() {
-        menuButton.applyNeumorphism()
-        dropdownMenu.applyNeumorphism()
+        
+        
+//        let img = ImageView()
+//            .setImage(UIImage(named: "teste"))
+//            .setContentMode(.scaleAspectFill)
+//
+//        img.add(insideTo: self)
+//        img.makeConstraints { make in
+//            make.setPin.equalToSuperView
+//        }
+
+        
     }
     
     
@@ -261,17 +271,17 @@ class HomeView: View {
             .setBorder { make in
                 make
                     .setCornerRadius(8)
-                    .setWidth(1)
+                    .setWidth(0)
             }
             .setNeumorphism({ build in
-                build.setReferenceColor(UIColor.HEX("#2b2f30"))
-                    .setShape(.concave)
+                build.setReferenceColor(UIColor.HEX("#26292a"))
+                    .setShape(.convex)
                     .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 0.7)
-                    .setBlur(to: .light, percent: 3)
-                    .setBlur(to: .dark , percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .setDistance(to: .dark, percent: 5)
+//                    .setIntensity(percent: 40)
+//                    .setShadowColor(to: .light, .black.withAlphaComponent(0.3))
+                    .setBlur(percent: 0)
+                    .setDistance(percent: 1)
+                    .apply()
             })
         return btn
     }

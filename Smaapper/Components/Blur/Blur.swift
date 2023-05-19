@@ -47,6 +47,7 @@ class Blur {
     private func configBlur() {
         configBackgroundColor()
         configBlurView()
+        blurView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         if vibrancyEnabled {
             configVibrancyView()
         }
@@ -96,7 +97,7 @@ class Blur {
     
     private func createVibrancyView() {
         if let blurEffect {
-            let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect,style: .fill)
+            let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
             self.vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
         }
     }

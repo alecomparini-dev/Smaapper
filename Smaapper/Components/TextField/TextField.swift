@@ -13,9 +13,6 @@ protocol ComponentsProtocol {
 
 class TextField: UITextField {
     internal var constraintsFlow: StartOfConstraintsFlow?
-    internal var shadow: Shadow?
-    internal var neumorphism: Neumorphism?
-    internal var gradient: Gradient?
     
     enum Position {
          case left
@@ -34,6 +31,11 @@ class TextField: UITextField {
     
     private let paddingConst: CGFloat = 5
     private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        Resize.resize(self)
+    }
     
     
 //  MARK: - Initializers
@@ -202,34 +204,25 @@ extension TextField: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        self.shadow = shadow(Shadow(self))
+        _ = shadow(Shadow(self))
         return self
-    }
-    func applyShadow() {
-        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        self.neumorphism = neumorphism(Neumorphism(self))
+        _ = neumorphism(Neumorphism(self))
         return self
-    }
-    func applyNeumorphism() {
-        self.neumorphism?.apply()
     }
     
     @discardableResult
     func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        self.gradient = gradient(Gradient(self))
+        _ = gradient(Gradient(self))
         return self
     }
-    func applyGradient() {
-        self.gradient?.apply()
-    }
-    
+
     @discardableResult
     func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        let _ = gesture(TapGesture(self))
+        _ = gesture(TapGesture(self))
         return self
     }
     

@@ -82,9 +82,9 @@ class Gradient {
 //  MARK: - Apply Gradient
     @discardableResult
     func apply() -> Self {
-//        DispatchQueue.main.async {
+        DispatchQueue.main.async {
             self.applyGradient()
-//        }
+        }
         return self
     }
     
