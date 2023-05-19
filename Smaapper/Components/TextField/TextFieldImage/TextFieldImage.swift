@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class TextFieldImage: TextField {
+class TextFieldImage: TextField  {
     
     typealias buildTextFieldImageAlias = (_ build: TextFieldImage) -> TextFieldImage
     
@@ -63,16 +63,12 @@ class TextFieldImage: TextField {
 //  MARK: - Component private functions
     
     private func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: Int) {
-        DispatchQueue.main.async { [weak self] in
-            guard var paddingView = self?.paddingView else { return }
-            guard let self else {return}
             paddingView = self.createPaddingView(image, margin)
             self.setFrameImage(image)
             self.addImageInsidePaddingView(image, paddingView)
             self.setImageAlignmentInPaddingView(image, paddingView, position)
             addPaddingToTextField(paddingView, position)
-            let _ = setTintColor(self.textColor ?? .black)
-        }
+            setTintColor(self.textColor ?? .black)
     }
     
     private func createPaddingView(_ image: UIImageView, _ margin: Int) -> UIView {
@@ -94,3 +90,5 @@ class TextFieldImage: TextField {
     
     
 }
+
+

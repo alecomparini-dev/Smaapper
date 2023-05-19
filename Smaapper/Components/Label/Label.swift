@@ -10,6 +10,8 @@ import UIKit
 class Label: UILabel {
 
     internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
     
     
 //  MARK: - Initializers
@@ -95,15 +97,21 @@ extension Label: BaseComponentProtocol {
     }
     
     @discardableResult
-    func setShadow(_ shadow: (Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+    func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
-    func setNeumorphism(_ neumorphism: (Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

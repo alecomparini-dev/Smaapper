@@ -10,6 +10,8 @@ import UIKit
 
 class View: UIView, BaseComponentProtocol {
     internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
     
     init() {
         super.init(frame: .zero)
@@ -38,14 +40,20 @@ class View: UIView, BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

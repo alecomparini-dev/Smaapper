@@ -9,9 +9,11 @@ import UIKit
 
 
 class List: UITableView {
+    internal var constraintsFlow: StartOfConstraintsFlow?
+    internal var shadow: Shadow?
+    internal var neumorphism: Neumorphism?
 
     typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
-    internal var constraintsFlow: StartOfConstraintsFlow?
     
     private var alreadyApplied = false
     private var _isShow = false
@@ -175,14 +177,20 @@ extension List: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        let _ = shadow(Shadow(self))
+        self.shadow = shadow(Shadow(self))
         return self
+    }
+    func applyShadow() {
+        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        let _ = neumorphism(Neumorphism(self))
+        self.neumorphism = neumorphism(Neumorphism(self))
         return self
+    }
+    func applyNeumorphism() {
+        self.neumorphism?.apply()
     }
     
     @discardableResult

@@ -120,22 +120,21 @@ class CategoriesView: View {
             .setBorder({ build in
                 build.setCornerRadius(8)
             })
+            .setConstraints { build in
+                build.setTop.equalTo(titleLabel, .bottom, 25)
+                    .setLeading.setTrailing.equalToSafeArea(40)
+                    .setHeight.equalToConstant(40)
+            }
             .setNeumorphism({ build in
                 build.setReferenceColor(UIColor.HEX("#2b2f30"))
-                    .setShape(.flat)
+                    .setShape(.concave)
                     .setLightPosition(.leftTop)
                     .setIntensity(to: .light, percent: 0.7)
                     .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark , percent: 5)
                     .setDistance(to: .light, percent: 3)
                     .setDistance(to: .dark, percent: 5)
-                    .apply()
             })
-            .setConstraints { build in
-                build.setTop.equalTo(titleLabel, .bottom, 25)
-                    .setLeading.setTrailing.equalToSafeArea(40)
-                    .setHeight.equalToConstant(40)
-            }
         return tf
     }()
     
@@ -170,6 +169,10 @@ class CategoriesView: View {
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.left)
         return label
+    }
+    
+    func applyStyle() {
+        searchTextField.applyNeumorphism()
     }
     
     
@@ -247,7 +250,6 @@ class CategoriesView: View {
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
-        
     }
     
 
