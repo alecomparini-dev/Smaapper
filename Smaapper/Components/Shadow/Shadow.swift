@@ -104,11 +104,9 @@ class Shadow {
     
     @discardableResult
     func apply() -> Self {
-//        DispatchQueue.main.async {
-            self.shadow.frame = self.component.bounds
-            self.shadow.shadowPath = self.calculateShadowPath()
-            self.insertSubLayer()
-//        }
+        self.shadow.frame = self.component.bounds
+        self.shadow.shadowPath = self.calculateShadowPath()
+        self.insertSubLayer()
         return self
     }
     

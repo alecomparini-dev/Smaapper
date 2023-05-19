@@ -123,9 +123,8 @@ class CategoriesView: View {
             .setPadding(15, .left)
             .setTextColor(.white.withAlphaComponent(0.8))
             .setBorder({ build in
-                build.setCornerRadius(8)
-                    .setWidth(1)
-                    .setColor(.yellow)
+                build
+                    .setCornerRadius(8)
             })
             .setConstraints { build in
                 build.setTop.equalTo(titleLabel, .bottom, 25)

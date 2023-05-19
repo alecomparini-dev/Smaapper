@@ -79,19 +79,15 @@ class Gradient {
     
     
     
-    //  MARK: - Apply Gradient
+//  MARK: - Apply Gradient
     @discardableResult
     func apply() -> Self {
-        self.applyGradient()
+//        DispatchQueue.main.async {
+            self.applyGradient()
+//        }
         return self
     }
     
-    @discardableResult
-    func apply(_ component: UIView) -> Self {
-        self.component = component
-        self.applyGradient()
-        return self
-    }
         
 //  MARK: - Component Private Functions
     
@@ -151,15 +147,13 @@ class Gradient {
 //  MARK: - Apply Gradient
     
     private func applyGradient() {
-        DispatchQueue.main.async {
-            self.configGradient()
-            self.gradient.frame = self.component.bounds
-            if !self.isAxial {
-                let endY = 0 + self.component.frame.size.width / self.component.frame.size.height / 2
-                self.gradient.endPoint = CGPoint(x: 0, y: endY)
-            }
-            self.setGradientOnComponent()
+        self.configGradient()
+        self.gradient.frame = self.component.bounds
+        if !self.isAxial {
+            let endY = 0 + self.component.frame.size.width / self.component.frame.size.height / 2
+            self.gradient.endPoint = CGPoint(x: 0, y: endY)
         }
+        self.setGradientOnComponent()
     }
     
     private func setGradientOnComponent() {

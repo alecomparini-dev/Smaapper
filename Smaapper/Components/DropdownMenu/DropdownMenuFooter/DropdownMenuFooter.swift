@@ -22,6 +22,7 @@ class DropdownMenuFooter: DropdownMenu {
     override init() {
         super.init()
         addElements()
+
     }
     
     required init?(coder: NSCoder) {
@@ -118,7 +119,7 @@ class DropdownMenuFooter: DropdownMenu {
     }
     
     private func addShadowOnFooter() {
-        _ = stackView
+        stackView
             .setShadow({ build in
                 build
                     .setColor(.black)
@@ -127,8 +128,10 @@ class DropdownMenuFooter: DropdownMenu {
                     .setOpacity(0.8)
                     .setCornerRadius(0)
                     .setShadowHeight(10)
-                    .apply()
             })
+
+            self.stackView.applyShadow()
+        
     }
     
     private func configConstraint() {
@@ -147,18 +150,17 @@ class DropdownMenuFooter: DropdownMenu {
     }
 
     private func configCornerRadius() {
-        DispatchQueue.main.async {
             self.stackView.layer.cornerRadius = self.layer.cornerRadius
-            _ = self.stackView.setBorder { build in
-                build.setWhichCornersWillBeRounded([.bottom])
+            self.stackView.setBorder { build in
+                build
+                    .setWhichCornersWillBeRounded([.bottom])
             }
-        }
     }
     
     private func configGradient() {
         if let footerGradient = self.footerGradient {
             stackView.layoutIfNeeded()
-            _ = footerGradient.apply(stackView)
+            footerGradient.apply()
         }
         
     }
