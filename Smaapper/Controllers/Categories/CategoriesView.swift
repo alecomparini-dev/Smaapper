@@ -40,10 +40,6 @@ class CategoriesView: View {
         return view
     }()
     
-//    lazy var viewToTextField: <#type name#> = {
-//        <#statements#>
-//        return <#value#>
-//    }()
     
     lazy var closeModalCategories: IconButton = {
         let img = ImageView(UIImage(systemName: "chevron.down"))
@@ -122,6 +118,7 @@ class CategoriesView: View {
             .setFont(UIFont.systemFont(ofSize: 15))
             .setPadding(15, .left)
             .setTextColor(.white.withAlphaComponent(0.8))
+            .setTintColor(.white.withAlphaComponent(0.8))
             .setBorder({ build in
                 build
                     .setCornerRadius(8)
@@ -140,6 +137,7 @@ class CategoriesView: View {
                     .setBlur(to: .dark , percent: 5)
                     .setDistance(to: .light, percent: 3)
                     .setDistance(to: .dark, percent: 5)
+                    .apply()
             })
         return tf
     }()
@@ -196,10 +194,6 @@ class CategoriesView: View {
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.left)
         return label
-    }
-    
-    func applyStyle() {
-        searchTextField.applyNeumorphism()
     }
     
     

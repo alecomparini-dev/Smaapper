@@ -52,28 +52,24 @@ class HomeVC: UIViewController {
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         //            self.dropdownMenuTapped((0,0))
         //        }
+        
+
+
 
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            self.homeScreen.applyStyle()
-        }
-        
     }
 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         DispatchQueue.main.async {
             self.homeScreen.dockIsShow(true)
             self.adjustAlignmentOfDock()
             self.addItemsDock()
-            
-            
         }
     }
     
@@ -223,9 +219,6 @@ class HomeVC: UIViewController {
         let win4 = homeScreen.createIconsDock("person.circle")
         
         
-        
-        win1.applyNeumorphism()
-        win4.applyNeumorphism()
         homeScreen.setItemsDock(win1)
         homeScreen.setItemsDock(win2)
         homeScreen.setItemsDock(win3)

@@ -128,9 +128,8 @@ class DropdownMenuFooter: DropdownMenu {
                     .setOpacity(0.8)
                     .setCornerRadius(0)
                     .setShadowHeight(10)
+                    .apply()
             })
-
-            self.stackView.applyShadow()
         
     }
     

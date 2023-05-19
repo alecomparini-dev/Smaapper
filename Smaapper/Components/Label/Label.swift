@@ -10,9 +10,6 @@ import UIKit
 class Label: UILabel {
 
     internal var constraintsFlow: StartOfConstraintsFlow?
-    internal var shadow: Shadow?
-    internal var neumorphism: Neumorphism?
-    internal var gradient: Gradient?
     
     
 //  MARK: - Initializers
@@ -99,29 +96,20 @@ extension Label: BaseComponentProtocol {
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        self.shadow = shadow(Shadow(self))
+        _ = shadow(Shadow(self))
         return self
-    }
-    func applyShadow() {
-        self.shadow?.apply()
     }
     
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        self.neumorphism = neumorphism(Neumorphism(self))
+        _ = neumorphism(Neumorphism(self))
         return self
     }
-    func applyNeumorphism() {
-        self.neumorphism?.apply()
-    }
-    
+
     @discardableResult
     func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        self.gradient = gradient(Gradient(self))
+        _ = gradient(Gradient(self))
         return self
-    }
-    func applyGradient() {
-        self.gradient?.apply()
     }
     
     @discardableResult

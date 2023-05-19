@@ -42,7 +42,7 @@ class Dock: View {
         self.layout.scrollDirection = .horizontal
         self.collection.setCollectionViewLayout(self.layout, animated: true)
         self.setMinimumLineSpacing(10)
-//        self.setContentInset(top: 0, left: 0, bottom: 0, rigth: 0)
+        self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
         self.setShowsHorizontalScrollIndicator(false)    
         
     }
@@ -273,6 +273,7 @@ class Dock: View {
 
 //  MARK: - Extension Delegate Flow Layout
 extension Dock: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return self.customItemSize[indexPath.row] ?? itemsSize
     }
@@ -282,8 +283,6 @@ extension Dock: UICollectionViewDelegateFlowLayout {
 
 //  MARK: - Extension Delegate
 extension Dock: UICollectionViewDelegate {
-    
-    
     
 }
 

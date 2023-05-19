@@ -44,6 +44,7 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
+                    .apply()
             }
             .setFooterGradient { build in
                 build
@@ -93,6 +94,7 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
+                    .apply()
             }
 
     }()
@@ -243,14 +245,6 @@ class HomeView: View {
         dock.applyConstraint()
     }
     
-    func applyStyle() {
-        self.applyNeumorphismStyle()
-    }
-    
-    private func applyNeumorphismStyle() {
-        menuButton.applyNeumorphism()
-        dropdownMenu.applyNeumorphism()
-    }
     
     
     func createIconsDock(_ systemNameImage: String) -> IconButton {
