@@ -12,6 +12,7 @@ class Label: UILabel {
     internal var constraintsFlow: StartOfConstraintsFlow?
     internal var shadow: Shadow?
     internal var neumorphism: Neumorphism?
+    internal var gradient: Gradient?
     
     
 //  MARK: - Initializers
@@ -115,9 +116,12 @@ extension Label: BaseComponentProtocol {
     }
     
     @discardableResult
-    func setGradient(_ gradient: (Gradient) -> Gradient) -> Self {
-        let _ = gradient(Gradient(self))
+    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
+        self.gradient = gradient(Gradient(self))
         return self
+    }
+    func applyGradient() {
+        self.gradient?.apply()
     }
     
     @discardableResult
