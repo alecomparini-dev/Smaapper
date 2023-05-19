@@ -38,7 +38,7 @@ class Dock: View {
         self.cellCallback = cellCallback
         self.layout = UICollectionViewFlowLayout()
         self.collection = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
-        super.init(frame: .zero)
+        super.init()
         self.initialization()
     }
     
