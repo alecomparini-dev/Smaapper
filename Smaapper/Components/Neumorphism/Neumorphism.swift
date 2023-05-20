@@ -40,7 +40,7 @@ class Neumorphism {
     private let lightShapeColorByColorReferencePercentage = 1.75
 
     
-    private let component: UIView
+    private var component: UIView
     private var referenceColor: UIColor?
     private var lightShadowColor: UIColor?
     private var darkShadowColor: UIColor?
@@ -54,7 +54,7 @@ class Neumorphism {
     private var lightPosition: LightPosition = .leftTop
     
 
-    init(_ component: UIView) {
+    init(_ component: UIView = UIView()) {
         self.component = component
         self.initialization()
     }
@@ -193,6 +193,11 @@ class Neumorphism {
             self.applyShape()
         }
         return self
+    }
+    
+    func apply(_ component: UIView) {
+        self.component = component
+        self.apply()
     }
     
     private func applyShadow() {
