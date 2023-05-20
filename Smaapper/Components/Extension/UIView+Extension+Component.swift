@@ -13,6 +13,7 @@ extension UIView {
         if element.isKind(of: UIStackView.self) {
             let element = element as! UIStackView
             element.addArrangedSubview(self)
+            return
         }
         element.addSubview(self)
     }

@@ -22,14 +22,33 @@ class HomeView: View {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addBackgroundColor()
-        addElements()
-        applyConstraints()
+        self.initialization()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func initialization() {
+        addBackgroundColor()
+        addElements()
+        applyConstraints()
+    }
+    
+//  MARK: - LAZY Properties
+    
+    lazy var clock: ClockNumbers = {
+        let clock = ClockNumbers()
+            .setConstraints { build in
+                build
+                    .setTop.equalToSafeArea(40)
+                    .setTrailing.equalToSafeArea(-80)
+                    .setWidth.equalToConstant(30)
+                    .setHeight.equalToConstant(50)
+            }
+        return clock
+    }()
+    
     
     lazy var dropdownMenu: DropdownMenuFooter = {
         return DropdownMenuFooter()
@@ -242,12 +261,14 @@ class HomeView: View {
         dropdownMenu.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
+        clock.add(insideTo: self)
     }
     
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
+        clock.applyConstraint()
         
         
 //        let img = ImageView()
@@ -258,12 +279,6 @@ class HomeView: View {
 //        img.makeConstraints { make in
 //            make.setPin.equalToSuperView
 //        }
-
-        
-
-
-        
-        DELETAR()
 
 
     }
@@ -295,95 +310,8 @@ class HomeView: View {
 
     
     
-    
-    
-    
-    lazy var label: Label = {
-        let label = Label("TESTE")
-            .setColor(.white)
-            .setNeumorphism({ build in
-                build
-                    .setReferenceColor(UIColor.HEX("#26292a"))
-                    .setShape(.convex)
-                    .setLightPosition(.leftTop)
-//                    .setIntensity(percent: 40)
-//                    .setShadowColor(to: .light, .black.withAlphaComponent(0.3))
-                    .setBlur(percent: 0)
-                    .setDistance(percent: 1)
-                    .apply()
-            })
-            .setFont(UIFont.systemFont(ofSize: 35))
-            .setConstraints { build in
-                build.setPinTop.equalToSafeArea(50)
-                    
-                    .setHeight.equalToConstant(100)
-            }
-        return label
-    }()
-    
-    
-    
-    
-    
-    
-    func DELETAR() {
-        let numberView = TrianguloView()
-        
-        
-        numberView.add(insideTo: self)
-        numberView.makeConstraints { make in
-            make
-                .setCenterXY.equalToSuperView
-                .setWidth.equalToConstant(15)
-                .setHeight.equalToConstant(50)
-        }
-        
-        numberView.makeNeumorphism { make in
-            make
-                .setReferenceColor(UIColor.HEX("#26292a"))
-                .setShape(.convex)
-                .setLightPosition(.leftTop)
-//                    .setIntensity(percent: 40)
-//                    .setShadowColor(to: .light, .black.withAlphaComponent(0.3))
-                .setBlur(percent: 5)
-                .setDistance(percent: 5)
-                .apply()
-        }
-    }
-    
-    
+
     
     
 }
 
-
-
-
-
-class TrianguloView: UIView {
-    override func draw(_ rect: CGRect) {
-        // Obtém o contexto gráfico atual
-        guard let contexto = UIGraphicsGetCurrentContext() else { return }
-        
-        // Define as propriedades do triângulo
-        let pontoA = CGPoint(x: rect.width / 2, y: 50)
-        let pontoB = CGPoint(x: 50, y: rect.height - 50)
-        let pontoC = CGPoint(x: rect.width - 50, y: rect.height - 50)
-        
-        let corPreenchimento = UIColor.blue.cgColor
-        let corBorda = UIColor.clear.cgColor
-        
-        // Define as propriedades do preenchimento
-        contexto.setFillColor(corPreenchimento)
-//        contexto.setStrokeColor(corBorda)
-        contexto.setLineWidth(2.0)
-        
-        // Desenha o triângulo
-        contexto.move(to: pontoA)
-        contexto.addLine(to: pontoB)
-        contexto.addLine(to: pontoC)
-        contexto.closePath()
-        
-        contexto.drawPath(using: .fillStroke)
-    }
-}
