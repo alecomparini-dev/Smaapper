@@ -43,8 +43,8 @@ class HomeView: View {
                 build
                     .setTop.equalToSafeArea(40)
                     .setTrailing.equalToSafeArea(-80)
-                    .setWidth.equalToConstant(30)
-                    .setHeight.equalToConstant(50)
+                    .setWidth.equalToConstant(20)
+                    .setHeight.equalToConstant(35)
             }
         return clock
     }()

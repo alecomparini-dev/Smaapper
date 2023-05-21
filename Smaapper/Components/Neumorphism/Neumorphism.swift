@@ -202,8 +202,8 @@ class Neumorphism {
     
     private func applyShadow() {
         let (offSetDarkShadow, offSetLightShadow) = self.calculateLightPosition()
-        self.applyLightShadow(offSetLightShadow)
         self.applyDarkShadow(offSetDarkShadow)
+        self.applyLightShadow(offSetLightShadow)
         
     }
     
@@ -339,9 +339,6 @@ class Neumorphism {
         }
     }
     
-    private func setShapeFlat() {
-        component.setBackgroundColorLayer(self.referenceColor ?? UIColor())
-    }
     
     private func setShapeConcave() {
         let (dark,light) = getShapeColorByColorReference()
@@ -351,6 +348,12 @@ class Neumorphism {
     private func setShapeConvex() {
         let (dark,light) = getShapeColorByColorReference()
         self.addShapeOnComponent([light,dark])
+    }
+    
+    private func setShapeFlat() {
+        if let referenceColor {
+            self.addShapeOnComponent([referenceColor, referenceColor])
+        }
     }
     
 }
