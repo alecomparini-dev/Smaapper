@@ -10,7 +10,7 @@ import UIKit
 
 class ClockNumbers: View {
     
-    private let weight: CGFloat = 7
+    private let weight: CGFloat = 5
     private var neumorphism: Neumorphism?
     
     override init() {
@@ -27,6 +27,8 @@ class ClockNumbers: View {
         configConstraints()
     }
     
+    
+//  MARK: - STACKS
     lazy var stackLeft: Stack = {
         let st = Stack()
             .setAxis(.vertical)
@@ -53,6 +55,9 @@ class ClockNumbers: View {
         return st
     }()
     
+    
+//  MARK: - LEFT STROKES
+    
     lazy var leftTopStroke: View = {
         return createView(true)
     }()
@@ -61,48 +66,61 @@ class ClockNumbers: View {
         return createView(true)
     }()
     
-    lazy var topStroke: View = {
+
+    
+//  MARK: - MIDDLE STROKE
+    lazy var topMiddleStrokeView: View = {
+        return createView(false)
+    }()
+    
+    lazy var topMiddleStroke: View = {
         return createView(true)
     }()
     
+    lazy var middleStrokeView: View = {
+        return createView(false)
+    }()
     lazy var middleStroke: View = {
         return createView(true)
     }()
     
     
-    lazy var bottomStroke: View = {
-        return createView(true)
-    }()
-    
-
-    
-    
-    lazy var middleTopView: View = {
-        return createView(false)
-    }()
-    
-    lazy var middleView: View = {
-        return createView(false)
-    }()
-    
     lazy var middleBottomView: View = {
         return createView(false)
     }()
+    lazy var bottomMiddleStroke: View = {
+        return createView(true)
+    }()
+    
+    
+    
+
+//  MARK: - RIGHT STROKE
+    
+    lazy var rightTopStroke: View = {
+        return createView(true)
+    }()
+    
+    lazy var rightBottomStroke: View = {
+        return createView(true)
+    }()
+    
+    
     
     
 //  MARK: - Private Functions Area
     
-    private func configNeumorphism(_ lightPosition: Neumorphism.LightPosition = .leftTop) -> Neumorphism {
+    private func configNeumorphism(_ lightPosition: Neumorphism.LightPosition = .rightTop) -> Neumorphism {
         return Neumorphism()
             .setReferenceColor(UIColor.HEX("#26292a"))
             .setShape(.flat)
             .setLightPosition(lightPosition)
             .setIntensity(to:.light,percent: 50)
             .setIntensity(to:.dark,percent: 100)
-            .setBlur(to:.light, percent: 3)
+            .setBlur(to:.light, percent: 0)
             .setBlur(to:.dark, percent: 5)
             .setDistance(to:.light, percent: 3)
-            .setDistance(to:.dark, percent: 7)
+            .setDistance(to:.dark, percent: 10)
     }
     
     private func addElement() {
@@ -119,19 +137,19 @@ class ClockNumbers: View {
 
     private func addStackMiddle() {
         stackMiddle.add(insideTo: self)
-        middleTopView.add(insideTo: stackMiddle)
-        middleView.add(insideTo: stackMiddle)
+        topMiddleStrokeView.add(insideTo: stackMiddle)
+        middleStrokeView.add(insideTo: stackMiddle)
         middleBottomView.add(insideTo: stackMiddle)
         
-        topStroke.add(insideTo: middleTopView)
-        middleStroke.add(insideTo: middleView)
-        bottomStroke.add(insideTo: middleBottomView)
+        topMiddleStroke.add(insideTo: topMiddleStrokeView)
+        middleStroke.add(insideTo: middleStrokeView)
+        bottomMiddleStroke.add(insideTo: middleBottomView)
     }
     
     private func addStackRight(){
         stackRight.add(insideTo: self)
-        createView(true).add(insideTo: stackRight)
-        createView(true).add(insideTo: stackRight)
+        rightTopStroke.add(insideTo: stackRight)
+        rightBottomStroke.add(insideTo: stackRight)
     }
     
     private func configConstraints() {
@@ -175,7 +193,7 @@ class ClockNumbers: View {
     
     
     private func configTopStrokeConstraints() {
-        topStroke.makeConstraints { make in
+        topMiddleStroke.makeConstraints { make in
             make
                 .setPinTop.equalToSuperView
                 .setHeight.equalToConstant(weight/1.4)
@@ -192,7 +210,7 @@ class ClockNumbers: View {
     }
     
     private func configBottomStrokeConstraints() {
-        bottomStroke.makeConstraints { make in
+        bottomMiddleStroke.makeConstraints { make in
             make
                 .setPinBottom.equalToSuperView
                 .setHeight.equalToConstant(weight/1.4)
