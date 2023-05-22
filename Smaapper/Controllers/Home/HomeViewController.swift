@@ -12,6 +12,7 @@ class HomeVC: UIViewController {
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
     
+    
     private let iconsDock = ["paperplane.fill",
                              "scribble",
                              "light.beacon.max.fill",
@@ -28,7 +29,6 @@ class HomeVC: UIViewController {
     
     private var resultDropdownMenu: DropdownMenuData?
     private var turnOnMenuButton = false
-    private var openDropdownMenu = false
     private var indexSection = 0
     private var indexRow = 0
     private var rowTapped: (section: Int, row: Int) = (0,0)
@@ -38,6 +38,7 @@ class HomeVC: UIViewController {
         return home
     }()
     
+   
     override func loadView() {
         super.loadView()
         view.addSubview(homeScreen)
@@ -90,15 +91,6 @@ class HomeVC: UIViewController {
     
     private func openCloseDropdownMenu() {
         homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
-    }
-    
-    private func turnOnOffMenuButton() {
-        if turnOnMenuButton {
-            homeScreen.turnOffMenuButton()
-        } else {
-            homeScreen.turnOnMenuButton()
-        }
-        turnOnMenuButton = !turnOnMenuButton
     }
     
     
@@ -208,6 +200,16 @@ class HomeVC: UIViewController {
         
     }
     
+    private func openCategories() {
+        guard let resultDropdownMenu else {return}
+        guard let items = resultDropdownMenu[rowTapped.section].items else { return }
+        if items[rowTapped.row].title == HomeVC.categoriesID {
+            guard let subMenu = items[rowTapped.row].subMenu else { return }
+            showCategoriesViewController(subMenu)
+        }
+        
+    }
+    
     
 }
 
@@ -215,11 +217,19 @@ class HomeVC: UIViewController {
 //  MARK: - Extension HomeViewDelegate
 
 extension HomeVC: HomeViewDelegate {
+    func openMenu() {
+        self.homeScreen.turnOnMenuButton()
+    }
+    
+    func closeMenu() {
+        self.homeScreen.turnOffMenuButton()
+    }
+    
     func numberOfItemsCallback() -> Int {
         return self.iconsDock.count
     }
     
-    func cellCalback(_ indexCell: Int) -> UIView {
+    func dockCellCalback(_ indexCell: Int) -> UIView {
         return homeScreen.createIconsDock(iconsDock[indexCell])
     }
     
@@ -230,18 +240,9 @@ extension HomeVC: HomeViewDelegate {
     
     func menuButtonTapped() {
         openCloseDropdownMenu()
-        turnOnOffMenuButton()
     }
     
-    private func openCategories() {
-        guard let resultDropdownMenu else {return}
-        guard let items = resultDropdownMenu[rowTapped.section].items else { return }
-        if items[rowTapped.row].title == HomeVC.categoriesID {
-            guard let subMenu = items[rowTapped.row].subMenu else { return }
-            showCategoriesViewController(subMenu)
-        }
-        
-    }
+
     
     
 }

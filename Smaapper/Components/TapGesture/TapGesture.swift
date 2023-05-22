@@ -72,11 +72,6 @@ class TapGesture {
         return self
     }
     
-    @discardableResult
-    func setTouchPositionRelative(to relative: TapGesture.GestureRelativeTo) -> Self {
-        self.gestureRelative = relative
-        return self
-    }
     
     
 //  MARK: - Private Functions Area
@@ -146,6 +141,7 @@ fileprivate class OnTapGesture: UITapGestureRecognizer {
     
 //  MARK: - Override Functions Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if !self.states.contains(.began) {return}
         setTouchPositions(touches)
         self.state = .began
         callAction()
