@@ -23,14 +23,14 @@ class DropdownMenu: View {
     
     private var onTapDropdownMenu: onTapDropdownMenuAlias?
 
-    private var zPosition: CGFloat = 10001
+    private var zPosition: CGFloat = 10000
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
-    var paddingMenu: UIEdgeInsets?
     private var paddingCells: UIEdgeInsets?
     private var openingPoint: CGPoint?
     
+    var paddingMenu: UIEdgeInsets?
     
     override init() {
         super.init(frame: .zero)
@@ -141,6 +141,7 @@ class DropdownMenu: View {
         set {
             self._isShow = newValue
             applyOnceConfig()
+            bringToFront()
             list.isShow = newValue
             self.isHidden = !self._isShow
         }
@@ -148,13 +149,19 @@ class DropdownMenu: View {
     
     
 //  MARK: - Private Functions Area
-    
+
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
             self.setTopMostPosition()
             self.addListOnDropdownMenu()
             self.configConstraints()
             self.alreadyApplied = true
+        }
+    }
+
+    private func bringToFront() {
+        if let superview = self.superview {
+            superview.bringSubviewToFront(self)
         }
     }
     

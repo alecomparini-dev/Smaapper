@@ -10,6 +10,9 @@ import UIKit
 
 internal class TitleWindow: View {
     
+    private var _isShow = false
+    private var alreadyApplied = false
+    
     override init() {
         super.init()
         self.initialization()
@@ -26,103 +29,81 @@ internal class TitleWindow: View {
     
     
 //  MARK: - Lazy Properties
-    lazy var leftView: View = {
+    
+    lazy var titleView: View = {
         let view = View()
             .setConstraints { build in
-                build.setPinLeft.equalToSuperView
+                build.setPin.equalToSuperView
             }
         return view
     }()
-    
-    lazy var middleView: View = {
-        let view = View()
-            .setConstraints { build in
-                build
-                    .setTop.setBottom.equalToSuperView
-                    .setLeading.equalTo(leftView, .trailing)
-                    .setTrailing.equalTo(rightView, .leading)
-            }
-        return view
-    }()
-    
-    lazy var rightView: View = {
-        let view = View()
-            .setConstraints { build in
-                build.setPinRight.equalToSuperView
-            }
-        return view
-    }()
-    
     
     
 //  MARK: - SET Properties
     @discardableResult
-    func setLeftView(_ view: UIView, _ size: CGFloat) -> Self {
-        configWidthConstraintLeftView(size)
-        addViewToLeftView(view)
+    func setTitleView(_ view: UIView) -> Self {
+        addTitleView(view)
         return self
     }
     
-    @discardableResult
-    func setMiddleView(_ view: UIView) -> Self {
-        addViewToMiddleView(view)
-        return self
-    }
     
-    @discardableResult
-    func setRightView(_ view: UIView, _ size: CGFloat) -> Self {
-        configWidthConstraintRightView(size)
-        addViewToRightView(view)
-        return self
+//  MARK: - SHOW title
+    var isShow: Bool {
+        get { return _isShow }
+        set {
+            _isShow = newValue
+            applyOnceConfig()
+            self.isHidden = !self._isShow
+        }
     }
-    
     
 //  MARK: - Private Function Area
+    private func applyOnceConfig() {
+        if self._isShow && !alreadyApplied {
+            configLayer()
+            addBackgroundColor()
+        }
+    }
+    
+    private func configLayer() {
+        self.makeBorder { make in
+            make
+                .setCornerRadius((self.superview?.layer.cornerRadius ?? 0)/2)
+                .setWhichCornersWillBeRounded([.top])
+        }
+        
+    }
+    
+    private func addBackgroundColor() {
+//        self.makeNeumorphism { make in
+//            make
+//                .setReferenceColor(UIColor.HEX("#f9710d"))
+//                .setShape(.convex)
+//                .setLightPosition(.leftTop)
+//                .setBlur(percent: 10)
+//                .setDistance(to: .light, percent: 0)
+//                .setDistance(to: .dark, percent: 5)
+//                .apply()
+//
+//        }
+    }
     
     private func addElements() {
-        leftView.add(insideTo: self)
-        middleView.add(insideTo: self)
-        rightView.add(insideTo: self)
+        titleView.add(insideTo: self)
     }
     
     private func configConstraint() {
-        leftView.applyConstraint()
-        middleView.applyConstraint()
-        rightView.applyConstraint()
+        titleView.applyConstraint()
     }
     
     
-    private func configWidthConstraintLeftView(_ size: CGFloat) {
-        leftView.makeConstraints { make in
-            make.setWidth.equalToConstant(size)
-        }
-    }
-    
-    private func addViewToLeftView(_ view: UIView) {
-        view.add(insideTo: leftView)
+    private func addTitleView(_ view: UIView) {
+        view.add(insideTo: titleView)
         view.makeConstraints { make in
             make.setPin.equalToSuperView
         }
     }
     
-    private func addViewToMiddleView(_ view: UIView) {
-        view.add(insideTo: middleView)
-        view.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
-    }
-    
-    private func configWidthConstraintRightView(_ size: CGFloat) {
-        rightView.makeConstraints { make in
-            make.setWidth.equalToConstant(size)
-        }
-    }
-    
-    private func addViewToRightView(_ view: UIView) {
-        view.add(insideTo: rightView)
-        view.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
-    }
+  
     
 }
