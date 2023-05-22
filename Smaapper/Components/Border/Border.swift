@@ -55,9 +55,12 @@ class Border {
     }
     
     func setCornerRadius(_ radius: CGFloat) -> Self {
+//        component.layer.masksToBounds = true
         component.clipsToBounds = true
         self.removeBorderStyleOfTextField()
         component.layer.cornerRadius = radius
+//        component.layer.masksToBounds = false
+        //TODO: - PROBLEMA DA SOMBRA E BORDA.. AFETA O DROPDOWN - O LIST E A DOCK
         return self
     }
     

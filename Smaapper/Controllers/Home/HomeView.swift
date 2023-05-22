@@ -210,6 +210,8 @@ class HomeView: View {
     }()
     
     
+    
+    
     private func createTitleView() -> UIView {
         let view = UIView()
         let maximize = createMaximizeButton()
@@ -254,10 +256,6 @@ class HomeView: View {
                     .setColor([UIColor.HEX("#febc2e"), UIColor.HEX("#febc2e")])
                     .apply()
             })
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
             .setShadow({ build in
                 build
                     .setColor(.black)
@@ -266,10 +264,13 @@ class HomeView: View {
                     .setOffset(width: 5, height: 5)
                     .apply()
             })
-            
             .setConstraints { build in
                 build
                     .setSize.equalToConstant(16)
+            }
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
             }
         return btn
     }
@@ -281,10 +282,7 @@ class HomeView: View {
                     .setColor([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
                     .apply()
             })
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
+
             .setShadow({ build in
                 build
                     .setColor(.black)
@@ -293,7 +291,10 @@ class HomeView: View {
                     .setOffset(width: 5, height: 5)
                     .apply()
             })
-            
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
+            }
             .setConstraints { build in
                 build
                     .setSize.equalToConstant(16)
@@ -308,10 +309,6 @@ class HomeView: View {
     }
     
     
-    
-    
-    
-    
     private func addElementsInTitleView(_ view: UIView, _ elements: [UIView]) {
         elements.forEach { elem in
             elem.add(insideTo: view)
@@ -319,13 +316,23 @@ class HomeView: View {
     }
     
     private func configButtonsConstraintsInTitleView(_ maximize: Button, _ minimize: Button, _ closeWin: Button) {
-        configMinimizeConstraintsInTitle(minimize )
-        configMaximizeConstraintsInTitle(maximize, minimize)
-        configCloseWinConstraintsInTitleView(closeWin)
-    }
-    
-    
-    private func configMaximizeConstraintsInTitle(_ maximize: Button, _ minimize: Button) {
+        
+        closeWin.makeConstraints { make in
+            make
+                .setLeading.equalToSuperView(10)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        closeWin.applyConstraint()
+        
+        
+        minimize.makeConstraints { make in
+            make
+                .setLeading.equalTo(closeWin, .trailing, 15)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        minimize.applyConstraint()
+        
+        
         maximize.makeConstraints { make in
             make
                 .setLeading.equalTo(minimize, .trailing, 15)
@@ -334,23 +341,8 @@ class HomeView: View {
         maximize.applyConstraint()
     }
     
-    private func configMinimizeConstraintsInTitle(_ minimize: Button) {
-        minimize.makeConstraints { make in
-            make
-                .setLeading.equalToSuperView(10)
-                .setVerticalAlignmentY.equalToSuperView(5)
-        }
-        minimize.applyConstraint()
-    }
     
-    private func configCloseWinConstraintsInTitleView(_ closeButton: Button) {
-        closeButton.makeConstraints { make in
-            make
-                .setTrailing.equalToSuperView(-10)
-                .setVerticalAlignmentY.equalToSuperView(5)
-        }
-        closeButton.applyConstraint()
-    }
+    
     
     
     
