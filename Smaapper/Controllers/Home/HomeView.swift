@@ -10,8 +10,10 @@ import UIKit
 protocol HomeViewDelegate: AnyObject {
     func menuButtonTapped()
     func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
+    func openMenu()
+    func closeMenu()
     func numberOfItemsCallback() -> Int
-    func cellCalback(_ indexCell: Int) -> UIView
+    func dockCellCalback(_ indexCell: Int) -> UIView
 }
 
 class HomeView: View {
@@ -75,7 +77,10 @@ class HomeView: View {
             .setFooterComponent(settingsButton)
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
-            .setAction(dropdownMenuTapped)
+            .setEvent(touch: dropdownMenuTapped)
+            .setEvent(openMenu: openCloseDropdowMenu)
+            .setEvent(closeMenu: openCloseDropdowMenu)
+            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
             .setConstraints { build in
                 build
                     .setTop.greaterThanOrEqualToSafeArea(10)
@@ -88,6 +93,15 @@ class HomeView: View {
     
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
         delegate?.dropdownMenuTapped(rowTapped)
+    }
+
+    private func openCloseDropdowMenu(_ state: DropdownMenu.StateMenu) {
+        switch state {
+        case .open:
+            delegate?.openMenu()
+        case .close:
+            delegate?.closeMenu()
+        }
     }
     
     lazy var menuButton: ButtonImage = {
@@ -148,7 +162,7 @@ class HomeView: View {
     }()
     
     lazy var dock: Dock = {
-        let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: cellCalback)
+        let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true)
@@ -172,8 +186,8 @@ class HomeView: View {
         return delegate?.numberOfItemsCallback() ?? 0
     }
     
-    private func cellCalback(_ indexCell: Int) -> UIView {
-        return delegate?.cellCalback(indexCell) ?? UIView()
+    private func dockCellCalback(_ indexCell: Int) -> UIView {
+        return delegate?.dockCellCalback(indexCell) ?? UIView()
     }
     
     func dockIsShow(_ flag: Bool) {
@@ -211,70 +225,16 @@ class HomeView: View {
     
     
     
-    
     private func createTitleView() -> UIView {
         let view = UIView()
-        let maximize = createMaximizeButton()
-        let minimize = createMinimizeButton()
         let closeWin = createCloseWindowButton()
         let dragDropView = createDragDropView()
-        addElementsInTitleView(view, [maximize,minimize,closeWin,dragDropView])
-        configButtonsConstraintsInTitleView(maximize, minimize, closeWin)
+        addElementsInTitleView(view, [closeWin,dragDropView])
+        configButtonsConstraintsInTitleView(closeWin)
         return view
     }
     
-    private func createMaximizeButton() -> Button {
-        let btn = Button()
-            .setGradient({ build in
-                build
-                    .setColor([UIColor.HEX("#28c840"), UIColor.HEX("#28c840")])
-                    .apply()
-            })
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
-            .setShadow({ build in
-                build
-                    .setColor(.black)
-                    .setBlur(5)
-                    .setOpacity(0.6)
-                    .setOffset(width: 5, height: 5)
-                    .apply()
-            })
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(16)
-            }
-        return btn
-    }
-    
-    private func createMinimizeButton() -> Button {
-        let btn = Button()
-            .setGradient({ build in
-                build
-                    .setColor([UIColor.HEX("#febc2e"), UIColor.HEX("#febc2e")])
-                    .apply()
-            })
-            .setShadow({ build in
-                build
-                    .setColor(.black)
-                    .setBlur(5)
-                    .setOpacity(0.6)
-                    .setOffset(width: 5, height: 5)
-                    .apply()
-            })
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(16)
-            }
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
-        return btn
-    }
-    
+
     private func createCloseWindowButton() -> Button {
         let btn = Button()
             .setGradient({ build in
@@ -315,33 +275,14 @@ class HomeView: View {
         }
     }
     
-    private func configButtonsConstraintsInTitleView(_ maximize: Button, _ minimize: Button, _ closeWin: Button) {
-        
+    private func configButtonsConstraintsInTitleView( _ closeWin: Button) {
         closeWin.makeConstraints { make in
             make
-                .setLeading.equalToSuperView(10)
+                .setTrailing.equalToSuperView(-12)
                 .setVerticalAlignmentY.equalToSuperView(5)
         }
         closeWin.applyConstraint()
-        
-        
-        minimize.makeConstraints { make in
-            make
-                .setLeading.equalTo(closeWin, .trailing, 15)
-                .setVerticalAlignmentY.equalToSuperView(5)
-        }
-        minimize.applyConstraint()
-        
-        
-        maximize.makeConstraints { make in
-            make
-                .setLeading.equalTo(minimize, .trailing, 15)
-                .setVerticalAlignmentY.equalToSuperView(5)
-        }
-        maximize.applyConstraint()
     }
-    
-    
     
     
     

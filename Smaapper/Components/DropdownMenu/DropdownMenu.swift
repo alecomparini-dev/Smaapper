@@ -7,10 +7,17 @@
 
 import UIKit
 
+protocol DropdownMenuDelegate: AnyObject {
+    func touchMenu()
+    func openMenu()
+    func closeMenu()
+}
 
 class DropdownMenu: View {
     
-    typealias onTapDropdownMenuAlias = ((_ rowTapped :(section: Int, row: Int)) -> Void)
+    typealias touchMenuClosureAlias = ((_ rowTapped: (section: Int, row: Int)) -> Void)
+    typealias openMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
+    typealias closeMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
     
     enum PositionMenu {
         case leftTop
@@ -18,17 +25,27 @@ class DropdownMenu: View {
         case rightTop
         case rightBottom
     }
+    
+    enum StateMenu {
+        case open
+        case close
+    }
+    
+    
     private var alreadyApplied = false
     private var _isShow = false
     
-    private var onTapDropdownMenu: onTapDropdownMenuAlias?
+    private var touchMenuClosure: touchMenuClosureAlias?
+    private var openMenuClosure: openMenuClosureAlias?
+    private var closeMenuClosure: closeMenuClosureAlias?
 
     private var zPosition: CGFloat = 10000
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
     private var paddingCells: UIEdgeInsets?
-    private var openingPoint: CGPoint?
+    private var autoCloseEnabled: Bool = false
+    private var excludeComponents: [UIView] = []
     
     var paddingMenu: UIEdgeInsets?
     
@@ -47,8 +64,8 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                if let onTapDropdownMenu = self.onTapDropdownMenu {
-                    onTapDropdownMenu((section,row))
+                if let touchMenuClosure = self.touchMenuClosure {
+                    touchMenuClosure((section,row))
                 }
             })
             .setBackgroundColor(.clear)
@@ -57,11 +74,13 @@ class DropdownMenu: View {
     
     
 //  MARK: - Set Properties
+    @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
         self.positionOpenMenu = position
         return self
     }
     
+    @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
         _ = list.setRowHeight(height)
         return self
@@ -72,42 +91,75 @@ class DropdownMenu: View {
         return self
     }
     
+    @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         self.menuWidth = width
         return self
     }
     
+    @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
         self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
+    @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
         self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        _ = list.setSectionHeaderHeight(height)
+        list.setSectionHeaderHeight(height)
         return self
     }
     
+    @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
         _ = list.setSectionFooterHeight(height)
         return self
     }
     
+    @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
         _ = list.setSectionHeaderHeight(forSection: forSection, height)
         return self
     }
     
+    @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
         _ = list.setSectionFooterHeight(forSection: forSection, height)
         return self
     }
     
+    func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
+        self.autoCloseEnabled = true
+        self.excludeComponents = excludeComponents
+        return self
+    }
     
+    
+
+//  MARK: - Actions
+    @discardableResult
+    func setEvent(touch closure: @escaping touchMenuClosureAlias) -> Self {
+        self.touchMenuClosure = closure
+        return self
+    }
+    
+    @discardableResult
+    func setEvent(openMenu closure: @escaping openMenuClosureAlias) -> Self {
+        self.openMenuClosure = closure
+        return self
+    }
+    
+    @discardableResult
+    func setEvent(closeMenu closure: @escaping closeMenuClosureAlias) -> Self {
+        self.closeMenuClosure = closure
+        return self
+    }
+
     
 //  MARK: - SET Data In List
     
@@ -126,13 +178,6 @@ class DropdownMenu: View {
     
     
     
-//  MARK: - Actions
-    func setAction(_ closure: @escaping onTapDropdownMenuAlias) -> Self {
-        self.onTapDropdownMenu = closure
-        return self
-    }
-    
-    
 //  MARK: - Show DropdownMenu
     
     var isShow: Bool {
@@ -142,8 +187,8 @@ class DropdownMenu: View {
             self._isShow = newValue
             applyOnceConfig()
             bringToFront()
-            list.isShow = newValue
-            self.isHidden = !self._isShow
+            isPresented()
+            callClosureOpenCloseMenu(self._isShow)
         }
     }
     
@@ -155,11 +200,87 @@ class DropdownMenu: View {
             self.setTopMostPosition()
             self.addListOnDropdownMenu()
             self.configConstraints()
+            self.configAutoCloseMenu()
             self.alreadyApplied = true
         }
     }
 
+    private func configAutoCloseMenu() {
+        if self.autoCloseEnabled {
+            if let superview = self.superview {
+                superview.makeTapGesture { make in
+                    make
+                        .setStateGesture([.ended])
+                        .setAction (closure: verifyTappedOutMenu)
+                }
+            }
+        }
+    }
+    
+    private func verifyTappedOutMenu(_ tap: TapGesture) {
+        if self._isShow {
+            if self.isTappedOut(tap) {
+                self.isShow = false
+            }
+        }
+    }
+    
+    
+    private func isTappedOut(_ tap: TapGesture) -> Bool {
+        let touchPoint = tap.getTouchedPositionRelative(to: .window)
+        if isTappedOutDropdownMenu(touchPoint) && isTappedOutExcludeComponents(touchPoint) {
+            return true
+        }
+        return false
+    }
+    
+    private func isTappedOutDropdownMenu(_ touchPoint: CGPoint) -> Bool {
+        if self.frame.contains(touchPoint) {
+            return false
+        }
+        return true
+    }
+    
+    private func isTappedOutExcludeComponents(_ touchPoint: CGPoint) -> Bool {
+        var isTappedOut = true
+        self.excludeComponents.forEach { comp in
+            if comp.frame.contains(touchPoint) {
+                isTappedOut = false
+                return
+            }
+        }
+        return isTappedOut
+    }
+    
+
+    private func isPresented() {
+        list.isShow = self._isShow
+        self.isHidden = !self._isShow
+    }
+    
+    private func callClosureOpenCloseMenu(_ isShow: Bool) {
+        callClosureOpenMenu()
+        callClosureCloseMenu()
+    }
+
+    private func callClosureOpenMenu() {
+        if let openMenuClosure {
+            if isShow {
+                openMenuClosure(.open)
+            }
+        }
+    }
+    
+    private func callClosureCloseMenu() {
+        if let closeMenuClosure {
+            if !isShow {
+                closeMenuClosure(.close)
+            }
+        }
+    }
+    
     private func bringToFront() {
+        if !_isShow { return }
         if let superview = self.superview {
             superview.bringSubviewToFront(self)
         }
