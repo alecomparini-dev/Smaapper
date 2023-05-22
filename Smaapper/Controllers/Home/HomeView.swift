@@ -37,14 +37,14 @@ class HomeView: View {
     
 //  MARK: - LAZY Properties
     
-    lazy var clock: ClockNumbers = {
-        let clock = ClockNumbers()
+    lazy var clock: ClockNeumorphism = {
+        let clock = ClockNeumorphism()
+//            .setBackgroundColor(.red)
             .setConstraints { build in
                 build
-                    .setTop.equalToSafeArea(40)
-                    .setTrailing.equalToSafeArea(-80)
-                    .setWidth.equalToConstant(20)
-                    .setHeight.equalToConstant(35)
+                    .setTop.setTrailing.equalToSafeArea(40)
+                    .setWidth.equalToConstant(110)
+                    .setHeight.equalToConstant(50)
             }
         return clock
     }()
@@ -261,14 +261,19 @@ class HomeView: View {
         dropdownMenu.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
-        clock.add(insideTo: self)
+        
+//        DispatchQueue.main.async {
+            self.clock.add(insideTo: self)
+            self.clock.applyConstraint()
+//        }
+        
     }
     
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        clock.applyConstraint()
+        
         
         
 //        let img = ImageView()

@@ -657,6 +657,7 @@
 		0281DAE52A1843C200E44F04 /* ClockNeumorphism */ = {
 			isa = PBXGroup;
 			children = (
+				0281DAE92A18445700E44F04 /* ClockNumbers.swift */,
 				0281DAE62A1843FF00E44F04 /* Views */,
 				0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */,
 			);
@@ -666,7 +667,6 @@
 		0281DAE62A1843FF00E44F04 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAE92A18445700E44F04 /* ClockNumbers.swift */,
 				0281DAEB2A18EA8700E44F04 /* LazyPropertiesClockNumbers.swift */,
 			);
 			path = Views;
