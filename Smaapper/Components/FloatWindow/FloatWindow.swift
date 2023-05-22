@@ -10,14 +10,16 @@ import UIKit
 
 class FloatWindow: View {
     
-    private var titleWindow: TitleWindow?
     private var _isShow = false
     private var alreadyApplied = false
     
     private let hierarchy: CGFloat = 1000
     
-    override init() {
-        super.init()
+    private var titleWindow: TitleWindow?
+    private var titleHeight: CGFloat = 30
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.initialization()
     }
     
@@ -38,13 +40,22 @@ class FloatWindow: View {
         return self
     }
     
-
+    @discardableResult
+    func setTitleHeight(_ height: CGFloat) -> Self {
+        self.titleHeight = height
+        return self
+    }
+    
+    
+    
+//  MARK: - SHOW Float Window
     var isShow: Bool {
         get { return self._isShow}
         set {
             self._isShow = newValue
             applyOnceConfig()
             self.isHidden = !self._isShow
+            self.titleWindow?.isShow = self._isShow
         }
     }
     
@@ -53,9 +64,13 @@ class FloatWindow: View {
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-//            DispatchQueue.main.async {
-                self.alreadyApplied = true
-//            }
+            self.titleWindow?.add(insideTo: self)
+            self.titleWindow?.makeConstraints({ make in
+                make
+                    .setPinTop.equalToSuperView
+                    .setHeight.equalToConstant(titleHeight)
+            })
+            self.alreadyApplied = true
         }
     }
     

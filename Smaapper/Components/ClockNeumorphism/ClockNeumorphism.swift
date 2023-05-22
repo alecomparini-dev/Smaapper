@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ClockNeumorphism: View {
     
     enum Weight {
@@ -75,7 +76,7 @@ class ClockNeumorphism: View {
         middleView.add(insideTo: stack)
         bottomView.add(insideTo: stack)
     
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { 
             let points = self.createTwoPoints(middleView.frame.height)
             points.add(insideTo: middleView)
             points.makeConstraints { make in
@@ -86,16 +87,18 @@ class ClockNeumorphism: View {
     }()
     
     
-    
-    
+//  MARK: - SET Properties
+    func setWeight(_ weight: CGFloat) -> Self {
+        self.weight = weight
+        return self
+    }
     
     
 //  MARK: - Private Function Area
     
+    // TODO: - CREATE METHOD START OR SHOW AND UPDATE ONLY WHEN NUMBER CHANGES
     private func createClock() {
         updateClock()
-        
-        // Cria um objeto DispatchSourceTimer
         timer = DispatchSource.makeTimerSource()
         
         timer?.schedule(deadline: .now(), repeating: .seconds(1))
@@ -108,9 +111,7 @@ class ClockNeumorphism: View {
                 }
             }
         }
-
         timer?.resume()
-        
     }
     
     private func updateClock() {

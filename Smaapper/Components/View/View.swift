@@ -26,7 +26,7 @@ class View: UIView, BaseComponentProtocol {
     override func layoutSubviews() {
         super.layoutSubviews()
         Resize.resize(self)
-        print("remover layoutsubviews" , self)
+//        print("remover aqui layoutsubviews" , self)
     }
 
     

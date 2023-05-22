@@ -39,12 +39,12 @@ class HomeView: View {
     
     lazy var clock: ClockNeumorphism = {
         let clock = ClockNeumorphism()
-//            .setBackgroundColor(.red)
+            .setWeight(4)
             .setConstraints { build in
                 build
-                    .setTop.setTrailing.equalToSafeArea(40)
+                    .setTop.setTrailing.equalToSafeArea(30)
                     .setWidth.equalToConstant(110)
-                    .setHeight.equalToConstant(50)
+                    .setHeight.equalToConstant(40)
             }
         return clock
     }()
@@ -81,7 +81,6 @@ class HomeView: View {
                     .setTop.greaterThanOrEqualToSafeArea(10)
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
-//                    .setHeight.greaterThanOrEqualToSafeArea(-100)
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
@@ -129,7 +128,6 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-
     lazy var recentButton: IconButton = {
         return IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
             .setImageWeight(.medium)
@@ -140,7 +138,6 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-    
     lazy var settingsButton: IconButton = {
         return IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
             .setImageWeight(.medium)
@@ -149,7 +146,6 @@ class HomeView: View {
             .setTitleSize(12)
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
-    
     
     lazy var dock: Dock = {
         let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: cellCalback)
@@ -183,7 +179,180 @@ class HomeView: View {
     func dockIsShow(_ flag: Bool) {
         dock.isShow = flag
     }
-
+    
+    
+    lazy var floatWindow: FloatWindow = {
+        let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])
+                    .setAxialGradient(.topToBottom)
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(24)
+            }
+            .setShadow { build in
+                build
+                    .setOpacity(1)
+                    .setColor(.black)
+                    .setCornerRadius(12)
+                    .setBlur(25)
+                    .setOffset(width: 5, height: 10)
+                    .apply()
+            }
+            .setTitleWindow { build in
+                build
+                    .setTitleView(createTitleView())
+            }
+        return win
+    }()
+    
+    
+    private func createTitleView() -> UIView {
+        let view = UIView()
+        let maximize = createMaximizeButton()
+        let minimize = createMinimizeButton()
+        let closeWin = createCloseWindowButton()
+        let dragDropView = createDragDropView()
+        addElementsInTitleView(view, [maximize,minimize,closeWin,dragDropView])
+        configButtonsConstraintsInTitleView(maximize, minimize, closeWin)
+        return view
+    }
+    
+    private func createMaximizeButton() -> Button {
+        let btn = Button()
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#28c840"), UIColor.HEX("#28c840")])
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
+            }
+            .setShadow({ build in
+                build
+                    .setColor(.black)
+                    .setBlur(5)
+                    .setOpacity(0.6)
+                    .setOffset(width: 5, height: 5)
+                    .apply()
+            })
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(16)
+            }
+        return btn
+    }
+    
+    private func createMinimizeButton() -> Button {
+        let btn = Button()
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#febc2e"), UIColor.HEX("#febc2e")])
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
+            }
+            .setShadow({ build in
+                build
+                    .setColor(.black)
+                    .setBlur(5)
+                    .setOpacity(0.6)
+                    .setOffset(width: 5, height: 5)
+                    .apply()
+            })
+            
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(16)
+            }
+        return btn
+    }
+    
+    private func createCloseWindowButton() -> Button {
+        let btn = Button()
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
+            }
+            .setShadow({ build in
+                build
+                    .setColor(.black)
+                    .setBlur(5)
+                    .setOpacity(0.6)
+                    .setOffset(width: 5, height: 5)
+                    .apply()
+            })
+            
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(16)
+            }
+        return btn
+    }
+    
+    private func createDragDropView() -> UIView {
+        let view = View()
+        
+        return view
+    }
+    
+    
+    
+    
+    
+    
+    private func addElementsInTitleView(_ view: UIView, _ elements: [UIView]) {
+        elements.forEach { elem in
+            elem.add(insideTo: view)
+        }
+    }
+    
+    private func configButtonsConstraintsInTitleView(_ maximize: Button, _ minimize: Button, _ closeWin: Button) {
+        configMinimizeConstraintsInTitle(minimize )
+        configMaximizeConstraintsInTitle(maximize, minimize)
+        configCloseWinConstraintsInTitleView(closeWin)
+    }
+    
+    
+    private func configMaximizeConstraintsInTitle(_ maximize: Button, _ minimize: Button) {
+        maximize.makeConstraints { make in
+            make
+                .setLeading.equalTo(minimize, .trailing, 15)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        maximize.applyConstraint()
+    }
+    
+    private func configMinimizeConstraintsInTitle(_ minimize: Button) {
+        minimize.makeConstraints { make in
+            make
+                .setLeading.equalToSuperView(10)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        minimize.applyConstraint()
+    }
+    
+    private func configCloseWinConstraintsInTitleView(_ closeButton: Button) {
+        closeButton.makeConstraints { make in
+            make
+                .setTrailing.equalToSuperView(-10)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        closeButton.applyConstraint()
+    }
+    
+    
     
 //  MARK: - Objc Functions Area
     @objc func menuButtonTapped() {
@@ -261,11 +430,8 @@ class HomeView: View {
         dropdownMenu.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
-        
-//        DispatchQueue.main.async {
-            self.clock.add(insideTo: self)
-            self.clock.applyConstraint()
-//        }
+        self.clock.add(insideTo: self)
+        floatWindow.add(insideTo: self)
         
     }
     
@@ -273,17 +439,10 @@ class HomeView: View {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        
-        
-        
-//        let img = ImageView()
-//            .setImage(UIImage(named: "teste"))
-//            .setContentMode(.scaleAspectFill)
-//
-//        img.add(insideTo: self)
-//        img.makeConstraints { make in
-//            make.setPin.equalToSuperView
-//        }
+        self.clock.applyConstraint()
+        floatWindow.applyConstraint()
+
+        floatWindow.isShow = true
 
 
     }
@@ -304,8 +463,6 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#26292a"))
                     .setShape(.convex)
                     .setLightPosition(.leftTop)
-//                    .setIntensity(percent: 40)
-//                    .setShadowColor(to: .light, .black.withAlphaComponent(0.3))
                     .setBlur(percent: 0)
                     .setDistance(percent: 1)
                     .apply()
@@ -316,6 +473,20 @@ class HomeView: View {
     
     
 
+    
+    
+    
+    func showImage() {
+        let img = ImageView()
+            .setImage(UIImage(named: "teste"))
+            .setContentMode(.scaleAspectFill)
+        
+        img.add(insideTo: self)
+        img.makeConstraints { make in
+            make.setPin.equalToSuperView
+        }
+
+    }
     
     
 }
