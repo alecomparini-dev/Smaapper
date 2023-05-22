@@ -10,12 +10,28 @@ import UIKit
 
 class ClockNumbers: View {
     
-    private let weight: CGFloat = 5
+    private var weight: CGFloat = 5
     private var neumorphism: Neumorphism?
+    private var number: Int = 0
+    
+    private let hasLeftTopStroke = [4,5,6,8,9,0]
+    private let hasLeftBottomStroke = [2,6,8,0]
+    private let hasRightTopStroke = [1,2,3,4,7,8,9,0]
+    private let hasRightBottomStroke = [1,3,4,5,6,7,8,9,0]
+    private let hasTopMiddleStroke = [2,3,5,7,8,9,0]
+    private let hasMiddleStroke = [2,3,4,5,6,8,9]
+    private let hasBottomMiddleStroke = [2,3,5,6,8,0]
+    
+    
+    init(number: Int, weight: CGFloat = 5) {
+        self.number = number
+        self.weight = weight
+        super.init()
+        self.initialization()
+    }
     
     override init() {
         super.init()
-        self.initialization()
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +57,6 @@ class ClockNumbers: View {
     lazy var stackMiddle: Stack = {
         let st = Stack()
             .setAxis(.vertical)
-//            .setAlignment(.center)
             .setDistribution(.fillProportionally)
         return st
     }()
@@ -59,11 +74,11 @@ class ClockNumbers: View {
 //  MARK: - LEFT STROKES
     
     lazy var leftTopStroke: View = {
-        return createView(true)
+        return (hasLeftTopStroke.contains(number)) ? createView(true) : View()
     }()
     
     lazy var leftBottomStroke: View = {
-        return createView(true)
+        return (hasLeftBottomStroke.contains(number)) ? createView(true) : View()
     }()
     
 
@@ -73,47 +88,44 @@ class ClockNumbers: View {
         return createView(false)
     }()
     
-    lazy var topMiddleStroke: View = {
-        return createView(true)
-    }()
-    
     lazy var middleStrokeView: View = {
         return createView(false)
     }()
-    lazy var middleStroke: View = {
-        return createView(true)
-    }()
-    
     
     lazy var middleBottomView: View = {
         return createView(false)
     }()
-    lazy var bottomMiddleStroke: View = {
-        return createView(true)
+    
+    lazy var topMiddleStroke: View = {
+        return (hasTopMiddleStroke.contains(number)) ? createView(true) : View()
     }()
     
+    lazy var middleStroke: View = {
+        return (hasMiddleStroke.contains(number)) ? createView(true) : View()
+    }()
     
+    lazy var bottomMiddleStroke: View = {
+        return (hasBottomMiddleStroke.contains(number)) ? createView(true) : View()
+    }()
     
 
 //  MARK: - RIGHT STROKE
     
     lazy var rightTopStroke: View = {
-        return createView(true)
+        return (hasRightTopStroke.contains(number)) ? createView(true) : View()
     }()
     
     lazy var rightBottomStroke: View = {
-        return createView(true)
+        return (hasRightBottomStroke.contains(number)) ? createView(true) : View()
     }()
-    
-    
     
     
 //  MARK: - Private Functions Area
     
-    private func configNeumorphism(_ lightPosition: Neumorphism.LightPosition = .rightTop) -> Neumorphism {
+    private func configNeumorphism(_ lightPosition: Neumorphism.LightPosition = .leftTop) -> Neumorphism {
         return Neumorphism()
             .setReferenceColor(UIColor.HEX("#26292a"))
-            .setShape(.flat)
+            .setShape(.convex)
             .setLightPosition(lightPosition)
             .setIntensity(to:.light,percent: 50)
             .setIntensity(to:.dark,percent: 100)
@@ -157,9 +169,9 @@ class ClockNumbers: View {
         configStackMiddleConstraints()
         configStackRightConstraints()
         
-        configTopStrokeConstraints()
-        configMiddleStrockConstraints()
-        configBottomStrokeConstraints()
+        configTopMiddleStrokeConstraints()
+        configMiddleStrokeConstraints()
+        configBottomMiddleStrokeConstraints()
 
     }
     
@@ -191,28 +203,32 @@ class ClockNumbers: View {
             })
     }
     
-    
-    private func configTopStrokeConstraints() {
+    private func configTopMiddleStrokeConstraints() {
         topMiddleStroke.makeConstraints { make in
             make
-                .setPinTop.equalToSuperView
+                .setTop.equalToSuperView
+                .setLeading.equalToSuperView
+                .setTrailing.equalToSuperView
                 .setHeight.equalToConstant(weight/1.4)
         }
     }
     
-    private func configMiddleStrockConstraints() {
+    private func configMiddleStrokeConstraints() {
         middleStroke.makeConstraints { make in
             make
                 .setVerticalAlignmentY.equalToSafeArea
-                .setLeading.setTrailing.equalToSuperView
+                .setLeading.equalToSuperView
+                .setTrailing.equalToSuperView
                 .setHeight.equalToConstant(weight/2)
         }
     }
     
-    private func configBottomStrokeConstraints() {
+    private func configBottomMiddleStrokeConstraints() {
         bottomMiddleStroke.makeConstraints { make in
             make
-                .setPinBottom.equalToSuperView
+                .setBottom.equalToSuperView
+                .setTrailing.equalToSuperView(calculateTrailing())
+                .setLeading.equalToSuperView(calculateLeading())
                 .setHeight.equalToConstant(weight/1.4)
         }
     }
@@ -223,6 +239,20 @@ class ClockNumbers: View {
             configNeumorphism(lightPosition).apply(v)
         }
         return v
+    }
+    
+    private func calculateLeading() -> CGFloat {
+        if self.number == 5 {
+            return -weight/1.5
+        }
+        return 0
+    }
+    
+    private func calculateTrailing() -> CGFloat {
+        if self.number == 2 {
+            return weight/1.5
+        }
+        return 0
     }
     
 }
