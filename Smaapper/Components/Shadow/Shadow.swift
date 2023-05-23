@@ -153,9 +153,6 @@ class Shadow {
     
     private func shadowInitializers() {
         let _ = self.setDefault()
-        self.component.layer.masksToBounds = false
-        self.component.layer.shouldRasterize = true
-        self.component.layer.rasterizationScale = UIScreen.main.scale
         self.shadow.shouldRasterize = true
         self.shadow.rasterizationScale = UIScreen.main.scale
     }

@@ -50,6 +50,7 @@ class Dock: View {
         self.collection.backgroundColor = .clear
         self.layout.scrollDirection = .horizontal
         self.collection.setCollectionViewLayout(self.layout, animated: true)
+        self.container.clipsToBounds = true
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
         self.setShowsHorizontalScrollIndicator(false)
@@ -140,15 +141,15 @@ class Dock: View {
         return self
     }
     
-//    @discardableResult
-//    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-//        self.collection.makeShadow { make in
-//            make.setColor(.red)
-//                .setOffset(width: 10, height: 10)
-//                .apply()
-//        }
-//        return self
-//    }
+    @discardableResult
+    override func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
+        self.collection.makeShadow { make in
+            make.setColor(.red)
+                .setOffset(width: 10, height: 10)
+                .apply()
+        }
+        return self
+    }
     
     
 //  MARK: - Private Function Area
@@ -296,9 +297,7 @@ extension Dock: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
-        
         let item = self.cellCallback(indexPath.row)
-        
         item.isUserInteractionEnabled = self.isUserInteractionEnabledItems
         cell.setupCell(item)
         
