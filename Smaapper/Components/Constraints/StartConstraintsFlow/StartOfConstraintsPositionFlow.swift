@@ -17,7 +17,6 @@ class StartOfConstraintsPositionFlow<C>: StartOfConstraintsPositionFlowProtocol 
     init(_ constraintsFlow: StartOfConstraintsFlow) {
         self.constraintsFlow = constraintsFlow
         self.constraintVM = self.constraintsFlow.constraintVM
-        typealias T = ConstraintsPositionX
     }
     
     

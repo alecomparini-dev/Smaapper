@@ -53,7 +53,7 @@ class HomeView: View {
     
     
     lazy var dropdownMenu: DropdownMenuFooter = {
-        return DropdownMenuFooter()
+        let drop = DropdownMenuFooter()
             .setBorder({ build in
                 build
                     .setCornerRadius(18)
@@ -77,9 +77,6 @@ class HomeView: View {
             .setFooterComponent(settingsButton)
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
-            .setEvent(touch: dropdownMenuTapped)
-            .setEvent(openMenu: openCloseDropdowMenu)
-            .setEvent(closeMenu: openCloseDropdowMenu)
             .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
             .setConstraints { build in
                 build
@@ -89,6 +86,13 @@ class HomeView: View {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
+        
+        drop.actions?
+            .setEvent(touch: dropdownMenuTapped)
+            .setEvent(openMenu: openCloseDropdowMenu)
+            .setEvent(closeMenu: openCloseDropdowMenu)
+        
+        return drop
     }()
     
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
@@ -163,16 +167,17 @@ class HomeView: View {
     
     lazy var dock: Dock = {
         let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
+        dock.attributes
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true)
+            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setBorder({ build in
                 build
                     .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
                     .setCornerRadius(15)
             })
-            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)
