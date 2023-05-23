@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DropdownMenuAction {
+class DropdownMenuActions {
     
     typealias touchMenuClosureAlias = ((_ rowTapped: (section: Int, row: Int)) -> Void)
     typealias openMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void

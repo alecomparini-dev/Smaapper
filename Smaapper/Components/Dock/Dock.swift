@@ -47,6 +47,7 @@ class Dock: View {
         self.layer.zPosition = hierarchy
     }
     
+//  MARK: - SHOW Dock
     var isShow: Bool {
         get { return self._isShow}
         set {

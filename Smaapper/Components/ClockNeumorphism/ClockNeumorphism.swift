@@ -76,7 +76,7 @@ class ClockNeumorphism: View {
         middleView.add(insideTo: stack)
         bottomView.add(insideTo: stack)
     
-        DispatchQueue.main.async { 
+        DispatchQueue.main.async {
             let points = self.createTwoPoints(middleView.frame.height)
             points.add(insideTo: middleView)
             points.makeConstraints { make in
@@ -102,7 +102,7 @@ class ClockNeumorphism: View {
         timer = DispatchSource.makeTimerSource()
         
         timer?.schedule(deadline: .now(), repeating: .seconds(1))
-        timer?.setEventHandler { [weak self] in
+        timer?.setEventHandler { [weak self ] in
             DispatchQueue.main.async {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "ss"

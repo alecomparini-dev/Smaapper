@@ -9,20 +9,19 @@ import UIKit
 
 class DropdownMenuFooter: DropdownMenu {
     
-    private var alreadyApplied = false
-    private var _isShow = false
-    
     private var footerHeight: CGFloat = 50
     private var footerGradient: Gradient?
     private var componentsFooter: [UIView] = []
     
     
-//  MARK: - Initializers
+    private var alreadyApplied = false
+    private var _isShow = false
     
+    
+//  MARK: - Initializers
     override init() {
         super.init()
         addElements()
-
     }
     
     required init?(coder: NSCoder) {
@@ -41,22 +40,26 @@ class DropdownMenuFooter: DropdownMenu {
     }()
     
     
+
+
 //  MARK: - SET Properties
+    @discardableResult
     func setFooterHeight(_ footerHeight: CGFloat) -> Self {
         self.footerHeight = footerHeight
         return self
     }
-    
+
+    @discardableResult
     func setFooterGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
         self.footerGradient = gradient(Gradient(stackView))
         return self
     }
-    
+
+    @discardableResult
     func setFooterComponent(_ componentView: UIView) -> Self {
         self.componentsFooter.append(componentView)
         return self
     }
-    
     
     
 //  MARK: - APPLY Dropdown Footer
@@ -142,10 +145,10 @@ class DropdownMenuFooter: DropdownMenu {
     }
     
     private func configFooter() {
-        _ = self.setPaddingMenu(top: self.paddingMenu?.top ?? 0,
-                                left: self.paddingMenu?.left ?? 0,
-                                bottom: self.footerHeight,
-                                right: self.paddingMenu?.right ?? 0)
+        self.setPaddingMenu(top: self.paddingMenu?.top ?? 0,
+                                       left: self.paddingMenu?.left ?? 0,
+                                       bottom: self.footerHeight,
+                                       right: self.paddingMenu?.right ?? 0)
     }
 
     private func configCornerRadius() {
