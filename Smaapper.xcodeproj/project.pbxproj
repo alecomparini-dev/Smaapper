@@ -76,6 +76,7 @@
 		0281DAEE2A1CDA5700E44F04 /* DropdownMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */; };
 		0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */; };
 		0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */; };
+		0281DAF82A1D000800E44F04 /* DockActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF72A1D000800E44F04 /* DockActions.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -177,6 +178,7 @@
 		0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuAction.swift; sourceTree = "<group>"; };
 		0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockAttributes.swift; sourceTree = "<group>"; };
 		0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentAttributes.swift; sourceTree = "<group>"; };
+		0281DAF72A1D000800E44F04 /* DockActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockActions.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 		0281DAD12A13F61300E44F04 /* Dock */ = {
 			isa = PBXGroup;
 			children = (
+				0281DAF62A1CFFFA00E44F04 /* DockActions */,
 				0281DAF02A1CDF5000E44F04 /* DockAttributes */,
 				0281DAD42A14071B00E44F04 /* DockCell */,
 				0281DAD22A13F6F700E44F04 /* Dock.swift */,
@@ -684,6 +687,14 @@
 				0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */,
 			);
 			path = DockAttributes;
+			sourceTree = "<group>";
+		};
+		0281DAF62A1CFFFA00E44F04 /* DockActions */ = {
+			isa = PBXGroup;
+			children = (
+				0281DAF72A1D000800E44F04 /* DockActions.swift */,
+			);
+			path = DockActions;
 			sourceTree = "<group>";
 		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
@@ -984,6 +995,7 @@
 				0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */,
 				0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
+				0281DAF82A1D000800E44F04 /* DockActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */,

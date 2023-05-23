@@ -9,6 +9,11 @@ import UIKit
 
 class Dock: View {
     
+    enum State {
+        case show
+        case hide
+    }
+    
     typealias cellCallbackAlias = (_ indexItem: Int) -> UIView
     typealias numberOfItemsCallbackAlias = () -> Int
     
@@ -168,13 +173,14 @@ class Dock: View {
     private func applyBlur() {
         if !attributes.blurEnabled { return }
         attributes.container.makeBlur { make in
-            make.setStyle(.dark)
+            make
+                .setStyle(.dark)
+                .setOpacity(self.attributes.opacity)
                 .apply()
         }
     }
     
 }
-
 
 
 //  MARK: - Extension Delegate Flow Layout
