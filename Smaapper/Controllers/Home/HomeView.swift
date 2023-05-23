@@ -394,10 +394,14 @@ class HomeView: View {
             .setNeumorphism({ build in
                 build
                     .setReferenceColor(UIColor.HEX("#26292a"))
-                    .setShape(.convex)
+                    .setShape(.concave)
                     .setLightPosition(.leftTop)
-                    .setBlur(percent: 0)
-                    .setDistance(percent: 1)
+                    .setIntensity(to: .light, percent: 10)
+                    .setIntensity(to: .dark, percent: 100)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .dark, percent: 5)
                     .apply()
             })
         return btn
