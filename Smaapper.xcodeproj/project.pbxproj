@@ -73,6 +73,9 @@
 		0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleWindow.swift */; };
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
+		0281DAEE2A1CDA5700E44F04 /* DropdownMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */; };
+		0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */; };
+		0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -171,6 +174,9 @@
 		0281DAE32A180A8300E44F04 /* TitleWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWindow.swift; sourceTree = "<group>"; };
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
+		0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuAction.swift; sourceTree = "<group>"; };
+		0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockAttributes.swift; sourceTree = "<group>"; };
+		0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentAttributes.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -580,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				02C5F4542A0C557300D75D9F /* DropdownMenuFooter */,
+				0281DAEF2A1CDD2500E44F04 /* Actions */,
 				026F79792A007774003947A6 /* DropdownMenu.swift */,
 			);
 			path = DropdownMenu;
@@ -605,6 +612,7 @@
 		0281DAD12A13F61300E44F04 /* Dock */ = {
 			isa = PBXGroup;
 			children = (
+				0281DAF02A1CDF5000E44F04 /* DockAttributes */,
 				0281DAD42A14071B00E44F04 /* DockCell */,
 				0281DAD22A13F6F700E44F04 /* Dock.swift */,
 			);
@@ -623,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				0281DADA2A15378300E44F04 /* BaseProtocol.swift */,
+				0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */,
 			);
 			path = BaseProtocol;
 			sourceTree = "<group>";
@@ -659,6 +668,22 @@
 				0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */,
 			);
 			path = ClockNeumorphism;
+			sourceTree = "<group>";
+		};
+		0281DAEF2A1CDD2500E44F04 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		0281DAF02A1CDF5000E44F04 /* DockAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */,
+			);
+			path = DockAttributes;
 			sourceTree = "<group>";
 		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
@@ -913,6 +938,7 @@
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
 				0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */,
 				0234A91429F9FD3A008392EC /* EndOfConstraintsPositionFlow.swift in Sources */,
+				0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */,
 				0234A90429F9FD3A008392EC /* BorderDefault.swift in Sources */,
@@ -951,6 +977,7 @@
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				0234A90B29F9FD3A008392EC /* CollectionView.swift in Sources */,
+				0281DAEE2A1CDA5700E44F04 /* DropdownMenuAction.swift in Sources */,
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
@@ -959,6 +986,7 @@
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
+				0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */,
 				0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */,

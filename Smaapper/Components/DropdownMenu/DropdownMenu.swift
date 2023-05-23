@@ -15,10 +15,6 @@ protocol DropdownMenuDelegate: AnyObject {
 
 class DropdownMenu: View {
     
-    typealias touchMenuClosureAlias = ((_ rowTapped: (section: Int, row: Int)) -> Void)
-    typealias openMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
-    typealias closeMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
-    
     enum PositionMenu {
         case leftTop
         case leftBottom
@@ -31,14 +27,9 @@ class DropdownMenu: View {
         case close
     }
     
-    
     private var alreadyApplied = false
     private var _isShow = false
     
-    private var touchMenuClosure: touchMenuClosureAlias?
-    private var openMenuClosure: openMenuClosureAlias?
-    private var closeMenuClosure: closeMenuClosureAlias?
-
     private var zPosition: CGFloat = 10000
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var menuHeight: CGFloat?
@@ -49,8 +40,11 @@ class DropdownMenu: View {
     
     var paddingMenu: UIEdgeInsets?
     
+    var actions: DropdownMenuAction?
+    
     override init() {
         super.init(frame: .zero)
+        self.actions = DropdownMenuAction(self)
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +58,7 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                if let touchMenuClosure = self.touchMenuClosure {
+                if let touchMenuClosure = self.actions?.touchMenuClosure {
                     touchMenuClosure((section,row))
                 }
             })
@@ -141,24 +135,7 @@ class DropdownMenu: View {
     
     
 
-//  MARK: - Actions
-    @discardableResult
-    func setEvent(touch closure: @escaping touchMenuClosureAlias) -> Self {
-        self.touchMenuClosure = closure
-        return self
-    }
-    
-    @discardableResult
-    func setEvent(openMenu closure: @escaping openMenuClosureAlias) -> Self {
-        self.openMenuClosure = closure
-        return self
-    }
-    
-    @discardableResult
-    func setEvent(closeMenu closure: @escaping closeMenuClosureAlias) -> Self {
-        self.closeMenuClosure = closure
-        return self
-    }
+
 
     
 //  MARK: - SET Data In List
@@ -264,7 +241,7 @@ class DropdownMenu: View {
     }
 
     private func callClosureOpenMenu() {
-        if let openMenuClosure {
+        if let openMenuClosure = actions?.openMenuClosure {
             if isShow {
                 openMenuClosure(.open)
             }
@@ -272,7 +249,7 @@ class DropdownMenu: View {
     }
     
     private func callClosureCloseMenu() {
-        if let closeMenuClosure {
+        if let closeMenuClosure = actions?.closeMenuClosure {
             if !isShow {
                 closeMenuClosure(.close)
             }
