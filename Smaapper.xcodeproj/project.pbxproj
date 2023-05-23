@@ -369,14 +369,14 @@
 		0234A8A129F9FD3A008392EC /* Constraints */ = {
 			isa = PBXGroup;
 			children = (
-				0234A8A229F9FD3A008392EC /* ViewModel */,
-				0234A8A429F9FD3A008392EC /* EndConstratinsFlow */,
 				0234A8A829F9FD3A008392EC /* ApplyConstraints */,
 				0234A8AA29F9FD3A008392EC /* Constants */,
-				0234A8AC29F9FD3A008392EC /* Tests */,
-				0234A8AE29F9FD3A008392EC /* Protocol */,
 				0234A8B129F9FD3A008392EC /* Model */,
+				0234A8AE29F9FD3A008392EC /* Protocol */,
+				0234A8A229F9FD3A008392EC /* ViewModel */,
 				0234A8B329F9FD3A008392EC /* StartConstraintsFlow */,
+				0234A8A429F9FD3A008392EC /* EndConstratinsFlow */,
+				0234A8AC29F9FD3A008392EC /* Tests */,
 				0234A8B029F9FD3A008392EC /* StartOfConstraintsFlow.swift */,
 			);
 			path = Constraints;

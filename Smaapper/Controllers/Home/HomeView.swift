@@ -167,18 +167,17 @@ class HomeView: View {
     
     lazy var dock: Dock = {
         let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
-        
-        dock.att
+        dock.attributes
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true)
+            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setBorder({ build in
                 build
                     .setColor(.white.withAlphaComponent(0.1))
                     .setWidth(1)
                     .setCornerRadius(15)
             })
-            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setConstraints { build in
                 build
                     .setLeading.equalToSafeArea(20)

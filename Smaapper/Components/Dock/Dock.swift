@@ -21,18 +21,16 @@ class Dock: View {
     private var dockViewBounds = CGRect()
     private var customConstraintWidthContainer: NSLayoutConstraint = NSLayoutConstraint()
     
-    
     private let numberOfItemsCallback: numberOfItemsCallbackAlias
     private let cellCallback: cellCallbackAlias
     
-    
-    var att: DockAttributes
+    var attributes: DockAttributes = DockAttributes()
     
     init(numberOfItemsCallback: @escaping () -> Int, cellCallback: @escaping cellCallbackAlias ) {
-        self.att = DockAttributes()
         self.numberOfItemsCallback = numberOfItemsCallback
         self.cellCallback = cellCallback
-        super.init()
+        super.init(frame: .zero)
+        self.attributes = DockAttributes(self)
         self.initialization()
     }
     
@@ -64,29 +62,27 @@ class Dock: View {
                 self.setDelegate()
                 self.alreadyApplied = true
             }
-            
         }
     }
     
     private func RegisterCell() {
-        att.collection.register(DockCell.self, forCellWithReuseIdentifier: DockCell.identifier)
+        attributes.collection.register(DockCell.self, forCellWithReuseIdentifier: DockCell.identifier)
     }
     
     private func setDelegate() {
-        att.collection.delegate = self
-        att.collection.dataSource = self
+        attributes.collection.delegate = self
+        attributes.collection.dataSource = self
     }
     
     private func configDock() {
         applyBlur()
         addElementsInDock()
         configConstraints()
-        
     }
     
     private func addElementsInDock() {
-        att.container.add(insideTo: self)
-        att.collection.add(insideTo: att.container)
+        attributes.container.add(insideTo: self)
+        attributes.collection.add(insideTo: attributes.container)
     }
     
     private func configConstraints() {
@@ -106,12 +102,12 @@ class Dock: View {
     }
     
     private func initializeWidthConstraintContainer() {
-        customConstraintWidthContainer = att.container.widthAnchor.constraint(equalToConstant: 0)
+        customConstraintWidthContainer = attributes.container.widthAnchor.constraint(equalToConstant: 0)
         customConstraintWidthContainer.isActive = true
     }
     
     private func applyConstraintContainer() {
-        att.container.makeConstraints { make in
+        attributes.container.makeConstraints { make in
             make
                 .setTop.equalTo(self, .top)
                 .setHorizontalAlignmentX.equalTo(self)
@@ -120,7 +116,7 @@ class Dock: View {
     }
     
     private func configConstraintsCollection() {
-        att.collection.makeConstraints { make in
+        attributes.collection.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
                 .setLeading.setTrailing.equalToSuperView(marginContainer)
@@ -146,13 +142,13 @@ class Dock: View {
     private func calculateLineSpacing() -> CGFloat {
         let numberOfItems = self.numberOfItemsCallback()
         if numberOfItems > 1 {
-            return (numberOfItems.toCGFloat - 1) * (att.layout.minimumLineSpacing)
+            return (numberOfItems.toCGFloat - 1) * (attributes.layout.minimumLineSpacing)
         }
         return 0.0
     }
     
     private func calculateContentInset() -> CGFloat {
-        return att.collection.contentInset.left + att.collection.contentInset.right
+        return (attributes.collection.contentInset.left) + (attributes.collection.contentInset.right)
     }
     
     private func calculateItemSize() -> CGFloat {
@@ -162,16 +158,16 @@ class Dock: View {
     }
     
     private func calculateCustomItemSize() -> CGFloat {
-        return self.att.customItemSize.reduce(0) { $0 + $1.value.width }
+        return attributes.customItemSize.reduce(0) { $0 + $1.value.width }
     }
     
     private func calculateItemSizeExcludingCustomItemSize() -> CGFloat {
-        return (self.numberOfItemsCallback() - self.att.customItemSize.count).toCGFloat * att.itemsSize.width
+        return (self.numberOfItemsCallback() - (self.attributes.customItemSize.count)).toCGFloat * (attributes.itemsSize.width)
     }
     
     private func applyBlur() {
-        if !att.blurEnabled { return }
-        att.container.makeBlur { make in
+        if !attributes.blurEnabled { return }
+        attributes.container.makeBlur { make in
             make.setStyle(.dark)
                 .apply()
         }
@@ -185,7 +181,7 @@ class Dock: View {
 extension Dock: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return self.att.customItemSize[indexPath.row] ?? self.att.itemsSize
+        return attributes.customItemSize[indexPath.row] ?? attributes.itemsSize
     }
     
 }
@@ -209,7 +205,7 @@ extension Dock: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
         let item = self.cellCallback(indexPath.row)
-        item.isUserInteractionEnabled = self.att.isUserInteractionEnabledItems
+        item.isUserInteractionEnabled = self.attributes.isUserInteractionEnabledItems
         cell.setupCell(item)
         
         return cell

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DockAttributes: BaseComponentAttributes {
+class DockAttributes: BaseComponentAttributes<Dock> {
     
 //  MARK: - Model - Need Refactor
     private var _customItemSize: [Int:CGSize] = [:]
@@ -20,11 +20,17 @@ class DockAttributes: BaseComponentAttributes {
     private let _container = UIView()
     private let _collection: UICollectionView
     
-    init() {
+    override init(_ dock: Dock) {
         self._layout = UICollectionViewFlowLayout()
         self._collection = UICollectionView(frame: .zero, collectionViewLayout: self._layout)
-        super.init(frame: .zero)
+        super.init(dock)
         self.initialization()
+    }
+    
+    override init() {
+        self._layout = UICollectionViewFlowLayout()
+        self._collection = UICollectionView(frame: .zero, collectionViewLayout: self._layout)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -36,8 +42,6 @@ class DockAttributes: BaseComponentAttributes {
         self._layout.scrollDirection = .horizontal
         self._collection.setCollectionViewLayout(self._layout, animated: true)
         self._container.clipsToBounds = true
-        
-        
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
         self.setShowsHorizontalScrollIndicator(false)
