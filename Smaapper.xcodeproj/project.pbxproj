@@ -77,6 +77,8 @@
 		0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */; };
 		0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */; };
 		0281DAF82A1D000800E44F04 /* DockActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF72A1D000800E44F04 /* DockActions.swift */; };
+		028436892A1D1F8B00B596DA /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028436882A1D1F8B00B596DA /* Overlay.swift */; };
+		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -179,6 +181,8 @@
 		0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockAttributes.swift; sourceTree = "<group>"; };
 		0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentAttributes.swift; sourceTree = "<group>"; };
 		0281DAF72A1D000800E44F04 /* DockActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockActions.swift; sourceTree = "<group>"; };
+		028436882A1D1F8B00B596DA /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -258,6 +262,8 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0284368A2A1D296700B596DA /* Handler */,
+				028436872A1D1F8100B596DA /* Overlay */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0281DAD92A15376D00E44F04 /* BaseProtocol */,
 				0281DADC2A16682B00E44F04 /* Blur */,
@@ -697,6 +703,22 @@
 			path = DockActions;
 			sourceTree = "<group>";
 		};
+		028436872A1D1F8100B596DA /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				028436882A1D1F8B00B596DA /* Overlay.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
+		0284368A2A1D296700B596DA /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -950,6 +972,7 @@
 				0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */,
 				0234A91429F9FD3A008392EC /* EndOfConstraintsPositionFlow.swift in Sources */,
 				0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */,
+				028436892A1D1F8B00B596DA /* Overlay.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				026F797A2A007774003947A6 /* DropdownMenu.swift in Sources */,
 				0234A90429F9FD3A008392EC /* BorderDefault.swift in Sources */,
@@ -1008,6 +1031,7 @@
 				0234A93A29F9FD3A008392EC /* TextField.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
+				0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */,
 				0234A93829F9FD3A008392EC /* TextFieldImage.swift in Sources */,
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,

@@ -21,13 +21,12 @@ class TextField: UITextField {
     
     static private var currentMainWindow: UIWindow?
     static private func hideKeyboardWhenViewTapped() {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let mainWindow = windowScene.windows.first {
-            if (mainWindow == currentMainWindow) { return }
-            mainWindow.hideKeyboardWhenViewTapped()
-            currentMainWindow = mainWindow
-        }
+        let mainWindow = CurrentWindow.get
+        if (mainWindow == currentMainWindow) { return }
+        mainWindow?.hideKeyboardWhenViewTapped()
+        currentMainWindow = mainWindow
     }
+        
     
     private let paddingConst: CGFloat = 5
     private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
