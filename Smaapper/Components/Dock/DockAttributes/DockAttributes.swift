@@ -16,22 +16,19 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     private var _blurEnabled = false
     private var _opacity: CGFloat = 1.0
 
-    private let _layout: UICollectionViewFlowLayout
+    private var _layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private let _container = UIView()
-    private let _collection: UICollectionView
-    private var dock: Dock?
+    private var _collection: UICollectionView = UICollectionView(frame: .zero,collectionViewLayout: UICollectionViewFlowLayout())
+    
+    private weak var dock: Dock?
     
     override init(_ dock: Dock) {
-        self._layout = UICollectionViewFlowLayout()
-        self._collection = UICollectionView(frame: .zero, collectionViewLayout: self._layout)
         self.dock = dock
         super.init(dock)
         self.initialization()
     }
     
     override init() {
-        self._layout = UICollectionViewFlowLayout()
-        self._collection = UICollectionView(frame: .zero, collectionViewLayout: self._layout)
         super.init()
     }
     
@@ -40,14 +37,31 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     }
     
     private func initialization() {
-        self._collection.backgroundColor = .clear
-        self._layout.scrollDirection = .horizontal
+        initiateContainer()
+        initiateLayout()
+        initiateCollection()
+        setDefault()
+    }
+    
+    private func initiateCollection() {
         self._collection.setCollectionViewLayout(self._layout, animated: true)
+        self._collection.backgroundColor = .clear
+    }
+    
+    private func initiateContainer() {
         self._container.clipsToBounds = true
+    }
+    
+    private func initiateLayout() {
+        self._layout.scrollDirection = .horizontal
+    }
+    
+    
+    private func setDefault() {
+        
         self.setMinimumLineSpacing(10)
         self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
         self.setShowsHorizontalScrollIndicator(false)
-        
     }
     
 

@@ -17,41 +17,19 @@ class Overlay: View {
     private var _isShow = false
     private var alreadyApplied = false
     
-    private var relativeTo: Overlay.RelativeTo = .window
-    private var color: UIColor?
-    private var opacity: CGFloat = 1
-    
     private let component: UIView
+    var attributes: OverlayAttributes = OverlayAttributes()
     
     init(component: UIView) {
         self.component = component
         super.init()
+        self.attributes = OverlayAttributes(self)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-//  MARK: - SET Properties
 
-    @discardableResult
-    func setColor(_ color: UIColor) -> Self {
-        self.setBackgroundColor(color)
-        return self
-    }
-    
-    @discardableResult
-    func setOpacity(_ opacity: CGFloat) -> Self {
-        self.alpha = opacity
-        return self
-    }
-    
-    @discardableResult
-    func setOverlayRelative(to relativeTo: Overlay.RelativeTo) -> Self {
-        self.relativeTo = relativeTo
-        return self
-    }
     
     
 //  MARK: - SHOW Overlay
@@ -81,14 +59,13 @@ class Overlay: View {
     }
     
     private func configOverlay() {
-        switch self.relativeTo {
+        switch self.attributes.relativeTo {
         case .superview:
             configOverlaySuperView()
         case .window:
             configOverlayWindow()
         }
     }
-    
     
     private func configOverlaySuperView() {
         guard let superview = self.component.superview else {return}
@@ -103,7 +80,6 @@ class Overlay: View {
     
     private func addOverlay(insideTo view: UIView) {
         self.add(insideTo: view)
-        
     }
     
     private func configOverlayConstraints(){

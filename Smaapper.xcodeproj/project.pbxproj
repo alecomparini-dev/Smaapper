@@ -73,12 +73,15 @@
 		0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleWindow.swift */; };
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
-		0281DAEE2A1CDA5700E44F04 /* DropdownMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */; };
+		0281DAEE2A1CDA5700E44F04 /* DropdownMenuActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAED2A1CDA5700E44F04 /* DropdownMenuActions.swift */; };
 		0281DAF22A1CDF5B00E44F04 /* DockAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */; };
 		0281DAF42A1CE9B500E44F04 /* BaseComponentAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */; };
 		0281DAF82A1D000800E44F04 /* DockActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAF72A1D000800E44F04 /* DockActions.swift */; };
 		028436892A1D1F8B00B596DA /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028436882A1D1F8B00B596DA /* Overlay.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
+		0284368F2A1D394100B596DA /* OverlayAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368E2A1D394100B596DA /* OverlayAttributes.swift */; };
+		028436922A1D40EC00B596DA /* DropdownMenuAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028436912A1D40EC00B596DA /* DropdownMenuAttributes.swift */; };
+		028436952A1D4EBD00B596DA /* DropdownMenuFooterAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028436942A1D4EBD00B596DA /* DropdownMenuFooterAttributes.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -177,12 +180,15 @@
 		0281DAE32A180A8300E44F04 /* TitleWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWindow.swift; sourceTree = "<group>"; };
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
-		0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuAction.swift; sourceTree = "<group>"; };
+		0281DAED2A1CDA5700E44F04 /* DropdownMenuActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuActions.swift; sourceTree = "<group>"; };
 		0281DAF12A1CDF5B00E44F04 /* DockAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockAttributes.swift; sourceTree = "<group>"; };
 		0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentAttributes.swift; sourceTree = "<group>"; };
 		0281DAF72A1D000800E44F04 /* DockActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockActions.swift; sourceTree = "<group>"; };
 		028436882A1D1F8B00B596DA /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
+		0284368E2A1D394100B596DA /* OverlayAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayAttributes.swift; sourceTree = "<group>"; };
+		028436912A1D40EC00B596DA /* DropdownMenuAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuAttributes.swift; sourceTree = "<group>"; };
+		028436942A1D4EBD00B596DA /* DropdownMenuFooterAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuFooterAttributes.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -594,7 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				02C5F4542A0C557300D75D9F /* DropdownMenuFooter */,
-				0281DAEF2A1CDD2500E44F04 /* Actions */,
+				028436902A1D40DC00B596DA /* DropdownMenuAttributes */,
+				0281DAEF2A1CDD2500E44F04 /* DropdownMenuActions */,
 				026F79792A007774003947A6 /* DropdownMenu.swift */,
 			);
 			path = DropdownMenu;
@@ -679,12 +686,12 @@
 			path = ClockNeumorphism;
 			sourceTree = "<group>";
 		};
-		0281DAEF2A1CDD2500E44F04 /* Actions */ = {
+		0281DAEF2A1CDD2500E44F04 /* DropdownMenuActions */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAED2A1CDA5700E44F04 /* DropdownMenuAction.swift */,
+				0281DAED2A1CDA5700E44F04 /* DropdownMenuActions.swift */,
 			);
-			path = Actions;
+			path = DropdownMenuActions;
 			sourceTree = "<group>";
 		};
 		0281DAF02A1CDF5000E44F04 /* DockAttributes */ = {
@@ -706,6 +713,7 @@
 		028436872A1D1F8100B596DA /* Overlay */ = {
 			isa = PBXGroup;
 			children = (
+				0284368D2A1D393100B596DA /* OverlayAttributes */,
 				028436882A1D1F8B00B596DA /* Overlay.swift */,
 			);
 			path = Overlay;
@@ -717,6 +725,30 @@
 				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		0284368D2A1D393100B596DA /* OverlayAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				0284368E2A1D394100B596DA /* OverlayAttributes.swift */,
+			);
+			path = OverlayAttributes;
+			sourceTree = "<group>";
+		};
+		028436902A1D40DC00B596DA /* DropdownMenuAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				028436912A1D40EC00B596DA /* DropdownMenuAttributes.swift */,
+			);
+			path = DropdownMenuAttributes;
+			sourceTree = "<group>";
+		};
+		028436932A1D4EAE00B596DA /* DropdownMenuFooterAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				028436942A1D4EBD00B596DA /* DropdownMenuFooterAttributes.swift */,
+			);
+			path = DropdownMenuFooterAttributes;
 			sourceTree = "<group>";
 		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
@@ -801,6 +833,7 @@
 		02C5F4542A0C557300D75D9F /* DropdownMenuFooter */ = {
 			isa = PBXGroup;
 			children = (
+				028436932A1D4EAE00B596DA /* DropdownMenuFooterAttributes */,
 				02C5F4552A0C559400D75D9F /* DropdownMenuFooter.swift */,
 			);
 			path = DropdownMenuFooter;
@@ -961,6 +994,7 @@
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
 				0234A93C29F9FD3A008392EC /* ButtonDefault.swift in Sources */,
 				0234A90629F9FD3A008392EC /* CollectionViewModel.swift in Sources */,
+				0284368F2A1D394100B596DA /* OverlayAttributes.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0234A90C29F9FD3A008392EC /* CollectionBuilder.swift in Sources */,
 				0234A90829F9FD3A008392EC /* Actions.swift in Sources */,
@@ -998,6 +1032,7 @@
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* Border.swift in Sources */,
 				02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */,
+				028436952A1D4EBD00B596DA /* DropdownMenuFooterAttributes.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
@@ -1011,7 +1046,7 @@
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				0234A90B29F9FD3A008392EC /* CollectionView.swift in Sources */,
-				0281DAEE2A1CDA5700E44F04 /* DropdownMenuAction.swift in Sources */,
+				0281DAEE2A1CDA5700E44F04 /* DropdownMenuActions.swift in Sources */,
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
@@ -1025,6 +1060,7 @@
 				0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */,
+				028436922A1D40EC00B596DA /* DropdownMenuAttributes.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
 				0281DAD32A13F6F700E44F04 /* Dock.swift in Sources */,
 				0234A93729F9FD3A008392EC /* LabelDefault.swift in Sources */,

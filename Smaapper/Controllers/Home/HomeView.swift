@@ -54,21 +54,7 @@ class HomeView: View {
     
     lazy var dropdownMenu: DropdownMenuFooter = {
         let drop = DropdownMenuFooter()
-            .setBorder({ build in
-                build
-                    .setCornerRadius(18)
-            })
-            .setRowHeight(45)
             .setFooterHeight(65)
-            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.concave)
-                    .setLightPosition(.rightBottom)
-                    .apply()
-            }
             .setFooterGradient { build in
                 build
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
@@ -78,6 +64,20 @@ class HomeView: View {
             .setFooterComponent(profileButton)
             .setFooterComponent(recentButton)
             .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
+            .setRowHeight(45)
+            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
+            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
+            .setBorder({ build in
+                build
+                    .setCornerRadius(18)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setShape(.concave)
+                    .setLightPosition(.rightBottom)
+                    .apply()
+            }
             .setConstraints { build in
                 build
                     .setTop.greaterThanOrEqualToSafeArea(10)

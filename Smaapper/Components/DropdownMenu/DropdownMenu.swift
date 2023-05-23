@@ -27,23 +27,24 @@ class DropdownMenu: View {
         case close
     }
     
-    private var alreadyApplied = false
-    private var _isShow = false
-    
-    private var zPosition: CGFloat = 10000
     private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var menuHeight: CGFloat?
     private var menuWidth: CGFloat?
     private var paddingCells: UIEdgeInsets?
     private var autoCloseEnabled: Bool = false
     private var excludeComponents: [UIView] = []
+    private var _paddingMenu: UIEdgeInsets?
     
-    var paddingMenu: UIEdgeInsets?
     
-    var actions: DropdownMenuAction
+    private var alreadyApplied = false
+    private var _isShow = false
+    
+    private var zPosition: CGFloat = 10000
+    
+    var actions: DropdownMenuActions
     
     override init() {
-        self.actions = DropdownMenuAction()
+        self.actions = DropdownMenuActions()
         super.init(frame: .zero)
     }
     
@@ -66,8 +67,10 @@ class DropdownMenu: View {
         return list
     }()
     
+//  MARK: - GET Attributes
+    var paddingMenu: UIEdgeInsets? { self._paddingMenu }
     
-//  MARK: - Set Properties
+//  MARK: - SET Attributes
     
     @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
@@ -77,7 +80,7 @@ class DropdownMenu: View {
     
     @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        _ = list.setRowHeight(height)
+        list.setRowHeight(height)
         return self
     }
     
@@ -95,7 +98,7 @@ class DropdownMenu: View {
     
     @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        self.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        self._paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
@@ -113,19 +116,19 @@ class DropdownMenu: View {
     
     @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        _ = list.setSectionFooterHeight(height)
+        list.setSectionFooterHeight(height)
         return self
     }
     
     @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        _ = list.setSectionHeaderHeight(forSection: forSection, height)
+        list.setSectionHeaderHeight(forSection: forSection, height)
         return self
     }
     
     @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        _ = list.setSectionFooterHeight(forSection: forSection, height)
+        list.setSectionFooterHeight(forSection: forSection, height)
         return self
     }
     
@@ -136,7 +139,7 @@ class DropdownMenu: View {
         return self
     }
     
-
+    
     
 //  MARK: - SET Data In List
     
