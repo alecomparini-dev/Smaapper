@@ -14,13 +14,18 @@ class HomeVC: UIViewController {
     
     
     private let iconsDock = ["paperplane.fill",
-                             "scribble",
+                             "square.and.arrow.up.trianglebadge.exclamationmark",
+                             "paintbrush.fill",
+                             "die.face.5",
+                             "pianokeys.inverse",
+                             "level.fill",
+                             "puzzlepiece.extension",
+                             "fan.oscillation.fill",
                              "light.beacon.max.fill",
                              "door.left.hand.closed",
                              "eraser.fill",
-
-                             "eraser.fill",
                              "xmark.seal",
+                             "scribble",
                              "bolt.horizontal" ]
     
     private let viewModel = HomeViewModel()
@@ -189,7 +194,6 @@ class HomeVC: UIViewController {
     
     
     private func adjustAlignmentOfDock() {
-    
         if iconsDock.count == 4 {
             self.adjustTrailingDock.constant = -50
         }

@@ -87,7 +87,7 @@ class HomeView: View {
                     .setWidth.equalToConstant(255)
             }
         
-        drop.actions?
+        drop.actions
             .setEvent(touch: dropdownMenuTapped)
             .setEvent(openMenu: openCloseDropdowMenu)
             .setEvent(closeMenu: openCloseDropdowMenu)
@@ -170,7 +170,7 @@ class HomeView: View {
         dock.attributes
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
-            .setBlur(true)
+            .setBlur(true, 0.7)
             .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setBorder({ build in
                 build

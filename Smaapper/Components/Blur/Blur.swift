@@ -12,6 +12,7 @@ class Blur {
     private var blurView: UIVisualEffectView?
     private var blurEffect: UIBlurEffect?
     private var vibrancyView: UIVisualEffectView?
+    private var opacity: CGFloat = 0.98
     
     private var vibrancyEnabled = true
     private var component: UIView
@@ -24,6 +25,12 @@ class Blur {
     @discardableResult
     func setStyle(_ style: UIBlurEffect.Style) -> Self {
         self.blurEffect = UIBlurEffect(style: style)
+        return self
+    }
+    
+    @discardableResult
+    func setOpacity(_ opacity: CGFloat) -> Self {
+        self.opacity = opacity
         return self
     }
     
@@ -68,7 +75,7 @@ class Blur {
     }
     
     private func configAlphaBlur() {
-        blurView?.alpha = 0.98
+        blurView?.alpha = self.opacity
     }
     
     private func createBlurView() {

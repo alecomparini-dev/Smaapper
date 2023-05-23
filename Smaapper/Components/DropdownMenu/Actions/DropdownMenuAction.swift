@@ -13,35 +13,37 @@ class DropdownMenuAction {
     typealias openMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
     typealias closeMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
     
-    var touchMenuClosure: touchMenuClosureAlias?
-    var openMenuClosure: openMenuClosureAlias?
-    var closeMenuClosure: closeMenuClosureAlias?
-    
-    private let dropdowMenu: DropdownMenu
-    
-    init(_ dropdowMenu: DropdownMenu) {
-        self.dropdowMenu = dropdowMenu
-    }
+    private var _touchMenuClosure: touchMenuClosureAlias?
+    private var _openMenuClosure: openMenuClosureAlias?
+    private var _closeMenuClosure: closeMenuClosureAlias?
     
     
-//  MARK: - Actions
+//  MARK: - GET Actions
+    
+    var touchMenuClosure: touchMenuClosureAlias? { self._touchMenuClosure}
+    var openMenuClosure: openMenuClosureAlias? { self._openMenuClosure}
+    var closeMenuClosure: closeMenuClosureAlias? { self._closeMenuClosure}
+    
+    
+//  MARK: - SET Actions
     
     @discardableResult
     func setEvent(touch closure: @escaping touchMenuClosureAlias) -> Self {
-        self.touchMenuClosure = closure
+        self._touchMenuClosure = closure
         return self
     }
     
     @discardableResult
     func setEvent(openMenu closure: @escaping openMenuClosureAlias) -> Self {
-        self.openMenuClosure = closure
+        self._openMenuClosure = closure
         return self
     }
     
     @discardableResult
     func setEvent(closeMenu closure: @escaping closeMenuClosureAlias) -> Self {
-        self.closeMenuClosure = closure
+        self._closeMenuClosure = closure
         return self
     }
+    
     
 }

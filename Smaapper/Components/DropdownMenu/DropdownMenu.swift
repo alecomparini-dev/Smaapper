@@ -40,11 +40,11 @@ class DropdownMenu: View {
     
     var paddingMenu: UIEdgeInsets?
     
-    var actions: DropdownMenuAction?
+    var actions: DropdownMenuAction
     
     override init() {
+        self.actions = DropdownMenuAction()
         super.init(frame: .zero)
-        self.actions = DropdownMenuAction(self)
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +58,7 @@ class DropdownMenu: View {
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setDidSelectRow({ section, row in
-                if let touchMenuClosure = self.actions?.touchMenuClosure {
+                if let touchMenuClosure = self.actions.touchMenuClosure {
                     touchMenuClosure((section,row))
                 }
             })
@@ -68,6 +68,7 @@ class DropdownMenu: View {
     
     
 //  MARK: - Set Properties
+    
     @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
         self.positionOpenMenu = position
@@ -80,6 +81,7 @@ class DropdownMenu: View {
         return self
     }
     
+    @discardableResult
     func setDropdownMenuHeight(_ height: CGFloat) -> Self {
         self.menuHeight = height
         return self
@@ -127,15 +129,13 @@ class DropdownMenu: View {
         return self
     }
     
+    @discardableResult
     func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
         self.autoCloseEnabled = true
         self.excludeComponents = excludeComponents
         return self
     }
     
-    
-
-
 
     
 //  MARK: - SET Data In List
@@ -202,7 +202,6 @@ class DropdownMenu: View {
         }
     }
     
-    
     private func isTappedOut(_ tap: TapGesture) -> Bool {
         let touchPoint = tap.getTouchedPositionRelative(to: .window)
         if isTappedOutDropdownMenu(touchPoint) && isTappedOutExcludeComponents(touchPoint) {
@@ -241,7 +240,7 @@ class DropdownMenu: View {
     }
 
     private func callClosureOpenMenu() {
-        if let openMenuClosure = actions?.openMenuClosure {
+        if let openMenuClosure = actions.openMenuClosure {
             if isShow {
                 openMenuClosure(.open)
             }
@@ -249,7 +248,7 @@ class DropdownMenu: View {
     }
     
     private func callClosureCloseMenu() {
-        if let closeMenuClosure = actions?.closeMenuClosure {
+        if let closeMenuClosure = actions.closeMenuClosure {
             if !isShow {
                 closeMenuClosure(.close)
             }

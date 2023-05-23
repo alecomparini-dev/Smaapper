@@ -14,15 +14,17 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     private var _itemsSize = CGSize(width: 50, height: 50)
     private var _isUserInteractionEnabledItems = false
     private var _blurEnabled = false
-
+    private var _opacity: CGFloat = 1.0
 
     private let _layout: UICollectionViewFlowLayout
     private let _container = UIView()
     private let _collection: UICollectionView
+    private var dock: Dock?
     
     override init(_ dock: Dock) {
         self._layout = UICollectionViewFlowLayout()
         self._collection = UICollectionView(frame: .zero, collectionViewLayout: self._layout)
+        self.dock = dock
         super.init(dock)
         self.initialization()
     }
@@ -57,6 +59,7 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     var itemsSize: CGSize { return self._itemsSize}
     var isUserInteractionEnabledItems: Bool { return self._isUserInteractionEnabledItems}
     var blurEnabled: Bool { return self._blurEnabled}
+    var opacity: CGFloat { return self._opacity}
     
     
 //  MARK: - SET Properties
@@ -104,9 +107,17 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     }
     
     @discardableResult
-    func setBlur(_ flag: Bool) -> Self {
+    func setBlur(_ flag: Bool, _ opacity: CGFloat = 1) -> Self {
         self._blurEnabled = flag
+        self._opacity = opacity
         return self
+    }
+    
+    
+//  MARK: - OVERRIDE BASE COMPONENT
+    override func setBorder(_ border: (Border) -> Border) -> Dock {
+        self.border = border(Border(self.container))
+        return dock!
     }
     
 }
