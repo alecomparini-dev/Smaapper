@@ -8,8 +8,7 @@
 import UIKit
 
 
-class View: UIView, BaseComponentProtocol {
-    internal var constraintsFlow: StartOfConstraintsFlow?
+class View: UIView {
     
     init() {
         super.init(frame: .zero)
@@ -29,47 +28,5 @@ class View: UIView, BaseComponentProtocol {
 //        print("remover aqui layoutsubviews" , self)
     }
 
-    
-    @discardableResult
-    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
-        let _ = border(BorderBuilder(self))
-        return self
-    }
-    
-    @discardableResult
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        _ = shadow(Shadow(self))
-        return self
-    }
-    
-    @discardableResult
-    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        _ = neumorphism(Neumorphism(self))
-        return self
-    }
-    
-    @discardableResult
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        _ = gradient(Gradient(self))
-        return self
-    }
-    
-    @discardableResult
-    func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        let _ = gesture(TapGesture(self))
-        return self
-    }
-    
-    
-//  MARK: - Constraint Area
-    @discardableResult
-    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
-        return self
-    }
-    
-    func applyConstraint() {
-        self.constraintsFlow?.applyConstraint()
-    }
     
 }

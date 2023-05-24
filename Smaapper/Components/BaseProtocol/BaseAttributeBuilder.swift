@@ -72,7 +72,7 @@ class BaseAttributeBuilder {
     }
     
     func applyConstraint() {
-        self.constraintsFlow?.applyConstraint()
+        self.constraintsFlow?.apply()
     }
 
     func add(insideTo element: UIView) {

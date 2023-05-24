@@ -7,7 +7,7 @@
 
 import UIKit
 
-internal class ListCellView: View {
+internal class ListCellView: ViewBuilder {
 
     private var leftViewCell: UIView?
     private var middleViewCell: UIView?
@@ -40,7 +40,7 @@ internal class ListCellView: View {
     
     @discardableResult
     func setBackgroundColorCell(_ color: UIColor) -> Self {
-        self.backgroundColor = color
+        self.view.backgroundColor = color
         return self
     }
                                                   
@@ -50,7 +50,7 @@ internal class ListCellView: View {
         self.leftViewCell = leftView
         self.middleViewCell = middleView
         self.rightViewCell = rightView
-        removeSubViews(self)
+        removeSubViews(self.view)
         addLeftView()
         addRightView()
         addMiddleView()
@@ -64,7 +64,7 @@ internal class ListCellView: View {
             self.leftViewCell = UIView()
             self.widthLeftColumnCell = 0
         }
-        self.leftViewCell?.add(insideTo: self)
+        self.leftViewCell?.add(insideTo: self.view)
         self.leftViewCell?.makeConstraints { make in
             make
                 .setTop
@@ -78,7 +78,7 @@ internal class ListCellView: View {
         if self.middleViewCell == nil {
             self.middleViewCell = UIView()
         }
-        self.middleViewCell?.add(insideTo: self)
+        self.middleViewCell?.add(insideTo: self.view)
         self.middleViewCell?.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
@@ -93,7 +93,7 @@ internal class ListCellView: View {
             self.widthRightColumnCell = 0
         }
         
-        self.rightViewCell?.add(insideTo: self)
+        self.rightViewCell?.add(insideTo: self.view)
         self.rightViewCell?.makeConstraints { make in
             make
                 .setTop.equalToSafeArea

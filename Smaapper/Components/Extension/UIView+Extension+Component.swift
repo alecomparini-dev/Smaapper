@@ -37,7 +37,7 @@ extension UIView {
     @discardableResult
     func makeConstraints(_ buildConstraintFlow: (_ make: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         let constraints = buildConstraintFlow(StartOfConstraintsFlow(self))
-        constraints.applyConstraint()
+        constraints.apply()
         return self
     }
     
