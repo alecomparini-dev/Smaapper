@@ -80,7 +80,48 @@ class HomeView: View {
             }
             .setConstraints { build in
                 build
-                    .setTop.greaterThanOrEqualToSafeArea(10)
+                    .setBottom.equalTo(menuButton, .top, -15)
+                    .setTrailing.equalTo(menuButton, .trailing, -5)
+                    .setHeight.equalToConstant(400)
+                    .setWidth.equalToConstant(255)
+            }
+        
+        drop.actions
+            .setEvent(touch: dropdownMenuTapped)
+            .setEvent(openMenu: openCloseDropdowMenu)
+            .setEvent(closeMenu: openCloseDropdowMenu)
+        
+        return drop
+    }()
+    
+    lazy var dropdownMenu_: DropdownMenuFooterBuilder = {
+        let drop = DropdownMenuFooterBuilder()
+            .setFooterHeight(65)
+            .setFooterGradient { build in
+                build
+                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
+                    .setAxialGradient(.rightBottomToLeftTop)
+            }
+            .setFooterComponent(settingsButton)
+            .setFooterComponent(profileButton)
+            .setFooterComponent(recentButton)
+            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
+            .setRowHeight(45)
+            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
+            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
+            .setBorder({ build in
+                build
+                    .setCornerRadius(18)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setShape(.concave)
+                    .setLightPosition(.rightBottom)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
                     .setHeight.equalToConstant(400)
@@ -366,6 +407,7 @@ class HomeView: View {
     
     private func addElements() {
         dropdownMenu.add(insideTo: self)
+        dropdownMenu_.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)
@@ -374,16 +416,20 @@ class HomeView: View {
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
+        dropdownMenu_.applyConstraint()
         dock.applyConstraint()
         self.clock.applyConstraint()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.floatWindow.add(insideTo: self)
-            self.floatWindow.applyConstraint()
-            self.floatWindow.isShow = true
-        }
-
-
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.floatWindow.add(insideTo: self)
+//            self.floatWindow.applyConstraint()
+//            self.floatWindow.isShow = true
+//        }
+        
+        
+        
+        
+        
     }
     
     func createIconsDock(_ systemNameImage: String) -> IconButton {
