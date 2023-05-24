@@ -36,9 +36,10 @@ class DropdownMenu: View {
     private var _paddingMenu: UIEdgeInsets?
     
     
+//    private var overlay: Overlay?
+    
     private var alreadyApplied = false
     private var _isShow = false
-    
     private var zPosition: CGFloat = 10000
     
     var actions: DropdownMenuActions
@@ -65,6 +66,19 @@ class DropdownMenu: View {
             })
             .setBackgroundColor(.clear)
         return list
+    }()
+    
+    lazy var overlay: View = {
+        let view = View()
+            .setUserInteractionEnabled(false)
+        view.makeBlur { make in
+            make
+                .setStyle(.systemUltraThinMaterialDark)
+                .setStyle(.dark)
+                .setOpacity(0.7)
+                .apply()
+        }
+        return view
     }()
     
 //  MARK: - GET Attributes
@@ -177,14 +191,38 @@ class DropdownMenu: View {
 
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            self.setTopMostPosition()
+            self.setDropdownHierarchyPosition()
             self.addListOnDropdownMenu()
             self.configConstraints()
             self.configAutoCloseMenu()
+            self.configOverlay()
             self.alreadyApplied = true
         }
     }
 
+    private func configOverlay() {
+        createOverlay()
+        setOverlayHierarchyPosition()
+    }
+    
+    private func createOverlay() {
+        guard let superview = self.superview else {return}
+        overlay.add(insideTo: self)
+        overlay.layer.zPosition = -1
+        overlay.makeConstraints { make in
+            make
+                .setPin.equalTo(superview)
+        }
+    }
+    
+    private func setOverlayHierarchyPosition() {
+        excludeComponents.forEach { comp in
+            overlay.bringSubviewToFront(comp)
+            comp.layer.zPosition = self.zPosition + 1
+        }
+    }
+    
+    
     private func configAutoCloseMenu() {
         if self.autoCloseEnabled {
             if let superview = self.superview {
@@ -235,6 +273,7 @@ class DropdownMenu: View {
     private func isPresented() {
         list.isShow = self._isShow
         self.isHidden = !self._isShow
+//        self.overlay?.isShow = self._isShow
     }
     
     private func callClosureOpenCloseMenu(_ isShow: Bool) {
@@ -265,7 +304,7 @@ class DropdownMenu: View {
         }
     }
     
-    private func setTopMostPosition() {
+    private func setDropdownHierarchyPosition() {
         self.layer.zPosition = zPosition
     }
     
