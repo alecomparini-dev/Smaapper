@@ -15,11 +15,11 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     private var zPosition: CGFloat = 10000
     
     
-    private var _dropdown: DropdownMenu_
-    var dropdown: DropdownMenu_ { self._dropdown }
+    private var _dropdown: DropdownMenu
+    var dropdown: DropdownMenu { self._dropdown }
     
     init() {
-        self._dropdown = DropdownMenu_()
+        self._dropdown = DropdownMenu()
         super.init(self._dropdown)
     }
     
@@ -27,7 +27,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var view: DropdownMenu_ { self.dropdown }
+    var view: DropdownMenu { self.dropdown }
     var actions: DropdownMenuActions = DropdownMenuActions()
     
     

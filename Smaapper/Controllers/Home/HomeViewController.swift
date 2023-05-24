@@ -61,7 +61,6 @@ class HomeVC: UIViewController {
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
-        homeScreen.dropdownMenu_.isShow = false
         
 //retirar !!!
 //        self.openCloseDropdownMenu()
@@ -97,7 +96,7 @@ class HomeVC: UIViewController {
     }
     
     private func openCloseDropdownMenu() {
-        homeScreen.dropdownMenu_.isShow = !homeScreen.dropdownMenu_.isShow
+        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
     }
     
     
@@ -136,7 +135,7 @@ class HomeVC: UIViewController {
     private func populateSection(_ sectionText: String? ) -> Section {
         let middleSectionView = homeScreen.createMiddleSectionView(sectionText ?? "")
         let section = Section(leftView: nil, middleView: middleSectionView)
-        homeScreen.dropdownMenu_.setSectionInDropdown(section)
+        homeScreen.dropdownMenu.setSectionInDropdown(section)
         return section
     }
     
@@ -144,7 +143,7 @@ class HomeVC: UIViewController {
         rows.enumerated().forEach { (index,row) in
             self.indexRow = index
             let row: Row = self.createRowView(row)
-            homeScreen.dropdownMenu_.setRowInSection(section, row)
+            homeScreen.dropdownMenu.setRowInSection(section, row)
         }
     }
     

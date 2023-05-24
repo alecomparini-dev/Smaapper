@@ -10,7 +10,7 @@ import UIKit
 class BaseComponentAttributes<T: UIView> {
     
     var constraintsFlow: StartOfConstraintsFlow?
-    var border: Border?
+    var border: BorderBuilder?
     var shadow: Shadow?
     var neumorphism: Neumorphism?
     var gradient: Gradient?
@@ -27,9 +27,9 @@ class BaseComponentAttributes<T: UIView> {
     }
     
     @discardableResult
-    func setBorder(_ border: (Border) -> Border) -> T {
+    func setBorder(_ border: (BorderBuilder) -> BorderBuilder) -> T {
         guard let view else { return view ?? UIView() as! T}
-        self.border = border(Border(view))
+        self.border = border(BorderBuilder(view))
         return view
     }
     

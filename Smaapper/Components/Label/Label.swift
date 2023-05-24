@@ -89,8 +89,8 @@ class Label: UILabel {
 extension Label: BaseComponentProtocol {
     
     @discardableResult
-    func setBorder(_ border: (Border) -> Border) -> Self {
-        let _ = border(Border(self))
+    func setBorder(_ border: (BorderBuilder) -> BorderBuilder) -> Self {
+        let _ = border(BorderBuilder(self))
         return self
     }
     

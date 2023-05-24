@@ -129,8 +129,8 @@ class DockAttributes: BaseComponentAttributes<Dock> {
     
     
 //  MARK: - OVERRIDE BASE COMPONENT
-    override func setBorder(_ border: (Border) -> Border) -> Dock {
-        self.border = border(Border(self.container))
+    override func setBorder(_ border: (BorderBuilder) -> BorderBuilder) -> Dock {
+        self.border = border(BorderBuilder(self.container))
         return dock!
     }
     

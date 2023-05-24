@@ -54,8 +54,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeBorder(_ border: (_ make: Border) -> Border) -> Self {
-        _ = border(Border(self))
+    func makeBorder(_ border: (_ make: BorderBuilder) -> BorderBuilder) -> Self {
+        _ = border(BorderBuilder(self))
         return self
     }
     

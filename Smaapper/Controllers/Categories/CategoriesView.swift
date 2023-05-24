@@ -245,7 +245,7 @@ class CategoriesView: View {
         return view
     }
 
-    func setCornerRadiusOnView(_ view: UIView, _ corner: [Border.Corner]) {
+    func setCornerRadiusOnView(_ view: UIView, _ corner: [BorderBuilder.Corner]) {
         _ = view.makeBorder { build in
             build
                 .setCornerRadius(12)
