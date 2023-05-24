@@ -14,7 +14,6 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     private var _isShow = false
     private var zPosition: CGFloat = 10000
     
-    
     private var _dropdown: DropdownMenu
     var dropdown: DropdownMenu { self._dropdown }
     

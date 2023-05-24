@@ -12,6 +12,7 @@
 		020D0E522A1E6E5D007F3992 /* BaseAttributeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E512A1E6E5D007F3992 /* BaseAttributeBuilder.swift */; };
 		020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E532A1E73A6007F3992 /* DropdownMenuFooter.swift */; };
 		020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E552A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift */; };
+		020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E572A1E9CE0007F3992 /* ButtonBuilder.swift */; };
 		0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F029F9F30F008392EC /* AppDelegate.swift */; };
 		0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F229F9F30F008392EC /* SceneDelegate.swift */; };
 		0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0234A5F929F9F310008392EC /* Assets.xcassets */; };
@@ -55,14 +56,13 @@
 		0234A93929F9FD3A008392EC /* TextFieldPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8EB29F9FD3A008392EC /* TextFieldPassword.swift */; };
 		0234A93A29F9FD3A008392EC /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8EC29F9FD3A008392EC /* TextField.swift */; };
 		0234A93B29F9FD3A008392EC /* TextFieldDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8ED29F9FD3A008392EC /* TextFieldDefault.swift */; };
-		0234A93C29F9FD3A008392EC /* ButtonDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8EF29F9FD3A008392EC /* ButtonDefault.swift */; };
 		0234A93D29F9FD3A008392EC /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8F029F9FD3A008392EC /* Button.swift */; };
 		0234A94529F9FD3A008392EC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A90129F9FD3A008392EC /* HomeView.swift */; };
 		0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A90229F9FD3A008392EC /* HomeViewController.swift */; };
 		0234A94929FA9E8E008392EC /* Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A94829FA9E8E008392EC /* Gradient.swift */; };
 		0234A95D29FB3E47008392EC /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A95C29FB3E47008392EC /* View.swift */; };
-		0234A96329FC0659008392EC /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96229FC0659008392EC /* IconButton.swift */; };
-		0234A96629FC0820008392EC /* ButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImage.swift */; };
+		0234A96329FC0659008392EC /* IconButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96229FC0659008392EC /* IconButtonBuilder.swift */; };
+		0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A96529FC0820008392EC /* ButtonImageBuilder.swift */; };
 		024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A62A0FDB3C00A39584 /* CategoriesView.swift */; };
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
@@ -115,6 +115,7 @@
 		020D0E512A1E6E5D007F3992 /* BaseAttributeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAttributeBuilder.swift; sourceTree = "<group>"; };
 		020D0E532A1E73A6007F3992 /* DropdownMenuFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuFooter.swift; sourceTree = "<group>"; };
 		020D0E552A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuFooterBuilder.swift; sourceTree = "<group>"; };
+		020D0E572A1E9CE0007F3992 /* ButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBuilder.swift; sourceTree = "<group>"; };
 		0234A5ED29F9F30F008392EC /* Smaapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smaapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0234A5F029F9F30F008392EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0234A5F229F9F30F008392EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,14 +162,13 @@
 		0234A8EB29F9FD3A008392EC /* TextFieldPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldPassword.swift; sourceTree = "<group>"; };
 		0234A8EC29F9FD3A008392EC /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		0234A8ED29F9FD3A008392EC /* TextFieldDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDefault.swift; sourceTree = "<group>"; };
-		0234A8EF29F9FD3A008392EC /* ButtonDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDefault.swift; sourceTree = "<group>"; };
 		0234A8F029F9FD3A008392EC /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		0234A90129F9FD3A008392EC /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0234A90229F9FD3A008392EC /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0234A94829FA9E8E008392EC /* Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gradient.swift; sourceTree = "<group>"; };
 		0234A95C29FB3E47008392EC /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
-		0234A96229FC0659008392EC /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
-		0234A96529FC0820008392EC /* ButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImage.swift; sourceTree = "<group>"; };
+		0234A96229FC0659008392EC /* IconButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButtonBuilder.swift; sourceTree = "<group>"; };
+		0234A96529FC0820008392EC /* ButtonImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonImageBuilder.swift; sourceTree = "<group>"; };
 		024F18A62A0FDB3C00A39584 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -529,8 +529,8 @@
 			children = (
 				0234A96129FC064D008392EC /* IconButton */,
 				0234A96429FC080D008392EC /* ButtonImage */,
-				0234A8EF29F9FD3A008392EC /* ButtonDefault.swift */,
 				0234A8F029F9FD3A008392EC /* Button.swift */,
+				020D0E572A1E9CE0007F3992 /* ButtonBuilder.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -563,7 +563,7 @@
 		0234A96129FC064D008392EC /* IconButton */ = {
 			isa = PBXGroup;
 			children = (
-				0234A96229FC0659008392EC /* IconButton.swift */,
+				0234A96229FC0659008392EC /* IconButtonBuilder.swift */,
 			);
 			path = IconButton;
 			sourceTree = "<group>";
@@ -571,7 +571,7 @@
 		0234A96429FC080D008392EC /* ButtonImage */ = {
 			isa = PBXGroup;
 			children = (
-				0234A96529FC0820008392EC /* ButtonImage.swift */,
+				0234A96529FC0820008392EC /* ButtonImageBuilder.swift */,
 			);
 			path = ButtonImage;
 			sourceTree = "<group>";
@@ -965,7 +965,6 @@
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
-				0234A93C29F9FD3A008392EC /* ButtonDefault.swift in Sources */,
 				0234A90629F9FD3A008392EC /* CollectionViewModel.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0234A90C29F9FD3A008392EC /* CollectionBuilder.swift in Sources */,
@@ -1011,7 +1010,7 @@
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
 				02C9C9E82A072B4200AA1370 /* ListDefault.swift in Sources */,
 				02C9C9EB2A0A776600AA1370 /* TapGesture.swift in Sources */,
-				0234A96629FC0820008392EC /* ButtonImage.swift in Sources */,
+				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				0234A90729F9FD3A008392EC /* Collection.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
@@ -1021,6 +1020,7 @@
 				0234A90A29F9FD3A008392EC /* CollectionPaddingModel.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
+				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */,
 				0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
@@ -1042,7 +1042,7 @@
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,
-				0234A96329FC0659008392EC /* IconButton.swift in Sources */,
+				0234A96329FC0659008392EC /* IconButtonBuilder.swift in Sources */,
 				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
 				020D0E4B2A1E5A6F007F3992 /* DropdownMenu.swift in Sources */,
 			);

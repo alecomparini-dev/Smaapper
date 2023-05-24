@@ -41,9 +41,9 @@ class CategoriesView: View {
     }()
     
     
-    lazy var closeModalCategories: IconButton = {
+    lazy var closeModalCategories: IconButtonBuilder = {
         let img = ImageView(UIImage(systemName: "chevron.down"))
-        let btn = IconButton(img)
+        let btn = IconButtonBuilder(img)
             .setImageColor(.white.withAlphaComponent(0.3))
             .setImageWeight(.semibold)
             .setTarget(self, #selector(closeModalTapped), .touchUpInside)
@@ -70,8 +70,8 @@ class CategoriesView: View {
             .setTextAlignment(.left)
             .setConstraints { build in
                 build
-                    .setVerticalAlignmentY.equalTo(closeModalCategories)
-                    .setLeading.equalTo(closeModalCategories, .trailing,5)
+                    .setVerticalAlignmentY.equalTo(closeModalCategories.button)
+                    .setLeading.equalTo(closeModalCategories.button, .trailing,5)
             }
         return label
     }()

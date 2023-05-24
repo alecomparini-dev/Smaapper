@@ -211,11 +211,8 @@ class HomeVC: UIViewController {
         if items[rowTapped.row].title == HomeVC.categoriesID {
             guard let subMenu = items[rowTapped.row].subMenu else { return }
             showCategoriesViewController(subMenu)
-        }
-        
+        }   
     }
-    
-    
 }
 
 
