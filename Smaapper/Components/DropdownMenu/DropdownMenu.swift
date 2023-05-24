@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol DropdownMenuDelegate: AnyObject {
-    func touchMenu()
-    func openMenu()
-    func closeMenu()
-}
+//protocol DropdownMenuDelegate: AnyObject {
+//    func touchMenu()
+//    func openMenu()
+//    func closeMenu()
+//}
 
 class DropdownMenu: View {
     
@@ -35,13 +35,9 @@ class DropdownMenu: View {
     private var excludeComponents: [UIView] = []
     private var _paddingMenu: UIEdgeInsets?
     
-    
-//    private var overlay: Overlay?
-    
     private var alreadyApplied = false
     private var _isShow = false
     private var zPosition: CGFloat = 10000
-    
     
     
     var actions: DropdownMenuActions

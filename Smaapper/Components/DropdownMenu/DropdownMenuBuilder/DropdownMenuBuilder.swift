@@ -27,7 +27,9 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var get: DropdownMenu_ { self.dropdown }
+    var view: DropdownMenu_ { self.dropdown }
+    var actions: DropdownMenuActions = DropdownMenuActions()
+    
     
 //  MARK: - SET Attributes
     
@@ -115,6 +117,8 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
 
     
+//  MARK: - SHOW DROPDOWN MENU
+    
     var isShow: Bool {
         get {
             return self._isShow }
@@ -126,10 +130,12 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         }
     }
     
-
+    
+//  MARK: - PRIVATE AREA
+    
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            self.addListOnDropdownMenu()
+            self.configList()
             self.configDropDownMenuConstraints()
             self.configAutoCloseDropdownMenu()
             self.configOverlay()
@@ -138,6 +144,19 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         }
     }
 
+    private func configList() {
+        self.addListOnDropdownMenu()
+        self.addTouchActionOnList()
+    }
+    
+    private func addTouchActionOnList() {
+        dropdown.list.setDidSelectRow({ section, row in
+            if let touchMenuClosure = self.actions.touchMenuClosure {
+                touchMenuClosure((section,row))
+            }
+        })
+    }
+    
     private func configOverlay() {
         addOverlayInDropdownMenu()
         configOverlayConstraints()
@@ -175,7 +194,6 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         dropdown.overlay.layer.zPosition = -1
     }
     
-    
     private func configAutoCloseDropdownMenu() {
         if self.dropdown.autoCloseEnabled {
             guard let rootView = CurrentWindow.rootView else { return }
@@ -188,7 +206,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
-        print("CLICOUUUUUUUUUUUUUUU NO OVERLAYYYYYYYYYYYYYYYYYYYYY PORRAAAAAA")
+        print("TIRAR ISSOOOO")
         if self._isShow {
             if self.isTappedOut(tap) {
                 self.isShow = false
@@ -222,21 +240,16 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         return isTappedOut
     }
     
-
     private func isPresented() {
         dropdown.list.isShow = self._isShow
         self.dropdown.isHidden = !self._isShow
-//        self.overlay?.isShow = self._isShow
     }
     
-  
     private func bringToFront() {
         if !_isShow { return }
         guard let rootView = CurrentWindow.rootView else { return }
         rootView.bringSubviewToFront(dropdown)
     }
-    
-    
     
     private func addListOnDropdownMenu() {
         dropdown.list.add(insideTo: dropdown)
@@ -251,21 +264,6 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
                 .setTrailing.equalToSuperView(-padding.right)
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }

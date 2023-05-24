@@ -127,6 +127,12 @@ class HomeView: View {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
+        
+        drop.actions
+            .setEvent(touch: dropdownMenuTapped)
+            .setEvent(openMenu: openCloseDropdowMenu)
+            .setEvent(closeMenu: openCloseDropdowMenu)
+        
         return drop
     }()
     
@@ -401,7 +407,7 @@ class HomeView: View {
     
     private func addElements() {
         dropdownMenu.add(insideTo: self)
-        dropdownMenu_.get.add(insideTo: self)
+        dropdownMenu_.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)

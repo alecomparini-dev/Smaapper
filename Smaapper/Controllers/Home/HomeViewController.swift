@@ -97,7 +97,6 @@ class HomeVC: UIViewController {
     }
     
     private func openCloseDropdownMenu() {
-//        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
         homeScreen.dropdownMenu_.isShow = !homeScreen.dropdownMenu_.isShow
     }
     

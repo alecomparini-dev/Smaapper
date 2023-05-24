@@ -7,17 +7,9 @@
 
 import UIKit
 
+
 class DropdownMenu_: UIView {
     
-    private var _positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
-    private var _menuHeight: CGFloat?
-    private var _menuWidth: CGFloat?
-    private var _paddingCells: UIEdgeInsets?
-    private var _autoCloseEnabled: Bool = false
-    private var _excludeComponents: [UIView] = []
-    private var _paddingMenu: UIEdgeInsets?
-    
-
     enum PositionMenu {
         case leftTop
         case leftBottom
@@ -29,7 +21,16 @@ class DropdownMenu_: UIView {
         case open
         case close
     }
-  
+    
+    private var _positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
+    private var _menuHeight: CGFloat?
+    private var _menuWidth: CGFloat?
+    private var _paddingCells: UIEdgeInsets?
+    private var _autoCloseEnabled: Bool = false
+    private var _excludeComponents: [UIView] = []
+    private var _paddingMenu: UIEdgeInsets?
+    
+    
 //  MARK: - Lazy Properties
     
     lazy var list: List = {
@@ -93,9 +94,5 @@ class DropdownMenu_: UIView {
         get { self._paddingMenu }
         set { self._paddingMenu = newValue }
     }
-    
-
-    
-    
     
 }
