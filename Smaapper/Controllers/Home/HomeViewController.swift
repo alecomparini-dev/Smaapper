@@ -61,7 +61,6 @@ class HomeVC: UIViewController {
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
-        homeScreen.dropdownMenu_.isShow = false
         
 //retirar !!!
 //        self.openCloseDropdownMenu()
@@ -88,7 +87,7 @@ class HomeVC: UIViewController {
     
     //  MARK: - Private Function Area
     private func setConstraintAlignmentHorizontalDock() {
-        self.adjustTrailingDock = homeScreen.dock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        self.adjustTrailingDock = homeScreen.dock.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         adjustTrailingDock.isActive = true
     }
     
@@ -97,7 +96,7 @@ class HomeVC: UIViewController {
     }
     
     private func openCloseDropdownMenu() {
-        homeScreen.dropdownMenu_.isShow = !homeScreen.dropdownMenu_.isShow
+        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
     }
     
     
@@ -136,7 +135,7 @@ class HomeVC: UIViewController {
     private func populateSection(_ sectionText: String? ) -> Section {
         let middleSectionView = homeScreen.createMiddleSectionView(sectionText ?? "")
         let section = Section(leftView: nil, middleView: middleSectionView)
-        homeScreen.dropdownMenu_.setSectionInDropdown(section)
+        homeScreen.dropdownMenu.setSectionInDropdown(section)
         return section
     }
     
@@ -144,7 +143,7 @@ class HomeVC: UIViewController {
         rows.enumerated().forEach { (index,row) in
             self.indexRow = index
             let row: Row = self.createRowView(row)
-            homeScreen.dropdownMenu_.setRowInSection(section, row)
+            homeScreen.dropdownMenu.setRowInSection(section, row)
         }
     }
     
@@ -203,7 +202,7 @@ class HomeVC: UIViewController {
         if iconsDock.count > 4 {
             self.adjustTrailingDock.constant = -90
         }
-        
+
     }
     
     private func openCategories() {
@@ -212,11 +211,8 @@ class HomeVC: UIViewController {
         if items[rowTapped.row].title == HomeVC.categoriesID {
             guard let subMenu = items[rowTapped.row].subMenu else { return }
             showCategoriesViewController(subMenu)
-        }
-        
+        }   
     }
-    
-    
 }
 
 

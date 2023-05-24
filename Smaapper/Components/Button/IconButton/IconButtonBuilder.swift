@@ -1,5 +1,5 @@
 //
-//  ButtonImage.swift
+//  IconButtonBuilder.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 28/04/23.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-class IconButton: ButtonImage {
+class IconButtonBuilder: ButtonImageBuilder {
     
     init(_ image: UIImageView) {
         super.init(image, .normal, nil)

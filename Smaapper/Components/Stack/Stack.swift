@@ -45,8 +45,8 @@ class Stack: UIStackView {
 extension Stack: BaseComponentProtocol {
     
     @discardableResult
-    func setBorder(_ border: (_ build: Border) -> Border) -> Self {
-        let _ = border(Border(self))
+    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
+        let _ = border(BorderBuilder(self))
         return self
     }
     

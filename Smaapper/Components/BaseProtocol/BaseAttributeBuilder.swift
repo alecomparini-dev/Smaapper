@@ -12,7 +12,7 @@ import UIKit
 class BaseAttributeBuilder {
     
     private var _constraintsFlow: StartOfConstraintsFlow?
-    private var _border: Border?
+    private var _border: BorderBuilder?
     private var _shadow: Shadow?
     private var _neumorphism: Neumorphism?
     private var _gradient: Gradient?
@@ -27,7 +27,7 @@ class BaseAttributeBuilder {
     
 //  MARK: - GET Properties
     var constraintsFlow: StartOfConstraintsFlow? { self._constraintsFlow}
-    var border: Border? { self._border}
+    var border: BorderBuilder? { self._border}
     var shadow: Shadow? { self._shadow}
     var neumorphism: Neumorphism? { self._neumorphism}
     var gradient: Gradient? { self._gradient}
@@ -36,8 +36,8 @@ class BaseAttributeBuilder {
     
 //  MARK: - SET Properties
     @discardableResult
-    func setBorder(_ border: (Border) -> Border) -> Self {
-        self._border = border(Border(component))
+    func setBorder(_ border: (BorderBuilder) -> BorderBuilder) -> Self {
+        self._border = border(BorderBuilder(component))
         return self
     }
     

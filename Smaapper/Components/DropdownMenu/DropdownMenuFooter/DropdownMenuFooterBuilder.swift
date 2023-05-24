@@ -12,11 +12,11 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     private var alreadyApplied = false
     private var _isShow = false
     
-    private var _dropdownFooter: DropdownMenuFooter_
-    var dropdownFooter: DropdownMenuFooter_ { self._dropdownFooter }
+    private var _dropdownFooter: DropdownMenuFooter
+    var dropdownFooter: DropdownMenuFooter { self._dropdownFooter }
 
     override init() {
-        self._dropdownFooter = DropdownMenuFooter_()
+        self._dropdownFooter = DropdownMenuFooter()
         super.init()
     }
     

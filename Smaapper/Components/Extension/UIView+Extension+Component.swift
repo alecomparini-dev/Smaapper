@@ -24,19 +24,7 @@ extension UIView {
         return self
     }
     
-//    @discardableResult
-//    func setBackgroundColorLayer(_ color: UIColor) -> Self {
-//        let layer = CAShapeLayer()
-//        layer.frame = self.bounds
-//        layer.cornerRadius = self.layer.cornerRadius
-//        layer.maskedCorners = self.layer.maskedCorners
-//        layer.fillColor = color.cgColor
-//        layer.backgroundColor = color.cgColor
-//        let position = UInt32(self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
-//        self.layer.insertSublayer(layer, at: position )
-//        return self
-//    }
-    
+   
     @discardableResult
     func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
         self.isUserInteractionEnabled = interactionEnabled
@@ -54,8 +42,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeBorder(_ border: (_ make: Border) -> Border) -> Self {
-        _ = border(Border(self))
+    func makeBorder(_ border: (_ make: BorderBuilder) -> BorderBuilder) -> Self {
+        _ = border(BorderBuilder(self))
         return self
     }
     

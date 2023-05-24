@@ -1,5 +1,5 @@
 //
-//  ButtonImage.swift
+//  ButtonImageBuilder.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 28/04/23.
@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class ButtonImage: Button {
+class ButtonImageBuilder: ButtonBuilder {
     
     private var imgWithConfiguration: ImageView?
     
@@ -45,39 +45,44 @@ class ButtonImage: Button {
     
     
 //  MARK: - Properties
+    @discardableResult
     func setImageButton(_ image: UIImageView) -> Self {
         guard let image = image.image else {return self}
-        super.configuration?.image = image
-        super.setImage(image, for: .normal)
+        super.button.configuration?.image = image
+        super.button.setImage(image, for: .normal)
         return self
     }
     
+    @discardableResult
     func setImagePlacement(_ alignment: NSDirectionalRectEdge ) -> Self {
-        super.configuration?.imagePlacement = alignment
+        super.button.configuration?.imagePlacement = alignment
         return self
     }
     
+    @discardableResult
     func setImageColor(_ color: UIColor) -> Self {
-        super.configuration?.baseForegroundColor = color
+        super.button.configuration?.baseForegroundColor = color
         return self
     }
     
+    @discardableResult
     func setImageSize( _ size: CGFloat? ) -> Self {
         guard let size else {return self}
-        let img = ImageView(super.configuration?.image).setSize(size)
+        let img = ImageView(super.button.configuration?.image).setSize(size)
         _ = setImageButton(img)
         return self
     }
     
+    @discardableResult
     func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        let img = ImageView(super.configuration?.image).setWeight(weight)
+        let img = ImageView(super.button.configuration?.image).setWeight(weight)
         _ = setImageButton(img)
         return self
     }
 
-
+    @discardableResult
     func setImagePadding(_ padding: CGFloat) -> Self {
-        super.configuration?.imagePadding = padding
+        super.button.configuration?.imagePadding = padding
         return self
     }
         

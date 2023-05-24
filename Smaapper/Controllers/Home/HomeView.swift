@@ -51,50 +51,8 @@ class HomeView: View {
         return clock
     }()
     
-    
-    lazy var dropdownMenu: DropdownMenuFooter = {
-        let drop = DropdownMenuFooter()
-            .setFooterHeight(65)
-            .setFooterGradient { build in
-                build
-                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
-                    .setAxialGradient(.rightBottomToLeftTop)
-            }
-            .setFooterComponent(settingsButton)
-            .setFooterComponent(profileButton)
-            .setFooterComponent(recentButton)
-            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
-            .setRowHeight(45)
-            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
-            .setBorder({ build in
-                build
-                    .setCornerRadius(18)
-            })
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
-                    .setShape(.concave)
-                    .setLightPosition(.rightBottom)
-                    .apply()
-            }
-            .setConstraints { build in
-                build
-                    .setBottom.equalTo(menuButton, .top, -15)
-                    .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.equalToConstant(400)
-                    .setWidth.equalToConstant(255)
-            }
         
-        drop.actions
-            .setEvent(touch: dropdownMenuTapped)
-            .setEvent(openMenu: openCloseDropdowMenu)
-            .setEvent(closeMenu: openCloseDropdowMenu)
-        
-        return drop
-    }()
-    
-    lazy var dropdownMenu_: DropdownMenuFooterBuilder = {
+    lazy var dropdownMenu: DropdownMenuFooterBuilder = {
         let drop = DropdownMenuFooterBuilder()
             .setFooterHeight(65)
             .setFooterGradient { build in
@@ -102,10 +60,10 @@ class HomeView: View {
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
-            .setFooterComponent(settingsButton)
-            .setFooterComponent(profileButton)
-            .setFooterComponent(recentButton)
-            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
+            .setFooterComponent(settingsButton.view)
+            .setFooterComponent(profileButton.view)
+            .setFooterComponent(recentButton.view)
+            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton.view])
             .setRowHeight(45)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
             .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
@@ -122,8 +80,8 @@ class HomeView: View {
             }
             .setConstraints { build in
                 build
-                    .setBottom.equalTo(menuButton, .top, -15)
-                    .setTrailing.equalTo(menuButton, .trailing, -5)
+                    .setBottom.equalTo(menuButton.view, .top, -15)
+                    .setTrailing.equalTo(menuButton.view, .trailing, -5)
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
@@ -149,9 +107,9 @@ class HomeView: View {
         }
     }
     
-    lazy var menuButton: ButtonImage = {
+    lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-        return ButtonImage(img)
+        return ButtonImageBuilder(img)
             .setImageColor(.white)
             .setImageSize(14)
             .setBorder({ build in
@@ -178,8 +136,8 @@ class HomeView: View {
 
     }()
     
-    lazy var profileButton: IconButton = {
-        return IconButton(ImageView(UIImage(systemName: "person")), "Profile")
+    lazy var profileButton: IconButtonBuilder = {
+        return IconButtonBuilder(ImageView(UIImage(systemName: "person")), "Profile")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -187,8 +145,8 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-    lazy var recentButton: IconButton = {
-        return IconButton(ImageView(UIImage(systemName: "rectangle.stack")))
+    lazy var recentButton: IconButtonBuilder = {
+        return IconButtonBuilder(ImageView(UIImage(systemName: "rectangle.stack")))
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -197,8 +155,8 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-    lazy var settingsButton: IconButton = {
-        return IconButton(ImageView(UIImage(systemName: "gearshape")), "Settings")
+    lazy var settingsButton: IconButtonBuilder = {
+        return IconButtonBuilder(ImageView(UIImage(systemName: "gearshape")), "Settings")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -206,9 +164,8 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-    lazy var dock: Dock = {
-        let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
-        dock.attributes
+    lazy var dock: DockBuilder = {
+        let dock = DockBuilder(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true, 0.7)
@@ -223,7 +180,7 @@ class HomeView: View {
                 build
                     .setLeading.equalToSafeArea(20)
                     .setHeight.equalToConstant(60)
-                    .setVerticalAlignmentY.equalTo(menuButton)
+                    .setVerticalAlignmentY.equalTo(menuButton.view)
             }
         return dock
     }()
@@ -270,19 +227,18 @@ class HomeView: View {
     }()
     
     
-    
     private func createTitleView() -> UIView {
         let view = UIView()
         let closeWin = createCloseWindowButton()
         let dragDropView = createDragDropView()
-        addElementsInTitleView(view, [closeWin,dragDropView])
+        addElementsInTitleView(view, [closeWin.view,dragDropView])
         configButtonsConstraintsInTitleView(closeWin)
         return view
     }
     
 
-    private func createCloseWindowButton() -> Button {
-        let btn = Button()
+    private func createCloseWindowButton() -> ButtonBuilder {
+        let btn = ButtonBuilder()
             .setGradient({ build in
                 build
                     .setColor([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
@@ -321,8 +277,8 @@ class HomeView: View {
         }
     }
     
-    private func configButtonsConstraintsInTitleView( _ closeWin: Button) {
-        closeWin.makeConstraints { make in
+    private func configButtonsConstraintsInTitleView( _ closeWin: ButtonBuilder) {
+        closeWin.setConstraints { make in
             make
                 .setTrailing.equalToSuperView(-12)
                 .setVerticalAlignmentY.equalToSuperView(5)
@@ -353,7 +309,7 @@ class HomeView: View {
     }
     
     func turnOffMenuButton() {
-        menuButton.removeShadowByID(idShadowEnableFloatButton)
+        menuButton.view.removeShadowByID(idShadowEnableFloatButton)
     }
 
     
@@ -407,7 +363,6 @@ class HomeView: View {
     
     private func addElements() {
         dropdownMenu.add(insideTo: self)
-        dropdownMenu_.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)
@@ -416,7 +371,6 @@ class HomeView: View {
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
-        dropdownMenu_.applyConstraint()
         dock.applyConstraint()
         self.clock.applyConstraint()
         
@@ -427,14 +381,11 @@ class HomeView: View {
 //        }
         
         
-        
-        
-        
     }
     
-    func createIconsDock(_ systemNameImage: String) -> IconButton {
+    func createIconsDock(_ systemNameImage: String) -> UIView {
         let img = ImageView(UIImage(systemName: systemNameImage))
-        let btn = IconButton(img)
+        let btn = IconButtonBuilder(img)
             .setImageColor(.white)
             .setImageSize(14)
             .setBorder { make in
@@ -455,7 +406,7 @@ class HomeView: View {
                     .setDistance(to: .dark, percent: 5)
                     .apply()
             })
-        return btn
+        return btn.view
     }
 
     

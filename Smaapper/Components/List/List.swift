@@ -171,8 +171,8 @@ class List: UITableView {
 extension List: BaseComponentProtocol {
     
     @discardableResult
-    func setBorder(_ border: (_ build: Border) -> Border) -> Self {
-        _ = border(Border(self))
+    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
+        _ = border(BorderBuilder(self))
         return self
     }
     

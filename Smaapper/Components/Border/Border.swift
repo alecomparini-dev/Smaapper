@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class Border {
+class BorderBuilder {
     
     enum Corner {
         case leftTop
@@ -36,31 +36,35 @@ class Border {
 //  MARK: - Properties Default
     
     func setDefault() -> Self {
-        return self.setWidth(BorderDefault.width)
-            .setColor(BorderDefault.color)
-            .setCornerRadius(BorderDefault.radius)
+        return self.setWidth(1)
+            .setColor(.darkGray)
+            .setCornerRadius(5)
     }
     
     
 //  MARK: - Set Properties
     
+    @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         component.layer.borderWidth = width
         return self
     }
     
+    @discardableResult
     func setColor(_ color: UIColor) -> Self {
         component.layer.borderColor = color.cgColor
         return self
     }
     
+    @discardableResult
     func setCornerRadius(_ radius: CGFloat) -> Self {
         self.removeBorderStyleOfTextField()
         component.layer.cornerRadius = radius
         return self
     }
     
-    func setWhichCornersWillBeRounded(_ cornes: [Border.Corner]) -> Self {
+    @discardableResult
+    func setWhichCornersWillBeRounded(_ cornes: [BorderBuilder.Corner]) -> Self {
         component.layer.maskedCorners = selectCorners(cornes)
         return self
     }
@@ -68,7 +72,7 @@ class Border {
     
 //  MARK: - Component Private Functions
     
-    private func selectCorners(_ cornes: [Border.Corner]) -> CACornerMask {
+    private func selectCorners(_ cornes: [BorderBuilder.Corner]) -> CACornerMask {
         
         var selection: CACornerMask = []
         
