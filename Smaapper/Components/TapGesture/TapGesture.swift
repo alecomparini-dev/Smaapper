@@ -109,6 +109,11 @@ class TapGesture {
 
 
 
+
+
+
+
+
 //  MARK: - ONTAPGESTURE CLASS ---
 
 fileprivate class OnTapGesture: UITapGestureRecognizer {

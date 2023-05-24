@@ -184,14 +184,6 @@ class HomeView: View {
                     .setHeight.equalToConstant(60)
                     .setVerticalAlignmentY.equalTo(menuButton)
             }
-            .setTapGesture { build in
-                build.setStateGesture([.began])
-                    .setAction { tapGesture in
-                        self.floatWindow.add(insideTo: self)
-                        self.floatWindow.applyConstraint()
-                        self.floatWindow.isShow = true
-                    }
-            }
         return dock
     }()
     
@@ -377,8 +369,6 @@ class HomeView: View {
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)
-        
-        
     }
     
     private func applyConstraints() {
@@ -387,15 +377,14 @@ class HomeView: View {
         dock.applyConstraint()
         self.clock.applyConstraint()
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            self.floatWindow.add(insideTo: self)
-//            self.floatWindow.applyConstraint()
-//            self.floatWindow.isShow = true
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.floatWindow.add(insideTo: self)
+            self.floatWindow.applyConstraint()
+            self.floatWindow.isShow = true
+        }
 
 
     }
-    
     
     func createIconsDock(_ systemNameImage: String) -> IconButton {
         let img = ImageView(UIImage(systemName: systemNameImage))
@@ -423,11 +412,6 @@ class HomeView: View {
         return btn
     }
 
-    
-    
-
-    
-    
     
     func showImage() {
         let img = ImageView()

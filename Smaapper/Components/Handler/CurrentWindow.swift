@@ -17,4 +17,12 @@ class CurrentWindow {
         return nil
     }
     
+    static var rootView: UIView? {
+        if let rootView = CurrentWindow.get?.rootViewController?.view {
+            return rootView
+        }
+        return nil
+    }
+    
+    
 }
