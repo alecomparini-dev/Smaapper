@@ -10,11 +10,17 @@ import UIKit
 
 class DropdownMenuBuilder: BaseAttributeBuilder {
    
-    private var dropdown: DropdownMenu_
+    private var alreadyApplied = false
+    private var _isShow = false
+    private var zPosition: CGFloat = 10000
+    
+    
+    private var _dropdown: DropdownMenu_
+    var dropdown: DropdownMenu_ { self._dropdown }
     
     init() {
-        self.dropdown = DropdownMenu_()
-        super.init(self.dropdown)
+        self._dropdown = DropdownMenu_()
+        super.init(self._dropdown)
     }
     
     required init?(coder: NSCoder) {
@@ -27,68 +33,68 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     
     @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
-        self.dropdown.positionOpenMenu = position
+        self._dropdown.positionOpenMenu = position
         return self
     }
     
     @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        dropdown.list.setRowHeight(height)
+        _dropdown.list.setRowHeight(height)
         return self
     }
     
     @discardableResult
     func setDropdownMenuHeight(_ height: CGFloat) -> Self {
-        dropdown.menuHeight = height
+        _dropdown.menuHeight = height
         return self
     }
     
     @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
-        dropdown.menuWidth = width
+        _dropdown.menuWidth = width
         return self
     }
     
     @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        dropdown.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        _dropdown.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
     @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
-        dropdown.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
+        _dropdown.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
     
     @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        dropdown.list.setSectionHeaderHeight(height)
+        _dropdown.list.setSectionHeaderHeight(height)
         return self
     }
     
     @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        dropdown.list.setSectionFooterHeight(height)
+        _dropdown.list.setSectionFooterHeight(height)
         return self
     }
     
     @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        dropdown.list.setSectionHeaderHeight(forSection: forSection, height)
+        _dropdown.list.setSectionHeaderHeight(forSection: forSection, height)
         return self
     }
     
     @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        dropdown.list.setSectionFooterHeight(forSection: forSection, height)
+        _dropdown.list.setSectionFooterHeight(forSection: forSection, height)
         return self
     }
     
     @discardableResult
     func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
-        dropdown.autoCloseEnabled = true
-        dropdown.excludeComponents = excludeComponents
+        _dropdown.autoCloseEnabled = true
+        _dropdown.excludeComponents = excludeComponents
         return self
     }
     
@@ -96,11 +102,11 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
 //  MARK: - SET Data In List
     
     func setSectionInDropdown(_ section: Section) {
-        dropdown.list.setSectionInList(section)
+        _dropdown.list.setSectionInList(section)
     }
 
     func setRowInSection(_ section: Section, _ row: Row) {
-        dropdown.list.setRowInSection(section, row)
+        _dropdown.list.setRowInSection(section, row)
     }
 
     func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
@@ -108,5 +114,158 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         section.rows.append(row)
     }
 
+    
+    var isShow: Bool {
+        get {
+            return self._isShow }
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            isPresented()
+            bringToFront()
+        }
+    }
+    
+
+    private func applyOnceConfig() {
+        if self._isShow && !alreadyApplied {
+            self.addListOnDropdownMenu()
+            self.configDropDownMenuConstraints()
+            self.configAutoCloseDropdownMenu()
+            self.configOverlay()
+            self.setHierarchyVisualizationPosition()
+            self.alreadyApplied = true
+        }
+    }
+
+    private func configOverlay() {
+        addOverlayInDropdownMenu()
+        configOverlayConstraints()
+        setOverlayHierarchyVisualizationPosition()
+    }
+    
+    private func configOverlayConstraints() {
+        guard let superview = self.dropdown.superview else {return}
+        dropdown.overlay.makeConstraints { make in
+            make
+                .setPin.equalTo(superview)
+        }
+    }
+    
+    private func addOverlayInDropdownMenu() {
+        dropdown.overlay.add(insideTo: dropdown)
+    }
+    
+    private func setHierarchyVisualizationPosition() {
+        setDropdownHierarchyVisualizationPosition()
+        setExcludeComponentsHierarchyVisualizationPosition()
+    }
+    
+    private func setDropdownHierarchyVisualizationPosition() {
+        self.dropdown.layer.zPosition = zPosition
+    }
+    
+    private func setExcludeComponentsHierarchyVisualizationPosition() {
+        dropdown.excludeComponents.forEach { comp in
+            comp.layer.zPosition = self.zPosition + 1
+        }
+    }
+    
+    private func setOverlayHierarchyVisualizationPosition() {
+        dropdown.overlay.layer.zPosition = -1
+    }
+    
+    
+    private func configAutoCloseDropdownMenu() {
+        if self.dropdown.autoCloseEnabled {
+            guard let rootView = CurrentWindow.rootView else { return }
+            rootView.makeTapGesture { make in
+                make
+                    .setStateGesture([.ended])
+                    .setAction (closure: verifyTappedOutMenu)
+            }
+        }
+    }
+    
+    private func verifyTappedOutMenu(_ tap: TapGesture) {
+        print("CLICOUUUUUUUUUUUUUUU NO OVERLAYYYYYYYYYYYYYYYYYYYYY PORRAAAAAA")
+        if self._isShow {
+            if self.isTappedOut(tap) {
+                self.isShow = false
+            }
+        }
+    }
+    
+    private func isTappedOut(_ tap: TapGesture) -> Bool {
+        let touchPoint = tap.getTouchedPositionRelative(to: .window)
+        if isTappedOutDropdownMenu(touchPoint) && isTappedOutExcludeComponents(touchPoint) {
+            return true
+        }
+        return false
+    }
+    
+    private func isTappedOutDropdownMenu(_ touchPoint: CGPoint) -> Bool {
+        if self.dropdown.frame.contains(touchPoint) {
+            return false
+        }
+        return true
+    }
+    
+    private func isTappedOutExcludeComponents(_ touchPoint: CGPoint) -> Bool {
+        var isTappedOut = true
+        self.dropdown.excludeComponents.forEach { comp in
+            if comp.frame.contains(touchPoint) {
+                isTappedOut = false
+                return
+            }
+        }
+        return isTappedOut
+    }
+    
+
+    private func isPresented() {
+        dropdown.list.isShow = self._isShow
+        self.dropdown.isHidden = !self._isShow
+//        self.overlay?.isShow = self._isShow
+    }
+    
+  
+    private func bringToFront() {
+        if !_isShow { return }
+        guard let rootView = CurrentWindow.rootView else { return }
+        rootView.bringSubviewToFront(dropdown)
+    }
+    
+    
+    
+    private func addListOnDropdownMenu() {
+        dropdown.list.add(insideTo: dropdown)
+    }
+    
+    private func configDropDownMenuConstraints() {
+        guard let padding = self.dropdown.paddingMenu else {return}
+        self.dropdown.list.makeConstraints { build in
+            build.setTop.equalToSuperView(padding.top)
+                .setBottom.equalToSuperView(-padding.bottom)
+                .setLeading.equalToSuperView(padding.left)
+                .setTrailing.equalToSuperView(-padding.right)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

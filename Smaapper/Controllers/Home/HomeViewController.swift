@@ -61,6 +61,7 @@ class HomeVC: UIViewController {
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
+        homeScreen.dropdownMenu_.isShow = false
         
 //retirar !!!
 //        self.openCloseDropdownMenu()
@@ -96,7 +97,8 @@ class HomeVC: UIViewController {
     }
     
     private func openCloseDropdownMenu() {
-        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
+//        homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
+        homeScreen.dropdownMenu_.isShow = !homeScreen.dropdownMenu_.isShow
     }
     
     

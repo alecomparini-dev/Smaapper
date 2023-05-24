@@ -80,7 +80,6 @@ class HomeView: View {
             }
             .setConstraints { build in
                 build
-                    .setTop.greaterThanOrEqualToSafeArea(10)
                     .setBottom.equalTo(menuButton, .top, -15)
                     .setTrailing.equalTo(menuButton, .trailing, -5)
                     .setHeight.equalToConstant(400)
@@ -95,17 +94,25 @@ class HomeView: View {
         return drop
     }()
     
-    lazy var dropdownMenu_: DropdownMenuBuilder = {
-        let drop = DropdownMenuBuilder()
-            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setConstraints { build in
+    lazy var dropdownMenu_: DropdownMenuFooterBuilder = {
+        let drop = DropdownMenuFooterBuilder()
+            .setFooterHeight(65)
+            .setFooterGradient { build in
                 build
-                    .setTop.greaterThanOrEqualToSafeArea(10)
-                    .setBottom.equalTo(menuButton, .top, -15)
-                    .setTrailing.equalTo(menuButton, .trailing, -5)
-                    .setHeight.equalToConstant(400)
-                    .setWidth.equalToConstant(255)
+                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
+                    .setAxialGradient(.rightBottomToLeftTop)
             }
+            .setFooterComponent(settingsButton)
+            .setFooterComponent(profileButton)
+            .setFooterComponent(recentButton)
+            .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton])
+            .setRowHeight(45)
+            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
+            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
+            .setBorder({ build in
+                build
+                    .setCornerRadius(18)
+            })
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
@@ -113,10 +120,13 @@ class HomeView: View {
                     .setLightPosition(.rightBottom)
                     .apply()
             }
-            .setBorder({ build in
+            .setConstraints { build in
                 build
-                    .setCornerRadius(18)
-            })
+                    .setBottom.equalTo(menuButton, .top, -15)
+                    .setTrailing.equalTo(menuButton, .trailing, -5)
+                    .setHeight.equalToConstant(400)
+                    .setWidth.equalToConstant(255)
+            }
         return drop
     }()
     
@@ -391,6 +401,7 @@ class HomeView: View {
     
     private func addElements() {
         dropdownMenu.add(insideTo: self)
+        dropdownMenu_.get.add(insideTo: self)
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)
@@ -399,29 +410,18 @@ class HomeView: View {
     private func applyConstraints() {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
+        dropdownMenu_.applyConstraint()
         dock.applyConstraint()
         self.clock.applyConstraint()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.floatWindow.add(insideTo: self)
-            self.floatWindow.applyConstraint()
-            self.floatWindow.isShow = true
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.floatWindow.add(insideTo: self)
+//            self.floatWindow.applyConstraint()
+//            self.floatWindow.isShow = true
+//        }
         
         
-        dropdownMenu_.get.add(insideTo: self)
-        dropdownMenu_.get.makeConstraints { make in
-            make
-                .setTop.greaterThanOrEqualToSafeArea(10)
-                .setBottom.equalTo(menuButton, .top, -15)
-                .setTrailing.equalTo(menuButton, .trailing, -5)
-                .setHeight.equalToConstant(400)
-                .setWidth.equalToConstant(255)
-        }
         
-        dropdownMenu_.get.isShow = true
-        
-
         
         
     }
