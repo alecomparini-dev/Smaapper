@@ -46,10 +46,11 @@ class HomeVC: UIViewController {
    
     override func loadView() {
         super.loadView()
-        view.addSubview(homeScreen)
-        homeScreen.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
+        view = homeScreen
+//        view.addSubview(homeScreen)
+//        homeScreen.makeConstraints { make in
+//            make.setPin.equalToSuperView
+//        }
         
     }
     

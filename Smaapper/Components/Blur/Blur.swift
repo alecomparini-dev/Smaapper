@@ -14,7 +14,7 @@ class Blur {
     private var vibrancyView: UIVisualEffectView?
     private var opacity: CGFloat = 0.98
     
-    private var vibrancyEnabled = true
+    private var vibrancyEnabled = false
     private var component: UIView
     
     init(_ component: UIView) {

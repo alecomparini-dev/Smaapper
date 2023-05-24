@@ -69,16 +69,16 @@ class DropdownMenu: View {
     }()
     
     lazy var overlay: View = {
-        let view = View()
+        let overlay = View()
             .setUserInteractionEnabled(false)
-        view.makeBlur { make in
+        overlay.makeBlur { make in
             make
                 .setStyle(.systemUltraThinMaterialDark)
                 .setStyle(.dark)
                 .setOpacity(0.7)
                 .apply()
         }
-        return view
+        return overlay
     }()
     
 //  MARK: - GET Attributes
@@ -180,8 +180,8 @@ class DropdownMenu: View {
         set {
             self._isShow = newValue
             applyOnceConfig()
-            bringToFront()
             isPresented()
+            bringToFront()
             callClosureOpenCloseMenu(self._isShow)
         }
     }
@@ -191,51 +191,66 @@ class DropdownMenu: View {
 
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            self.setDropdownHierarchyPosition()
             self.addListOnDropdownMenu()
-            self.configConstraints()
-            self.configAutoCloseMenu()
+            self.configDropDownMenuConstraints()
+            self.configAutoCloseDropdownMenu()
             self.configOverlay()
+            self.setHierarchyVisualizationPosition()
             self.alreadyApplied = true
         }
     }
 
     private func configOverlay() {
-        createOverlay()
-        setOverlayHierarchyPosition()
+        addOverlayInDropdownMenu()
+        configOverlayConstraints()
+        setOverlayHierarchyVisualizationPosition()
     }
     
-    private func createOverlay() {
+    private func configOverlayConstraints() {
         guard let superview = self.superview else {return}
-        overlay.add(insideTo: self)
-        overlay.layer.zPosition = -1
         overlay.makeConstraints { make in
             make
                 .setPin.equalTo(superview)
         }
     }
     
-    private func setOverlayHierarchyPosition() {
+    private func addOverlayInDropdownMenu() {
+        overlay.add(insideTo: self)
+    }
+    
+    private func setHierarchyVisualizationPosition() {
+        setDropdownHierarchyVisualizationPosition()
+        setExcludeComponentsHierarchyVisualizationPosition()
+    }
+    
+    private func setDropdownHierarchyVisualizationPosition() {
+        self.layer.zPosition = zPosition
+    }
+    
+    private func setExcludeComponentsHierarchyVisualizationPosition() {
         excludeComponents.forEach { comp in
-            overlay.bringSubviewToFront(comp)
             comp.layer.zPosition = self.zPosition + 1
         }
     }
     
+    private func setOverlayHierarchyVisualizationPosition() {
+        overlay.layer.zPosition = -1
+    }
     
-    private func configAutoCloseMenu() {
+    
+    private func configAutoCloseDropdownMenu() {
         if self.autoCloseEnabled {
-            if let superview = self.superview {
-                superview.makeTapGesture { make in
-                    make
-                        .setStateGesture([.ended])
-                        .setAction (closure: verifyTappedOutMenu)
-                }
+            guard let rootView = CurrentWindow.rootView else { return }
+            rootView.makeTapGesture { make in
+                make
+                    .setStateGesture([.ended])
+                    .setAction (closure: verifyTappedOutMenu)
             }
         }
     }
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
+        print("CLICOUUUUUUUUUUUUUUU NO OVERLAYYYYYYYYYYYYYYYYYYYYY PORRAAAAAA")
         if self._isShow {
             if self.isTappedOut(tap) {
                 self.isShow = false
@@ -299,20 +314,17 @@ class DropdownMenu: View {
     
     private func bringToFront() {
         if !_isShow { return }
-        if let superview = self.superview {
-            superview.bringSubviewToFront(self)
-        }
+        guard let rootView = CurrentWindow.rootView else { return }
+        rootView.bringSubviewToFront(self)
     }
     
-    private func setDropdownHierarchyPosition() {
-        self.layer.zPosition = zPosition
-    }
+    
     
     private func addListOnDropdownMenu() {
         list.add(insideTo: self)
     }
     
-    private func configConstraints() {
+    private func configDropDownMenuConstraints() {
         guard let padding = self.paddingMenu else {return}
         self.list.makeConstraints { build in
             build.setTop.equalToSuperView(padding.top)
