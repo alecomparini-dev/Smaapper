@@ -14,22 +14,57 @@ class Overlay: View {
         case window
     }
     
+    private var relativeTo: Overlay.RelativeTo = .window
+    private var bringToFront: [UIView] = []
+    private var opacity: CGFloat = 1.0
+    
+    private var blur: Blur?
     private var _isShow = false
     private var alreadyApplied = false
+    private var zPosition: CGFloat = 9000
     
     private let component: UIView
-    var attributes: OverlayAttributes = OverlayAttributes()
     
     init(component: UIView) {
         self.component = component
         super.init()
-        self.attributes = OverlayAttributes(self)
+        self.initialization()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func initialization() {
+        
+    }
 
+    
+//  MARK: - SET Attributes
+    
+    @discardableResult
+    func setColor(_ color: UIColor) -> Self {
+        self.setBackgroundColor(color)
+        return self
+    }
+    
+    @discardableResult
+    func setOpacity(_ opacity: CGFloat) -> Self {
+        self.opacity = opacity
+        return self
+    }
+    
+    @discardableResult
+    func setOverlayRelative(to relativeTo: Overlay.RelativeTo) -> Self {
+        self.relativeTo = relativeTo
+        return self
+    }
+    
+    @discardableResult
+    func setBringToFront(_ components: [UIView]) -> Self {
+        self.bringToFront = components
+        return self
+    }
     
     
 //  MARK: - SHOW Overlay
@@ -46,47 +81,64 @@ class Overlay: View {
 //  MARK: - Private Function Area
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            DispatchQueue.main.async {
-                self.configOverlay()
-                self.alreadyApplied = true
-            }
+            self.configOverlay()
+            self.alreadyApplied = true
         }
     }
     
     private func setIsHiddenOverlay() {
         self.isHidden = !_isShow
-        self.isUserInteractionEnabled = _isShow
+        self.isUserInteractionEnabled = !_isShow
     }
     
     private func configOverlay() {
-        switch self.attributes.relativeTo {
-        case .superview:
-            configOverlaySuperView()
-        case .window:
-            configOverlayWindow()
-        }
-    }
-    
-    private func configOverlaySuperView() {
-        guard let superview = self.component.superview else {return}
-        addOverlay(insideTo: superview)
-    }
-    
-    private func configOverlayWindow() {
-        guard let window = CurrentWindow.get else {return}
-        addOverlay(insideTo: window)
+        setOverlayHierarchyPosition()
+        createBlur()
+        addOverlay()
         configOverlayConstraints()
+        componentBringToFront()
     }
     
-    private func addOverlay(insideTo view: UIView) {
-        self.add(insideTo: view)
+    private func componentBringToFront() {
+        guard let window = CurrentWindow.get else {return}
+//        window.bringSubviewToFront(component)
+    }
+    
+    private func createBlur() {
+        self.blur = Blur(self)
+            .setStyle(.dark)
+            .setOpacity(self.opacity)
+            .apply()
+    }
+    
+    private func addOverlay() {
+        guard let superview = self.component.superview else {return}
+        guard let window = CurrentWindow.get else {return}
+        self.add(insideTo: superview)
     }
     
     private func configOverlayConstraints(){
-        self.makeConstraints { make in
-            make.setPin.equalToSuperView
+        switch self.relativeTo {
+            case .superview:
+                guard let superview = self.component.superview else {return}
+                makeOverlayConstraints(superview)
+            
+            case .window:
+                guard let window = CurrentWindow.get else {return}
+                makeOverlayConstraints(window)
         }
         
+    }
+    
+    private func makeOverlayConstraints(_ view: UIView) {
+        self.makeConstraints { make in
+            make.setPin.equalTo(view)
+        }
+    }
+ 
+    
+    private func setOverlayHierarchyPosition() {
+        self.layer.zPosition = zPosition
     }
     
 }

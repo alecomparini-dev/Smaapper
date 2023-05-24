@@ -184,6 +184,14 @@ class HomeView: View {
                     .setHeight.equalToConstant(60)
                     .setVerticalAlignmentY.equalTo(menuButton)
             }
+            .setTapGesture { build in
+                build.setStateGesture([.began])
+                    .setAction { tapGesture in
+                        self.floatWindow.add(insideTo: self)
+                        self.floatWindow.applyConstraint()
+                        self.floatWindow.isShow = true
+                    }
+            }
         return dock
     }()
     
@@ -369,7 +377,7 @@ class HomeView: View {
         dock.add(insideTo: self)
         menuButton.add(insideTo: self)
         self.clock.add(insideTo: self)
-        floatWindow.add(insideTo: self)
+        
         
     }
     
@@ -378,9 +386,12 @@ class HomeView: View {
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
         self.clock.applyConstraint()
-        floatWindow.applyConstraint()
-
-        floatWindow.isShow = true
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.floatWindow.add(insideTo: self)
+//            self.floatWindow.applyConstraint()
+//            self.floatWindow.isShow = true
+//        }
 
 
     }
