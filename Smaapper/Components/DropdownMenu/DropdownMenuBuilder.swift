@@ -126,6 +126,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
             applyOnceConfig()
             isPresented()
             bringToFront()
+            callClosureOpenCloseMenu(self._isShow)
         }
     }
     
@@ -243,6 +244,27 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
         dropdown.list.isShow = self._isShow
         self.dropdown.isHidden = !self._isShow
     }
+    
+    private func callClosureOpenCloseMenu(_ isShow: Bool) {
+            callClosureOpenMenu()
+            callClosureCloseMenu()
+        }
+
+        private func callClosureOpenMenu() {
+            if let openMenuClosure = actions.openMenuClosure {
+                if isShow {
+                    openMenuClosure(.open)
+                }
+            }
+        }
+        
+        private func callClosureCloseMenu() {
+            if let closeMenuClosure = actions.closeMenuClosure {
+                if !isShow {
+                    closeMenuClosure(.close)
+                }
+            }
+        }
     
     private func bringToFront() {
         if !_isShow { return }
