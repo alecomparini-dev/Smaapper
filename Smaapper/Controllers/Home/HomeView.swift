@@ -164,9 +164,8 @@ class HomeView: View {
             .setImageColor(UIColor.HEX("#0f1010"))
     }()
     
-    lazy var dock: Dock = {
-        let dock = Dock(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
-        dock.attributes
+    lazy var dock: DockBuilder = {
+        let dock = DockBuilder(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true, 0.7)

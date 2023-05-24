@@ -87,7 +87,7 @@ class HomeVC: UIViewController {
     
     //  MARK: - Private Function Area
     private func setConstraintAlignmentHorizontalDock() {
-        self.adjustTrailingDock = homeScreen.dock.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+        self.adjustTrailingDock = homeScreen.dock.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         adjustTrailingDock.isActive = true
     }
     
@@ -202,7 +202,7 @@ class HomeVC: UIViewController {
         if iconsDock.count > 4 {
             self.adjustTrailingDock.constant = -90
         }
-        
+
     }
     
     private func openCategories() {

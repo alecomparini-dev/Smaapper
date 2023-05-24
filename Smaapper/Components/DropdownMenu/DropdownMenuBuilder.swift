@@ -9,7 +9,7 @@ import UIKit
 
 
 class DropdownMenuBuilder: BaseAttributeBuilder {
-   
+    
     private var alreadyApplied = false
     private var _isShow = false
     private var zPosition: CGFloat = 10000
@@ -27,10 +27,11 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     var view: DropdownMenu { self.dropdown }
+    
     var actions: DropdownMenuActions = DropdownMenuActions()
     
     
-//  MARK: - SET Attributes
+    //  MARK: - SET Attributes
     
     @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
@@ -100,23 +101,23 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     
-//  MARK: - SET Data In List
+    //  MARK: - SET Data In List
     
     func setSectionInDropdown(_ section: Section) {
         _dropdown.list.setSectionInList(section)
     }
-
+    
     func setRowInSection(_ section: Section, _ row: Row) {
         _dropdown.list.setRowInSection(section, row)
     }
-
+    
     func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
         let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
         section.rows.append(row)
     }
-
     
-//  MARK: - SHOW DROPDOWN MENU
+    
+    //  MARK: - SHOW DROPDOWN MENU
     
     var isShow: Bool {
         get {
@@ -131,7 +132,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     
-//  MARK: - PRIVATE AREA
+    //  MARK: - PRIVATE AREA
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
@@ -143,7 +144,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
             self.alreadyApplied = true
         }
     }
-
+    
     private func configList() {
         self.addListOnDropdownMenu()
         self.addTouchActionOnList()
@@ -207,9 +208,9 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
         print("TIRAR ISSOOOO")
-        if self._isShow {
-            if self.isTappedOut(tap) {
-                self.isShow = false
+        if _isShow {
+            if isTappedOut(tap) {
+                isShow = false
             }
         }
     }
@@ -241,30 +242,30 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     private func isPresented() {
-        dropdown.list.isShow = self._isShow
-        self.dropdown.isHidden = !self._isShow
+        dropdown.list.isShow = _isShow
+        dropdown.isHidden = !_isShow
     }
     
     private func callClosureOpenCloseMenu(_ isShow: Bool) {
-            callClosureOpenMenu()
-            callClosureCloseMenu()
-        }
-
-        private func callClosureOpenMenu() {
-            if let openMenuClosure = actions.openMenuClosure {
-                if isShow {
-                    openMenuClosure(.open)
-                }
+        callClosureOpenMenu()
+        callClosureCloseMenu()
+    }
+    
+    private func callClosureOpenMenu() {
+        if let openMenuClosure = actions.openMenuClosure {
+            if isShow {
+                openMenuClosure(.open)
             }
         }
-        
-        private func callClosureCloseMenu() {
-            if let closeMenuClosure = actions.closeMenuClosure {
-                if !isShow {
-                    closeMenuClosure(.close)
-                }
+    }
+    
+    private func callClosureCloseMenu() {
+        if let closeMenuClosure = actions.closeMenuClosure {
+            if !isShow {
+                closeMenuClosure(.close)
             }
         }
+    }
     
     private func bringToFront() {
         if !_isShow { return }
@@ -277,14 +278,14 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     }
     
     private func configDropDownMenuConstraints() {
-        guard let padding = self.dropdown.paddingMenu else {return}
-        self.dropdown.list.makeConstraints { build in
+        guard let padding = dropdown.paddingMenu else {return}
+        dropdown.list.makeConstraints { build in
             build.setTop.equalToSuperView(padding.top)
                 .setBottom.equalToSuperView(-padding.bottom)
                 .setLeading.equalToSuperView(padding.left)
                 .setTrailing.equalToSuperView(-padding.right)
         }
     }
-
+    
     
 }
