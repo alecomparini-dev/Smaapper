@@ -62,15 +62,15 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     private func addComponentsOnFooter() {
         _dropdownFooter.componentsFooter.forEach { component in
             let view = createView()
-            component.add(insideTo: view)
+            component.add(insideTo: view.view)
             view.add(insideTo: _dropdownFooter.stackView)
             view.applyConstraint()
             makeConstraintComponent(component)
         }
     }
     
-    private func createView() -> View {
-        return View()
+    private func createView() -> ViewBuilder {
+        return ViewBuilder()
             .setConstraints { build in
                 build.setTop.setBottom.equalToSuperView
             }

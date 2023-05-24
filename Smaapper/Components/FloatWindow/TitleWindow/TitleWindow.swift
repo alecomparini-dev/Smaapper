@@ -30,8 +30,8 @@ internal class TitleWindow: View {
     
 //  MARK: - Lazy Properties
     
-    lazy var titleView: View = {
-        let view = View()
+    lazy var titleView: ViewBuilder = {
+        let view = ViewBuilder()
             .setConstraints { build in
                 build.setPin.equalToSuperView
             }
@@ -98,7 +98,7 @@ internal class TitleWindow: View {
     
     
     private func addTitleView(_ view: UIView) {
-        view.add(insideTo: titleView)
+        view.add(insideTo: titleView.view)
         view.makeConstraints { make in
             make.setPin.equalToSuperView
         }

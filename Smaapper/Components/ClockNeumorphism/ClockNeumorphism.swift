@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ClockNeumorphism: View {
+class ClockNeumorphism: ViewBuilder {
     
     enum Weight {
         case ultraLight
@@ -162,25 +162,27 @@ class ClockNeumorphism: View {
         point1.add(insideTo: view)
         point2.add(insideTo: view)
         
-        point1.makeConstraints { make in
-            make
+        point1.setConstraints({ build in
+            build
                 .setTop.equalToSuperView(-4)
                 .setHorizontalAlignmentX.equalTo(view)
                 .setSize.equalToConstant(widthPoints)
-        }
+                .apply()
+        })
         
-        point2.makeConstraints { make in
-            make
+        point2.setConstraints({ build in
+            build
                 .setBottom.equalToSuperView(4)
                 .setHorizontalAlignmentX.equalToSuperView
                 .setSize.equalToConstant(widthPoints)
-        }
-        
+                .apply()
+        })
+
         return view
     }
     
-    private func createPoint(_ widthPoints: CGFloat) -> View {
-        return View()
+    private func createPoint(_ widthPoints: CGFloat) -> ViewBuilder {
+        return ViewBuilder()
             .setBorder { build in
                 build.setCornerRadius(widthPoints/2)
             }
@@ -202,9 +204,9 @@ class ClockNeumorphism: View {
     
     
     private func addElements() {
-        stackHours.add(insideTo: self)
-        stackMinutes.add(insideTo: self)
-        twoPoints.add(insideTo: self)
+        stackHours.add(insideTo: self.view)
+        stackMinutes.add(insideTo: self.view)
+        twoPoints.add(insideTo: self.view)
         
     }
     

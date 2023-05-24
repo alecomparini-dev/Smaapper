@@ -8,7 +8,7 @@
 import UIKit
 
 
-class FloatWindow: View {
+class FloatWindow: ViewBuilder {
     
     private var _isShow = false
     private var alreadyApplied = false
@@ -28,7 +28,7 @@ class FloatWindow: View {
     }
     
     private func initialization() {
-        self.layer.zPosition = hierarchy
+        self.view.layer.zPosition = hierarchy
     }
     
     
@@ -54,7 +54,7 @@ class FloatWindow: View {
         set {
             self._isShow = newValue
             applyOnceConfig()
-            self.isHidden = !self._isShow
+            self.view.isHidden = !self._isShow
             self.titleWindow?.isShow = self._isShow
         }
     }
@@ -64,7 +64,7 @@ class FloatWindow: View {
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            self.titleWindow?.add(insideTo: self)
+            self.titleWindow?.add(insideTo: self.view)
             self.titleWindow?.makeConstraints({ make in
                 make
                     .setPinTop.equalToSuperView

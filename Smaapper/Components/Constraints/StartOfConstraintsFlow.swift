@@ -138,11 +138,13 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         self.constraintVM.mainElement = self.mainElement
     }
     
-    func applyConstraint() {
+    @discardableResult
+    func apply() -> Self {
         let applyConstraint = ApplyConstraints(constraints: listConstraints)
         applyConstraint.apply()
         listConstraints.removeAll()
         _constraintVM = nil
+        return self
     }
     
 }

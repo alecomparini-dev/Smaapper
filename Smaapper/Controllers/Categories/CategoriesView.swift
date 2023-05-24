@@ -26,8 +26,8 @@ class CategoriesView: View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var viewGradient: View = {
-        let view = View()
+    lazy var viewGradient: ViewBuilder = {
+        let view = ViewBuilder()
             .setGradient({ build in
                 build
                     .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
@@ -77,8 +77,8 @@ class CategoriesView: View {
     }()
     
     
-    lazy var underLineTitle: View = {
-       var view = View()
+    lazy var underLineTitle: ViewBuilder = {
+       var view = ViewBuilder()
             .setGradient({ build in
                 build
                     .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#f48537")])
@@ -261,7 +261,7 @@ class CategoriesView: View {
         titleLabel.add(insideTo: self)
         underLineTitle.add(insideTo: self)
         searchTextField.add(insideTo: self)
-        list.add(insideTo: viewGradient)
+        list.add(insideTo: viewGradient.view)
     }
     
     private func applyConstraints() {

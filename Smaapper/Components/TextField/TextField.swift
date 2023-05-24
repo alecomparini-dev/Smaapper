@@ -233,7 +233,7 @@ extension TextField: BaseComponentProtocol {
     }
     
     func applyConstraint() {
-        self.constraintsFlow?.applyConstraint()
+        self.constraintsFlow?.apply()
     }
     
 }

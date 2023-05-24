@@ -228,7 +228,7 @@ func test_bottom_equalto_toAttibute() {
         .setBottom
         .equalTo(Label(""), .bottom )
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -242,7 +242,7 @@ func test_top_equalto_toAttibute() {
         .setTop
         .equalTo(Label(""), .top)
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 func test_leading_equalto_toAttibute() {
@@ -254,7 +254,7 @@ func test_leading_equalto_toAttibute() {
         .setLeading
         .equalTo(TextField(), .leading)
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -264,7 +264,7 @@ func test_trailing_equalto_toAttibute() {
         .setTrailing.equalTo(Label(""), .leading, 55)
         .setTrailing.equalTo(Label(""), .trailing)
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -274,7 +274,7 @@ func test_bottom_equaltoSafeArea() {
         .setBottom.equalToSafeArea(111)
         .setBottom.equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -284,7 +284,7 @@ func test_top_equaltoSafeArea() {
         .setTop.equalToSafeArea(222)
         .setTop.equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -295,7 +295,7 @@ func test_leading_equaltoSafeArea() {
         .setLeading.equalToSafeArea(3)
         .setLeading.equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -305,7 +305,7 @@ func test_trailing_equaltoSafeArea() {
         .setTrailing.equalToSafeArea(3)
         .setTrailing.equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -318,7 +318,7 @@ func test_bottom_equaltoSuperView() {
         .setBottom
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -331,7 +331,7 @@ func test_top_equaltoSuperView() {
         .setTop
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -344,7 +344,7 @@ func test_leading_equaltoSuperView() {
         .setLeading
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -357,7 +357,7 @@ func test_trailing_equaltoSuperView() {
         .setTrailing
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -368,7 +368,7 @@ func test_width_equalTo() {
         .setWidth
         .equalTo(Label(""))
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -378,7 +378,7 @@ func test_height_equalTo() {
         .setHeight
         .equalTo(Label(""))
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -389,7 +389,7 @@ func test_width_equalToConstant() {
         .setWidth
         .equalToConstant(123)
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -399,7 +399,7 @@ func test_height_equalToConstant() {
         .setHeight
         .equalToConstant(321)
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -410,7 +410,7 @@ func test_width_equalToSafeArea() {
         .setWidth
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -421,7 +421,7 @@ func test_height_equalToSafeArea() {
         .setHeight
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -432,7 +432,7 @@ func test_width_equalToSuperView() {
         .setWidth
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -442,7 +442,7 @@ func test_height_equalToSuperView() {
         .setHeight
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -457,7 +457,7 @@ func test_horizontalX_equalTo() {
         .equalTo(Label(""))
 
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -472,7 +472,7 @@ func test_verticalY_equalTo() {
         .equalTo(Label(""))
 
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -487,7 +487,7 @@ func test_horizontalX_equalToSafeArea() {
         .setHorizontalAlignmentX
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -501,7 +501,7 @@ func test_verticalY_equalToSafeArea() {
         .setVerticalAlignmentY
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -516,7 +516,7 @@ func test_horizontalX_equalToSuperView() {
         .setHorizontalAlignmentX
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -531,7 +531,7 @@ func test_verticalY_equalToSuperView() {
         .setVerticalAlignmentY
         .equalToSuperView
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -546,7 +546,7 @@ func test_Position_Position_equalTo(){
         .setTrailing
         .equalTo(Label(""))
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -561,7 +561,7 @@ func test_Position_Size_equalTo() {
         .setHeight
         .equalTo(Label(""))
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -575,7 +575,7 @@ func test_Position_Position_equalToSafeArea() {
         .setLeading
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -585,7 +585,7 @@ func test_Position_Size_equalToSafeArea() {
         .setWidth
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
 }
 
 
@@ -595,7 +595,7 @@ func test_Size_Size_equalTo(){
         .setHeight
         .equalTo(Label("teste"))
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -606,7 +606,7 @@ func test_Size_Size_equalToConstant(){
         .setWidth
         .equalToConstant(997)
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -617,7 +617,7 @@ func test_Size_Position_equalTo() {
         .setTop
         .equalTo(TextField())
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -629,7 +629,7 @@ func test_Size_Size_equalToSafeArea() {
         .setHeight
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -640,7 +640,7 @@ func test_Size_Position_equalToSafeArea() {
         .setTrailing
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -651,7 +651,7 @@ func test_Alignment_Alignment_equalTo() {
         .setVerticalAlignmentY
         .equalTo(Label(""))
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -674,7 +674,7 @@ func test_Position_Position_Position_equalTo() {
         .setBottom
         .equalTo(Label(), 7799)
 
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -691,7 +691,7 @@ func test_Position_Position_Size_equalTo() {
         .setWidth
         .equalTo(Label(""))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -709,7 +709,7 @@ func test_Position_Size_Position_equalTo() {
         .setBottom
         .equalTo(Label(""))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -726,7 +726,7 @@ func test_Position_Size_Size_equalTo() {
         .setWidth
         .equalTo(TextField("asdfasdfasdf"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -750,7 +750,7 @@ func test_Position_Position_Position_equalToSafeArea() {
         .setLeading
         .equalToSafeArea(77555)
 
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -768,7 +768,7 @@ func test_Position_Position_Size_equalToSafeArea() {
         .setWidth
         .equalToSafeArea
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -785,7 +785,7 @@ func test_Position_Size_Position_equalToSafeArea() {
         .setTop
         .equalToSafeArea
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -803,7 +803,7 @@ func test_Position_Size_Size_equalToSafeArea() {
         .equalToSafeArea
         
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -814,7 +814,7 @@ func test_Size_Size_Size_equalTo() {
     
         .setWidth.setWidth.setHeight.equalTo(Label())
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -831,7 +831,7 @@ func test_Size_Size_Size_equalToConstant() {
         .setHeight
         .equalToConstant(77885222)
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -849,7 +849,7 @@ func test_Size_Size_Position_equalTo() {
         .setTrailing
         .equalTo(Label("trailing "))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -866,7 +866,7 @@ func test_Size_Position_Size_equalTo() {
         .setWidth
         .equalTo(Label("labelmaroto"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -883,7 +883,7 @@ func test_Size_Position_Position_equalTo() {
         .setTrailing
         .equalTo(Label("teste7"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -895,7 +895,7 @@ func test_Size_Size_Size_equalToSafeArea() {
         .setWidth
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -906,7 +906,7 @@ func test_Size_Size_Position_equalToSafeArea() {
         .setTrailing
         .equalToSafeArea
     
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -918,7 +918,7 @@ func test_Size_Position_Size_equalToSafeArea() {
         .setWidth
         .equalToSafeArea
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -930,7 +930,7 @@ func test_Size_Position_Position_equalToSafeArea() {
         .setLeading
         .equalToSafeArea
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -950,7 +950,7 @@ func test_Size_Position_Position_Size_equalTo() {
         .setWidth
         .equalTo(Label("4 niveis de novo"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -974,7 +974,7 @@ func test_Position_Position_Position_Position_Size_Size_equalTo() {
         .setWidth
         .equalTo(Label("muito foda isso"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
@@ -1005,7 +1005,7 @@ func test_Size_Size_Position_Position_Position_Position_equalTo() {
         .setTop
         .equalTo(Label("muito foda dos fodasticos"))
         
-    flow.applyConstraint()
+    flow.apply()
     
 }
 
