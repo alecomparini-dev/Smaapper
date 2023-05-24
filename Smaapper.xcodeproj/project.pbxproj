@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020D0E4B2A1E5A6F007F3992 /* DropdownMenu_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E4A2A1E5A6F007F3992 /* DropdownMenu_.swift */; };
+		020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E4D2A1E5B0E007F3992 /* DropdownMenuBuilder.swift */; };
+		020D0E522A1E6E5D007F3992 /* BaseAttributeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E512A1E6E5D007F3992 /* BaseAttributeBuilder.swift */; };
 		0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F029F9F30F008392EC /* AppDelegate.swift */; };
 		0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F229F9F30F008392EC /* SceneDelegate.swift */; };
 		0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0234A5F929F9F310008392EC /* Assets.xcassets */; };
@@ -108,6 +111,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		020D0E4A2A1E5A6F007F3992 /* DropdownMenu_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu_.swift; sourceTree = "<group>"; };
+		020D0E4D2A1E5B0E007F3992 /* DropdownMenuBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuBuilder.swift; sourceTree = "<group>"; };
+		020D0E512A1E6E5D007F3992 /* BaseAttributeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAttributeBuilder.swift; sourceTree = "<group>"; };
 		0234A5ED29F9F30F008392EC /* Smaapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smaapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0234A5F029F9F30F008392EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0234A5F229F9F30F008392EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +225,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020D0E492A1E5934007F3992 /* DropdownMenuBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				020D0E4A2A1E5A6F007F3992 /* DropdownMenu_.swift */,
+				020D0E4D2A1E5B0E007F3992 /* DropdownMenuBuilder.swift */,
+			);
+			path = DropdownMenuBuilder;
+			sourceTree = "<group>";
+		};
 		0234A5E429F9F30E008392EC = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +608,7 @@
 		026F79782A00775E003947A6 /* DropdownMenu */ = {
 			isa = PBXGroup;
 			children = (
+				020D0E492A1E5934007F3992 /* DropdownMenuBuilder */,
 				02C5F4542A0C557300D75D9F /* DropdownMenuFooter */,
 				0281DAEF2A1CDD2500E44F04 /* DropdownMenuActions */,
 				026F79792A007774003947A6 /* DropdownMenu.swift */,
@@ -641,6 +657,7 @@
 			children = (
 				0281DADA2A15378300E44F04 /* BaseProtocol.swift */,
 				0281DAF32A1CE9B500E44F04 /* BaseComponentAttributes.swift */,
+				020D0E512A1E6E5D007F3992 /* BaseAttributeBuilder.swift */,
 			);
 			path = BaseProtocol;
 			sourceTree = "<group>";
@@ -989,6 +1006,7 @@
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				0234A93929F9FD3A008392EC /* TextFieldPassword.swift in Sources */,
+				020D0E522A1E6E5D007F3992 /* BaseAttributeBuilder.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				0234A91729F9FD3A008392EC /* tests.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
@@ -1034,9 +1052,11 @@
 				0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */,
 				0234A93829F9FD3A008392EC /* TextFieldImage.swift in Sources */,
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
+				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,
 				0234A96329FC0659008392EC /* IconButton.swift in Sources */,
 				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
+				020D0E4B2A1E5A6F007F3992 /* DropdownMenu_.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

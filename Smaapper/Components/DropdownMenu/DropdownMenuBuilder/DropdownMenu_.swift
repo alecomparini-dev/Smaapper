@@ -1,19 +1,25 @@
 //
-//  DropdownMenu.swift
+//  DropdownMenu_.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 01/05/23.
+//  Created by Alessandro Comparini on 24/05/23.
 //
 
 import UIKit
 
-protocol DropdownMenuDelegate: AnyObject {
-    func touchMenu()
-    func openMenu()
-    func closeMenu()
-}
-
-class DropdownMenu: View {
+class DropdownMenu_: UIView {
+    
+    private var _positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
+    private var _menuHeight: CGFloat?
+    private var _menuWidth: CGFloat?
+    private var _paddingCells: UIEdgeInsets?
+    private var _autoCloseEnabled: Bool = false
+    private var _excludeComponents: [UIView] = []
+    private var _paddingMenu: UIEdgeInsets?
+    
+    private var alreadyApplied = false
+    private var _isShow = false
+    private var zPosition: CGFloat = 10000
     
     enum PositionMenu {
         case leftTop
@@ -26,34 +32,8 @@ class DropdownMenu: View {
         case open
         case close
     }
-    
-    private var positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
-    private var menuHeight: CGFloat?
-    private var menuWidth: CGFloat?
-    private var paddingCells: UIEdgeInsets?
-    private var autoCloseEnabled: Bool = false
-    private var excludeComponents: [UIView] = []
-    private var _paddingMenu: UIEdgeInsets?
-    
-    
-//    private var overlay: Overlay?
-    
-    private var alreadyApplied = false
-    private var _isShow = false
-    private var zPosition: CGFloat = 10000
-    
-    
-    
-    var actions: DropdownMenuActions
-    
-    override init() {
-        self.actions = DropdownMenuActions()
-        super.init(frame: .zero)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-}
+  
+//  MARK: - Lazy Properties
     
     lazy var list: List = {
         let list = List(.grouped)
@@ -61,11 +41,6 @@ class DropdownMenu: View {
             .setSeparatorStyle(.none)
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
-            .setDidSelectRow({ section, row in
-                if let touchMenuClosure = self.actions.touchMenuClosure {
-                    touchMenuClosure((section,row))
-                }
-            })
             .setBackgroundColor(.clear)
         return list
     }()
@@ -83,99 +58,46 @@ class DropdownMenu: View {
         return overlay
     }()
     
+
+    
 //  MARK: - GET Attributes
-    var paddingMenu: UIEdgeInsets? { self._paddingMenu }
-    
-//  MARK: - SET Attributes
-    
-    @discardableResult
-    func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
-        self.positionOpenMenu = position
-        return self
+
+    var positionOpenMenu: DropdownMenu.PositionMenu {
+        get { self._positionOpenMenu }
+        set { self._positionOpenMenu = newValue }
     }
     
-    @discardableResult
-    func setRowHeight(_ height: CGFloat) -> Self {
-        list.setRowHeight(height)
-        return self
+    var menuHeight: CGFloat? {
+        get { self._menuHeight }
+        set { self._menuHeight = newValue }
     }
     
-    @discardableResult
-    func setDropdownMenuHeight(_ height: CGFloat) -> Self {
-        self.menuHeight = height
-        return self
+    var menuWidth: CGFloat? {
+        get { self._menuWidth }
+        set { self._menuWidth = newValue }
     }
     
-    @discardableResult
-    func setWidth(_ width: CGFloat) -> Self {
-        self.menuWidth = width
-        return self
+    var paddingCells: UIEdgeInsets? {
+        get { self._paddingCells }
+        set { self._paddingCells = newValue }
     }
     
-    @discardableResult
-    func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        self._paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
-        return self
+    var autoCloseEnabled: Bool {
+        get { self._autoCloseEnabled }
+        set { self._autoCloseEnabled = newValue }
     }
     
-    @discardableResult
-    func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
-        self.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
-        return self
+    var excludeComponents: [UIView] {
+        get { self._excludeComponents }
+        set { self._excludeComponents = newValue }
     }
     
-    @discardableResult
-    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        list.setSectionHeaderHeight(height)
-        return self
+    var paddingMenu: UIEdgeInsets? {
+        get { self._paddingMenu }
+        set { self._paddingMenu = newValue }
     }
     
-    @discardableResult
-    func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        list.setSectionFooterHeight(height)
-        return self
-    }
-    
-    @discardableResult
-    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        list.setSectionHeaderHeight(forSection: forSection, height)
-        return self
-    }
-    
-    @discardableResult
-    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        list.setSectionFooterHeight(forSection: forSection, height)
-        return self
-    }
-    
-    @discardableResult
-    func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
-        self.autoCloseEnabled = true
-        self.excludeComponents = excludeComponents
-        return self
-    }
-    
-    
-    
-//  MARK: - SET Data In List
-    
-    func setSectionInDropdown(_ section: Section) {
-        list.setSectionInList(section)
-    }
-    
-    func setRowInSection(_ section: Section, _ row: Row) {
-        list.setRowInSection(section, row)
-    }
-    
-    func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
-        let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
-        section.rows.append(row)
-    }
-    
-    
-    
-//  MARK: - Show DropdownMenu
-    
+
     var isShow: Bool {
         get {
             return self._isShow }
@@ -184,12 +106,9 @@ class DropdownMenu: View {
             applyOnceConfig()
             isPresented()
             bringToFront()
-            callClosureOpenCloseMenu(self._isShow)
         }
     }
     
-    
-//  MARK: - Private Functions Area
 
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
@@ -293,27 +212,7 @@ class DropdownMenu: View {
 //        self.overlay?.isShow = self._isShow
     }
     
-    private func callClosureOpenCloseMenu(_ isShow: Bool) {
-        callClosureOpenMenu()
-        callClosureCloseMenu()
-    }
-
-    private func callClosureOpenMenu() {
-        if let openMenuClosure = actions.openMenuClosure {
-            if isShow {
-                openMenuClosure(.open)
-            }
-        }
-    }
-    
-    private func callClosureCloseMenu() {
-        if let closeMenuClosure = actions.closeMenuClosure {
-            if !isShow {
-                closeMenuClosure(.close)
-            }
-        }
-    }
-    
+  
     private func bringToFront() {
         if !_isShow { return }
         guard let rootView = CurrentWindow.rootView else { return }
@@ -336,7 +235,6 @@ class DropdownMenu: View {
         }
     }
     
+    
+    
 }
-
-
-

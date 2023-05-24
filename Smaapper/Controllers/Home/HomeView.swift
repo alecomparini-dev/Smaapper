@@ -95,6 +95,31 @@ class HomeView: View {
         return drop
     }()
     
+    lazy var dropdownMenu_: DropdownMenuBuilder = {
+        let drop = DropdownMenuBuilder()
+            .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
+            .setConstraints { build in
+                build
+                    .setTop.greaterThanOrEqualToSafeArea(10)
+                    .setBottom.equalTo(menuButton, .top, -15)
+                    .setTrailing.equalTo(menuButton, .trailing, -5)
+                    .setHeight.equalToConstant(400)
+                    .setWidth.equalToConstant(255)
+            }
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setShape(.concave)
+                    .setLightPosition(.rightBottom)
+                    .apply()
+            }
+            .setBorder({ build in
+                build
+                    .setCornerRadius(18)
+            })
+        return drop
+    }()
+    
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
         delegate?.dropdownMenuTapped(rowTapped)
     }
@@ -382,8 +407,23 @@ class HomeView: View {
             self.floatWindow.applyConstraint()
             self.floatWindow.isShow = true
         }
+        
+        
+        dropdownMenu_.get.add(insideTo: self)
+        dropdownMenu_.get.makeConstraints { make in
+            make
+                .setTop.greaterThanOrEqualToSafeArea(10)
+                .setBottom.equalTo(menuButton, .top, -15)
+                .setTrailing.equalTo(menuButton, .trailing, -5)
+                .setHeight.equalToConstant(400)
+                .setWidth.equalToConstant(255)
+        }
+        
+        dropdownMenu_.get.isShow = true
+        
 
-
+        
+        
     }
     
     func createIconsDock(_ systemNameImage: String) -> IconButton {

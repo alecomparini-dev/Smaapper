@@ -135,7 +135,7 @@ class HomeVC: UIViewController {
     private func populateSection(_ sectionText: String? ) -> Section {
         let middleSectionView = homeScreen.createMiddleSectionView(sectionText ?? "")
         let section = Section(leftView: nil, middleView: middleSectionView)
-        homeScreen.dropdownMenu.setSectionInDropdown(section)
+        homeScreen.dropdownMenu_.setSectionInDropdown(section)
         return section
     }
     
@@ -143,7 +143,7 @@ class HomeVC: UIViewController {
         rows.enumerated().forEach { (index,row) in
             self.indexRow = index
             let row: Row = self.createRowView(row)
-            homeScreen.dropdownMenu.setRowInSection(section, row)
+            homeScreen.dropdownMenu_.setRowInSection(section, row)
         }
     }
     

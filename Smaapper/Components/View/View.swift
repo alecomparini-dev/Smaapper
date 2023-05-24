@@ -73,33 +73,3 @@ class View: UIView, BaseComponentProtocol {
     }
     
 }
-
-
-
-
-
-class CustomLabel: UILabel {
-    
-    func setText(_ string: String) -> Self {
-        self.text = string
-        return self
-    }
-    
-}
-
-class CustomTextField: UITextField {
-    
-    func setText(_ string: String) -> Self {
-        self.text = string
-        return self
-    }
-
-}
-
-class AttrBase {
-    
-    func setBackColor(_ color: UIColor) -> Self {
-        self.color = color
-        return self
-    }
-}
