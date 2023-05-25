@@ -28,13 +28,14 @@ class DropdownMenu: UIView {
     
 //  MARK: - Lazy Properties
     
-    lazy var list: List = {
-        let list = List(.grouped)
+    lazy var list: ListBuilder = {
+        let list = ListBuilder(.grouped)
             .setShowsVerticalScrollIndicator(false)
             .setSeparatorStyle(.none)
             .setSectionHeaderHeight(30)
             .setSectionFooterHeight(20)
             .setBackgroundColor(.clear)
+            .setCustomRowHeight(forSection: 0, forRow: 0, 80)
         return list
     }()
     

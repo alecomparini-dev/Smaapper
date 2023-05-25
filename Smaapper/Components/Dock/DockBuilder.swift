@@ -16,19 +16,17 @@ class DockBuilder: BaseBuilder {
     private var dockViewBounds = CGRect()
     private var customConstraintWidthContainer: NSLayoutConstraint = NSLayoutConstraint()
 
-    
     private let hierarchy: CGFloat = 1100
     private let marginContainer: CGFloat = 8
     private var _isShow = false
     private var alreadyApplied = false
     
-    private var _dock: Dock
-    var dock: Dock { self._dock }
-    var view: Dock { self._dock }
+    private(set) var dock: Dock
+    var view: Dock { self.dock }
     
-    init(numberOfItemsCallback: @escaping Dock.numberOfItemsCallbackAlias, cellCallback: @escaping Dock.cellCallbackAlias ) {
-        self._dock = Dock(numberOfItemsCallback, cellCallback)
-        super.init(self._dock)
+    init(numberOfItemsCallback: @escaping Dock.numberOfItemsCallbackAlias, cellCallback: @escaping Dock.itemCallbackAlias ) {
+        self.dock = Dock(numberOfItemsCallback, cellCallback)
+        super.init(self.dock)
         self.initialization()
     }
     
@@ -38,44 +36,19 @@ class DockBuilder: BaseBuilder {
         initiateCollection()
         setHierarchyVisualization()
         setDefault()
-        
     }
     
-    private func initiateCollection() {
-        collection.setCollectionViewLayout(self.layout, animated: true)
-        collection.backgroundColor = .clear
-    }
-    
-    private func initiateContainer() {
-        container.clipsToBounds = true
-    }
-    
-    private func initiateLayout() {
-        layout.scrollDirection = .horizontal
-    }
-    
-    private func setDefault() {
-        self.setMinimumLineSpacing(10)
-        self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
-        self.setShowsHorizontalScrollIndicator(false)
-    }
-    
-    
-    private func setHierarchyVisualization() {
-        dock.layer.zPosition = hierarchy
-    }
-    
-    //  MARK: - SET Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setSize(indexItem: Int, _ size: CGSize) -> Self {
-        _dock.customItemSize.updateValue(size, forKey: indexItem)
+        dock.customItemSize.updateValue(size, forKey: indexItem)
         return self
     }
     
     @discardableResult
     func setSize(_ size: CGSize) -> Self {
-        _dock.itemsSize = size
+        dock.itemsSize = size
         return self
     }
     
@@ -105,30 +78,30 @@ class DockBuilder: BaseBuilder {
     
     @discardableResult
     func setIsUserInteractionEnabledItems(_ isUserInteractionEnabled: Bool) -> Self {
-        _dock.isUserInteractionEnabledItems = isUserInteractionEnabled
+        dock.isUserInteractionEnabledItems = isUserInteractionEnabled
         return self
     }
     
     @discardableResult
     func setBlur(_ flag: Bool, _ opacity: CGFloat = 1) -> Self {
-        _dock.blurEnabled = flag
-        _dock.opacity = opacity
+        dock.blurEnabled = flag
+        dock.opacity = opacity
         return self
     }
     
     
-    //  MARK: - SHOW Dock
+//  MARK: - SHOW Dock
     var isShow: Bool {
         get { return self._isShow}
         set {
             self._isShow = newValue
             applyOnceConfig()
-            _dock.isHidden = !_isShow
+            dock.isHidden = !_isShow
         }
     }
     
     
-    //  MARK: - Private Function Area
+//  MARK: - Private Function Area
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
@@ -251,39 +224,29 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-}
-
-
-//  MARK: - Extension Delegate Flow Layout
-extension Dock: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return customItemSize[indexPath.row] ?? itemsSize
+    private func initiateCollection() {
+        collection.setCollectionViewLayout(self.layout, animated: true)
+        collection.backgroundColor = .clear
     }
     
-}
+    private func initiateContainer() {
+        container.clipsToBounds = true
+    }
+    
+    private func initiateLayout() {
+        layout.scrollDirection = .horizontal
+    }
+    
+    private func setDefault() {
+        self.setMinimumLineSpacing(10)
+        self.setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
+        self.setShowsHorizontalScrollIndicator(false)
+    }
+    
+    private func setHierarchyVisualization() {
+        dock.layer.zPosition = hierarchy
+    }
 
-
-//  MARK: - Extension DataSource
-extension Dock: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItemsCallback()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
-        let item = self.cellCallback(indexPath.row)
-        item.isUserInteractionEnabled = isUserInteractionEnabledItems
-        cell.setupCell(item)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
     
 }
 

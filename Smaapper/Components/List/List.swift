@@ -7,30 +7,28 @@
 
 import UIKit
 
+protocol ListActionsDelegate: AnyObject {
+    func didSelectRow(_ section: Int, _ row: Int)
+}
+
 
 class List: UITableView {
-    internal var constraintsFlow: StartOfConstraintsFlow?
-    internal var shadow: Shadow?
-    internal var neumorphism: Neumorphism?
-    internal var gradient: Gradient?
 
-    typealias didSelectRow = ((_ rowTapped: (section: Int, row: Int)) -> Void)
     
-    private var alreadyApplied = false
-    private var _isShow = false
-    private var customSectionHeaderHeight: [Int : CGFloat] = [:]
-    private var customSectionFooterHeight: [Int : CGFloat] = [:]
-    private var widthLeftColumnCell: CGFloat = 35
-    private var widthRightColumnCell: CGFloat = 35
-    private var backgroundColorCell: UIColor = .clear
+    weak var listDelegate: ListActionsDelegate?
+
+    private var _customSectionHeaderHeight: [Int : CGFloat] = [:]
+    private var _customSectionFooterHeight: [Int : CGFloat] = [:]
+    private var _customRowHeight: [Int : [Int : CGFloat]] = [:]
+    private var _widthLeftColumnCell: CGFloat = 35
+    private var _widthRightColumnCell: CGFloat = 35
+    private var _backgroundColorCell: UIColor = .clear
     
-    private var didSelectRow: didSelectRow?
-    private var sections = [Section]()
+    private var _sections = [Section]()
     
     
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
-//        isHidden = false
     }
     
     required init?(coder: NSCoder) {
@@ -38,179 +36,44 @@ class List: UITableView {
     }
 
     
-//  MARK: - SET Properties
-    
-    @discardableResult
-    func setRowHeight(_ height: CGFloat) -> Self {
-        self.rowHeight = height
-        return self
+//  MARK: - GET Properties
+    var customSectionHeaderHeight: [Int : CGFloat] {
+        get { self._customSectionHeaderHeight }
+        set { self._customSectionHeaderHeight = newValue }
     }
     
-    //TODO: - Fazer !!
-    @discardableResult
-    func setCustomRowHeight(_ height: CGFloat) -> Self {
-        return self
+    var customSectionFooterHeight: [Int : CGFloat] {
+        get { self._customSectionFooterHeight }
+        set { self._customSectionFooterHeight = newValue }
     }
     
-    @discardableResult
-    func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        self.sectionHeaderHeight = height
-        return self
+    var widthLeftColumnCell: CGFloat {
+        get { self._widthLeftColumnCell }
+        set { self._widthLeftColumnCell = newValue }
     }
     
-    @discardableResult
-    func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        self.customSectionHeaderHeight.updateValue(height, forKey: forSection)
-        return self
+    var widthRightColumnCell: CGFloat {
+        get { self._widthRightColumnCell }
+        set { self._widthRightColumnCell = newValue }
     }
     
-    @discardableResult
-    func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        self.sectionFooterHeight = height
-        return self
+    var backgroundColorCell: UIColor {
+        get { self._backgroundColorCell }
+        set { self._backgroundColorCell = newValue }
     }
     
-    @discardableResult
-    func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        self.customSectionFooterHeight.updateValue(height, forKey: forSection)
-        return self
+    var sections: [Section] {
+        get { self._sections }
+        set { self._sections = newValue }
     }
     
-    @discardableResult
-    func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
-        self.widthLeftColumnCell = width
-        return self
+    var customRowHeight: [Int : [Int : CGFloat]] {
+        get { self._customRowHeight }
+        set { self._customRowHeight = newValue }
     }
     
-    @discardableResult
-    func setWidthRightColumnCell(_ width: CGFloat) -> Self {
-        self.widthRightColumnCell = width
-        return self
-    }
     
-    @discardableResult
-    func setBackgroundColorCell(_ color: UIColor) -> Self {
-        self.backgroundColorCell = color
-        return self
-    }
-    
-    @discardableResult
-    func setSeparatorStyle(_ style: UITableViewCell.SeparatorStyle) -> Self {
-        self.separatorStyle = style
-        return self
-    }
-    
-    @discardableResult
-    func setShowsVerticalScrollIndicator(_ flag: Bool) -> Self {
-        self.showsVerticalScrollIndicator = flag
-        return self
-    }
-    
-    @discardableResult
-    func setIsScrollEnabled(_ flag: Bool) -> Self {
-        self.isScrollEnabled = flag
-        return self
-    }
-    
-    @discardableResult
-    func setDidSelectRow(_ closure: @escaping didSelectRow) -> Self {
-        self.didSelectRow = closure
-        return self
-    }
 
-    
-//  MARK: - Populate List
-    
-    func setSectionInList(_ section: Section) {
-        self.sections.append(section)
-    }
-    
-    func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
-        let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
-        section.rows.append(row)
-    }
-    
-    func setRowInSection(_ section: Section, _ row: Row) {
-        section.rows.append(row)
-    }
-
-    
-//  MARK: - Show List
-    
-    var isShow: Bool {
-        get { return self._isShow }
-        set {
-            self._isShow = newValue
-            applyOnceConfig()
-            self.isHidden = !self._isShow
-        }
-    }
-    
-//  MARK: - Private Function Area
-    
-    private func applyOnceConfig() {
-        if self._isShow && !alreadyApplied {
-            self.RegisterCell()
-            self.setDelegate()
-            alreadyApplied = true
-        }
-    }
-    
-    private func RegisterCell() {
-        self.register(ListCell.self, forCellReuseIdentifier: ListCell.identifier)
-    }
-    
-    private func setDelegate() {
-        delegate = self
-        dataSource = self
-    }
-
-}
-
-//  MARK: - Extension BaseComponentProtocol
-extension List: BaseComponentProtocol {
-    
-    @discardableResult
-    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
-        _ = border(BorderBuilder(self))
-        return self
-    }
-    
-    @discardableResult
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        _ = shadow(Shadow(self))
-        return self
-    }
-    
-    @discardableResult
-    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        _ = neumorphism(Neumorphism(self))
-        return self
-    }
-    
-    @discardableResult
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        _ = gradient(Gradient(self))
-        return self
-    }
-    
-    @discardableResult
-    func setTapGesture(_ gesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        _ = gesture(TapGesture(self))
-        return self
-    }
-    
-//  MARK: - Constraint Area
-    @discardableResult
-    func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(self))
-        return self
-    }
-    
-    func applyConstraint() {
-        self.constraintsFlow?.apply()
-    }
-    
 }
 
 
@@ -226,6 +89,9 @@ extension List: UITableViewDelegate {
         return self.customSectionFooterHeight[section] ?? self.sectionFooterHeight
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.customRowHeight[indexPath.section]?[indexPath.row] ?? self.rowHeight
+    }
     
 }
 
@@ -249,6 +115,7 @@ extension List: UITableViewDataSource {
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell
         
@@ -262,15 +129,15 @@ extension List: UITableViewDataSource {
             self.sections[indexPath.section].rows[indexPath.row].middleView,
             self.sections[indexPath.section].rows[indexPath.row].rightView
         )
-        return cell 
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let didSelectRow = self.didSelectRow {
-            didSelectRow((indexPath.section, indexPath.row))
-        }
+        listDelegate?.didSelectRow(indexPath.section, indexPath.row)
     }
     
+    
 }
+
 
 

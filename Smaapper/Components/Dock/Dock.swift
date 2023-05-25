@@ -14,7 +14,7 @@ class Dock: UIView {
         case hide
     }
     
-    typealias cellCallbackAlias = (_ indexItem: Int) -> UIView
+    typealias itemCallbackAlias = (_ indexItem: Int) -> UIView
     typealias numberOfItemsCallbackAlias = () -> Int
     
     private var _customItemSize: [Int:CGSize] = [:]
@@ -24,11 +24,11 @@ class Dock: UIView {
     private var _opacity: CGFloat = 1.0
     
     private let _numberOfItemsCallback: numberOfItemsCallbackAlias
-    private let _cellCallback: cellCallbackAlias
+    private let _itemCallback: itemCallbackAlias
 
-    init(_ numberOfItemsCallback: @escaping numberOfItemsCallbackAlias, _ cellCallback: @escaping cellCallbackAlias) {
+    init(_ numberOfItemsCallback: @escaping numberOfItemsCallbackAlias, _ itemCallback: @escaping itemCallbackAlias) {
         self._numberOfItemsCallback = numberOfItemsCallback
-        self._cellCallback = cellCallback
+        self._itemCallback = itemCallback
         super.init(frame: .zero)
     }
     
@@ -62,11 +62,42 @@ class Dock: UIView {
         get { return self._opacity }
         set { self._opacity = newValue }
     }
-    
-    
+        
     var numberOfItemsCallback: numberOfItemsCallbackAlias { self._numberOfItemsCallback }
-    var cellCallback: cellCallbackAlias { return self._cellCallback }
+    var itemCallback: itemCallbackAlias { return self._itemCallback }
 
+}
+
+
+//  MARK: - Extension Delegate Flow Layout
+extension Dock: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return customItemSize[indexPath.row] ?? itemsSize
+    }
     
 }
 
+
+//  MARK: - Extension DataSource
+extension Dock: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return numberOfItemsCallback()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
+        let item = self.itemCallback(indexPath.row)
+        item.isUserInteractionEnabled = isUserInteractionEnabledItems
+        cell.setupCell(item)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+}
