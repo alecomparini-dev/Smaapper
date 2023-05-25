@@ -82,7 +82,6 @@ class ClockNumbers: View {
     }()
     
 
-    
 //  MARK: - MIDDLE STROKE
     lazy var topMiddleStrokeView: ViewBuilder = {
         return createView(false)
@@ -122,8 +121,8 @@ class ClockNumbers: View {
     
 //  MARK: - Private Functions Area
     
-    private func configNeumorphism(_ lightPosition: Neumorphism.LightPosition = .leftTop) -> Neumorphism {
-        return Neumorphism()
+    private func configNeumorphism(_ component: UIView, _ lightPosition: Neumorphism.LightPosition = .leftTop) {
+        Neumorphism(component)
             .setReferenceColor(UIColor.HEX("#26292a"))
             .setShape(.convex)
             .setLightPosition(lightPosition)
@@ -133,6 +132,7 @@ class ClockNumbers: View {
             .setBlur(to:.dark, percent: 5)
             .setDistance(to:.light, percent: 3)
             .setDistance(to:.dark, percent: 10)
+            .apply()
     }
     
     private func addElement() {
@@ -242,7 +242,7 @@ class ClockNumbers: View {
     private func createView(_ withNeumorphism: Bool, _ lightPosition: Neumorphism.LightPosition = .leftTop) -> ViewBuilder {
         let v = ViewBuilder()
         if withNeumorphism {
-            configNeumorphism(lightPosition).apply(v.view)
+            configNeumorphism(v.view, lightPosition)
         }
         return v
     }

@@ -195,10 +195,6 @@ class Neumorphism {
         return self
     }
     
-    func apply(_ component: UIView) {
-        self.component = component
-        self.apply()
-    }
     
     private func applyShadow() {
         let (offSetDarkShadow, offSetLightShadow) = self.calculateLightPosition()
