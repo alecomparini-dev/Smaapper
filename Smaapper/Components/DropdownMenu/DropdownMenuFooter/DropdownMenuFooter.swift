@@ -15,8 +15,8 @@ class DropdownMenuFooter: DropdownMenu {
     
     
 //  MARK: - Components
-    lazy var stackView: Stack = {
-        let sv = Stack()
+    lazy var stackView: StackBuilder = {
+        let sv = StackBuilder()
             .setDistribution(.fillEqually)
             .setAxis(.horizontal)
             .setAlignment(.center)

@@ -34,7 +34,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
 
     @discardableResult
     func setFooterGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        _dropdownFooter.footerGradient = gradient(Gradient(_dropdownFooter.stackView))
+        _dropdownFooter.footerGradient = gradient(Gradient(_dropdownFooter.stackView.view))
         return self
     }
 
@@ -63,7 +63,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
         _dropdownFooter.componentsFooter.forEach { component in
             let view = createView()
             component.add(insideTo: view.view)
-            view.add(insideTo: _dropdownFooter.stackView)
+            view.add(insideTo: _dropdownFooter.stackView.view)
             view.applyConstraint()
             makeConstraintComponent(component)
         }
@@ -122,11 +122,12 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     }
     
     private func configConstraint() {
-        _dropdownFooter.stackView.makeConstraints { make in
-            make
+        _dropdownFooter.stackView.setConstraints({ build in
+            build
                 .setPinBottom.equalToSuperView
                 .setHeight.equalToConstant(self._dropdownFooter.footerHeight)
-        }
+                .apply()
+        })
     }
     
     private func configFooter() {
@@ -138,7 +139,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
 
     
     private func configCornerRadius() {
-        self._dropdownFooter.stackView.layer.cornerRadius = super.dropdown.layer.cornerRadius
+        self._dropdownFooter.stackView.view.layer.cornerRadius = super.dropdown.layer.cornerRadius
         self._dropdownFooter.stackView.setBorder { build in
                 build
                     .setWhichCornersWillBeRounded([.bottom])
@@ -147,7 +148,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     
     private func configGradient() {
         if let footerGradient = self._dropdownFooter.footerGradient {
-            _dropdownFooter.stackView.layoutIfNeeded()
+            _dropdownFooter.stackView.view.layoutIfNeeded()
             footerGradient.apply()
         }
         

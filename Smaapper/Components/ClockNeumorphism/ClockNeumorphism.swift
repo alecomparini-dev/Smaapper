@@ -40,16 +40,16 @@ class ClockNeumorphism: ViewBuilder {
         createClock()
     }
     
-    lazy var stackHours: Stack = {
-        let st = Stack()
+    lazy var stackHours: StackBuilder = {
+        let st = StackBuilder()
             .setAxis(.horizontal)
             .setDistribution(.fillEqually)
             .setSpacing(8)
         return st
     }()
     
-    lazy var stackMinutes: Stack = {
-        let st = Stack()
+    lazy var stackMinutes: StackBuilder = {
+        let st = StackBuilder()
             .setAxis(.horizontal)
             .setDistribution(.fillEqually)
             .setSpacing(8)
@@ -57,28 +57,29 @@ class ClockNeumorphism: ViewBuilder {
     }()
     
     
-    lazy var twoPoints: View = {
-        let view = View()
+    lazy var twoPoints: ViewBuilder = {
+        let view = ViewBuilder()
         
-        let stack = Stack()
+        let stack = StackBuilder()
             .setAxis(.vertical)
             .setDistribution(.fillEqually)
+            .view
     
-        stack.add(insideTo: view)
+        stack.add(insideTo: view.view)
         stack.makeConstraints { make in
             make.setPin.equalToSuperView
         }
-        let topView = View()
-        let middleView = View()
-        let bottomView = View()
+        let topView = ViewBuilder()
+        let middleView = ViewBuilder()
+        let bottomView = ViewBuilder()
         
         topView.add(insideTo: stack)
         middleView.add(insideTo: stack)
         bottomView.add(insideTo: stack)
     
         DispatchQueue.main.async {
-            let points = self.createTwoPoints(middleView.frame.height)
-            points.add(insideTo: middleView)
+            let points = self.createTwoPoints(middleView.view.frame.height)
+            points.add(insideTo: middleView.view)
             points.makeConstraints { make in
                 make.setPin.equalToSuperView
             }
@@ -120,15 +121,15 @@ class ClockNeumorphism: ViewBuilder {
         let hour2 = ClockNumbers(number: getHour(firstPosition: false), weight: weight)
         let minute1 = ClockNumbers(number: getMinute(firstPosition: true), weight: weight)
         let minute2 = ClockNumbers(number: getMinute(firstPosition: false), weight: weight)
-        hour1.add(insideTo: stackHours)
-        hour2.add(insideTo: stackHours)
-        minute1.add(insideTo: stackMinutes)
-        minute2.add(insideTo: stackMinutes)
+        hour1.add(insideTo: stackHours.view)
+        hour2.add(insideTo: stackHours.view)
+        minute1.add(insideTo: stackMinutes.view)
+        minute2.add(insideTo: stackMinutes.view)
     }
     
     private func removeSubviews() {
-        stackHours.subviews.forEach { $0.removeFromSuperview() }
-        stackMinutes.subviews.forEach { $0.removeFromSuperview() }
+        stackHours.view.subviews.forEach { $0.removeFromSuperview() }
+        stackMinutes.view.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func getHour(firstPosition: Bool) -> Int {
@@ -218,28 +219,32 @@ class ClockNeumorphism: ViewBuilder {
     }
     
     private func configStackHoursConstraint() {
-        stackHours.makeConstraints { make in
-            make
+        stackHours.setConstraints({ build in
+            build
                 .setPinLeft.equalToSuperView
-                .setTrailing.equalTo(twoPoints, .leading, -3)
-        }
+                .setTrailing.equalTo(twoPoints.view, .leading, -3)
+                .apply()
+        })
+            
     }
     
     private func configStackMinutesConstraint() {
-        stackMinutes.makeConstraints { make in
-            make
+        stackMinutes.setConstraints({ build in
+            build
                 .setPinRight.equalToSuperView
-                .setLeading.equalTo(twoPoints, .trailing)
-        }
+                .setLeading.equalTo(twoPoints.view, .trailing)
+                .apply()
+        })
     }
     
     private func configTwoPointsConstraint() {
-        twoPoints.makeConstraints { make in
-            make
+        twoPoints.setConstraints({ build in
+            build
                 .setTop.setBottom.equalToSuperView
                 .setWidth.equalToConstant(20)
                 .setHorizontalAlignmentX.equalToSuperView
-        }
+                .apply()
+        })
     }
     
     

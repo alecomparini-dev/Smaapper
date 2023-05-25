@@ -45,8 +45,8 @@ class ClockNumbers: View {
     
     
 //  MARK: - STACKS
-    lazy var stackLeft: Stack = {
-        let st = Stack()
+    lazy var stackLeft: StackBuilder = {
+        let st = StackBuilder()
             .setAxis(.vertical)
             .setAlignment(.fill)
             .setDistribution(.fillEqually)
@@ -54,15 +54,15 @@ class ClockNumbers: View {
         return st
     }()
     
-    lazy var stackMiddle: Stack = {
-        let st = Stack()
+    lazy var stackMiddle: StackBuilder = {
+        let st = StackBuilder()
             .setAxis(.vertical)
             .setDistribution(.fillProportionally)
         return st
     }()
     
-    lazy var stackRight: Stack = {
-        let st = Stack()
+    lazy var stackRight: StackBuilder = {
+        let st = StackBuilder()
             .setAxis(.vertical)
             .setAlignment(.fill)
             .setDistribution(.fillEqually)
@@ -73,50 +73,50 @@ class ClockNumbers: View {
     
 //  MARK: - LEFT STROKES
     
-    lazy var leftTopStroke: View = {
-        return (hasLeftTopStroke.contains(number)) ? createView(true) : View()
+    lazy var leftTopStroke: ViewBuilder = {
+        return (hasLeftTopStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
-    lazy var leftBottomStroke: View = {
-        return (hasLeftBottomStroke.contains(number)) ? createView(true) : View()
+    lazy var leftBottomStroke: ViewBuilder = {
+        return (hasLeftBottomStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
 
     
 //  MARK: - MIDDLE STROKE
-    lazy var topMiddleStrokeView: View = {
+    lazy var topMiddleStrokeView: ViewBuilder = {
         return createView(false)
     }()
     
-    lazy var middleStrokeView: View = {
+    lazy var middleStrokeView: ViewBuilder = {
         return createView(false)
     }()
     
-    lazy var middleBottomView: View = {
+    lazy var middleBottomView: ViewBuilder = {
         return createView(false)
     }()
     
-    lazy var topMiddleStroke: View = {
-        return (hasTopMiddleStroke.contains(number)) ? createView(true) : View()
+    lazy var topMiddleStroke: ViewBuilder = {
+        return (hasTopMiddleStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
-    lazy var middleStroke: View = {
-        return (hasMiddleStroke.contains(number)) ? createView(true) : View()
+    lazy var middleStroke: ViewBuilder = {
+        return (hasMiddleStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
-    lazy var bottomMiddleStroke: View = {
-        return (hasBottomMiddleStroke.contains(number)) ? createView(true) : View()
+    lazy var bottomMiddleStroke: ViewBuilder = {
+        return (hasBottomMiddleStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
 
 //  MARK: - RIGHT STROKE
     
-    lazy var rightTopStroke: View = {
-        return (hasRightTopStroke.contains(number)) ? createView(true) : View()
+    lazy var rightTopStroke: ViewBuilder = {
+        return (hasRightTopStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
-    lazy var rightBottomStroke: View = {
-        return (hasRightBottomStroke.contains(number)) ? createView(true) : View()
+    lazy var rightBottomStroke: ViewBuilder = {
+        return (hasRightBottomStroke.contains(number)) ? createView(true) : ViewBuilder()
     }()
     
     
@@ -143,25 +143,25 @@ class ClockNumbers: View {
     
     private func addStackLeft() {
         stackLeft.add(insideTo: self)
-        leftTopStroke.add(insideTo: stackLeft)
-        leftBottomStroke.add(insideTo: stackLeft)
+        leftTopStroke.add(insideTo: stackLeft.view)
+        leftBottomStroke.add(insideTo: stackLeft.view)
     }
 
     private func addStackMiddle() {
         stackMiddle.add(insideTo: self)
-        topMiddleStrokeView.add(insideTo: stackMiddle)
-        middleStrokeView.add(insideTo: stackMiddle)
-        middleBottomView.add(insideTo: stackMiddle)
+        topMiddleStrokeView.add(insideTo: stackMiddle.view)
+        middleStrokeView.add(insideTo: stackMiddle.view)
+        middleBottomView.add(insideTo: stackMiddle.view)
         
-        topMiddleStroke.add(insideTo: topMiddleStrokeView)
-        middleStroke.add(insideTo: middleStrokeView)
-        bottomMiddleStroke.add(insideTo: middleBottomView)
+        topMiddleStroke.add(insideTo: topMiddleStrokeView.view)
+        middleStroke.add(insideTo: middleStrokeView.view)
+        bottomMiddleStroke.add(insideTo: middleBottomView.view)
     }
     
     private func addStackRight(){
         stackRight.add(insideTo: self)
-        rightTopStroke.add(insideTo: stackRight)
-        rightBottomStroke.add(insideTo: stackRight)
+        rightTopStroke.add(insideTo: stackRight.view)
+        rightBottomStroke.add(insideTo: stackRight.view)
     }
     
     private func configConstraints() {
@@ -176,67 +176,73 @@ class ClockNumbers: View {
     }
     
     private func configStackLeftConstraints() {
-        stackLeft.makeConstraints({ make in
-                make
-                    .setTop.setBottom.equalToSuperView(1)
-                    .setLeading.equalToSuperView
-                    .setWidth.equalToConstant(weight)
-            })
+        stackLeft.setConstraints({ build in
+            build
+                .setTop.setBottom.equalToSuperView(1)
+                .setLeading.equalToSuperView
+                .setWidth.equalToConstant(weight)
+                .apply()
+        })
     }
     
     
     private func configStackMiddleConstraints() {
-        stackMiddle.makeConstraints({ make in
-                make
-                    .setTop.setBottom.equalToSuperView
-                    .setLeading.equalTo(stackLeft, .trailing, 0)
-                    .setTrailing.equalTo(stackRight, .leading, 0)
-            })
+        stackMiddle.setConstraints({ build in
+            build
+                .setTop.setBottom.equalToSuperView
+                .setLeading.equalTo(stackLeft.view, .trailing, 0)
+                .setTrailing.equalTo(stackRight.view, .leading, 0)
+                .apply()
+        })
     }
     
     private func configStackRightConstraints() {
-        stackRight.makeConstraints({ make in
-                make
-                    .setTop.setBottom.equalToSuperView(1)
-                    .setTrailing.equalToSuperView
-                    .setWidth.equalToConstant(weight)
-            })
+        stackRight.setConstraints({ build in
+            build
+                .setTop.setBottom.equalToSuperView(1)
+                .setTrailing.equalToSuperView
+                .setWidth.equalToConstant(weight)
+                .apply()
+        })
     }
     
     private func configTopMiddleStrokeConstraints() {
-        topMiddleStroke.makeConstraints { make in
-            make
+        topMiddleStroke.setConstraints { build in
+            build
                 .setTop.equalToSuperView
                 .setLeading.equalToSuperView
                 .setTrailing.equalToSuperView
                 .setHeight.equalToConstant(weight/1.4)
+                .apply()
         }
     }
     
     private func configMiddleStrokeConstraints() {
-        middleStroke.makeConstraints { make in
-            make
+        middleStroke.setConstraints({ build in
+            build
                 .setVerticalAlignmentY.equalToSafeArea
                 .setLeading.equalToSuperView
                 .setTrailing.equalToSuperView
                 .setHeight.equalToConstant(weight/2)
-        }
+                .apply()
+        })
     }
     
     private func configBottomMiddleStrokeConstraints() {
-        bottomMiddleStroke.makeConstraints { make in
-            make
+        bottomMiddleStroke.setConstraints({ build in
+            build
                 .setBottom.equalToSuperView
                 .setTrailing.equalToSuperView(calculateTrailing())
                 .setLeading.equalToSuperView(calculateLeading())
                 .setHeight.equalToConstant(weight/1.4)
-        }
+                .apply()
+        })
     }
     
-    private func createView(_ withNeumorphism: Bool, _ lightPosition: Neumorphism.LightPosition = .leftTop) -> View {
-        let v = View()
+    private func createView(_ withNeumorphism: Bool, _ lightPosition: Neumorphism.LightPosition = .leftTop) -> ViewBuilder {
+        let v = ViewBuilder()
         if withNeumorphism {
-            configNeumorphism(lightPosition).apply(v)
+            configNeumorphism(lightPosition).apply(v.view)
         }
         return v
     }
