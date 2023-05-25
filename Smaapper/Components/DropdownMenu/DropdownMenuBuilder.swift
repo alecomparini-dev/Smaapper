@@ -8,95 +8,95 @@
 import UIKit
 
 
-class DropdownMenuBuilder: BaseAttributeBuilder {
+class DropdownMenuBuilder: BaseBuilder {
     
     private var alreadyApplied = false
     private var _isShow = false
     private var zPosition: CGFloat = 10000
     
-    private var _dropdown: DropdownMenu
-    var dropdown: DropdownMenu { self._dropdown }
+    private(set) var dropdown: DropdownMenu
+    var view: DropdownMenu { self.dropdown }
+    
+    var actions = DropdownMenuActions()
     
     init() {
-        self._dropdown = DropdownMenu()
-        super.init(self._dropdown)
+        self.dropdown = DropdownMenu()
+        super.init(self.dropdown)
+        self.actions = DropdownMenuActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    var view: DropdownMenu { self.dropdown }
-    
-    var actions: DropdownMenuActions = DropdownMenuActions()
+
     
     
-    //  MARK: - SET Attributes
+//  MARK: - SET Properties
     
     @discardableResult
     func setPositionOpenMenu(_ position: DropdownMenu.PositionMenu) -> Self {
-        self._dropdown.positionOpenMenu = position
+        self.dropdown.positionOpenMenu = position
         return self
     }
     
     @discardableResult
     func setRowHeight(_ height: CGFloat) -> Self {
-        _dropdown.list.setRowHeight(height)
+        dropdown.list.setRowHeight(height)
         return self
     }
     
     @discardableResult
     func setDropdownMenuHeight(_ height: CGFloat) -> Self {
-        _dropdown.menuHeight = height
+        dropdown.menuHeight = height
         return self
     }
     
     @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
-        _dropdown.menuWidth = width
+        dropdown.menuWidth = width
         return self
     }
     
     @discardableResult
     func setPaddingMenu(top: CGFloat , left: CGFloat, bottom: CGFloat, right: CGFloat) -> Self {
-        _dropdown.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        dropdown.paddingMenu = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
         return self
     }
     
     @discardableResult
     func setPaddingColuns(left: CGFloat, right: CGFloat) -> Self {
-        _dropdown.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
+        dropdown.paddingCells = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
         return self
     }
     
     @discardableResult
     func setSectionHeaderHeight(_ height: CGFloat) -> Self {
-        _dropdown.list.setSectionHeaderHeight(height)
+        dropdown.list.setSectionHeaderHeight(height)
         return self
     }
     
     @discardableResult
     func setSectionFooterHeight(_ height: CGFloat) -> Self {
-        _dropdown.list.setSectionFooterHeight(height)
+        dropdown.list.setSectionFooterHeight(height)
         return self
     }
     
     @discardableResult
     func setSectionHeaderHeight(forSection: Int, _ height: CGFloat) -> Self {
-        _dropdown.list.setSectionHeaderHeight(forSection: forSection, height)
+        dropdown.list.setSectionHeaderHeight(forSection: forSection, height)
         return self
     }
     
     @discardableResult
     func setSectionFooterHeight(forSection: Int, _ height: CGFloat) -> Self {
-        _dropdown.list.setSectionFooterHeight(forSection: forSection, height)
+        dropdown.list.setSectionFooterHeight(forSection: forSection, height)
         return self
     }
     
     @discardableResult
     func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
-        _dropdown.autoCloseEnabled = true
-        _dropdown.excludeComponents = excludeComponents
+        dropdown.autoCloseEnabled = true
+        dropdown.excludeComponents = excludeComponents
         return self
     }
     
@@ -104,11 +104,11 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     //  MARK: - SET Data In List
     
     func setSectionInDropdown(_ section: Section) {
-        _dropdown.list.setSectionInList(section)
+        dropdown.list.setSectionInList(section)
     }
     
     func setRowInSection(_ section: Section, _ row: Row) {
-        _dropdown.list.setRowInSection(section, row)
+        dropdown.list.setRowInSection(section, row)
     }
     
     func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
@@ -254,7 +254,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     private func callClosureOpenMenu() {
         if let openMenuClosure = actions.openMenuClosure {
             if isShow {
-                openMenuClosure(.open)
+                openMenuClosure()
             }
         }
     }
@@ -262,7 +262,7 @@ class DropdownMenuBuilder: BaseAttributeBuilder {
     private func callClosureCloseMenu() {
         if let closeMenuClosure = actions.closeMenuClosure {
             if !isShow {
-                closeMenuClosure(.close)
+                closeMenuClosure()
             }
         }
     }

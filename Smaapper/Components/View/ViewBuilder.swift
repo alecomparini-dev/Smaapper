@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewBuilder: BaseAttributeBuilder {
+class ViewBuilder: BaseBuilder {
     
     private var _view: View
     var view: View { self._view }

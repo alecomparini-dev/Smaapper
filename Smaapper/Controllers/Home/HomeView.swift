@@ -87,9 +87,9 @@ class HomeView: View {
             }
         
         drop.actions
-            .setEvent(touch: dropdownMenuTapped)
-            .setEvent(openMenu: openCloseDropdowMenu)
-            .setEvent(closeMenu: openCloseDropdowMenu)
+            .setAction(touch: dropdownMenuTapped)
+            .setAction(event: .openMenu, closure: openMenu)
+            .setAction(event: .closeMenu, closure: closeMenu)
         
         return drop
     }()
@@ -97,16 +97,13 @@ class HomeView: View {
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
         delegate?.dropdownMenuTapped(rowTapped)
     }
-
-    private func openCloseDropdowMenu(_ state: DropdownMenu.StateMenu) {
-        switch state {
-        case .open:
-            delegate?.openMenu()
-        case .close:
-            delegate?.closeMenu()
-        }
+    private func openMenu() {
+        delegate?.openMenu()
     }
-    
+    private func closeMenu() {
+        delegate?.closeMenu()
+    }
+
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         return ButtonImageBuilder(img)
@@ -137,7 +134,7 @@ class HomeView: View {
     }()
     
     lazy var profileButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageView(UIImage(systemName: "person")), "Profile")
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "person")).view, "Profile")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -146,7 +143,7 @@ class HomeView: View {
     }()
     
     lazy var recentButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageView(UIImage(systemName: "rectangle.stack")))
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "rectangle.stack")).view)
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -156,7 +153,7 @@ class HomeView: View {
     }()
     
     lazy var settingsButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageView(UIImage(systemName: "gearshape")), "Settings")
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "gearshape")).view, "Settings")
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(UIColor.HEX("#0f1010"), .normal)
@@ -316,37 +313,41 @@ class HomeView: View {
 //  MARK: - Create Section Menu
     
     func createMiddleSectionView(_ text: String) -> UIView {
-        return Label(text)
+        return LabelBuilder(text)
             .setColor(UIColor.systemGray)
             .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
             .setTextAlignment(.left)
+            .view
     }
 
     
 //  MARK: - Create Rows Menu
     
     func createLeftRowView(_ systemNameImage: String) -> UIView {
-        return ImageView()
+        return ImageViewBuilder()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(18)
             .setTintColor(.white.withAlphaComponent(0.8))
+            .view
     }
     
     func createMiddleRowView(_ text: String) -> UIView {
-        return Label(text)
+        return LabelBuilder(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
+            .view
     }
     
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
-        return ImageView()
+        return ImageViewBuilder()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(14)
             .setWeight(.regular)
             .setTintColor(color)
+            .view
     }
     
     
@@ -384,7 +385,7 @@ class HomeView: View {
     }
     
     func createIconsDock(_ systemNameImage: String) -> UIView {
-        let img = ImageView(UIImage(systemName: systemNameImage))
+        let img = ImageViewBuilder(UIImage(systemName: systemNameImage)).view
         let btn = IconButtonBuilder(img)
             .setImageColor(.white)
             .setImageSize(14)
@@ -411,9 +412,10 @@ class HomeView: View {
 
     
     func showImage() {
-        let img = ImageView()
+        let img = ImageViewBuilder()
             .setImage(UIImage(named: "teste"))
             .setContentMode(.scaleAspectFill)
+            .view
         
         img.add(insideTo: self)
         img.makeConstraints { make in

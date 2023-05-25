@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ButtonBuilder: BaseAttributeBuilder {
+class ButtonBuilder: BaseBuilder {
     
     private var _config = UIButton.Configuration.plain()
     private var titleWeight: UIFont.Weight = .regular

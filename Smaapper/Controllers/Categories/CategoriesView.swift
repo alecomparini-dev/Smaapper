@@ -12,7 +12,7 @@ protocol CategoriesViewDelegate: AnyObject {
     func closeModalTapped()
 }
 
-class CategoriesView: View {
+class CategoriesView: UIView {
     
     weak var delegate: CategoriesViewDelegate?
     
@@ -42,7 +42,7 @@ class CategoriesView: View {
     
     
     lazy var closeModalCategories: IconButtonBuilder = {
-        let img = ImageView(UIImage(systemName: "chevron.down"))
+        let img = ImageViewBuilder(UIImage(systemName: "chevron.down")).view
         let btn = IconButtonBuilder(img)
             .setImageColor(.white.withAlphaComponent(0.3))
             .setImageWeight(.semibold)
@@ -50,7 +50,6 @@ class CategoriesView: View {
             .setConstraints { build in
                 build
                     .setTop.equalToSafeArea(10)
-//                    .setHorizontalAlignmentX.equalToSafeArea
                     .setLeading.equalToSafeArea(15)
                     .setWidth.equalToConstant(30)
             }
@@ -62,8 +61,8 @@ class CategoriesView: View {
     }
     
     
-    lazy var titleLabel: Label = {
-       var label = Label()
+    lazy var titleLabel: LabelBuilder = {
+       var label = LabelBuilder()
             .setText("Categories")
             .setFont(UIFont.systemFont(ofSize: 22, weight: .thin))
             .setColor(.white.withAlphaComponent(0.8))
@@ -98,8 +97,8 @@ class CategoriesView: View {
             })
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleLabel, .bottom, 3)
-                    .setLeading.equalTo(titleLabel, .leading, 1)
+                    .setTop.equalTo(titleLabel.view, .bottom, 3)
+                    .setLeading.equalTo(titleLabel.view, .leading, 1)
                     .setHeight.equalToConstant(2)
                     .setWidth.equalToConstant(80)
             }
@@ -108,10 +107,10 @@ class CategoriesView: View {
     
     
     lazy var searchTextField: TextFieldImageBuilder = {
-        let img = ImageView(UIImage(systemName: "magnifyingglass"))
+        let img = ImageViewBuilder(UIImage(systemName: "magnifyingglass"))
             .setTintColor(.white.withAlphaComponent(0.3))
         
-        let tf = TextFieldImageBuilder(image: img, position: .right, margin: 25)
+        let tf = TextFieldImageBuilder(image: img.view, position: .right, margin: 25)
             .setPlaceHolder("Search")
             .setPlaceHolderColor(.white.withAlphaComponent(0.4))
             .setPlaceHolderSize(15)
@@ -124,7 +123,7 @@ class CategoriesView: View {
                     .setCornerRadius(8)
             })
             .setConstraints { build in
-                build.setTop.equalTo(titleLabel, .bottom, 25)
+                build.setTop.equalTo(titleLabel.view, .bottom, 25)
                     .setLeading.setTrailing.equalToSafeArea(40)
                     .setHeight.equalToConstant(40)
             }
@@ -169,60 +168,63 @@ class CategoriesView: View {
     
 //  MARK: - Create Section Menu
     func createMiddleSectionView(_ text: String) -> UIView {
-        let label = Label("  \(text)")
+        let label = LabelBuilder("  \(text)")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.left)
+            .view
         return label
     }
     
     
 //  MARK: - Create Rows Menu
-    func createLeftRowView(_ systemNameImage: String) -> View {
-        let view = View()
+    func createLeftRowView(_ systemNameImage: String) -> UIView {
+        let view = ViewBuilder()
             .setBackgroundColor(UIColor.HEX("#2b2f30"))
         
-        let img = ImageView()
+        let img = ImageViewBuilder()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(20)
             .setTintColor(.white.withAlphaComponent(0.9))
+            .view
         
-        img.add(insideTo: view)
+        img.add(insideTo: view.view)
         img.makeConstraints { make in
             make.setPin.equalToSuperView
         }
         
-        return view
+        return view.view
     }
     
     func createMiddleRowView(_ text: String) -> UIView {
-        let label = Label("  \(text)")
-            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.3))
+        let label = LabelBuilder("  \(text)")
             .setColor(.white)
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
+            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.3))
+            .view
         return label
     }
 
     
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
-        let view = View()
+        let view = ViewBuilder()
             .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.2))
             
-        let img = ImageView()
-            .setImage(UIImage(systemName: systemNameImage))
+        let img = ImageViewBuilder(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(12)
             .setTintColor(color)
             .setWeight(.regular)
+            .view
             
-        img.add(insideTo: view)
+        img.add(insideTo: view.view)
         img.makeConstraints { make in
             make.setPin.equalToSuperView
         }
         
-        return view
+        return view.view
     }
 
     func setCornerRadiusOnView(_ view: UIView, _ corner: [BorderBuilder.Corner]) {
@@ -245,15 +247,12 @@ class CategoriesView: View {
     }
     
     private func applyConstraints() {
-        
         viewGradient.applyConstraint()
         closeModalCategories.applyConstraint()
         titleLabel.applyConstraint()
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
-                
-        
     }
     
 

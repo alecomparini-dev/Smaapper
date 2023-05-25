@@ -17,11 +17,6 @@ class DropdownMenu: UIView {
         case rightBottom
     }
     
-    enum StateMenu {
-        case open
-        case close
-    }
-    
     private var _positionOpenMenu: DropdownMenu.PositionMenu = .rightBottom
     private var _menuHeight: CGFloat?
     private var _menuWidth: CGFloat?

@@ -13,7 +13,7 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
 //  MARK: - Initializers
 
     init(paddingRightImage: Int = 15) {
-        super.init(image: ImageView(UIImage(systemName: "eye.slash")), position: .right, margin: paddingRightImage)
+        super.init(image: ImageViewBuilder(UIImage(systemName: "eye.slash")).view, position: .right, margin: paddingRightImage)
         self.setIsSecureText(true)
             .setOnTapImage(completion: openCloseEyes(_:))
     }

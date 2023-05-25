@@ -223,10 +223,10 @@ func test_bottom_equalto_toAttibute() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setBottom
-        .equalTo(Label(""), .top, 10)
+        .equalTo(LabelBuilder("").view, .top, 10)
         
         .setBottom
-        .equalTo(Label(""), .bottom )
+        .equalTo(LabelBuilder("").view, .bottom )
     
     flow.apply()
     
@@ -237,10 +237,10 @@ func test_top_equalto_toAttibute() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setTop
-        .equalTo(Label(""), .bottom, 52)
+        .equalTo(LabelBuilder("").view, .bottom, 52)
         
         .setTop
-        .equalTo(Label(""), .top)
+        .equalTo(LabelBuilder("").view, .top)
     
     flow.apply()
 }
@@ -249,7 +249,7 @@ func test_leading_equalto_toAttibute() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setLeading
-        .equalTo(Label(""), .trailing, 25)
+        .equalTo(LabelBuilder("").view, .trailing, 25)
         
         .setLeading
         .equalTo(TextField(), .leading)
@@ -261,8 +261,8 @@ func test_leading_equalto_toAttibute() {
 func test_trailing_equalto_toAttibute() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
-        .setTrailing.equalTo(Label(""), .leading, 55)
-        .setTrailing.equalTo(Label(""), .trailing)
+        .setTrailing.equalTo(LabelBuilder("").view, .leading, 55)
+        .setTrailing.equalTo(LabelBuilder("").view, .trailing)
     
     flow.apply()
 }
@@ -366,7 +366,7 @@ func test_width_equalTo() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setWidth
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
     
     flow.apply()
     
@@ -376,7 +376,7 @@ func test_height_equalTo() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setHeight
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
     
     flow.apply()
     
@@ -451,10 +451,10 @@ func test_horizontalX_equalTo() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setHorizontalAlignmentX
-        .equalTo(Label(""),5744)
+        .equalTo(LabelBuilder("").view,5744)
     
         .setHorizontalAlignmentX
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
 
     
     flow.apply()
@@ -466,10 +466,10 @@ func test_verticalY_equalTo() {
     print("\n>>>>> \(#function)")
     let flow = StartOfConstraintsFlow(UIView())
         .setVerticalAlignmentY
-        .equalTo(Label(""), 7799)
+        .equalTo(LabelBuilder("").view, 7799)
     
         .setVerticalAlignmentY
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
 
     
     flow.apply()
@@ -540,11 +540,11 @@ func test_Position_Position_equalTo(){
     let flow = StartOfConstraintsFlow(UIView())
         .setTop
         .setLeading
-        .equalTo(Label("teste"), 155)
+        .equalTo(LabelBuilder("teste").view, 155)
     
         .setBottom
         .setTrailing
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
     
     flow.apply()
     
@@ -555,11 +555,11 @@ func test_Position_Size_equalTo() {
     let flow = StartOfConstraintsFlow(UIView())
         .setTop
         .setWidth
-        .equalTo(Label("teste"))
+        .equalTo(LabelBuilder("teste").view)
     
         .setTrailing
         .setHeight
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
     
     flow.apply()
 }
@@ -593,7 +593,7 @@ func test_Size_Size_equalTo(){
     let flow = StartOfConstraintsFlow(UIView())
         .setWidth
         .setHeight
-        .equalTo(Label("teste"))
+        .equalTo(LabelBuilder("teste").view)
     
     flow.apply()
     
@@ -649,7 +649,7 @@ func test_Alignment_Alignment_equalTo() {
     let flow = StartOfConstraintsFlow(UIView())
         .setHorizontalAlignmentX
         .setVerticalAlignmentY
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
     
     flow.apply()
     
@@ -667,12 +667,12 @@ func test_Position_Position_Position_equalTo() {
         .setLeading
         .setTop
         .setTrailing
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
         
         .setTrailing
         .setLeading
         .setBottom
-        .equalTo(Label(), 7799)
+        .equalTo(LabelBuilder().view, 7799)
 
     flow.apply()
     
@@ -684,12 +684,12 @@ func test_Position_Position_Size_equalTo() {
         .setLeading
         .setTrailing
         .setHeight
-        .equalTo(Label("äsdfasdf"))
+        .equalTo(LabelBuilder("äsdfasdf").view)
     
         .setTop
         .setBottom
         .setWidth
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
         
     flow.apply()
     
@@ -702,12 +702,12 @@ func test_Position_Size_Position_equalTo() {
         .setTrailing
         .setWidth
         .setTop
-        .equalTo(Label("asdfasdf"))
+        .equalTo(LabelBuilder("asdfasdf").view)
     
         .setTop
         .setHeight
         .setBottom
-        .equalTo(Label(""))
+        .equalTo(LabelBuilder("").view)
         
     flow.apply()
     
@@ -719,7 +719,7 @@ func test_Position_Size_Size_equalTo() {
         .setTop
         .setWidth
         .setHeight
-        .equalTo(Label("123456789"))
+        .equalTo(LabelBuilder("123456789").view)
     
         .setLeading
         .setHeight
@@ -810,9 +810,9 @@ func test_Position_Size_Size_equalToSafeArea() {
 
 func test_Size_Size_Size_equalTo() {
     let flow = StartOfConstraintsFlow(UIView())
-        .setWidth.setHeight.setWidth.equalTo(Label("nao deveria poder mas ok"))
+        .setWidth.setHeight.setWidth.equalTo(LabelBuilder("nao deveria poder mas ok").view)
     
-        .setWidth.setWidth.setHeight.equalTo(Label())
+        .setWidth.setWidth.setHeight.equalTo(LabelBuilder().view)
         
     flow.apply()
     
@@ -842,12 +842,12 @@ func test_Size_Size_Position_equalTo() {
         .setHeight
         .setWidth
         .setTop
-        .equalTo(Label("top"))
+        .equalTo(LabelBuilder("top").view)
     
         .setWidth
         .setHeight
         .setTrailing
-        .equalTo(Label("trailing "))
+        .equalTo(LabelBuilder("trailing ").view)
         
     flow.apply()
     
@@ -859,12 +859,12 @@ func test_Size_Position_Size_equalTo() {
         .setHeight
         .setBottom
         .setWidth
-        .equalTo(Label("tetse"))
+        .equalTo(LabelBuilder("tetse").view)
     
         .setWidth
         .setLeading
         .setWidth
-        .equalTo(Label("labelmaroto"))
+        .equalTo(LabelBuilder("labelmaroto").view)
         
     flow.apply()
     
@@ -876,12 +876,12 @@ func test_Size_Position_Position_equalTo() {
         .setWidth
         .setTop
         .setLeading
-        .equalTo(Label("teste5"))
+        .equalTo(LabelBuilder("teste5").view)
     
         .setWidth
         .setLeading
         .setTrailing
-        .equalTo(Label("teste7"))
+        .equalTo(LabelBuilder("teste7").view)
         
     flow.apply()
     
@@ -941,14 +941,14 @@ func test_Size_Position_Position_Size_equalTo() {
         .setTop
         .setBottom
         .setHeight
-        .equalTo(Label("4 niveis"))
+        .equalTo(LabelBuilder("4 niveis").view)
         
     
         .setHeight
         .setLeading
         .setTrailing
         .setWidth
-        .equalTo(Label("4 niveis de novo"))
+        .equalTo(LabelBuilder("4 niveis de novo").view)
         
     flow.apply()
     
@@ -964,7 +964,7 @@ func test_Position_Position_Position_Position_Size_Size_equalTo() {
         .setTrailing
         .setWidth
         .setHeight
-        .equalTo(Label("6 niveis !!!!"))
+        .equalTo(LabelBuilder("6 niveis !!!!").view)
     
         .setLeading
         .setTop
@@ -972,7 +972,7 @@ func test_Position_Position_Position_Position_Size_Size_equalTo() {
         .setBottom
         .setHeight
         .setWidth
-        .equalTo(Label("muito foda isso"))
+        .equalTo(LabelBuilder("muito foda isso").view)
         
     flow.apply()
     
@@ -987,7 +987,7 @@ func test_Size_Size_Position_Position_Position_Position_equalTo() {
         .setBottom
         .setLeading
         .setTrailing
-        .equalTo(Label("que top"))
+        .equalTo(LabelBuilder("que top").view)
     
         .setWidth
         .setHeight
@@ -1003,7 +1003,7 @@ func test_Size_Size_Position_Position_Position_Position_equalTo() {
         .setLeading
         .setBottom
         .setTop
-        .equalTo(Label("muito foda dos fodasticos"))
+        .equalTo(LabelBuilder("muito foda dos fodasticos").view)
         
     flow.apply()
     

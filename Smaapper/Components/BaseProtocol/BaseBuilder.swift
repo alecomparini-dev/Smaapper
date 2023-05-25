@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class BaseAttributeBuilder {
+class BaseBuilder {
     
     private var _constraintsFlow: StartOfConstraintsFlow?
     private var _border: BorderBuilder?
@@ -18,10 +18,11 @@ class BaseAttributeBuilder {
     private var _gradient: Gradient?
     private var _tapGesture: TapGesture?
     
-    private var component: UIView
+    private var _component: UIView
+    var component: UIView { self._component}
     
     init(_ component: UIView) {
-        self.component = component
+        self._component = component
     }
     
     
@@ -65,6 +66,14 @@ class BaseAttributeBuilder {
         return self
     }
     
+    @discardableResult
+    public func setBackgroundColor(_ color: UIColor) -> Self {
+        component.backgroundColor = color
+        return self
+    }
+
+
+//  MARK: - CONSTRAINTS AREA
     @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self._constraintsFlow = builderConstraint(StartOfConstraintsFlow(component))

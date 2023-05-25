@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DockBuilder: BaseAttributeBuilder {
+class DockBuilder: BaseBuilder {
     
     private var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private var container = UIView()
