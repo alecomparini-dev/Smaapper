@@ -9,19 +9,24 @@ import UIKit
 
 class TextFieldImageBuilder: TextFieldBuilder {
     
-    private var onTapAction: ((_ imageView: UIImageView) -> Void)?
+    typealias onTapImageClosureAlias = (_ imageView: UIImageView) -> Void
     
+//  MARK: - Properties
     private var paddingView = UIView(frame: .zero)
     private let imageView: UIImageView
-    private let position: TextField.Position
+    private let imagePosition: TextField.Position
     private let margin: Int
     
     
-    //  MARK: - Initializers
+//  MARK: - Actions Properties
+    private var onTapAction: onTapImageClosureAlias?
+    
+    
+//  MARK: - Initializers
     
     init(image: ImageView, position: TextField.Position, margin: Int = 10) {
         self.imageView =  image
-        self.position = position
+        self.imagePosition = position
         self.margin = margin
         super.init()
         self.setImage( self.imageView, position, margin)
@@ -35,28 +40,41 @@ class TextFieldImageBuilder: TextFieldBuilder {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //  MARK: - Set Properties
+    
+//  MARK: - Set Properties
+    
+    @discardableResult
     func setImageSize(_ size: CGFloat, _ weight: UIImage.SymbolWeight? = nil) -> Self {
         imageView.image = imageView.image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size , weight: weight ?? .regular))
         return self
     }
     
+    override func setPadding(_ padding: CGFloat, _ position: TextField.Position) -> Self {
+        if imagePosition == position {
+            return self
+        }
+        super.setPadding(padding, position)
+        return self
+    }
     
-    //  MARK: - Set Actions
-    func setOnTapImage(completion: @escaping (_ imageView: UIImageView) -> Void) {
+    
+//  MARK: - Set Actions
+    
+    @discardableResult
+    func setOnTapImage(completion: @escaping onTapImageClosureAlias) -> Self {
         self.onTapAction = completion
-        self.imageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ontapped))
-        self.imageView.addGestureRecognizer(tap)
+        self.paddingView.makeTapGesture { make in
+            make.setStateGesture([.ended])
+                .setAction { [weak self] tapGesture in
+                    guard let self else { return }
+                    self.onTapAction?(self.imageView)
+                }
+        }
+        return self
     }
+
     
-    @objc
-    private func ontapped() {
-        self.onTapAction?(self.imageView)
-    }
-    
-    
-    //  MARK: - Component private functions
+//  MARK: - Private Area
     
     private func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: Int) {
         paddingView = self.createPaddingView(image, margin)

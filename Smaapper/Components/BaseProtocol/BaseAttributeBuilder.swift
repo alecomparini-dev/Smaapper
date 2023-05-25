@@ -36,7 +36,7 @@ class BaseAttributeBuilder {
     
 //  MARK: - SET Properties
     @discardableResult
-    func setBorder(_ border: (BorderBuilder) -> BorderBuilder) -> Self {
+    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
         self._border = border(BorderBuilder(component))
         return self
     }
@@ -60,7 +60,7 @@ class BaseAttributeBuilder {
     }
 
     @discardableResult
-    func setTapGesture(_ tapGesture: (TapGesture) -> TapGesture) -> Self {
+    func setTapGesture(_ tapGesture: (_ build: TapGesture) -> TapGesture) -> Self {
         self._tapGesture = tapGesture(TapGesture(component))
         return self
     }

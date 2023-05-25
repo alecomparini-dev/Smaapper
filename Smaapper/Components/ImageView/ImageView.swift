@@ -17,7 +17,7 @@ class ImageView: UIImageView {
     //  MARK: - Initializers
     
     init() {
-        super.init(frame: .null)
+        super.init(frame: .zero)
     }
     
     convenience init(_ image: UIImage?) {

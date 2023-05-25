@@ -141,27 +141,7 @@ class CategoriesView: View {
             })
         return tf
     }()
-    
-//    lazy var searchTextField: View = {
-//        let tf = View()
-////            .setBorder({ build in
-////                build.setCornerRadius(8)
-////                    .setWidth(1)
-////                    .setColor(.yellow)
-////            })
-////            .setNeumorphism({ build in
-////                build
-////        .setReferenceColor(UIColor.HEX("#2b2f30"))
-////                    .setShape(.concave)
-////                    .setLightPosition(.leftTop)
-////                    .setIntensity(to: .light, percent: 0.7)
-////                    .setBlur(to: .light, percent: 3)
-////                    .setBlur(to: .dark , percent: 5)
-////                    .setDistance(to: .light, percent: 3)
-////                    .setDistance(to: .dark, percent: 5)
-////            })
-//        return tf
-//    }()
+        
     
     lazy var list: List = {
         let list = List(.grouped)
@@ -266,14 +246,13 @@ class CategoriesView: View {
     
     private func applyConstraints() {
         
-        
         viewGradient.applyConstraint()
         closeModalCategories.applyConstraint()
         titleLabel.applyConstraint()
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
-        
+                
         
     }
     

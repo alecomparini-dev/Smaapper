@@ -9,9 +9,12 @@ import UIKit
 
 class TextFieldPasswordBuilder: TextFieldImageBuilder {
     
-    init() {
-        super.init(image: ImageView(UIImage(systemName: "eye.slash")), position: .right, margin: 10)
-        let _ = self.setIsSecureText(true)
+    
+//  MARK: - Initializers
+
+    init(paddingRightImage: Int = 15) {
+        super.init(image: ImageView(UIImage(systemName: "eye.slash")), position: .right, margin: paddingRightImage)
+        self.setIsSecureText(true)
             .setOnTapImage(completion: openCloseEyes(_:))
     }
     
@@ -26,6 +29,7 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
     
     
 //  MARK: - ACTIONS THIS COMPONENT
+
     private func openCloseEyes(_ imageView: UIImageView) {
         if self.textField.isSecureTextEntry {
             imageView.image = UIImage(systemName: "eye")
