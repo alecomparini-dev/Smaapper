@@ -66,6 +66,14 @@ class BaseAttributeBuilder {
     }
     
     @discardableResult
+    public func setBackgroundColor(_ color: UIColor) -> Self {
+        component.backgroundColor = color
+        return self
+    }
+
+
+//  MARK: - CONSTRAINTS AREA
+    @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self._constraintsFlow = builderConstraint(StartOfConstraintsFlow(component))
         return self

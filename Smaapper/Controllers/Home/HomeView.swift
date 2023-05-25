@@ -316,10 +316,11 @@ class HomeView: View {
 //  MARK: - Create Section Menu
     
     func createMiddleSectionView(_ text: String) -> UIView {
-        return Label(text)
+        return LabelBuilder(text)
             .setColor(UIColor.systemGray)
             .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
             .setTextAlignment(.left)
+            .view
     }
 
     
@@ -334,10 +335,11 @@ class HomeView: View {
     }
     
     func createMiddleRowView(_ text: String) -> UIView {
-        return Label(text)
+        return LabelBuilder(text)
             .setColor(.white.withAlphaComponent(0.9))
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
+            .view
     }
     
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
