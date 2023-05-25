@@ -64,7 +64,6 @@
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
 		026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* Neumorphism.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
-		0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADA2A15378300E44F04 /* BaseProtocol.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
 		0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatWindow.swift */; };
 		0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleWindow.swift */; };
@@ -82,7 +81,6 @@
 		02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */ = {isa = PBXBuildFile; fileRef = 02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */; };
 		02C9C9E22A05392400AA1370 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E12A05392400AA1370 /* Section.swift */; };
 		02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E52A058FB700AA1370 /* ListCellView.swift */; };
-		02C9C9E82A072B4200AA1370 /* ListDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E72A072B4200AA1370 /* ListDefault.swift */; };
 		02C9C9EB2A0A776600AA1370 /* TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9EA2A0A776600AA1370 /* TapGesture.swift */; };
 		02C9C9EF2A0AB8F800AA1370 /* TapGestureDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
@@ -91,6 +89,8 @@
 		02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581422A1FACBF00150AF9 /* ImageViewActions.swift */; };
 		02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581442A1FCC2B00150AF9 /* BaseActions.swift */; };
 		02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581462A1FD86900150AF9 /* StackBuilder.swift */; };
+		02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581482A1FE15900150AF9 /* ListBuilder.swift */; };
+		02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814A2A1FF01800150AF9 /* ListActions.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -167,7 +167,6 @@
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* Neumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neumorphism.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
-		0281DADA2A15378300E44F04 /* BaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProtocol.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0281DAE02A18089800E44F04 /* FloatWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindow.swift; sourceTree = "<group>"; };
 		0281DAE32A180A8300E44F04 /* TitleWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWindow.swift; sourceTree = "<group>"; };
@@ -185,7 +184,6 @@
 		02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DropdownMenuData.json; sourceTree = "<group>"; };
 		02C9C9E12A05392400AA1370 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		02C9C9E52A058FB700AA1370 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
-		02C9C9E72A072B4200AA1370 /* ListDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDefault.swift; sourceTree = "<group>"; };
 		02C9C9EA2A0A776600AA1370 /* TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGesture.swift; sourceTree = "<group>"; };
 		02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureDefault.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
@@ -194,6 +192,8 @@
 		02D581422A1FACBF00150AF9 /* ImageViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewActions.swift; sourceTree = "<group>"; };
 		02D581442A1FCC2B00150AF9 /* BaseActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseActions.swift; sourceTree = "<group>"; };
 		02D581462A1FD86900150AF9 /* StackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackBuilder.swift; sourceTree = "<group>"; };
+		02D581482A1FE15900150AF9 /* ListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilder.swift; sourceTree = "<group>"; };
+		02D5814A2A1FF01800150AF9 /* ListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActions.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -570,7 +570,6 @@
 		0281DAD92A15376D00E44F04 /* BaseProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				0281DADA2A15378300E44F04 /* BaseProtocol.swift */,
 				020D0E512A1E6E5D007F3992 /* BaseBuilder.swift */,
 				02D581442A1FCC2B00150AF9 /* BaseActions.swift */,
 			);
@@ -763,7 +762,8 @@
 			children = (
 				02C9C9E42A058FA500AA1370 /* ListCell */,
 				02C9C9E32A05392A00AA1370 /* Model */,
-				02C9C9E72A072B4200AA1370 /* ListDefault.swift */,
+				02D5814A2A1FF01800150AF9 /* ListActions.swift */,
+				02D581482A1FE15900150AF9 /* ListBuilder.swift */,
 				02F45AFA2A046F720096A75A /* List.swift */,
 			);
 			path = List;
@@ -908,6 +908,7 @@
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				0234A91729F9FD3A008392EC /* tests.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
+				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
 				026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */,
@@ -923,7 +924,6 @@
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
-				02C9C9E82A072B4200AA1370 /* ListDefault.swift in Sources */,
 				02C9C9EB2A0A776600AA1370 /* TapGesture.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
@@ -933,10 +933,10 @@
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
 				020D0E5D2A1EADCF007F3992 /* DockBuilder.swift in Sources */,
+				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */,
-				0281DADB2A15378300E44F04 /* BaseProtocol.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,

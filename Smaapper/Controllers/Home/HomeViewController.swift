@@ -244,7 +244,4 @@ extension HomeVC: HomeViewDelegate {
         openCloseDropdownMenu()
     }
     
-
-    
-    
 }

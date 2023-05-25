@@ -151,11 +151,11 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func addTouchActionOnList() {
-        dropdown.list.setDidSelectRow({ section, row in
+        dropdown.list.actions?.setAction(didSelectRow: { section, row in
             if let touchMenuClosure = self.actions.touchMenuClosure {
                 touchMenuClosure((section,row))
             }
-        })
+        })        
     }
     
     private func configOverlay() {
@@ -279,12 +279,14 @@ class DropdownMenuBuilder: BaseBuilder {
     
     private func configDropDownMenuConstraints() {
         guard let padding = dropdown.paddingMenu else {return}
-        dropdown.list.makeConstraints { build in
-            build.setTop.equalToSuperView(padding.top)
+        dropdown.list.setConstraints({ build in
+            build
+                .setTop.equalToSuperView(padding.top)
                 .setBottom.equalToSuperView(-padding.bottom)
                 .setLeading.equalToSuperView(padding.left)
                 .setTrailing.equalToSuperView(-padding.right)
-        }
+                .apply()
+        })
     }
     
     

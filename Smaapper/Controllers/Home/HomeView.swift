@@ -85,12 +85,13 @@ class HomeView: View {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
+            
+
         
         drop.actions
             .setAction(touch: dropdownMenuTapped)
             .setAction(event: .openMenu, closure: openMenu)
             .setAction(event: .closeMenu, closure: closeMenu)
-        
         return drop
     }()
     

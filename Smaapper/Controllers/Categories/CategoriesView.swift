@@ -142,8 +142,8 @@ class CategoriesView: UIView {
     }()
         
     
-    lazy var list: List = {
-        let list = List(.grouped)
+    lazy var list: ListBuilder = {
+        let list = ListBuilder(.grouped)
             .setBackgroundColor(.clear)
             .setBorder({ build in
                 build
