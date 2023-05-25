@@ -8,42 +8,46 @@
 import Foundation
 
 class DropdownMenuActions {
-    
+
+    enum Event {
+        case openMenu
+        case closeMenu
+    }
+
     typealias touchMenuClosureAlias = (_ rowTapped: (section: Int, row: Int)) -> Void
-    typealias openMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
-    typealias closeMenuClosureAlias = (_ stateMenu: DropdownMenu.StateMenu) -> Void
+    typealias eventMenuClosureAlias = () -> Void
     
     private var _touchMenuClosure: touchMenuClosureAlias?
-    private var _openMenuClosure: openMenuClosureAlias?
-    private var _closeMenuClosure: closeMenuClosureAlias?
+    private var _openMenuClosure: eventMenuClosureAlias?
+    private var _closeMenuClosure: eventMenuClosureAlias?
     
     
 //  MARK: - GET Actions
     
     var touchMenuClosure: touchMenuClosureAlias? { self._touchMenuClosure}
-    var openMenuClosure: openMenuClosureAlias? { self._openMenuClosure}
-    var closeMenuClosure: closeMenuClosureAlias? { self._closeMenuClosure}
+    var openMenuClosure: eventMenuClosureAlias? { self._openMenuClosure}
+    var closeMenuClosure: eventMenuClosureAlias? { self._closeMenuClosure}
     
     
 //  MARK: - SET Actions
     
     @discardableResult
-    func setEvent(touch closure: @escaping touchMenuClosureAlias) -> Self {
+    func setAction(touch closure: @escaping touchMenuClosureAlias) -> Self {
         self._touchMenuClosure = closure
         return self
     }
     
     @discardableResult
-    func setEvent(openMenu closure: @escaping openMenuClosureAlias) -> Self {
-        self._openMenuClosure = closure
-        return self
-    }
-    
-    @discardableResult
-    func setEvent(closeMenu closure: @escaping closeMenuClosureAlias) -> Self {
-        self._closeMenuClosure = closure
+    func setAction(event: Event, closure: @escaping eventMenuClosureAlias) -> Self {
+        switch event {
+            case .openMenu:
+                self._openMenuClosure = closure
+            case .closeMenu:
+                self._closeMenuClosure = closure
+        }
         return self
     }
     
     
 }
+

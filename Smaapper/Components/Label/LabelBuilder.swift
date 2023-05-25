@@ -7,15 +7,18 @@
 
 import UIKit
 
-class LabelBuilder: BaseAttributeBuilder {
+class LabelBuilder: BaseBuilder {
     
     private var _label: Label
     var label: Label { self._label }
     var view: Label { self._label }
     
+    var actions: LabelAction?
+    
     init() {
-        self._label = Label(frame: .zero)
+        self._label = Label()
         super.init(self._label)
+        self.actions = LabelAction(self)
     }
     
     convenience init(_ text: String) {

@@ -42,7 +42,7 @@ class CategoriesView: UIView {
     
     
     lazy var closeModalCategories: IconButtonBuilder = {
-        let img = ImageView(UIImage(systemName: "chevron.down"))
+        let img = ImageViewBuilder(UIImage(systemName: "chevron.down")).view
         let btn = IconButtonBuilder(img)
             .setImageColor(.white.withAlphaComponent(0.3))
             .setImageWeight(.semibold)
@@ -50,7 +50,6 @@ class CategoriesView: UIView {
             .setConstraints { build in
                 build
                     .setTop.equalToSafeArea(10)
-//                    .setHorizontalAlignmentX.equalToSafeArea
                     .setLeading.equalToSafeArea(15)
                     .setWidth.equalToConstant(30)
             }
@@ -108,10 +107,10 @@ class CategoriesView: UIView {
     
     
     lazy var searchTextField: TextFieldImageBuilder = {
-        let img = ImageView(UIImage(systemName: "magnifyingglass"))
+        let img = ImageViewBuilder(UIImage(systemName: "magnifyingglass"))
             .setTintColor(.white.withAlphaComponent(0.3))
         
-        let tf = TextFieldImageBuilder(image: img, position: .right, margin: 25)
+        let tf = TextFieldImageBuilder(image: img.view, position: .right, margin: 25)
             .setPlaceHolder("Search")
             .setPlaceHolderColor(.white.withAlphaComponent(0.4))
             .setPlaceHolderSize(15)
@@ -183,11 +182,12 @@ class CategoriesView: UIView {
         let view = ViewBuilder()
             .setBackgroundColor(UIColor.HEX("#2b2f30"))
         
-        let img = ImageView()
+        let img = ImageViewBuilder()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(20)
             .setTintColor(.white.withAlphaComponent(0.9))
+            .view
         
         img.add(insideTo: view.view)
         img.makeConstraints { make in
@@ -212,12 +212,12 @@ class CategoriesView: UIView {
         let view = ViewBuilder()
             .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.2))
             
-        let img = ImageView()
-            .setImage(UIImage(systemName: systemNameImage))
+        let img = ImageViewBuilder(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(12)
             .setTintColor(color)
             .setWeight(.regular)
+            .view
             
         img.add(insideTo: view.view)
         img.makeConstraints { make in

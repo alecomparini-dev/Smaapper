@@ -18,4 +18,8 @@ class Label: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
+    init() {
+        super.init(frame: .zero)
+    }
+    
 }

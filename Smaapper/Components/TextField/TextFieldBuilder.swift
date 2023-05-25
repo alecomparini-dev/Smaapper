@@ -8,7 +8,7 @@
 import UIKit
 
 
-class TextFieldBuilder: BaseAttributeBuilder {
+class TextFieldBuilder: BaseBuilder {
     
     
     private var _textField: TextField

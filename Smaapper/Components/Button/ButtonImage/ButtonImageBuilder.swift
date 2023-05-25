@@ -68,14 +68,14 @@ class ButtonImageBuilder: ButtonBuilder {
     @discardableResult
     func setImageSize( _ size: CGFloat? ) -> Self {
         guard let size else {return self}
-        let img = ImageView(super.button.configuration?.image).setSize(size)
+        let img = ImageViewBuilder(super.button.configuration?.image).setSize(size).view
         _ = setImageButton(img)
         return self
     }
     
     @discardableResult
     func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        let img = ImageView(super.button.configuration?.image).setWeight(weight)
+        let img = ImageViewBuilder(super.button.configuration?.image).setWeight(weight).view
         _ = setImageButton(img)
         return self
     }

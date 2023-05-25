@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class BaseAttributeBuilder {
+class BaseBuilder {
     
     private var _constraintsFlow: StartOfConstraintsFlow?
     private var _border: BorderBuilder?
@@ -18,10 +18,11 @@ class BaseAttributeBuilder {
     private var _gradient: Gradient?
     private var _tapGesture: TapGesture?
     
-    private var component: UIView
+    private var _component: UIView
+    var component: UIView { self._component}
     
     init(_ component: UIView) {
-        self.component = component
+        self._component = component
     }
     
     

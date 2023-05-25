@@ -9,13 +9,17 @@ import Foundation
 
 class DockActions {
     
+    enum Event {
+        case showDock
+        case hideDock
+    }
+    
     typealias touchDockClosureAlias = (_ indexItem: Int ) -> Void
-    typealias showDockClosureAlias = (_ stateDock: Dock.State) -> Void
-    typealias hideDockClosureAlias = (_ stateDock: Dock.State) -> Void
+    typealias eventDockClosureAlias = (_ stateDock: Event) -> Void
     
     private var _touchDockClosure: touchDockClosureAlias?
-    private var _showDockClosure: showDockClosureAlias?
-    private var _hideDockClosure: hideDockClosureAlias?
+    private var _showDockClosure: eventDockClosureAlias?
+    private var _hideDockClosure: eventDockClosureAlias?
     
     private let dock: Dock
     
@@ -25,30 +29,28 @@ class DockActions {
 
 //  MARK: - GET Propeties
     var touchDockClosure: touchDockClosureAlias? { self._touchDockClosure}
-    var showDockClosure: showDockClosureAlias? { self._showDockClosure}
-    var hideDockClosure: hideDockClosureAlias? { self._hideDockClosure}
+    var showDockClosure: eventDockClosureAlias? { self._showDockClosure}
+    var hideDockClosure: eventDockClosureAlias? { self._hideDockClosure}
     
     
 //  MARK: - SET Actions
     
     @discardableResult
-    func setEvent(touch closure: @escaping touchDockClosureAlias) -> Self {
+    func setAction(touch closure: @escaping touchDockClosureAlias) -> Self {
         self._touchDockClosure = closure
         return self
     }
     
     @discardableResult
-    func setEvent(openMenu closure: @escaping showDockClosureAlias) -> Self {
-        self._showDockClosure = closure
+    func setAction(event: Event  ,closure: @escaping eventDockClosureAlias) -> Self {
+        switch event {
+            case .showDock:
+                self._showDockClosure = closure
+            case .hideDock:
+                self._hideDockClosure = closure
+        }
         return self
     }
-    
-    @discardableResult
-    func setEvent(closeMenu closure: @escaping hideDockClosureAlias) -> Self {
-        self._hideDockClosure = closure
-        return self
-    }
-    
     
     
 }
