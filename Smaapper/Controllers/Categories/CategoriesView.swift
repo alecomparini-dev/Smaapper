@@ -107,11 +107,11 @@ class CategoriesView: View {
     }()
     
     
-    lazy var searchTextField: TextFieldImage = {
+    lazy var searchTextField: TextFieldImageBuilder = {
         let img = ImageView(UIImage(systemName: "magnifyingglass"))
             .setTintColor(.white.withAlphaComponent(0.3))
         
-        let tf = TextFieldImage(image: img, position: .right, margin: 25)
+        let tf = TextFieldImageBuilder(image: img, position: .right, margin: 25)
             .setPlaceHolder("Search")
             .setPlaceHolderColor(.white.withAlphaComponent(0.4))
             .setPlaceHolderSize(15)
@@ -141,27 +141,7 @@ class CategoriesView: View {
             })
         return tf
     }()
-    
-//    lazy var searchTextField: View = {
-//        let tf = View()
-////            .setBorder({ build in
-////                build.setCornerRadius(8)
-////                    .setWidth(1)
-////                    .setColor(.yellow)
-////            })
-////            .setNeumorphism({ build in
-////                build
-////        .setReferenceColor(UIColor.HEX("#2b2f30"))
-////                    .setShape(.concave)
-////                    .setLightPosition(.leftTop)
-////                    .setIntensity(to: .light, percent: 0.7)
-////                    .setBlur(to: .light, percent: 3)
-////                    .setBlur(to: .dark , percent: 5)
-////                    .setDistance(to: .light, percent: 3)
-////                    .setDistance(to: .dark, percent: 5)
-////            })
-//        return tf
-//    }()
+        
     
     lazy var list: List = {
         let list = List(.grouped)
@@ -180,7 +160,7 @@ class CategoriesView: View {
             .setSectionFooterHeight(20)
             .setConstraints { build in
                 build
-                    .setTop.equalTo(searchTextField, .bottom, 20)
+                    .setTop.equalTo(searchTextField.view, .bottom, 20)
                     .setLeading.setBottom.setTrailing.equalToSafeArea(20)
             }
         return list
@@ -266,14 +246,13 @@ class CategoriesView: View {
     
     private func applyConstraints() {
         
-        
         viewGradient.applyConstraint()
         closeModalCategories.applyConstraint()
         titleLabel.applyConstraint()
         underLineTitle.applyConstraint()
         searchTextField.applyConstraint()
         list.applyConstraint()
-        
+                
         
     }
     
