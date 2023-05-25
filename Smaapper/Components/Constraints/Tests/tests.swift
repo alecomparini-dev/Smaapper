@@ -724,7 +724,7 @@ func test_Position_Size_Size_equalTo() {
         .setLeading
         .setHeight
         .setWidth
-        .equalTo(TextField("asdfasdfasdf"))
+        .equalTo(TextFieldBuilder("asdfasdfasdf").view)
         
     flow.apply()
     

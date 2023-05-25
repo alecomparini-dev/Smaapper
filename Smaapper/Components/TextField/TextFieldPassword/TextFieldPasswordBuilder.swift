@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextFieldPassword: TextFieldImage {
+class TextFieldPasswordBuilder: TextFieldImageBuilder {
     
     init() {
         super.init(image: ImageView(UIImage(systemName: "eye.slash")), position: .right, margin: 10)
@@ -17,7 +17,7 @@ class TextFieldPassword: TextFieldImage {
     
     convenience init(_ placeHolder: String) {
         self.init()
-        let _ = super.setPlaceHolder(placeHolder)
+        super.setPlaceHolder(placeHolder)
     }
     
     required init?(coder: NSCoder) {
@@ -27,12 +27,12 @@ class TextFieldPassword: TextFieldImage {
     
 //  MARK: - ACTIONS THIS COMPONENT
     private func openCloseEyes(_ imageView: UIImageView) {
-        if self.isSecureTextEntry {
+        if self.textField.isSecureTextEntry {
             imageView.image = UIImage(systemName: "eye")
         } else {
             imageView.image = UIImage(systemName: "eye.slash")
         }
-        let _ = self.setIsSecureText(!self.isSecureTextEntry)
+        let _ = self.setIsSecureText(!self.textField.isSecureTextEntry)
     }
     
 }

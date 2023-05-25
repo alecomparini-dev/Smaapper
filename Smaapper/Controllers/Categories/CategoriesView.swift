@@ -107,11 +107,11 @@ class CategoriesView: View {
     }()
     
     
-    lazy var searchTextField: TextFieldImage = {
+    lazy var searchTextField: TextFieldImageBuilder = {
         let img = ImageView(UIImage(systemName: "magnifyingglass"))
             .setTintColor(.white.withAlphaComponent(0.3))
         
-        let tf = TextFieldImage(image: img, position: .right, margin: 25)
+        let tf = TextFieldImageBuilder(image: img, position: .right, margin: 25)
             .setPlaceHolder("Search")
             .setPlaceHolderColor(.white.withAlphaComponent(0.4))
             .setPlaceHolderSize(15)
@@ -180,7 +180,7 @@ class CategoriesView: View {
             .setSectionFooterHeight(20)
             .setConstraints { build in
                 build
-                    .setTop.equalTo(searchTextField, .bottom, 20)
+                    .setTop.equalTo(searchTextField.view, .bottom, 20)
                     .setLeading.setBottom.setTrailing.equalToSafeArea(20)
             }
         return list

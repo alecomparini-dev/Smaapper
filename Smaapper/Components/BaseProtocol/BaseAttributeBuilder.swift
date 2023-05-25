@@ -71,8 +71,10 @@ class BaseAttributeBuilder {
         return self
     }
     
-    func applyConstraint() {
+    @discardableResult
+    func applyConstraint() -> Self {
         self.constraintsFlow?.apply()
+        return self
     }
 
     func add(insideTo element: UIView) {
