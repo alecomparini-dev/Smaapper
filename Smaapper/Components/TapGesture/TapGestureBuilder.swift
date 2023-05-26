@@ -107,7 +107,6 @@ class TapGestureBuilder {
 }
 
 
-
 //  MARK: - Extension TapGestureActionsDelegate
 extension TapGestureBuilder: TapGestureDelegate {
     

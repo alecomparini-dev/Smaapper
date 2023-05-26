@@ -9,15 +9,14 @@ import UIKit
 
 class ImageViewBuilder: BaseBuilder {
     
-    private var _imageView: ImageView
-    var imageView: ImageView { self._imageView }
-    var view: ImageView { self._imageView }
+    private(set) var imageView: ImageView
     
+    var view: ImageView { self.imageView }
     var actions: ImageViewActions?
     
     init() {
-        self._imageView = ImageView()
-        super.init(self._imageView)
+        self.imageView = ImageView()
+        super.init(self.imageView)
         self.actions = ImageViewActions(self)
     }
     
@@ -32,34 +31,34 @@ class ImageViewBuilder: BaseBuilder {
     @discardableResult
     func setImage(_ image: UIImage?) -> Self {
         if let image {
-            self._imageView.image = image
+            self.imageView.image = image
         }
         return self
     }
     
     @discardableResult
     func setContentMode(_ contentMode: UIView.ContentMode) -> Self {
-        self._imageView.contentMode = contentMode
+        self.imageView.contentMode = contentMode
         return self
     }
     
     @discardableResult
     func setTintColor(_ color: UIColor) -> Self {
-        self._imageView.image = self._imageView.image?.withRenderingMode(.alwaysTemplate)
-        self._imageView.image?.withTintColor(color)
-        self._imageView.tintColor = color
+        self.imageView.image = self.imageView.image?.withRenderingMode(.alwaysTemplate)
+        self.imageView.image?.withTintColor(color)
+        self.imageView.tintColor = color
         return self
     }
     
     @discardableResult
     func setSize(_ size: CGFloat) -> Self {
-        self._imageView.image = self._imageView.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: size))
+        self.imageView.image = self.imageView.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: size))
         return self
     }
     
     @discardableResult
     func setWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        self._imageView.image = self._imageView.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: weight))
+        self.imageView.image = self.imageView.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: weight))
         return self
     }
     
