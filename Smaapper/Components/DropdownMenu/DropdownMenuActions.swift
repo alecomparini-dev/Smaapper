@@ -17,23 +17,16 @@ class DropdownMenuActions {
     typealias touchMenuClosureAlias = (_ rowTapped: (section: Int, row: Int)) -> Void
     typealias eventMenuClosureAlias = () -> Void
     
-    private var _touchMenuClosure: touchMenuClosureAlias?
-    private var _openMenuClosure: eventMenuClosureAlias?
-    private var _closeMenuClosure: eventMenuClosureAlias?
+    private(set) var touchMenuClosure: touchMenuClosureAlias?
+    private(set) var openMenuClosure: eventMenuClosureAlias?
+    private(set) var closeMenuClosure: eventMenuClosureAlias?
     
-    
-//  MARK: - GET Actions
-    
-    var touchMenuClosure: touchMenuClosureAlias? { self._touchMenuClosure}
-    var openMenuClosure: eventMenuClosureAlias? { self._openMenuClosure}
-    var closeMenuClosure: eventMenuClosureAlias? { self._closeMenuClosure}
-    
-    
+        
 //  MARK: - SET Actions
     
     @discardableResult
     func setAction(touch closure: @escaping touchMenuClosureAlias) -> Self {
-        self._touchMenuClosure = closure
+        self.touchMenuClosure = closure
         return self
     }
     
@@ -41,9 +34,9 @@ class DropdownMenuActions {
     func setAction(event: Event, closure: @escaping eventMenuClosureAlias) -> Self {
         switch event {
             case .openMenu:
-                self._openMenuClosure = closure
+                self.openMenuClosure = closure
             case .closeMenu:
-                self._closeMenuClosure = closure
+                self.closeMenuClosure = closure
         }
         return self
     }

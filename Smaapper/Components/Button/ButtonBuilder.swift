@@ -9,16 +9,21 @@ import UIKit
 
 class ButtonBuilder: BaseBuilder {
     
+    private let hierarchyFloatButton: CGFloat = 10000
+    
     private var _config = UIButton.Configuration.plain()
     private var titleWeight: UIFont.Weight = .regular
     
-    private var _button: Button
-    var button: Button { self._button }
-    var view: Button { self._button }
+    private(set) var button: Button
+    var view: Button { self.button }
+    var actions: ButtonActions?
+    
+    
+//  MARK: - Initializers
     
     init() {
-        self._button = Button(frame: .zero)
-        super.init(_button)
+        self.button = Button(frame: .zero)
+        super.init(button)
         self.initialization()
     }
     
@@ -33,35 +38,36 @@ class ButtonBuilder: BaseBuilder {
     }
     
     private func initialization() {
-        _button.configuration = config
+        self.actions = ButtonActions(self)
+        button.configuration = config
         self.setTitleColor(.white, .normal)
     }
     
     
+//  MARK: - SET Properties
     
     @discardableResult
     func setTitle(_ title: String, _ state: UIControl.State) -> Self {
-        _button.setTitle(title, for: state)
+        button.setTitle(title, for: state)
         return self
     }
 
     @discardableResult
     func setTitleColor(_ color: UIColor, _ state: UIControl.State) -> Self {
-        _button.setTitleColor(color, for: state)
+        button.setTitleColor(color, for: state)
         return self
     }
     
-
     @discardableResult
     func setTintColor(_ color: UIColor) -> Self {
-        _button.tintColor = color
+        button.tintColor = color
         return self
     }
     
     @discardableResult
     func setFont(_ font: UIFont?) -> Self {
         if let font {
-            _button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+            button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
                 var attr = attrTransformer
                 attr.font = font
                 return attr
@@ -72,20 +78,20 @@ class ButtonBuilder: BaseBuilder {
     
     @discardableResult
     func setTitleSize(_ ofSize: CGFloat) -> Self {
-        _button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+        button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
             attr.font = .systemFont(ofSize: ofSize, weight: self.titleWeight)
             return attr
         }
-        _button.titleLabel?.font = UIFont.systemFont(ofSize: ofSize)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: ofSize)
         return self
     }
     
     @discardableResult
     func setTitleWeight(_ weight: UIFont.Weight) -> Self {
         self.titleWeight = weight
-        let fontSize = self._button.titleLabel?.font.pointSize
-        _button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
+        let fontSize = self.button.titleLabel?.font.pointSize
+        button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
             attr.font = UIFont.systemFont(ofSize: fontSize ?? 0, weight: weight)
             return attr
@@ -95,48 +101,32 @@ class ButtonBuilder: BaseBuilder {
      
     @discardableResult
     func setTitleAlignment(_ alignment: UIControl.ContentHorizontalAlignment) -> Self {
-        _button.contentHorizontalAlignment = alignment
+        button.contentHorizontalAlignment = alignment
         return self
     }
 
     @discardableResult
     func setActivateDisabledButton(_ startDisable: Bool) -> Self {
-        self._button.activateDisabledButton = true
-        setTitleColor(_button.titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
+        self.button.activateDisabledButton = true
+        setTitleColor(button.titleColor(for: .normal)!.withAlphaComponent(0.3), .disabled)
         if startDisable {
-            _button.isEnabled = false
+            button.isEnabled = false
         }
         return self
     }
 
     @discardableResult
     func setFloatButton() -> Self {
-        self._button.layer.zPosition = 10000
+        self.button.layer.zPosition = hierarchyFloatButton
+        bringToFront()
         return self
     }
     
     
-    
-    
-    
-    
-    
-    
-
-    
-    //  MARK: - Action Area
-        @discardableResult
-        func setTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
-            self._button.addTarget(target, action: action, for: event )
-            return self
-        }
-        
-        
-
-    
-    
-    
-    
-    
+//  MARK: - Private Area
+    private func bringToFront() {
+        guard let superview = self.button.superview else {return}
+        superview.bringSubviewToFront(self.button)
+    }
     
 }

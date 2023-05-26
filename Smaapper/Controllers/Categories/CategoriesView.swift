@@ -46,13 +46,14 @@ class CategoriesView: UIView {
         let btn = IconButtonBuilder(img)
             .setImageColor(.white.withAlphaComponent(0.3))
             .setImageWeight(.semibold)
-            .setTarget(self, #selector(closeModalTapped), .touchUpInside)
             .setConstraints { build in
                 build
                     .setTop.equalToSafeArea(10)
                     .setLeading.equalToSafeArea(15)
                     .setWidth.equalToConstant(30)
             }
+        btn.actions?
+            .setTarget(self, #selector(closeModalTapped), .touchUpInside)
         return btn
     }()
     @objc

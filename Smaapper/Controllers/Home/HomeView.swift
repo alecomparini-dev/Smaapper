@@ -107,7 +107,7 @@ class HomeView: View {
 
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-        return ButtonImageBuilder(img)
+        let btn = ButtonImageBuilder(img)
             .setImageColor(.white)
             .setImageSize(14)
             .setBorder({ build in
@@ -116,7 +116,6 @@ class HomeView: View {
                     .setColor(.systemGray.withAlphaComponent(0.2))
                     .setColor(.white.withAlphaComponent(0.1))
             })
-            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             .setFloatButton()
             .setConstraints { build in
                 build
@@ -131,7 +130,9 @@ class HomeView: View {
                     .setLightPosition(.leftTop)
                     .apply()
             }
-
+        btn.actions?
+            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+        return btn
     }()
     
     lazy var profileButton: IconButtonBuilder = {

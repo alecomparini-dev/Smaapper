@@ -17,9 +17,9 @@ class DockActions {
     typealias touchDockClosureAlias = (_ indexItem: Int ) -> Void
     typealias eventDockClosureAlias = (_ stateDock: Event) -> Void
     
-    private var _touchDockClosure: touchDockClosureAlias?
-    private var _showDockClosure: eventDockClosureAlias?
-    private var _hideDockClosure: eventDockClosureAlias?
+    private(set) var touchDockClosure: touchDockClosureAlias?
+    private(set) var showDockClosure: eventDockClosureAlias?
+    private(set) var hideDockClosure: eventDockClosureAlias?
     
     private let dock: Dock
     
@@ -27,17 +27,12 @@ class DockActions {
         self.dock = dock
     }
 
-//  MARK: - GET Propeties
-    var touchDockClosure: touchDockClosureAlias? { self._touchDockClosure}
-    var showDockClosure: eventDockClosureAlias? { self._showDockClosure}
-    var hideDockClosure: eventDockClosureAlias? { self._hideDockClosure}
-    
     
 //  MARK: - SET Actions
     
     @discardableResult
     func setAction(touch closure: @escaping touchDockClosureAlias) -> Self {
-        self._touchDockClosure = closure
+        self.touchDockClosure = closure
         return self
     }
     
@@ -45,9 +40,9 @@ class DockActions {
     func setAction(event: Event  ,closure: @escaping eventDockClosureAlias) -> Self {
         switch event {
             case .showDock:
-                self._showDockClosure = closure
+                self.showDockClosure = closure
             case .hideDock:
-                self._hideDockClosure = closure
+                self.hideDockClosure = closure
         }
         return self
     }
