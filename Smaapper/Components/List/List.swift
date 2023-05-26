@@ -14,7 +14,6 @@ protocol ListActionsDelegate: AnyObject {
 
 class List: UITableView {
 
-    
     weak var listDelegate: ListActionsDelegate?
 
     private var _customSectionHeaderHeight: [Int : CGFloat] = [:]
@@ -26,7 +25,6 @@ class List: UITableView {
     
     private var _sections = [Section]()
     
-    
     init(_ style: UITableView.Style) {
         super.init(frame: .zero, style: style)
     }
@@ -37,6 +35,7 @@ class List: UITableView {
 
     
 //  MARK: - GET Properties
+    
     var customSectionHeaderHeight: [Int : CGFloat] {
         get { self._customSectionHeaderHeight }
         set { self._customSectionHeaderHeight = newValue }
@@ -72,10 +71,7 @@ class List: UITableView {
         set { self._customRowHeight = newValue }
     }
     
-    
-
 }
-
 
 
 //  MARK: - Extension Delegate
@@ -95,8 +91,8 @@ extension List: UITableViewDelegate {
     
 }
 
-//  MARK: - Extension Data Source
 
+//  MARK: - Extension Data Source
 extension List: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -114,7 +110,6 @@ extension List: UITableViewDataSource {
                        self.sections[section].rightView)
         return cell
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListCell.identifier, for: indexPath) as! ListCell

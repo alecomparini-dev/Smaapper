@@ -73,9 +73,7 @@ class BorderBuilder {
 //  MARK: - Component Private Functions
     
     private func selectCorners(_ cornes: [BorderBuilder.Corner]) -> CACornerMask {
-        
         var selection: CACornerMask = []
-        
         cornes.forEach { corner in
             switch corner {
             case .leftTop:

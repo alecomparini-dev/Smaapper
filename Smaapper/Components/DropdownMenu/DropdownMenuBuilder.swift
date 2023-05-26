@@ -200,8 +200,10 @@ class DropdownMenuBuilder: BaseBuilder {
             guard let rootView = CurrentWindow.rootView else { return }
             rootView.makeTapGesture { make in
                 make
-                    .setStateGesture([.ended])
-                    .setAction (closure: verifyTappedOutMenu)
+                    .setAction (touchEnded: { [weak self] tapGesture in
+                        guard let self else {return}
+                        self.verifyTappedOutMenu(tapGesture)
+                    })
             }
         }
     }
@@ -216,7 +218,7 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func isTappedOut(_ tap: TapGesture) -> Bool {
-        let touchPoint = tap.getTouchedPositionRelative(to: .window)
+        let touchPoint = tap.getTouchPosition(.window)
         if isTappedOutDropdownMenu(touchPoint) && isTappedOutExcludeComponents(touchPoint) {
             return true
         }

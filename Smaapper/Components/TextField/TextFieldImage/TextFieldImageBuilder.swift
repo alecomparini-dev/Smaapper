@@ -63,13 +63,14 @@ class TextFieldImageBuilder: TextFieldBuilder {
     @discardableResult
     func setOnTapImage(completion: @escaping onTapImageClosureAlias) -> Self {
         self.onTapAction = completion
-        self.paddingView.makeTapGesture { make in
-            make.setStateGesture([.ended])
-                .setAction { [weak self] tapGesture in
-                    guard let self else { return }
-                    self.onTapAction?(self.imageView)
-                }
-        }
+        self.paddingView
+            .makeTapGesture({ make in
+                make
+                    .setAction(touchEnded: { [weak self] tapGesture in
+                        guard let self else {return}
+                        self.onTapAction?(self.imageView)
+                    })
+            })
         return self
     }
 

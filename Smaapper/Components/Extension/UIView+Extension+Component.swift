@@ -66,8 +66,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeTapGesture(_ gesture: (_ make: TapGesture) -> TapGesture) -> Self {
-        _ = gesture(TapGesture(self))
+    func makeTapGesture(_ gesture: (_ make: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        _ = gesture(TapGestureBuilder(self))
         return self
     }
     

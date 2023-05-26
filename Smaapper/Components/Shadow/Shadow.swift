@@ -96,10 +96,10 @@ class Shadow {
 //  MARK: - Component private functions
     @discardableResult
     func setDefault() -> Self {
-        return self.setColor(ShadowDefault.color)
-            .setOffset(ShadowDefault.offset)
-            .setOpacity(ShadowDefault.opacity)
-            .setBlur(ShadowDefault.radius)
+        return
+            setColor(.black)
+            .setOpacity(0.6)
+            .setBlur(5)
     }
     
     @discardableResult

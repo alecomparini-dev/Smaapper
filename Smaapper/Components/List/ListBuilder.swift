@@ -32,7 +32,6 @@ class ListBuilder: BaseBuilder {
         return self
     }
     
-    //TODO: - Fazer !!
     @discardableResult
     func setCustomRowHeight(forSection: Int, forRow: Int, _ height: CGFloat) -> Self {
         list.customRowHeight.updateValue([forRow : height], forKey: forSection)

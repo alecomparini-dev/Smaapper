@@ -47,7 +47,6 @@
 		0234A91E29F9FD3A008392EC /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8B829F9FD3A008392EC /* Alert.swift */; };
 		0234A91F29F9FD3A008392EC /* Choose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8B929F9FD3A008392EC /* Choose.swift */; };
 		0234A92029F9FD3A008392EC /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BA29F9FD3A008392EC /* Warning.swift */; };
-		0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BC29F9FD3A008392EC /* ShadowDefault.swift */; };
 		0234A92229F9FD3A008392EC /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BD29F9FD3A008392EC /* Shadow.swift */; };
 		0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */; };
 		0234A93629F9FD3A008392EC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E529F9FD3A008392EC /* Label.swift */; };
@@ -81,8 +80,6 @@
 		02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */ = {isa = PBXBuildFile; fileRef = 02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */; };
 		02C9C9E22A05392400AA1370 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E12A05392400AA1370 /* Section.swift */; };
 		02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E52A058FB700AA1370 /* ListCellView.swift */; };
-		02C9C9EB2A0A776600AA1370 /* TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9EA2A0A776600AA1370 /* TapGesture.swift */; };
-		02C9C9EF2A0AB8F800AA1370 /* TapGestureDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -91,6 +88,9 @@
 		02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581462A1FD86900150AF9 /* StackBuilder.swift */; };
 		02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581482A1FE15900150AF9 /* ListBuilder.swift */; };
 		02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814A2A1FF01800150AF9 /* ListActions.swift */; };
+		02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814C2A20057700150AF9 /* TapGesture.swift */; };
+		02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814E2A20058500150AF9 /* TapGestureBuilder.swift */; };
+		02D581512A20263D00150AF9 /* TapGestureActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581502A20263D00150AF9 /* TapGestureActions.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -150,7 +150,6 @@
 		0234A8B829F9FD3A008392EC /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0234A8B929F9FD3A008392EC /* Choose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Choose.swift; sourceTree = "<group>"; };
 		0234A8BA29F9FD3A008392EC /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
-		0234A8BC29F9FD3A008392EC /* ShadowDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowDefault.swift; sourceTree = "<group>"; };
 		0234A8BD29F9FD3A008392EC /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
 		0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowsScroll.swift; sourceTree = "<group>"; };
 		0234A8E529F9FD3A008392EC /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -184,8 +183,6 @@
 		02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DropdownMenuData.json; sourceTree = "<group>"; };
 		02C9C9E12A05392400AA1370 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		02C9C9E52A058FB700AA1370 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
-		02C9C9EA2A0A776600AA1370 /* TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGesture.swift; sourceTree = "<group>"; };
-		02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureDefault.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -194,6 +191,9 @@
 		02D581462A1FD86900150AF9 /* StackBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackBuilder.swift; sourceTree = "<group>"; };
 		02D581482A1FE15900150AF9 /* ListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilder.swift; sourceTree = "<group>"; };
 		02D5814A2A1FF01800150AF9 /* ListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListActions.swift; sourceTree = "<group>"; };
+		02D5814C2A20057700150AF9 /* TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGesture.swift; sourceTree = "<group>"; };
+		02D5814E2A20058500150AF9 /* TapGestureBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureBuilder.swift; sourceTree = "<group>"; };
+		02D581502A20263D00150AF9 /* TapGestureActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureActions.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A8B729F9FD3A008392EC /* Alert */,
-				0281DAD92A15376D00E44F04 /* BaseProtocol */,
+				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
 				0234A88A29F9FD3A008392EC /* Border */,
 				0234A8EE29F9FD3A008392EC /* Button */,
@@ -425,7 +425,6 @@
 		0234A8BB29F9FD3A008392EC /* Shadow */ = {
 			isa = PBXGroup;
 			children = (
-				0234A8BC29F9FD3A008392EC /* ShadowDefault.swift */,
 				0234A8BD29F9FD3A008392EC /* Shadow.swift */,
 			);
 			path = Shadow;
@@ -454,8 +453,8 @@
 			children = (
 				02B792682A1EE56E006CEE8E /* TextFieldPassword */,
 				02B792652A1EE409006CEE8E /* TextFieldImage */,
-				020D0E652A1ED628007F3992 /* TextField.swift */,
 				020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */,
+				020D0E652A1ED628007F3992 /* TextField.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -491,8 +490,8 @@
 		0234A95B29FB3E39008392EC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0234A95C29FB3E47008392EC /* View.swift */,
 				020D0E622A1ECE02007F3992 /* ViewBuilder.swift */,
+				0234A95C29FB3E47008392EC /* View.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,13 +566,13 @@
 			path = DockCell;
 			sourceTree = "<group>";
 		};
-		0281DAD92A15376D00E44F04 /* BaseProtocol */ = {
+		0281DAD92A15376D00E44F04 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				020D0E512A1E6E5D007F3992 /* BaseBuilder.swift */,
 				02D581442A1FCC2B00150AF9 /* BaseActions.swift */,
+				020D0E512A1E6E5D007F3992 /* BaseBuilder.swift */,
 			);
-			path = BaseProtocol;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		0281DADC2A16682B00E44F04 /* Blur */ = {
@@ -743,8 +742,9 @@
 		02C9C9E92A0A774F00AA1370 /* TapGesture */ = {
 			isa = PBXGroup;
 			children = (
-				02C9C9EE2A0AB8F800AA1370 /* TapGestureDefault.swift */,
-				02C9C9EA2A0A776600AA1370 /* TapGesture.swift */,
+				02D5814C2A20057700150AF9 /* TapGesture.swift */,
+				02D5814E2A20058500150AF9 /* TapGestureBuilder.swift */,
+				02D581502A20263D00150AF9 /* TapGestureActions.swift */,
 			);
 			path = TapGesture;
 			sourceTree = "<group>";
@@ -877,11 +877,12 @@
 				020D0E662A1ED628007F3992 /* TextField.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */,
+				02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
 				020D0E5F2A1ECD0A007F3992 /* DropdownMenuActions.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
-				02C9C9EF2A0AB8F800AA1370 /* TapGestureDefault.swift in Sources */,
+				02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */,
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
@@ -901,6 +902,7 @@
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
+				02D581512A20263D00150AF9 /* TapGestureActions.swift in Sources */,
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
@@ -924,7 +926,6 @@
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
-				02C9C9EB2A0A776600AA1370 /* TapGesture.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
@@ -941,7 +942,6 @@
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
-				0234A92129F9FD3A008392EC /* ShadowDefault.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
