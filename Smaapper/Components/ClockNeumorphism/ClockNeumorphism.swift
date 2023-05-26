@@ -24,6 +24,11 @@ class ClockNeumorphism: ViewBuilder {
     
     private var timer: DispatchSourceTimer?
     private var weight: CGFloat = 3
+    private var enabledDay: Bool = false
+    private var hour1: Int = 0
+    private var hour2: Int = 0
+    private var minute1: Int = 0
+    private var minute2: Int = 0
     
     override init() {
         super.init()
@@ -37,7 +42,7 @@ class ClockNeumorphism: ViewBuilder {
     private func initialization() {
         addElements()
         configConstraint()
-        createClock()
+        startClock()
     }
     
     lazy var stackHours: StackBuilder = {
@@ -56,6 +61,24 @@ class ClockNeumorphism: ViewBuilder {
         return st
     }()
     
+    lazy var day: LabelBuilder = {
+        let label = LabelBuilder()
+            .setText("31-05")
+            .setFont(UIFont.systemFont(ofSize: 14, weight: .thin))
+            .setColor(.systemOrange.withAlphaComponent(0.8))
+            .setTextAlignment(.right)
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(stackMinutes.view, .bottom, 5)
+                    .setLeading.equalToSuperView(10)
+                    .setTrailing.equalToSuperView(2)
+                
+                    
+//                    .setHeight.setWidth.equalToConstant(10)
+            }
+        
+        return label
+    }()
     
     lazy var twoPoints: ViewBuilder = {
         let view = ViewBuilder()
@@ -89,8 +112,15 @@ class ClockNeumorphism: ViewBuilder {
     
     
 //  MARK: - SET Properties
+    @discardableResult
     func setWeight(_ weight: CGFloat) -> Self {
         self.weight = weight
+        return self
+    }
+    
+    @discardableResult
+    func setEnabledDay(_ enabled: Bool) -> Self {
+        self.enabledDay = enabled
         return self
     }
     
@@ -98,7 +128,7 @@ class ClockNeumorphism: ViewBuilder {
 //  MARK: - Private Function Area
     
     // TODO: - CREATE METHOD START OR SHOW AND UPDATE ONLY WHEN NUMBER CHANGES
-    private func createClock() {
+    private func startClock() {
         updateClock()
         timer = DispatchSource.makeTimerSource()
         
@@ -117,14 +147,14 @@ class ClockNeumorphism: ViewBuilder {
     
     private func updateClock() {
         removeSubviews()
-        let hour1 = ClockNumbers(number: getHour(firstPosition: true), weight: weight)
-        let hour2 = ClockNumbers(number: getHour(firstPosition: false), weight: weight)
-        let minute1 = ClockNumbers(number: getMinute(firstPosition: true), weight: weight)
-        let minute2 = ClockNumbers(number: getMinute(firstPosition: false), weight: weight)
-        hour1.add(insideTo: stackHours.view)
-        hour2.add(insideTo: stackHours.view)
-        minute1.add(insideTo: stackMinutes.view)
-        minute2.add(insideTo: stackMinutes.view)
+        let hourView1 = ClockNumbers(number: getHour(firstPosition: true), weight: weight)
+        let hourView2 = ClockNumbers(number: getHour(firstPosition: false), weight: weight)
+        let minuteView1 = ClockNumbers(number: getMinute(firstPosition: true), weight: weight)
+        let minuteView2 = ClockNumbers(number: getMinute(firstPosition: false), weight: weight)
+        hourView1.add(insideTo: stackHours.view)
+        hourView2.add(insideTo: stackHours.view)
+        minuteView1.add(insideTo: stackMinutes.view)
+        minuteView2.add(insideTo: stackMinutes.view)
     }
     
     private func removeSubviews() {
@@ -208,14 +238,15 @@ class ClockNeumorphism: ViewBuilder {
         stackHours.add(insideTo: self.view)
         stackMinutes.add(insideTo: self.view)
         twoPoints.add(insideTo: self.view)
-        
+        day.add(insideTo: self.view)
     }
     
     private func configConstraint() {
         configStackHoursConstraint()
         configTwoPointsConstraint()
         configStackMinutesConstraint()
-        
+        day.applyConstraint()
+
     }
     
     private func configStackHoursConstraint() {
