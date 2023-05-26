@@ -16,7 +16,7 @@ class BaseBuilder {
     private var _shadow: Shadow?
     private var _neumorphism: Neumorphism?
     private var _gradient: Gradient?
-    private var _tapGesture: TapGesture?
+    private var _tapGesture: TapGestureBuilder?
     
     private var _component: UIView
     var component: UIView { self._component}
@@ -32,7 +32,7 @@ class BaseBuilder {
     var shadow: Shadow? { self._shadow}
     var neumorphism: Neumorphism? { self._neumorphism}
     var gradient: Gradient? { self._gradient}
-    var tapGesture: TapGesture? { self._tapGesture}
+    var tapGesture: TapGestureBuilder? { self._tapGesture}
     
     
 //  MARK: - SET Properties
@@ -61,8 +61,8 @@ class BaseBuilder {
     }
 
     @discardableResult
-    func setTapGesture(_ tapGesture: (_ build: TapGesture) -> TapGesture) -> Self {
-        self._tapGesture = tapGesture(TapGesture(component))
+    func setTapGesture(_ tapGesture: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        self._tapGesture = tapGesture(TapGestureBuilder(component))
         return self
     }
     

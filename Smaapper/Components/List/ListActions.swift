@@ -10,8 +10,8 @@ import UIKit
 
 class ListActions {
     
-    typealias didSelectRow = (_ section: Int, _ row: Int) -> Void
-    private var didSelectRow: didSelectRow?
+    typealias didSelectRowAlias = (_ section: Int, _ row: Int) -> Void
+    private var didSelectRow: didSelectRowAlias?
     
     private let listBuilder: ListBuilder
     
@@ -24,7 +24,7 @@ class ListActions {
 //  MARK: - SET Actions
     
     @discardableResult
-    func setAction(didSelectRow closure: @escaping didSelectRow) -> Self {
+    func setAction(didSelectRow closure: @escaping didSelectRowAlias) -> Self {
         self.didSelectRow = closure
         return self
     }
@@ -36,6 +36,9 @@ class ListActions {
     }
     
 }
+
+
+//  MARK: - Extension ListActionsDelegate
 
 extension ListActions: ListActionsDelegate {
     

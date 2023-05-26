@@ -23,14 +23,12 @@ class BaseActions {
     
     @discardableResult
     func setAction(touch closure: @escaping touchBaseActionClosureAlias) -> Self {
-        self.baseBuilder.setTapGesture { build in
-            build
-                .setStateGesture([.ended])
-                .setAction { [weak self] tapGesture in
-                    guard let self else {return}
-                    closure(self.baseBuilder.component)
-                }
-        }
+//        self.baseBuilder.setTapGesture { build in
+//            build.actions?
+//                .setAction(touchEnded: <#T##TapGestureActions.touchGestureActionsAlias##TapGestureActions.touchGestureActionsAlias##(_ tapGesture: TapGesture) -> Void#>)
+//        }
+//        
+//        closure(self.baseBuilder.component)
         return self
     }
     
