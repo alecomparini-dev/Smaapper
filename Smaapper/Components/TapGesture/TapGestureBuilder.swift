@@ -26,7 +26,7 @@ class TapGestureBuilder {
     
     private func initialization() {
         enableUserInteractionComponent()
-        setCancelsTouchesInView(false)
+        setCancelsTouchesInView(true)
         configTapGestureDelegate()
         createTapGesture()
         addTapOnComponent()
@@ -127,3 +127,17 @@ extension TapGestureBuilder: TapGestureDelegate {
     }
     
 }
+
+
+extension UITableView: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+extension UICollectionView: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
