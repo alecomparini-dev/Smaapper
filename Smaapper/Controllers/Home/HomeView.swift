@@ -44,7 +44,8 @@ class HomeView: View {
             .setWeight(4)
             .setConstraints { build in
                 build
-                    .setTop.setTrailing.equalToSafeArea(30)
+                    .setTop.equalToSafeArea(45)
+                    .setTrailing.equalToSafeArea(-20)
                     .setWidth.equalToConstant(110)
                     .setHeight.equalToConstant(40)
             }
@@ -117,12 +118,6 @@ class HomeView: View {
                     .setColor(.white.withAlphaComponent(0.1))
             })
             .setFloatButton()
-            .setConstraints { build in
-                build
-                    .setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-15)
-                    .setHeight.setWidth.equalToConstant(60)
-            }
             .setNeumorphism { build in
                 build
                     .setReferenceColor(UIColor.HEX("#17191a"))
@@ -130,6 +125,13 @@ class HomeView: View {
                     .setLightPosition(.leftTop)
                     .apply()
             }
+            .setConstraints { build in
+                build
+                    .setBottom.equalToSafeArea(-10)
+                    .setTrailing.equalToSafeArea(-15)
+                    .setHeight.setWidth.equalToConstant(60)
+            }
+
         btn.actions?
             .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
         return btn
