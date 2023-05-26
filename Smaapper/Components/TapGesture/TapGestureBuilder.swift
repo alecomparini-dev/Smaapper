@@ -16,7 +16,7 @@ class TapGestureBuilder {
     private var _touchEnded: touchGestureAlias?
     private var _touchCancelled: touchGestureAlias?
     
-    private(set) var tapGesture: TapGesture = TapGesture()
+    private(set) var tapGesture: TapGesture?
     private let component: UIView
     
     init(_ component: UIView) {
@@ -26,60 +26,70 @@ class TapGestureBuilder {
     
     private func initialization() {
         enableUserInteractionComponent()
-        setCancelsTouchesInView(true)
-        configTapGestureDelegate()
         createTapGesture()
+        setCancelsTouchesInView(false)
         addTapOnComponent()
+        configTapGestureDelegate()
+        
     }
 
 //  MARK: - GET Properties
-    var view: TapGesture { self.tapGesture }
+    var view: TapGesture { self.tapGesture ?? TapGesture() }
 
     
 //  MARK: - Set Properties
 
     @discardableResult
     func setNumberOfTapsRequired(_ numberOfTaps: Int) -> Self {
-        tapGesture.numberOfTapsRequired = numberOfTaps
+        self.tapGesture?.numberOfTapsRequired = numberOfTaps
         return self
     }
     
     @discardableResult
     func setNumberOfTouchesRequired(_ numberOfTouches: Int) -> Self {
-        tapGesture.numberOfTouchesRequired = numberOfTouches
+        self.tapGesture?.numberOfTouchesRequired = numberOfTouches
         return self
     }
     
     @discardableResult
     func setCancelsTouchesInView(_ cancel: Bool ) -> Self {
-        tapGesture.cancelsTouchesInView = cancel
+        self.tapGesture?.cancelsTouchesInView = cancel
         return self
     }
     
     @discardableResult
-    func setAction(touchBegan closure: @escaping touchGestureAlias) -> Self {
+    func setAction(touchBegan closure: (@escaping touchGestureAlias)) -> Self {
         self._touchBegan = closure
+        self.addStatesEnabled(.began)
         return self
     }
     
     @discardableResult
-    func setAction(touchMoved closure: @escaping touchGestureAlias) -> Self {
-        self._touchMoved = closure
-        return self
-    }
-    
-    @discardableResult
-    func setAction(touchEnded closure: @escaping touchGestureAlias) -> Self {
+    func setAction(touchEnded closure: (@escaping touchGestureAlias)) -> Self {
         self._touchEnded = closure
+        self.addStatesEnabled(.ended)
         return self
     }
     
     @discardableResult
-    func setAction(touchCancelled closure: @escaping touchGestureAlias) -> Self {
-        self._touchCancelled = closure
+    func setAction(touchMoved closure: (@escaping touchGestureAlias)) -> Self {
+        self._touchMoved = closure
+        self.addStatesEnabled(.changed)
         return self
     }
     
+    @discardableResult
+    func setAction(touchCancelled closure: (@escaping touchGestureAlias)) -> Self {
+        self._touchCancelled = closure
+        self.addStatesEnabled(.cancelled)
+        return self
+    }
+    
+    @discardableResult
+    func setIsEnabled(_ enabled: Bool ) -> Self {
+        self.tapGesture?.isEnabled = enabled
+        return self
+    }
        
     
 //  MARK: - Private Area
@@ -88,15 +98,21 @@ class TapGestureBuilder {
     }
     
     private func createTapGesture() {
-        self.tapGesture.addTarget(self, action: #selector(objcTapGesture))
+        self.tapGesture = TapGesture(target: self, action: #selector(objcTapGesture))
     }
     
     private func addTapOnComponent() {
-        self.component.addGestureRecognizer(self.tapGesture)
+        if let tapGesture {
+            self.component.addGestureRecognizer(tapGesture)
+        }
     }
     
     private func configTapGestureDelegate() {
-        tapGesture.tapGestureDelegate = self
+        tapGesture?.tapGestureDelegate = self
+    }
+    
+    private func addStatesEnabled(_ state: UIGestureRecognizer.State) {
+        self.tapGesture?.statesEnabled.append(state)
     }
 
     
@@ -126,18 +142,5 @@ extension TapGestureBuilder: TapGestureDelegate {
         self._touchCancelled?(tapGesture)
     }
     
-}
-
-
-extension UITableView: UIGestureRecognizerDelegate {
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
-
-extension UICollectionView: UIGestureRecognizerDelegate {
-    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
 }
 

@@ -27,6 +27,8 @@ class TapGesture: UITapGestureRecognizer {
     private var _touchPositionSuperView: CGPoint?
     private var _touchPositionWindow: CGPoint?
     
+    var statesEnabled: [UIGestureRecognizer.State] = []
+    
     
 //  MARK: - GET Properties
         
@@ -44,24 +46,28 @@ class TapGesture: UITapGestureRecognizer {
     
 //  MARK: - Override Functions Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        if !statesEnabled.contains(.began) {return}
         setTouchPositions(touches)
         self.state = .began
         tapGestureDelegate?.touchBegan(self)
     }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        if !statesEnabled.contains(.ended) {return}
+        setTouchPositions(touches)
+        self.state = .ended
+        tapGestureDelegate?.touchEnded(self)
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        if !statesEnabled.contains(.changed) {return}
         setTouchPositions(touches)
         self.state = .changed
         tapGestureDelegate?.touchMoved(self)
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        setTouchPositions(touches)
-        self.state = .ended
-        tapGestureDelegate?.touchEnded(self)
-    }
-
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+        if !statesEnabled.contains(.cancelled) {return}
         self.state = .cancelled
         tapGestureDelegate?.touchCancelled(self)
     }

@@ -13,6 +13,7 @@ class DropdownMenuBuilder: BaseBuilder {
     private var alreadyApplied = false
     private var _isShow = false
     private var zPosition: CGFloat = 10000
+    private var tapGestureBuilder: TapGestureBuilder?
     
     private(set) var dropdown: DropdownMenu
     var view: DropdownMenu { self.dropdown }
@@ -124,10 +125,11 @@ class DropdownMenuBuilder: BaseBuilder {
             return self._isShow }
         set {
             self._isShow = newValue
-            applyOnceConfig()
+            callOnlyIsShow()
             isPresented()
-            bringToFront()
             callClosureOpenCloseMenu(self._isShow)
+            bringToFront()
+            isEnabledTapGesture(self._isShow)
         }
     }
     
@@ -135,7 +137,7 @@ class DropdownMenuBuilder: BaseBuilder {
     //  MARK: - PRIVATE AREA
     
     private func applyOnceConfig() {
-        if self._isShow && !alreadyApplied {
+        if !alreadyApplied {
             self.configList()
             self.configDropDownMenuConstraints()
             self.configAutoCloseDropdownMenu()
@@ -144,6 +146,23 @@ class DropdownMenuBuilder: BaseBuilder {
             self.alreadyApplied = true
         }
     }
+    
+    private func callOnlyIsShow() {
+        if self._isShow {
+            applyOnceConfig()
+            bringToFront()
+        }
+    }
+    
+    private func isEnabledTapGesture(_ enabled: Bool) {
+        self.tapGestureBuilder?.setIsEnabled(enabled)
+    }
+    
+    private func bringToFront() {
+        guard let rootView = CurrentWindow.rootView else { return }
+        rootView.bringSubviewToFront(dropdown)
+    }
+    
     
     private func configList() {
         self.addListOnDropdownMenu()
@@ -198,18 +217,17 @@ class DropdownMenuBuilder: BaseBuilder {
     private func configAutoCloseDropdownMenu() {
         if self.dropdown.autoCloseEnabled {
             guard let rootView = CurrentWindow.rootView else { return }
-            rootView.makeTapGesture { make in
-                make
-                    .setAction (touchEnded: { [weak self] tapGesture in
-                        guard let self else {return}
-                        self.verifyTappedOutMenu(tapGesture)
-                    })
-            }
+            self.tapGestureBuilder = TapGestureBuilder(rootView)
+                .setAction(touchEnded: { [weak self] tapGesture in
+                    guard let self else {return}
+                    self.verifyTappedOutMenu(tapGesture)
+                })
+                
         }
     }
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
-        print("TIRAR ISSOOOO")
+        print("CHAMANDO TODA HORA ?!?!?!?!")
         if _isShow {
             if isTappedOut(tap) {
                 isShow = false
@@ -269,12 +287,7 @@ class DropdownMenuBuilder: BaseBuilder {
         }
     }
     
-    private func bringToFront() {
-        if !_isShow { return }
-        guard let rootView = CurrentWindow.rootView else { return }
-        rootView.bringSubviewToFront(dropdown)
-    }
-    
+
     private func addListOnDropdownMenu() {
         dropdown.list.add(insideTo: dropdown)
     }
