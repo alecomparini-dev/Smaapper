@@ -16,10 +16,9 @@ protocol HomeViewDelegate: AnyObject {
     func dockCellCalback(_ indexCell: Int) -> UIView
 }
 
-class HomeView: View {
+class HomeView: ViewBuilder {
     
     weak var delegate: HomeViewDelegate?
-    
     private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
     override init(frame: CGRect) {
@@ -38,6 +37,51 @@ class HomeView: View {
     }
     
 //  MARK: - LAZY Properties
+    
+    lazy var weather: WeatherForecastView = {
+        let view = WeatherForecastView(temperature: 25)
+//            .setBackgroundColor(.orange.withAlphaComponent(0.8))
+            .setGradient({ build in
+                build
+                    .setColor([UIColor.HEX("#ec9355"), UIColor.HEX("#ff6b00")])
+                    .setAxialGradient(.topToBottom)
+                    .apply()
+            })
+            .setShadow({ build in
+                build
+                    .setColor(.black)
+                    .setBlur(3)
+                    .setOffset(width: 5, height: 5)
+                    
+                    .apply()
+            })
+            .setBorder({ build in
+                build
+                    .setCornerRadius(40)
+                    .setWhichCornersWillBeRounded([.right])
+            })
+//            .setNeumorphism({ build in
+//                build
+//                    .setReferenceColor(UIColor.HEX("#ff6b00"))
+//                    .setShape(.convex)
+//                    .setLightPosition(.leftTop)
+////                    .setIntensity(to: .light, percent: 10)
+////                    .setIntensity(to: .dark, percent: 100)
+//                    .setBlur(to: .light, percent: 10)
+//                    .setBlur(to: .dark, percent: 5)
+//                    .setDistance(to: .light, percent: 0)
+//                    .setDistance(to: .dark, percent: 10)
+//                    .apply()
+//            })
+            .setConstraints { build in
+                build
+                    .setTop.equalToSafeArea(25)
+                    .setLeading.equalToSuperView(40)
+                    .setHeight.equalToConstant(80)
+                    .setWidth.equalToConstant(320)
+            }
+        return view
+    }()
     
     lazy var clock: ClockNeumorphism = {
         let clock = ClockNeumorphism()
@@ -358,26 +402,32 @@ class HomeView: View {
 //  MARK: - Private Function Area
 
     private func addBackgroundColor() {
-        self.makeGradient { build in
+        self.setGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
+
         }
     }
     
     private func addElements() {
-        dropdownMenu.add(insideTo: self)
-        dock.add(insideTo: self)
-        menuButton.add(insideTo: self)
-        self.clock.add(insideTo: self)
+//        weather.add(insideTo: self.view)
+        clock.add(insideTo: self.view)
+        dropdownMenu.add(insideTo: self.view)
+        dock.add(insideTo: self.view)
+        menuButton.add(insideTo: self.view)
+        
+        
     }
     
     private func applyConstraints() {
+//        weather.applyConstraint()
+        clock.applyConstraint()
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        self.clock.applyConstraint()
+        
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            self.floatWindow.add(insideTo: self)
@@ -386,6 +436,8 @@ class HomeView: View {
 //        }
         
         
+        weather.add(insideTo: self.view)
+        weather.applyConstraint()
         
     }
     
@@ -422,7 +474,7 @@ class HomeView: View {
             .setContentMode(.scaleAspectFill)
             .view
         
-        img.add(insideTo: self)
+        img.add(insideTo: self.view)
         img.makeConstraints { make in
             make.setPin.equalToSuperView
         }

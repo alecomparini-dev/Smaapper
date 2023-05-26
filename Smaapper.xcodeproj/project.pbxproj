@@ -91,6 +91,8 @@
 		02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814C2A20057700150AF9 /* TapGesture.swift */; };
 		02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5814E2A20058500150AF9 /* TapGestureBuilder.swift */; };
 		02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581522A20CD8A00150AF9 /* ButtonActions.swift */; };
+		02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581562A2120F200150AF9 /* WeatherForecastView.swift */; };
+		02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -194,6 +196,8 @@
 		02D5814C2A20057700150AF9 /* TapGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGesture.swift; sourceTree = "<group>"; };
 		02D5814E2A20058500150AF9 /* TapGestureBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureBuilder.swift; sourceTree = "<group>"; };
 		02D581522A20CD8A00150AF9 /* ButtonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActions.swift; sourceTree = "<group>"; };
+		02D581562A2120F200150AF9 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
+		02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CACornerMask+Extension+Component.swift"; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -249,8 +253,8 @@
 		0234A5EF29F9F30F008392EC /* Smaapper */ = {
 			isa = PBXGroup;
 			children = (
-				026F797E2A02A53B003947A6 /* Controllers */,
 				02D581542A211F7D00150AF9 /* CustomViews */,
+				026F797E2A02A53B003947A6 /* Controllers */,
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
 				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F4452A0C1A7200D75D9F /* Service */,
@@ -324,6 +328,7 @@
 				0234A8A029F9FD3A008392EC /* Int+Extension+Component.swift */,
 				0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */,
 				0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */,
+				02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -753,8 +758,17 @@
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				02D581552A21205C00150AF9 /* WeatherForecast */,
 			);
 			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		02D581552A21205C00150AF9 /* WeatherForecast */ = {
+			isa = PBXGroup;
+			children = (
+				02D581562A2120F200150AF9 /* WeatherForecastView.swift */,
+			);
+			path = WeatherForecast;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {
@@ -891,6 +905,7 @@
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
 				02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */,
+				02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */,
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
@@ -950,6 +965,7 @@
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
+				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,

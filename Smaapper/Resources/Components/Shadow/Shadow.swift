@@ -94,13 +94,6 @@ class Shadow {
     
     
 //  MARK: - Component private functions
-    @discardableResult
-    func setDefault() -> Self {
-        return
-            setColor(.black)
-            .setOpacity(0.6)
-            .setBlur(5)
-    }
     
     @discardableResult
     func apply() -> Self {
@@ -127,7 +120,8 @@ class Shadow {
         return UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0),
                                                 size: CGSize(width: shadowWidth,
                                                              height: shadowHeight)),
-                            cornerRadius: cornerRadius).cgPath
+                            byRoundingCorners: self.component.layer.maskedCorners.toRectCorner ,
+                            cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
     }
     
     private func getShadowHeight() -> CGFloat {
@@ -152,9 +146,16 @@ class Shadow {
     }
     
     private func shadowInitializers() {
-        let _ = self.setDefault()
-        self.shadow.shouldRasterize = true
-        self.shadow.rasterizationScale = UIScreen.main.scale
+        setDefault()
+        shadow.shouldRasterize = true
+        shadow.rasterizationScale = UIScreen.main.scale
+        
+    }
+    
+    private func setDefault(){
+        setColor(.black)
+            .setOpacity(0.6)
+            .setBlur(5)
     }
     
 }

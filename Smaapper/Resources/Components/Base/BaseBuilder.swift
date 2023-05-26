@@ -18,11 +18,10 @@ class BaseBuilder {
     private var _gradient: Gradient?
     private var _tapGesture: TapGestureBuilder?
     
-    private var _component: UIView
-    var component: UIView { self._component}
+    private(set) var component: UIView
     
     init(_ component: UIView) {
-        self._component = component
+        self.component = component
     }
     
     
@@ -41,6 +40,7 @@ class BaseBuilder {
         self._border = border(BorderBuilder(component))
         return self
     }
+
     
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
