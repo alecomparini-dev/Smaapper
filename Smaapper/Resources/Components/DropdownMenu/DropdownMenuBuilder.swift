@@ -18,7 +18,7 @@ class DropdownMenuBuilder: BaseBuilder {
     private(set) var dropdown: DropdownMenu
     var view: DropdownMenu { self.dropdown }
     
-    private(set) var actions: DropdownMenuActions = DropdownMenuActions()
+    private var actions: DropdownMenuActions?
     
     init() {
         self.dropdown = DropdownMenu()
@@ -103,7 +103,7 @@ class DropdownMenuBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: DropdownMenuActions) -> DropdownMenuActions) -> Self {
-        _ = action(DropdownMenuActions())
+        self.actions = action(DropdownMenuActions())
         return self
     }
     
@@ -169,18 +169,20 @@ class DropdownMenuBuilder: BaseBuilder {
         rootView.bringSubviewToFront(dropdown)
     }
     
-    
     private func configList() {
         self.addListOnDropdownMenu()
         self.addTouchActionOnList()
     }
     
     private func addTouchActionOnList() {
-        dropdown.list.actions?.setAction(didSelectRow: { section, row in
-            if let touchMenuClosure = self.actions.touchMenuClosure {
-                touchMenuClosure((section,row))
-            }
-        })        
+        dropdown.list.setActions({ build in
+            build
+                .setAction { section, row in
+                    if let touchMenuClosure = self.actions?.touchMenuClosure {
+                        touchMenuClosure((section,row))
+                    }
+                }
+        })
     }
     
     private func configOverlay() {
@@ -191,15 +193,12 @@ class DropdownMenuBuilder: BaseBuilder {
     
     private func configOverlayConstraints() {
         guard let superview = self.dropdown.superview else {return}
-        dropdown.overlay.setConstraints({ build in
-            build
-                .setPin.equalTo(superview)
-                .apply()
-        })
-//            .makeConstraints { make in
-//            make
-//                .setPin.equalTo(superview)
-//        }
+        dropdown.overlay
+            .setConstraints({ build in
+                build
+                    .setPin.equalTo(superview)
+                    .apply()
+            })
     }
     
     private func addOverlayInDropdownMenu() {
@@ -229,11 +228,10 @@ class DropdownMenuBuilder: BaseBuilder {
         if self.dropdown.autoCloseEnabled {
             guard let rootView = CurrentWindow.rootView else { return }
             self.tapGestureBuilder = TapGestureBuilder(rootView)
-                .setAction(touchEnded: { [weak self] tapGesture in
+                .setTouchEnded({ [weak self] tapGesture in
                     guard let self else {return}
                     self.verifyTappedOutMenu(tapGesture)
                 })
-                
         }
     }
     
@@ -282,7 +280,7 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func callClosureOpenMenu() {
-        if let openMenuClosure = actions.openMenuClosure {
+        if let openMenuClosure = actions?.openMenuClosure {
             if isShow {
                 openMenuClosure()
             }
@@ -290,14 +288,13 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func callClosureCloseMenu() {
-        if let closeMenuClosure = actions.closeMenuClosure {
+        if let closeMenuClosure = actions?.closeMenuClosure {
             if !isShow {
                 closeMenuClosure()
             }
         }
     }
     
-
     private func addListOnDropdownMenu() {
         dropdown.list.add(insideTo: dropdown)
     }

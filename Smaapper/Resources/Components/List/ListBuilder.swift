@@ -12,17 +12,16 @@ class ListBuilder: BaseBuilder {
     
     private var alreadyApplied = false
     private var _isShow = false
-    
+    private var actions: ListActions?
     
     private(set) var list: List
     var view: List { self.list }
-    
-    private(set) var actions: ListActions?
     
     init(_ style: UITableView.Style) {
         self.list = List(style)
         super.init(self.list)
     }
+    
     
 //  MARK: - SET Properties
     @discardableResult

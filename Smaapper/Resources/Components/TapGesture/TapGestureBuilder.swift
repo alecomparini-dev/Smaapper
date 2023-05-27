@@ -58,28 +58,28 @@ class TapGestureBuilder {
     }
     
     @discardableResult
-    func setAction(touchBegan closure: (@escaping touchGestureAlias)) -> Self {
+    func setTouchBegan(_ closure: (@escaping touchGestureAlias)) -> Self {
         self._touchBegan = closure
         self.addStatesEnabled(.began)
         return self
     }
     
     @discardableResult
-    func setAction(touchEnded closure: (@escaping touchGestureAlias)) -> Self {
+    func setTouchEnded(_ closure: (@escaping touchGestureAlias)) -> Self {
         self._touchEnded = closure
         self.addStatesEnabled(.ended)
         return self
     }
     
     @discardableResult
-    func setAction(touchMoved closure: (@escaping touchGestureAlias)) -> Self {
+    func setTouchMoved(_ closure: (@escaping touchGestureAlias)) -> Self {
         self._touchMoved = closure
         self.addStatesEnabled(.changed)
         return self
     }
     
     @discardableResult
-    func setAction(touchCancelled closure: (@escaping touchGestureAlias)) -> Self {
+    func setTouchCancelled(_ closure: (@escaping touchGestureAlias)) -> Self {
         self._touchCancelled = closure
         self.addStatesEnabled(.cancelled)
         return self
