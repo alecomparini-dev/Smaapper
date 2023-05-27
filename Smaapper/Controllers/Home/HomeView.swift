@@ -111,11 +111,13 @@ class HomeView: ViewBuilder {
                     .setHeight.equalToConstant(400)
                     .setWidth.equalToConstant(255)
             }
+            .setActions { build in
+                build
+                    .setAction(touch: dropdownMenuTapped)
+                    .setAction(event: .openMenu, closure: openMenu)
+                    .setAction(event: .closeMenu, closure: closeMenu)
+            }
             
-        drop.actions
-            .setAction(touch: dropdownMenuTapped)
-            .setAction(event: .openMenu, closure: openMenu)
-            .setAction(event: .closeMenu, closure: closeMenu)
         return drop
     }()
     
@@ -146,9 +148,6 @@ class HomeView: ViewBuilder {
                 build
                     .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             }
-
-//        btn.actions?
-//            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
         return btn
     }()
     
@@ -242,7 +241,7 @@ class HomeView: ViewBuilder {
         return win
     }()
     
-    
+
     private func createTitleView() -> UIView {
         let view = UIView()
         let closeWin = createCloseWindowButton()
