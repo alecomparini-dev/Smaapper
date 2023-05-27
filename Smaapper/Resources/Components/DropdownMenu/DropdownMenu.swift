@@ -46,7 +46,7 @@ class DropdownMenu: UIView {
             make
                 .setStyle(.systemUltraThinMaterialDark)
                 .setStyle(.dark)
-                .setOpacity(0.7)
+                .setOpacity(0.9)
                 .apply()
         }
         return overlay

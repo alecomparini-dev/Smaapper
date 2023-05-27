@@ -66,10 +66,36 @@ class BaseBuilder {
         return self
     }
     
+//    @discardableResult
+//    public func setBackgroundColor(_ color: UIColor) -> Self {
+//        component.backgroundColor = color
+//        return self
+//    }
+
     @discardableResult
     public func setBackgroundColor(_ color: UIColor) -> Self {
         component.backgroundColor = color
         return self
+    }
+    
+    @discardableResult
+    func setBackgroundColorLayer(_ color: UIColor) -> Self {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            let layer = CAShapeLayer()
+            layer.frame = self.component.bounds
+            layer.cornerRadius = self.component.layer.cornerRadius
+            layer.maskedCorners = self.component.layer.maskedCorners
+            layer.fillColor = color.cgColor
+            layer.backgroundColor = color.cgColor
+            let position = UInt32(self.countShadows())
+            self.component.layer.insertSublayer(layer, at: position )
+        }
+        return self
+    }
+    
+    private func countShadows() -> Int {
+        return component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0
     }
 
 

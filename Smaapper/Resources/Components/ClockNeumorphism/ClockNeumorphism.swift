@@ -23,7 +23,7 @@ class ClockNeumorphism: ViewBuilder {
     }
     
     private var timer: DispatchSourceTimer?
-    private var weight: CGFloat = 3
+    private var weight: CGFloat = 4
     private var enabledDay: Bool = false
     private var hour1: Int = 0
     private var hour2: Int = 0
@@ -63,7 +63,7 @@ class ClockNeumorphism: ViewBuilder {
     
     lazy var day: LabelBuilder = {
         let label = LabelBuilder()
-            .setText("31-05")
+            .setText("26-05")
             .setFont(UIFont.systemFont(ofSize: 14, weight: .thin))
             .setColor(.systemOrange.withAlphaComponent(0.8))
             .setTextAlignment(.right)
@@ -72,8 +72,6 @@ class ClockNeumorphism: ViewBuilder {
                     .setTop.equalTo(stackMinutes.view, .bottom, 5)
                     .setLeading.equalToSuperView(10)
                     .setTrailing.equalToSuperView(2)
-                
-                    
 //                    .setHeight.setWidth.equalToConstant(10)
             }
         

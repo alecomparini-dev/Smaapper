@@ -20,6 +20,10 @@ extension UIView {
     
     @discardableResult
     public func setBackgroundColor(_ color: UIColor) -> Self {
+        if countShadows() > 0 {
+            setBackgroundColorLayer(color)
+            return self
+        }
         self.backgroundColor = color
         return self
     }
@@ -80,6 +84,22 @@ extension UIView {
         self.addGestureRecognizer(tap)
     }
     
+
+    private func setBackgroundColorLayer(_ color: UIColor) {
+        let layer = CAShapeLayer()
+        layer.frame = self.bounds
+        layer.cornerRadius = self.layer.cornerRadius
+        layer.maskedCorners = self.layer.maskedCorners
+        layer.fillColor = color.cgColor
+        layer.backgroundColor = color.cgColor
+        let position = UInt32(countShadows())
+        self.layer.insertSublayer(layer, at: position )
+    }
+    
+    private func countShadows() -> Int {
+        return self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0
+    }
+
     
 }
 

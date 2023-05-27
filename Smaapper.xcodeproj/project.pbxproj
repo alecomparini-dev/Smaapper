@@ -327,8 +327,8 @@
 				0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */,
 				0234A8A029F9FD3A008392EC /* Int+Extension+Component.swift */,
 				0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */,
-				0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */,
 				02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */,
+				0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

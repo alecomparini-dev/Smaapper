@@ -40,45 +40,38 @@ class HomeView: ViewBuilder {
     
     lazy var weather: WeatherForecastView = {
         let view = WeatherForecastView(temperature: 25)
-//            .setBackgroundColor(.orange.withAlphaComponent(0.8))
-            .setGradient({ build in
-                build
-                    .setColor([UIColor.HEX("#ec9355"), UIColor.HEX("#ff6b00")])
-                    .setAxialGradient(.topToBottom)
-                    .apply()
-            })
             .setShadow({ build in
                 build
                     .setColor(.black)
                     .setBlur(3)
                     .setOffset(width: 5, height: 5)
-                    
                     .apply()
             })
             .setBorder({ build in
                 build
-                    .setCornerRadius(40)
+                    .setCornerRadius(35)
                     .setWhichCornersWillBeRounded([.right])
             })
-//            .setNeumorphism({ build in
-//                build
-//                    .setReferenceColor(UIColor.HEX("#ff6b00"))
-//                    .setShape(.convex)
-//                    .setLightPosition(.leftTop)
-////                    .setIntensity(to: .light, percent: 10)
-////                    .setIntensity(to: .dark, percent: 100)
-//                    .setBlur(to: .light, percent: 10)
-//                    .setBlur(to: .dark, percent: 5)
-//                    .setDistance(to: .light, percent: 0)
-//                    .setDistance(to: .dark, percent: 10)
-//                    .apply()
-//            })
+            .setNeumorphism({ build in
+                build
+                    .setReferenceColor(UIColor.HEX("#ff852d"))
+//                    .setReferenceColor(UIColor.HEX("#222626"))
+                    .setShape(.convex)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 10)
+                    .setIntensity(to: .dark, percent: 100)
+                    .setBlur(percent: 10)
+                    .setBlur(to: .light, percent: 2)
+                    .setDistance(to: .light, percent: 5)
+                    .setDistance(to: .dark, percent: 5)
+                    .apply()
+            })
             .setConstraints { build in
                 build
-                    .setTop.equalToSafeArea(25)
-                    .setLeading.equalToSuperView(40)
-                    .setHeight.equalToConstant(80)
-                    .setWidth.equalToConstant(320)
+                    .setTop.equalToSafeArea(32)
+                    .setLeading.equalToSuperView
+                    .setHeight.equalToConstant(70)
+                    .setWidth.equalToConstant(115)
             }
         return view
     }()
@@ -90,7 +83,7 @@ class HomeView: ViewBuilder {
                 build
                     .setTop.equalToSafeArea(45)
                     .setTrailing.equalToSafeArea(-20)
-                    .setWidth.equalToConstant(110)
+                    .setWidth.equalToConstant(120)
                     .setHeight.equalToConstant(40)
             }
         return clock
