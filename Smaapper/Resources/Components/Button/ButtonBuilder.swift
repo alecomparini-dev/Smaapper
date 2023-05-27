@@ -16,7 +16,6 @@ class ButtonBuilder: BaseBuilder {
     
     private(set) var button: Button
     var view: Button { self.button }
-    var actions: ButtonActions?
     
     
 //  MARK: - Initializers
@@ -38,7 +37,6 @@ class ButtonBuilder: BaseBuilder {
     }
     
     private func initialization() {
-        self.actions = ButtonActions(self)
         button.configuration = config
         self.setTitleColor(.white, .normal)
     }
@@ -122,6 +120,13 @@ class ButtonBuilder: BaseBuilder {
         return self
     }
     
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: ButtonActions) -> ButtonActions) -> Self {
+        _ = action(ButtonActions(self))
+        return self
+    }
     
 //  MARK: - Private Area
     private func bringToFront() {

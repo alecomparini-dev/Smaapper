@@ -15,22 +15,21 @@ class DropdownMenuBuilder: BaseBuilder {
     private var zPosition: CGFloat = 10000
     private var tapGestureBuilder: TapGestureBuilder?
     
+    private(set) var actions: DropdownMenuActions = DropdownMenuActions()   
     private(set) var dropdown: DropdownMenu
+    
     var view: DropdownMenu { self.dropdown }
     
-    var actions = DropdownMenuActions()
     
     init() {
         self.dropdown = DropdownMenu()
         super.init(self.dropdown)
-        self.actions = DropdownMenuActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     
 //  MARK: - SET Properties
     
@@ -98,6 +97,14 @@ class DropdownMenuBuilder: BaseBuilder {
     func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
         dropdown.autoCloseEnabled = true
         dropdown.excludeComponents = excludeComponents
+        return self
+    }
+    
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: DropdownMenuActions) -> DropdownMenuActions) -> Self {
+        _ = action(DropdownMenuActions())
         return self
     }
     

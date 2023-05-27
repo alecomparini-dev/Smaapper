@@ -469,9 +469,9 @@
 			children = (
 				0234A96129FC064D008392EC /* IconButton */,
 				0234A96429FC080D008392EC /* ButtonImage */,
+				02D581522A20CD8A00150AF9 /* ButtonActions.swift */,
 				020D0E572A1E9CE0007F3992 /* ButtonBuilder.swift */,
 				0234A8F029F9FD3A008392EC /* Button.swift */,
-				02D581522A20CD8A00150AF9 /* ButtonActions.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";

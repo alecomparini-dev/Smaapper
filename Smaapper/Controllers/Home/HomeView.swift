@@ -123,12 +123,9 @@ class HomeView: ViewBuilder {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImageBuilder(img)
             .setImageColor(.white)
-            .setImageSize(14)
+            .setImageSize(16)
             .setBorder({ build in
                 build.setCornerRadius(14)
-                    .setWidth(0)
-                    .setColor(.systemGray.withAlphaComponent(0.2))
-                    .setColor(.white.withAlphaComponent(0.1))
             })
             .setFloatButton()
             .setNeumorphism { build in
@@ -136,6 +133,7 @@ class HomeView: ViewBuilder {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
+                    .setDistance(to: .light, percent: 6)
                     .apply()
             }
             .setConstraints { build in
@@ -144,9 +142,13 @@ class HomeView: ViewBuilder {
                     .setTrailing.equalToSafeArea(-15)
                     .setHeight.setWidth.equalToConstant(60)
             }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            }
 
-        btn.actions?
-            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+//        btn.actions?
+//            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
         return btn
     }()
     
@@ -301,8 +303,6 @@ class HomeView: ViewBuilder {
     }
     
     
-    
-    
 //  MARK: - Objc Functions Area
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
@@ -433,8 +433,6 @@ class HomeView: ViewBuilder {
                     .setReferenceColor(UIColor.HEX("#26292a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 10)
-                    .setIntensity(to: .dark, percent: 100)
                     .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark, percent: 5)
                     .setDistance(to: .light, percent: 3)
