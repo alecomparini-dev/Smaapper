@@ -15,11 +15,10 @@ class DropdownMenuBuilder: BaseBuilder {
     private var zPosition: CGFloat = 10000
     private var tapGestureBuilder: TapGestureBuilder?
     
-    private(set) var actions: DropdownMenuActions = DropdownMenuActions()   
     private(set) var dropdown: DropdownMenu
-    
     var view: DropdownMenu { self.dropdown }
     
+    private(set) var actions: DropdownMenuActions = DropdownMenuActions()
     
     init() {
         self.dropdown = DropdownMenu()
@@ -192,10 +191,15 @@ class DropdownMenuBuilder: BaseBuilder {
     
     private func configOverlayConstraints() {
         guard let superview = self.dropdown.superview else {return}
-        dropdown.overlay.makeConstraints { make in
-            make
+        dropdown.overlay.setConstraints({ build in
+            build
                 .setPin.equalTo(superview)
-        }
+                .apply()
+        })
+//            .makeConstraints { make in
+//            make
+//                .setPin.equalTo(superview)
+//        }
     }
     
     private func addOverlayInDropdownMenu() {
@@ -218,7 +222,7 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func setOverlayHierarchyVisualizationPosition() {
-        dropdown.overlay.layer.zPosition = -1
+        dropdown.overlay.view.layer.zPosition = -1
     }
     
     private func configAutoCloseDropdownMenu() {

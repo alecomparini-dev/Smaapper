@@ -58,7 +58,7 @@ class BaseBuilder {
     }
     
     @discardableResult
-    func setBlur(_ blur: (_ make: Blur) -> Blur) -> Self {
+    func setBlur(_ blur: (_ build: Blur) -> Blur) -> Self {
         self.blur = blur(Blur(component))
         return self
     }
@@ -83,11 +83,13 @@ class BaseBuilder {
         return self
     }
     
-    private func countShadows() -> Int {
-        return component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0
+    @discardableResult
+    func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
+        self.component.isUserInteractionEnabled = interactionEnabled
+        return self
     }
-
-
+   
+    
 //  MARK: - CONSTRAINTS AREA
     @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
@@ -108,6 +110,12 @@ class BaseBuilder {
             return
         }
         element.addSubview(component)
+    }
+
+
+//  MARK: - Private Area
+    private func countShadows() -> Int {
+        return component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0
     }
 
     

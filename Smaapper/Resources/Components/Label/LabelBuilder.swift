@@ -12,12 +12,11 @@ class LabelBuilder: BaseBuilder {
     private(set) var label: Label
     var view: Label { self.label }
     
-    var actions: LabelAction?
+    private(set) var actions: LabelActions?
     
     init() {
         self.label = Label()
         super.init(self.label)
-        self.actions = LabelAction(self)
     }
     
     convenience init(_ text: String) {
@@ -73,6 +72,14 @@ class LabelBuilder: BaseBuilder {
     @discardableResult
     func setNumberOfLines(_ numberOfLines: Int) -> Self {
         label.numberOfLines = numberOfLines
+        return self
+    }
+    
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: LabelActions) -> LabelActions) -> Self {
+        self.actions = action(LabelActions(self))
         return self
     }
     
