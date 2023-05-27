@@ -32,7 +32,7 @@ class ListActions {
     
 //  MARK: - Private Area
     private func configListDelegate() {
-        listBuilder.list.listDelegate = self
+        listBuilder.view.listDelegate = self
     }
     
 }

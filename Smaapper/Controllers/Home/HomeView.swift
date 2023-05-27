@@ -77,7 +77,15 @@ class HomeView: ViewBuilder {
         return clock
     }()
     
-        
+    
+    lazy var chatGPTTextField: TextFieldImageBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "message.and.waveform.fill"))
+        let tf = TextFieldImageBuilder(img.view)
+        return tf
+    }()
+    
+    
+    
     lazy var dropdownMenu: DropdownMenuFooterBuilder = {
         let drop = DropdownMenuFooterBuilder()
             .setFooterHeight(65)

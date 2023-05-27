@@ -38,7 +38,7 @@ class ButtonImageBuilder: ButtonBuilder {
     }
     
     private func initialization(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
-        _ = setImageButton(image)
+        setImageButton(image)
             .setImageSize(size)
             .setImagePadding(5)
     }
@@ -48,41 +48,41 @@ class ButtonImageBuilder: ButtonBuilder {
     @discardableResult
     func setImageButton(_ image: UIImageView) -> Self {
         guard let image = image.image else {return self}
-        super.button.configuration?.image = image
-        super.button.setImage(image, for: .normal)
+        super.view.configuration?.image = image
+        super.view.setImage(image, for: .normal)
         return self
     }
     
     @discardableResult
     func setImagePlacement(_ alignment: NSDirectionalRectEdge ) -> Self {
-        super.button.configuration?.imagePlacement = alignment
+        super.view.configuration?.imagePlacement = alignment
         return self
     }
     
     @discardableResult
     func setImageColor(_ color: UIColor) -> Self {
-        super.button.configuration?.baseForegroundColor = color
+        super.view.configuration?.baseForegroundColor = color
         return self
     }
     
     @discardableResult
     func setImageSize( _ size: CGFloat? ) -> Self {
         guard let size else {return self}
-        let img = ImageViewBuilder(super.button.configuration?.image).setSize(size).view
-        _ = setImageButton(img)
+        let img = ImageViewBuilder(super.view.configuration?.image).setSize(size).view
+        setImageButton(img)
         return self
     }
     
     @discardableResult
     func setImageWeight(_ weight: UIImage.SymbolWeight) -> Self {
-        let img = ImageViewBuilder(super.button.configuration?.image).setWeight(weight).view
-        _ = setImageButton(img)
+        let img = ImageViewBuilder(super.view.configuration?.image).setWeight(weight).view
+        setImageButton(img)
         return self
     }
 
     @discardableResult
     func setImagePadding(_ padding: CGFloat) -> Self {
-        super.button.configuration?.imagePadding = padding
+        super.view.configuration?.imagePadding = padding
         return self
     }
         
