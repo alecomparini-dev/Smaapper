@@ -72,16 +72,19 @@ class TextFieldImageBuilder: TextFieldBuilder {
     }
 
     
-//  MARK: - Private Area
-    
-    private func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: Int) {
+    @discardableResult
+    func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: Int) -> Self {
         paddingView = self.createPaddingView(image, margin)
         self.setFrameImage(image)
         self.addImageInsidePaddingView(image, paddingView)
         self.setImageAlignmentInPaddingView(image, paddingView, position)
         addPaddingToTextField(paddingView, position)
         setTintColor(self.textField.textColor ?? .black)
+        return self
     }
+    
+//  MARK: - Private Area
+    
     
     private func createPaddingView(_ image: UIImageView, _ margin: Int) -> UIView {
         return UIView(frame: CGRect(x: 0, y: 0, width: Int(image.image?.size.width ?? 0) + self.margin, height: Int(self.textField.frame.height)))

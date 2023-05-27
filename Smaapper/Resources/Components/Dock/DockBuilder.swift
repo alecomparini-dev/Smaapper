@@ -21,7 +21,7 @@ class DockBuilder: BaseBuilder {
     private var _isShow = false
     private var alreadyApplied = false
     
-    private(set) var dock: Dock
+    private var dock: Dock
     var view: Dock { self.dock }
     
     init(numberOfItemsCallback: @escaping Dock.numberOfItemsCallbackAlias, cellCallback: @escaping Dock.itemCallbackAlias ) {

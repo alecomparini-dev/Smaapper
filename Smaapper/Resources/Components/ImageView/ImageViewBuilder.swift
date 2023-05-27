@@ -9,7 +9,7 @@ import UIKit
 
 class ImageViewBuilder: BaseBuilder {
     
-    private(set) var imageView: ImageView
+    private var imageView: ImageView
     
     var view: ImageView { self.imageView }
     private(set) var actions: ImageViewActions?

@@ -12,9 +12,9 @@ class ListBuilder: BaseBuilder {
     
     private var alreadyApplied = false
     private var _isShow = false
-    private var actions: ListActions?
+    private var list: List
     
-    private(set) var list: List
+    private var actions: ListActions?
     var view: List { self.list }
     
     init(_ style: UITableView.Style) {

@@ -9,7 +9,7 @@ import UIKit
 
 class LabelBuilder: BaseBuilder {
     
-    private(set) var label: Label
+    private var label: Label
     var view: Label { self.label }
     
     private(set) var actions: LabelActions?

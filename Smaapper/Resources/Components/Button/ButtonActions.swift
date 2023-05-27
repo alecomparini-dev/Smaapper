@@ -22,7 +22,7 @@ class ButtonActions: BaseActions {
     
     @discardableResult
     func setTarget(_ target: Any, _ action: Selector , _ event: UIControl.Event) -> Self {
-        self.buttonBuilder.button.addTarget(target, action: action, for: event )
+        self.buttonBuilder.view.addTarget(target, action: action, for: event )
         return self
     }
     

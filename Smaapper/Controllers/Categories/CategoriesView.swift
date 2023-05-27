@@ -73,8 +73,8 @@ class CategoriesView: UIView {
             .setTextAlignment(.left)
             .setConstraints { build in
                 build
-                    .setVerticalAlignmentY.equalTo(closeModalCategories.button)
-                    .setLeading.equalTo(closeModalCategories.button, .trailing,5)
+                    .setVerticalAlignmentY.equalTo(closeModalCategories.view)
+                    .setLeading.equalTo(closeModalCategories.view, .trailing,5)
             }
         return label
     }()
