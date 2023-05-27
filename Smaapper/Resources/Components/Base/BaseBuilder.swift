@@ -11,12 +11,13 @@ import UIKit
 
 class BaseBuilder {
     
-    private var _constraintsFlow: StartOfConstraintsFlow?
-    private var _border: BorderBuilder?
-    private var _shadow: Shadow?
-    private var _neumorphism: Neumorphism?
-    private var _gradient: Gradient?
-    private var _tapGesture: TapGestureBuilder?
+    private(set) var constraintsFlow: StartOfConstraintsFlow?
+    private(set) var border: BorderBuilder?
+    private(set) var shadow: Shadow?
+    private(set) var neumorphism: Neumorphism?
+    private(set) var gradient: Gradient?
+    private(set) var tapGesture: TapGestureBuilder?
+    private(set) var blur: Blur?
     
     private(set) var component: UIView
     
@@ -24,68 +25,56 @@ class BaseBuilder {
         self.component = component
     }
     
-    
-//  MARK: - GET Properties
-    var constraintsFlow: StartOfConstraintsFlow? { self._constraintsFlow}
-    var border: BorderBuilder? { self._border}
-    var shadow: Shadow? { self._shadow}
-    var neumorphism: Neumorphism? { self._neumorphism}
-    var gradient: Gradient? { self._gradient}
-    var tapGesture: TapGestureBuilder? { self._tapGesture}
-    
-    
+        
 //  MARK: - SET Properties
     @discardableResult
     func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
-        self._border = border(BorderBuilder(component))
+        self.border = border(BorderBuilder(component))
         return self
     }
 
-    
     @discardableResult
     func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        self._shadow = shadow(Shadow(component))
+        self.shadow = shadow(Shadow(component))
         return self
     }
 
     @discardableResult
     func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        self._neumorphism = neumorphism(Neumorphism(component))
+        self.neumorphism = neumorphism(Neumorphism(component))
         return self
     }
 
     @discardableResult
     func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        self._gradient = gradient(Gradient(component))
+        self.gradient = gradient(Gradient(component))
         return self
     }
 
     @discardableResult
     func setTapGesture(_ tapGesture: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
-        self._tapGesture = tapGesture(TapGestureBuilder(component))
+        self.tapGesture = tapGesture(TapGestureBuilder(component))
         return self
     }
     
-//    @discardableResult
-//    public func setBackgroundColor(_ color: UIColor) -> Self {
-//        component.backgroundColor = color
-//        return self
-//    }
+    @discardableResult
+    func setBlur(_ blur: (_ make: Blur) -> Blur) -> Self {
+        self.blur = blur(Blur(component))
+        return self
+    }
 
     @discardableResult
     public func setBackgroundColor(_ color: UIColor) -> Self {
         component.backgroundColor = color
         return self
     }
-    
+        
     @discardableResult
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
             let layer = CAShapeLayer()
-            layer.frame = self.component.bounds
-            layer.cornerRadius = self.component.layer.cornerRadius
-            layer.maskedCorners = self.component.layer.maskedCorners
+            layer.path = self.component.replicateFormat().cgPath
             layer.fillColor = color.cgColor
             layer.backgroundColor = color.cgColor
             let position = UInt32(self.countShadows())
@@ -102,7 +91,7 @@ class BaseBuilder {
 //  MARK: - CONSTRAINTS AREA
     @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
-        self._constraintsFlow = builderConstraint(StartOfConstraintsFlow(component))
+        self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(component))
         return self
     }
     

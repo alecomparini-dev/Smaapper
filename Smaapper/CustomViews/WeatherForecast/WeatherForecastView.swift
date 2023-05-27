@@ -11,6 +11,7 @@ import UIKit
 class WeatherForecastView: ViewBuilder {
     
     private var temperature: CGFloat
+    private let secondColor = UIColor.HEX("#000000")
     
     init(temperature: CGFloat) {
         self.temperature = temperature
@@ -24,16 +25,17 @@ class WeatherForecastView: ViewBuilder {
     
     lazy var weatherImageView: ImageViewBuilder = {
         let img = ImageViewBuilder()
-            .setImage(UIImage(systemName: "cloud.sun.fill"))
+//            .setImage(UIImage(systemName: "cloud.sun.fill"))
             .setImage(UIImage(systemName: "sun.max.fill"))
-            .setSize(35)
-            .setTintColor(UIColor.HEXA("#0f1010",0.7))
-            .setTintColor(UIColor.HEX("#ffffff"))
-            .setContentMode(.center)
+            .setImage(UIImage(systemName: "cloud.bolt.rain.fill"))
+            .setTintColor(UIColor.HEX("#ffffff",0.7))
+            .setContentMode(.scaleAspectFit)
             .setConstraints { build in
                 build
                     .setLeading.equalToSuperView(8)
-                    .setVerticalAlignmentY.equalToSuperView
+                    .setVerticalAlignmentY.equalToSuperView(2)
+                    .setHeight
+                    .setWidth.equalToConstant(40)
             }
         return img
     }()
@@ -42,13 +44,12 @@ class WeatherForecastView: ViewBuilder {
     lazy var locationImageView: ImageViewBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "location.fill"))
             .setSize(12)
-            .setTintColor(UIColor.HEX("#0f1010",0.6))
-//            .setTintColor(UIColor.HEX("#ffffff"))
+            .setTintColor(secondColor)
             .setContentMode(.center)
             .setConstraints { build in
                 build
                     .setTop.equalTo(weatherImageView.view, .top, 4)
-                    .setLeading.equalTo(weatherImageView.view, .trailing, 8)
+                    .setLeading.equalTo(weatherImageView.view, .trailing, 11)
             }
         return img
     }()
@@ -57,8 +58,7 @@ class WeatherForecastView: ViewBuilder {
     
     lazy var temperatureLabel: LabelBuilder = {
         let label = LabelBuilder("25")
-            .setColor(UIColor.HEX("#0f1010",0.6))
-//            .setColor(UIColor.HEX("#ffffff"))
+            .setColor(secondColor)
             .setFont(UIFont.systemFont(ofSize: 15, weight: .semibold))
             .setConstraints { build in
                 build
@@ -70,8 +70,7 @@ class WeatherForecastView: ViewBuilder {
     
     lazy var degreesLabel: LabelBuilder = {
         let label = LabelBuilder("0")
-            .setColor(UIColor.HEX("#0f1010",0.6))
-//            .setColor(UIColor.HEX("#ffffff"))
+            .setColor(secondColor)
             .setFont(UIFont.systemFont(ofSize: 8, weight: .medium))
             .setConstraints { build in
                 build
@@ -86,8 +85,7 @@ class WeatherForecastView: ViewBuilder {
         let img = ImageViewBuilder(UIImage(systemName: "chevron.forward"))
             .setSize(14)
             .setWeight(.semibold)
-            .setTintColor(UIColor.HEX("#0f1010",0.5))
-//            .setTintColor(UIColor.HEX("#ffffff"))
+            .setTintColor(secondColor)
             .setContentMode(.center)
             .setConstraints { build in
                 build

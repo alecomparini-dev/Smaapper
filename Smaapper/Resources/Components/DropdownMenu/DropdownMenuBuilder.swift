@@ -227,7 +227,6 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
-        print("CHAMANDO TODA HORA ?!?!?!?!")
         if _isShow {
             if isTappedOut(tap) {
                 isShow = false

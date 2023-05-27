@@ -113,15 +113,10 @@ class Shadow {
     }
     
     private func calculateShadowPath() -> CGPath {
-        let cornerRadius = self.getCornerRadius()
-        let shadowHeight = self.getShadowHeight()
-        let shadowWidth  = self.getShadowWidth()
-        
-        return UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0),
-                                                size: CGSize(width: shadowWidth,
-                                                             height: shadowHeight)),
-                            byRoundingCorners: self.component.layer.maskedCorners.toRectCorner ,
-                            cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)).cgPath
+        return component.replicateFormat(width: self.getShadowWidth(),
+                                         height: self.getShadowHeight(),
+                                         cornerRadius: self.getCornerRadius()
+                                        ).cgPath
     }
     
     private func getShadowHeight() -> CGFloat {

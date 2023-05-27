@@ -40,13 +40,6 @@ class HomeView: ViewBuilder {
     
     lazy var weather: WeatherForecastView = {
         let view = WeatherForecastView(temperature: 25)
-            .setShadow({ build in
-                build
-                    .setColor(.black)
-                    .setBlur(3)
-                    .setOffset(width: 5, height: 5)
-                    .apply()
-            })
             .setBorder({ build in
                 build
                     .setCornerRadius(35)
@@ -54,21 +47,16 @@ class HomeView: ViewBuilder {
             })
             .setNeumorphism({ build in
                 build
-                    .setReferenceColor(UIColor.HEX("#ff852d"))
-//                    .setReferenceColor(UIColor.HEX("#222626"))
+                    .setReferenceColor(UIColor.HEX("#222626"))
                     .setShape(.convex)
                     .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 10)
-                    .setIntensity(to: .dark, percent: 100)
                     .setBlur(percent: 10)
-                    .setBlur(to: .light, percent: 2)
-                    .setDistance(to: .light, percent: 5)
-                    .setDistance(to: .dark, percent: 5)
+                    .setDistance(to: .light, percent: 1)
                     .apply()
             })
             .setConstraints { build in
                 build
-                    .setTop.equalToSafeArea(32)
+                    .setTop.equalToSafeArea(35)
                     .setLeading.equalToSuperView
                     .setHeight.equalToConstant(70)
                     .setWidth.equalToConstant(115)
@@ -124,8 +112,6 @@ class HomeView: ViewBuilder {
                     .setWidth.equalToConstant(255)
             }
             
-
-        
         drop.actions
             .setAction(touch: dropdownMenuTapped)
             .setAction(event: .openMenu, closure: openMenu)
@@ -133,16 +119,6 @@ class HomeView: ViewBuilder {
         return drop
     }()
     
-    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
-        delegate?.dropdownMenuTapped(rowTapped)
-    }
-    private func openMenu() {
-        delegate?.openMenu()
-    }
-    private func closeMenu() {
-        delegate?.closeMenu()
-    }
-
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImageBuilder(img)
@@ -394,6 +370,17 @@ class HomeView: ViewBuilder {
     
 //  MARK: - Private Function Area
 
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
+    }
+    private func openMenu() {
+        delegate?.openMenu()
+    }
+    private func closeMenu() {
+        delegate?.closeMenu()
+    }
+    
+    
     private func addBackgroundColor() {
         self.setGradient { build in
             build
@@ -405,7 +392,7 @@ class HomeView: ViewBuilder {
     }
     
     private func addElements() {
-//        weather.add(insideTo: self.view)
+        weather.add(insideTo: self.view)
         clock.add(insideTo: self.view)
         dropdownMenu.add(insideTo: self.view)
         dock.add(insideTo: self.view)
@@ -415,7 +402,7 @@ class HomeView: ViewBuilder {
     }
     
     private func applyConstraints() {
-//        weather.applyConstraint()
+        weather.applyConstraint()
         clock.applyConstraint()
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
@@ -428,9 +415,6 @@ class HomeView: ViewBuilder {
 //            self.floatWindow.isShow = true
 //        }
         
-        
-        weather.add(insideTo: self.view)
-        weather.applyConstraint()
         
     }
     
