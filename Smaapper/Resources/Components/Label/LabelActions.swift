@@ -8,7 +8,7 @@
 import UIKit
 
 
-class LabelAction: BaseActions {
+class LabelActions: BaseActions {
     
     private let labelBuilder: LabelBuilder
     

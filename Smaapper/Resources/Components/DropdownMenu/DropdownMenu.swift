@@ -39,16 +39,16 @@ class DropdownMenu: UIView {
         return list
     }()
     
-    lazy var overlay: View = {
-        let overlay = View()
+    lazy var overlay: ViewBuilder = {
+        let overlay = ViewBuilder()
             .setUserInteractionEnabled(false)
-        overlay.makeBlur { make in
-            make
-                .setStyle(.systemUltraThinMaterialDark)
-                .setStyle(.dark)
-                .setOpacity(0.7)
-                .apply()
-        }
+            .setBlur { build in
+                build
+                    .setStyle(.systemUltraThinMaterialDark)
+                    .setStyle(.dark)
+                    .setOpacity(0.9)
+                    .apply()
+            }
         return overlay
     }()
     

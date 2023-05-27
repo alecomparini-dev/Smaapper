@@ -16,10 +16,9 @@ protocol HomeViewDelegate: AnyObject {
     func dockCellCalback(_ indexCell: Int) -> UIView
 }
 
-class HomeView: View {
+class HomeView: ViewBuilder {
     
     weak var delegate: HomeViewDelegate?
-    
     private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
     override init(frame: CGRect) {
@@ -39,6 +38,32 @@ class HomeView: View {
     
 //  MARK: - LAZY Properties
     
+    lazy var weather: WeatherForecastView = {
+        let view = WeatherForecastView(temperature: 25)
+            .setBorder({ build in
+                build
+                    .setCornerRadius(35)
+                    .setWhichCornersWillBeRounded([.right])
+            })
+            .setNeumorphism({ build in
+                build
+                    .setReferenceColor(UIColor.HEX("#222626"))
+                    .setShape(.convex)
+                    .setLightPosition(.leftTop)
+                    .setBlur(percent: 10)
+                    .setDistance(to: .light, percent: 1)
+                    .apply()
+            })
+            .setConstraints { build in
+                build
+                    .setTop.equalToSafeArea(35)
+                    .setLeading.equalToSuperView
+                    .setHeight.equalToConstant(70)
+                    .setWidth.equalToConstant(115)
+            }
+        return view
+    }()
+    
     lazy var clock: ClockNeumorphism = {
         let clock = ClockNeumorphism()
             .setWeight(4)
@@ -46,7 +71,7 @@ class HomeView: View {
                 build
                     .setTop.equalToSafeArea(45)
                     .setTrailing.equalToSafeArea(-20)
-                    .setWidth.equalToConstant(110)
+                    .setWidth.equalToConstant(120)
                     .setHeight.equalToConstant(40)
             }
         return clock
@@ -87,8 +112,6 @@ class HomeView: View {
                     .setWidth.equalToConstant(255)
             }
             
-
-        
         drop.actions
             .setAction(touch: dropdownMenuTapped)
             .setAction(event: .openMenu, closure: openMenu)
@@ -96,26 +119,13 @@ class HomeView: View {
         return drop
     }()
     
-    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
-        delegate?.dropdownMenuTapped(rowTapped)
-    }
-    private func openMenu() {
-        delegate?.openMenu()
-    }
-    private func closeMenu() {
-        delegate?.closeMenu()
-    }
-
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         let btn = ButtonImageBuilder(img)
             .setImageColor(.white)
-            .setImageSize(14)
+            .setImageSize(16)
             .setBorder({ build in
                 build.setCornerRadius(14)
-                    .setWidth(0)
-                    .setColor(.systemGray.withAlphaComponent(0.2))
-                    .setColor(.white.withAlphaComponent(0.1))
             })
             .setFloatButton()
             .setNeumorphism { build in
@@ -123,6 +133,7 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#17191a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
+                    .setDistance(to: .light, percent: 6)
                     .apply()
             }
             .setConstraints { build in
@@ -131,9 +142,13 @@ class HomeView: View {
                     .setTrailing.equalToSafeArea(-15)
                     .setHeight.setWidth.equalToConstant(60)
             }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            }
 
-        btn.actions?
-            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+//        btn.actions?
+//            .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
         return btn
     }()
     
@@ -288,8 +303,6 @@ class HomeView: View {
     }
     
     
-    
-    
 //  MARK: - Objc Functions Area
     @objc func menuButtonTapped() {
         delegate?.menuButtonTapped()
@@ -357,34 +370,50 @@ class HomeView: View {
     
 //  MARK: - Private Function Area
 
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
+    }
+    private func openMenu() {
+        delegate?.openMenu()
+    }
+    private func closeMenu() {
+        delegate?.closeMenu()
+    }
+    
+    
     private func addBackgroundColor() {
-        self.makeGradient { build in
+        self.setGradient { build in
             build
                 .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
+
         }
     }
     
     private func addElements() {
-        dropdownMenu.add(insideTo: self)
-        dock.add(insideTo: self)
-        menuButton.add(insideTo: self)
-        self.clock.add(insideTo: self)
+        weather.add(insideTo: self.view)
+        clock.add(insideTo: self.view)
+        dropdownMenu.add(insideTo: self.view)
+        dock.add(insideTo: self.view)
+        menuButton.add(insideTo: self.view)
+        
+        
     }
     
     private func applyConstraints() {
+        weather.applyConstraint()
+        clock.applyConstraint()
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        self.clock.applyConstraint()
+        
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //            self.floatWindow.add(insideTo: self)
 //            self.floatWindow.applyConstraint()
 //            self.floatWindow.isShow = true
 //        }
-        
         
         
     }
@@ -404,8 +433,6 @@ class HomeView: View {
                     .setReferenceColor(UIColor.HEX("#26292a"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 10)
-                    .setIntensity(to: .dark, percent: 100)
                     .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark, percent: 5)
                     .setDistance(to: .light, percent: 3)
@@ -422,7 +449,7 @@ class HomeView: View {
             .setContentMode(.scaleAspectFill)
             .view
         
-        img.add(insideTo: self)
+        img.add(insideTo: self.view)
         img.makeConstraints { make in
             make.setPin.equalToSuperView
         }

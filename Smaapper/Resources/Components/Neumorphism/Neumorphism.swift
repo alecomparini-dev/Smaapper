@@ -108,12 +108,12 @@ class Neumorphism {
         if !validatePercent("distance", distance, 10) {
             return self
         }
-        let distance = calculateRatioPercent(50, distance)
+        let percentDistance = calculateRatioPercent(50, distance)
         switch to {
             case .light:
-                self.lightShadowDistance = distance
+                self.lightShadowDistance = percentDistance
             case .dark:
-                self.darkShadowDistance = distance
+                self.darkShadowDistance = percentDistance
         }
         return self
     }
@@ -123,9 +123,9 @@ class Neumorphism {
         if !validatePercent("blur", blur, 10) {
             return self
         }
-        let blur = calculateRatioPercent(50, blur)
-        self.lightShadowBlur = blur
-        self.darkShadowBlur = blur
+        let percentBlur = calculateRatioPercent(50, blur)
+        self.lightShadowBlur = percentBlur
+        self.darkShadowBlur = percentBlur
         return self
     }
     
@@ -134,12 +134,12 @@ class Neumorphism {
         if !validatePercent("blur", blur, 10) {
             return self
         }
-        let blur = calculateRatioPercent(50, blur)
+        let percentBlur = calculateRatioPercent(50, blur)
         switch to {
             case .light:
-                self.lightShadowBlur = blur
+                self.lightShadowBlur = percentBlur
             case .dark:
-                self.darkShadowBlur = blur
+                self.darkShadowBlur = percentBlur
         }
         return self
     }
@@ -149,9 +149,9 @@ class Neumorphism {
         if !validatePercent("intensity", intensity, 100) {
             return self
         }
-        let intensity =  Float(calculateRatioPercent(100, intensity))
-        self.darkShadowIntensity = intensity
-        self.lightShadowIntensity = intensity
+        let percentIntensity =  Float(calculateRatioPercent(100, intensity)) / 100
+        self.darkShadowIntensity = percentIntensity
+        self.lightShadowIntensity = percentIntensity
         return self
     }
 
@@ -160,12 +160,12 @@ class Neumorphism {
         if !validatePercent("intensity", intensity, 100) {
             return self
         }
-        let intensity = Float(calculateRatioPercent(100, intensity))
+        let percentIntensity = Float(calculateRatioPercent(100, intensity)) / 100
         switch to {
         case .light:
-            self.lightShadowIntensity = intensity
+            self.lightShadowIntensity = percentIntensity
         case .dark:
-            self.darkShadowIntensity = intensity
+            self.darkShadowIntensity = percentIntensity
         }
         
         return self
@@ -213,7 +213,7 @@ class Neumorphism {
     }
     
     private func calculateRatioPercent(_ max: CGFloat, _ percent: CGFloat) -> CGFloat {
-        return percent * max / 100
+        return (percent * max) / 100
     }
     
     private func calculateLightPosition() -> (CGSize, CGSize) {

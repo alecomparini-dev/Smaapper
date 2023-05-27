@@ -32,16 +32,6 @@ class BorderBuilder {
         self.component = component
     }
 
-    
-//  MARK: - Properties Default
-    
-    func setDefault() -> Self {
-        return self.setWidth(1)
-            .setColor(.darkGray)
-            .setCornerRadius(5)
-    }
-    
-    
 //  MARK: - Set Properties
     
     @discardableResult

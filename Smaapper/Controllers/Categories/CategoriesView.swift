@@ -52,8 +52,11 @@ class CategoriesView: UIView {
                     .setLeading.equalToSafeArea(15)
                     .setWidth.equalToConstant(30)
             }
-        btn.actions?
-            .setTarget(self, #selector(closeModalTapped), .touchUpInside)
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(closeModalTapped), .touchUpInside)
+                
+            }
         return btn
     }()
     @objc
@@ -132,7 +135,7 @@ class CategoriesView: UIView {
                 build.setReferenceColor(UIColor.HEX("#2b2f30"))
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 0.7)
+                    .setIntensity(to: .light, percent: 100)
                     .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark , percent: 5)
                     .setDistance(to: .light, percent: 3)

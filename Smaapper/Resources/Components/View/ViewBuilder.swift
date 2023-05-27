@@ -9,17 +9,16 @@ import UIKit
 
 class ViewBuilder: BaseBuilder {
     
-    private var _view: View
-    var view: View { self._view }
+    private(set) var view: View
     
     init() {
-        self._view = View(frame: .zero)
-        super.init(_view)
+        self.view = View(frame: .zero)
+        super.init(view)
     }
     
     init(frame: CGRect) {
-        self._view = View(frame: frame)
-        super.init(_view)
+        self.view = View(frame: frame)
+        super.init(view)
     }
     
 }

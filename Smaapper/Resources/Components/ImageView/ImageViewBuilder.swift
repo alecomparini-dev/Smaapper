@@ -12,7 +12,7 @@ class ImageViewBuilder: BaseBuilder {
     private(set) var imageView: ImageView
     
     var view: ImageView { self.imageView }
-    var actions: ImageViewActions?
+    private(set) var actions: ImageViewActions?
     
     init() {
         self.imageView = ImageView()
@@ -59,6 +59,14 @@ class ImageViewBuilder: BaseBuilder {
     @discardableResult
     func setWeight(_ weight: UIImage.SymbolWeight) -> Self {
         self.imageView.image = self.imageView.image?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: weight))
+        return self
+    }
+    
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: ImageViewActions) -> ImageViewActions) -> Self {
+        self.actions = action(ImageViewActions(self))
         return self
     }
     

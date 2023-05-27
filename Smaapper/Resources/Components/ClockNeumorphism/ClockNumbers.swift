@@ -123,8 +123,8 @@ class ClockNumbers: View {
     
     private func configNeumorphism(_ component: UIView, _ lightPosition: Neumorphism.LightPosition = .leftTop) {
         Neumorphism(component)
-            .setReferenceColor(UIColor.HEX("#26292a"))
-            .setShape(.convex)
+            .setReferenceColor(UIColor.HEX("#34373a"))
+            .setShape(.concave)
             .setLightPosition(lightPosition)
             .setIntensity(to:.light,percent: 50)
             .setIntensity(to:.dark,percent: 100)

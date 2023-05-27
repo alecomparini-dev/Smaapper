@@ -36,6 +36,10 @@ extension UIColor {
 
     }
     
+    @nonobjc class func HEX(_ hexColor: String, _ alpha: Float) -> UIColor {
+        return HEXA(hexColor, alpha)
+    }
+    
     @nonobjc class func HEX(_ hexColor: String) -> UIColor {
         return HEXA(hexColor, 1.0)
     }

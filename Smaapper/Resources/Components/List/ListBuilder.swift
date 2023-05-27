@@ -17,12 +17,11 @@ class ListBuilder: BaseBuilder {
     private(set) var list: List
     var view: List { self.list }
     
-    var actions: ListActions?
+    private(set) var actions: ListActions?
     
     init(_ style: UITableView.Style) {
         self.list = List(style)
         super.init(self.list)
-        self.actions = ListActions(self)
     }
     
 //  MARK: - SET Properties
@@ -99,7 +98,15 @@ class ListBuilder: BaseBuilder {
     }
     
     
-    //  MARK: - Populate List
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: ListActions) -> ListActions) -> Self {
+        self.actions = action(ListActions(self))
+        return self
+    }
+    
+    
+//  MARK: - Populate List
     
     func setSectionInList(_ section: Section) {
         list.sections.append(section)

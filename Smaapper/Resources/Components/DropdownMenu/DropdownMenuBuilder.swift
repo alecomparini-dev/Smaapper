@@ -18,19 +18,17 @@ class DropdownMenuBuilder: BaseBuilder {
     private(set) var dropdown: DropdownMenu
     var view: DropdownMenu { self.dropdown }
     
-    var actions = DropdownMenuActions()
+    private(set) var actions: DropdownMenuActions = DropdownMenuActions()
     
     init() {
         self.dropdown = DropdownMenu()
         super.init(self.dropdown)
-        self.actions = DropdownMenuActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     
 //  MARK: - SET Properties
     
@@ -98,6 +96,14 @@ class DropdownMenuBuilder: BaseBuilder {
     func setAutoCloseMenuWhenTappedOut(excludeComponents: [UIView]) -> Self {
         dropdown.autoCloseEnabled = true
         dropdown.excludeComponents = excludeComponents
+        return self
+    }
+    
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: DropdownMenuActions) -> DropdownMenuActions) -> Self {
+        _ = action(DropdownMenuActions())
         return self
     }
     
@@ -185,10 +191,15 @@ class DropdownMenuBuilder: BaseBuilder {
     
     private func configOverlayConstraints() {
         guard let superview = self.dropdown.superview else {return}
-        dropdown.overlay.makeConstraints { make in
-            make
+        dropdown.overlay.setConstraints({ build in
+            build
                 .setPin.equalTo(superview)
-        }
+                .apply()
+        })
+//            .makeConstraints { make in
+//            make
+//                .setPin.equalTo(superview)
+//        }
     }
     
     private func addOverlayInDropdownMenu() {
@@ -211,7 +222,7 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func setOverlayHierarchyVisualizationPosition() {
-        dropdown.overlay.layer.zPosition = -1
+        dropdown.overlay.view.layer.zPosition = -1
     }
     
     private func configAutoCloseDropdownMenu() {
@@ -227,7 +238,6 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func verifyTappedOutMenu(_ tap: TapGesture) {
-        print("CHAMANDO TODA HORA ?!?!?!?!")
         if _isShow {
             if isTappedOut(tap) {
                 isShow = false
