@@ -77,8 +77,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeGradient(_ gradient: (_ make: Gradient) -> Gradient) -> Self {
-        _ = gradient(Gradient(self))
+    func makeGradient(_ gradient: (_ make: GradientBuilder) -> GradientBuilder) -> Self {
+        _ = gradient(GradientBuilder(self))
         return self
     }
     

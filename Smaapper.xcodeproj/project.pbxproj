@@ -93,6 +93,12 @@
 		02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581522A20CD8A00150AF9 /* ButtonActions.swift */; };
 		02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581562A2120F200150AF9 /* WeatherForecastView.swift */; };
 		02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */; };
+		02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5815D2A229F1400150AF9 /* ThemeManager.swift */; };
+		02D581612A22A06A00150AF9 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581602A22A06A00150AF9 /* ThemeModel.swift */; };
+		02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581642A22A1B100150AF9 /* ThemeProtocol.swift */; };
+		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
+		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
+		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -198,6 +204,12 @@
 		02D581522A20CD8A00150AF9 /* ButtonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActions.swift; sourceTree = "<group>"; };
 		02D581562A2120F200150AF9 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
 		02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CACornerMask+Extension+Component.swift"; sourceTree = "<group>"; };
+		02D5815D2A229F1400150AF9 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		02D581602A22A06A00150AF9 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
+		02D581642A22A1B100150AF9 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
+		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
+		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
+		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -253,8 +265,8 @@
 		0234A5EF29F9F30F008392EC /* Smaapper */ = {
 			isa = PBXGroup;
 			children = (
-				02D581542A211F7D00150AF9 /* CustomViews */,
 				026F797E2A02A53B003947A6 /* Controllers */,
+				02D581542A211F7D00150AF9 /* CustomViews */,
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
 				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F4452A0C1A7200D75D9F /* Service */,
@@ -288,7 +300,6 @@
 				0234A89C29F9FD3A008392EC /* Extension */,
 				0281DADF2A18087800E44F04 /* FloatWindow */,
 				0234A94729FA9E79008392EC /* Gradient */,
-				0284368A2A1D296700B596DA /* Handler */,
 				0234A88D29F9FD3A008392EC /* ImageView */,
 				0234A8E429F9FD3A008392EC /* Label */,
 				02F45AF92A046F630096A75A /* List */,
@@ -298,6 +309,8 @@
 				024F18AA2A11257000A39584 /* Stack */,
 				02C9C9E92A0A774F00AA1370 /* TapGesture */,
 				0234A8E729F9FD3A008392EC /* TextField */,
+				02D5815C2A229F0300150AF9 /* Theme */,
+				0284368A2A1D296700B596DA /* Utils */,
 				0234A95B29FB3E39008392EC /* View */,
 			);
 			path = Components;
@@ -489,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A94829FA9E8E008392EC /* Gradient.swift */,
+				02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */,
 			);
 			path = Gradient;
 			sourceTree = "<group>";
@@ -615,12 +629,13 @@
 			path = ClockNeumorphism;
 			sourceTree = "<group>";
 		};
-		0284368A2A1D296700B596DA /* Handler */ = {
+		0284368A2A1D296700B596DA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
+				02D581682A23A2DC00150AF9 /* ValidatePercent.swift */,
 			);
-			path = Handler;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		02B792652A1EE409006CEE8E /* TextFieldImage */ = {
@@ -771,6 +786,41 @@
 			path = WeatherForecast;
 			sourceTree = "<group>";
 		};
+		02D5815C2A229F0300150AF9 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				02D581632A22A19D00150AF9 /* Protocol */,
+				02D5815F2A229FF000150AF9 /* Model */,
+				02D581622A22A19300150AF9 /* Themes */,
+				02D5815D2A229F1400150AF9 /* ThemeManager.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		02D5815F2A229FF000150AF9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				02D581602A22A06A00150AF9 /* ThemeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		02D581622A22A19300150AF9 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		02D581632A22A19D00150AF9 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				02D581642A22A1B100150AF9 /* ThemeProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		02F45AF62A043F760096A75A /* Resize */ = {
 			isa = PBXGroup;
 			children = (
@@ -896,6 +946,7 @@
 				0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */,
 				02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
+				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
 				020D0E662A1ED628007F3992 /* TextField.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */,
@@ -921,6 +972,7 @@
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,
 				02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */,
 				02C5F44A2A0C1B1700D75D9F /* GenericService.swift in Sources */,
+				02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
@@ -960,6 +1012,7 @@
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
+				02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatWindow.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
@@ -967,8 +1020,11 @@
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
+				02D581612A22A06A00150AF9 /* ThemeModel.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
+				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
+				02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */,
 				0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */,
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,

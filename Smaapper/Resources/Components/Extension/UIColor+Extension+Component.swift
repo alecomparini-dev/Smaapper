@@ -56,7 +56,17 @@ extension UIColor {
         
         return String(format: "#%02X%02X%02X", r, g, b)
         
-        }
+    }
+    
+    
+    func adjustBrightness(_ percentage: CGFloat) -> UIColor {
+        
+        var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
+        self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        let newBrightness = brightness * (1 + (percentage/100))
+        return UIColor(hue: hue, saturation: saturation, brightness: newBrightness, alpha: alpha)
+    }
+    
     
 }
 

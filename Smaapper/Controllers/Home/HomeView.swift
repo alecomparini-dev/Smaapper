@@ -21,6 +21,8 @@ class HomeView: ViewBuilder {
     weak var delegate: HomeViewDelegate?
     private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
+    private let theme = Theme.shared.currentTheme
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initialization()
@@ -91,7 +93,7 @@ class HomeView: ViewBuilder {
             .setFooterHeight(65)
             .setFooterGradient { build in
                 build
-                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
+                    .setGradientColors([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
                     .setAxialGradient(.rightBottomToLeftTop)
             }
             .setFooterComponent(settingsButton.view)
@@ -225,7 +227,7 @@ class HomeView: ViewBuilder {
         let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
             .setGradient({ build in
                 build
-                    .setColor([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])
+                    .setGradientColors([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])
                     .setAxialGradient(.topToBottom)
                     .apply()
             })
@@ -264,7 +266,7 @@ class HomeView: ViewBuilder {
         let btn = ButtonBuilder()
             .setGradient({ build in
                 build
-                    .setColor([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
+                    .setGradientColors([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
                     .apply()
             })
 
@@ -318,7 +320,7 @@ class HomeView: ViewBuilder {
     
 //  MARK: - Public Functions Area
     func turnOnMenuButton() {
-        _ = menuButton.setShadow { build in
+        menuButton.setShadow { build in
             build.setColor(UIColor.HEX("#ff710b"))
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)
@@ -391,10 +393,9 @@ class HomeView: ViewBuilder {
     private func addBackgroundColor() {
         self.setGradient { build in
             build
-                .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
+                .setReferenceColor(theme.backgroundColor, percentageGradient: -60)
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
-
         }
     }
     
@@ -404,8 +405,6 @@ class HomeView: ViewBuilder {
         dropdownMenu.add(insideTo: self.view)
         dock.add(insideTo: self.view)
         menuButton.add(insideTo: self.view)
-        
-        
     }
     
     private func applyConstraints() {
@@ -416,14 +415,26 @@ class HomeView: ViewBuilder {
         dock.applyConstraint()
         
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            self.floatWindow.add(insideTo: self)
-//            self.floatWindow.applyConstraint()
-//            self.floatWindow.isShow = true
-//        }
-        
         
     }
+    
+    
+    func adjustBrightness(of color: UIColor, percent: CGFloat) -> UIColor {
+        var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
+        color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+        
+        
+        print("hue:", hue, "saturation:", saturation, "brightness:", brightness )
+        let adjustedBrightness = brightness * 0.58400048965
+        let adjustedSaturation = saturation * 1.344086022
+        let adjustedHue = hue * 1.063895
+        
+        let adjustedColor = UIColor(hue: adjustedHue, saturation: adjustedSaturation, brightness: adjustedBrightness, alpha: alpha)
+        
+        return adjustedColor
+    }
+    
+    
     
     func createIconsDock(_ systemNameImage: String) -> UIView {
         let img = ImageViewBuilder(UIImage(systemName: systemNameImage)).view
@@ -464,5 +475,6 @@ class HomeView: ViewBuilder {
     }
     
     
-}
 
+    
+}

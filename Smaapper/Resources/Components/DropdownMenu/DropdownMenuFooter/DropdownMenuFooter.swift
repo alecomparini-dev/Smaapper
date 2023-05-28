@@ -10,7 +10,7 @@ import UIKit
 class DropdownMenuFooter: DropdownMenu {
     
     private var _footerHeight: CGFloat = 50
-    private var _footerGradient: Gradient?
+    private var _footerGradient: GradientBuilder?
     private var _componentsFooter: [UIView] = []
     
     
@@ -31,7 +31,7 @@ class DropdownMenuFooter: DropdownMenu {
         set { self._footerHeight = newValue }
     }
     
-    var footerGradient: Gradient? {
+    var footerGradient: GradientBuilder? {
         get { self._footerGradient }
         set { self._footerGradient = newValue }
     }
