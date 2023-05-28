@@ -30,7 +30,7 @@ class CategoriesView: UIView {
         let view = ViewBuilder()
             .setGradient({ build in
                 build
-                    .setGradientColors([UIColor.HEX("#292D2E"),  UIColor.HEX("#101112")])
+                    .setGradientColors(Theme.shared.currentTheme.backgroundColorGradient)
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             })

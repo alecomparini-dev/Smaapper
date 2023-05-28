@@ -21,8 +21,6 @@ class HomeView: ViewBuilder {
     weak var delegate: HomeViewDelegate?
     private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
-    private let theme = Theme.shared.currentTheme
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.initialization()
@@ -393,7 +391,7 @@ class HomeView: ViewBuilder {
     private func addBackgroundColor() {
         self.setGradient { build in
             build
-                .setReferenceColor(theme.backgroundColor, percentageGradient: -60)
+                .setGradientColors(Theme.shared.currentTheme.backgroundColorGradient)
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }

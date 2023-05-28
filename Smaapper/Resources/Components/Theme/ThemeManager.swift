@@ -9,6 +9,9 @@ import UIKit
 
 protocol ThemeStrategy {
     var backgroundColor: UIColor { get }
+    var backgroundColorGradient: [UIColor] { get }
+    var primaryColor: UIColor { get }
+    var onPrimaryColor: UIColor { get }
 }
 
 
@@ -27,11 +30,18 @@ class Theme {
     
 }
 
-class ThemeDarkDefault: ThemeStrategy {
-    var backgroundColor: UIColor = UIColor.HEX("#292D2E")
+struct ThemeDarkDefault: ThemeStrategy {
+    var backgroundColor: UIColor { UIColor.HEX("#292D2E") }
+    var backgroundColorGradient: [UIColor] { return [backgroundColor, backgroundColor.adjustBrightness(-10)] }
+    var primaryColor: UIColor {UIColor.HEX("#3d4248")}
+    var onPrimaryColor = UIColor.HEX("#FFFFFF")
+    
 }
 
 
-class ThemeLightDefault: ThemeStrategy {
+struct ThemeLightDefault: ThemeStrategy {
+    var onPrimaryColor: UIColor
+    var backgroundColorGradient: [UIColor]
+    var primaryColor: UIColor
     var backgroundColor: UIColor = .white
 }

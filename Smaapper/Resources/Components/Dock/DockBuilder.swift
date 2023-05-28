@@ -31,6 +31,7 @@ class DockBuilder: BaseBuilder {
     }
     
     private func initialization() {
+        initiateDock()
         initiateContainer()
         initiateLayout()
         initiateCollection()
@@ -227,10 +228,20 @@ class DockBuilder: BaseBuilder {
     private func initiateCollection() {
         collection.setCollectionViewLayout(self.layout, animated: true)
         collection.backgroundColor = .clear
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            self.collection.layer.cornerRadius = self.dock.layer.cornerRadius
+            self.collection.layer.maskedCorners = self.dock.layer.maskedCorners
+        }
+    }
+    
+    private func initiateDock() {
+        self.dock.clipsToBounds = true
     }
     
     private func initiateContainer() {
-        container.clipsToBounds = true
+        self.container.layer.cornerRadius = dock.layer.cornerRadius
+        self.container.layer.maskedCorners = dock.layer.maskedCorners
     }
     
     private func initiateLayout() {
