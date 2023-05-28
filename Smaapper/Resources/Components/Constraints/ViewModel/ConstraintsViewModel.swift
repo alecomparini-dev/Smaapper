@@ -32,7 +32,6 @@ class ConstraintsViewModel {
     
     var typeElement: ConstraintsTypeElement { model.typeElement }
     
-
     var relation: ConstraintsRelations { model.relation }
     
     func equalTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {

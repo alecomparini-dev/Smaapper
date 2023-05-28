@@ -30,7 +30,7 @@ class CategoriesView: UIView {
         let view = ViewBuilder()
             .setGradient({ build in
                 build
-                    .setColor([UIColor.HEX("#17191a").getBrightness(1.7),  UIColor.HEX("#17191a").getBrightness(0.7)])
+                    .setGradientColors([UIColor.HEX("#292D2E"),  UIColor.HEX("#101112")])
                     .setAxialGradient(.leftTopToRightBottom)
                     .apply()
             })
@@ -42,8 +42,8 @@ class CategoriesView: UIView {
     
     
     lazy var closeModalCategories: IconButtonBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "chevron.down")).view
-        let btn = IconButtonBuilder(img)
+        let img = ImageViewBuilder(UIImage(systemName: "chevron.down"))
+        let btn = IconButtonBuilder(img.view)
             .setImageColor(.white.withAlphaComponent(0.3))
             .setImageWeight(.semibold)
             .setConstraints { build in
@@ -84,7 +84,7 @@ class CategoriesView: UIView {
        var view = ViewBuilder()
             .setGradient({ build in
                 build
-                    .setColor([UIColor.HEX("#ff6b00"),UIColor.HEX("#f48537")])
+                    .setGradientColors([UIColor.HEX("#ff6b00"),UIColor.HEX("#f48537")])
                     .setAxialGradient(.rightToLeft)
                     .apply()
             })

@@ -33,8 +33,8 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     }
 
     @discardableResult
-    func setFooterGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        _dropdownFooter.footerGradient = gradient(Gradient(_dropdownFooter.stackView.view))
+    func setFooterGradient(_ gradient: (_ build: GradientBuilder) -> GradientBuilder) -> Self {
+        _dropdownFooter.footerGradient = gradient(GradientBuilder(_dropdownFooter.stackView.view))
         return self
     }
 

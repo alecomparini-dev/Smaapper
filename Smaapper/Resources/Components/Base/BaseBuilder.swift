@@ -15,7 +15,7 @@ class BaseBuilder {
     private(set) var border: BorderBuilder?
     private(set) var shadow: Shadow?
     private(set) var neumorphism: Neumorphism?
-    private(set) var gradient: Gradient?
+    private(set) var gradient: GradientBuilder?
     private(set) var tapGesture: TapGestureBuilder?
     private(set) var blur: Blur?
     
@@ -46,8 +46,8 @@ class BaseBuilder {
     }
 
     @discardableResult
-    func setGradient(_ gradient: (_ build: Gradient) -> Gradient) -> Self {
-        self.gradient = gradient(Gradient(component))
+    func setGradient(_ gradient: (_ build: GradientBuilder) -> GradientBuilder) -> Self {
+        self.gradient = gradient(GradientBuilder(component))
         return self
     }
 
