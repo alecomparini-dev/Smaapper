@@ -47,7 +47,7 @@ class HomeView: ViewBuilder {
             })
             .setNeumorphism({ build in
                 build
-                    .setReferenceColor(UIColor.HEX("#222626"))
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
                     .setShape(.convex)
                     .setLightPosition(.leftTop)
                     .setBlur(percent: 10)
@@ -130,7 +130,7 @@ class HomeView: ViewBuilder {
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
         return ButtonImageBuilder(img)
-            .setImageColor(.white)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageSize(16)
             .setBorder({ build in
                 build.setCornerRadius(14)
@@ -141,9 +141,7 @@ class HomeView: ViewBuilder {
                     .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-//                    .setDistance(to: .light, percent: 7)
                     .setBlur(to: .light, percent: 5)
-//                    .setIntensity(to: .light, percent: 100)
                     .apply()
             }
             .setConstraints { build in
@@ -194,7 +192,7 @@ class HomeView: ViewBuilder {
             .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
             .setBorder({ build in
                 build
-                    .setColor(.white.withAlphaComponent(0.1))
+                    .setColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.2))
                     .setWidth(1)
                     .setCornerRadius(15)
             })
@@ -259,8 +257,8 @@ class HomeView: ViewBuilder {
     
     func createMiddleSectionView(_ text: String) -> UIView {
         return LabelBuilder(text)
-            .setColor(UIColor.systemGray)
-            .setFont(UIFont.systemFont(ofSize: 16, weight: .semibold))
+            .setColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setFont(UIFont.systemFont(ofSize: 17, weight: .semibold))
             .setTextAlignment(.left)
             .view
     }
@@ -273,14 +271,14 @@ class HomeView: ViewBuilder {
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(18)
-            .setTintColor(.white.withAlphaComponent(0.8))
+            .setTintColor(Theme.shared.currentTheme.onSurface)
             .view
     }
     
     func createMiddleRowView(_ text: String) -> UIView {
         return LabelBuilder(text)
-            .setColor(.white.withAlphaComponent(0.9))
-            .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
+            .setColor(Theme.shared.currentTheme.onSurface)
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
             .setTextAlignment(.left)
             .view
     }
@@ -298,7 +296,7 @@ class HomeView: ViewBuilder {
     func createIconsDock(_ systemNameImage: String) -> UIView {
         let img = ImageViewBuilder(UIImage(systemName: systemNameImage)).view
         let btn = IconButtonBuilder(img)
-            .setImageColor(.white)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageSize(14)
             .setBorder { make in
                 make
