@@ -65,14 +65,13 @@ class ClockNeumorphism: ViewBuilder {
         let label = LabelBuilder()
             .setText("26-05")
             .setFont(UIFont.systemFont(ofSize: 14, weight: .thin))
-            .setColor(.systemOrange.withAlphaComponent(0.8))
+            .setColor(Theme.shared.currentTheme.primary)
             .setTextAlignment(.right)
             .setConstraints { build in
                 build
                     .setTop.equalTo(stackMinutes.view, .bottom, 5)
                     .setLeading.equalToSuperView(10)
                     .setTrailing.equalToSuperView(2)
-//                    .setHeight.setWidth.equalToConstant(10)
             }
         
         return label
@@ -217,7 +216,7 @@ class ClockNeumorphism: ViewBuilder {
             }
             .setNeumorphism { build in
                 build
-                    .setReferenceColor(UIColor.HEX("#f77c22"))
+                    .setReferenceColor(Theme.shared.currentTheme.primary)
                     .setShape(.flat)
                     .setLightPosition(.leftTop)
                     .setShadowColor(to: .dark, .black)

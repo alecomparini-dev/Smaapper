@@ -37,6 +37,7 @@ protocol ThemeStrategy {
     
     var onSurface: UIColor { get }
     var onSurfaceVariant: UIColor { get }
+    var onSurfaceInverse: UIColor { get }
     
 }
 
@@ -61,8 +62,8 @@ struct ThemeDarkDefault: ThemeStrategy {
     var backgroundColor: UIColor { UIColor.HEX("#292D2E") }
     var backgroundColorGradient: [UIColor] { [backgroundColor, backgroundColor.adjustBrightness(-60)] }
     
-    var primary: UIColor { UIColor.HEX("#ff6b00") }
-    var primaryGradient: [UIColor] { [UIColor.HEX("#ec9355"), primary] }
+    var primary: UIColor { UIColor.HEX("#ec9355") }
+    var primaryGradient: [UIColor] { [primary, UIColor.HEX("#ff6b00")] }
     var onPrimary:UIColor { UIColor.HEX("#0f1010") }
     
     var primaryContainer: UIColor {UIColor.HEX("#3d4248")}
@@ -87,8 +88,9 @@ struct ThemeDarkDefault: ThemeStrategy {
     var surfaceContainerLowest: UIColor { surfaceContainerHighest.adjustBrightness(-70) }
 
     var onSurface: UIColor { UIColor.HEX("#d3d3d3") }
+    var onSurfaceInverse: UIColor { UIColor.HEX("#050505") }
     var onSurfaceVariant: UIColor { onSurface.adjustBrightness(-40) }//9598a0
-    
+
 }
 
 
