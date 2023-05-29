@@ -73,7 +73,6 @@ class ClockNeumorphism: ViewBuilder {
                     .setLeading.equalToSuperView(10)
                     .setTrailing.equalToSuperView(2)
             }
-        
         return label
     }()
     
