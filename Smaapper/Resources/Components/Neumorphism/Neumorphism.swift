@@ -163,7 +163,6 @@ class Neumorphism {
         case .dark:
             self.darkShadowIntensity = percentIntensity
         }
-        
         return self
     }
     
