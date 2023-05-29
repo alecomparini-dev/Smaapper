@@ -62,8 +62,9 @@ class GradientBuilder {
     }
     
     @discardableResult
-    func setRadialGradient(_ startPoint: CGPoint) -> Self {
+    func setRadialGradient(startPoint: CGPoint, _ endPoint: CGPoint?) -> Self {
         self.setStartPoint(startPoint.x, startPoint.y)
+        self.gradient.endPoint = endPoint ?? CGPointZero
         self.setType(.radial)
         return self
     }
@@ -125,7 +126,6 @@ class GradientBuilder {
         }
         
     }
-    
 
     private func configGradient() {
         gradient.cornerRadius = component.layer.cornerRadius
@@ -143,8 +143,8 @@ class GradientBuilder {
     private func applyGradient() {
         self.configGradient()
         self.gradient.frame = self.component.bounds
-        if !self.gradient.isAxial {
-            let endY = 0 + self.component.frame.size.width / self.component.frame.size.height / 2
+        if !self.gradient.isAxial && self.gradient.endPoint == CGPointZero {
+            let endY = self.component.frame.size.width / self.component.frame.size.height / 2
             self.gradient.endPoint = CGPoint(x: 0, y: endY)
         }
         self.setGradientOnComponent()

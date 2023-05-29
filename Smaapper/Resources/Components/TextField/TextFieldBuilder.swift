@@ -129,9 +129,14 @@ class TextFieldBuilder: BaseBuilder {
     }
     
     @discardableResult
-    func setPadding(_ padding: CGFloat, _ position: TextField.Position) -> Self {
+    func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 0))
-        addPaddingToTextField(paddingView, position)
+        if let position {
+            addPaddingToTextField(paddingView, position)
+            return self
+        }
+        addPaddingToTextField(paddingView, .left)
+        addPaddingToTextField(paddingView, .right)
         return self
     }
     

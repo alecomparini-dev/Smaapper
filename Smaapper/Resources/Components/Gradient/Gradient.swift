@@ -21,6 +21,7 @@ class Gradient: CAGradientLayer {
     }
     
     private var _isAxial = false
+    private var _endPoint: CGPoint = CGPointZero
     
     override init() {
         super.init()
@@ -36,6 +37,11 @@ class Gradient: CAGradientLayer {
     var isAxial: Bool {
         get { self._isAxial }
         set { self._isAxial = newValue }
+    }
+    
+    override var endPoint: CGPoint {
+        get { self._endPoint }
+        set { self._endPoint = newValue }
     }
 
     

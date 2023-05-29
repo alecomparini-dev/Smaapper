@@ -18,10 +18,14 @@ class CategoriesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        initialization()
+    }
+
+    private func initialization() {
         addElements()
         applyConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

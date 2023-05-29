@@ -49,7 +49,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
         return self
     }
     
-    override func setPadding(_ padding: CGFloat, _ position: TextField.Position) -> Self {
+    override func setPadding(_ padding: CGFloat, _ position: TextField.Position?) -> Self {
         if imagePosition == position {
             return self
         }
