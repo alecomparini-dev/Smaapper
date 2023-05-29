@@ -48,7 +48,7 @@ class HomeView: ViewBuilder {
             .setNeumorphism({ build in
                 build
                     .setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
-                    .setShape(.convex)
+                    .setShape(.concave)
                     .setLightPosition(.leftTop)
                     .setBlur(percent: 10)
                     .setDistance(to: .light, percent: 1)
@@ -107,7 +107,7 @@ class HomeView: ViewBuilder {
             })
             .setNeumorphism { build in
                 build
-                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLow)
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
                     .apply()
