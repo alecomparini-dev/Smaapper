@@ -132,7 +132,7 @@ class DropdownMenuBuilder: BaseBuilder {
         set {
             self._isShow = newValue
             callOnlyIsShow()
-            isPresented()
+            presentation()
             callClosureOpenCloseMenu(self._isShow)
             bringToFront()
             isEnabledTapGesture(self._isShow)
@@ -269,7 +269,7 @@ class DropdownMenuBuilder: BaseBuilder {
         return isTappedOut
     }
     
-    private func isPresented() {
+    private func presentation() {
         dropdown.list.isShow = _isShow
         dropdown.isHidden = !_isShow
     }
