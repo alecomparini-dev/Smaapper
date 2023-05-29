@@ -87,16 +87,16 @@ class HomeView: ViewBuilder {
     
     
     lazy var dropdownMenu: DropdownMenuFooterBuilder = {
-        let drop = DropdownMenuFooterBuilder()
+        return DropdownMenuFooterBuilder()
             .setFooterHeight(65)
             .setFooterGradient { build in
                 build
-                    .setGradientColors([UIColor.HEX("#ff6b00"),UIColor.HEX("#ec9355")])
-                    .setAxialGradient(.rightBottomToLeftTop)
+                    .setGradientColors(Theme.shared.currentTheme.primaryGradient)
+                    .setAxialGradient(.leftTopToRightBottom)
             }
-            .setFooterComponent(settingsButton.view)
-            .setFooterComponent(profileButton.view)
-            .setFooterComponent(recentButton.view)
+            .setFooterComponent(settingsDropdownMenuFooterIconButton.view)
+            .setFooterComponent(profileDropdownMenuFooterIconButton.view)
+            .setFooterComponent(recentDropdownMenuFooterIconButton.view)
             .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton.view])
             .setRowHeight(45)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
@@ -107,7 +107,7 @@ class HomeView: ViewBuilder {
             })
             .setNeumorphism { build in
                 build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
                     .setShape(.concave)
                     .setLightPosition(.rightBottom)
                     .apply()
@@ -125,13 +125,11 @@ class HomeView: ViewBuilder {
                     .setAction(event: .openMenu, closure: openMenu)
                     .setAction(event: .closeMenu, closure: closeMenu)
             }
-            
-        return drop
     }()
     
     lazy var menuButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-        let btn = ButtonImageBuilder(img)
+        return ButtonImageBuilder(img)
             .setImageColor(.white)
             .setImageSize(16)
             .setBorder({ build in
@@ -140,10 +138,12 @@ class HomeView: ViewBuilder {
             .setFloatButton()
             .setNeumorphism { build in
                 build
-                    .setReferenceColor(UIColor.HEX("#17191a"))
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
-                    .setDistance(to: .light, percent: 6)
+//                    .setDistance(to: .light, percent: 7)
+                    .setBlur(to: .light, percent: 5)
+//                    .setIntensity(to: .light, percent: 100)
                     .apply()
             }
             .setConstraints { build in
@@ -156,35 +156,34 @@ class HomeView: ViewBuilder {
                 build
                     .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             }
-        return btn
     }()
     
-    lazy var profileButton: IconButtonBuilder = {
+    lazy var profileDropdownMenuFooterIconButton: IconButtonBuilder = {
         return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "person")).view, "Profile")
             .setImageWeight(.medium)
             .setImageSize(18)
-            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
+            .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#0f1010"))
+            .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
     
-    lazy var recentButton: IconButtonBuilder = {
+    lazy var recentDropdownMenuFooterIconButton: IconButtonBuilder = {
         return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "rectangle.stack")).view)
             .setImageWeight(.medium)
             .setImageSize(18)
-            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
+            .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTitleSize(12)
             .setTitle("Recent", .normal)
-            .setImageColor(UIColor.HEX("#0f1010"))
+            .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
     
-    lazy var settingsButton: IconButtonBuilder = {
+    lazy var settingsDropdownMenuFooterIconButton: IconButtonBuilder = {
         return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "gearshape")).view, "Settings")
             .setImageWeight(.medium)
             .setImageSize(18)
-            .setTitleColor(UIColor.HEX("#0f1010"), .normal)
+            .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTitleSize(12)
-            .setImageColor(UIColor.HEX("#0f1010"))
+            .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
     
     lazy var dock: DockBuilder = {
@@ -208,34 +207,6 @@ class HomeView: ViewBuilder {
         return dock
     }()
 
-    lazy var floatWindow: FloatWindow = {
-        let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
-            .setGradient({ build in
-                build
-                    .setGradientColors([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])
-                    .setAxialGradient(.topToBottom)
-                    .apply()
-            })
-            .setBorder { build in
-                build
-                    .setCornerRadius(24)
-            }
-            .setShadow { build in
-                build
-                    .setOpacity(1)
-                    .setColor(.black)
-                    .setCornerRadius(12)
-                    .setBlur(25)
-                    .setOffset(width: 5, height: 10)
-                    .apply()
-            }
-            .setTitleWindow { build in
-                build
-                    .setTitleView(createTitleView())
-            }
-        return win
-    }()
-    
 
 //  MARK: - DELEGATE Functions Area
     
@@ -268,7 +239,8 @@ class HomeView: ViewBuilder {
 //  MARK: - Public Functions Area
     func turnOnMenuButton() {
         menuButton.setShadow { build in
-            build.setColor(UIColor.HEX("#ff710b"))
+            build
+                .setColor(Theme.shared.currentTheme.primary)
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)
                 .setBlur(4)
@@ -351,18 +323,6 @@ class HomeView: ViewBuilder {
     
 //  MARK: - Private Function Area
     
-    private func addBackgroundColor() {
-        self.setGradient { build in
-            build
-                .setGradientColors(Theme.shared.currentTheme.backgroundColorGradient)
-                .setAxialGradient(.leftTopToRightBottom)
-                .apply()
-        }
-
-//        setBackgroundColor(UIColor.HEX("#292D2E").adjustBrightness(60))
-        
-    }
-    
     private func addElements() {
         weather.add(insideTo: self.view)
         clock.add(insideTo: self.view)
@@ -380,25 +340,51 @@ class HomeView: ViewBuilder {
     }
     
     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    private func addBackgroundColor() {
+        self.setGradient { build in
+            build
+                .setGradientColors(Theme.shared.currentTheme.backgroundColorGradient)
+                .setAxialGradient(.leftTopToRightBottom)
+                .apply()
+        }
+    }
     
     
     
     
     
 //  MARK: - FLOAT WINDOW
+    
+    
+    lazy var floatWindow: FloatWindow = {
+        let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
+            .setGradient({ build in
+                build
+                    .setGradientColors([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])
+                    .setAxialGradient(.topToBottom)
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(24)
+            }
+            .setShadow { build in
+                build
+                    .setOpacity(1)
+                    .setColor(.black)
+                    .setCornerRadius(12)
+                    .setBlur(25)
+                    .setOffset(width: 5, height: 10)
+                    .apply()
+            }
+            .setTitleWindow { build in
+                build
+                    .setTitleView(createTitleView())
+            }
+        return win
+    }()
+    
+    
     
     private func createTitleView() -> UIView {
         let view = UIView()
@@ -455,25 +441,5 @@ class HomeView: ViewBuilder {
         }
         closeWin.applyConstraint()
     }
-    
-    
-    
-    
-    
-    func showImage() {
-        let img = ImageViewBuilder()
-            .setImage(UIImage(named: "teste"))
-            .setContentMode(.scaleAspectFill)
-            .view
-        
-        img.add(insideTo: self.view)
-        img.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
-
-    }
-    
-    
-
     
 }
