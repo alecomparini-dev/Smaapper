@@ -207,20 +207,7 @@ class HomeView: ViewBuilder {
             }
         return dock
     }()
-    
-    private func numberOfItemsCallback() -> Int {
-        return delegate?.numberOfItemsCallback() ?? 0
-    }
-    
-    private func dockCellCalback(_ indexCell: Int) -> UIView {
-        return delegate?.dockCellCalback(indexCell) ?? UIView()
-    }
-    
-    func dockIsShow(_ flag: Bool) {
-        dock.isShow = flag
-    }
-    
-    
+
     lazy var floatWindow: FloatWindow = {
         let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
             .setGradient({ build in
@@ -250,71 +237,33 @@ class HomeView: ViewBuilder {
     }()
     
 
-    private func createTitleView() -> UIView {
-        let view = UIView()
-        let closeWin = createCloseWindowButton()
-        let dragDropView = createDragDropView()
-        addElementsInTitleView(view, [closeWin.view,dragDropView])
-        configButtonsConstraintsInTitleView(closeWin)
-        return view
-    }
+//  MARK: - DELEGATE Functions Area
     
-
-    private func createCloseWindowButton() -> ButtonBuilder {
-        let btn = ButtonBuilder()
-            .setGradient({ build in
-                build
-                    .setGradientColors([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
-                    .apply()
-            })
-
-            .setShadow({ build in
-                build
-                    .setColor(.black)
-                    .setBlur(5)
-                    .setOpacity(0.6)
-                    .setOffset(width: 5, height: 5)
-                    .apply()
-            })
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(16)
-            }
-        return btn
-    }
-    
-    private func createDragDropView() -> UIView {
-        let view = View()
-        
-        return view
-    }
-    
-    
-    private func addElementsInTitleView(_ view: UIView, _ elements: [UIView]) {
-        elements.forEach { elem in
-            elem.add(insideTo: view)
-        }
-    }
-    
-    private func configButtonsConstraintsInTitleView( _ closeWin: ButtonBuilder) {
-        closeWin.setConstraints { make in
-            make
-                .setTrailing.equalToSuperView(-12)
-                .setVerticalAlignmentY.equalToSuperView(5)
-        }
-        closeWin.applyConstraint()
-    }
-    
-    
-//  MARK: - Objc Functions Area
-    @objc func menuButtonTapped() {
+    @objc
+    private func menuButtonTapped() {
         delegate?.menuButtonTapped()
     }
+    
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
+    }
 
+    private func openMenu() {
+        delegate?.openMenu()
+    }
+    
+    private func closeMenu() {
+        delegate?.closeMenu()
+    }
+    
+    private func numberOfItemsCallback() -> Int {
+        return delegate?.numberOfItemsCallback() ?? 0
+    }
+    
+    private func dockCellCalback(_ indexCell: Int) -> UIView {
+        return delegate?.dockCellCalback(indexCell) ?? UIView()
+    }
+    
     
 //  MARK: - Public Functions Area
     func turnOnMenuButton() {
@@ -374,19 +323,33 @@ class HomeView: ViewBuilder {
             .view
     }
     
+    func createIconsDock(_ systemNameImage: String) -> UIView {
+        let img = ImageViewBuilder(UIImage(systemName: systemNameImage)).view
+        let btn = IconButtonBuilder(img)
+            .setImageColor(.white)
+            .setImageSize(14)
+            .setBorder { make in
+                make
+                    .setCornerRadius(8)
+                    .setWidth(0)
+            }
+            .setNeumorphism({ build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .dark, percent: 5)
+                    .apply()
+            })
+        return btn.view
+    }
+
+    
     
 //  MARK: - Private Function Area
-
-    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
-        delegate?.dropdownMenuTapped(rowTapped)
-    }
-    private func openMenu() {
-        delegate?.openMenu()
-    }
-    private func closeMenu() {
-        delegate?.closeMenu()
-    }
-    
     
     private func addBackgroundColor() {
         self.setGradient { build in
@@ -395,6 +358,9 @@ class HomeView: ViewBuilder {
                 .setAxialGradient(.leftTopToRightBottom)
                 .apply()
         }
+
+//        setBackgroundColor(UIColor.HEX("#292D2E").adjustBrightness(60))
+        
     }
     
     private func addElements() {
@@ -411,53 +377,88 @@ class HomeView: ViewBuilder {
         menuButton.applyConstraint()
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
-        
-        
-        
     }
     
     
-    func adjustBrightness(of color: UIColor, percent: CGFloat) -> UIColor {
-        var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0
-        color.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        
-        
-        print("hue:", hue, "saturation:", saturation, "brightness:", brightness )
-        let adjustedBrightness = brightness * 0.58400048965
-        let adjustedSaturation = saturation * 1.344086022
-        let adjustedHue = hue * 1.063895
-        
-        let adjustedColor = UIColor(hue: adjustedHue, saturation: adjustedSaturation, brightness: adjustedBrightness, alpha: alpha)
-        
-        return adjustedColor
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//  MARK: - FLOAT WINDOW
+    
+    private func createTitleView() -> UIView {
+        let view = UIView()
+        let closeWin = createCloseWindowButton()
+        let dragDropView = createDragDropView()
+        addElementsInTitleView(view, [closeWin.view,dragDropView])
+        configButtonsConstraintsInTitleView(closeWin)
+        return view
     }
     
-    
-    
-    func createIconsDock(_ systemNameImage: String) -> UIView {
-        let img = ImageViewBuilder(UIImage(systemName: systemNameImage)).view
-        let btn = IconButtonBuilder(img)
-            .setImageColor(.white)
-            .setImageSize(14)
-            .setBorder { make in
-                make
-                    .setCornerRadius(8)
-                    .setWidth(0)
-            }
-            .setNeumorphism({ build in
+    private func createCloseWindowButton() -> ButtonBuilder {
+        let btn = ButtonBuilder()
+            .setGradient({ build in
                 build
-                    .setReferenceColor(UIColor.HEX("#26292a"))
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .setBlur(to: .light, percent: 3)
-                    .setBlur(to: .dark, percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .setDistance(to: .dark, percent: 5)
+                    .setGradientColors([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
                     .apply()
             })
-        return btn.view
+            .setShadow({ build in
+                build
+                    .setColor(.black)
+                    .setBlur(5)
+                    .setOpacity(0.6)
+                    .setOffset(width: 5, height: 5)
+                    .apply()
+            })
+            .setBorder { build in
+                build
+                    .setCornerRadius(8)
+            }
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(16)
+            }
+        return btn
     }
-
+    
+    private func createDragDropView() -> UIView {
+        let view = View()
+        return view
+    }
+    
+    
+    private func addElementsInTitleView(_ view: UIView, _ elements: [UIView]) {
+        elements.forEach { elem in
+            elem.add(insideTo: view)
+        }
+    }
+    
+    private func configButtonsConstraintsInTitleView( _ closeWin: ButtonBuilder) {
+        closeWin.setConstraints { make in
+            make
+                .setTrailing.equalToSuperView(-12)
+                .setVerticalAlignmentY.equalToSuperView(5)
+        }
+        closeWin.applyConstraint()
+    }
+    
+    
+    
+    
     
     func showImage() {
         let img = ImageViewBuilder()

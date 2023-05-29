@@ -55,7 +55,6 @@ class CategoriesView: UIView {
             .setActions { build in
                 build
                     .setTarget(self, #selector(closeModalTapped), .touchUpInside)
-                
             }
         return btn
     }()
