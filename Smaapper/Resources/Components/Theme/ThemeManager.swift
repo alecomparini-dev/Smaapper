@@ -68,7 +68,6 @@ struct ThemeDarkDefault: ThemeStrategy {
     var primaryContainer: UIColor {UIColor.HEX("#3d4248")}
     var onPrimaryContainer = UIColor.HEX("#FFFFFF")
     
-    
     var secondary: UIColor { UIColor.HEX("#3d4248") }
     var secondaryGradient: [UIColor] { [secondary, UIColor.HEX("#ff6b00")] }
     var onSecondary = UIColor.HEX("#FFFFFF")
@@ -88,7 +87,7 @@ struct ThemeDarkDefault: ThemeStrategy {
     var surfaceContainerLowest: UIColor { surfaceContainerHighest.adjustBrightness(-70) }
 
     var onSurface: UIColor { UIColor.HEX("#d3d3d3") }
-    var onSurfaceVariant: UIColor { onSurface.adjustBrightness(-20) }//9598a0
+    var onSurfaceVariant: UIColor { onSurface.adjustBrightness(-40) }//9598a0
     
 }
 

@@ -169,12 +169,12 @@ class HomeVC: UIViewController {
             return addChevronToSubMenu(subMenu)
         }
         guard let rightImage = row.rightImage else { return nil }
-        return homeScreen.createRightRowView(rightImage, .white)
+        return homeScreen.createRightRowView(rightImage, Theme.shared.currentTheme.onSurface)
     }
     
     private func addChevronToSubMenu(_ subMenu: DropdownMenuData ) -> UIView? {
         if !subMenu.isEmpty {
-            return homeScreen.createRightRowView("chevron.forward", .white.withAlphaComponent(0.4))
+            return homeScreen.createRightRowView("chevron.forward", Theme.shared.currentTheme.onSurfaceVariant)
         }
         return nil
     }
@@ -182,7 +182,7 @@ class HomeVC: UIViewController {
     private func addHeartToFavorites() -> UIView? {
         guard let resultDropdownMenu else { return nil }
         if (resultDropdownMenu[self.indexSection].section == HomeVC.favoritesID) {
-            return homeScreen.createRightRowView("heart.fill", .white.withAlphaComponent(0.8))
+            return homeScreen.createRightRowView("heart.fill", Theme.shared.currentTheme.onSurface)
         }
         return nil
     }

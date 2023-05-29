@@ -101,7 +101,7 @@ class CategoriesViewController: UIViewController {
     
     private func createRightView(_ row: RowDropdownMenuData) -> UIView? {
         guard let rightImage = row.rightImage else { return nil }
-        let rightView = screen.createRightRowView(rightImage, .white.withAlphaComponent(0.4))
+        let rightView = screen.createRightRowView(rightImage, Theme.shared.currentTheme.onSurfaceVariant)
         return rightView
     }
     

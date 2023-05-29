@@ -44,7 +44,7 @@ class CategoriesView: UIView {
     lazy var closeModalCategories: IconButtonBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "chevron.down"))
         let btn = IconButtonBuilder(img.view)
-            .setImageColor(.white.withAlphaComponent(0.3))
+            .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageWeight(.semibold)
             .setConstraints { build in
                 build
@@ -68,11 +68,11 @@ class CategoriesView: UIView {
        var label = LabelBuilder()
             .setText("Categories")
             .setFont(UIFont.systemFont(ofSize: 22, weight: .thin))
-            .setColor(.white.withAlphaComponent(0.8))
+            .setColor(Theme.shared.currentTheme.onSurface)
             .setTextAlignment(.left)
             .setConstraints { build in
                 build
-                    .setVerticalAlignmentY.equalTo(closeModalCategories.view)
+                    .setVerticalAlignmentY.equalTo(closeModalCategories.view,-3)
                     .setLeading.equalTo(closeModalCategories.view, .trailing,5)
             }
         return label
@@ -83,8 +83,8 @@ class CategoriesView: UIView {
        var view = ViewBuilder()
             .setGradient({ build in
                 build
-                    .setGradientColors([UIColor.HEX("#ff6b00"),UIColor.HEX("#f48537")])
-                    .setAxialGradient(.rightToLeft)
+                    .setGradientColors(Theme.shared.currentTheme.primaryGradient)
+                    .setAxialGradient(.leftToRight)
                     .apply()
             })
             .setBorder({ build in
@@ -111,16 +111,16 @@ class CategoriesView: UIView {
     
     lazy var searchTextField: TextFieldImageBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "magnifyingglass"))
-            .setTintColor(.white.withAlphaComponent(0.3))
+            .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)
         
         let tf = TextFieldImageBuilder(image: img.view, position: .right, margin: 25)
             .setPlaceHolder("Search")
-            .setPlaceHolderColor(.white.withAlphaComponent(0.4))
+            .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant)
             .setPlaceHolderSize(15)
             .setFont(UIFont.systemFont(ofSize: 15))
             .setPadding(15, .left)
-            .setTextColor(.white.withAlphaComponent(0.8))
-            .setTintColor(.white.withAlphaComponent(0.8))
+            .setTextColor(Theme.shared.currentTheme.onSurface)
+            .setTintColor(Theme.shared.currentTheme.onSurface)
             .setBorder({ build in
                 build
                     .setCornerRadius(8)
@@ -131,7 +131,7 @@ class CategoriesView: UIView {
                     .setHeight.equalToConstant(40)
             }
             .setNeumorphism({ build in
-                build.setReferenceColor(UIColor.HEX("#2b2f30"))
+                build.setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
                     .setIntensity(to: .light, percent: 100)
@@ -172,7 +172,7 @@ class CategoriesView: UIView {
 //  MARK: - Create Section Menu
     func createMiddleSectionView(_ text: String) -> UIView {
         let label = LabelBuilder("  \(text)")
-            .setColor(.white)
+            .setColor(Theme.shared.currentTheme.onSurface)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .regular))
             .setTextAlignment(.left)
             .view
@@ -183,13 +183,13 @@ class CategoriesView: UIView {
 //  MARK: - Create Rows Menu
     func createLeftRowView(_ systemNameImage: String) -> UIView {
         let view = ViewBuilder()
-            .setBackgroundColor(UIColor.HEX("#2b2f30"))
+            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainerHighest)
         
         let img = ImageViewBuilder()
             .setImage(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
             .setSize(20)
-            .setTintColor(.white.withAlphaComponent(0.9))
+            .setTintColor(Theme.shared.currentTheme.onSurface)
             .view
         
         img.add(insideTo: view.view)
@@ -202,18 +202,17 @@ class CategoriesView: UIView {
     
     func createMiddleRowView(_ text: String) -> UIView {
         let label = LabelBuilder("  \(text)")
-            .setColor(.white)
+            .setColor(Theme.shared.currentTheme.onSurface)
             .setFont(UIFont.systemFont(ofSize: 14, weight: .regular))
             .setTextAlignment(.left)
-            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.3))
+            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
             .view
         return label
     }
 
-    
     func createRightRowView(_ systemNameImage: String, _ color: UIColor) -> UIView {
         let view = ViewBuilder()
-            .setBackgroundColor(UIColor.HEX("#2b2f30").withAlphaComponent(0.2))
+            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer.withAlphaComponent(0.8))
             
         let img = ImageViewBuilder(UIImage(systemName: systemNameImage))
             .setContentMode(.center)
