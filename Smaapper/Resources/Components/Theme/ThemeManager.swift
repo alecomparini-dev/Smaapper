@@ -59,7 +59,7 @@ class Theme {
 
 struct ThemeDarkDefault: ThemeStrategy {
     
-    var backgroundColor: UIColor { UIColor.HEX("#292D2E") }
+    var backgroundColor: UIColor { UIColor.HEX("#292D2E")}
     var backgroundColorGradient: [UIColor] { [backgroundColor, backgroundColor.adjustBrightness(-60)] }
     
     var primary: UIColor { UIColor.HEX("#ec9355") }
