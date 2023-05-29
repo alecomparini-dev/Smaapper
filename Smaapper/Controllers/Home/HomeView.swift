@@ -89,25 +89,6 @@ class HomeView: ViewBuilder {
                     .setAxialGradient(.leftToRight)
                     .apply()
             })
-//            .setNeumorphism({ build in
-//                build
-//                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainer.withAlphaComponent(0.5))
-//                    .setShape(.flat)
-//                    .setLightPosition(.leftTop)
-//                    .setDistance(percent: 1)
-////                    .setDistance(to: .dark ,percent: 3)
-//                    .setBlur(percent: 1)
-//                    .apply()
-//            })
-//            .setShadow({ build in
-//                build
-//                    .setCornerRadius(20)
-//                    .setOffset(width: 10, height: 15)
-//                    .setBlur(15)
-//                    .setOpacity(1)
-//                    .setColor(.black)
-//                    .apply()
-//            })
             .setConstraints { build in
                 build
                     .setTop.equalTo(weather.view, .bottom, 50)
