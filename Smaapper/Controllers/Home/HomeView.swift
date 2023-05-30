@@ -376,8 +376,8 @@ class HomeView: ViewBuilder {
 //  MARK: - FLOAT WINDOW
     
     
-    lazy var floatWindow: FloatWindow = {
-        let win = FloatWindow(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
+    lazy var floatWindow: FloatWindowViewController = {
+        let win = FloatWindowViewController(frame: CGRect(x: 140, y: 155, width: 210, height: 280))
             .setGradient({ build in
                 build
                     .setGradientColors([UIColor.HEX("#3d4248"), UIColor.HEX("#2a2e34")])

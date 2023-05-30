@@ -45,13 +45,7 @@ class HomeVC: UIViewController {
     
    
     override func loadView() {
-        super.loadView()
         view = homeScreen.view
-//        view.addSubview(homeScreen)
-//        homeScreen.makeConstraints { make in
-//            make.setPin.equalToSuperView
-//        }
-        
     }
     
     override func viewDidLoad() {
@@ -61,14 +55,6 @@ class HomeVC: UIViewController {
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
-        
-//retirar !!!
-//        self.openCloseDropdownMenu()
-//        self.turnOnOffMenuButton()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            self.dropdownMenuTapped((0,0))
-//        }
-        
     }
     
     
@@ -77,8 +63,11 @@ class HomeVC: UIViewController {
         adjustAlignmentOfDock()
         homeScreen.dock.isShow = true
         
+        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
+        
+        weather.present(insideTo: self.view)
+        
     }
-
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

@@ -9,7 +9,7 @@ import UIKit
 
 class ViewBuilder: BaseBuilder {
     
-    private(set) var view: View
+    var view: View
     
     init() {
         self.view = View(frame: .zero)
