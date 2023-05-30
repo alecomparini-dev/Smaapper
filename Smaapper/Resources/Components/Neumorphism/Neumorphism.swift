@@ -247,7 +247,7 @@ class Neumorphism {
                 build.setColor(self.darkShadowColor ?? .clear)
                     .setOffset(offSetDarkShadow)
                     .setOpacity(self.darkShadowIntensity)
-                    .setBlur(self.darkShadowBlur)
+                    .setRadius(self.darkShadowBlur)
                     .apply()
             }
     }
@@ -258,7 +258,7 @@ class Neumorphism {
                 build.setColor(self.lightShadowColor ?? .clear)
                     .setOffset(offSetLightShadow)
                     .setOpacity(self.lightShadowIntensity)
-                    .setBlur(self.lightShadowBlur)
+                    .setRadius(self.lightShadowBlur)
                     .apply()
             }
     }

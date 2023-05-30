@@ -96,7 +96,7 @@ class WeatherView: ViewBuilder {
             .setShadow({ build in
                 build
                     .setColor(.black)
-                    .setBlur(5)
+                    .setRadius(5)
                     .setOpacity(0.6)
                     .setOffset(width: 5, height: 5)
                     .apply()

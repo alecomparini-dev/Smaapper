@@ -57,8 +57,8 @@ class Shadow {
     }
     
     @discardableResult
-    func setBlur(_ blur: CGFloat) -> Self {
-        shadow.shadowRadius = blur
+    func setRadius(_ radius: CGFloat) -> Self {
+        shadow.shadowRadius = radius
         return self
     }
     
@@ -150,7 +150,7 @@ class Shadow {
     private func setDefault(){
         setColor(.black)
             .setOpacity(0.6)
-            .setBlur(5)
+            .setRadius(5)
     }
     
 }

@@ -50,7 +50,7 @@ class AskChatGPTView: ViewBuilder {
                     .setOffset(width: 3, height: 3)
                     .setColor(.black.withAlphaComponent(0.8))
                     .setOpacity(1)
-                    .setBlur(3)
+                    .setRadius(3)
                     .apply()
             })
             .setConstraints { build in
@@ -105,7 +105,7 @@ class AskChatGPTView: ViewBuilder {
             .setShadow { build in
                 build
                     .setColor(.black)
-                    .setBlur(5)
+                    .setRadius(5)
                     .setOpacity(1)
                     .setOffset(width: 3, height: 3)
                     .apply()
