@@ -29,11 +29,7 @@ class CategoriesViewController: UIViewController {
     }
     
     override func loadView() {
-        super.loadView()
-        view.addSubview(screen)
-        screen.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
+        view = screen
     }
     
     override func viewDidLoad() {

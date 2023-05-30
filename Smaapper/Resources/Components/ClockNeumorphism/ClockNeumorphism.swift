@@ -42,7 +42,7 @@ class ClockNeumorphism: ViewBuilder {
     private func initialization() {
         addElements()
         configConstraint()
-        startClock()
+//        startClock()
     }
     
     lazy var stackHours: StackBuilder = {

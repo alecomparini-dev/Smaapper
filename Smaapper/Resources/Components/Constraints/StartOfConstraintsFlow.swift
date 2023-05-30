@@ -111,7 +111,7 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         return StartOfConstraintsAlignmentFlow(self)
     }
     
-    var setCenterXY: StartOfConstraintsAlignmentFlowProtocol {
+    var setAlignmentCenterXY: StartOfConstraintsAlignmentFlowProtocol {
         configStartFlow()
         _ = setHorizontalAlignmentX.setVerticalAlignmentY
         return StartOfConstraintsAlignmentFlow(self)
