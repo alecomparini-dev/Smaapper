@@ -58,8 +58,8 @@ class FloatWindowViewController: ViewBuilder {
     //  MARK: - SET Properties
     
     @discardableResult
-    func setTitleWindow(_ titleWindow: (_ build: TitleWindow) -> TitleWindow) -> Self {
-        self.titleWindow = titleWindow(TitleWindow())
+    func setTitleWindow(_ titleWindow: UIView ) -> Self {
+        self.titleWindow = TitleWindow().setTitleView(titleWindow)
         return self
     }
     

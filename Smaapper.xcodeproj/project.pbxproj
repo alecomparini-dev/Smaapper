@@ -97,7 +97,6 @@
 		02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581562A2120F200150AF9 /* WeatherForecastView.swift */; };
 		02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */; };
 		02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5815D2A229F1400150AF9 /* ThemeManager.swift */; };
-		02D581612A22A06A00150AF9 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581602A22A06A00150AF9 /* ThemeModel.swift */; };
 		02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581642A22A1B100150AF9 /* ThemeProtocol.swift */; };
 		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
 		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
@@ -211,7 +210,6 @@
 		02D581562A2120F200150AF9 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
 		02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CACornerMask+Extension+Component.swift"; sourceTree = "<group>"; };
 		02D5815D2A229F1400150AF9 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
-		02D581602A22A06A00150AF9 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
 		02D581642A22A1B100150AF9 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
 		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
@@ -822,20 +820,11 @@
 		02D5815C2A229F0300150AF9 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				02D581632A22A19D00150AF9 /* Protocol */,
-				02D5815F2A229FF000150AF9 /* Model */,
 				02D581622A22A19300150AF9 /* Themes */,
+				02D581642A22A1B100150AF9 /* ThemeProtocol.swift */,
 				02D5815D2A229F1400150AF9 /* ThemeManager.swift */,
 			);
 			path = Theme;
-			sourceTree = "<group>";
-		};
-		02D5815F2A229FF000150AF9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				02D581602A22A06A00150AF9 /* ThemeModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		02D581622A22A19300150AF9 /* Themes */ = {
@@ -844,14 +833,6 @@
 				02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */,
 			);
 			path = Themes;
-			sourceTree = "<group>";
-		};
-		02D581632A22A19D00150AF9 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				02D581642A22A1B100150AF9 /* ThemeProtocol.swift */,
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {
@@ -1055,7 +1036,6 @@
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
-				02D581612A22A06A00150AF9 /* ThemeModel.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,

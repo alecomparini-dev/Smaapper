@@ -76,7 +76,6 @@ class AskChatGPTView: ViewBuilder {
             .setNeumorphism({ build in
                 build
                     .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLow.adjustBrightness(17))
-//                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
                     .setShape(.concave)
                     .setIntensity(to: .light, percent: 80)
                     .setBlur(to: .light, percent: 5)
