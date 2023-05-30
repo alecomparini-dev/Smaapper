@@ -30,7 +30,7 @@ internal class TitleWindow: View {
     
 //  MARK: - Lazy Properties
     
-    lazy var titleView: ViewBuilder = {
+    lazy private var titleView: ViewBuilder = {
         let view = ViewBuilder()
             .setConstraints { build in
                 build.setPin.equalToSuperView
@@ -61,7 +61,6 @@ internal class TitleWindow: View {
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
             configLayer()
-            addBackgroundColor()
         }
     }
     
@@ -71,23 +70,8 @@ internal class TitleWindow: View {
                 .setCornerRadius((self.superview?.layer.cornerRadius ?? 0)/2)
                 .setWhichCornersWillBeRounded([.top])
         }
-        
     }
-    
-    private func addBackgroundColor() {
-//        self.makeNeumorphism { make in
-//            make
-//                .setReferenceColor(UIColor.HEX("#f9710d"))
-//                .setShape(.convex)
-//                .setLightPosition(.leftTop)
-//                .setBlur(percent: 10)
-//                .setDistance(to: .light, percent: 0)
-//                .setDistance(to: .dark, percent: 5)
-//                .apply()
-//
-//        }
-    }
-    
+ 
     private func addElements() {
         titleView.add(insideTo: self)
     }
