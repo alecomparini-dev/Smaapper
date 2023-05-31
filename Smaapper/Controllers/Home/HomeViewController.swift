@@ -38,6 +38,8 @@ class HomeVC: UIViewController {
     private var indexRow = 0
     private var rowTapped: (section: Int, row: Int) = (0,0)
     
+    private var weather: WeatherViewController?
+    
     lazy var homeScreen: HomeView = {
         let home = HomeView(frame: .zero)
         return home
@@ -56,8 +58,8 @@ class HomeVC: UIViewController {
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
         
-        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
-        weather.present(insideTo: self.view)
+        self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
+        weather?.present(insideTo: self.view)
 
         
         drag()
@@ -222,7 +224,7 @@ class HomeVC: UIViewController {
         private func drag() {
             
             // Crie uma label draggable
-            draggableLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 150, height: 200))
+            draggableLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 150, height: 150))
             draggableLabel.text = "Arraste-me"
             draggableLabel.backgroundColor = .red
             draggableLabel.textColor = .white
@@ -230,53 +232,99 @@ class HomeVC: UIViewController {
             draggableLabel.isUserInteractionEnabled = true
             
             
-            // Adicione o UIPanGestureRecognizer à label
-            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-            draggableLabel.addGestureRecognizer(panGesture)
+//            // Adicione o UIPanGestureRecognizer à label
+//            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+//            draggableLabel.addGestureRecognizer(panGesture)
+           
+            
+
             
             view.addSubview(draggableLabel)
             
-            BorderBuilder(draggableLabel)
-                .setCornerRadius(20)
+            Draggable(component: draggableLabel)
+            Draggable(component: homeScreen.weather.view)
+            Draggable(component: homeScreen.menuButton.view)
+            Draggable(component: homeScreen.askChatGPTView.view)
+            Draggable(component: homeScreen.clock.view)
+            Draggable(component: homeScreen.dock.view)
+            Draggable(component: weather?.view ?? UIView())
+            
             
             
         }
+    
+    
+}
 
+class Draggable {
+    private var component: UIView?
+    private var initialCenter: CGPoint = .zero
+    
+    init(component: UIView) {
+        self.component = component
+        addPanGestureRecognizer()
+    }
+    
+    private func addPanGestureRecognizer() {
+        guard let component else { return }
+        _ = DragDrop2(component)
+    }
+}
+
+
+class DragDrop2: UIPanGestureRecognizer {
+    
+    private var initialCenter: CGPoint = .zero
+    private var originalPosition: CGPoint = .zero
+    private var component = UIView()
+    
+//    override init(target: Any?, action: Selector?) {
+//        super.init(target: target, action: action)
+//    }
+    
+    init(_ comp: UIView) {
+        super.init(target: nil, action: nil)
+        self.component = comp
+        self.addTarget(self, action: #selector(handlePan(_:)))
+        self.component.addGestureRecognizer(self)
+    }
+    
+    func asdf(_ comp: UIView) {
         
+    }
+    
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: view)
+        let translation = gesture.translation(in: component)
         
         switch gesture.state {
         case .began:
-            // Salve a posição original da label
-            originalPosition = draggableLabel.center
+            originalPosition = component.center
             
         case .changed:
-            // Atualize a posição da label com base no gesto de arrastar
             let newPosition = CGPoint(x: originalPosition.x + translation.x, y: originalPosition.y + translation.y)
-            draggableLabel.center = newPosition
+            component.center = newPosition
+            print("velocity:", gesture.velocity(in: self.component).y)
+            print("translation:", translation.y)
             
         case .ended:
+            break
+            
+        case .cancelled:
             break
             
         default:
             break
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
+
+
+
+
+
+
 
 
 //  MARK: - Extension HomeViewDelegate

@@ -307,8 +307,8 @@
 		0234A5EF29F9F30F008392EC /* Smaapper */ = {
 			isa = PBXGroup;
 			children = (
-				021848B12A262577007E68A4 /* FloatWindowControllers */,
 				026F797E2A02A53B003947A6 /* Controllers */,
+				021848B12A262577007E68A4 /* FloatWindowControllers */,
 				02D581542A211F7D00150AF9 /* CustomViews */,
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
 				02C5F4412A0BF4D100D75D9F /* Models */,
