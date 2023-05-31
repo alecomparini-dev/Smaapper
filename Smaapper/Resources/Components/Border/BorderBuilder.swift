@@ -49,6 +49,10 @@ class BorderBuilder {
     @discardableResult
     func setCornerRadius(_ radius: CGFloat) -> Self {
         self.removeBorderStyleOfTextField()
+        
+        //TODO: - COOOORIGIRRRRRRRRRRRRR SAPOORRAAAAA CARALHOOOOOOOOO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        component.clipsToBounds = true
+        // ESSA CARALHA ACIMA QUE FODE COM TODO MUNDO SE O BORDER ESTIVER PRIMEIRO QUE O SHADOW .. VAI TOMA NO CUUUUUUUUUUUUUUUUU
         component.layer.cornerRadius = radius
         return self
     }

@@ -11,6 +11,9 @@ import UIKit
 class DragDrop: UIPanGestureRecognizer {
     
     
+    private var originalPosition: CGPoint = .zero
     
+    
+
     
 }
