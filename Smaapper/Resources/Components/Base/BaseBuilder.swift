@@ -58,6 +58,12 @@ class BaseBuilder {
     }
     
     @discardableResult
+    func setDragDrop(_ tapGesture: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        self.tapGesture = tapGesture(TapGestureBuilder(component))
+        return self
+    }
+    
+    @discardableResult
     func setBlur(_ blur: (_ build: Blur) -> Blur) -> Self {
         self.blur = blur(Blur(component))
         return self
