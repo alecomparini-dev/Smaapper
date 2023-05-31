@@ -99,7 +99,7 @@ class CategoriesView: UIView {
                     .setOffset(width: 3, height: 3)
                     .setColor(.black.withAlphaComponent(0.8))
                     .setOpacity(1)
-                    .setBlur(3)
+                    .setRadius(3)
                     .apply()
             })
             .setConstraints { build in

@@ -261,7 +261,7 @@ class HomeView: ViewBuilder {
                 .setColor(Theme.shared.currentTheme.primary)
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)
-                .setBlur(4)
+                .setRadius(4)
                 .setBringToFront()
                 .setID(idShadowEnableFloatButton)
                 .apply()

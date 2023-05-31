@@ -23,12 +23,14 @@
 		021848AD2A2517B2007E68A4 /* AskChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848AC2A2517B2007E68A4 /* AskChatGPTView.swift */; };
 		021848B42A2625A5007E68A4 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B32A2625A5007E68A4 /* WeatherViewController.swift */; };
 		021848B72A262664007E68A4 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B62A262664007E68A4 /* WeatherView.swift */; };
+		021848BB2A26A511007E68A4 /* DragDropBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BA2A26A511007E68A4 /* DragDropBuilder.swift */; };
+		021848BD2A26C213007E68A4 /* DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BC2A26C213007E68A4 /* DragDrop.swift */; };
 		0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F029F9F30F008392EC /* AppDelegate.swift */; };
 		0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F229F9F30F008392EC /* SceneDelegate.swift */; };
 		0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0234A5F929F9F310008392EC /* Assets.xcassets */; };
 		0234A5FD29F9F310008392EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0234A5FB29F9F310008392EC /* LaunchScreen.storyboard */; };
 		0234A60829F9F310008392EC /* SmaapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A60729F9F310008392EC /* SmaapperTests.swift */; };
-		0234A90329F9FD3A008392EC /* Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A88B29F9FD3A008392EC /* Border.swift */; };
+		0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A88B29F9FD3A008392EC /* BorderBuilder.swift */; };
 		0234A90529F9FD3A008392EC /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A88E29F9FD3A008392EC /* ImageView.swift */; };
 		0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */; };
 		0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */; };
@@ -133,6 +135,8 @@
 		021848AC2A2517B2007E68A4 /* AskChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskChatGPTView.swift; sourceTree = "<group>"; };
 		021848B32A2625A5007E68A4 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		021848B62A262664007E68A4 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		021848BA2A26A511007E68A4 /* DragDropBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropBuilder.swift; sourceTree = "<group>"; };
+		021848BC2A26C213007E68A4 /* DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDrop.swift; sourceTree = "<group>"; };
 		0234A5ED29F9F30F008392EC /* Smaapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smaapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0234A5F029F9F30F008392EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0234A5F229F9F30F008392EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,7 +145,7 @@
 		0234A5FE29F9F310008392EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0234A60329F9F310008392EC /* SmaapperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmaapperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0234A60729F9F310008392EC /* SmaapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmaapperTests.swift; sourceTree = "<group>"; };
-		0234A88B29F9FD3A008392EC /* Border.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Border.swift; sourceTree = "<group>"; };
+		0234A88B29F9FD3A008392EC /* BorderBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderBuilder.swift; sourceTree = "<group>"; };
 		0234A88E29F9FD3A008392EC /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fload+Extension+Component.swift"; sourceTree = "<group>"; };
 		0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension+Component.swift"; sourceTree = "<group>"; };
@@ -273,6 +277,15 @@
 			path = Weather;
 			sourceTree = "<group>";
 		};
+		021848B92A26A4F4007E68A4 /* DragDrop */ = {
+			isa = PBXGroup;
+			children = (
+				021848BA2A26A511007E68A4 /* DragDropBuilder.swift */,
+				021848BC2A26C213007E68A4 /* DragDrop.swift */,
+			);
+			path = DragDrop;
+			sourceTree = "<group>";
+		};
 		0234A5E429F9F30E008392EC = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +338,7 @@
 				0281DAE52A1843C200E44F04 /* ClockNeumorphism */,
 				0234A8A129F9FD3A008392EC /* Constraints */,
 				020D0E592A1EADA1007F3992 /* Dock */,
+				021848B92A26A4F4007E68A4 /* DragDrop */,
 				026F79782A00775E003947A6 /* DropdownMenu */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
@@ -349,7 +363,7 @@
 		0234A88A29F9FD3A008392EC /* Border */ = {
 			isa = PBXGroup;
 			children = (
-				0234A88B29F9FD3A008392EC /* Border.swift */,
+				0234A88B29F9FD3A008392EC /* BorderBuilder.swift */,
 			);
 			path = Border;
 			sourceTree = "<group>";
@@ -1005,7 +1019,7 @@
 				026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
-				0234A90329F9FD3A008392EC /* Border.swift in Sources */,
+				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
 				02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */,
 				02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
@@ -1023,6 +1037,7 @@
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
+				021848BD2A26C213007E68A4 /* DragDrop.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
 				020D0E5D2A1EADCF007F3992 /* DockBuilder.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
@@ -1030,6 +1045,7 @@
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatWindowViewController.swift in Sources */,
+				021848BB2A26A511007E68A4 /* DragDropBuilder.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,

@@ -112,7 +112,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
                 build
                     .setColor(.black)
                     .setOffset(width: 0, height: -5)
-                    .setBlur(5)
+                    .setRadius(5)
                     .setOpacity(0.8)
                     .setCornerRadius(0)
                     .setShadowHeight(10)
