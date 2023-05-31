@@ -23,7 +23,6 @@ class WeatherView: ViewBuilder {
         addElements()
         configConstraints()
         configDraggable()
-        configTap()
     }
     
 //  MARK: - LAZY Area
@@ -86,28 +85,15 @@ class WeatherView: ViewBuilder {
         return view
     }
     
-    private func createCloseWindowButton() -> ButtonBuilder {
-        let btn = ButtonBuilder()
-            .setGradient({ build in
-                build
-                    .setGradientColors([UIColor.HEX("#d32739"), UIColor.HEX("#d32739")])
-                    .apply()
-            })
-            .setShadow({ build in
-                build
-                    .setColor(.black)
-                    .setRadius(5)
-                    .setOpacity(0.6)
-                    .setOffset(width: 5, height: 5)
-                    .apply()
-            })
-            .setBorder { build in
-                build
-                    .setCornerRadius(8)
-            }
+    private func createCloseWindowButton() -> ButtonImageBuilder {
+        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
+            .setImageSize(11)
+            .setImageWeight(.semibold)
+            .setTitleAlignment(.center)
+            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
-                    .setSize.equalToConstant(16)
+                    .setSize.equalToConstant(25)
             }
         return btn
     }
@@ -127,8 +113,8 @@ class WeatherView: ViewBuilder {
         closeWin.applyConstraint()
         closeWin.setConstraints { make in
             make
-                .setTrailing.equalToSuperView(-12)
-                .setVerticalAlignmentY.equalToSuperView(5)
+                .setTop.equalToSuperView(6)
+                .setTrailing.equalToSuperView(-8)
                 .apply()
         }
         
@@ -137,10 +123,5 @@ class WeatherView: ViewBuilder {
     private func configDraggable() {
         self.setDraggable()
     }
-    
-    private func configTap() {
-        
-    }
-    
     
 }
