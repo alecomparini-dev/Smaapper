@@ -20,65 +20,98 @@ class TapGesture: UITapGestureRecognizer {
     enum GestureRelativeTo {
         case window
         case superview
+        case component
     }
     
     var tapGestureDelegate: TapGestureDelegate?
     
-    private var _touchPositionSuperView: CGPoint?
-    private var _touchPositionWindow: CGPoint?
+    private var _touchPositionComponent: CGPoint = CGPointZero
+    private var _touchPositionSuperView: CGPoint = CGPointZero
+    private var _touchPositionWindow: CGPoint = CGPointZero
     
-    var statesEnabled: [UIGestureRecognizer.State] = []
+    private weak var component: UIView?
+    
+    init(_ component: UIView) {
+        super.init(target: nil, action: nil)
+        self.component = component
+        self.initialization()
+    }
+    
+    private func initialization() {
+        self.addTarget(self, action: #selector(objcTapGesture(_:)))
+        self.component?.addGestureRecognizer(self)
+    }
     
     
 //  MARK: - GET Properties
         
-    var getState: UIGestureRecognizer.State { self.state }
+    var getState: UITapGestureRecognizer.State { self.state }
     
     func getTouchPosition(_ touchPositionRelative: GestureRelativeTo) -> CGPoint {
         switch touchPositionRelative {
             case .window:
-                return self._touchPositionWindow ?? CGPoint()
+                return self._touchPositionWindow
+            
             case .superview:
-                return self._touchPositionSuperView ?? CGPoint()
+                return self._touchPositionSuperView
+            
+            case .component:
+                return self._touchPositionComponent
         }
     }
     
     
-//  MARK: - Override Functions Touches
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        if !statesEnabled.contains(.began) {return}
-        setTouchPositions(touches)
-        self.state = .began
+//  MARK: - OBJC Gesture
+    @objc
+    private func objcTapGesture(_ gesture: UITapGestureRecognizer) {
+        switch gesture.state {
+            case .began:
+                self.beganTap()
+            
+            case .changed:
+                self.moved()
+                
+            case .ended:
+                self.endedTap()
+            
+            case .cancelled:
+                self.tapCancelled()
+            
+            default:
+                break
+        }
+    }
+    
+    
+//  MARK: - PRIVATE Area
+    private func beganTap() {
+        setTouchPositions()
         tapGestureDelegate?.touchBegan(self)
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        if !statesEnabled.contains(.ended) {return}
-        setTouchPositions(touches)
-        self.state = .ended
+    private func endedTap() {
+        setTouchPositions()
         tapGestureDelegate?.touchEnded(self)
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        if !statesEnabled.contains(.changed) {return}
-        setTouchPositions(touches)
-        self.state = .changed
+    private func moved() {
+        setTouchPositions()
         tapGestureDelegate?.touchMoved(self)
     }
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        if !statesEnabled.contains(.cancelled) {return}
-        self.state = .cancelled
+    private func tapCancelled() {
         tapGestureDelegate?.touchCancelled(self)
     }
 
-    
-//  MARK: - Private Function Area
-    
-    private func setTouchPositions(_ touches: Set<UITouch>) {
-        guard let touch = touches.first else { return }
-        self._touchPositionSuperView = touch.location(in: self.view?.superview)
-        self._touchPositionWindow = touch.location(in: nil)
+        
+    private func setTouchPositions() {
+        self._touchPositionComponent = self.location(in: self.component)
+        self._touchPositionSuperView = self.location(in: self.component?.superview)
+        self._touchPositionWindow = self.location(in: nil)
     }
+    
+    
+
+
     
 }

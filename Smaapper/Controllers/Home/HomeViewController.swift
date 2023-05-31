@@ -58,12 +58,39 @@ class HomeVC: UIViewController {
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
         
-        self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
+        self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather?.present(insideTo: self.view)
         
-        _ = DraggableBuilder(weather?.view ?? UIView())
+        let weather2 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
+        weather2.present(insideTo: self.view)
+        
+        let weather3 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 320, height: 120))
+        weather3.present(insideTo: self.view)
+        
+        
+//        TapGestureBuilder(weather3.view)
+//            .setTouchEnded { tapGesture in
+//                print("window", tapGesture.getTouchPosition(.window))
+//                print("superview", tapGesture.getTouchPosition(.superview))
+//                print("component", tapGesture.getTouchPosition(.component))
+//            }
+//
+        weather3.setTapGesture { build in
+            build.setTouchEnded { tapGesture in
+                print("asdfasdfasdf")
+            }
+        }
+            
+        
+        homeScreen.clock.view.layer.opacity = 0.6
+        homeScreen.weather.view.isHidden = true
+        homeScreen.askChatGPTView.view.isHidden = true
         
     }
+    
+//    private func teste() -> TapGestureBuilder {
+//
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -229,7 +229,7 @@ class DropdownMenuBuilder: BaseBuilder {
             guard let rootView = CurrentWindow.rootView else { return }
             self.tapGestureBuilder = TapGestureBuilder(rootView)
                 .setTouchEnded({ [weak self] tapGesture in
-                    guard let self else {return}
+                    guard let self else { return }
                     self.verifyTappedOutMenu(tapGesture)
                 })
         }
