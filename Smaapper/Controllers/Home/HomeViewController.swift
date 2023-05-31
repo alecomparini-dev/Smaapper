@@ -60,12 +60,10 @@ class HomeVC: UIViewController {
         
         self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
         weather?.present(insideTo: self.view)
-
         
-        drag()
+        _ = DraggableBuilder(weather?.view ?? UIView())
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -207,81 +205,8 @@ class HomeVC: UIViewController {
             showCategoriesViewController(subMenu)
         }   
     }
-    
-    
-        private func drag() {
-            
-            
-            _ = Draggable(component: weather?.view ?? UIView())
-            
-            
-            
-        }
-    
-    
-}
-
-class Draggable {
-    private var component: UIView?
-    private var initialCenter: CGPoint = .zero
-    
-    init(component: UIView) {
-        self.component = component
-        addPanGestureRecognizer()
-    }
-    
-    private func addPanGestureRecognizer() {
-        guard let component else { return }
-        _ = DragDrop2(component)
-    }
-}
-
-
-class DragDrop2: UIPanGestureRecognizer {
-    
-    private var initialCenter: CGPoint = .zero
-    private var originalPosition: CGPoint = .zero
-    private var component = UIView()
-    
-    
-    init(_ comp: UIView) {
-        super.init(target: nil, action: nil)
-        self.component = comp
-        self.addTarget(self, action: #selector(handlePan(_:)))
-        self.component.addGestureRecognizer(self)
-    }
-    
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: component)
         
-        switch gesture.state {
-        case .began:
-            originalPosition = component.center
-            
-        case .changed:
-            let newPosition = CGPoint(x: originalPosition.x + translation.x, y: originalPosition.y + translation.y)
-            component.center = newPosition
-            print("velocity:", gesture.velocity(in: self.component).y)
-            print("translation:", translation.y)
-            
-        case .ended:
-            break
-            
-        case .cancelled:
-            break
-            
-        default:
-            break
-        }
-    }
-
-    
 }
-
-
-
-
-
 
 
 
