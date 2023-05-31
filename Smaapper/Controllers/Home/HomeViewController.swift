@@ -209,45 +209,10 @@ class HomeVC: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-        
-    
-        private var draggableLabel: UILabel!
-        private var originalPosition: CGPoint = .zero
-
         private func drag() {
             
-            // Crie uma label draggable
-            draggableLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 150, height: 150))
-            draggableLabel.text = "Arraste-me"
-            draggableLabel.backgroundColor = .red
-            draggableLabel.textColor = .white
-            draggableLabel.textAlignment = .center
-            draggableLabel.isUserInteractionEnabled = true
             
-            
-//            // Adicione o UIPanGestureRecognizer à label
-//            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-//            draggableLabel.addGestureRecognizer(panGesture)
-           
-            
-
-            
-            view.addSubview(draggableLabel)
-            
-            Draggable(component: draggableLabel)
-            Draggable(component: homeScreen.weather.view)
-            Draggable(component: homeScreen.menuButton.view)
-            Draggable(component: homeScreen.askChatGPTView.view)
-            Draggable(component: homeScreen.clock.view)
-            Draggable(component: homeScreen.dock.view)
-            Draggable(component: weather?.view ?? UIView())
+            _ = Draggable(component: weather?.view ?? UIView())
             
             
             
@@ -278,19 +243,12 @@ class DragDrop2: UIPanGestureRecognizer {
     private var originalPosition: CGPoint = .zero
     private var component = UIView()
     
-//    override init(target: Any?, action: Selector?) {
-//        super.init(target: target, action: action)
-//    }
     
     init(_ comp: UIView) {
         super.init(target: nil, action: nil)
         self.component = comp
         self.addTarget(self, action: #selector(handlePan(_:)))
         self.component.addGestureRecognizer(self)
-    }
-    
-    func asdf(_ comp: UIView) {
-        
     }
     
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
