@@ -24,6 +24,7 @@
 		021848B42A2625A5007E68A4 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B32A2625A5007E68A4 /* WeatherViewController.swift */; };
 		021848B72A262664007E68A4 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B62A262664007E68A4 /* WeatherView.swift */; };
 		021848BB2A26A511007E68A4 /* DragDropBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BA2A26A511007E68A4 /* DragDropBuilder.swift */; };
+		021848BD2A26C213007E68A4 /* DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BC2A26C213007E68A4 /* DragDrop.swift */; };
 		0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F029F9F30F008392EC /* AppDelegate.swift */; };
 		0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A5F229F9F30F008392EC /* SceneDelegate.swift */; };
 		0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0234A5F929F9F310008392EC /* Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		021848B32A2625A5007E68A4 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		021848B62A262664007E68A4 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		021848BA2A26A511007E68A4 /* DragDropBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropBuilder.swift; sourceTree = "<group>"; };
+		021848BC2A26C213007E68A4 /* DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDrop.swift; sourceTree = "<group>"; };
 		0234A5ED29F9F30F008392EC /* Smaapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smaapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0234A5F029F9F30F008392EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0234A5F229F9F30F008392EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				021848BA2A26A511007E68A4 /* DragDropBuilder.swift */,
+				021848BC2A26C213007E68A4 /* DragDrop.swift */,
 			);
 			path = DragDrop;
 			sourceTree = "<group>";
@@ -1034,6 +1037,7 @@
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
+				021848BD2A26C213007E68A4 /* DragDrop.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
 				020D0E5D2A1EADCF007F3992 /* DockBuilder.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,

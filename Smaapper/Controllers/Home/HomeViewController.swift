@@ -55,6 +55,13 @@ class HomeVC: UIViewController {
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
         homeScreen.dropdownMenu.isShow = false
+        
+        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
+        weather.present(insideTo: self.view)
+
+        
+        drag()
+        
     }
     
     
@@ -62,10 +69,6 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         adjustAlignmentOfDock()
         homeScreen.dock.isShow = true
-        
-        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 200, height: 350))
-        
-        weather.present(insideTo: self.view)
         
     }
     
@@ -202,6 +205,77 @@ class HomeVC: UIViewController {
             showCategoriesViewController(subMenu)
         }   
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    
+        private var draggableLabel: UILabel!
+        private var originalPosition: CGPoint = .zero
+
+        private func drag() {
+            
+            // Crie uma label draggable
+            draggableLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 150, height: 200))
+            draggableLabel.text = "Arraste-me"
+            draggableLabel.backgroundColor = .red
+            draggableLabel.textColor = .white
+            draggableLabel.textAlignment = .center
+            draggableLabel.isUserInteractionEnabled = true
+            
+            
+            // Adicione o UIPanGestureRecognizer à label
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+            draggableLabel.addGestureRecognizer(panGesture)
+            
+            view.addSubview(draggableLabel)
+            
+            BorderBuilder(draggableLabel)
+                .setCornerRadius(20)
+            
+            
+        }
+
+        
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        
+        switch gesture.state {
+        case .began:
+            // Salve a posição original da label
+            originalPosition = draggableLabel.center
+            
+        case .changed:
+            // Atualize a posição da label com base no gesto de arrastar
+            let newPosition = CGPoint(x: originalPosition.x + translation.x, y: originalPosition.y + translation.y)
+            draggableLabel.center = newPosition
+            
+        case .ended:
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
