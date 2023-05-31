@@ -18,11 +18,11 @@ class DraggableBuilder  {
     private var _draggableCancelled: draggableAlias?
     
     private var draggable: Draggable
-    private let component: UIView
+    private weak var component: UIView?
     
     init(_ component: UIView) {
         self.component = component
-        self.draggable = Draggable(self.component)
+        self.draggable = Draggable(component)
         self.initialization()
     }
     
@@ -32,7 +32,7 @@ class DraggableBuilder  {
     }
     
     private func enableUserInteractionComponent() {
-        self.component.isUserInteractionEnabled = true
+        self.component?.isUserInteractionEnabled = true
     }
     
 

@@ -13,12 +13,12 @@ class ViewBuilder: BaseBuilder {
     
     init() {
         self.view = View(frame: .zero)
-        super.init(view)
+        super.init(self.view)
     }
     
     init(frame: CGRect) {
         self.view = View(frame: frame)
-        super.init(view)
+        super.init(self.view)
     }
     
 }

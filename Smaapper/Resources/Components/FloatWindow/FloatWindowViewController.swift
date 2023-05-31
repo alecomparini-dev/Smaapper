@@ -48,7 +48,9 @@ class FloatWindowViewController: ViewBuilder {
     
     //  MARK: - LIFE CIRCLE
     func loadView() {}
-    func viewDidLoad(){}
+    func viewDidLoad(){
+        super.component = view
+    }
     func viewWillAppear(){}
     func viewDidAppear() {}
     func viewWillDisappear() {}

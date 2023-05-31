@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class WeatherView: ViewBuilder {
     
     override init() {
@@ -24,6 +22,8 @@ class WeatherView: ViewBuilder {
         configStyles()
         addElements()
         configConstraints()
+        configDraggable()
+        configTap()
     }
     
 //  MARK: - LAZY Area
@@ -104,7 +104,6 @@ class WeatherView: ViewBuilder {
             .setBorder { build in
                 build
                     .setCornerRadius(8)
-//                    .setWidth(2)
             }
             .setConstraints { build in
                 build
@@ -134,5 +133,14 @@ class WeatherView: ViewBuilder {
         }
         
     }
+    
+    private func configDraggable() {
+        self.setDraggable()
+    }
+    
+    private func configTap() {
+        
+    }
+    
     
 }

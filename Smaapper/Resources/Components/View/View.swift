@@ -25,6 +25,7 @@ class View: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         Resize.resize(self)
+        //TODO: - REMOVER - 
 //        print("remover aqui layoutsubviews" , self)
     }
 

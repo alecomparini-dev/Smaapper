@@ -17,55 +17,69 @@ class BaseBuilder {
     private(set) var neumorphism: Neumorphism?
     private(set) var gradient: GradientBuilder?
     private(set) var tapGesture: TapGestureBuilder?
+    private(set) var draggable: DraggableBuilder?
     private(set) var blur: Blur?
     
-    private(set) var component: UIView
+    private var _component: UIView
     
     init(_ component: UIView) {
-        self.component = component
+        self._component = component
+    }
+
+//  MARK: - GET Properties
+    
+    var component: UIView {
+        get { self._component }
+        set { self._component = newValue }
     }
     
         
 //  MARK: - SET Properties
     @discardableResult
-    func setBorder(_ border: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
-        self.border = border(BorderBuilder(component))
+    func setBorder(_ build: (_ build: BorderBuilder) -> BorderBuilder) -> Self {
+        self.border = build(BorderBuilder(component))
         return self
     }
 
     @discardableResult
-    func setShadow(_ shadow: (_ build: Shadow) -> Shadow) -> Self {
-        self.shadow = shadow(Shadow(component))
+    func setShadow(_ build: (_ build: Shadow) -> Shadow) -> Self {
+        self.shadow = build(Shadow(component))
         return self
     }
 
     @discardableResult
-    func setNeumorphism(_ neumorphism: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        self.neumorphism = neumorphism(Neumorphism(component))
+    func setNeumorphism(_ build: (_ build: Neumorphism) -> Neumorphism) -> Self {
+        self.neumorphism = build(Neumorphism(component))
         return self
     }
 
     @discardableResult
-    func setGradient(_ gradient: (_ build: GradientBuilder) -> GradientBuilder) -> Self {
-        self.gradient = gradient(GradientBuilder(component))
+    func setGradient(_ build: (_ build: GradientBuilder) -> GradientBuilder) -> Self {
+        self.gradient = build(GradientBuilder(component))
         return self
     }
 
     @discardableResult
-    func setTapGesture(_ tapGesture: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
-        self.tapGesture = tapGesture(TapGestureBuilder(component))
+    func setTapGesture(_ build: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        self.tapGesture = build(TapGestureBuilder(component))
         return self
     }
     
     @discardableResult
-    func setDragDrop(_ tapGesture: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
-        self.tapGesture = tapGesture(TapGestureBuilder(component))
+    func setDraggable(_ build: (_ build: DraggableBuilder) -> DraggableBuilder) -> Self {
+        self.draggable = build(DraggableBuilder(component))
         return self
     }
     
     @discardableResult
-    func setBlur(_ blur: (_ build: Blur) -> Blur) -> Self {
-        self.blur = blur(Blur(component))
+    func setDraggable() -> Self {
+        self.draggable = DraggableBuilder(component)
+        return self
+    }
+    
+    @discardableResult
+    func setBlur(_ build: (_ build: Blur) -> Blur) -> Self {
+        self.blur = build(Blur(component))
         return self
     }
 
@@ -126,3 +140,4 @@ class BaseBuilder {
 
     
 }
+

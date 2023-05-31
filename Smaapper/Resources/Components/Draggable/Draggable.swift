@@ -35,7 +35,7 @@ class Draggable: UIPanGestureRecognizer {
     private var _positionWindow: CGPoint = CGPointZero
     private var _positionComponent: CGPoint = CGPointZero
     
-    private var component: UIView!
+    private weak var component: UIView?
     
     init(_ component: UIView) {
         super.init(target: nil, action: nil)
@@ -45,7 +45,7 @@ class Draggable: UIPanGestureRecognizer {
     
     private func initialization() {
         self.addTarget(self, action: #selector(draggableGesture(_:)))
-        self.component.addGestureRecognizer(self)
+        self.component?.addGestureRecognizer(self)
     }
 
     
@@ -70,7 +70,7 @@ class Draggable: UIPanGestureRecognizer {
 //  MARK: - Private Area
     private func beganDragging() {
         setPoints()
-        originalPosition = component.center
+        originalPosition = component?.center ?? .zero
         delegateDraggable?.beganDragging(self)
     }
     
@@ -78,7 +78,7 @@ class Draggable: UIPanGestureRecognizer {
         setPoints()
         let newPosition = CGPoint(x: originalPosition.x + translation.x,
                                   y: originalPosition.y + translation.y)
-        component.center = newPosition
+        component?.center = newPosition
         delegateDraggable?.dragging(self)
     }
     
