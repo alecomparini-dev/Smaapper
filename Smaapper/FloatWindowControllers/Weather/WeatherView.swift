@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol WeatherViewDelegate: AnyObject {
+    func closeWindow()
+}
+
 class WeatherView: ViewBuilder {
+    
+    weak var delegate: WeatherViewDelegate?
     
     override init() {
         super.init()
@@ -78,7 +84,6 @@ class WeatherView: ViewBuilder {
     func createTitleView() -> UIView {
         let view = UIView()
         let closeWin = createCloseWindowButton()
-//        let dragDropView = createDragDropView()
         addElementsInTitleView(view, [closeWin.view])
         configButtonsConstraintsInTitleView(closeWin)
         return view
@@ -94,7 +99,16 @@ class WeatherView: ViewBuilder {
                 build
                     .setSize.equalToConstant(25)
             }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(teste), .touchUpInside)
+            }
+        
         return btn
+    }
+    @objc
+    private func teste() {
+        delegate?.closeWindow()
     }
     
     private func createDragDropView() -> UIView {

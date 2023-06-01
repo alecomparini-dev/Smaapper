@@ -28,7 +28,6 @@ internal class DockCell: UICollectionViewCell {
         }
     }
     
-    
     private func removeSubViews(_ view: UIView) {
         view.subviews.forEach { $0.removeFromSuperview() }
     }

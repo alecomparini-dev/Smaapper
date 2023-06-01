@@ -73,8 +73,6 @@ class HomeVC: UIViewController {
         homeScreen.askChatGPTView.setHidden(true)
         
         
-        weather2.dismiss()
-        
     }
     
     

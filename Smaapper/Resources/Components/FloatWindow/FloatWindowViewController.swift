@@ -13,7 +13,7 @@ class FloatWindowViewController: ViewBuilder {
     private var _isShow = false
     private var alreadyApplied = false
     private let hierarchy: CGFloat = 1000
-    private var superView: UIView?
+    private var _superView: UIView?
     private(set) var id: UUID = UUID()
     
     private var sizeWindow: CGSize? = nil
@@ -44,8 +44,15 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     private func initialization() {
-        addCountWindows()
         setHierarchyVisualization()
+    }
+    
+//  MARK: - GET Properties
+    var superView: UIView {
+        if let superView = self._superView {
+            return superView
+        }
+        return self.view.superview ?? UIView()
     }
     
     
@@ -87,8 +94,7 @@ class FloatWindowViewController: ViewBuilder {
     
 //  MARK: - Actions
     var bringToFront: Void {
-        guard let superview = self.view.superview else {return}
-        superview.bringSubviewToFront(self.view)
+        superView.bringSubviewToFront(self.view)
     }
     var minimize: Void { return }
     var maximize: Void { return }
@@ -98,12 +104,11 @@ class FloatWindowViewController: ViewBuilder {
     
     //  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
-        self.superView = insideTo
+        self._superView = insideTo
+        addCountWindows()
         loadView()
         viewDidLoad()
-        
         configFloatWindow()
-        
         viewWillAppear()
         addFloatWindow()
         appearFloatWindow()
@@ -111,20 +116,21 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     func dismiss() {
-        removeCountWindow()
+        viewWillDisappear()
+        removeWindows()
+        viewDidDisappear()
     }
-    
     
     
     //  MARK: - PRIVATE Function Area
     
-    private func addCountWindows() {
-        manager.addCountWindow(self)
-        print(manager.getCountWindow)
+    private func removeWindows() {
+        manager.removeCountWindow(self)
+        self.view.removeFromSuperview()
     }
     
-    private func removeCountWindow() {
-        manager.removeCountWindow(self)
+    private func addCountWindows() {
+        manager.addCountWindow(self)
     }
     
     private func setHierarchyVisualization() {
@@ -138,9 +144,7 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     private func addFloatWindow() {
-        if let superView {
-            self.view.add(insideTo: superView)
-        }
+        self.view.add(insideTo: superView)
     }
    
     private func decidePositionWindow() {
@@ -197,14 +201,6 @@ class FloatWindowViewController: ViewBuilder {
                 .setHeight.equalToConstant(titleHeight)
         })
     }
-    
-    
-    private func disappear() {
-        self.view.isHidden = true
-        self.titleWindow?.isShow = false
-    }
-    
-    
     
     
 }

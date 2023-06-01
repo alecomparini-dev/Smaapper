@@ -12,7 +12,7 @@ class ImageViewBuilder: BaseBuilder {
     private var imageView: ImageView
     
     var view: ImageView { self.imageView }
-    private(set) var actions: ImageViewActions?
+    private var actions: ImageViewActions?
     
     init() {
         self.imageView = ImageView()

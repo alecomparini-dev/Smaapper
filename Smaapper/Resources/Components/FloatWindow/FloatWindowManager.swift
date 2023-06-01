@@ -31,15 +31,15 @@ class FloatWindowManager {
     
 
     func minimizeAll() {
-        
-    }
-    
-    func maximizeAll() {
-        
+        floatWindows.forEach { win in
+            win.minimize
+        }
     }
     
     func restoreAll() {
-        
+        floatWindows.forEach { win in
+            win.restore
+        }
     }
 
 
