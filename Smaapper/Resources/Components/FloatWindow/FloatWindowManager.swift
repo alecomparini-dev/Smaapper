@@ -26,17 +26,22 @@ class FloatWindowManager {
     }
     
     func removeCountWindow(_ floatWin: FloatWindowViewController)  {
-        self.floatWindows.removeAll { $0.idWindow == floatWin.idWindow}
+        self.floatWindows.removeAll { $0.id == floatWin.id }
     }
     
-    
-    func minimize(_ floatWin: FloatWindowViewController) {}
-    func maxmize(_ floatWin: FloatWindowViewController) {}
-    func restore(_ floatWin: FloatWindowViewController) {}
 
-    func minimizeAll() {}
-    func maxmizeAll() {}
-    func restoreAll() {}
+    func minimizeAll() {
+        floatWindows.forEach { win in
+            win.minimize
+        }
+    }
+    
+    func restoreAll() {
+        floatWindows.forEach { win in
+            win.restore
+        }
+    }
+
 
     
 }

@@ -14,6 +14,7 @@ class ButtonBuilder: BaseBuilder {
     private var _config = UIButton.Configuration.plain()
     private var titleWeight: UIFont.Weight = .regular
     
+    private(set) var actions: ButtonActions?
     private var button: Button
     var view: Button { self.button }
     
@@ -124,7 +125,7 @@ class ButtonBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: ButtonActions) -> ButtonActions) -> Self {
-        _ = action(ButtonActions(self))
+        self.actions = action(ButtonActions(self))
         return self
     }
     

@@ -13,8 +13,8 @@ class FloatWindowViewController: ViewBuilder {
     private var _isShow = false
     private var alreadyApplied = false
     private let hierarchy: CGFloat = 1000
-    private var superView: UIView?
-    private(set) var idWindow: UUID = UUID()
+    private var _superView: UIView?
+    private(set) var id: UUID = UUID()
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
@@ -22,6 +22,7 @@ class FloatWindowViewController: ViewBuilder {
     private var titleHeight: CGFloat = 30
     
     private var manager: FloatWindowManager = FloatWindowManager.instance
+    private var actionsFloatWindow: FloatWindowsActions?
     
     override init(frame: CGRect ) {
         super.init(frame: frame)
@@ -44,24 +45,29 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     private func initialization() {
-        addCountWindows()
         setHierarchyVisualization()
     }
     
     
+//  MARK: - GET Properties
+    var superView: UIView {
+        if let superView = self._superView {
+            return superView
+        }
+        return self.view.superview ?? UIView()
+    }
+    
     
     //  MARK: - LIFE CIRCLE
     func loadView() {}
-    func viewDidLoad(){
-        super.component = view
-    }
-    func viewWillAppear(){}
+    func viewDidLoad() {}
+    func viewWillAppear() {}
     func viewDidAppear() {}
     func viewWillDisappear() {}
     func viewDidDisappear() {}
     
     
-    //  MARK: - SET Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setTitleWindow(_ titleWindow: UIView ) -> Self {
@@ -87,16 +93,30 @@ class FloatWindowViewController: ViewBuilder {
         return self
     }
     
+//    @discardableResult
+//    func setActions(_ action: (_ build: Self) -> Self ) -> Self {
+//        _ = action(FloatWindowsActions(self))
+//        return self
+//    }
     
     
-    //  MARK: - PRESENT and DISMISS FloatWindow
+//  MARK: - Actions
+    var bringToFront: Void {
+        superView.bringSubviewToFront(self.view)
+    }
+    var minimize: Void { return }
+    var maximize: Void { return }
+    var restore: Void { return }
+    
+    
+    
+//  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
-        self.superView = insideTo
+        self._superView = insideTo
+        addCountWindows()
         loadView()
         viewDidLoad()
-        
         configFloatWindow()
-        
         viewWillAppear()
         addFloatWindow()
         appearFloatWindow()
@@ -104,20 +124,21 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     func dismiss() {
-        removeCountWindow()
+        viewWillDisappear()
+        removeWindows()
+        viewDidDisappear()
     }
     
     
+//  MARK: - PRIVATE Function Area
     
-    //  MARK: - PRIVATE Function Area
+    private func removeWindows() {
+        manager.removeCountWindow(self)
+        self.view.removeFromSuperview()
+    }
     
     private func addCountWindows() {
         manager.addCountWindow(self)
-        print(manager.getCountWindow)
-    }
-    
-    private func removeCountWindow() {
-        manager.removeCountWindow(self)
     }
     
     private func setHierarchyVisualization() {
@@ -131,9 +152,7 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     private func addFloatWindow() {
-        if let superView {
-            self.view.add(insideTo: superView)
-        }
+        self.view.add(insideTo: superView)
     }
    
     private func decidePositionWindow() {
@@ -171,7 +190,6 @@ class FloatWindowViewController: ViewBuilder {
         self.view.frame = frame
     }
     
-    
     private func configTitleWindowView() {
         if let titleWindow {
             addTitleWindow(titleWindow)
@@ -190,14 +208,6 @@ class FloatWindowViewController: ViewBuilder {
                 .setHeight.equalToConstant(titleHeight)
         })
     }
-    
-    
-    private func disappear() {
-        self.view.isHidden = true
-        self.titleWindow?.isShow = false
-    }
-    
-    
     
     
 }
