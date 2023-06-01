@@ -119,6 +119,11 @@
                         "rightImage": "game",
                         "items": [
                             {
+                                "title": "Dominoes",
+                                "leftImage": "rectangle.trailinghalf.filled",
+                                "rightImage": "chevron.forward"
+                            },
+                            {
                                 "title": "Hangman",
                                 "leftImage": "figure.mixed.cardio",
                                 "rightImage": "chevron.forward"
