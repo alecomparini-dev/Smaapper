@@ -22,6 +22,7 @@ class FloatWindowViewController: ViewBuilder {
     private var titleHeight: CGFloat = 30
     
     private var manager: FloatWindowManager = FloatWindowManager.instance
+    private var actionsFloatWindow: FloatWindowsActions?
     
     override init(frame: CGRect ) {
         super.init(frame: frame)
@@ -46,6 +47,7 @@ class FloatWindowViewController: ViewBuilder {
     private func initialization() {
         setHierarchyVisualization()
     }
+    
     
 //  MARK: - GET Properties
     var superView: UIView {
@@ -91,6 +93,12 @@ class FloatWindowViewController: ViewBuilder {
         return self
     }
     
+//    @discardableResult
+//    func setActions(_ action: (_ build: Self) -> Self ) -> Self {
+//        _ = action(FloatWindowsActions(self))
+//        return self
+//    }
+    
     
 //  MARK: - Actions
     var bringToFront: Void {
@@ -102,7 +110,7 @@ class FloatWindowViewController: ViewBuilder {
     
     
     
-    //  MARK: - PRESENT and DISMISS FloatWindow
+//  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
         self._superView = insideTo
         addCountWindows()
@@ -122,7 +130,7 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     
-    //  MARK: - PRIVATE Function Area
+//  MARK: - PRIVATE Function Area
     
     private func removeWindows() {
         manager.removeCountWindow(self)
@@ -181,7 +189,6 @@ class FloatWindowViewController: ViewBuilder {
     private func configFrameWindow(_ frame: CGRect) {
         self.view.frame = frame
     }
-    
     
     private func configTitleWindowView() {
         if let titleWindow {

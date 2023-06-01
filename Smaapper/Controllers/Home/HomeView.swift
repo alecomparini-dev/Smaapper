@@ -36,7 +36,17 @@ class HomeView: ViewBuilder {
         applyConstraints()
     }
     
+    
 //  MARK: - LAZY Properties
+    
+    lazy var viewFloatWindow: ViewBuilder = {
+        let view = ViewBuilder()
+            .setConstraints { build in
+                build
+                    .setPin.equalToSuperView
+            }
+        return view
+    }()
     
     lazy var weather: WeatherForecastView = {
         let view = WeatherForecastView(temperature: 25)
@@ -103,7 +113,6 @@ class HomeView: ViewBuilder {
         let tf = TextFieldImageBuilder(img.view)
         return tf
     }()
-    
     
     
     lazy var dropdownMenu: DropdownMenuFooterBuilder = {
@@ -344,10 +353,12 @@ class HomeView: ViewBuilder {
     private func addElements() {
         weather.add(insideTo: self.view)
         clock.add(insideTo: self.view)
+        askChatGPTView.add(insideTo: self.view)
+        viewFloatWindow.add(insideTo: self.view)
         dropdownMenu.add(insideTo: self.view)
         dock.add(insideTo: self.view)
         menuButton.add(insideTo: self.view)
-        askChatGPTView.add(insideTo: self.view)
+        
     }
     
     private func applyConstraints() {
@@ -357,6 +368,7 @@ class HomeView: ViewBuilder {
         dropdownMenu.applyConstraint()
         dock.applyConstraint()
         askChatGPTView.applyConstraint()
+        viewFloatWindow.applyConstraint()
     }
     
     

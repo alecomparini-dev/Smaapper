@@ -40,15 +40,16 @@ class WeatherViewController: FloatWindowViewController {
                             self?.bringToFront
                         }
                 }
+                
         }
+        
+        
     }
     
     private func configDelegate() {
         screen.delegate = self
     }
     
-    
-      
 }
 
 extension WeatherViewController: WeatherViewDelegate {

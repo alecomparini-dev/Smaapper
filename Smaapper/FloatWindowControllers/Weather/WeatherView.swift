@@ -52,7 +52,7 @@ class WeatherView: ViewBuilder {
         configNeumorphism()
     }
     
-    private func configBorder() {
+    private func    configBorder() {
         self.setBorder { build in
             build
                 .setCornerRadius(20)
