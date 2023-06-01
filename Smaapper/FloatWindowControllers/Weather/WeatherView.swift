@@ -22,7 +22,6 @@ class WeatherView: ViewBuilder {
         configStyles()
         addElements()
         configConstraints()
-        configDraggable()
     }
     
 //  MARK: - LAZY Area
@@ -120,11 +119,5 @@ class WeatherView: ViewBuilder {
         
     }
     
-    private func configDraggable() {
-        self.setActions { build in
-            build
-                .setDraggable()
-        }
-    }
-    
+
 }

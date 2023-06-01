@@ -68,23 +68,9 @@ class HomeVC: UIViewController {
         weather3.present(insideTo: self.view)
         
         
-        weather3.setActions({ build in
-            build
-                .setTouch({ component, tapGesture in
-                    print("window", tapGesture?.getTouchPosition(.window) ?? "")
-                    print("superview", tapGesture?.getTouchPosition(.superview) ?? "")
-                    print("component", tapGesture?.getTouchPosition(.component) ?? "")
-                    print("component --> ", component)
-                })
-        })
-            
         homeScreen.clock.setOpacity(0.6)
         homeScreen.weather.setHidden(true)
         homeScreen.askChatGPTView.setHidden(true)
-        
-//        weather?.setOpacity(0.3)
-//        weather2.setOpacity(0.2)
-        
         
         
         weather2.dismiss()

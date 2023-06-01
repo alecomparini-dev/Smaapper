@@ -10,17 +10,24 @@ import UIKit
 class ViewBuilder: BaseBuilder {
     
     private(set) var actions: ViewActions?
+    private var _view: View
     
-    var view: View
+    var view: View {
+        get { self._view }
+        set {
+            self._view = newValue
+            super.component = self._view
+        }
+    }
     
     init() {
-        self.view = View(frame: .zero)
-        super.init(self.view)
+        self._view = View(frame: .zero)
+        super.init(self._view)
     }
     
     init(frame: CGRect) {
-        self.view = View(frame: frame)
-        super.init(self.view)
+        self._view = View(frame: frame)
+        super.init(self._view)
     }
     
     

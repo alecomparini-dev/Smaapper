@@ -14,7 +14,7 @@ class FloatWindowViewController: ViewBuilder {
     private var alreadyApplied = false
     private let hierarchy: CGFloat = 1000
     private var superView: UIView?
-    private(set) var idWindow: UUID = UUID()
+    private(set) var id: UUID = UUID()
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
@@ -49,19 +49,16 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     
-    
     //  MARK: - LIFE CIRCLE
     func loadView() {}
-    func viewDidLoad(){
-        super.component = view
-    }
-    func viewWillAppear(){}
+    func viewDidLoad() {}
+    func viewWillAppear() {}
     func viewDidAppear() {}
     func viewWillDisappear() {}
     func viewDidDisappear() {}
     
     
-    //  MARK: - SET Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setTitleWindow(_ titleWindow: UIView ) -> Self {
@@ -86,6 +83,16 @@ class FloatWindowViewController: ViewBuilder {
         self.frameWindow  = frame
         return self
     }
+    
+    
+//  MARK: - Actions
+    var bringToFront: Void {
+        guard let superview = self.view.superview else {return}
+        superview.bringSubviewToFront(self.view)
+    }
+    var minimize: Void { return }
+    var maximize: Void { return }
+    var restore: Void { return }
     
     
     

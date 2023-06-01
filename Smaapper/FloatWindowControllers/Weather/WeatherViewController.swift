@@ -28,7 +28,22 @@ class WeatherViewController: FloatWindowViewController {
         setTitleWindow(screen.createTitleView())
         .setTitleHeight(35)
         
+        configDraggable()
     }
+    
+    
+    private func configDraggable() {
+        self.setActions { build in
+            build
+                .setDraggable { build in
+                    build
+                        .setBeganDragging { [weak self] draggable in
+                            self?.bringToFront
+                        }
+                }
+        }
+    }
+    
     
     
     
