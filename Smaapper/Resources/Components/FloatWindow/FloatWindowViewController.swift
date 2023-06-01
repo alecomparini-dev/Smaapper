@@ -14,11 +14,14 @@ class FloatWindowViewController: ViewBuilder {
     private var alreadyApplied = false
     private let hierarchy: CGFloat = 1000
     private var superView: UIView?
+    private(set) var idWindow: UUID = UUID()
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
     private var titleWindow: TitleWindow?
     private var titleHeight: CGFloat = 30
+    
+    private var manager: FloatWindowManager = FloatWindowManager.instance
     
     override init(frame: CGRect ) {
         super.init(frame: frame)
@@ -41,7 +44,8 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     private func initialization() {
-        self.view.layer.zPosition = hierarchy
+        addCountWindows()
+        setHierarchyVisualization()
     }
     
     
@@ -100,12 +104,25 @@ class FloatWindowViewController: ViewBuilder {
     }
     
     func dismiss() {
-        
+        removeCountWindow()
     }
     
     
     
     //  MARK: - PRIVATE Function Area
+    
+    private func addCountWindows() {
+        manager.addCountWindow(self)
+        print(manager.getCountWindow)
+    }
+    
+    private func removeCountWindow() {
+        manager.removeCountWindow(self)
+    }
+    
+    private func setHierarchyVisualization() {
+        self.view.layer.zPosition = hierarchy
+    }
     
     private func configFloatWindow() {
         decidePositionWindow()

@@ -75,6 +75,7 @@
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
+		02AAD6AE2A28D99B009381C3 /* FloatWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
@@ -99,7 +100,7 @@
 		02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581522A20CD8A00150AF9 /* ButtonActions.swift */; };
 		02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581562A2120F200150AF9 /* WeatherForecastView.swift */; };
 		02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */; };
-		02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5815D2A229F1400150AF9 /* ThemeManager.swift */; };
+		02D5815E2A229F1400150AF9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5815D2A229F1400150AF9 /* Theme.swift */; };
 		02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581642A22A1B100150AF9 /* ThemeProtocol.swift */; };
 		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
 		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
@@ -191,6 +192,7 @@
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
+		02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowManager.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
@@ -215,7 +217,7 @@
 		02D581522A20CD8A00150AF9 /* ButtonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonActions.swift; sourceTree = "<group>"; };
 		02D581562A2120F200150AF9 /* WeatherForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastView.swift; sourceTree = "<group>"; };
 		02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CACornerMask+Extension+Component.swift"; sourceTree = "<group>"; };
-		02D5815D2A229F1400150AF9 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		02D5815D2A229F1400150AF9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		02D581642A22A1B100150AF9 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
 		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 			children = (
 				0281DAE22A180A7500E44F04 /* TitleWindow */,
 				0281DAE02A18089800E44F04 /* FloatWindowViewController.swift */,
+				02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */,
 			);
 			path = FloatWindow;
 			sourceTree = "<group>";
@@ -839,7 +842,7 @@
 			children = (
 				02D581622A22A19300150AF9 /* Themes */,
 				02D581642A22A1B100150AF9 /* ThemeProtocol.swift */,
-				02D5815D2A229F1400150AF9 /* ThemeManager.swift */,
+				02D5815D2A229F1400150AF9 /* Theme.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -1034,6 +1037,7 @@
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
+				02AAD6AE2A28D99B009381C3 /* FloatWindowManager.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
@@ -1047,7 +1051,7 @@
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
-				02D5815E2A229F1400150AF9 /* ThemeManager.swift in Sources */,
+				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatWindowViewController.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,

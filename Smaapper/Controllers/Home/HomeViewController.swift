@@ -61,7 +61,7 @@ class HomeVC: UIViewController {
         self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather?.present(insideTo: self.view)
         
-        let weather2 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
+        let weather2 = WeatherViewController(frame: CGRect(x: 10, y: 150, width: 160, height: 250))
         weather2.present(insideTo: self.view)
         
         let weather3 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 320, height: 120))
@@ -81,6 +81,13 @@ class HomeVC: UIViewController {
         homeScreen.clock.setOpacity(0.6)
         homeScreen.weather.setHidden(true)
         homeScreen.askChatGPTView.setHidden(true)
+        
+//        weather?.setOpacity(0.3)
+//        weather2.setOpacity(0.2)
+        
+        
+        
+        weather2.dismiss()
         
     }
     
