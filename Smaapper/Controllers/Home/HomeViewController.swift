@@ -68,29 +68,22 @@ class HomeVC: UIViewController {
         weather3.present(insideTo: self.view)
         
         
-//        TapGestureBuilder(weather3.view)
-//            .setTouchEnded { tapGesture in
-//                print("window", tapGesture.getTouchPosition(.window))
-//                print("superview", tapGesture.getTouchPosition(.superview))
-//                print("component", tapGesture.getTouchPosition(.component))
-//            }
-//
-        weather3.setTapGesture { build in
-            build.setTouchEnded { tapGesture in
-                print("asdfasdfasdf")
-            }
-        }
+        weather3.setActions({ build in
+            build
+                .setTouch({ component, tapGesture in
+                    print("window", tapGesture?.getTouchPosition(.window) ?? "")
+                    print("superview", tapGesture?.getTouchPosition(.superview) ?? "")
+                    print("component", tapGesture?.getTouchPosition(.component) ?? "")
+                    print("component --> ", component)
+                })
+        })
             
-        
-        homeScreen.clock.view.layer.opacity = 0.6
-        homeScreen.weather.view.isHidden = true
-        homeScreen.askChatGPTView.view.isHidden = true
+        homeScreen.clock.setOpacity(0.6)
+        homeScreen.weather.setHidden(true)
+        homeScreen.askChatGPTView.setHidden(true)
         
     }
     
-//    private func teste() -> TapGestureBuilder {
-//
-//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

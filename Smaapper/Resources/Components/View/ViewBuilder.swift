@@ -9,6 +9,8 @@ import UIKit
 
 class ViewBuilder: BaseBuilder {
     
+    private(set) var actions: ViewActions?
+    
     var view: View
     
     init() {
@@ -20,5 +22,14 @@ class ViewBuilder: BaseBuilder {
         self.view = View(frame: frame)
         super.init(self.view)
     }
+    
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: ViewActions) -> ViewActions) -> Self {
+        self.actions = action(ViewActions(self))
+        return self
+    }
+        
     
 }

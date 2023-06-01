@@ -74,6 +74,7 @@
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
+		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
@@ -189,6 +190,7 @@
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
+		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 			children = (
 				020D0E622A1ECE02007F3992 /* ViewBuilder.swift */,
 				0234A95C29FB3E47008392EC /* View.swift */,
+				02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
 				020D0E5B2A1EADB6007F3992 /* Dock.swift in Sources */,
+				02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */,
 				0234A91629F9FD3A008392EC /* ConstraintsConstants.swift in Sources */,
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,

@@ -121,7 +121,10 @@ class WeatherView: ViewBuilder {
     }
     
     private func configDraggable() {
-        self.setDraggable()
+        self.setActions { build in
+            build
+                .setDraggable()
+        }
     }
     
 }

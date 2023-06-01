@@ -16,8 +16,6 @@ class BaseBuilder {
     private(set) var shadow: Shadow?
     private(set) var neumorphism: Neumorphism?
     private(set) var gradient: GradientBuilder?
-    private(set) var tapGesture: TapGestureBuilder?
-    private(set) var draggable: DraggableBuilder?
     private(set) var blur: Blur?
     
     private var _component: UIView
@@ -60,24 +58,6 @@ class BaseBuilder {
     }
 
     @discardableResult
-    func setTapGesture(_ build: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
-        self.tapGesture = build(TapGestureBuilder(component))
-        return self
-    }
-    
-    @discardableResult
-    func setDraggable(_ build: (_ build: DraggableBuilder) -> DraggableBuilder) -> Self {
-        self.draggable = build(DraggableBuilder(component))
-        return self
-    }
-    
-    @discardableResult
-    func setDraggable() -> Self {
-        self.draggable = DraggableBuilder(component)
-        return self
-    }
-    
-    @discardableResult
     func setBlur(_ build: (_ build: Blur) -> Blur) -> Self {
         self.blur = build(Blur(component))
         return self
@@ -108,7 +88,18 @@ class BaseBuilder {
         self.component.isUserInteractionEnabled = interactionEnabled
         return self
     }
+    
+    @discardableResult
+    public func setOpacity(_ opacity: Float) -> Self {
+        component.layer.opacity = opacity
+        return self
+    }
    
+    @discardableResult
+    public func setHidden(_ hide: Bool) -> Self {
+        component.isHidden = hide
+        return self
+    }
     
 //  MARK: - CONSTRAINTS AREA
     @discardableResult
@@ -132,6 +123,16 @@ class BaseBuilder {
         element.addSubview(component)
     }
 
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
 
 //  MARK: - Private Area
     private func countShadows() -> Int {
