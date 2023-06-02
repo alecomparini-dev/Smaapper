@@ -29,7 +29,7 @@
                                 "rightImage": "chevron.forward"
                             },
                             {
-                                "id": "Split_Bill",
+                                "id": "split_bill",
                                 "title": "Split Bill",
                                 "leftImage": "person.2.gobackward",
                                 "rightImage": "chevron.forward"
@@ -101,7 +101,7 @@
                         "rightImage": "AR",
                         "items": [
                             {
-                                "id": "tip_calculator",
+                                "id": "tape_measure",
                                 "title": "Tape Measure",
                                 "leftImage": "ruler.fill",
                                 "rightImage": "chevron.forward"
@@ -191,7 +191,7 @@
                                 "rightImage": "chevron.forward"
                             },
                             {
-                                "id": "weather_forecast",
+                                "id": "weather",
                                 "title": "Weather Forecast",
                                 "leftImage": "cloud.sun.fill",
                                 "rightImage": "chevron.forward"

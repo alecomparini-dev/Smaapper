@@ -10,6 +10,7 @@ import UIKit
 
 protocol CategoriesViewDelegate: AnyObject {
     func closeModalTapped()
+    func didSelectRow(_ section: Int, _ row: Int)
 }
 
 class CategoriesView: UIView {
@@ -169,6 +170,13 @@ class CategoriesView: UIView {
                     .setTop.equalTo(searchTextField.view, .bottom, 20)
                     .setLeading.setBottom.setTrailing.equalToSafeArea(20)
             }
+            .setActions { build in
+                build
+                    .setDidSelectRow { [weak self] section, row in
+                        self?.delegate?.didSelectRow(section, row)
+                    }
+            }
+
         return list
     }()
     
@@ -234,7 +242,7 @@ class CategoriesView: UIView {
     }
 
     func setCornerRadiusOnView(_ view: UIView, _ corner: [BorderBuilder.Corner]) {
-        _ = view.makeBorder { build in
+        view.makeBorder { build in
             build
                 .setCornerRadius(12)
                 .setWhichCornersWillBeRounded(corner)
