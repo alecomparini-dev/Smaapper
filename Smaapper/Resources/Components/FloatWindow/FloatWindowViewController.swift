@@ -14,7 +14,7 @@ protocol FloatWindowDelegate: AnyObject {
 
 class FloatWindowViewController: BaseBuilder {
     
-    var delegate: FloatWindowDelegate?
+    weak var delegate: FloatWindowDelegate?
     
     private var _isShow = false
     private var alreadyApplied = false
@@ -61,7 +61,6 @@ class FloatWindowViewController: BaseBuilder {
     
     private func initialization() {
         setHierarchyVisualization()
-        loadView()
     }
     
     
@@ -74,7 +73,7 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     
-    //  MARK: - LIFE CIRCLE
+//  MARK: - LIFE CIRCLE
     func loadView() {}
     func viewDidLoad() {}
     func viewWillAppear() {}
@@ -105,7 +104,7 @@ class FloatWindowViewController: BaseBuilder {
     
     @discardableResult
     func setFrameWindow(_ frame: CGRect) -> Self {
-        self.frameWindow  = frame
+        self.frameWindow = frame
         return self
     }
     
@@ -134,7 +133,7 @@ class FloatWindowViewController: BaseBuilder {
     func present(insideTo: UIView) {
         self._superView = insideTo
         addCountWindows()
-//        loadView()
+        loadView()
         viewDidLoad()
         configFloatWindow()
         viewWillAppear()

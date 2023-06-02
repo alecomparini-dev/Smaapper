@@ -40,6 +40,9 @@ class WeatherViewController: FloatWindowViewController {
                             self.bringToFront
                         }
                 }
+                .setCloseWindow { floatWindow in
+                    print("janela fechou")
+                }
         }
         
         

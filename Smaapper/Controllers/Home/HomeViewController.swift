@@ -73,11 +73,14 @@ class HomeVC: UIViewController {
         weather2.present(insideTo: homeScreen.viewFloatWindow.view)
         
         let weather3 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 320, height: 120))
-            .setActions({ build in
+        weather3.present(insideTo: homeScreen.viewFloatWindow.view)
+        
+
+        weather3.setActions({ build in
                 build
                     .setCloseWindow(closeFloatWindow(_:))
             })
-        weather3.present(insideTo: homeScreen.viewFloatWindow.view)
+
         
         homeScreen.clock.setOpacity(0.6)
         homeScreen.weather.setHidden(true)
