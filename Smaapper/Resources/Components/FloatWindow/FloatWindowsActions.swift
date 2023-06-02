@@ -11,7 +11,8 @@ import UIKit
 class FloatWindowsActions: BaseActions {
     typealias floatWindowAlias = (_ floatWindow: FloatWindowViewController) -> Void
     
-    private var _dismiss: [floatWindowAlias] = []
+    
+    private var _closeWindow: [floatWindowAlias] = []
     
     private let floatWindow: FloatWindowViewController
     
@@ -28,14 +29,8 @@ class FloatWindowsActions: BaseActions {
     
 //  MARK: - SET Actions
     @discardableResult
-    func setCloseWindow(_ closure: (@escaping floatWindowAlias)) -> Self {
-        self._dismiss.append(closure)
-        return self
-    }
-    
-    @discardableResult
-    func setOpenWindow(_ closure: (@escaping floatWindowAlias)) -> Self {
-        
+    func setCloseWindow(_ closure: @escaping floatWindowAlias) -> Self {
+        self._closeWindow.append(closure)
         return self
     }
     
@@ -45,18 +40,18 @@ class FloatWindowsActions: BaseActions {
         floatWindow.delegate = self
     }
     
-    
 }
 
 
 //  MARK: - EXTENSION FloatWindowDelegate
 extension FloatWindowsActions: FloatWindowDelegate {
-    
-    func dismiss(_ floatWindow: FloatWindowViewController) {
-        self._dismiss.forEach({ closure in
+
+    func closeWindow(_ floatWindow: FloatWindowViewController) {
+        self._closeWindow.forEach({ closure in
             closure(floatWindow)
         })
     }
     
+
     
 }

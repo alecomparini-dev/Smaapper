@@ -11,36 +11,43 @@
                         "rightImage": "util",
                         "items": [
                             {
+                                "id": "alcohol_gasoline",
                                 "title": "Alcohol or Gasoline",
                                 "leftImage": "fuelpump.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "todo_list",
                                 "title": "TODO-List",
                                 "leftImage": "list.bullet.clipboard.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "timers",
                                 "title": "Timers",
                                 "leftImage": "timer.circle.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "Split_Bill",
                                 "title": "Split Bill",
                                 "leftImage": "person.2.gobackward",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "qrcode_reader",
                                 "title": "QRCode Reader",
                                 "leftImage": "qrcode.viewfinder",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "reminders",
                                 "title": "Reminders",
                                 "leftImage": "note.text",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "playlist_youtube",
                                 "title": "Playlist Youtube",
                                 "leftImage": "play.square.stack.fill",
                                 "rightImage": "chevron.forward"
@@ -52,31 +59,37 @@
                         "rightImage": "calc",
                         "items": [
                             {
+                                "id": "rule_of_3",
                                 "title": "Rule of 3",
                                 "leftImage": "3.square.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "calculator",
                                 "title": "Calculator",
                                 "leftImage": "plusminus.circle.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "bmi_calculator",
                                 "title": "BMI Calculator",
                                 "leftImage": "scalemass.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "barbecue_calculator",
                                 "title": "Barbecue Calculator",
                                 "leftImage": "flame.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "unit_converter",
                                 "title": "Unit Converter",
                                 "leftImage": "arrow.left.and.right.righttriangle.left.righttriangle.right.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "tip_calculator",
                                 "title": "Tip Calculator",
                                 "leftImage": "percent",
                                 "rightImage": "chevron.forward"
@@ -88,26 +101,31 @@
                         "rightImage": "AR",
                         "items": [
                             {
+                                "id": "tip_calculator",
                                 "title": "Tape Measure",
                                 "leftImage": "ruler.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "ar_dice",
                                 "title": "Dice",
                                 "leftImage": "dice.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "what_flower",
                                 "title": "What Flower",
                                 "leftImage": "leaf.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "what_color",
                                 "title": "What Color",
                                 "leftImage": "paintpalette.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "invisible_device",
                                 "title": "Invisible Device",
                                 "leftImage": "wand.and.stars.inverse",
                                 "rightImage": "chevron.forward"
@@ -119,31 +137,37 @@
                         "rightImage": "game",
                         "items": [
                             {
+                                "id": "dominoes",
                                 "title": "Dominoes",
                                 "leftImage": "rectangle.trailinghalf.filled",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "hangman",
                                 "title": "Hangman",
                                 "leftImage": "figure.mixed.cardio",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "coin_toss",
                                 "title": "Coin Toss",
                                 "leftImage": "cedisign.circle.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "tic_tac_toe",
                                 "title": "Tic-Tac-Toe",
                                 "leftImage": "number.square.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "rock_paper_scissors",
                                 "title": "Rock/Paper/Scissors",
                                 "leftImage": "scissors.badge.ellipsis",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "games_dices",
                                 "title": "Dices",
                                 "leftImage": "die.face.6.fill",
                                 "rightImage": "chevron.forward"
@@ -155,31 +179,37 @@
                         "rightImage": "i",
                         "items": [
                             {
+                                "id": "ask_chatgpt",
                                 "title": "Ask ChatGPT",
                                 "leftImage": "message.and.waveform.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "horoscope",
                                 "title": "Horoscope of the Day",
                                 "leftImage": "bubbles.and.sparkles.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "weather_forecast",
                                 "title": "Weather Forecast",
                                 "leftImage": "cloud.sun.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "stock_quotes",
                                 "title": "Stock quotes",
                                 "leftImage": "dollarsign.circle",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "upcoming_holidays",
                                 "title": "Upcoming Holidays",
                                 "leftImage": "calendar.badge.exclamationmark",
                                 "rightImage": "chevron.forward"
                             },
                             {
+                                "id": "movie_series_recommendations",
                                 "title": "Movie/Series Recommendations",
                                 "leftImage": "film.stack.fill",
                                 "rightImage": "chevron.forward"
@@ -191,6 +221,7 @@
                         "rightImage": "help",
                         "items": [
                             {
+                                "id": "music_quotes",
                                 "title": "Music and quotes",
                                 "leftImage": "book.fill",
                                 "rightImage": "chevron.forward"

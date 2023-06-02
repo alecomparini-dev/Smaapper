@@ -17,7 +17,6 @@ class WeatherViewController: FloatWindowViewController {
         return view
     }()
     
-    
     override func loadView() {
         view = screen.view
     }
@@ -26,28 +25,10 @@ class WeatherViewController: FloatWindowViewController {
         super.viewDidLoad()
         setTitleWindow(screen.createTitleView())
         setTitleHeight(35)
-        configDraggable()
+        setEnabledDraggable(true)
         configDelegate()
     }
-    
-    
-    private func configDraggable() {
-        self.setActions { build in
-            build
-                .setDraggable { build in
-                    build
-                        .setBeganDragging { draggable in
-                            self.bringToFront
-                        }
-                }
-                .setCloseWindow { floatWindow in
-                    print("janela fechou")
-                }
-        }
         
-        
-    }
-    
     private func configDelegate() {
         screen.delegate = self
     }

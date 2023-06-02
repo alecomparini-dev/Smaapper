@@ -101,7 +101,7 @@ class HomeView: ViewBuilder {
             })
             .setConstraints { build in
                 build
-                    .setTop.equalTo(weather.view, .bottom, 50)
+                    .setTop.equalTo(weather.view, .bottom, 40)
                     .setLeading.setTrailing.equalToSafeArea(20)
                     .setHeight.equalToConstant(168)
             }
@@ -351,10 +351,10 @@ class HomeView: ViewBuilder {
 //  MARK: - Private Function Area
     
     private func addElements() {
-        weather.add(insideTo: self.view)
         clock.add(insideTo: self.view)
-        askChatGPTView.add(insideTo: self.view)
         viewFloatWindow.add(insideTo: self.view)
+        weather.add(insideTo: self.view)
+        askChatGPTView.add(insideTo: self.view)
         dropdownMenu.add(insideTo: self.view)
         dock.add(insideTo: self.view)
         menuButton.add(insideTo: self.view)
