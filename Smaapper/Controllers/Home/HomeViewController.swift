@@ -59,39 +59,31 @@ class HomeVC: UIViewController {
         homeScreen.dropdownMenu.isShow = false
         
         self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
-            .setActions({ build in
-                build
-                    .setCloseWindow(closeFloatWindow(_:))
-            })
         weather?.present(insideTo: homeScreen.viewFloatWindow.view)
         
         let weather2 = WeatherViewController(frame: CGRect(x: 10, y: 150, width: 160, height: 250))
-            .setActions({ build in
-                build
-                    .setCloseWindow(closeFloatWindow(_:))
-            })
         weather2.present(insideTo: homeScreen.viewFloatWindow.view)
         
         let weather3 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 320, height: 120))
         weather3.present(insideTo: homeScreen.viewFloatWindow.view)
+
         
-
-        weather3.setActions({ build in
+        FloatWindowManager.instance
+            .setActions { build in
                 build
-                    .setCloseWindow(closeFloatWindow(_:))
-            })
-
+                    .setAllClosedWindow { [weak self] in
+                        guard let self else {return}
+                        self.homeScreen.clock.setOpacity(1)
+                        self.homeScreen.weather.setHidden(false)
+                        self.homeScreen.askChatGPTView.setHidden(false)
+                    }
+            }
         
         homeScreen.clock.setOpacity(0.6)
         homeScreen.weather.setHidden(true)
         homeScreen.askChatGPTView.setHidden(true)
     
         
-    }
-    
-    private func closeFloatWindow(_ floatWindow: FloatWindowViewController) {
-        print("FECHOUUU A PORRA DA JANELA")
-        print(floatWindow.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {

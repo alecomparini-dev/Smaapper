@@ -8,7 +8,8 @@
 import UIKit
 
 protocol FloatWindowDelegate: AnyObject {
-    func dismiss(_ floatWindow: FloatWindowViewController)
+    func closeWindow(_ floatWindow: FloatWindowViewController)
+    
 }
 
 
@@ -79,7 +80,9 @@ class FloatWindowViewController: BaseBuilder {
     func viewWillAppear() {}
     func viewDidAppear() {}
     func viewWillDisappear() {}
-    func viewDidDisappear() {}
+    func viewDidDisappear() {
+        delegate?.closeWindow(self)
+    }
     
     
 //  MARK: - SET Properties
@@ -87,6 +90,19 @@ class FloatWindowViewController: BaseBuilder {
     @discardableResult
     func setTitleWindow(_ titleWindow: UIView ) -> Self {
         self.titleWindow = TitleWindow().setTitleView(titleWindow)
+        return self
+    }
+    
+    @discardableResult
+    func setEnabledDraggable(_ enabled: Bool) -> Self {
+        setActions { build in
+            build
+                .setDraggable { build in
+                    build.setBeganDragging {[weak self] draggable in
+                        self?.bringToFront
+                    }
+                }
+        }
         return self
     }
     
@@ -146,7 +162,6 @@ class FloatWindowViewController: BaseBuilder {
         viewWillDisappear()
         removeWindows()
         viewDidDisappear()
-        delegate?.dismiss(self)
     }
     
     
@@ -226,5 +241,6 @@ class FloatWindowViewController: BaseBuilder {
         })
     }
     
+
     
 }

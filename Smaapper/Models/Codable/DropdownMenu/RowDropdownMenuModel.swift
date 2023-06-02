@@ -8,6 +8,7 @@
 import Foundation
 
 struct RowDropdownMenuData: Codable {
+    let id: String?
     let title: String?
     let leftImage: String?
     let rightImage: String?
