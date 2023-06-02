@@ -230,6 +230,7 @@ class DropdownMenuBuilder: BaseBuilder {
     private func configAutoCloseDropdownMenu() {
         if self.dropdown.autoCloseEnabled {
             guard let rootView = CurrentWindow.rootView else { return }
+            
             self.tapGestureBuilder = TapGestureBuilder(rootView)
                 .setCancelsTouchesInView(false)
                 .setTouchEnded({ [weak self] tapGesture in
@@ -248,7 +249,7 @@ class DropdownMenuBuilder: BaseBuilder {
     }
     
     private func isTappedOut(_ tap: TapGesture) -> Bool {
-        let touchPoint = tap.getTouchPosition(.window)
+        let touchPoint = tap.getTouchPosition(.superview)
         if isTappedOutDropdownMenu(touchPoint) && isTappedOutExcludeComponents(touchPoint) {
             return true
         }
