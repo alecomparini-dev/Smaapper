@@ -25,14 +25,14 @@ class BaseActions {
 //  MARK: - SET Actions
     
     @discardableResult
-    func setTouch(_ closure: @escaping touchBaseActionAlias) -> Self {
+    func setTouch(_ closure: @escaping touchBaseActionAlias, _ cancelsTouchesInView: Bool = true) -> Self {
         self.setTapGesture { build in
             build
+                .setCancelsTouchesInView(cancelsTouchesInView)
                 .setTouchEnded { [weak self] tapGesture in
                     guard let self else {return}
                     closure(self.baseBuilder.component, tapGesture)
                 }
-            
         }
         return self
     }

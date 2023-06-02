@@ -29,6 +29,7 @@ class HomeVC: UIViewController {
                              "bolt.horizontal" ]
     
     private let viewModel = HomeViewModel()
+    private var categoriesVC: CategoriesViewController?
     
     private var adjustTrailingDock = NSLayoutConstraint()
     
@@ -56,34 +57,8 @@ class HomeVC: UIViewController {
         fetchDropdownMenu()
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
+        configControlElementsForShowingFloatWindow()
         homeScreen.dropdownMenu.isShow = false
-        
-        self.weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
-        weather?.present(insideTo: homeScreen.viewFloatWindow.view)
-        
-        let weather2 = WeatherViewController(frame: CGRect(x: 10, y: 150, width: 160, height: 250))
-        weather2.present(insideTo: homeScreen.viewFloatWindow.view)
-        
-        let weather3 = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 320, height: 120))
-        weather3.present(insideTo: homeScreen.viewFloatWindow.view)
-
-        
-        FloatWindowManager.instance
-            .setActions { build in
-                build
-                    .setAllClosedWindow { [weak self] in
-                        guard let self else {return}
-                        self.homeScreen.clock.setOpacity(1)
-                        self.homeScreen.weather.setHidden(false)
-                        self.homeScreen.askChatGPTView.setHidden(false)
-                    }
-            }
-        
-        homeScreen.clock.setOpacity(0.6)
-        homeScreen.weather.setHidden(true)
-        homeScreen.askChatGPTView.setHidden(true)
-    
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +85,19 @@ class HomeVC: UIViewController {
     
     private func openCloseDropdownMenu() {
         homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
+    }
+    
+    private func configControlElementsForShowingFloatWindow() {
+        FloatWindowManager.instance
+            .setActions { build in
+                build
+                    .setAllClosedWindow { [weak self] in
+                        guard let self else {return}
+                        self.homeScreen.clock.setOpacity(1)
+                        self.homeScreen.weather.setHidden(false)
+                        self.homeScreen.askChatGPTView.setHidden(false)
+                    }
+            }
     }
     
     
@@ -201,9 +189,18 @@ class HomeVC: UIViewController {
     }
     
     private func showCategoriesViewController(_ subMenu: DropdownMenuData) {
-        let categoriesVC = CategoriesViewController(subMenu)
-        categoriesVC.modalPresentationStyle = .fullScreen
-        present(categoriesVC, animated: true)
+        categoriesVC = CategoriesViewController(subMenu)
+        configCategoriesDelegate()
+        if let categoriesVC {
+            categoriesVC.modalPresentationStyle = .fullScreen
+            present(categoriesVC, animated: true)
+        }
+    }
+    
+    private func configCategoriesDelegate() {
+        if let categoriesVC {
+            categoriesVC.delegate = self
+        }
     }
     
     
@@ -226,12 +223,18 @@ class HomeVC: UIViewController {
             showCategoriesViewController(subMenu)
         }   
     }
+    
+    private func hideElementsForShowingFloatWindow() {
+        homeScreen.clock.setOpacity(0.6)
+        homeScreen.weather.setHidden(true)
+        homeScreen.askChatGPTView.setHidden(true)
+    }
         
 }
 
 
 
-//  MARK: - Extension HomeViewDelegate
+//  MARK: - EXTENSION HomeViewDelegate
 
 extension HomeVC: HomeViewDelegate {
     func openMenu() {
@@ -258,5 +261,22 @@ extension HomeVC: HomeViewDelegate {
     func menuButtonTapped() {
         openCloseDropdownMenu()
     }
+    
+}
+
+
+//  MARK: - EXTENSION HomeViewDelegate
+
+extension HomeVC: CategoriesViewControllerDelegate {
+    
+    func didSelectRow(_ section: Int, _ row: Int) {
+        print("JA ESTOU NA HOME COM OS DADOS", section, row)
+        openCloseDropdownMenu()
+        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
+        weather.present(insideTo: homeScreen.viewFloatWindow.view)
+        hideElementsForShowingFloatWindow()
+    }
+    
+
     
 }

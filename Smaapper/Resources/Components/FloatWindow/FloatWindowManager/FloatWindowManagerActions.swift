@@ -10,7 +10,7 @@ import UIKit
 class FloatWindowManagerActions {
     typealias closureEmptyAlias = () -> Void
     
-    private var _allClosedWindow: [closureEmptyAlias] = []
+    private var allClosedWindow: [closureEmptyAlias] = []
     
     init() {
         configDelegate()
@@ -20,7 +20,7 @@ class FloatWindowManagerActions {
 //  MARK: - SET Actions
     @discardableResult
     func setAllClosedWindow(_ closure: @escaping closureEmptyAlias) -> Self {
-        self._allClosedWindow.append(closure)
+        self.allClosedWindow.append(closure)
         return self
     }
     
@@ -37,7 +37,7 @@ class FloatWindowManagerActions {
 extension FloatWindowManagerActions: FloatWindowManagerDelegate {
     
     func allClosedWindows() {
-        self._allClosedWindow.forEach({ closure in
+        self.allClosedWindow.forEach({ closure in
             closure()
         })
     }

@@ -11,7 +11,8 @@ import UIKit
 class ListActions {
     
     typealias didSelectRowAlias = (_ section: Int, _ row: Int) -> Void
-    private var didSelectRow: didSelectRowAlias?
+    
+    private var didSelectRow: [didSelectRowAlias] = []
     
     private let listBuilder: ListBuilder
     
@@ -24,8 +25,8 @@ class ListActions {
 //  MARK: - SET Actions
     
     @discardableResult
-    func setAction(didSelectRow closure: @escaping didSelectRowAlias) -> Self {
-        self.didSelectRow = closure
+    func setDidSelectRow(_ closure: @escaping didSelectRowAlias) -> Self {
+        self.didSelectRow.append(closure)
         return self
     }
     
@@ -43,7 +44,9 @@ class ListActions {
 extension ListActions: ListActionsDelegate {
     
     func didSelectRow(_ section: Int, _ row: Int) {
-        self.didSelectRow?(section,row)
+        self.didSelectRow.forEach { closure in
+            closure(section,row)
+        }
     }
     
 }

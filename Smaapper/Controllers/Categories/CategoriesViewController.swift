@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol CategoriesViewControllerDelegate: AnyObject {
+    func didSelectRow(_ section: Int, _ row: Int)
+}
 
 class CategoriesViewController: UIViewController {
 
+    weak var delegate: CategoriesViewControllerDelegate?
+    
     private let categories: DropdownMenuData
     private var indexSection = 0
     private var indexRow = 0
@@ -141,9 +146,14 @@ class CategoriesViewController: UIViewController {
 
 //  MARK: - Extension CategoriesView Delegate
 extension CategoriesViewController: CategoriesViewDelegate {
+    
     func closeModalTapped() {
         dismiss(animated: true)
     }
-    
+
+    func didSelectRow(_ section: Int, _ row: Int) {
+        delegate?.didSelectRow(section, row)
+        dismiss(animated: true)
+    }
     
 }

@@ -103,6 +103,9 @@ class DropdownMenuBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: DropdownMenuActions) -> DropdownMenuActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+        }
         self.actions = action(DropdownMenuActions())
         return self
     }
@@ -177,8 +180,8 @@ class DropdownMenuBuilder: BaseBuilder {
     private func addTouchActionOnList() {
         dropdown.list.setActions({ build in
             build
-                .setAction { section, row in
-                    if let touchMenuClosure = self.actions?.touchMenuClosure {
+                .setDidSelectRow { [weak self] section, row in
+                    if let touchMenuClosure = self?.actions?.touchMenuClosure {
                         touchMenuClosure((section,row))
                     }
                 }
@@ -228,6 +231,7 @@ class DropdownMenuBuilder: BaseBuilder {
         if self.dropdown.autoCloseEnabled {
             guard let rootView = CurrentWindow.rootView else { return }
             self.tapGestureBuilder = TapGestureBuilder(rootView)
+                .setCancelsTouchesInView(false)
                 .setTouchEnded({ [weak self] tapGesture in
                     guard let self else { return }
                     self.verifyTappedOutMenu(tapGesture)
