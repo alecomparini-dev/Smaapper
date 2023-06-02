@@ -36,11 +36,10 @@ class WeatherViewController: FloatWindowViewController {
             build
                 .setDraggable { build in
                     build
-                        .setBeganDragging { [weak self] draggable in
-                            self?.bringToFront
+                        .setBeganDragging { draggable in
+                            self.bringToFront
                         }
                 }
-                
         }
         
         
@@ -53,11 +52,8 @@ class WeatherViewController: FloatWindowViewController {
 }
 
 extension WeatherViewController: WeatherViewDelegate {
-    
     func closeWindow() {
         self.dismiss()
-        
     }
-    
     
 }

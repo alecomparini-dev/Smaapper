@@ -79,7 +79,6 @@
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02BE514F2A29379A00901669 /* FloatWindowsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatWindowsActions.swift */; };
-		02BE51512A293EFF00901669 /* FloatWindowViewController_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE51502A293EFF00901669 /* FloatWindowViewController_.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -198,7 +197,6 @@
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatWindowsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowsActions.swift; sourceTree = "<group>"; };
-		02BE51502A293EFF00901669 /* FloatWindowViewController_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowViewController_.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -663,7 +661,6 @@
 				02BE514E2A29379A00901669 /* FloatWindowsActions.swift */,
 				02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */,
 				0281DAE02A18089800E44F04 /* FloatWindowViewController.swift */,
-				02BE51502A293EFF00901669 /* FloatWindowViewController_.swift */,
 			);
 			path = FloatWindow;
 			sourceTree = "<group>";
@@ -1045,7 +1042,6 @@
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
 				02AAD6AE2A28D99B009381C3 /* FloatWindowManager.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
-				02BE51512A293EFF00901669 /* FloatWindowViewController_.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
 				021848B72A262664007E68A4 /* WeatherView.swift in Sources */,
