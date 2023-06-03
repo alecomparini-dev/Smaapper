@@ -16,7 +16,7 @@ class TextField: UITextField {
     
     static private var currentMainWindow: UIWindow?
     static private func hideKeyboardWhenViewTapped() {
-        let mainWindow = CurrentWindow.get
+        let mainWindow = CurrentWindow.window
         if (mainWindow == currentMainWindow) { return }
         mainWindow?.hideKeyboardWhenViewTapped()
         currentMainWindow = mainWindow

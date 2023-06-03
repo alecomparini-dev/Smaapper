@@ -41,7 +41,6 @@ class DropdownMenu: UIView {
     
     lazy var overlay: ViewBuilder = {
         let overlay = ViewBuilder()
-            .setUserInteractionEnabled(false)
             .setBlur { build in
                 build
                     .setStyle(.systemUltraThinMaterialDark)
@@ -49,9 +48,12 @@ class DropdownMenu: UIView {
                     .setOpacity(0.9)
                     .apply()
             }
+            .setConstraints { build in
+                build
+                    .setPin.equalToSuperView
+            }
         return overlay
     }()
-    
 
     
 //  MARK: - GET Attributes
@@ -92,3 +94,4 @@ class DropdownMenu: UIView {
     }
     
 }
+
