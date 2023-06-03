@@ -24,7 +24,7 @@ class BorderBuilder {
         case diagonalDown
     }
 
-    private var component: UIView
+    private weak var component: UIView?
     
     
 //  MARK: - Initializers
@@ -36,13 +36,13 @@ class BorderBuilder {
     
     @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
-        component.layer.borderWidth = width
+        component?.layer.borderWidth = width
         return self
     }
     
     @discardableResult
     func setColor(_ color: UIColor) -> Self {
-        component.layer.borderColor = color.cgColor
+        component?.layer.borderColor = color.cgColor
         return self
     }
     
@@ -53,13 +53,13 @@ class BorderBuilder {
         //TODO: - COOOORIGIRRRRRRRRRRRRR SAPOORRAAAAA CARALHOOOOOOOOO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //        component.clipsToBounds = true
         // ESSA CARALHA ACIMA QUE FODE COM TODO MUNDO SE O BORDER ESTIVER PRIMEIRO QUE O SHADOW .. VAI TOMA NO CUUUUUUUUUUUUUUUUU
-        component.layer.cornerRadius = radius
+        component?.layer.cornerRadius = radius
         return self
     }
     
     @discardableResult
     func setWhichCornersWillBeRounded(_ cornes: [BorderBuilder.Corner]) -> Self {
-        component.layer.maskedCorners = selectCorners(cornes)
+        component?.layer.maskedCorners = selectCorners(cornes)
         return self
     }
     
@@ -111,6 +111,7 @@ class BorderBuilder {
     }
     
     private func removeBorderStyleOfTextField() {
+        guard let component else {return}
         if component.isKind(of: UITextField.self) {
             (component as! UITextField).borderStyle = UITextField.BorderStyle.none
         }

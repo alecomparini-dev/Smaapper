@@ -18,7 +18,7 @@ protocol HomeViewDelegate: AnyObject {
 
 class HomeView: ViewBuilder {
     
-    weak var delegate: HomeViewDelegate?
+    private weak var delegate: HomeViewDelegate?
     private let idShadowEnableFloatButton = "shadowFloatButtonID"
     
     override init(frame: CGRect) {
@@ -264,6 +264,10 @@ class HomeView: ViewBuilder {
     
     
 //  MARK: - Public Functions Area
+    func setDelegate(_ delegate: HomeViewDelegate) {
+        self.delegate = delegate
+    }
+    
     func turnOnMenuButton() {
         menuButton.setShadow { build in
             build

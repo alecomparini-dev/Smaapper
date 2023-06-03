@@ -22,7 +22,7 @@ class TapGesture: UITapGestureRecognizer {
         case component
     }
     
-    var tapGestureDelegate: TapGestureDelegate?
+    weak var tapGestureDelegate: TapGestureDelegate?
     
     private var _touchPositionComponent: CGPoint = CGPointZero
     private var _touchPositionSuperView: CGPoint = CGPointZero
