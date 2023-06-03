@@ -267,6 +267,24 @@ extension HomeVC: CategoriesViewControllerDelegate {
 
 
 extension HomeVC: FloatWindowManagerDelegate {
+    func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
+        deactiveWindow.view.removeShadowByID("activeWindow")
+    }
+    
+    func activatedWindow(_ activeWindow: FloatWindowViewController) {
+        activeWindow.setShadow { build in
+            build
+                .setColor(Theme.shared.currentTheme.primary)
+                .setOffset(width: 0, height: 0)
+                .setOpacity(0.8)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("activeWindow")
+                .apply()
+        }
+        
+    }
+    
     
     func allClosedWindows() {
         self.homeScreen.clock.setOpacity(1)
