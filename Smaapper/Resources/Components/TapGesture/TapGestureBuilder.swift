@@ -11,10 +11,9 @@ class TapGestureBuilder {
     
     typealias touchGestureAlias = (_ tapGesture: TapGesture) -> Void
     
-    private var _touchBegan: [touchGestureAlias] = []
-    private var _touchMoved: [touchGestureAlias] = []
-    private var _touchEnded: [touchGestureAlias] = []
-    private var _touchCancelled: [touchGestureAlias] = []
+    private var touchMoved: [touchGestureAlias] = []
+    private var touchEnded: [touchGestureAlias] = []
+    private var touchCancelled: [touchGestureAlias] = []
     
     private var tapGesture: TapGesture
     private weak var component: UIView?
@@ -52,26 +51,20 @@ class TapGestureBuilder {
     }
     
     @discardableResult
-    func setTouchBegan(_ closure: @escaping touchGestureAlias) -> Self {
-        self._touchBegan.append(closure)
-        return self
-    }
-    
-    @discardableResult
     func setTouchEnded(_ closure: @escaping touchGestureAlias) -> Self {
-        self._touchEnded.append(closure)
+        self.touchEnded.append(closure)
         return self
     }
     
     @discardableResult
     func setTouchMoved(_ closure: @escaping touchGestureAlias) -> Self {
-        self._touchMoved.append(closure)
+        self.touchMoved.append(closure)
         return self
     }
     
     @discardableResult
     func setTouchCancelled(_ closure: @escaping touchGestureAlias) -> Self {
-        self._touchCancelled.append(closure)
+        self.touchCancelled.append(closure)
         return self
     }
     
@@ -96,26 +89,20 @@ class TapGestureBuilder {
 //  MARK: - Extension TapGestureActionsDelegate
 extension TapGestureBuilder: TapGestureDelegate {
     
-    func touchBegan(_ tapGesture: TapGesture) {
-        self._touchBegan.forEach({ closure in
-            closure(tapGesture)
-        })
-    }
-    
     func touchMoved(_ tapGesture: TapGesture) {
-        self._touchMoved.forEach({ closure in
+        self.touchMoved.forEach({ closure in
             closure(tapGesture)
         })
     }
     
     func touchEnded(_ tapGesture: TapGesture) {
-        self._touchEnded.forEach({ closure in
+        self.touchEnded.forEach({ closure in
             closure(tapGesture)
         })
     }
     
     func touchCancelled(_ tapGesture: TapGesture) {
-        self._touchCancelled.forEach({ closure in
+        self.touchCancelled.forEach({ closure in
             closure(tapGesture)
         })
     }

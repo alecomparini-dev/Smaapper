@@ -8,7 +8,6 @@
 import UIKit
 
 protocol TapGestureDelegate: AnyObject {
-    func touchBegan(_ tapGesture: TapGesture)
     func touchMoved(_ tapGesture: TapGesture)
     func touchEnded(_ tapGesture: TapGesture)
     func touchCancelled(_ tapGesture: TapGesture)
@@ -23,7 +22,7 @@ class TapGesture: UITapGestureRecognizer {
         case component
     }
     
-    weak var tapGestureDelegate: TapGestureDelegate?
+    var tapGestureDelegate: TapGestureDelegate?
     
     private var _touchPositionComponent: CGPoint = CGPointZero
     private var _touchPositionSuperView: CGPoint = CGPointZero
@@ -64,18 +63,20 @@ class TapGesture: UITapGestureRecognizer {
 //  MARK: - OBJC Gesture
     @objc
     private func objcTapGesture(_ gesture: UITapGestureRecognizer) {
+        
         switch gesture.state {
-            case .began:
-                self.beganTap()
             
             case .changed:
                 self.moved()
+                break
                 
             case .ended:
                 self.endedTap()
+                break
             
             case .cancelled:
                 self.tapCancelled()
+                break
             
             default:
                 break
@@ -84,10 +85,6 @@ class TapGesture: UITapGestureRecognizer {
     
     
 //  MARK: - PRIVATE Area
-    private func beganTap() {
-        setTouchPositions()
-        tapGestureDelegate?.touchBegan(self)
-    }
 
     private func endedTap() {
         setTouchPositions()

@@ -270,7 +270,6 @@ extension HomeVC: HomeViewDelegate {
 extension HomeVC: CategoriesViewControllerDelegate {
     
     func didSelectRow(_ section: Int, _ row: Int) {
-        print("JA ESTOU NA HOME COM OS DADOS", section, row)
         openCloseDropdownMenu()
         let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather.present(insideTo: homeScreen.viewFloatWindow.view)
