@@ -9,7 +9,7 @@ import UIKit
 
 class CurrentWindow {
     
-    static var get: UIWindow? {
+    static var window: UIWindow? {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
            let mainWindow = windowScene.windows.first {
             return mainWindow
@@ -18,7 +18,7 @@ class CurrentWindow {
     }
     
     static var rootView: UIView? {
-        if let rootView = CurrentWindow.get?.rootViewController?.view {
+        if let rootView = CurrentWindow.window?.rootViewController?.view {
             return rootView
         }
         return nil

@@ -14,6 +14,7 @@ class DropdownMenuBuilder: BaseBuilder {
     private var _isShow = false
     private var zPosition: CGFloat = 10000
     private var tapGestureBuilder: TapGestureBuilder?
+    private var superview = UIView()
     
     private(set) var dropdown: DropdownMenu
     var view: DropdownMenu { self.dropdown }
@@ -145,8 +146,16 @@ class DropdownMenuBuilder: BaseBuilder {
     
     //  MARK: - PRIVATE AREA
     
+    private func callOnlyIsShow() {
+        if self._isShow {
+            applyOnceConfig()
+            bringToFront()
+        }
+    }
+    
     private func applyOnceConfig() {
         if !alreadyApplied {
+            self.getSuperview()
             self.configList()
             self.configDropDownMenuConstraints()
             self.configAutoCloseDropdownMenu()
@@ -156,20 +165,23 @@ class DropdownMenuBuilder: BaseBuilder {
         }
     }
     
-    private func callOnlyIsShow() {
-        if self._isShow {
-            applyOnceConfig()
-            bringToFront()
-        }
-    }
-    
     private func isEnabledTapGesture(_ enabled: Bool) {
         self.tapGestureBuilder?.setIsEnabled(enabled)
     }
     
     private func bringToFront() {
-        guard let rootView = CurrentWindow.rootView else { return }
-        rootView.bringSubviewToFront(dropdown)
+        bringToFrontDropdownMenu()
+        bringToFrontExcludeComponents()
+    }
+    
+    private func bringToFrontDropdownMenu() {
+        self.superview.bringSubviewToFront(dropdown)
+    }
+    
+    private func bringToFrontExcludeComponents() {
+        dropdown.excludeComponents.forEach { comp in
+            self.superview.bringSubviewToFront(comp)
+        }
     }
     
     private func configList() {
@@ -188,24 +200,19 @@ class DropdownMenuBuilder: BaseBuilder {
         })
     }
     
+    private func getSuperview() {
+        guard let superview = self.dropdown.superview else {return}
+        self.superview = superview
+    }
+    
     private func configOverlay() {
         addOverlayInDropdownMenu()
-        configOverlayConstraints()
         setOverlayHierarchyVisualizationPosition()
     }
     
-    private func configOverlayConstraints() {
-        guard let superview = self.dropdown.superview else {return}
-        dropdown.overlay
-            .setConstraints({ build in
-                build
-                    .setPin.equalTo(superview)
-                    .apply()
-            })
-    }
-    
     private func addOverlayInDropdownMenu() {
-        dropdown.overlay.add(insideTo: dropdown)
+        dropdown.overlay.add(insideTo: self.superview)
+        dropdown.overlay.applyConstraint()
     }
     
     private func setHierarchyVisualizationPosition() {
@@ -217,21 +224,19 @@ class DropdownMenuBuilder: BaseBuilder {
         self.dropdown.layer.zPosition = zPosition
     }
     
+    private func setOverlayHierarchyVisualizationPosition() {
+        self.dropdown.overlay.view.layer.zPosition = zPosition
+    }
+    
     private func setExcludeComponentsHierarchyVisualizationPosition() {
         dropdown.excludeComponents.forEach { comp in
             comp.layer.zPosition = self.zPosition + 1
         }
     }
     
-    private func setOverlayHierarchyVisualizationPosition() {
-        dropdown.overlay.view.layer.zPosition = -1
-    }
-    
     private func configAutoCloseDropdownMenu() {
         if self.dropdown.autoCloseEnabled {
-            guard let rootView = CurrentWindow.rootView else { return }
-            
-            self.tapGestureBuilder = TapGestureBuilder(rootView)
+            self.tapGestureBuilder = TapGestureBuilder(self.superview)
                 .setCancelsTouchesInView(false)
                 .setTouchEnded({ [weak self] tapGesture in
                     guard let self else { return }
@@ -277,6 +282,7 @@ class DropdownMenuBuilder: BaseBuilder {
     private func presentation() {
         dropdown.list.isShow = _isShow
         dropdown.isHidden = !_isShow
+        dropdown.overlay.view.isHidden = !_isShow
     }
     
     private func callClosureOpenCloseMenu(_ isShow: Bool) {
