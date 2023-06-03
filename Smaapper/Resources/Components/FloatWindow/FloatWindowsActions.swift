@@ -52,5 +52,4 @@ extension FloatWindowsActions: FloatWindowDelegate {
     }
     
 
-    
 }

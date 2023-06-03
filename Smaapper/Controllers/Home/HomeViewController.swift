@@ -57,7 +57,6 @@ class HomeVC: UIViewController {
         fetchDropdownMenu()
         configRowsHeightOfDropdowMenu()
         setConstraintAlignmentHorizontalDock()
-        configControlElementsForShowingFloatWindow()
         homeScreen.dropdownMenu.isShow = false
     }
     
@@ -80,24 +79,12 @@ class HomeVC: UIViewController {
     }
     
     private func configDelegate() {
-        homeScreen.delegate = self
+        homeScreen.setDelegate(self)
+        FloatWindowManager.instance.setDelegate(self)
     }
     
     private func openCloseDropdownMenu() {
         homeScreen.dropdownMenu.isShow = !homeScreen.dropdownMenu.isShow
-    }
-    
-    private func configControlElementsForShowingFloatWindow() {
-        FloatWindowManager.instance
-            .setActions { build in
-                build
-                    .setAllClosedWindow { [weak self] in
-                        guard let self else {return}
-                        self.homeScreen.clock.setOpacity(1)
-                        self.homeScreen.weather.setHidden(false)
-                        self.homeScreen.askChatGPTView.setHidden(false)
-                    }
-            }
     }
     
     
@@ -276,6 +263,15 @@ extension HomeVC: CategoriesViewControllerDelegate {
         hideElementsForShowingFloatWindow()
     }
     
+}
 
+
+extension HomeVC: FloatWindowManagerDelegate {
+    
+    func allClosedWindows() {
+        self.homeScreen.clock.setOpacity(1)
+        self.homeScreen.weather.setHidden(false)
+        self.homeScreen.askChatGPTView.setHidden(false)
+    }
     
 }

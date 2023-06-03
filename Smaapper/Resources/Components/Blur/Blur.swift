@@ -15,7 +15,7 @@ class Blur {
     private var opacity: CGFloat = 0.98
     
     private var vibrancyEnabled = false
-    private var component: UIView
+    private weak var component: UIView?
     
     init(_ component: UIView) {
         self.component = component
@@ -61,7 +61,7 @@ class Blur {
     }
     
     private func configBackgroundColor() {
-        component.backgroundColor = .clear
+        component?.backgroundColor = .clear
     }
     
     
@@ -84,10 +84,11 @@ class Blur {
     
     private func addBlurOnComponent () {
         guard let blurView = self.blurView else { return }
-        component.addSubview(blurView)
+        component?.addSubview(blurView)
     }
     
     private func configConstraintsBlurView() {
+        guard let component else {return}
         self.blurView?.makeConstraints({ make in
             make.setPin.equalTo(component)
         })

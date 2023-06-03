@@ -18,7 +18,7 @@ class BaseBuilder {
     private(set) var gradient: GradientBuilder?
     private(set) var blur: Blur?
     
-    private var _component: UIView
+    private weak var _component: UIView?
     
     init(_ component: UIView) {
         self._component = component
@@ -27,8 +27,8 @@ class BaseBuilder {
 //  MARK: - GET Properties
     
     var component: UIView {
-        get { self._component }
-        set { self._component = newValue }
+        get { self._component  ?? UIView()}
+        set { self._component = newValue}
     }
     
         

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FloatWindowDelegate: AnyObject {
-    func closeWindow(_ floatWindow: FloatWindowViewController)
+//    func closeWindow(_ floatWindow: FloatWindowViewController)
     
 }
 
@@ -17,9 +17,9 @@ class FloatWindowViewController: BaseBuilder {
     
     weak var delegate: FloatWindowDelegate?
     
+    private let hierarchy: CGFloat = 1000
     private var _isShow = false
     private var alreadyApplied = false
-    private let hierarchy: CGFloat = 1000
     private var _superView: UIView?
     private(set) var id: UUID = UUID()
     
@@ -81,7 +81,7 @@ class FloatWindowViewController: BaseBuilder {
     func viewDidAppear() {}
     func viewWillDisappear() {}
     func viewDidDisappear() {
-        delegate?.closeWindow(self)
+//        delegate?.closeWindow(self)
     }
     
     
@@ -149,7 +149,7 @@ class FloatWindowViewController: BaseBuilder {
 //  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
         self._superView = insideTo
-        addCountWindows()
+        addWindowsToManager()
         loadView()
         viewDidLoad()
         configFloatWindow()
@@ -169,13 +169,13 @@ class FloatWindowViewController: BaseBuilder {
     
 //  MARK: - PRIVATE Function Area
     
-    private func removeWindows() {
-        manager.removeCountWindow(self)
-        self.view.removeFromSuperview()
+    private func addWindowsToManager() {
+        manager.addWindow(self)
     }
     
-    private func addCountWindows() {
-        manager.addCountWindow(self)
+    private func removeWindows() {
+        manager.removeWindow(self)
+        self.view.removeFromSuperview()
     }
     
     private func setHierarchyVisualization() {
