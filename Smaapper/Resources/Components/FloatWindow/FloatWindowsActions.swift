@@ -11,7 +11,6 @@ import UIKit
 class FloatWindowsActions: BaseActions {
     typealias floatWindowAlias = (_ floatWindow: FloatWindowViewController) -> Void
     
-    
     private var _closeWindow: [floatWindowAlias] = []
     
     private let floatWindow: FloatWindowViewController

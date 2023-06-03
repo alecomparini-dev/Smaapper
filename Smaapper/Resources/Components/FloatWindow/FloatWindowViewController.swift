@@ -98,9 +98,10 @@ class FloatWindowViewController: BaseBuilder {
         setActions { build in
             build
                 .setDraggable { build in
-                    build.setBeganDragging {[weak self] draggable in
-                        self?.bringToFront
-                    }
+                    build
+                        .setBeganDragging {[weak self] draggable in
+                            self?.bringToFront
+                        }
                 }
         }
         return self
@@ -156,6 +157,7 @@ class FloatWindowViewController: BaseBuilder {
         addFloatWindow()
         appearFloatWindow()
         viewDidAppear()
+        configActivateWindow()
     }
     
     func dismiss() {
@@ -241,6 +243,19 @@ class FloatWindowViewController: BaseBuilder {
         })
     }
     
+    private func configActivateWindow() {
+        self.setActions { build in
+            build
+                .setTapGesture { build in
+                    build
+                        .setCancelsTouchesInView(false)
+                        .setTouchEnded { [weak self] tapGesture in
+                            self?.bringToFront
+                        }
+                }
+        }
+        
+    }
 
     
 }
