@@ -101,13 +101,12 @@ class WeatherView: ViewBuilder {
             }
             .setActions { build in
                 build
-                    .setTarget(self, #selector(teste), .touchUpInside)
+                    .setTarget(self, #selector(closeWindow), .touchUpInside)
             }
-        
         return btn
     }
     @objc
-    private func teste() {
+    private func closeWindow() {
         delegate?.closeWindow()
     }
     

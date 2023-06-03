@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FloatWindowDelegate: AnyObject {
-//    func closeWindow(_ floatWindow: FloatWindowViewController)
+    func closeWindow(_ floatWindow: FloatWindowViewController)
     
 }
 
@@ -81,7 +81,7 @@ class FloatWindowViewController: BaseBuilder {
     func viewDidAppear() {}
     func viewWillDisappear() {}
     func viewDidDisappear() {
-//        delegate?.closeWindow(self)
+        delegate?.closeWindow(self)
     }
     
     
@@ -100,7 +100,8 @@ class FloatWindowViewController: BaseBuilder {
                 .setDraggable { build in
                     build
                         .setBeganDragging {[weak self] draggable in
-                            self?.bringToFront
+                            guard let self else {return}
+                            self.bringToFront
                         }
                 }
         }
@@ -139,6 +140,7 @@ class FloatWindowViewController: BaseBuilder {
 //  MARK: - Actions
     var bringToFront: Void {
         superView.bringSubviewToFront(self.view)
+        manager.activeWindow = self
     }
     var minimize: Void { return }
     var maximize: Void { return }
@@ -149,7 +151,6 @@ class FloatWindowViewController: BaseBuilder {
 //  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
         self._superView = insideTo
-        addWindowsToManager()
         loadView()
         viewDidLoad()
         configFloatWindow()
@@ -183,6 +184,7 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     private func configFloatWindow() {
+        addWindowsToManager()
         decidePositionWindow()
         configTitleWindowView()
     }

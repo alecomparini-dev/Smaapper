@@ -11,6 +11,8 @@ protocol FloatWindowManagerDelegate: AnyObject {
     func allClosedWindows()
     func allMinimizedWindows()
     func allRestoredWindows()
+    func deactivatedWindow(_ deactiveWindow: FloatWindowViewController)
+    func activatedWindow(_ activeWindow: FloatWindowViewController)
 }
 
 class FloatWindowManager {
@@ -21,18 +23,23 @@ class FloatWindowManager {
     
     private var floatWindows: [FloatWindowViewController] = []
     private var _activeWindow: FloatWindowViewController?
+    private var _lastActiveWindow: FloatWindowViewController?
     
     private init() {}
 
     var getCountWindow: Int { return self.floatWindows.count }
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
-        set { self._activeWindow = newValue }
+        set {
+            invokeActivatedDeactivatedWindow(newValue)
+            self._lastActiveWindow = self._activeWindow
+            self._activeWindow = newValue
+        }
     }
 
     func addWindow(_ floatWindow: FloatWindowViewController)  {
         self.floatWindows.append(floatWindow)
-        self._activeWindow = floatWindow
+        self.activeWindow = floatWindow
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
@@ -40,6 +47,7 @@ class FloatWindowManager {
         if floatWindow.id == self._activeWindow?.id {
             self._activeWindow = nil
         }
+        activeWindow = self._lastActiveWindow
         verifyAllClosedWindows()
     }
     
@@ -68,6 +76,25 @@ class FloatWindowManager {
         if self.getCountWindow == 0 {
             delegate?.allClosedWindows()
         }
+    }
+    
+    private func invokeActivatedDeactivatedWindow(_ newValue: FloatWindowViewController?) {
+        guard let newValue else { return }
+        
+        if newValue.id == self._activeWindow?.id { return }
+        
+        if let activeWin = self._activeWindow {
+            invokeDeactivedWindow(activeWin)
+        }
+        invokeActivatedWindow(newValue)
+    }
+    
+    private func invokeDeactivedWindow(_ deactiveWin: FloatWindowViewController) {
+        delegate?.deactivatedWindow(deactiveWin)
+    }
+    
+    private func invokeActivatedWindow(_ activeWin: FloatWindowViewController) {
+        delegate?.activatedWindow(activeWin)
     }
     
 }
