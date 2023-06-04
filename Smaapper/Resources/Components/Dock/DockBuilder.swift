@@ -106,11 +106,13 @@ class DockBuilder: BaseBuilder {
     
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
-            DispatchQueue.main.async {
-                self.configDock()
-                self.RegisterCell()
-                self.setDelegate()
-                self.alreadyApplied = true
+            RegisterCell()
+            setDelegate()
+            alreadyApplied = true
+            applyBlur()
+            addElementsInDock()
+            DispatchQueue.main.async { [weak self] in
+                self?.configConstraints()
             }
         }
     }
@@ -122,12 +124,6 @@ class DockBuilder: BaseBuilder {
     private func setDelegate() {
         collection.delegate = dock
         collection.dataSource = dock
-    }
-    
-    private func configDock() {
-        applyBlur()
-        addElementsInDock()
-        configConstraints()
     }
     
     private func addElementsInDock() {
