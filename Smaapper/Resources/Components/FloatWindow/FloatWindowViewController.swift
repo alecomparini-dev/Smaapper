@@ -101,7 +101,7 @@ class FloatWindowViewController: BaseBuilder {
                     build
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
-                            self.bringToFront
+                            manager.activeWindow = self
                         }
                 }
         }
@@ -140,7 +140,6 @@ class FloatWindowViewController: BaseBuilder {
 //  MARK: - Actions
     var bringToFront: Void {
         superView.bringSubviewToFront(self.view)
-        manager.activeWindow = self
     }
     var minimize: Void { return }
     var maximize: Void { return }
@@ -252,7 +251,8 @@ class FloatWindowViewController: BaseBuilder {
                     build
                         .setCancelsTouchesInView(false)
                         .setTouchEnded { [weak self] tapGesture in
-                            self?.bringToFront
+                            guard let self else {return}
+                            manager.activeWindow = self
                         }
                 }
         }

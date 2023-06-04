@@ -31,8 +31,9 @@ class FloatWindowManager {
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
         set {
-            invokeActivatedDeactivatedWindow(newValue)
             self._lastActiveWindow = self._activeWindow
+            invokeActivatedDeactivatedWindow(newValue)
+            newValue?.bringToFront
             self._activeWindow = newValue
         }
     }
@@ -45,9 +46,8 @@ class FloatWindowManager {
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
         self.floatWindows.removeAll { $0.id == floatWindow.id }
         if floatWindow.id == self._activeWindow?.id {
-            self._activeWindow = nil
+            activeWindow = self._lastActiveWindow
         }
-        activeWindow = self._lastActiveWindow
         verifyAllClosedWindows()
     }
     
@@ -80,9 +80,7 @@ class FloatWindowManager {
     
     private func invokeActivatedDeactivatedWindow(_ newValue: FloatWindowViewController?) {
         guard let newValue else { return }
-        
         if newValue.id == self._activeWindow?.id { return }
-        
         if let activeWin = self._activeWindow {
             invokeDeactivedWindow(activeWin)
         }
