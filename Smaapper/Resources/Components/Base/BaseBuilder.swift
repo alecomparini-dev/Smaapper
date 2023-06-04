@@ -71,13 +71,14 @@ class BaseBuilder {
         
     @discardableResult
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
-        let layer = CAShapeLayer()
-        layer.fillColor = color.cgColor
-        layer.backgroundColor = color.cgColor
-        let position = UInt32(self.countShadows())
-        self.component.layer.insertSublayer(layer, at: position )
+
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
+            let layer = CAShapeLayer()
+            layer.fillColor = color.cgColor
+            layer.backgroundColor = color.cgColor
+            let position = UInt32(self.countShadows())
+            self.component.layer.insertSublayer(layer, at: position )
             layer.path = self.component.replicateFormat().cgPath
         }
         return self

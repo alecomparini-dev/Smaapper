@@ -183,10 +183,10 @@ class Neumorphism {
     @discardableResult
     func apply() -> Self {
         self.calculateShadeColorByColorReference()
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.applyShadow()
             self.applyShape()
-        }
+//        }
         return self
     }
     
