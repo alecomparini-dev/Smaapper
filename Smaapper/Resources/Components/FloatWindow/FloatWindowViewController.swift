@@ -158,6 +158,7 @@ class FloatWindowViewController: BaseBuilder {
         appearFloatWindow()
         viewDidAppear()
         configActivateWindow()
+        
     }
     
     func dismiss() {
@@ -256,6 +257,8 @@ class FloatWindowViewController: BaseBuilder {
                         }
                 }
         }
+        
+        manager.desactivateWindowOnClickSuperView()
         
     }
 

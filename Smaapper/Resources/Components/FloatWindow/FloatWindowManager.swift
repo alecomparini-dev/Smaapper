@@ -16,18 +16,20 @@ protocol FloatWindowManagerDelegate: AnyObject {
 }
 
 class FloatWindowManager {
-    
     static let instance = FloatWindowManager()
     
     private weak var delegate: FloatWindowManagerDelegate?
     
-    private var floatWindows: [FloatWindowViewController] = []
+    private var _listWindows: [FloatWindowViewController] = []
     private var _activeWindow: FloatWindowViewController?
     private var _lastActiveWindow: FloatWindowViewController?
+    private var _desactivateWindowSuperView: Bool = false
+    
     
     private init() {}
 
-    var getCountWindow: Int { return self.floatWindows.count }
+    var listWindows: [FloatWindowViewController] { self._listWindows }
+    var countWindows: Int { self._listWindows.count }
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
         set {
@@ -37,29 +39,28 @@ class FloatWindowManager {
             self._activeWindow = newValue
         }
     }
+    
 
     func addWindow(_ floatWindow: FloatWindowViewController)  {
-        self.floatWindows.append(floatWindow)
+        self._listWindows.append(floatWindow)
         self.activeWindow = floatWindow
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
-        self.floatWindows.removeAll { $0.id == floatWindow.id }
-        if floatWindow.id == self._activeWindow?.id {
-            activeWindow = self._lastActiveWindow
-        }
+        removeWindowsFromList(floatWindow)
+        activateLastWindowIfNeeded(floatWindow)
         verifyAllClosedWindows()
     }
     
     func minimizeAll() {
-        floatWindows.forEach { win in
+        self._listWindows.forEach { win in
             win.minimize
         }
         delegate?.allMinimizedWindows()
     }
     
     func restoreAll() {
-        floatWindows.forEach { win in
+        self._listWindows.forEach { win in
             win.restore
         }
         delegate?.allRestoredWindows()
@@ -72,14 +73,30 @@ class FloatWindowManager {
 
 
 //  MARK: - PRIVATE Area
+    private func removeWindowsFromList(_ floatWindow: FloatWindowViewController) {
+        self._listWindows.removeAll { $0.id == floatWindow.id }
+    }
+    
+    private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController){
+        if floatWindow.id == self._activeWindow?.id {
+            activeWindow = self._lastActiveWindow
+        }
+    }
+    
     private func verifyAllClosedWindows() {
-        if self.getCountWindow == 0 {
+        if self.countWindows == 0 {
             delegate?.allClosedWindows()
         }
     }
     
     private func invokeActivatedDeactivatedWindow(_ newValue: FloatWindowViewController?) {
-        guard let newValue else { return }
+        guard let newValue else {
+            if let lastActiveWindow = self._lastActiveWindow {
+                invokeDeactivedWindow(lastActiveWindow)
+            }
+            return
+        }
+        
         if newValue.id == self._activeWindow?.id { return }
         if let activeWin = self._activeWindow {
             invokeDeactivedWindow(activeWin)
@@ -93,6 +110,20 @@ class FloatWindowManager {
     
     private func invokeActivatedWindow(_ activeWin: FloatWindowViewController) {
         delegate?.activatedWindow(activeWin)
+    }
+    
+    func desactivateWindowOnClickSuperView() {
+        if self._desactivateWindowSuperView { return }
+        
+        if let superview = self.activeWindow?.superView {
+            superview.isUserInteractionEnabled = true
+            TapGestureBuilder(superview)
+                .setTouchEnded { [weak self] tapGesture in
+                    self?.activeWindow = nil
+                }
+            _desactivateWindowSuperView = true
+        }
+        
     }
     
 }
