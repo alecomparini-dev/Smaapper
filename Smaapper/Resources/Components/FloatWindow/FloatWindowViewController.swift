@@ -258,8 +258,6 @@ class FloatWindowViewController: BaseBuilder {
                 }
         }
         
-        manager.desactivateWindowOnClickSuperView()
-        
     }
 
     

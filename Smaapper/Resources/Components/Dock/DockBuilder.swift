@@ -9,10 +9,6 @@ import UIKit
 
 class DockBuilder: BaseBuilder {
     
-    private var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    private var container = UIView()
-    private let collection: UICollectionView = UICollectionView(frame: .zero,collectionViewLayout: UICollectionViewFlowLayout())
-    
     private var dockViewBounds = CGRect()
     private var customConstraintWidthContainer: NSLayoutConstraint = NSLayoutConstraint()
 
@@ -24,20 +20,20 @@ class DockBuilder: BaseBuilder {
     private var dock: Dock
     var view: Dock { self.dock }
     
-    init(numberOfItemsCallback: @escaping Dock.numberOfItemsCallbackAlias, cellCallback: @escaping Dock.itemCallbackAlias ) {
-        self.dock = Dock(numberOfItemsCallback, cellCallback)
+    init() {
+        self.dock = Dock()
         super.init(self.dock)
         self.initialization()
     }
     
     private func initialization() {
-        initiateDock()
         initiateContainer()
         initiateLayout()
         initiateCollection()
         setHierarchyVisualization()
         setDefault()
     }
+    
     
 //  MARK: - SET Properties
     
@@ -55,25 +51,25 @@ class DockBuilder: BaseBuilder {
     
     @discardableResult
     func setShowsHorizontalScrollIndicator(_ flag: Bool) -> Self {
-        collection.showsHorizontalScrollIndicator = flag
+        dock.collection.showsHorizontalScrollIndicator = flag
         return self
     }
     
     @discardableResult
     func setContentInset(top: CGFloat, left: CGFloat, bottom: CGFloat, rigth: CGFloat) -> Self {
-        collection.contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: rigth)
+        dock.collection.contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: rigth)
         return self
     }
     
     @discardableResult
     func setContentInsetAdjustmentBehavior(_ insetAdjustment: UIScrollView.ContentInsetAdjustmentBehavior ) -> Self {
-        collection.contentInsetAdjustmentBehavior = insetAdjustment
+        dock.collection.contentInsetAdjustmentBehavior = insetAdjustment
         return self
     }
     
     @discardableResult
     func setMinimumLineSpacing(_ minimumSpacing: CGFloat) -> Self {
-        layout.minimumLineSpacing = minimumSpacing
+        dock.layout.minimumLineSpacing = minimumSpacing
         return self
     }
     
@@ -88,6 +84,24 @@ class DockBuilder: BaseBuilder {
         dock.blurEnabled = flag
         dock.opacity = opacity
         return self
+    }
+    
+    override func setBorder(_ build: (BorderBuilder) -> BorderBuilder) -> Self {
+        _ = build(BorderBuilder(dock.container))
+        return self
+    }
+    
+    
+//  MARK: - SET Actions
+    func refresh() {
+        dock.collection.reloadData()
+        configConstraintsContainer()
+    }
+    
+    
+//  MARK: - SET Delegate
+    func setDelegate(_ dockDelegate: DockDelegate) {
+        self.dock.delegate = dockDelegate
     }
     
     
@@ -108,27 +122,27 @@ class DockBuilder: BaseBuilder {
         if self._isShow && !alreadyApplied {
             RegisterCell()
             setDelegate()
-            alreadyApplied = true
             applyBlur()
             addElementsInDock()
             DispatchQueue.main.async { [weak self] in
                 self?.configConstraints()
+                self?.alreadyApplied = true
             }
         }
     }
     
     private func RegisterCell() {
-        collection.register(DockCell.self, forCellWithReuseIdentifier: DockCell.identifier)
+        dock.collection.register(DockCell.self, forCellWithReuseIdentifier: DockCell.identifier)
     }
     
     private func setDelegate() {
-        collection.delegate = dock
-        collection.dataSource = dock
+        dock.collection.delegate = dock
+        dock.collection.dataSource = dock
     }
     
     private func addElementsInDock() {
-        container.add(insideTo: dock)
-        collection.add(insideTo: container)
+        dock.container.add(insideTo: dock)
+        dock.collection.add(insideTo: dock.container)
     }
     
     private func configConstraints() {
@@ -148,12 +162,13 @@ class DockBuilder: BaseBuilder {
     }
     
     private func initializeWidthConstraintContainer() {
-        customConstraintWidthContainer = container.widthAnchor.constraint(equalToConstant: 0)
+        if alreadyApplied {return}
+        customConstraintWidthContainer = dock.container.widthAnchor.constraint(equalToConstant: 0)
         customConstraintWidthContainer.isActive = true
     }
     
     private func applyConstraintContainer() {
-        container.makeConstraints { make in
+        dock.container.makeConstraints { make in
             make
                 .setTop.equalTo(dock, .top)
                 .setHorizontalAlignmentX.equalTo(dock)
@@ -162,7 +177,7 @@ class DockBuilder: BaseBuilder {
     }
     
     private func configConstraintsCollection() {
-        collection.makeConstraints { make in
+        dock.collection.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
                 .setLeading.setTrailing.equalToSuperView(marginContainer)
@@ -186,15 +201,15 @@ class DockBuilder: BaseBuilder {
     }
     
     private func calculateLineSpacing() -> CGFloat {
-        let numberOfItems = dock.numberOfItemsCallback()
+        let numberOfItems = dock.delegate?.numberOfItemsCallback() ?? 0
         if numberOfItems > 1 {
-            return (numberOfItems.toCGFloat - 1) * (layout.minimumLineSpacing)
+            return (numberOfItems.toCGFloat - 1) * (dock.layout.minimumLineSpacing)
         }
         return 0.0
     }
     
     private func calculateContentInset() -> CGFloat {
-        return (collection.contentInset.left) + (collection.contentInset.right)
+        return (dock.collection.contentInset.left) + (dock.collection.contentInset.right)
     }
     
     private func calculateItemSize() -> CGFloat {
@@ -208,12 +223,12 @@ class DockBuilder: BaseBuilder {
     }
     
     private func calculateItemSizeExcludingCustomItemSize() -> CGFloat {
-        return (dock.numberOfItemsCallback() - (dock.customItemSize.count)).toCGFloat * (dock.itemsSize.width)
+        return ((dock.delegate?.numberOfItemsCallback() ?? 0) - (dock.customItemSize.count)).toCGFloat * (dock.itemsSize.width)
     }
     
     private func applyBlur() {
         if !dock.blurEnabled { return }
-        container.makeBlur { make in
+        dock.container.makeBlur { make in
             make
                 .setStyle(.dark)
                 .setOpacity(dock.opacity)
@@ -222,26 +237,24 @@ class DockBuilder: BaseBuilder {
     }
     
     private func initiateCollection() {
-        collection.setCollectionViewLayout(self.layout, animated: true)
-        collection.backgroundColor = .clear
+        dock.collection.setCollectionViewLayout(self.dock.layout, animated: true)
+        dock.collection.backgroundColor = .clear
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
-            self.collection.layer.cornerRadius = self.dock.layer.cornerRadius
-            self.collection.layer.maskedCorners = self.dock.layer.maskedCorners
+            self.dock.collection.layer.cornerRadius = self.dock.layer.cornerRadius
+            self.dock.collection.layer.maskedCorners = self.dock.layer.maskedCorners
         }
     }
     
-    private func initiateDock() {
-        self.dock.clipsToBounds = true
-    }
-    
     private func initiateContainer() {
-        self.container.layer.cornerRadius = dock.layer.cornerRadius
-        self.container.layer.maskedCorners = dock.layer.maskedCorners
+        
+        self.dock.container.clipsToBounds = true
+        self.dock.container.layer.cornerRadius = dock.layer.cornerRadius
+        self.dock.container.layer.maskedCorners = dock.layer.maskedCorners
     }
     
     private func initiateLayout() {
-        layout.scrollDirection = .horizontal
+        dock.layout.scrollDirection = .horizontal
     }
     
     private func setDefault() {

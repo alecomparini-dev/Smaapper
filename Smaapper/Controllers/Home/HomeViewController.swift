@@ -34,6 +34,7 @@ class HomeVC: UIViewController {
     private var adjustTrailingDock = NSLayoutConstraint()
     
     private var resultDropdownMenu: DropdownMenuData?
+    private var categories: DropdownMenuData = []
     private var turnOnMenuButton = false
     private var indexSection = 0
     private var indexRow = 0
@@ -54,17 +55,12 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configDelegate()
-        fetchDropdownMenu()
-        configRowsHeightOfDropdowMenu()
-        setConstraintAlignmentHorizontalDock()
-        homeScreen.dropdownMenu.isShow = false
+        configDropdownMenu()
+        configDock()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        adjustAlignmentOfDock()
-        homeScreen.dock.isShow = true
-        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -73,6 +69,18 @@ class HomeVC: UIViewController {
     
     
     //  MARK: - Private Function Area
+    
+    private func configDropdownMenu() {
+        fetchDropdownMenu()
+        configRowsHeightOfDropdowMenu()
+        homeScreen.dropdownMenu.isShow = false
+    }
+    
+    private func configDock() {
+        setConstraintAlignmentHorizontalDock()
+        adjustAlignmentOfDock()
+    }
+    
     private func setConstraintAlignmentHorizontalDock() {
         self.adjustTrailingDock = homeScreen.dock.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
         adjustTrailingDock.isActive = true
@@ -81,6 +89,7 @@ class HomeVC: UIViewController {
     private func configDelegate() {
         homeScreen.setDelegate(self)
         FloatWindowManager.instance.setDelegate(self)
+        homeScreen.dock.setDelegate(self)
     }
     
     private func openCloseDropdownMenu() {
@@ -192,13 +201,14 @@ class HomeVC: UIViewController {
     
     
     private func adjustAlignmentOfDock() {
-        if iconsDock.count == 4 {
-            self.adjustTrailingDock.constant = -50
-        }
         
-        if iconsDock.count > 4 {
-            self.adjustTrailingDock.constant = -90
-        }
+//        if iconsDock.count == 4 {
+//            self.adjustTrailingDock.constant = -50
+//        }
+//
+//        if iconsDock.count > 4 {
+//            self.adjustTrailingDock.constant = -90
+//        }
 
     }
     
@@ -206,8 +216,8 @@ class HomeVC: UIViewController {
         guard let resultDropdownMenu else {return}
         guard let items = resultDropdownMenu[rowTapped.section].items else { return }
         if items[rowTapped.row].title == HomeVC.categoriesID {
-            guard let subMenu = items[rowTapped.row].subMenu else { return }
-            showCategoriesViewController(subMenu)
+            self.categories = items[rowTapped.row].subMenu ?? []
+            showCategoriesViewController(categories)
         }   
     }
     
@@ -231,15 +241,7 @@ extension HomeVC: HomeViewDelegate {
     func closeMenu() {
         self.homeScreen.turnOffMenuButton()
     }
-    
-    func numberOfItemsCallback() -> Int {
-        return self.iconsDock.count
-    }
-    
-    func dockCellCalback(_ indexCell: Int) -> UIView {
-        return homeScreen.createIconsDock(iconsDock[indexCell])
-    }
-    
+       
     func dropdownMenuTapped(_ rowTapped: (section: Int, row: Int)) {
         self.rowTapped = rowTapped
         openCategories()
@@ -261,12 +263,23 @@ extension HomeVC: CategoriesViewControllerDelegate {
         let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather.present(insideTo: homeScreen.viewFloatWindow.view)
         hideElementsForShowingFloatWindow()
+        
+        
+        if !homeScreen.dock.isShow {
+            homeScreen.dock.isShow = true
+            return
+        }
+        homeScreen.dock.refresh()
+        
     }
     
 }
 
 
+
+//  MARK: - EXTENSION FloatWindowManagerDelegate
 extension HomeVC: FloatWindowManagerDelegate {
+    
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
         deactiveWindow.view.removeShadowByID("activeWindow")
     }
@@ -285,11 +298,27 @@ extension HomeVC: FloatWindowManagerDelegate {
         
     }
     
-    
     func allClosedWindows() {
         self.homeScreen.clock.setOpacity(1)
         self.homeScreen.weather.setHidden(false)
         self.homeScreen.askChatGPTView.setHidden(false)
     }
+    
+}
+
+
+
+//  MARK: - EXTENSION DockDelegate
+extension HomeVC: DockDelegate {
+    
+    func numberOfItemsCallback() -> Int {
+        return FloatWindowManager.instance.listWindows.count
+    }
+    
+    func cellItemCallback(_ indexItem: Int) -> UIView {
+        return homeScreen.createIconsDock(iconsDock[indexItem])
+    }
+    
+    
     
 }
