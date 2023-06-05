@@ -78,7 +78,7 @@ class HomeVC: UIViewController {
     
     private func configDock() {
         setConstraintAlignmentHorizontalDock()
-        adjustAlignmentOfDock()
+        setDockAlignment()
     }
     
     private func setConstraintAlignmentHorizontalDock() {
@@ -200,18 +200,6 @@ class HomeVC: UIViewController {
     }
     
     
-    private func adjustAlignmentOfDock() {
-        
-//        if iconsDock.count == 4 {
-//            self.adjustTrailingDock.constant = -50
-//        }
-//
-//        if iconsDock.count > 4 {
-//            self.adjustTrailingDock.constant = -90
-//        }
-
-    }
-    
     private func openCategories() {
         guard let resultDropdownMenu else {return}
         guard let items = resultDropdownMenu[rowTapped.section].items else { return }
@@ -260,17 +248,14 @@ extension HomeVC: CategoriesViewControllerDelegate {
     
     func didSelectRow(_ section: Int, _ row: Int) {
         openCloseDropdownMenu()
+        addFloatWindow()
+        reloadDock()
+    }
+    
+    private func addFloatWindow() {
         let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather.present(insideTo: homeScreen.viewFloatWindow.view)
         hideElementsForShowingFloatWindow()
-        
-        
-        if !homeScreen.dock.isShow {
-            homeScreen.dock.isShow = true
-            return
-        }
-        homeScreen.dock.refresh()
-        
     }
     
 }
@@ -297,6 +282,10 @@ extension HomeVC: FloatWindowManagerDelegate {
         }
         
     }
+
+    func closeWindow(_ floatWindow: FloatWindowViewController) {
+        reloadDock()
+    }
     
     func allClosedWindows() {
         self.homeScreen.clock.setOpacity(1)
@@ -317,6 +306,32 @@ extension HomeVC: DockDelegate {
     
     func cellItemCallback(_ indexItem: Int) -> UIView {
         return homeScreen.createIconsDock(iconsDock[indexItem])
+    }
+    
+    private func setDockAlignment() {
+        if FloatWindowManager.instance.listWindows.count == 4 {
+            self.adjustTrailingDock.constant = -50
+        }
+
+        if FloatWindowManager.instance.listWindows.count > 4 {
+            self.adjustTrailingDock.constant = -90
+        }
+    }
+    
+    private func reloadDock() {
+        if !homeScreen.dock.isShow {
+            if FloatWindowManager.instance.listWindows.count > 1 {
+                homeScreen.dock.isShow = true
+            }
+            return
+        } else {
+            if FloatWindowManager.instance.listWindows.count < 2 {
+                homeScreen.dock.isShow = false
+                return
+            }
+        }
+        setDockAlignment()
+        homeScreen.dock.reload()
     }
     
     
