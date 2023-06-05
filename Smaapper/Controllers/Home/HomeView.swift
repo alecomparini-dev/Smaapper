@@ -212,7 +212,7 @@ class HomeView: ViewBuilder {
     }()
     
     lazy var dock: DockBuilder = {
-        let dock = DockBuilder( )
+        return DockBuilder( )
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true, 0.7)
@@ -229,7 +229,6 @@ class HomeView: ViewBuilder {
                     .setHeight.equalToConstant(60)
                     .setVerticalAlignmentY.equalTo(menuButton.view)
             }
-        return dock
     }()
 
 

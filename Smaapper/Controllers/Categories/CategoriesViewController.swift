@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CategoriesViewControllerDelegate: AnyObject {
-    func didSelectRow(_ section: Int, _ row: Int)
+    func selectedCategory(_ section: Int, _ row: Int)
 }
 
 class CategoriesViewController: UIViewController {
@@ -152,7 +152,7 @@ extension CategoriesViewController: CategoriesViewDelegate {
     }
 
     func didSelectRow(_ section: Int, _ row: Int) {
-        delegate?.didSelectRow(section, row)
+        delegate?.selectedCategory(section, row)
         dismiss(animated: true)
     }
     

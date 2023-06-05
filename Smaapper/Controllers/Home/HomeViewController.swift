@@ -18,22 +18,6 @@ class HomeVC: UIViewController {
                              "paintbrush.fill",
                              "die.face.5",
                              "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
-                             "fan.oscillation.fill",
-                             "light.beacon.max.fill",
-                             "door.left.hand.closed",
-                             "eraser.fill",
-                             "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
-                             "fan.oscillation.fill",
-                             "light.beacon.max.fill",
-                             "door.left.hand.closed",
-                             "eraser.fill",
-                             "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
                              "fan.oscillation.fill",
                              "light.beacon.max.fill",
                              "door.left.hand.closed",
@@ -228,6 +212,45 @@ class HomeVC: UIViewController {
         homeScreen.weather.setHidden(true)
         homeScreen.askChatGPTView.setHidden(true)
     }
+    
+    
+    
+//  MARK: - DOCK Area
+    
+    private func setDockAlignment() {
+        if FloatWindowManager.instance.listWindows.count == 4 {
+            self.adjustTrailingDock.constant = -50
+        }
+
+        if FloatWindowManager.instance.listWindows.count > 4 {
+            self.adjustTrailingDock.constant = -90
+        }
+    }
+    
+    private func reloadDock() {
+        if !homeScreen.dock.isShow {
+            if FloatWindowManager.instance.listWindows.count > 1 {
+                homeScreen.dock.isShow = true
+                homeScreen.dock.reload()
+            }
+            return
+        } else {
+            if FloatWindowManager.instance.listWindows.count < 2 {
+                homeScreen.dock.isShow = false
+                return
+            }
+        }
+        setDockAlignment()
+        homeScreen.dock.reload()
+    }
+    
+    private func getIcon(_ index: Int) -> String {
+        let win = FloatWindowManager.instance.listWindows[index]
+        let category: (section:Int, row:Int) = win.customAttribute as! (section:Int, row:Int)
+        let icon = self.categories[category.section].items?[category.row].leftImage ?? ""
+        return icon
+    }
+
         
 }
 
@@ -260,16 +283,16 @@ extension HomeVC: HomeViewDelegate {
 
 extension HomeVC: CategoriesViewControllerDelegate {
     
-    func didSelectRow(_ section: Int, _ row: Int) {
+    func selectedCategory(_ section: Int, _ row: Int) {
         openCloseDropdownMenu()
-        addFloatWindow()
-        reloadDock()
+        addFloatWindow((section,row))
     }
     
-    private func addFloatWindow() {
+    private func addFloatWindow(_ category: (section: Int, row: Int)) {
         let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
-        weather.present(insideTo: homeScreen.viewFloatWindow.view)
+        weather.setCustomAttribute(category)
         hideElementsForShowingFloatWindow()
+        weather.present(insideTo: homeScreen.viewFloatWindow.view)
     }
     
 }
@@ -278,6 +301,10 @@ extension HomeVC: CategoriesViewControllerDelegate {
 
 //  MARK: - EXTENSION FloatWindowManagerDelegate
 extension HomeVC: FloatWindowManagerDelegate {
+    func openWindow(_ floatWindow: FloatWindowViewController) {
+        reloadDock()
+    }
+    
     
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
         deactiveWindow.view.removeShadowByID("activeWindow")
@@ -294,7 +321,9 @@ extension HomeVC: FloatWindowManagerDelegate {
                 .setID("activeWindow")
                 .apply()
         }
-        
+        if let indexWin = FloatWindowManager.instance.getIndexById(activeWindow.id) {
+            homeScreen.dock.selectItem(indexWin, at: .centeredHorizontally)
+        }
     }
 
     func closeWindow(_ floatWindow: FloatWindowViewController) {
@@ -313,41 +342,24 @@ extension HomeVC: FloatWindowManagerDelegate {
 
 //  MARK: - EXTENSION DockDelegate
 extension HomeVC: DockDelegate {
+    func activatedItemDock(_ indexItem: Int) {
+        print("caralho chamouuu aqui--->", indexItem)
+    }
+    
+    func deactivatedItemDock(_ indexItem: Int) {
+        print("caralho chamouuu aqui--->", indexItem)
+    }
+    
     
     func numberOfItemsCallback() -> Int {
         return FloatWindowManager.instance.listWindows.count
     }
     
     func cellItemCallback(_ indexItem: Int) -> UIView {
-        return homeScreen.createIconsDock(iconsDock[indexItem])
+        let img = getIcon(indexItem)
+        print("imagemm -->>>", img)
+        return homeScreen.createIconsDock(img)
     }
     
-    private func setDockAlignment() {
-        if FloatWindowManager.instance.listWindows.count == 4 {
-            self.adjustTrailingDock.constant = -50
-        }
 
-        if FloatWindowManager.instance.listWindows.count > 4 {
-            self.adjustTrailingDock.constant = -90
-        }
-    }
-    
-    private func reloadDock() {
-        if !homeScreen.dock.isShow {
-            if FloatWindowManager.instance.listWindows.count > 1 {
-                homeScreen.dock.isShow = true
-            }
-            return
-        } else {
-            if FloatWindowManager.instance.listWindows.count < 2 {
-                homeScreen.dock.isShow = false
-                return
-            }
-        }
-        setDockAlignment()
-        homeScreen.dock.reload()
-    }
-    
-    
-    
 }
