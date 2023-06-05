@@ -93,7 +93,7 @@ class DockBuilder: BaseBuilder {
     
     
 //  MARK: - SET Actions
-    func refresh() {
+    func reload() {
         dock.collection.reloadData()
         configConstraintsContainer()
     }
@@ -246,8 +246,7 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-    private func initiateContainer() {
-        
+    private func initiateContainer() {        
         self.dock.container.clipsToBounds = true
         self.dock.container.layer.cornerRadius = dock.layer.cornerRadius
         self.dock.container.layer.maskedCorners = dock.layer.maskedCorners

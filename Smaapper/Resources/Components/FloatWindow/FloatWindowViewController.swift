@@ -7,15 +7,8 @@
 
 import UIKit
 
-protocol FloatWindowDelegate: AnyObject {
-    func closeWindow(_ floatWindow: FloatWindowViewController)
-    
-}
-
 
 class FloatWindowViewController: BaseBuilder {
-    
-    weak var delegate: FloatWindowDelegate?
     
     private let hierarchy: CGFloat = 1000
     private var _isShow = false
@@ -80,9 +73,7 @@ class FloatWindowViewController: BaseBuilder {
     func viewWillAppear() {}
     func viewDidAppear() {}
     func viewWillDisappear() {}
-    func viewDidDisappear() {
-        delegate?.closeWindow(self)
-    }
+    func viewDidDisappear() { }
     
     
 //  MARK: - SET Properties

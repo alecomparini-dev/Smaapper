@@ -8,6 +8,7 @@
 import UIKit
 
 protocol FloatWindowManagerDelegate: AnyObject {
+    func closeWindow(_ floatWindow: FloatWindowViewController)
     func allClosedWindows()
     func allMinimizedWindows()
     func allRestoredWindows()
@@ -40,7 +41,6 @@ class FloatWindowManager {
         }
     }
     
-
     func addWindow(_ floatWindow: FloatWindowViewController)  {
         self._listWindows.append(floatWindow)
         self.activeWindow = floatWindow
@@ -76,6 +76,7 @@ class FloatWindowManager {
 //  MARK: - PRIVATE Area
     private func removeWindowsFromList(_ floatWindow: FloatWindowViewController) {
         self._listWindows.removeAll { $0.id == floatWindow.id }
+        delegate?.closeWindow(floatWindow)
     }
     
     private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController){
