@@ -12,8 +12,6 @@ protocol HomeViewDelegate: AnyObject {
     func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int))
     func openMenu()
     func closeMenu()
-    func numberOfItemsCallback() -> Int
-    func dockCellCalback(_ indexCell: Int) -> UIView
 }
 
 class HomeView: ViewBuilder {
@@ -214,7 +212,7 @@ class HomeView: ViewBuilder {
     }()
     
     lazy var dock: DockBuilder = {
-        let dock = DockBuilder(numberOfItemsCallback: numberOfItemsCallback, cellCallback: dockCellCalback)
+        let dock = DockBuilder( )
             .setSize(CGSize(width: 40 , height: 40))
             .setMinimumLineSpacing(12)
             .setBlur(true, 0.7)
@@ -254,13 +252,6 @@ class HomeView: ViewBuilder {
         delegate?.closeMenu()
     }
     
-    private func numberOfItemsCallback() -> Int {
-        return delegate?.numberOfItemsCallback() ?? 0
-    }
-    
-    private func dockCellCalback(_ indexCell: Int) -> UIView {
-        return delegate?.dockCellCalback(indexCell) ?? UIView()
-    }
     
     
 //  MARK: - Public Functions Area

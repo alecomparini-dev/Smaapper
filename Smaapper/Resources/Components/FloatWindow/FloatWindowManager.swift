@@ -44,6 +44,7 @@ class FloatWindowManager {
     func addWindow(_ floatWindow: FloatWindowViewController)  {
         self._listWindows.append(floatWindow)
         self.activeWindow = floatWindow
+        desactivateWindowWhenTappedSuperView()
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
@@ -112,7 +113,7 @@ class FloatWindowManager {
         delegate?.activatedWindow(activeWin)
     }
     
-    func desactivateWindowOnClickSuperView() {
+    private func desactivateWindowWhenTappedSuperView() {
         if self._desactivateWindowSuperView { return }
         
         if let superview = self.activeWindow?.superView {
