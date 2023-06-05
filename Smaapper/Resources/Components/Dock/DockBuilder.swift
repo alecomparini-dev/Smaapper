@@ -95,7 +95,15 @@ class DockBuilder: BaseBuilder {
 //  MARK: - SET Actions
     func reload() {
         dock.collection.reloadData()
-        configConstraintsContainer()
+        autoResizingContainer()
+    }
+    
+    func selectItem(_ indexItem: Int, at: UICollectionView.ScrollPosition) {
+        if self.isShow {
+            let indexPath = IndexPath(row: indexItem, section: 0)
+            dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
+            dock.delegate?.activatedItemDock(indexItem)
+        }
     }
     
     
@@ -146,15 +154,14 @@ class DockBuilder: BaseBuilder {
     }
     
     private func configConstraints() {
-        configConstraintsContainer()
-        configConstraintsCollection()
+        self.configConstraintsContainer()
+        self.configConstraintsCollection()
     }
     
     private func configConstraintsContainer() {
-        setDockBounds()
         initializeWidthConstraintContainer()
         applyConstraintContainer()
-        configConstraintWidthContainer()
+        autoResizingContainer()
     }
     
     private func setDockBounds() {
@@ -162,7 +169,6 @@ class DockBuilder: BaseBuilder {
     }
     
     private func initializeWidthConstraintContainer() {
-        if alreadyApplied {return}
         customConstraintWidthContainer = dock.container.widthAnchor.constraint(equalToConstant: 0)
         customConstraintWidthContainer.isActive = true
     }
@@ -184,7 +190,8 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-    private func configConstraintWidthContainer() {
+    private func autoResizingContainer() {
+        setDockBounds()
         let sizeAllItems = self.calculateSizeAllItems()
         if sizeAllItems >= self.dockViewBounds.width {
             self.customConstraintWidthContainer.constant = self.dockViewBounds.width

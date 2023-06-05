@@ -9,6 +9,7 @@ import UIKit
 
 protocol FloatWindowManagerDelegate: AnyObject {
     func closeWindow(_ floatWindow: FloatWindowViewController)
+    func openWindow(_ floatWindow: FloatWindowViewController)
     func allClosedWindows()
     func allMinimizedWindows()
     func allRestoredWindows()
@@ -43,6 +44,7 @@ class FloatWindowManager {
     
     func addWindow(_ floatWindow: FloatWindowViewController)  {
         self._listWindows.append(floatWindow)
+        delegate?.openWindow(floatWindow)
         self.activeWindow = floatWindow
         desactivateWindowWhenTappedSuperView()
     }
@@ -69,6 +71,13 @@ class FloatWindowManager {
     
     func setDelegate(_ delegate: FloatWindowManagerDelegate) {
         self.delegate = delegate
+    }
+    
+    func getIndexById(_ id: UUID) -> Int? {
+        if let index = listWindows.firstIndex(where: { $0.id == id }) {
+            return index
+        }
+        return nil
     }
     
 

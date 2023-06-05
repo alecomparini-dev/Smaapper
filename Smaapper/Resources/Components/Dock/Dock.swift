@@ -10,6 +10,9 @@ import UIKit
 protocol DockDelegate: AnyObject {
     func numberOfItemsCallback() -> Int
     func cellItemCallback(_ indexItem: Int) -> UIView
+    
+    func activatedItemDock(_ indexItem: Int)
+    func deactivatedItemDock(_ indexItem: Int)
 }
 
 class Dock: UIView {
@@ -81,5 +84,6 @@ extension Dock: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
+    
     
 }

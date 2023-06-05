@@ -14,12 +14,14 @@ class FloatWindowViewController: BaseBuilder {
     private var _isShow = false
     private var alreadyApplied = false
     private var _superView: UIView?
-    private(set) var id: UUID = UUID()
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
     private var titleWindow: TitleWindow?
     private var titleHeight: CGFloat = 30
+    
+    private(set) var id: UUID = UUID()
+    private(set) var customAttribute: Any?
     
     private var manager: FloatWindowManager = FloatWindowManager.instance
     private var actions: FloatWindowsActions?
@@ -124,6 +126,12 @@ class FloatWindowViewController: BaseBuilder {
             return self
         }
         self.actions = action(FloatWindowsActions(self))
+        return self
+    }
+    
+    @discardableResult
+    func setCustomAttribute(_ attribute: Any) -> Self {
+        self.customAttribute = attribute
         return self
     }
     
