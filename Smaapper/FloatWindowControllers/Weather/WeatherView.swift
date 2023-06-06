@@ -9,6 +9,7 @@ import UIKit
 
 protocol WeatherViewDelegate: AnyObject {
     func closeWindow()
+    func minimizeWindow()
 }
 
 class WeatherView: ViewBuilder {
@@ -30,7 +31,7 @@ class WeatherView: ViewBuilder {
         configConstraints()
     }
     
-//  MARK: - LAZY Area
+    //  MARK: - LAZY Area
     
     lazy var temperatureImageView: ImageViewBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "cloud.bolt.rain.fill"))
@@ -45,6 +46,62 @@ class WeatherView: ViewBuilder {
     }()
     
     
+    lazy var minimizeWindowButton: ButtonImageBuilder = {
+        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "minus.square.fill")))
+            .setImageSize(14)
+            .setImageWeight(.semibold)
+            .setTitleAlignment(.center)
+            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.8))
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(25)
+                    .setTop.equalToSuperView(7)
+                    .setTrailing.equalToSuperView(-7)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(minimizeWindow), .touchUpInside)
+            }
+        return btn
+    }()
+    @objc
+    private func minimizeWindow() {
+        delegate?.minimizeWindow()
+    }
+    
+    lazy var closeWindowButton: ButtonImageBuilder = {
+        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
+            .setImageSize(10)
+            .setImageWeight(.semibold)
+            .setTitleAlignment(.center)
+            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
+            .setConstraints { build in
+                build
+                    .setSize.equalToConstant(25)
+                    .setTop.equalToSuperView(7)
+                    .setLeading.equalToSuperView(8)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(closeWindow), .touchUpInside)
+            }
+        return btn
+    }()
+    @objc
+    private func closeWindow() {
+        delegate?.closeWindow()
+    }
+    
+    lazy var titleView: ViewBuilder = {
+        let view = ViewBuilder()
+            minimizeWindowButton.add(insideTo: view.view)
+            minimizeWindowButton.applyConstraint()
+            closeWindowButton.add(insideTo: view.view)
+            closeWindowButton.applyConstraint()
+        return view
+    }()
+    
+    
 //  MARK: - PRIVATE Area
     
     private func configStyles() {
@@ -52,7 +109,7 @@ class WeatherView: ViewBuilder {
         configNeumorphism()
     }
     
-    private func    configBorder() {
+    private func configBorder() {
         self.setBorder { build in
             build
                 .setCornerRadius(20)
@@ -71,7 +128,6 @@ class WeatherView: ViewBuilder {
         }
     }
     
-    
     private func addElements() {
         temperatureImageView.add(insideTo: self.view)
     }
@@ -80,57 +136,6 @@ class WeatherView: ViewBuilder {
         temperatureImageView.applyConstraint()
     }
     
-    
-    func createTitleView() -> UIView {
-        let view = UIView()
-        let closeWin = createCloseWindowButton()
-        addElementsInTitleView(view, [closeWin.view])
-        configButtonsConstraintsInTitleView(closeWin)
-        return view
-    }
-    
-    private func createCloseWindowButton() -> ButtonImageBuilder {
-        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
-            .setImageSize(11)
-            .setImageWeight(.semibold)
-            .setTitleAlignment(.center)
-            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(25)
-            }
-            .setActions { build in
-                build
-                    .setTarget(self, #selector(closeWindow), .touchUpInside)
-            }
-        return btn
-    }
-    @objc
-    private func closeWindow() {
-        delegate?.closeWindow()
-    }
-    
-    private func createDragDropView() -> UIView {
-        let view = View()
-        return view
-    }
-    
-    private func addElementsInTitleView(_ view: UIView, _ elements: [UIView]) {
-        elements.forEach { elem in
-            elem.add(insideTo: view)
-        }
-    }
-    
-    private func configButtonsConstraintsInTitleView( _ closeWin: ButtonBuilder) {
-        closeWin.applyConstraint()
-        closeWin.setConstraints { make in
-            make
-                .setTop.equalToSuperView(6)
-                .setTrailing.equalToSuperView(-8)
-                .apply()
-        }
-        
-    }
     
 
 }

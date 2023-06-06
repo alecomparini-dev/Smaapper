@@ -377,6 +377,7 @@ class HomeView: ViewBuilder {
         dock.applyConstraint()
         askChatGPTView.applyConstraint()
         viewFloatWindow.applyConstraint()
+    
     }
     
     
@@ -389,8 +390,5 @@ class HomeView: ViewBuilder {
         }
     }
     
-    
-    
-
     
 }
