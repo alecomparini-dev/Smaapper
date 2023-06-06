@@ -23,7 +23,7 @@ class WeatherViewController: FloatWindowViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitleWindow(screen.createTitleView())
+        setTitleWindow(screen.titleView.view)
         setTitleHeight(35)
         setEnabledDraggable(true)
         configDelegate()
@@ -36,8 +36,14 @@ class WeatherViewController: FloatWindowViewController {
 }
 
 extension WeatherViewController: WeatherViewDelegate {
+    
     func closeWindow() {
         self.dismiss()
     }
+    
+    func minimizeWindow() {
+        self.minimize
+    }
+
     
 }

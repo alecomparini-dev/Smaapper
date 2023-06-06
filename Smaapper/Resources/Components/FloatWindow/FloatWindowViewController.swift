@@ -23,6 +23,9 @@ class FloatWindowViewController: BaseBuilder {
     private(set) var id: UUID = UUID()
     private(set) var customAttribute: Any?
     
+    private(set) var isMinimized: Bool = false
+    private(set) var originalCenter: CGPoint = .zero
+    
     private var manager: FloatWindowManager = FloatWindowManager.instance
     private var actions: FloatWindowsActions?
     
@@ -34,6 +37,8 @@ class FloatWindowViewController: BaseBuilder {
             super.component = self._view
         }
     }
+    
+    
     
     init(frame: CGRect ) {
         super.init(self._view)
@@ -140,9 +145,23 @@ class FloatWindowViewController: BaseBuilder {
     var bringToFront: Void {
         superView.bringSubviewToFront(self.view)
     }
-    var minimize: Void { return }
+    
+    var minimize: Void {
+        if isMinimized {return}
+        originalCenter = self.view.center
+        manager.minimize(self)
+        isMinimized = true
+    }
+    
+    var restore: Void {
+        if isMinimized {
+            manager.restore(self)
+            isMinimized = false
+        }
+        return
+    }
+    
     var maximize: Void { return }
-    var restore: Void { return }
     
     
     
@@ -175,7 +194,6 @@ class FloatWindowViewController: BaseBuilder {
     
     private func removeWindows() {
         manager.removeWindow(self)
-        self.view.removeFromSuperview()
     }
     
     private func setHierarchyVisualization() {

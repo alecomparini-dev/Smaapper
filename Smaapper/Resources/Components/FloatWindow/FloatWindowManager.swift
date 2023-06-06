@@ -15,7 +15,10 @@ protocol FloatWindowManagerDelegate: AnyObject {
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController)
     func allClosedWindows()
     
+    func minimizedWindow(_ floatWindow: FloatWindowViewController)
     func allMinimizedWindows()
+    
+    func restoredWindow(_ floatWindow: FloatWindowViewController)
     func allRestoredWindows()
 }
 
@@ -44,6 +47,7 @@ class FloatWindowManager {
             self._activeWindow = newValue
             invokeActivatedWindow(self._activeWindow)
             newValue?.bringToFront
+            newValue?.restore
         }
     }
     
@@ -55,9 +59,19 @@ class FloatWindowManager {
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
-        removeWindowsFromList(floatWindow)
+        self.activateLastWindowIfNeeded(floatWindow)
+        closeAnimation(floatWindow)
+    }
+    
+    func minimize(_ floatWindow: FloatWindowViewController) {
         activateLastWindowIfNeeded(floatWindow)
-        verifyAllClosedWindows()
+        minimizeAnimation(floatWindow)
+        self.delegate?.minimizedWindow(floatWindow)
+    }
+    
+    func restore(_ floatWindow: FloatWindowViewController) {
+        restoreAnimation(floatWindow)
+        self.delegate?.restoredWindow(floatWindow)
     }
     
     func minimizeAll() {
@@ -87,6 +101,7 @@ class FloatWindowManager {
     
 
 //  MARK: - PRIVATE Area
+    
     private func isActivationOfNilWindow(_ newValue: FloatWindowViewController?) -> Bool {
         if newValue != nil { return false }
         invokeDeactivedWindow(self._activeWindow)
@@ -116,9 +131,14 @@ class FloatWindowManager {
         delegate?.closeWindow(floatWindow)
     }
     
-    private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController){
+    private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController) {
+        guard let lastActiveWindow = self._lastActiveWindow else {return}
         if floatWindow.id == self._activeWindow?.id {
-            activeWindow = self._lastActiveWindow
+            if !lastActiveWindow.isMinimized {
+                activeWindow = self._lastActiveWindow
+                return
+            }
+            activeWindow = nil
         }
     }
     
@@ -163,6 +183,40 @@ class FloatWindowManager {
             _desactivateWindowSuperViewControl = true
         }
         
+    }
+    
+//  MARK: - ANIMATIONS Area
+    
+    private func minimizeAnimation(_ floatWindow: FloatWindowViewController) {
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: {
+            floatWindow.view.alpha = 0.0
+            floatWindow.view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            floatWindow.view.center = CGPoint(x: floatWindow.superView.center.x, y: floatWindow.superView.frame.maxY)
+        }, completion: { _ in
+            floatWindow.view.isHidden = true
+        })
+    }
+    
+    private func restoreAnimation(_ floatWindow: FloatWindowViewController) {
+        floatWindow.view.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            floatWindow.view.alpha = 1
+            floatWindow.view.transform = CGAffineTransform.identity
+            floatWindow.view.center = floatWindow.originalCenter
+        }, completion: { _ in
+            
+        })
+    }
+    
+    private func closeAnimation(_ floatWindow: FloatWindowViewController) {
+        UIView.animate(withDuration: 0.3, animations: {
+            floatWindow.view.alpha = 0
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            self.removeWindowsFromList(floatWindow)
+            self.verifyAllClosedWindows()
+            floatWindow.view.removeFromSuperview()
+        })
     }
     
 }

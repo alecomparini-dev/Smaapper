@@ -63,6 +63,8 @@ class HomeVC: UIViewController {
         configDelegate()
         configDropdownMenu()
         configDock()
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -298,6 +300,19 @@ class HomeVC: UIViewController {
             self.activationDockControl = false
         }
     }
+    
+    private func restoreItemDock(_ cellItem: UIView) {
+        UIView.animate(withDuration: 0.3) {
+            cellItem.transform = CGAffineTransform.identity
+        }
+    }
+    
+    private func minimizeItemDock(_ cellItem: UIView) {
+        UIView.animate(withDuration: 0.3) {
+            cellItem.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }
+    }
+    
         
 }
 
@@ -349,6 +364,21 @@ extension HomeVC: CategoriesViewControllerDelegate {
 //  MARK: - EXTENSION FloatWindowManagerDelegate
 
 extension HomeVC: FloatWindowManagerDelegate {
+    func minimizedWindow(_ floatWindow: FloatWindowViewController) {
+        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
+            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
+                self?.minimizeItemDock(cellItem)
+            }
+        }
+    }
+    
+    func restoredWindow(_ floatWindow: FloatWindowViewController) {
+        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
+            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
+                self?.restoreItemDock(cellItem)
+            }
+        }
+    }
     
     func openWindow(_ floatWindow: FloatWindowViewController) {
         reloadDock()
@@ -413,7 +443,6 @@ extension HomeVC: DockDelegate {
         }
         
     }
-    
     
     func numberOfItemsCallback() -> Int {
         return FloatWindowManager.instance.listWindows.count
