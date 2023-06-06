@@ -59,7 +59,6 @@ class FloatWindowManager {
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
-        self.activateLastWindowIfNeeded(floatWindow)
         closeAnimation(floatWindow)
     }
     
@@ -132,7 +131,10 @@ class FloatWindowManager {
     }
     
     private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController) {
-        guard let lastActiveWindow = self._lastActiveWindow else {return}
+        guard let lastActiveWindow = self._lastActiveWindow else {
+            activeWindow = nil
+            return
+        }
         if floatWindow.id == self._activeWindow?.id {
             if !lastActiveWindow.isMinimized {
                 activeWindow = self._lastActiveWindow
@@ -214,6 +216,7 @@ class FloatWindowManager {
         }, completion: { [weak self] _ in
             guard let self else {return}
             self.removeWindowsFromList(floatWindow)
+            self.activateLastWindowIfNeeded(floatWindow)
             self.verifyAllClosedWindows()
             floatWindow.view.removeFromSuperview()
         })
