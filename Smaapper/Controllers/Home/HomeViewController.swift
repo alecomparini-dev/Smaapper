@@ -239,34 +239,55 @@ class HomeVC: UIViewController {
     }
     
     private func reloadDock() {
-        if isShowDockIfMoreThanOneWindow() {
-            homeScreen.dock.reload()
-            return
-        }
-        if isHideDockIfLessThanTwoWindows() {
-            return
-        }
         setDockAlignment()
         homeScreen.dock.reload()
+        configItemsMinimized()
     }
     
-    private func isShowDockIfMoreThanOneWindow() -> Bool {
-        if homeScreen.dock.isShow {return false}
-        
-        if FloatWindowManager.instance.listWindows.count > 1 {
+    private func configItemsMinimized() {
+        var indexItem: [Int] = []
+//        FloatWindowManager.instance.listWindows.enumerated().forEach { (index,win) in
+//            if (win.isMinimized) {
+//                indexItem.append(index)
+//            }
+//        }
+//
+//        homeScreen.dock.getCellItem(indexItem) { cellItem in
+//            self.minimizeItemDock(cellItem)
+//        }
+
+    }
+    
+    private func showDock() {
+        if isShowDockIfOneWindow() {
             homeScreen.dock.isShow = true
+            return
+        }
+        if isShowDockIfMoreThanOneWindow() {
+            homeScreen.dock.isShow = true
+            return
+        }
+        homeScreen.dock.isShow = false
+    }
+    
+    
+    private func isShowDockIfOneWindow() -> Bool {
+        let countWindow = FloatWindowManager.instance.listWindows.count
+        if (countWindow < 1) || (countWindow > 1)  {return false}
+        
+        if FloatWindowManager.instance.listWindows[0].isMinimized {
             return true
         }
         return false
     }
     
-    private func isHideDockIfLessThanTwoWindows() -> Bool {
-        if !homeScreen.dock.isShow {return true}
+    private func isShowDockIfMoreThanOneWindow() -> Bool {
+        if FloatWindowManager.instance.listWindows.count < 2 {return false}
         
-        if FloatWindowManager.instance.listWindows.count < 2 {
-            homeScreen.dock.isShow = false
+        if FloatWindowManager.instance.listWindows.count > 1 {
             return true
         }
+        
         return false
     }
     
@@ -291,13 +312,6 @@ class HomeVC: UIViewController {
     private func activationWindow(_ indexItem: Int?) {
         if let indexItem {
             FloatWindowManager.instance.activeWindow = FloatWindowManager.instance.listWindows[indexItem]
-        }
-    }
-    
-    private func resetControllers() {
-        if activationWindowControl && activationDockControl {
-            self.activationWindowControl = false
-            self.activationDockControl = false
         }
     }
     
@@ -370,6 +384,7 @@ extension HomeVC: FloatWindowManagerDelegate {
                 self?.minimizeItemDock(cellItem)
             }
         }
+        showDock()
     }
     
     func restoredWindow(_ floatWindow: FloatWindowViewController) {
@@ -378,10 +393,12 @@ extension HomeVC: FloatWindowManagerDelegate {
                 self?.restoreItemDock(cellItem)
             }
         }
+        showDock()
     }
     
     func openWindow(_ floatWindow: FloatWindowViewController) {
         reloadDock()
+        showDock()
     }
     
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
@@ -405,6 +422,7 @@ extension HomeVC: FloatWindowManagerDelegate {
 
     func closeWindow(_ floatWindow: FloatWindowViewController) {
         reloadDock()
+        showDock()
     }
     
     func allClosedWindows() {

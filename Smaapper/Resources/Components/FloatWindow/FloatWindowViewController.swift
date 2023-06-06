@@ -38,8 +38,6 @@ class FloatWindowViewController: BaseBuilder {
         }
     }
     
-    
-    
     init(frame: CGRect ) {
         super.init(self._view)
         self.frameWindow = frame
@@ -148,15 +146,15 @@ class FloatWindowViewController: BaseBuilder {
     
     var minimize: Void {
         if isMinimized {return}
+        isMinimized = true
         originalCenter = self.view.center
         manager.minimize(self)
-        isMinimized = true
     }
     
     var restore: Void {
         if isMinimized {
-            manager.restore(self)
             isMinimized = false
+            manager.restore(self)
         }
         return
     }

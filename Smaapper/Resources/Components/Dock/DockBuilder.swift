@@ -31,6 +31,17 @@ class DockBuilder: BaseBuilder {
         setDefault()
     }
     
+    
+//  MARK: - SHOW Dock
+    var isShow: Bool {
+        get { return self._isShow}
+        set {
+            self._isShow = newValue
+            applyOnceConfig()
+            dock.isHidden = !_isShow
+        }
+    }
+    
 //  MARK: - GET Properties
     func getCellItem(_ indexItem: Int, closure: @escaping Dock.closureGetCellItemAlias ) {
         let indexPath = IndexPath(row: indexItem, section: 0)
@@ -112,12 +123,10 @@ class DockBuilder: BaseBuilder {
     }
     
     func deselectActiveItem() {
-        if self.isShow {
-            if let activeItem = dock.activeItem {
-                let indexPath = IndexPath(row: activeItem, section: 0)
-                dock.collection.deselectItem(at: indexPath, animated: true)
-                dock.activeItem = nil
-            }
+        if let activeItem = dock.activeItem {
+            let indexPath = IndexPath(row: activeItem, section: 0)
+            dock.collection.deselectItem(at: indexPath, animated: true)
+            dock.activeItem = nil
         }
     }
     
@@ -127,16 +136,7 @@ class DockBuilder: BaseBuilder {
         self.dock.delegate = dockDelegate
     }
     
-    
-//  MARK: - SHOW Dock
-    var isShow: Bool {
-        get { return self._isShow}
-        set {
-            self._isShow = newValue
-            applyOnceConfig()
-            dock.isHidden = !_isShow
-        }
-    }
+
     
     
 //  MARK: - Private Function Area

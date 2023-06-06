@@ -129,7 +129,7 @@ extension Dock: UICollectionViewDataSource {
             cell.setupCell(item)
         }
         
-        if indexPath.row == self.indexGetCellItem {
+        if self.indexGetCellItem == indexPath.row  {
             invokeGetCellItem(cell)
         }
         return cell
