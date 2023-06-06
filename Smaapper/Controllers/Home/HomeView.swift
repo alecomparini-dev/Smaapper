@@ -46,6 +46,8 @@ class HomeView: ViewBuilder {
         return view
     }()
     
+    
+    //  MARK: - WEATHER
     lazy var weather: WeatherForecastView = {
         let view = WeatherForecastView(temperature: 25)
             .setBorder({ build in
@@ -72,6 +74,9 @@ class HomeView: ViewBuilder {
         return view
     }()
     
+    
+    //  MARK: - CLOCK NEUMORPHISM
+    
     lazy var clock: ClockNeumorphism = {
         let clock = ClockNeumorphism()
             .setWeight(4)
@@ -84,6 +89,9 @@ class HomeView: ViewBuilder {
             }
         return clock
     }()
+    
+    
+    //  MARK: - ASK CHAT GPT VIEW
     
     lazy var askChatGPTView: AskChatGPTView = {
         let view = AskChatGPTView()
@@ -112,6 +120,8 @@ class HomeView: ViewBuilder {
         return tf
     }()
     
+    
+    //  MARK: - DROPDOW MENU
     
     lazy var dropdownMenu: DropdownMenuFooterBuilder = {
         return DropdownMenuFooterBuilder()
@@ -154,35 +164,6 @@ class HomeView: ViewBuilder {
             }
     }()
     
-    lazy var menuButton: ButtonImageBuilder = {
-        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
-        return ButtonImageBuilder(img)
-            .setImageColor(Theme.shared.currentTheme.onSurface)
-            .setImageSize(16)
-            .setBorder({ build in
-                build.setCornerRadius(14)
-            })
-            .setFloatButton()
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .setBlur(to: .light, percent: 5)
-                    .apply()
-            }
-            .setConstraints { build in
-                build
-                    .setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-15)
-                    .setHeight.setWidth.equalToConstant(60)
-            }
-            .setActions { build in
-                build
-                    .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
-            }
-    }()
-    
     lazy var profileDropdownMenuFooterIconButton: IconButtonBuilder = {
         return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "person")).view, "Profile")
             .setImageWeight(.medium)
@@ -211,34 +192,6 @@ class HomeView: ViewBuilder {
             .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
     
-    lazy var dock: DockBuilder = {
-        return DockBuilder( )
-            .setSize(CGSize(width: 40 , height: 40))
-            .setMinimumLineSpacing(12)
-            .setBlur(true, 0.7)
-            .setContentInset(top: 8, left: 10, bottom: 10, rigth: 10)
-            .setBorder({ build in
-                build
-                    .setColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.2))
-                    .setWidth(1)
-                    .setCornerRadius(15)
-            })
-            .setConstraints { build in
-                build
-                    .setLeading.equalToSafeArea(20)
-                    .setHeight.equalToConstant(60)
-                    .setVerticalAlignmentY.equalTo(menuButton.view)
-            }
-    }()
-
-
-//  MARK: - DELEGATE Functions Area
-    
-    @objc
-    private func menuButtonTapped() {
-        delegate?.menuButtonTapped()
-    }
-    
     private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
         delegate?.dropdownMenuTapped(rowTapped)
     }
@@ -251,6 +204,67 @@ class HomeView: ViewBuilder {
         delegate?.closeMenu()
     }
     
+    
+    //  MARK: - MENU FLOAT BUTTON
+    
+    lazy var menuButton: ButtonImageBuilder = {
+        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
+        return ButtonImageBuilder(img)
+            .setFloatButton()
+            .setImageColor(Theme.shared.currentTheme.onSurface)
+            .setImageSize(16)
+            .setBorder({ build in
+                build.setCornerRadius(14)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLowest)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setBlur(to: .light, percent: 5)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setBottom.equalToSafeArea(-10)
+                    .setTrailing.equalToSafeArea(-15)
+                    .setHeight.setWidth.equalToConstant(60)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
+            }
+    }()
+    
+    @objc
+    private func menuButtonTapped() {
+        delegate?.menuButtonTapped()
+    }
+    
+    
+    //  MARK: - DOCK
+    
+    lazy var dock: DockBuilder = {
+        return DockBuilder( )
+            .setSize(CGSize(width: 40 , height: 40))
+            .setMinimumLineSpacing(12)
+            .setBlur(true, 0.7)
+            .setContentInset(top: 10, left: 10, bottom: 10, rigth: 10)
+            .setBorder({ build in
+                build
+                    .setColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.2))
+                    .setWidth(1)
+                    .setCornerRadius(15)
+            })
+            .setConstraints { build in
+                build
+                    .setLeading.equalToSafeArea(20)
+                    .setHeight.equalToConstant(60)
+                    .setVerticalAlignmentY.equalTo(menuButton.view)
+            }
+            
+    }()
+
     
     
 //  MARK: - Public Functions Area

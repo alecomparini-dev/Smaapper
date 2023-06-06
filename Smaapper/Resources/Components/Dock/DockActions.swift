@@ -9,17 +9,24 @@ import Foundation
 
 class DockActions {
     
-    enum Event {
+    enum EventDock {
         case showDock
         case hideDock
     }
     
-    typealias touchDockClosureAlias = (_ indexItem: Int ) -> Void
-    typealias eventDockClosureAlias = (_ stateDock: Event) -> Void
+    enum EventItemDock {
+        case activatedItem
+        case deactivatedItem
+    }
     
-    private(set) var touchDockClosure: touchDockClosureAlias?
+    typealias indexItemDockAlias = (_ indexItem: Int ) -> Void
+    typealias eventDockClosureAlias = (_ stateDock: EventDock) -> Void
+    
+    private(set) var touchItemDock: indexItemDockAlias?
     private(set) var showDockClosure: eventDockClosureAlias?
     private(set) var hideDockClosure: eventDockClosureAlias?
+    private(set) var activatedItemDock: indexItemDockAlias?
+    private(set) var deactivatedItemDock: indexItemDockAlias?
     
     private let dock: Dock
     
@@ -31,19 +38,33 @@ class DockActions {
 //  MARK: - SET Actions
     
     @discardableResult
-    func setAction(touch closure: @escaping touchDockClosureAlias) -> Self {
-        self.touchDockClosure = closure
+    func setTouchItem(_ closure: @escaping indexItemDockAlias) -> Self {
+        self.touchItemDock = closure
         return self
     }
     
     @discardableResult
-    func setAction(event: Event  ,closure: @escaping eventDockClosureAlias) -> Self {
+    func setEventDock(event: EventDock ,closure: @escaping eventDockClosureAlias) -> Self {
         switch event {
             case .showDock:
                 self.showDockClosure = closure
+            
             case .hideDock:
                 self.hideDockClosure = closure
         }
+        return self
+    }
+    
+    @discardableResult
+    func setEventItemDock(event: EventItemDock ,closure: @escaping indexItemDockAlias) -> Self {
+        switch event {
+            case .activatedItem:
+                self.activatedItemDock = closure
+            
+            case .deactivatedItem:
+                self.deactivatedItemDock = closure
+        }
+        
         return self
     }
     

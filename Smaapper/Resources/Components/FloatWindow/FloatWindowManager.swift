@@ -8,13 +8,15 @@
 import UIKit
 
 protocol FloatWindowManagerDelegate: AnyObject {
-    func closeWindow(_ floatWindow: FloatWindowViewController)
     func openWindow(_ floatWindow: FloatWindowViewController)
+    func activatedWindow(_ activeWindow: FloatWindowViewController)
+    
+    func closeWindow(_ floatWindow: FloatWindowViewController)
+    func deactivatedWindow(_ deactiveWindow: FloatWindowViewController)
     func allClosedWindows()
+    
     func allMinimizedWindows()
     func allRestoredWindows()
-    func deactivatedWindow(_ deactiveWindow: FloatWindowViewController)
-    func activatedWindow(_ activeWindow: FloatWindowViewController)
 }
 
 class FloatWindowManager {
@@ -25,7 +27,7 @@ class FloatWindowManager {
     private var _listWindows: [FloatWindowViewController] = []
     private var _activeWindow: FloatWindowViewController?
     private var _lastActiveWindow: FloatWindowViewController?
-    private var _desactivateWindowSuperView: Bool = false
+    private var _desactivateWindowSuperViewControl: Bool = false
     
     
     private init() {}
@@ -35,10 +37,13 @@ class FloatWindowManager {
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
         set {
+            if isAlreadyActivated(newValue) {return}
             self._lastActiveWindow = self._activeWindow
-            invokeActivatedDeactivatedWindow(newValue)
-            newValue?.bringToFront
+            if isActivationOfNilWindow(newValue) {return}
+            invokeDeactivedWindow(self._activeWindow)
             self._activeWindow = newValue
+            invokeActivatedWindow(self._activeWindow)
+            newValue?.bringToFront
         }
     }
     
@@ -46,7 +51,7 @@ class FloatWindowManager {
         self._listWindows.append(floatWindow)
         delegate?.openWindow(floatWindow)
         self.activeWindow = floatWindow
-        desactivateWindowWhenTappedSuperView()
+        configDesactivateWindowWhenTappedSuperView()
     }
     
     func removeWindow(_ floatWindow: FloatWindowViewController)  {
@@ -81,10 +86,33 @@ class FloatWindowManager {
     }
     
 
-
 //  MARK: - PRIVATE Area
+    private func isActivationOfNilWindow(_ newValue: FloatWindowViewController?) -> Bool {
+        if newValue != nil { return false }
+        invokeDeactivedWindow(self._activeWindow)
+        self._activeWindow = newValue
+        return true
+    }
+    
+    private func isAlreadyActivated(_ newValue: FloatWindowViewController?) -> Bool {
+        return newValue?.id == self._activeWindow?.id
+    }
+    
+    private func invokeDeactivedWindow(_ deactiveItem: FloatWindowViewController?) {
+        if let deactiveItem {
+            delegate?.deactivatedWindow(deactiveItem)
+        }
+    }
+    
+    private func invokeActivatedWindow(_ activeItem: FloatWindowViewController?) {
+        if let activeItem {
+            delegate?.activatedWindow(activeItem)
+        }
+    }
+    
     private func removeWindowsFromList(_ floatWindow: FloatWindowViewController) {
         self._listWindows.removeAll { $0.id == floatWindow.id }
+        delegate?.deactivatedWindow(floatWindow)
         delegate?.closeWindow(floatWindow)
     }
     
@@ -123,8 +151,8 @@ class FloatWindowManager {
         delegate?.activatedWindow(activeWin)
     }
     
-    private func desactivateWindowWhenTappedSuperView() {
-        if self._desactivateWindowSuperView { return }
+    private func configDesactivateWindowWhenTappedSuperView() {
+        if self._desactivateWindowSuperViewControl { return }
         
         if let superview = self.activeWindow?.superView {
             superview.isUserInteractionEnabled = true
@@ -132,7 +160,7 @@ class FloatWindowManager {
                 .setTouchEnded { [weak self] tapGesture in
                     self?.activeWindow = nil
                 }
-            _desactivateWindowSuperView = true
+            _desactivateWindowSuperViewControl = true
         }
         
     }
