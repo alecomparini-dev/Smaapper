@@ -11,9 +11,6 @@ class DockBuilder: BaseBuilder {
     
     private var dockViewBounds = CGRect()
     private var customConstraintWidthContainer: NSLayoutConstraint = NSLayoutConstraint()
-
-    private let hierarchy: CGFloat = 1100
-    private let marginContainer: CGFloat = 8
     private var _isShow = false
     private var alreadyApplied = false
     
@@ -34,6 +31,14 @@ class DockBuilder: BaseBuilder {
         setDefault()
     }
     
+//  MARK: - GET Properties
+    func getCellItem(_ indexItem: Int, closure: @escaping Dock.closureGetCellItemAlias ) {
+        let indexPath = IndexPath(row: indexItem, section: 0)
+        if let cell = dock.collection.cellForItem(at: indexPath) {
+            return closure(cell)
+        }
+        dock.setClosureGetCellItem(indexItem, closure: closure)
+    }
     
 //  MARK: - SET Properties
     
@@ -102,7 +107,17 @@ class DockBuilder: BaseBuilder {
         if self.isShow {
             let indexPath = IndexPath(row: indexItem, section: 0)
             dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
-            dock.delegate?.activatedItemDock(indexItem)
+            dock.activeItem = indexItem
+        }
+    }
+    
+    func deselectActiveItem() {
+        if self.isShow {
+            if let activeItem = dock.activeItem {
+                let indexPath = IndexPath(row: activeItem, section: 0)
+                dock.collection.deselectItem(at: indexPath, animated: true)
+                dock.activeItem = nil
+            }
         }
     }
     
@@ -186,7 +201,7 @@ class DockBuilder: BaseBuilder {
         dock.collection.makeConstraints { make in
             make
                 .setTop.setBottom.equalToSuperView
-                .setLeading.setTrailing.equalToSuperView(marginContainer)
+                .setLeading.setTrailing.equalToSuperView(dock.marginContainer)
         }
     }
     
@@ -204,7 +219,7 @@ class DockBuilder: BaseBuilder {
         let spacing = calculateLineSpacing()
         let contentInset = calculateContentInset()
         let itemSize = calculateItemSize()
-        return itemSize + spacing + contentInset + (marginContainer*2)
+        return itemSize + spacing + contentInset + (dock.marginContainer*2)
     }
     
     private func calculateLineSpacing() -> CGFloat {
@@ -270,10 +285,12 @@ class DockBuilder: BaseBuilder {
     }
     
     private func setHierarchyVisualization() {
-        dock.layer.zPosition = hierarchy
+        dock.layer.zPosition = dock.hierarchy
     }
 
     
 }
+
+
 
 
