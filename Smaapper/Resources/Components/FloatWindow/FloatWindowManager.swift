@@ -9,9 +9,20 @@ import UIKit
 
 protocol FloatWindowManagerDelegate: AnyObject {
     
-    
-    
-    
+    func viewDidLoad(_ floatWindow: FloatWindowViewController)
+    func viewWillAppear(_ floatWindow: FloatWindowViewController)
+    func viewWillLayoutSubviews(_ floatWindow: FloatWindowViewController)
+    func viewDidLayoutSubviews(_ floatWindow: FloatWindowViewController)
+    func viewDidAppear(_ floatWindow: FloatWindowViewController)
+    func viewWillDragging(_ floatWindow: FloatWindowViewController)
+    func viewDragging(_ floatWindow: FloatWindowViewController)
+    func viewEndedDragging(_ floatWindow: FloatWindowViewController)
+    func viewMinimized(_ floatWindow: FloatWindowViewController)
+    func viewRestored(_ floatWindow: FloatWindowViewController)
+    func viewActivated(_ floatWindow: FloatWindowViewController)
+    func viewDesactivated(_ floatWindow: FloatWindowViewController)
+    func viewWillDisappear(_ floatWindow: FloatWindowViewController)
+    func viewDidDisappear(_ floatWindow: FloatWindowViewController)
     
     
     func allClosedWindows()
@@ -33,25 +44,26 @@ class FloatWindowManager {
     var listWindows: [FloatWindowViewController] { self._listWindows }
     var countWindows: Int { self._listWindows.count }
     
+    var lastActiveWindow: FloatWindowViewController? {self._lastActiveWindow}
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
         set {
             print(#function, #fileID)
-            if isActivated(newValue) {return}
+            if isActivate(newValue) {return}
             self._lastActiveWindow = self._activeWindow
-            self._activeWindow?.viewDesactivated()
             self._activeWindow = newValue
+            self._lastActiveWindow?.viewDesactivated()
         }
     }
     
     func deactiveWindow (_ floatWindow: FloatWindowViewController?) {
         print(#function, #fileID)
-        if isActivated(floatWindow) {
-            self._activeWindow = nil
+        if isActivate(floatWindow) {
+            self.activeWindow = nil
             return
         }
-        
     }
+    
     
     func addWindowToManager(_ floatWindow: FloatWindowViewController)  {
         print(#function, #fileID)
@@ -90,7 +102,7 @@ class FloatWindowManager {
 
 //  MARK: - PRIVATE Area
     
-    private func isActivated(_ newValue: FloatWindowViewController?) -> Bool {
+    func isActivate(_ newValue: FloatWindowViewController?) -> Bool {
         print(#function, #fileID)
         return newValue?.id == self._activeWindow?.id
     }
@@ -131,4 +143,20 @@ class FloatWindowManager {
 
 }
 
+
+extension FloatWindowManagerDelegate {
+    func viewDidLoad(_ floatWindow: FloatWindowViewController) {}
+    func viewWillAppear(_ floatWindow: FloatWindowViewController) {}
+    func viewWillLayoutSubviews(_ floatWindow: FloatWindowViewController) {}
+    func viewDidLayoutSubviews(_ floatWindow: FloatWindowViewController) {}
+    func viewDidAppear(_ floatWindow: FloatWindowViewController) {}
+    func viewWillDragging(_ floatWindow: FloatWindowViewController) {}
+    func viewDragging(_ floatWindow: FloatWindowViewController) {}
+    func viewEndedDragging(_ floatWindow: FloatWindowViewController) {}
+    func viewMinimized(_ floatWindow: FloatWindowViewController) {}
+    func viewRestored(_ floatWindow: FloatWindowViewController) {}
+    func viewWillDisappear(_ floatWindow: FloatWindowViewController) {}
+    func viewDidDisappear(_ floatWindow: FloatWindowViewController) {}
+    func allClosedWindows() {}
+}
 

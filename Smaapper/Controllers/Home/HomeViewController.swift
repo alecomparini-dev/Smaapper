@@ -405,6 +405,48 @@ extension HomeVC: CategoriesViewControllerDelegate {
 //  MARK: - EXTENSION FloatWindowManagerDelegate
 
 extension HomeVC: FloatWindowManagerDelegate {
+    
+    func viewActivated(_ floatWindow: FloatWindowViewController) {
+        floatWindow.setShadow { build in
+            build
+                .setColor(Theme.shared.currentTheme.primary)
+                .setOffset(width: 0, height: 0)
+                .setOpacity(0.8)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("activeWindow")
+                .apply()
+        }
+    }
+    
+    func viewDesactivated(_ floatWindow: FloatWindowViewController) {
+        floatWindow.view.removeShadowByID("activeWindow")
+    }
+    
+    
+    func allClosedWindows() {
+        self.homeScreen.clock.setOpacity(1)
+        self.homeScreen.weather.setHidden(false)
+        self.homeScreen.askChatGPTView.setHidden(false)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func minimizedWindow(_ floatWindow: FloatWindowViewController) {
         if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
             homeScreen.dock.getCellItem(index) { [weak self] cellItem in
@@ -432,21 +474,11 @@ extension HomeVC: FloatWindowManagerDelegate {
     
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
         print(#function, #fileID)
-        deactiveWindow.view.removeShadowByID("activeWindow")
+        
         homeScreen.dock.deselectActiveItem()
     }
     
     func activatedWindow(_ activeWindow: FloatWindowViewController) {
-        activeWindow.setShadow { build in
-            build
-                .setColor(Theme.shared.currentTheme.primary)
-                .setOffset(width: 0, height: 0)
-                .setOpacity(0.8)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeWindow")
-                .apply()
-        }
         activationItemDock(activeWindow)
     }
 
@@ -455,11 +487,7 @@ extension HomeVC: FloatWindowManagerDelegate {
         showDock()
     }
     
-    func allClosedWindows() {
-        self.homeScreen.clock.setOpacity(1)
-        self.homeScreen.weather.setHidden(false)
-        self.homeScreen.askChatGPTView.setHidden(false)
-    }
+    
     
 }
 
