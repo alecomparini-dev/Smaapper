@@ -53,6 +53,7 @@ class Dock: UIView {
     var activeItem: Int? {
         get { self._activeItem }
         set {
+            print(#function, #fileID)
             if isAlreadyActivated(newValue) {return}
             if isActivationOfNilItem(newValue) {return}
             invokeDeactivedItem(self._activeItem)
@@ -67,6 +68,7 @@ class Dock: UIView {
     }
     
     private func isActivationOfNilItem(_ newValue: Int?) -> Bool {
+        print(#function, #fileID)
         if newValue != nil { return false }
         invokeDeactivedItem(self._activeItem)
         self._activeItem = newValue
@@ -74,16 +76,19 @@ class Dock: UIView {
     }
     
     private func isAlreadyActivated(_ newValue: Int?) -> Bool {
+        print(#function, #fileID)
         return newValue == self._activeItem
     }
     
     private func invokeDeactivedItem(_ deactiveItem: Int?) {
+        print(#function, #fileID)
         if let deactiveItem {
             delegate?.deactivatedItemDock(deactiveItem)
         }
     }
     
     private func invokeActivatedItem(_ activeItem: Int?) {
+        print(#function, #fileID)
         if let activeItem {
             delegate?.activatedItemDock(activeItem)
         }

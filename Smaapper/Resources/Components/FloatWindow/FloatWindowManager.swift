@@ -32,7 +32,6 @@ class FloatWindowManager {
     private var _lastActiveWindow: FloatWindowViewController?
     private var _desactivateWindowSuperViewControl: Bool = false
     
-    
     private init() {}
 
     var listWindows: [FloatWindowViewController] { self._listWindows }
@@ -40,6 +39,7 @@ class FloatWindowManager {
     var activeWindow: FloatWindowViewController? {
         get { self._activeWindow }
         set {
+            print(#function, #fileID)
             if isAlreadyActivated(newValue) {return}
             self._lastActiveWindow = self._activeWindow
             if isActivationOfNilWindow(newValue) {return}
@@ -52,6 +52,7 @@ class FloatWindowManager {
     }
     
     func addWindow(_ floatWindow: FloatWindowViewController)  {
+        print(#function, #fileID)
         self._listWindows.append(floatWindow)
         delegate?.openWindow(floatWindow)
         self.activeWindow = floatWindow
@@ -69,6 +70,7 @@ class FloatWindowManager {
     }
     
     func restore(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         restoreAnimation(floatWindow)
         self.delegate?.restoredWindow(floatWindow)
     }
@@ -102,6 +104,7 @@ class FloatWindowManager {
 //  MARK: - PRIVATE Area
     
     private func isActivationOfNilWindow(_ newValue: FloatWindowViewController?) -> Bool {
+        print(#function, #fileID)
         if newValue != nil { return false }
         invokeDeactivedWindow(self._activeWindow)
         self._activeWindow = newValue
@@ -109,10 +112,12 @@ class FloatWindowManager {
     }
     
     private func isAlreadyActivated(_ newValue: FloatWindowViewController?) -> Bool {
+        print(#function, #fileID)
         return newValue?.id == self._activeWindow?.id
     }
     
     private func invokeDeactivedWindow(_ deactiveItem: FloatWindowViewController?) {
+        print(#function, #fileID)
         if let deactiveItem {
             delegate?.deactivatedWindow(deactiveItem)
         }
