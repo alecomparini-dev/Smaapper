@@ -55,11 +55,13 @@ class HomeVC: UIViewController {
     
    
     override func loadView() {
+        print(#function, #fileID)
         view = homeScreen.view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#function, #fileID)
         configDelegate()
         configDropdownMenu()
         configDock()
@@ -69,6 +71,22 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print(#function, #fileID)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print(#function, #fileID)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print(#function, #fileID)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print(#function, #fileID)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -229,6 +247,7 @@ class HomeVC: UIViewController {
 //  MARK: - DOCK Area
     
     private func setDockAlignment() {
+        print(#function, #fileID)
         if FloatWindowManager.instance.listWindows.count == 4 {
             self.adjustTrailingDock.constant = -50
         }
@@ -239,26 +258,28 @@ class HomeVC: UIViewController {
     }
     
     private func reloadDock() {
+        print(#function, #fileID)
         setDockAlignment()
         homeScreen.dock.reload()
         configItemsMinimized()
     }
     
     private func configItemsMinimized() {
-        var indexItem: [Int] = []
-//        FloatWindowManager.instance.listWindows.enumerated().forEach { (index,win) in
-//            if (win.isMinimized) {
-//                indexItem.append(index)
-//            }
-//        }
-//
-//        homeScreen.dock.getCellItem(indexItem) { cellItem in
-//            self.minimizeItemDock(cellItem)
-//        }
+        print(#function, #fileID)
+        FloatWindowManager.instance.listWindows.enumerated().forEach { (index,win) in
+            if (win.isMinimized) {
+                homeScreen.dock.getCellItem(index) { cellItem in
+                    self.minimizeItemDock(cellItem)
+                }
+            }
+        }
+
+
 
     }
     
     private func showDock() {
+        print(#function, #fileID)
         if isShowDockIfOneWindow() {
             homeScreen.dock.isShow = true
             return
@@ -299,6 +320,7 @@ class HomeVC: UIViewController {
     }
     
     private func activationItemDock(_ activeWindow: FloatWindowViewController?) {
+        print(#function, #fileID)
         if !homeScreen.dock.isShow { return }
         if let activeWindow {
             if let indexWin = FloatWindowManager.instance.getIndexById(activeWindow.id) {
@@ -310,18 +332,21 @@ class HomeVC: UIViewController {
     }
 
     private func activationWindow(_ indexItem: Int?) {
+        print(#function, #fileID)
         if let indexItem {
             FloatWindowManager.instance.activeWindow = FloatWindowManager.instance.listWindows[indexItem]
         }
     }
     
     private func restoreItemDock(_ cellItem: UIView) {
+        print(#function, #fileID)
         UIView.animate(withDuration: 0.3) {
             cellItem.transform = CGAffineTransform.identity
         }
     }
     
     private func minimizeItemDock(_ cellItem: UIView) {
+        print(#function, #fileID)
         UIView.animate(withDuration: 0.3) {
             cellItem.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }
@@ -360,11 +385,13 @@ extension HomeVC: HomeViewDelegate {
 extension HomeVC: CategoriesViewControllerDelegate {
     
     func selectedCategory(_ section: Int, _ row: Int) {
+        print(#function, #fileID)
         openCloseDropdownMenu()
         addFloatWindow((section,row))
     }
     
     private func addFloatWindow(_ category: (section: Int, row: Int)) {
+        print(#function, #fileID)
         let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather.setCustomAttribute(category)
         hideElementsForShowingFloatWindow()
@@ -388,6 +415,7 @@ extension HomeVC: FloatWindowManagerDelegate {
     }
     
     func restoredWindow(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
             homeScreen.dock.getCellItem(index) { [weak self] cellItem in
                 self?.restoreItemDock(cellItem)
@@ -397,11 +425,13 @@ extension HomeVC: FloatWindowManagerDelegate {
     }
     
     func openWindow(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         reloadDock()
         showDock()
     }
     
     func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         deactiveWindow.view.removeShadowByID("activeWindow")
         homeScreen.dock.deselectActiveItem()
     }
@@ -438,10 +468,12 @@ extension HomeVC: FloatWindowManagerDelegate {
 //  MARK: - EXTENSION DockDelegate
 extension HomeVC: DockDelegate {
     func didSelectItemAt(_ indexItem: Int) {
+        print(#function, #fileID)
         activationWindow(indexItem)
     }
     
     func activatedItemDock(_ indexItem: Int) {
+        print(#function, #fileID)
         self.homeScreen.dock.getCellItem(indexItem) { cellItem in
             Shadow(cellItem.subviews[0].subviews[0])
                 .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
@@ -456,6 +488,7 @@ extension HomeVC: DockDelegate {
     }
     
     func deactivatedItemDock(_ indexItem: Int) {
+        print(#function, #fileID)
         self.homeScreen.dock.getCellItem(indexItem) { cellItem in
             cellItem.subviews[0].subviews[0].removeShadowByID("activeItemDock")
         }

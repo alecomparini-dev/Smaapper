@@ -38,10 +38,12 @@ class WeatherViewController: FloatWindowViewController {
 extension WeatherViewController: WeatherViewDelegate {
     
     func closeWindow() {
+        print(#function, #fileID)
         self.dismiss()
     }
     
     func minimizeWindow() {
+        print(#function, #fileID)
         self.minimize
     }
 

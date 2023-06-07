@@ -73,12 +73,12 @@ class FloatWindowViewController: BaseBuilder {
     
     
 //  MARK: - LIFE CIRCLE
-    func loadView() {}
-    func viewDidLoad() {}
-    func viewWillAppear() {}
-    func viewDidAppear() {}
-    func viewWillDisappear() {}
-    func viewDidDisappear() { }
+    func loadView() {print(#function, #fileID)}
+    func viewDidLoad() {print(#function, #fileID)}
+    func viewWillAppear() {print(#function, #fileID)}
+    func viewDidAppear() {print(#function, #fileID)}
+    func viewWillDisappear() {print(#function, #fileID)}
+    func viewDidDisappear() { print(#function, #fileID)}
     
     
 //  MARK: - SET Properties
@@ -141,6 +141,7 @@ class FloatWindowViewController: BaseBuilder {
     
 //  MARK: - Actions
     var bringToFront: Void {
+        print(#function, #fileID)
         superView.bringSubviewToFront(self.view)
     }
     
@@ -152,6 +153,7 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     var restore: Void {
+        print(#function, #fileID)
         if isMinimized {
             isMinimized = false
             manager.restore(self)
@@ -165,6 +167,7 @@ class FloatWindowViewController: BaseBuilder {
     
 //  MARK: - PRESENT and DISMISS FloatWindow
     func present(insideTo: UIView) {
+        print(#function, #fileID)
         self._superView = insideTo
         loadView()
         viewDidLoad()
@@ -173,11 +176,11 @@ class FloatWindowViewController: BaseBuilder {
         addFloatWindow()
         appearFloatWindow()
         viewDidAppear()
-        configActivateWindow()
-        
+        configTouchForActivateWindow()   
     }
     
     func dismiss() {
+        print(#function, #fileID)
         viewWillDisappear()
         removeWindows()
         viewDidDisappear()
@@ -187,6 +190,7 @@ class FloatWindowViewController: BaseBuilder {
 //  MARK: - PRIVATE Function Area
     
     private func addWindowsToManager() {
+        print(#function, #fileID)
         manager.addWindow(self)
     }
     
@@ -199,16 +203,19 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     private func configFloatWindow() {
+        print(#function, #fileID)
         addWindowsToManager()
         decidePositionWindow()
         configTitleWindowView()
     }
     
     private func addFloatWindow() {
+        print(#function, #fileID)
         self.view.add(insideTo: superView)
     }
    
     private func decidePositionWindow() {
+        print(#function, #fileID)
         if let frameWindow {
             configFrameWindow(frameWindow)
             return
@@ -225,6 +232,7 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     private func appearFloatWindow() {
+        print(#function, #fileID)
         self.view.isHidden = false
         titleWindow?.isShow = true
     }
@@ -242,6 +250,7 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     private func configTitleWindowView() {
+        print(#function, #fileID)
         if let titleWindow {
             addTitleWindow(titleWindow)
             configTitleWindowConstraints(titleWindow)
@@ -260,7 +269,8 @@ class FloatWindowViewController: BaseBuilder {
         })
     }
     
-    private func configActivateWindow() {
+    private func configTouchForActivateWindow() {
+        print(#function, #fileID)
         self.setActions { build in
             build
                 .setTapGesture { build in
