@@ -140,21 +140,32 @@ class FloatWindowViewController: BaseBuilder {
         manager.delegate?.viewEndedDragging(self)
     }
 
-//  MARK: - Functions Min-Res-Act-Deac
+    
+//  MARK: - Functions
+    
     func viewMinimized() {
         print(#function, #fileID)
+        if isMinimized {return}
+        isMinimized = true
+        originalCenter = self.view.center
         minimizeAnimation(callBackViewMinimized)
+        manager.delegate?.viewMinimized(self)
         manager.lastActiveWindow?.viewActivated()
+        viewDesactivated()
     }
     private func callBackViewMinimized() {
         view.isHidden = true
-        manager.delegate?.viewMinimized(self)
-        viewDesactivated()
     }
     
     func viewRestored() {
         print(#function, #fileID)
+        if !isMinimized {return}
+        view.isHidden = false
+        isMinimized = false
+        restoreAnimation(callBackViewRestored)
         manager.delegate?.viewRestored(self)
+    }
+    private func callBackViewRestored() {
         viewWillAppear()
         viewDidAppear()
     }
@@ -165,26 +176,27 @@ class FloatWindowViewController: BaseBuilder {
         if isMinimized {return}
         self.bringToFront
         manager.activeWindow = self
-        manager.delegate?.viewActivated(self)
     }
     
     func viewDesactivated() {
         print(#function, #fileID)
         manager.deactiveWindow(self)
-        manager.delegate?.viewDesactivated(self)
     }
     
     
 //  MARK: - Disappear Window
     func viewWillDisappear() {
         print(#function, #fileID)
+        removeWindowToManager()
+        manager.delegate?.viewWillDisappear(self)
+        manager.lastActiveWindow?.viewActivated()
         removeWindowAnimation()
     }
     
     func viewDidDisappear() {
         print(#function, #fileID)
-        removeWindowToManager()
         removeWindowToSuperview()
+        manager.delegate?.viewDidDisappear(self)
         manager.verifyAllClosedWindows()
     }
     
@@ -260,25 +272,7 @@ class FloatWindowViewController: BaseBuilder {
         print(#function, #fileID)
         superView.bringSubviewToFront(self.view)
     }
-    
-    var minimize: Void {
-        print(#function, #fileID)
-        if isMinimized {return}
-        isMinimized = true
-        originalCenter = self.view.center
-        viewMinimized()
-    }
-    
-    var restore: Void {
-        print(#function, #fileID)
-        isMinimized = false
-        restoreAnimation()
-        return
-    }
-    
-    var maximize: Void { return }
-    
-    
+
     
 
     
@@ -408,16 +402,15 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     
-    private func restoreAnimation() {
+    private func restoreAnimation(_ closure: @escaping () -> Void ) {
         print(#function, #fileID)
-        self.view.isHidden = false
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             guard let self else {return}
             view.alpha = 1
             view.transform = CGAffineTransform.identity
             view.center = self.originalCenter
         }, completion: { _ in
-            self.viewRestored()
+            closure()
         })
     }
 }

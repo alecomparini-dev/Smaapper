@@ -49,42 +49,63 @@ class FloatWindowManager {
         get { self._activeWindow }
         set {
             print(#function, #fileID)
-            if isActivate(newValue) {return}
             self._lastActiveWindow = self._activeWindow
+            if isActivate(newValue) {return}
+            
+            if let _activeWindow {
+                delegate?.viewDesactivated(_activeWindow)
+            }
+            
             self._activeWindow = newValue
-            self._lastActiveWindow?.viewDesactivated()
+            
+            if let _activeWindow {
+                delegate?.viewActivated(_activeWindow)
+            }
         }
     }
     
-    func deactiveWindow (_ floatWindow: FloatWindowViewController?) {
-        print(#function, #fileID)
+
+    
+    func deactiveWindow (_ floatWindow: FloatWindowViewController) {
+        debugPrint(#function, #fileID)
         if isActivate(floatWindow) {
             self.activeWindow = nil
-            return
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     func addWindowToManager(_ floatWindow: FloatWindowViewController)  {
-        print(#function, #fileID)
+        debugPrint(#function, #fileID)
         self._listWindows.append(floatWindow)
     }
     
     func removeWindowToManager(_ floatWindow: FloatWindowViewController)  {
-        print(#function, #fileID)
+        debugPrint(#function, #fileID)
         self._listWindows.removeAll { $0.id == floatWindow.id }
     }
     
-    
     func minimizeAll() {
         self._listWindows.forEach { win in
-            win.minimize
+            win.viewMinimized()
         }
     }
     
     func restoreAll() {
         self._listWindows.forEach { win in
-            win.restore
+            win.viewRestored()
         }
     }
     
@@ -103,24 +124,10 @@ class FloatWindowManager {
 //  MARK: - PRIVATE Area
     
     func isActivate(_ newValue: FloatWindowViewController?) -> Bool {
-        print(#function, #fileID)
+        debugPrint(#function, #fileID)
         return newValue?.id == self._activeWindow?.id
     }
     
-    
-    private func activateLastWindowIfNeeded(_ floatWindow: FloatWindowViewController) {
-        guard let lastActiveWindow = self._lastActiveWindow else {
-            activeWindow = nil
-            return
-        }
-        if floatWindow.id == self._activeWindow?.id {
-            if !lastActiveWindow.isMinimized {
-                activeWindow = self._lastActiveWindow
-                return
-            }
-            activeWindow = nil
-        }
-    }
     
     func verifyAllClosedWindows() {
         if self.countWindows == 0 {
@@ -136,6 +143,9 @@ class FloatWindowManager {
         TapGestureBuilder(superView)
             .setTouchEnded { [weak self] tapGesture in
                 self?.activeWindow?.viewDesactivated()
+                self?.lastActiveWindow?.viewDesactivated()
+                self?._activeWindow = nil
+                self?._lastActiveWindow = nil
             }
         _desactivateWindowSuperViewControl = true
     }

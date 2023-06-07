@@ -44,7 +44,7 @@ extension WeatherViewController: WeatherViewDelegate {
     
     func minimizeWindow() {
         print(#function, #fileID)
-        self.minimize
+        self.viewMinimized()
     }
 
     
