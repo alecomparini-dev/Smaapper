@@ -41,12 +41,10 @@ class FloatWindowViewController: BaseBuilder {
     init(frame: CGRect ) {
         super.init(self._view)
         self.frameWindow = frame
-        self.initialization()
     }
     
     init() {
         super.init(self._view)
-        initialization()
     }
     
     convenience init(sizeWindow: CGSize ) {
@@ -58,10 +56,26 @@ class FloatWindowViewController: BaseBuilder {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initialization() {
-        setHierarchyVisualization()
-    }
     
+//  MARK: - PRESENT and DISMISS FloatWindow
+    func present(insideTo: UIView) {
+        print(#function, #fileID)
+        self._superView = insideTo
+        loadView()
+        viewDidLoad()
+        configSetProperties()
+        viewWillAppear()
+        viewWillLayoutSubviews()
+        viewDidLayoutSubviews()
+        viewDidAppear()
+    }
+
+    
+    func dismiss() {
+        print(#function, #fileID)
+        viewWillDisappear()
+    }
+        
     
 //  MARK: - GET Properties
     var superView: UIView {
@@ -73,12 +87,85 @@ class FloatWindowViewController: BaseBuilder {
     
     
 //  MARK: - LIFE CIRCLE
-    func loadView() {print(#function, #fileID)}
-    func viewDidLoad() {print(#function, #fileID)}
-    func viewWillAppear() {print(#function, #fileID)}
-    func viewDidAppear() {print(#function, #fileID)}
-    func viewWillDisappear() {print(#function, #fileID)}
-    func viewDidDisappear() { print(#function, #fileID)}
+    func loadView() {
+        print(#function, #fileID)
+    }
+    
+    func viewDidLoad() {
+        print(#function, #fileID)
+        addFloatWindow()
+        setHierarchyVisualization()
+        addWindowsToManager()
+        configTouchForActivateWindow()
+        manager.configDesactivateWindowWhenTappedSuperView(superView)
+    }
+
+    
+    func viewWillAppear() {
+        print(#function, #fileID)
+        viewActivated()
+    }
+    
+    func viewWillLayoutSubviews(){
+        print(#function, #fileID)
+    }
+    
+    func viewDidLayoutSubviews(){
+        print(#function, #fileID)
+    }
+    
+    func viewDidAppear() {
+        print(#function, #fileID)
+        self.view.isHidden = false
+    }
+    
+    
+//  MARK: - Dragging
+    func viewWillDragging() {
+        print(#function, #fileID)
+        viewActivated()
+    }
+    func viewDragging() {}
+    func viewEndedDragging(){
+        print(#function, #fileID)
+    }
+
+//  MARK: - Functions Min-Res-Act-Deac
+    func viewMinimized() {
+        print(#function, #fileID)
+        viewDesactivated()
+    }
+    
+    func viewRestored() {
+        print(#function, #fileID)
+        viewWillAppear()
+        viewDidAppear()
+    }
+    
+    func viewActivated() {
+        print(#function, #fileID)
+        self.bringToFront
+        manager.activeWindow = self
+    }
+    
+    func viewDesactivated() {
+        print(#function, #fileID)
+        manager.deactiveWindow(self)
+    }
+    
+    
+//  MARK: - Desappear Window
+    func viewWillDisappear() {
+        print(#function, #fileID)
+        removeWindowAnimation()
+    }
+    
+    func viewDidDisappear() {
+        print(#function, #fileID)
+        removeWindowToManager()
+        removeWindowToSuperview()
+        manager.verifyAllClosedWindows()
+    }
     
     
 //  MARK: - SET Properties
@@ -97,7 +184,15 @@ class FloatWindowViewController: BaseBuilder {
                     build
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
-                            manager.activeWindow = self
+                            self.viewWillDragging()
+                        }
+                        .setDragging { [weak self] draggable in
+                            guard let self else {return}
+                            self.viewDragging()
+                        }
+                        .setDropped { [weak self] draggable in
+                            guard let self else {return}
+                            self.viewEndedDragging()
                         }
                 }
         }
@@ -146,18 +241,17 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     var minimize: Void {
+        print(#function, #fileID)
         if isMinimized {return}
         isMinimized = true
         originalCenter = self.view.center
-        manager.minimize(self)
+        minimizeAnimation()
     }
     
     var restore: Void {
         print(#function, #fileID)
-        if isMinimized {
-            isMinimized = false
-            manager.restore(self)
-        }
+        isMinimized = false
+        restoreAnimation()
         return
     }
     
@@ -165,48 +259,21 @@ class FloatWindowViewController: BaseBuilder {
     
     
     
-//  MARK: - PRESENT and DISMISS FloatWindow
-    func present(insideTo: UIView) {
-        print(#function, #fileID)
-        self._superView = insideTo
-        loadView()
-        viewDidLoad()
-        configFloatWindow()
-        viewWillAppear()
-        addFloatWindow()
-        appearFloatWindow()
-        viewDidAppear()
-        configTouchForActivateWindow()   
-    }
-    
-    func dismiss() {
-        print(#function, #fileID)
-        viewWillDisappear()
-        removeWindows()
-        viewDidDisappear()
-    }
-    
+
     
 //  MARK: - PRIVATE Function Area
     
     private func addWindowsToManager() {
         print(#function, #fileID)
-        manager.addWindow(self)
+        manager.addWindowToManager(self)
     }
     
-    private func removeWindows() {
-        manager.removeWindow(self)
+    private func removeWindowToManager() {
+        manager.removeWindowToManager(self)
     }
     
     private func setHierarchyVisualization() {
         self.view.layer.zPosition = hierarchy
-    }
-    
-    private func configFloatWindow() {
-        print(#function, #fileID)
-        addWindowsToManager()
-        decidePositionWindow()
-        configTitleWindowView()
     }
     
     private func addFloatWindow() {
@@ -233,8 +300,7 @@ class FloatWindowViewController: BaseBuilder {
     
     private func appearFloatWindow() {
         print(#function, #fileID)
-        self.view.isHidden = false
-        titleWindow?.isShow = true
+        
     }
     
     private func configSizeWindow(_ sizeWindow: CGSize) {
@@ -254,6 +320,7 @@ class FloatWindowViewController: BaseBuilder {
         if let titleWindow {
             addTitleWindow(titleWindow)
             configTitleWindowConstraints(titleWindow)
+            titleWindow.isShow = true
         }
     }
     
@@ -278,12 +345,60 @@ class FloatWindowViewController: BaseBuilder {
                         .setCancelsTouchesInView(false)
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
-                            manager.activeWindow = self
+                            viewActivated()
                         }
                 }
         }
         
     }
-
     
+    private func configSetProperties() {
+        configTitleWindowView()
+        decidePositionWindow()
+    }
+
+    private func removeWindowToSuperview() {
+        self.view.removeFromSuperview()
+    }
+    
+    
+//  MARK: - ANIMATIONS
+    
+    private func removeWindowAnimation() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.alpha = 0
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            self.viewDidDisappear()
+        })
+    }
+    
+    private func minimizeAnimation() {
+        print(#function, #fileID)
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            view.alpha = 0.0
+            view.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            view.center = CGPoint(x: superView.center.x, y: superView.frame.maxY)
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            view.isHidden = true
+            viewMinimized()
+            restore
+        })
+    }
+    
+    
+    private func restoreAnimation() {
+        print(#function, #fileID)
+        self.view.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+            guard let self else {return}
+            view.alpha = 1
+            view.transform = CGAffineTransform.identity
+            view.center = self.originalCenter
+        }, completion: { _ in
+            self.viewRestored()
+        })
+    }
 }
