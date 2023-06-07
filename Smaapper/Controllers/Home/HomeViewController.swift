@@ -66,8 +66,6 @@ class HomeVC: UIViewController {
         configDelegate()
         configDropdownMenu()
         configDock()
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +74,7 @@ class HomeVC: UIViewController {
         if let categoryTapped {
             addFloatWindow(categoryTapped)
         }
+        reloadDock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -336,7 +335,16 @@ class HomeVC: UIViewController {
     private func activationWindow(_ indexItem: Int?) {
         print(#function, #fileID)
         if let indexItem {
-            FloatWindowManager.instance.activeWindow = FloatWindowManager.instance.listWindows[indexItem]
+            let win = FloatWindowManager.instance.listWindows[indexItem]
+            if win.isMinimized {
+                win.viewRestored()
+                return
+            }
+            if FloatWindowManager.instance.isActivate(win) {
+                win.viewMinimized()
+                return
+            }
+            win.viewActivated()
         }
     }
     
@@ -354,7 +362,17 @@ class HomeVC: UIViewController {
         }
     }
     
-        
+
+    
+    private func minimizedItemDock(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
+        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
+            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
+                self?.minimizeItemDock(cellItem)
+            }
+        }
+    }
+    
 }
 
 
@@ -407,6 +425,7 @@ extension HomeVC: CategoriesViewControllerDelegate {
 extension HomeVC: FloatWindowManagerDelegate {
     
     func viewActivated(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         floatWindow.setShadow { build in
             build
                 .setColor(Theme.shared.currentTheme.primary)
@@ -417,10 +436,14 @@ extension HomeVC: FloatWindowManagerDelegate {
                 .setID("activeWindow")
                 .apply()
         }
+        activationItemDock(floatWindow)
+        
     }
     
     func viewDesactivated(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
         floatWindow.view.removeShadowByID("activeWindow")
+        homeScreen.dock.deselectActiveItem()
     }
     
     
@@ -430,31 +453,41 @@ extension HomeVC: FloatWindowManagerDelegate {
         self.homeScreen.askChatGPTView.setHidden(false)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func minimizedWindow(_ floatWindow: FloatWindowViewController) {
-        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
-            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
-                self?.minimizeItemDock(cellItem)
-            }
-        }
+    func viewMinimized(_ floatWindow: FloatWindowViewController) {
+        print(#function, #fileID)
+        minimizedItemDock(floatWindow)
         showDock()
     }
+    
+    func viewDidLoad(_ floatWindow: FloatWindowViewController) {
+        reloadDock()
+    }
+    
+    func viewWillAppear(_ floatWindow: FloatWindowViewController) {
+        showDock()
+    }
+    
+    func viewWillDisappear(_ floatWindow: FloatWindowViewController) {
+        reloadDock()
+        showDock()
+    }
+    
+    
+    func viewWillDragging(_ floatWindow: FloatWindowViewController) {
+        floatWindow.view.alpha = 0.8
+    }
+    
+    func viewEndedDragging(_ floatWindow: FloatWindowViewController) {
+        floatWindow.view.alpha = 1
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     
     func restoredWindow(_ floatWindow: FloatWindowViewController) {
         print(#function, #fileID)
@@ -463,30 +496,7 @@ extension HomeVC: FloatWindowManagerDelegate {
                 self?.restoreItemDock(cellItem)
             }
         }
-        showDock()
     }
-    
-    func openWindow(_ floatWindow: FloatWindowViewController) {
-        print(#function, #fileID)
-        reloadDock()
-        showDock()
-    }
-    
-    func deactivatedWindow(_ deactiveWindow: FloatWindowViewController) {
-        print(#function, #fileID)
-        
-        homeScreen.dock.deselectActiveItem()
-    }
-    
-    func activatedWindow(_ activeWindow: FloatWindowViewController) {
-        activationItemDock(activeWindow)
-    }
-
-    func closeWindow(_ floatWindow: FloatWindowViewController) {
-        reloadDock()
-        showDock()
-    }
-    
     
     
 }
