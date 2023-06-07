@@ -45,6 +45,7 @@ class HomeVC: UIViewController {
     private var indexSection = 0
     private var indexRow = 0
     private var rowTapped: (section: Int, row: Int) = (0,0)
+    private var categoryTapped: (section: Int, row: Int)?
     
     private var weather: WeatherViewController?
     
@@ -72,6 +73,9 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print(#function, #fileID)
+        if let categoryTapped {
+            addFloatWindow(categoryTapped)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -248,11 +252,11 @@ class HomeVC: UIViewController {
     
     private func setDockAlignment() {
         print(#function, #fileID)
-        if FloatWindowManager.instance.listWindows.count == 4 {
+        if FloatWindowManager.instance.countWindows == 4 {
             self.adjustTrailingDock.constant = -50
         }
 
-        if FloatWindowManager.instance.listWindows.count > 4 {
+        if FloatWindowManager.instance.countWindows > 4 {
             self.adjustTrailingDock.constant = -90
         }
     }
@@ -273,8 +277,6 @@ class HomeVC: UIViewController {
                 }
             }
         }
-
-
 
     }
     
@@ -380,14 +382,14 @@ extension HomeVC: HomeViewDelegate {
 }
 
 
-//  MARK: - EXTENSION HomeViewDelegate
+//  MARK: - EXTENSION CategoriesViewControllerDelegate
 
 extension HomeVC: CategoriesViewControllerDelegate {
     
     func selectedCategory(_ section: Int, _ row: Int) {
         print(#function, #fileID)
         openCloseDropdownMenu()
-        addFloatWindow((section,row))
+        categoryTapped = (section,row)
     }
     
     private func addFloatWindow(_ category: (section: Int, row: Int)) {
@@ -397,10 +399,8 @@ extension HomeVC: CategoriesViewControllerDelegate {
         hideElementsForShowingFloatWindow()
         weather.present(insideTo: homeScreen.viewFloatWindow.view)
     }
-    
+
 }
-
-
 
 //  MARK: - EXTENSION FloatWindowManagerDelegate
 

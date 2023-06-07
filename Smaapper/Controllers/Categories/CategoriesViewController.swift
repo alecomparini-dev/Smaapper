@@ -152,8 +152,8 @@ extension CategoriesViewController: CategoriesViewDelegate {
     }
 
     func didSelectRow(_ section: Int, _ row: Int) {
-        delegate?.selectedCategory(section, row)
         dismiss(animated: true)
+        delegate?.selectedCategory(section, row)
     }
     
 }
