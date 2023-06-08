@@ -14,9 +14,9 @@ protocol FloatWindowManagerDelegate: AnyObject {
     func viewWillLayoutSubviews(_ floatWindow: FloatWindowViewController)
     func viewDidLayoutSubviews(_ floatWindow: FloatWindowViewController)
     func viewDidAppear(_ floatWindow: FloatWindowViewController)
-    func viewWillDragging(_ floatWindow: FloatWindowViewController)
+    func viewWillDrag(_ floatWindow: FloatWindowViewController)
     func viewDragging(_ floatWindow: FloatWindowViewController)
-    func viewEndedDragging(_ floatWindow: FloatWindowViewController)
+    func viewDidDrag(_ floatWindow: FloatWindowViewController)
     func viewMinimized(_ floatWindow: FloatWindowViewController)
     func viewRestored(_ floatWindow: FloatWindowViewController)
     func viewActivated(_ floatWindow: FloatWindowViewController)
@@ -122,9 +122,9 @@ extension FloatWindowManagerDelegate {
     func viewWillLayoutSubviews(_ floatWindow: FloatWindowViewController) {}
     func viewDidLayoutSubviews(_ floatWindow: FloatWindowViewController) {}
     func viewDidAppear(_ floatWindow: FloatWindowViewController) {}
-    func viewWillDragging(_ floatWindow: FloatWindowViewController) {}
+    func viewWillDrag(_ floatWindow: FloatWindowViewController) {}
     func viewDragging(_ floatWindow: FloatWindowViewController) {}
-    func viewEndedDragging(_ floatWindow: FloatWindowViewController) {}
+    func viewDidDrag(_ floatWindow: FloatWindowViewController) {}
     func viewMinimized(_ floatWindow: FloatWindowViewController) {}
     func viewRestored(_ floatWindow: FloatWindowViewController) {}
     func viewWillDisappear(_ floatWindow: FloatWindowViewController) {}

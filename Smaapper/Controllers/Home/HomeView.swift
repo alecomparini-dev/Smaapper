@@ -71,6 +71,10 @@ class HomeView: ViewBuilder {
                     .setHeight.equalToConstant(70)
                     .setWidth.equalToConstant(115)
             }
+            .setActions { build in
+                build
+                    .setDraggable()
+            }
         return view
     }()
     
@@ -234,6 +238,7 @@ class HomeView: ViewBuilder {
                 build
                     .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             }
+            
     }()
     
     @objc

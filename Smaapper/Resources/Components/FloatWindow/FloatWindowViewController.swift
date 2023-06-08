@@ -119,8 +119,8 @@ class FloatWindowViewController: BaseBuilder {
     
     
 //  MARK: - Dragging
-    func viewWillDragging() {
-        manager.delegate?.viewWillDragging(self)
+    func viewWillDrag() {
+        manager.delegate?.viewWillDrag(self)
         viewActivated()
     }
     
@@ -128,8 +128,8 @@ class FloatWindowViewController: BaseBuilder {
         manager.delegate?.viewDragging(self)
     }
     
-    func viewEndedDragging(){
-        manager.delegate?.viewEndedDragging(self)
+    func viewDidDrag(){
+        manager.delegate?.viewDidDrag(self)
     }
 
     
@@ -168,6 +168,7 @@ class FloatWindowViewController: BaseBuilder {
     func viewRestored() {
         if !isMinimized {return}
         view.isHidden = false
+        self.bringToFront
         isMinimized = false
         restoreAnimation(callBackViewRestored)
         manager.delegate?.viewRestored(self)
@@ -212,7 +213,7 @@ class FloatWindowViewController: BaseBuilder {
                     build
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
-                            self.viewWillDragging()
+                            self.viewWillDrag()
                         }
                         .setDragging { [weak self] draggable in
                             guard let self else {return}
@@ -220,7 +221,7 @@ class FloatWindowViewController: BaseBuilder {
                         }
                         .setDropped { [weak self] draggable in
                             guard let self else {return}
-                            self.viewEndedDragging()
+                            self.viewDidDrag()
                         }
                 }
         }
