@@ -110,7 +110,6 @@ class DockBuilder: BaseBuilder {
     
 //  MARK: - SET Actions
     func reload() {
-        print(#function, #fileID)
         dock.collection.reloadData()
         autoResizingContainer()
     }
@@ -124,7 +123,6 @@ class DockBuilder: BaseBuilder {
     }
     
     func deselectActiveItem() {
-        print(#function, #fileID)
         if let activeItem = dock.activeItem {
             let indexPath = IndexPath(row: activeItem, section: 0)
             dock.collection.deselectItem(at: indexPath, animated: true)
@@ -208,7 +206,6 @@ class DockBuilder: BaseBuilder {
     }
     
     private func autoResizingContainer() {
-        print(#function, #fileID)
         setDockBounds()
         let sizeAllItems = self.calculateSizeAllItems()
         if sizeAllItems >= self.dockViewBounds.width {
