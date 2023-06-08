@@ -349,7 +349,6 @@ class FloatWindowViewController: BaseBuilder {
                         .setCancelsTouchesInView(false)
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
-                            print("clicou pra ativar")
                             viewActivated()
                         }
                 }
