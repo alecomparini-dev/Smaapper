@@ -440,6 +440,10 @@ extension HomeVC: FloatWindowManagerDelegate {
         showDock()
     }
     
+    func viewRestored(_ floatWindow: FloatWindowViewController) {
+        restoredWindow(floatWindow)
+    }
+    
     func viewDidLoad(_ floatWindow: FloatWindowViewController) {
         reloadDock()
     }
@@ -455,7 +459,7 @@ extension HomeVC: FloatWindowManagerDelegate {
     
     
     func viewWillDragging(_ floatWindow: FloatWindowViewController) {
-        floatWindow.view.alpha = 0.8
+        floatWindow.view.alpha = 0.9
     }
     
     func viewEndedDragging(_ floatWindow: FloatWindowViewController) {
