@@ -36,7 +36,6 @@ class Dock: UIView {
     var opacity: CGFloat = 1.0
     var selectItem: Int?
     
-    
     private(set) var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private(set) var container = UIView()
     private(set) var collection: UICollectionView = UICollectionView(frame: .zero,collectionViewLayout: UICollectionViewFlowLayout())

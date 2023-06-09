@@ -17,8 +17,13 @@ protocol FloatManagerDelegate: AnyObject {
     func viewWillDrag(_ floatWindow: FloatViewController)
     func viewDragging(_ floatWindow: FloatViewController)
     func viewDidDrag(_ floatWindow: FloatViewController)
-    func viewMinimized(_ floatWindow: FloatViewController)
-    func viewRestored(_ floatWindow: FloatViewController)
+    
+    func viewWillMinimize(_ floatWindow: FloatViewController)
+    func viewDidMinimize(_ floatWindow: FloatViewController)
+    
+    
+    func viewWillRestore(_ floatWindow: FloatViewController)
+    func viewDidRestore(_ floatWindow: FloatViewController)
     func viewActivated(_ floatWindow: FloatViewController)
     func viewDesactivated(_ floatWindow: FloatViewController)
     func viewWillDisappear(_ floatWindow: FloatViewController)
@@ -68,13 +73,13 @@ class FloatManager {
     
     func minimizeAll() {
         self._listWindows.forEach { win in
-            win.viewMinimized()
+            win.viewMinimize()
         }
     }
     
     func restoreAll() {
         self._listWindows.forEach { win in
-            win.viewRestored()
+            win.viewRestore()
         }
     }
     
@@ -125,8 +130,10 @@ extension FloatManagerDelegate {
     func viewWillDrag(_ floatWindow: FloatViewController) {}
     func viewDragging(_ floatWindow: FloatViewController) {}
     func viewDidDrag(_ floatWindow: FloatViewController) {}
-    func viewMinimized(_ floatWindow: FloatViewController) {}
-    func viewRestored(_ floatWindow: FloatViewController) {}
+    func viewDidMinimize(_ floatWindow: FloatViewController) {}
+    func viewWillMinimize(_ floatWindow: FloatViewController) {}
+    func viewDidRestore(_ floatWindow: FloatViewController) {}
+    func viewWillRestore(_ floatWindow: FloatViewController) {}
     func viewWillDisappear(_ floatWindow: FloatViewController) {}
     func viewDidDisappear(_ floatWindow: FloatViewController) {}
     func allClosedWindows() {}
