@@ -9,6 +9,7 @@ import UIKit
 
 
 class WeatherFloatViewController: FloatViewController {
+    static let identifierApp = "weather"
     
     private var titleView: UIView?
     

@@ -14,11 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let vc = HomeVC()
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = vc
         window.makeKeyAndVisible()
+        let floatNavigation = FloatNavigationController()
+        floatNavigation.navigationBar.isHidden = true
+        floatNavigation.navigationBar.backgroundColor = .clear
+        window.rootViewController = floatNavigation
         self.window = window
+        
+        let coordinator = HomeCoordinator(floatNavigation)
+        coordinator.start()
+         
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

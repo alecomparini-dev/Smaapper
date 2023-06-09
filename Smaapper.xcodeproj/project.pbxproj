@@ -106,6 +106,10 @@
 		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
 		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
+		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
+		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
+		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
+		02E974182A339B3E00BF14EE /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -224,6 +228,10 @@
 		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
 		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
+		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
+		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -313,9 +321,9 @@
 		0234A5EF29F9F30F008392EC /* Smaapper */ = {
 			isa = PBXGroup;
 			children = (
-				02E9740F2A336A2600BF14EE /* Coordinator */,
 				026F797E2A02A53B003947A6 /* Controllers */,
 				021848B12A262577007E68A4 /* FloatWindowControllers */,
+				02E9740F2A336A2600BF14EE /* Coordinator */,
 				02D581542A211F7D00150AF9 /* CustomViews */,
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
 				02C5F4412A0BF4D100D75D9F /* Models */,
@@ -337,6 +345,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				02E974102A33949900BF14EE /* FloatNavigationController */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
@@ -862,8 +871,19 @@
 		02E9740F2A336A2600BF14EE /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				02E974132A3398F000BF14EE /* Coordinator.swift */,
+				02E974152A3399B100BF14EE /* HomeCoordinator.swift */,
+				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		02E974102A33949900BF14EE /* FloatNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				02E974112A3394C700BF14EE /* FloatNavigationController.swift */,
+			);
+			path = FloatNavigationController;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {
@@ -1005,6 +1025,7 @@
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
+				02E974142A3398F000BF14EE /* Coordinator.swift in Sources */,
 				0281DAE42A180A8300E44F04 /* TitleView.swift in Sources */,
 				020D0E682A1ED645007F3992 /* TextFieldBuilder.swift in Sources */,
 				02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */,
@@ -1044,6 +1065,7 @@
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
 				020D0E5B2A1EADB6007F3992 /* Dock.swift in Sources */,
 				02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */,
+				02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */,
 				0234A91629F9FD3A008392EC /* ConstraintsConstants.swift in Sources */,
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
@@ -1064,6 +1086,7 @@
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
+				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
@@ -1077,6 +1100,7 @@
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
 				02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */,
 				0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */,
+				02E974182A339B3E00BF14EE /* WeatherCoordinator.swift in Sources */,
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,

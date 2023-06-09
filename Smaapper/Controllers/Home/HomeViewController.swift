@@ -7,10 +7,16 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+protocol HomeFloatViewControllerDelegate: AnyObject {
+    func openFloatViewController(_ idApp: String, where: UIView)
+}
+
+class HomeViewController: UIViewController {
     
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
+    
+    var delegateFloatViewController: HomeFloatViewControllerDelegate?
     
     enum StartFlow {
         case window
@@ -179,7 +185,7 @@ class HomeVC: UIViewController {
     
     private func addHeartToFavorites() -> UIView? {
         guard let resultDropdownMenu else { return nil }
-        if (resultDropdownMenu[self.indexSection].section == HomeVC.favoritesID) {
+        if (resultDropdownMenu[self.indexSection].section == HomeViewController.favoritesID) {
             return homeScreen.createRightRowView("heart.fill", Theme.shared.currentTheme.onSurface)
         }
         return nil
@@ -190,7 +196,7 @@ class HomeVC: UIViewController {
         configCategoriesDelegate()
         if let categoriesVC {
             categoriesVC.modalPresentationStyle = .fullScreen
-            present(categoriesVC, animated: true)
+            self.navigationController?.present(categoriesVC, animated: true)
         }
     }
     
@@ -200,11 +206,10 @@ class HomeVC: UIViewController {
         }
     }
     
-    
     private func openCategories() {
         guard let resultDropdownMenu else {return}
         guard let items = resultDropdownMenu[rowTapped.section].items else { return }
-        if items[rowTapped.row].title == HomeVC.categoriesID {
+        if items[rowTapped.row].title == HomeViewController.categoriesID {
             self.categories = items[rowTapped.row].subMenu ?? []
             showCategoriesViewController(categories)
         }   
@@ -233,8 +238,6 @@ class HomeVC: UIViewController {
         setDockAlignment()
         homeScreen.dock.reload()
     }
-    
-
     
     private func showDock() {
         if isShowDockIfOneWindow() {
@@ -269,9 +272,16 @@ class HomeVC: UIViewController {
     
     private func getIcon(_ index: Int) -> String {
         let win = FloatManager.instance.listWindows[index]
-        let category: (section:Int, row:Int) = win.customAttribute as! (section:Int, row:Int)
-        let icon = self.categories[category.section].items?[category.row].leftImage ?? ""
-        return icon
+        let idApp = win.customAttribute as! String
+        return getImageById(idApp)
+    }
+    
+    private func getImageById(_ idApp: String) -> String {
+        let filteredItems = categories
+            .compactMap { $0.items?.compactMap { $0 } }
+            .flatMap { $0 }
+            .filter { $0.id == idApp }.first
+        return filteredItems?.leftImage ?? ""
     }
     
     private func activationItemDock(_ activeWindow: FloatViewController?) {
@@ -347,19 +357,21 @@ class HomeVC: UIViewController {
     }
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
-        
-        let weather = WeatherFloatViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
-        weather.setCustomAttribute(category)
+        let idApp: String = getIdAppByCategory(category)
         hideElementsForShowingFloatWindow()
-        weather.present(insideTo: homeScreen.viewFloatWindow.view)
-        
+        delegateFloatViewController?.openFloatViewController(idApp, where: homeScreen.viewFloatWindow.view)
     }
+    
+    private func getIdAppByCategory(_ category: (section: Int, row: Int)) -> String {
+        return self.categories[category.section].items?[category.row].id ?? ""
+    }
+    
 }
 
 
 //  MARK: - EXTENSION HomeViewDelegate
 
-extension HomeVC: HomeViewDelegate {
+extension HomeViewController: HomeViewDelegate {
     func openMenu() {
         self.homeScreen.turnOnMenuButton()
     }
@@ -382,7 +394,7 @@ extension HomeVC: HomeViewDelegate {
 
 //  MARK: - Extension CATEGORIES-VIEW-CONTROLLER-DELEGATE
 
-extension HomeVC: CategoriesViewControllerDelegate {
+extension HomeViewController: CategoriesViewControllerDelegate {
     
     func selectedCategory(_ section: Int, _ row: Int) {
         openCloseDropdownMenu()
@@ -394,7 +406,7 @@ extension HomeVC: CategoriesViewControllerDelegate {
 
 //  MARK: - Extension FLOATWINDOW-MANAGER-DELEGATE
 
-extension HomeVC: FloatManagerDelegate {
+extension HomeViewController: FloatManagerDelegate {
     
     func viewActivated(_ floatWindow: FloatViewController) {
         setShadow(floatWindow)
@@ -413,8 +425,8 @@ extension HomeVC: FloatManagerDelegate {
     }
     
     func viewWillMinimize(_ floatWindow: FloatViewController) {
-        showDock()
         minimizedItemDock(floatWindow)
+        showDock()
     }
     
     func viewDidMinimize(_ floatWindow: FloatViewController) {
@@ -457,7 +469,7 @@ extension HomeVC: FloatManagerDelegate {
 
 //  MARK: - Extension DOCK DELEGATE
 
-extension HomeVC: DockDelegate {
+extension HomeViewController: DockDelegate {
     func didSelectItemAt(_ indexItem: Int) {
         activationWindowByIndex(indexItem)
     }
