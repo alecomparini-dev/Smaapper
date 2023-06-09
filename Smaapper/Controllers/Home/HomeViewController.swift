@@ -32,7 +32,7 @@ class HomeVC: UIViewController {
     private var rowTapped: (section: Int, row: Int) = (0,0)
     private var categoryTapped: (section: Int, row: Int)?
     
-    private var weather: WeatherViewController?
+    private var weather: WeatherFloatViewController?
     
     lazy var homeScreen: HomeView = {
         let home = HomeView(frame: .zero)
@@ -87,7 +87,7 @@ class HomeVC: UIViewController {
     
     private func configDelegate() {
         homeScreen.setDelegate(self)
-        FloatWindowManager.instance.setDelegate(self)
+        FloatManager.instance.setDelegate(self)
         homeScreen.dock.setDelegate(self)
     }
     
@@ -219,11 +219,11 @@ class HomeVC: UIViewController {
 //  MARK: - DOCK Area
     
     private func setDockAlignment() {
-        if FloatWindowManager.instance.countWindows == 4 {
+        if FloatManager.instance.countWindows == 4 {
             self.adjustTrailingDock.constant = -50
         }
 
-        if FloatWindowManager.instance.countWindows > 4 {
+        if FloatManager.instance.countWindows > 4 {
             self.adjustTrailingDock.constant = -90
         }
     }
@@ -248,35 +248,35 @@ class HomeVC: UIViewController {
     }
     
     private func isShowDockIfOneWindow() -> Bool {
-        let countWindow = FloatWindowManager.instance.listWindows.count
+        let countWindow = FloatManager.instance.listWindows.count
         if (countWindow < 1) || (countWindow > 1)  {return false}
         
-        if FloatWindowManager.instance.listWindows[0].isMinimized {
+        if FloatManager.instance.listWindows[0].isMinimized {
             return true
         }
         return false
     }
     
     private func isShowDockIfMoreThanOneWindow() -> Bool {
-        if FloatWindowManager.instance.listWindows.count < 2 {return false}
+        if FloatManager.instance.listWindows.count < 2 {return false}
         
-        if FloatWindowManager.instance.listWindows.count > 1 {
+        if FloatManager.instance.listWindows.count > 1 {
             return true
         }
         return false
     }
     
     private func getIcon(_ index: Int) -> String {
-        let win = FloatWindowManager.instance.listWindows[index]
+        let win = FloatManager.instance.listWindows[index]
         let category: (section:Int, row:Int) = win.customAttribute as! (section:Int, row:Int)
         let icon = self.categories[category.section].items?[category.row].leftImage ?? ""
         return icon
     }
     
-    private func activationItemDock(_ activeWindow: FloatWindowViewController?) {
+    private func activationItemDock(_ activeWindow: FloatViewController?) {
         if !homeScreen.dock.isShow { return }
         if let activeWindow {
-            if let indexWin = FloatWindowManager.instance.getIndexById(activeWindow.id) {
+            if let indexWin = FloatManager.instance.getIndexById(activeWindow.id) {
                 if indexWin != homeScreen.dock.view.activeItem {
                     homeScreen.dock.selectItem(indexWin, at: .centeredHorizontally)
                 }
@@ -284,16 +284,16 @@ class HomeVC: UIViewController {
         }
     }
 
-    private func minimizedItemDock(_ floatWindow: FloatWindowViewController, _ reload: Bool = false) {
-        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
+    private func minimizedItemDock(_ floatWindow: FloatViewController, _ reload: Bool = false) {
+        if let index = FloatManager.instance.getIndexById(floatWindow.id) {
             homeScreen.dock.getCellItem(index) { [weak self] cellItem in
                 self?.minimizeItemDock(cellItem, reload)
             }
         }
     }
     
-    private func restoredItemDock(_ floatWindow: FloatWindowViewController) {
-        if let index = FloatWindowManager.instance.getIndexById(floatWindow.id) {
+    private func restoredItemDock(_ floatWindow: FloatViewController) {
+        if let index = FloatManager.instance.getIndexById(floatWindow.id) {
             homeScreen.dock.getCellItem(index) { [weak self] cellItem in
                 self?.restoreItemDock(cellItem)
             }
@@ -316,7 +316,7 @@ class HomeVC: UIViewController {
     
 //  MARK: - FLOATWINDOW Area
     
-    private func setShadow(_ floatWindow: FloatWindowViewController) {
+    private func setShadow(_ floatWindow: FloatViewController) {
         floatWindow.setShadow { build in
             build
                 .setColor(Theme.shared.currentTheme.primary)
@@ -330,7 +330,7 @@ class HomeVC: UIViewController {
     }
 
     private func activationWindowByIndex(_ indexItem: Int) {
-        let win = FloatWindowManager.instance.listWindows[indexItem]
+        let win = FloatManager.instance.listWindows[indexItem]
 
         if win.isMinimized {
             win.viewRestored()
@@ -380,7 +380,7 @@ extension HomeVC: CategoriesViewControllerDelegate {
     }
     
     private func addFloatWindow(_ category: (section: Int, row: Int)) {
-        let weather = WeatherViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
+        let weather = WeatherFloatViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
         weather.setCustomAttribute(category)
         hideElementsForShowingFloatWindow()
         weather.present(insideTo: homeScreen.viewFloatWindow.view)
@@ -391,14 +391,14 @@ extension HomeVC: CategoriesViewControllerDelegate {
 
 //  MARK: - Extension FLOATWINDOW-MANAGER-DELEGATE
 
-extension HomeVC: FloatWindowManagerDelegate {
+extension HomeVC: FloatManagerDelegate {
     
-    func viewActivated(_ floatWindow: FloatWindowViewController) {
+    func viewActivated(_ floatWindow: FloatViewController) {
         setShadow(floatWindow)
         activationItemDock(floatWindow)
     }
     
-    func viewDesactivated(_ floatWindow: FloatWindowViewController) {
+    func viewDesactivated(_ floatWindow: FloatViewController) {
         floatWindow.view.removeShadowByID("activeWindow")
         homeScreen.dock.deselectActiveItem()
     }
@@ -409,33 +409,33 @@ extension HomeVC: FloatWindowManagerDelegate {
         self.homeScreen.askChatGPTView.setHidden(false)
     }
     
-    func viewMinimized(_ floatWindow: FloatWindowViewController) {
+    func viewMinimized(_ floatWindow: FloatViewController) {
         minimizedItemDock(floatWindow)
         showDock()
     }
     
-    func viewRestored(_ floatWindow: FloatWindowViewController) {
+    func viewRestored(_ floatWindow: FloatViewController) {
         restoredItemDock(floatWindow)
     }
     
-    func viewDidLoad(_ floatWindow: FloatWindowViewController) {
+    func viewDidLoad(_ floatWindow: FloatViewController) {
         reloadDock()
     }
     
-    func viewWillAppear(_ floatWindow: FloatWindowViewController) {
+    func viewWillAppear(_ floatWindow: FloatViewController) {
         showDock()
     }
     
-    func viewWillDisappear(_ floatWindow: FloatWindowViewController) {
+    func viewWillDisappear(_ floatWindow: FloatViewController) {
         reloadDock()
         showDock()
     }
     
-    func viewWillDrag(_ floatWindow: FloatWindowViewController) {
+    func viewWillDrag(_ floatWindow: FloatViewController) {
         floatWindow.view.alpha = 0.9
     }
     
-    func viewDidDrag(_ floatWindow: FloatWindowViewController) {
+    func viewDidDrag(_ floatWindow: FloatViewController) {
         floatWindow.view.alpha = 1
     }
     
@@ -471,7 +471,7 @@ extension HomeVC: DockDelegate {
     }
     
     func numberOfItemsCallback() -> Int {
-        return FloatWindowManager.instance.listWindows.count
+        return FloatManager.instance.listWindows.count
     }
     
     func cellItemCallback(_ indexItem: Int) -> UIView {
@@ -481,7 +481,7 @@ extension HomeVC: DockDelegate {
     private func configIconsDock(_ indexItem: Int) -> UIView {
         let img = getIcon(indexItem)
         let iconDock = homeScreen.createIconsDock(img)
-        let win = FloatWindowManager.instance.listWindows[indexItem]
+        let win = FloatManager.instance.listWindows[indexItem]
         if win.isMinimized {
             minimizedItemDock(win, true)
         }
