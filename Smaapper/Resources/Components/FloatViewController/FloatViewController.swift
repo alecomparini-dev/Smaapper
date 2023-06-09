@@ -80,10 +80,7 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - GET Properties
     var superView: UIView {
-        if let superView = self._superView {
-            return superView
-        }
-        return self.view.superview ?? UIView()
+        return self._superView ?? UIView()
     }
     
     
@@ -99,7 +96,6 @@ class FloatViewController: BaseBuilder {
         manager.delegate?.viewDidLoad(self)
     }
 
-    
     func viewWillAppear() {
         manager.delegate?.viewWillAppear(self)
     }
@@ -162,11 +158,12 @@ class FloatViewController: BaseBuilder {
         if isMinimized {return}
         isMinimized = true
         originalCenter = self.view.center
-        manager.delegate?.viewWillMinimize(self)
         minimizeAnimation(callBackViewMinimized)
+        manager.delegate?.viewWillMinimize(self)
         viewDesactivated()
         manager.lastActiveWindow?.viewActivated()
     }
+    
     private func callBackViewMinimized() {
         viewDidMinimize()
     }

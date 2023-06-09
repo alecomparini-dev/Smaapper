@@ -7,11 +7,10 @@
 
 import UIKit
 
-class NavigationFloatController: UINavigationController {
+class FloatNavigationController: UINavigationController {
     
-    
-    func present(floatViewController: FloatViewController, insideTo: UIView, completion: (() -> Void)? = nil) {
-        floatViewController.present(insideTo: insideTo)
+    func present(_ floatViewController: FloatViewController, where component: UIView,  completion: (() -> Void)? = nil) {
+        floatViewController.present(insideTo: component)
     }
 
     
