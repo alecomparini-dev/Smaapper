@@ -69,6 +69,7 @@ class FloatViewController: BaseBuilder {
         viewWillAppear()
         viewWillLayoutSubviews()
         viewDidLayoutSubviews()
+        viewActivated()
         viewDidAppear()
     }
 
@@ -101,7 +102,6 @@ class FloatViewController: BaseBuilder {
     
     func viewWillAppear() {
         manager.delegate?.viewWillAppear(self)
-        viewActivated()
     }
     
     func viewWillLayoutSubviews(){
@@ -152,30 +152,49 @@ class FloatViewController: BaseBuilder {
     
     
 //  MARK: - MINIMIZE AND RESTORED
-    func viewMinimized() {
+    
+    func viewMinimize() {
+        viewWillMinimize()
+    }
+    
+    
+    func viewWillMinimize() {
         if isMinimized {return}
         isMinimized = true
         originalCenter = self.view.center
+        manager.delegate?.viewWillMinimize(self)
         minimizeAnimation(callBackViewMinimized)
-        manager.delegate?.viewMinimized(self)
         viewDesactivated()
         manager.lastActiveWindow?.viewActivated()
     }
     private func callBackViewMinimized() {
-        view.isHidden = true
+        viewDidMinimize()
     }
     
-    func viewRestored() {
+    func viewDidMinimize() {
+        view.isHidden = true
+        manager.delegate?.viewDidMinimize(self)
+    }
+    
+    func viewRestore() {
+        viewWillRestore()
+    }
+    
+    func viewWillRestore() {
         if !isMinimized {return}
-        view.isHidden = false
-        self.bringToFront
         isMinimized = false
+        manager.delegate?.viewWillRestore(self)
+        view.isHidden = false
         restoreAnimation(callBackViewRestored)
-        manager.delegate?.viewRestored(self)
+        viewActivated()
     }
     private func callBackViewRestored() {
-        viewWillAppear()
-        viewDidAppear()
+        viewDidRestore()
+    }
+    
+    func viewDidRestore() {
+        self.bringToFront
+        manager.delegate?.viewDidRestore(self)
     }
     
 
@@ -186,7 +205,10 @@ class FloatViewController: BaseBuilder {
         removeWindowToManager()
         manager.delegate?.viewWillDisappear(self)
         manager.lastActiveWindow?.viewActivated()
-        removeWindowAnimation()
+        removeWindowAnimation(callBackViewWillDisappear)
+    }
+    private func callBackViewWillDisappear() {
+        viewDidDisappear()
     }
     
     func viewDidDisappear() {
@@ -267,8 +289,6 @@ class FloatViewController: BaseBuilder {
     var bringToFront: Void {
         superView.bringSubviewToFront(self.view)
     }
-
-    
 
     
 //  MARK: - PRIVATE Function Area
@@ -369,12 +389,11 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - ANIMATIONS
     
-    private func removeWindowAnimation() {
+    private func removeWindowAnimation(_ closure: @escaping () -> Void ) {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 0
-        }, completion: { [weak self] _ in
-            guard let self else {return}
-            self.viewDidDisappear()
+        }, completion: { _ in
+            closure()
         })
     }
     

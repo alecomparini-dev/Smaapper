@@ -53,13 +53,14 @@ class HomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let categoryTapped {
-            addFloatWindow(categoryTapped)
+            addFloatViewController(categoryTapped)
         }
         reloadDock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        categoryTapped = nil
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -333,16 +334,25 @@ class HomeVC: UIViewController {
         let win = FloatManager.instance.listWindows[indexItem]
 
         if win.isMinimized {
-            win.viewRestored()
+            win.viewRestore()
             return
         }
         
         if win.active {
-            win.viewMinimized()
+            win.viewMinimize()
             return
         }
         
         win.viewActivated()
+    }
+    
+    private func addFloatViewController(_ category: (section: Int, row: Int)) {
+        
+        let weather = WeatherFloatViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
+        weather.setCustomAttribute(category)
+        hideElementsForShowingFloatWindow()
+        weather.present(insideTo: homeScreen.viewFloatWindow.view)
+        
     }
 }
 
@@ -378,13 +388,6 @@ extension HomeVC: CategoriesViewControllerDelegate {
         openCloseDropdownMenu()
         categoryTapped = (section,row)
     }
-    
-    private func addFloatWindow(_ category: (section: Int, row: Int)) {
-        let weather = WeatherFloatViewController(frame: CGRect(x: 80, y: 350, width: 160, height: 250))
-        weather.setCustomAttribute(category)
-        hideElementsForShowingFloatWindow()
-        weather.present(insideTo: homeScreen.viewFloatWindow.view)
-    }
 
 }
 
@@ -409,13 +412,21 @@ extension HomeVC: FloatManagerDelegate {
         self.homeScreen.askChatGPTView.setHidden(false)
     }
     
-    func viewMinimized(_ floatWindow: FloatViewController) {
-        minimizedItemDock(floatWindow)
+    func viewWillMinimize(_ floatWindow: FloatViewController) {
         showDock()
+        minimizedItemDock(floatWindow)
     }
     
-    func viewRestored(_ floatWindow: FloatViewController) {
-        restoredItemDock(floatWindow)
+    func viewDidMinimize(_ floatWindow: FloatViewController) {
+        
+    }
+    
+    func viewWillRestore(_ floatWindow: FloatViewController) {
+        restoredItemDock(floatWindow)   
+    }
+    
+    func viewDidRestore(_ floatWindow: FloatViewController) {
+        showDock()
     }
     
     func viewDidLoad(_ floatWindow: FloatViewController) {
