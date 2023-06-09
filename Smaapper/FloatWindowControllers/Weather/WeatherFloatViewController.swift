@@ -8,7 +8,7 @@
 import UIKit
 
 
-class WeatherViewController: FloatWindowViewController {
+class WeatherFloatViewController: FloatViewController {
     
     private var titleView: UIView?
     
@@ -35,7 +35,7 @@ class WeatherViewController: FloatWindowViewController {
     
 }
 
-extension WeatherViewController: WeatherViewDelegate {
+extension WeatherFloatViewController: WeatherViewDelegate {
     
     func closeWindow() {
         self.dismiss()

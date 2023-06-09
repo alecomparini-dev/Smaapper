@@ -8,7 +8,7 @@
 import UIKit
 
 
-class FloatWindowViewController: BaseBuilder {
+class FloatViewController: BaseBuilder {
     
     private let hierarchy: CGFloat = 1000
     private var _isShow = false
@@ -17,7 +17,7 @@ class FloatWindowViewController: BaseBuilder {
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
-    private var titleWindow: TitleWindow?
+    private var titleWindow: TitleFloatView?
     private var titleHeight: CGFloat = 30
     
     
@@ -29,8 +29,8 @@ class FloatWindowViewController: BaseBuilder {
     private(set) var isMinimized: Bool = false
     private(set) var originalCenter: CGPoint = .zero
     
-    private var manager: FloatWindowManager = FloatWindowManager.instance
-    private var actions: FloatWindowsActions?
+    private var manager: FloatManager = FloatManager.instance
+    private var actions: FloatViewControllerActions?
     
     private var _view: View = View()
     var view: View {
@@ -200,7 +200,7 @@ class FloatWindowViewController: BaseBuilder {
     
     @discardableResult
     func setTitleWindow(_ titleWindow: UIView ) -> Self {
-        self.titleWindow = TitleWindow().setTitleView(titleWindow)
+        self.titleWindow = TitleFloatView().setTitleView(titleWindow)
         self.view.bringSubviewToFront(titleWindow)
         return self
     }
@@ -247,12 +247,12 @@ class FloatWindowViewController: BaseBuilder {
     }
     
     @discardableResult
-    func setActions(_ action: (_ build: FloatWindowsActions) -> FloatWindowsActions ) -> Self {
+    func setActions(_ action: (_ build: FloatViewControllerActions) -> FloatViewControllerActions ) -> Self {
         if let actions = self.actions {
             self.actions = action(actions)
             return self
         }
-        self.actions = action(FloatWindowsActions(self))
+        self.actions = action(FloatViewControllerActions(self))
         return self
     }
     

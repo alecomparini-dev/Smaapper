@@ -8,7 +8,7 @@
 import UIKit
 
 
-internal class TitleWindow: View {
+internal class TitleFloatView: View {
     
     private var _isShow = false
     private var alreadyApplied = false

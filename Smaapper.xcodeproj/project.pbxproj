@@ -21,7 +21,7 @@
 		020D0E662A1ED628007F3992 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E652A1ED628007F3992 /* TextField.swift */; };
 		020D0E682A1ED645007F3992 /* TextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */; };
 		021848AD2A2517B2007E68A4 /* AskChatGPTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848AC2A2517B2007E68A4 /* AskChatGPTView.swift */; };
-		021848B42A2625A5007E68A4 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B32A2625A5007E68A4 /* WeatherViewController.swift */; };
+		021848B42A2625A5007E68A4 /* WeatherFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B32A2625A5007E68A4 /* WeatherFloatViewController.swift */; };
 		021848B72A262664007E68A4 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848B62A262664007E68A4 /* WeatherView.swift */; };
 		021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BA2A26A511007E68A4 /* DraggableBuilder.swift */; };
 		021848BD2A26C213007E68A4 /* Draggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021848BC2A26C213007E68A4 /* Draggable.swift */; };
@@ -69,16 +69,16 @@
 		026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* Neumorphism.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
-		0281DAE12A18089800E44F04 /* FloatWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatWindowViewController.swift */; };
-		0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleWindow.swift */; };
+		0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatViewController.swift */; };
+		0281DAE42A180A8300E44F04 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleView.swift */; };
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
-		02AAD6AE2A28D99B009381C3 /* FloatWindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */; };
+		02AAD6AE2A28D99B009381C3 /* FloatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatManager.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
-		02BE514F2A29379A00901669 /* FloatWindowsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatWindowsActions.swift */; };
+		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
 		02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */; };
@@ -136,7 +136,7 @@
 		020D0E652A1ED628007F3992 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBuilder.swift; sourceTree = "<group>"; };
 		021848AC2A2517B2007E68A4 /* AskChatGPTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskChatGPTView.swift; sourceTree = "<group>"; };
-		021848B32A2625A5007E68A4 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		021848B32A2625A5007E68A4 /* WeatherFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFloatViewController.swift; sourceTree = "<group>"; };
 		021848B62A262664007E68A4 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		021848BA2A26A511007E68A4 /* DraggableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableBuilder.swift; sourceTree = "<group>"; };
 		021848BC2A26C213007E68A4 /* Draggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Draggable.swift; sourceTree = "<group>"; };
@@ -187,16 +187,16 @@
 		026F797C2A0172D0003947A6 /* Neumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neumorphism.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
-		0281DAE02A18089800E44F04 /* FloatWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowViewController.swift; sourceTree = "<group>"; };
-		0281DAE32A180A8300E44F04 /* TitleWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWindow.swift; sourceTree = "<group>"; };
+		0281DAE02A18089800E44F04 /* FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewController.swift; sourceTree = "<group>"; };
+		0281DAE32A180A8300E44F04 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
-		02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowManager.swift; sourceTree = "<group>"; };
+		02AAD6AD2A28D99B009381C3 /* FloatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatManager.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
-		02BE514E2A29379A00901669 /* FloatWindowsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatWindowsActions.swift; sourceTree = "<group>"; };
+		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDropdownMenuModel.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				021848B62A262664007E68A4 /* WeatherView.swift */,
-				021848B32A2625A5007E68A4 /* WeatherViewController.swift */,
+				021848B32A2625A5007E68A4 /* WeatherFloatViewController.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -348,7 +348,7 @@
 				026F79782A00775E003947A6 /* DropdownMenu */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
-				0281DADF2A18087800E44F04 /* FloatWindow */,
+				0281DADF2A18087800E44F04 /* FloatViewController */,
 				0234A94729FA9E79008392EC /* Gradient */,
 				0234A88D29F9FD3A008392EC /* ImageView */,
 				0234A8E429F9FD3A008392EC /* Label */,
@@ -654,23 +654,23 @@
 			path = Blur;
 			sourceTree = "<group>";
 		};
-		0281DADF2A18087800E44F04 /* FloatWindow */ = {
+		0281DADF2A18087800E44F04 /* FloatViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAE22A180A7500E44F04 /* TitleWindow */,
-				02AAD6AD2A28D99B009381C3 /* FloatWindowManager.swift */,
-				02BE514E2A29379A00901669 /* FloatWindowsActions.swift */,
-				0281DAE02A18089800E44F04 /* FloatWindowViewController.swift */,
+				0281DAE22A180A7500E44F04 /* TitleView */,
+				02AAD6AD2A28D99B009381C3 /* FloatManager.swift */,
+				02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */,
+				0281DAE02A18089800E44F04 /* FloatViewController.swift */,
 			);
-			path = FloatWindow;
+			path = FloatViewController;
 			sourceTree = "<group>";
 		};
-		0281DAE22A180A7500E44F04 /* TitleWindow */ = {
+		0281DAE22A180A7500E44F04 /* TitleView */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAE32A180A8300E44F04 /* TitleWindow.swift */,
+				0281DAE32A180A8300E44F04 /* TitleView.swift */,
 			);
-			path = TitleWindow;
+			path = TitleView;
 			sourceTree = "<group>";
 		};
 		0281DAE52A1843C200E44F04 /* ClockNeumorphism */ = {
@@ -997,7 +997,7 @@
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
-				0281DAE42A180A8300E44F04 /* TitleWindow.swift in Sources */,
+				0281DAE42A180A8300E44F04 /* TitleView.swift in Sources */,
 				020D0E682A1ED645007F3992 /* TextFieldBuilder.swift in Sources */,
 				02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */,
 				021848AD2A2517B2007E68A4 /* AskChatGPTView.swift in Sources */,
@@ -1040,7 +1040,7 @@
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
-				02AAD6AE2A28D99B009381C3 /* FloatWindowManager.swift in Sources */,
+				02AAD6AE2A28D99B009381C3 /* FloatManager.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
@@ -1055,10 +1055,10 @@
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
-				0281DAE12A18089800E44F04 /* FloatWindowViewController.swift in Sources */,
+				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
-				02BE514F2A29379A00901669 /* FloatWindowsActions.swift in Sources */,
+				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
@@ -1072,7 +1072,7 @@
 				0234A93629F9FD3A008392EC /* Label.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,
-				021848B42A2625A5007E68A4 /* WeatherViewController.swift in Sources */,
+				021848B42A2625A5007E68A4 /* WeatherFloatViewController.swift in Sources */,
 				0234A96329FC0659008392EC /* IconButtonBuilder.swift in Sources */,
 				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
 				020D0E4B2A1E5A6F007F3992 /* DropdownMenu.swift in Sources */,
