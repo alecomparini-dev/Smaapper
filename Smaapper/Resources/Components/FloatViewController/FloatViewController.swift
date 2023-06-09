@@ -153,7 +153,6 @@ class FloatViewController: BaseBuilder {
         viewWillMinimize()
     }
     
-    
     func viewWillMinimize() {
         if isMinimized {return}
         isMinimized = true
