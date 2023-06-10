@@ -40,8 +40,6 @@ class FloatManager {
     weak var delegate: FloatManagerDelegate?
     
     private var _listWindows: [FloatViewController] = []
-    private var _activeWindow: FloatViewController?
-    private var _lastActiveWindow: FloatViewController?
     private var _desactivateWindowSuperViewControl: Bool = false
     
     private init() {}
@@ -49,18 +47,13 @@ class FloatManager {
     var listWindows: [FloatViewController] { self._listWindows }
     var countWindows: Int { self._listWindows.count }
     
-    var lastActiveWindow: FloatViewController? {
-        get { self._lastActiveWindow }
-        set { self._lastActiveWindow = newValue }
-    }
-    
-    var activeWindow: FloatViewController? {
-        get { self._activeWindow }
-        set { self._activeWindow = newValue }
-    }
     
     func windowActive() -> FloatViewController? {
         return listWindows.first(where: { $0.active })
+    }
+    
+    func lastWindowActive() -> FloatViewController? {
+        return listWindows.first(where: { $0.lastActive })
     }
     
     func addWindowToManager(_ floatWindow: FloatViewController)  {
@@ -111,8 +104,8 @@ class FloatManager {
         superView.isUserInteractionEnabled = true
         TapGestureBuilder(superView)
             .setTouchEnded { [weak self] tapGesture in
-                self?.windowActive()?.viewDesactivated()
-                self?.lastActiveWindow?.viewDesactivated()
+                guard let self else {return}
+                windowActive()?.viewDesactivated()
             }
         _desactivateWindowSuperViewControl = true
     }

@@ -122,12 +122,10 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-    func deselectActiveItem() {
-        if let activeItem = dock.activeItem {
-            let indexPath = IndexPath(row: activeItem, section: 0)
-            dock.collection.deselectItem(at: indexPath, animated: true)
-            dock.activeItem = nil
-        }
+    func deselectActiveItem(_ indexItem: Int) {
+        let indexPath = IndexPath(row: indexItem, section: 0)
+        dock.collection.deselectItem(at: indexPath, animated: true)
+        dock.activeItem = nil
     }
     
     
