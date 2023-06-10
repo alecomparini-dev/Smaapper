@@ -43,7 +43,7 @@ extension WeatherFloatViewController: WeatherViewDelegate {
     }
     
     func minimizeWindow() {
-        self.viewMinimize()
+        self.minimize
     }
 
     

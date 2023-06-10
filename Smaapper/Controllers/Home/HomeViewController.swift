@@ -26,8 +26,6 @@ class HomeViewController: UIViewController {
     private let viewModel = HomeViewModel()
     private var categoriesVC: CategoriesViewController?
 
-    private var activationWindowControl = false
-    private var activationDockControl = false
     
     private var adjustTrailingDock = NSLayoutConstraint()
     private var resultDropdownMenu: DropdownMenuData?
@@ -344,16 +342,16 @@ class HomeViewController: UIViewController {
         let win = FloatManager.instance.listWindows[indexItem]
 
         if win.isMinimized {
-            win.viewRestore()
+            win.restore
             return
         }
         
         if win.active {
-            win.viewMinimize()
+            win.minimize
             return
         }
         
-        win.viewActivated()
+        win.select
     }
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
@@ -411,11 +409,18 @@ extension HomeViewController: FloatManagerDelegate {
     func viewActivated(_ floatWindow: FloatViewController) {
         setShadow(floatWindow)
         activationItemDock(floatWindow)
+        
+        if let indexWin = FloatManager.instance.getIndexById(floatWindow.id) {
+            homeScreen.dock.selectItem(indexWin, at: .centeredHorizontally)
+        }
     }
     
     func viewDesactivated(_ floatWindow: FloatViewController) {
         floatWindow.view.removeShadowByID("activeWindow")
-        homeScreen.dock.deselectActiveItem()
+        
+        if let indexWin = FloatManager.instance.getIndexById(floatWindow.id) {
+            homeScreen.dock.deselectActiveItem(indexWin)
+        }
     }
     
     func allClosedWindows() {

@@ -69,12 +69,17 @@ class FloatViewController: BaseBuilder {
         viewWillAppear()
         viewWillLayoutSubviews()
         viewDidLayoutSubviews()
+        manager.windowActive()?.viewDesactivated()
         viewActivated()
         viewDidAppear()
     }
-
+    
+    
     func dismiss() {
         viewWillDisappear()
+        viewDesactivated()
+        manager.lastWindowActive()?.viewActivated()
+        manager.windowActive()?.bringToFront
     }
         
     
@@ -117,7 +122,6 @@ class FloatViewController: BaseBuilder {
 //  MARK: - Dragging
     func viewWillDrag() {
         manager.delegate?.viewWillDrag(self)
-        viewActivated()
     }
     
     func viewDragging() {
@@ -128,20 +132,21 @@ class FloatViewController: BaseBuilder {
         manager.delegate?.viewDidDrag(self)
     }
 
+
     
 //  MARK: - ACTIVE / DEACTIVE
+
     func viewActivated() {
         if isMinimized {return}
-        self.bringToFront
-        if self.active {return}
-        manager.lastActiveWindow = manager.windowActive()
-        manager.lastActiveWindow?.viewDesactivated()
+        if active {return}
         active = true
+        lastActive = false
         manager.delegate?.viewActivated(self)
     }
     
     func viewDesactivated() {
         active = false
+        lastActive = true
         manager.delegate?.viewDesactivated(self)
     }
     
@@ -154,13 +159,10 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewWillMinimize() {
-        if isMinimized {return}
         isMinimized = true
         originalCenter = self.view.center
         minimizeAnimation(callBackViewMinimized)
         manager.delegate?.viewWillMinimize(self)
-        viewDesactivated()
-        manager.lastActiveWindow?.viewActivated()
     }
     
     private func callBackViewMinimized() {
@@ -177,12 +179,10 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewWillRestore() {
-        if !isMinimized {return}
         isMinimized = false
         manager.delegate?.viewWillRestore(self)
         view.isHidden = false
         restoreAnimation(callBackViewRestored)
-        viewActivated()
     }
     private func callBackViewRestored() {
         viewDidRestore()
@@ -194,13 +194,10 @@ class FloatViewController: BaseBuilder {
     }
     
 
-    
-    
 //  MARK: - Disappear Window
     func viewWillDisappear() {
         removeWindowToManager()
         manager.delegate?.viewWillDisappear(self)
-        manager.lastActiveWindow?.viewActivated()
         removeWindowAnimation(callBackViewWillDisappear)
     }
     private func callBackViewWillDisappear() {
@@ -231,7 +228,11 @@ class FloatViewController: BaseBuilder {
                     build
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
-                            self.viewWillDrag()
+                            if active {return}
+                            self.bringToFront
+                            manager.windowActive()?.viewDesactivated()
+                            viewActivated()
+                            viewWillDrag()
                         }
                         .setDragging { [weak self] draggable in
                             guard let self else {return}
@@ -286,6 +287,25 @@ class FloatViewController: BaseBuilder {
         superView.bringSubviewToFront(self.view)
     }
 
+    var minimize: Void {
+        manager.lastWindowActive()?.viewActivated()
+        viewDesactivated()
+        viewMinimize()
+    }
+    
+    var restore: Void {
+        viewRestore()
+        manager.windowActive()?.viewDesactivated()
+        viewActivated()
+        bringToFront
+    }
+    
+    var select: Void {
+        self.bringToFront
+        manager.windowActive()?.viewDesactivated()
+        viewActivated()
+    }
+    
     
 //  MARK: - PRIVATE Function Area
     
@@ -321,9 +341,6 @@ class FloatViewController: BaseBuilder {
         self.view.frame = CGRect(x: 50, y: 100, width: 200, height: 350)
     }
     
-    private func appearFloatWindow() {
-        
-    }
     
     private func configSizeWindow(_ sizeWindow: CGSize) {
         self.view.frame = CGRect(x: 50, y: 100, width: sizeWindow.width, height: sizeWindow.height)
@@ -366,6 +383,9 @@ class FloatViewController: BaseBuilder {
                         .setCancelsTouchesInView(false)
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
+                            if active {return}
+                            self.bringToFront
+                            manager.windowActive()?.viewDesactivated()
                             viewActivated()
                         }
                 }
