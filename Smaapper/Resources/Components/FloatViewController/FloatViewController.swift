@@ -141,11 +141,11 @@ class FloatViewController: BaseBuilder {
 //  MARK: - ACTIVE / DEACTIVE
 
     func viewActivated() {
+        if active {return}
         bringToFront
         manager.lastActive = manager.windowActive()
         manager.windowActive()?.viewDesactivated()
         if isMinimized {return}
-        if active {return}
         active = true
         manager.delegate?.viewActivated(self)
     }
@@ -381,6 +381,7 @@ class FloatViewController: BaseBuilder {
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
                             if active {return}
+                            manager.delegate?.didSelectedFloatView(self)
                             viewActivated()
                         }
                 }

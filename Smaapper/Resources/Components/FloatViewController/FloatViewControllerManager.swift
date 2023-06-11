@@ -1,5 +1,5 @@
 //
-//  FloatWindowManager.swift
+//  floatViewManager.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 01/06/23.
@@ -9,27 +9,28 @@ import UIKit
 
 protocol FloatViewControllerManagerDelegate: AnyObject {
     
-    func viewDidLoad(_ floatWindow: FloatViewController)
-    func viewWillAppear(_ floatWindow: FloatViewController)
-    func viewWillLayoutSubviews(_ floatWindow: FloatViewController)
-    func viewDidLayoutSubviews(_ floatWindow: FloatViewController)
-    func viewDidAppear(_ floatWindow: FloatViewController)
-    func viewWillDrag(_ floatWindow: FloatViewController)
-    func viewDragging(_ floatWindow: FloatViewController)
-    func viewDidDrag(_ floatWindow: FloatViewController)
+    func viewDidLoad(_ floatView: FloatViewController)
+    func viewWillAppear(_ floatView: FloatViewController)
+    func viewWillLayoutSubviews(_ floatView: FloatViewController)
+    func viewDidLayoutSubviews(_ floatView: FloatViewController)
+    func viewDidAppear(_ floatView: FloatViewController)
+    func viewWillDrag(_ floatView: FloatViewController)
+    func viewDragging(_ floatView: FloatViewController)
+    func viewDidDrag(_ floatView: FloatViewController)
     
-    func viewWillMinimize(_ floatWindow: FloatViewController)
-    func viewDidMinimize(_ floatWindow: FloatViewController)
+    func viewWillMinimize(_ floatView: FloatViewController)
+    func viewDidMinimize(_ floatView: FloatViewController)
     
-    func viewWillRestore(_ floatWindow: FloatViewController)
-    func viewDidRestore(_ floatWindow: FloatViewController)
-    func viewActivated(_ floatWindow: FloatViewController)
-    func viewDesactivated(_ floatWindow: FloatViewController)
-    func viewWillDisappear(_ floatWindow: FloatViewController)
-    func viewDidDisappear(_ floatWindow: FloatViewController)
+    func viewWillRestore(_ floatView: FloatViewController)
+    func viewDidRestore(_ floatView: FloatViewController)
+    func viewActivated(_ floatView: FloatViewController)
+    func viewDesactivated(_ floatView: FloatViewController)
+    func viewWillDisappear(_ floatView: FloatViewController)
+    func viewDidDisappear(_ floatView: FloatViewController)
     
     
     func allClosedWindows()
+    func didSelectedFloatView(_ floatView: FloatViewController)
     
 }
 
@@ -57,12 +58,12 @@ class FloatViewControllerManager {
         return self.lastActive
     }
     
-    func addWindowToManager(_ floatWindow: FloatViewController)  {
-        self._listWindows.append(floatWindow)
+    func addWindowToManager(_ floatView: FloatViewController)  {
+        self._listWindows.append(floatView)
     }
     
-    func removeWindowToManager(_ floatWindow: FloatViewController)  {
-        self._listWindows.removeAll { $0.id == floatWindow.id }
+    func removeWindowToManager(_ floatView: FloatViewController)  {
+        self._listWindows.removeAll { $0.id == floatView.id }
     }
     
     func minimizeAll() {
@@ -81,8 +82,8 @@ class FloatViewControllerManager {
         self.delegate = delegate
     }
     
-    func getIndexById(_ id: UUID) -> Int? {
-        if let index = listWindows.firstIndex(where: { $0.id == id }) {
+    func getIndex(_ floatView: FloatViewController) -> Int? {
+        if let index = listWindows.firstIndex(where: { $0.id == floatView.id }) {
             return index
         }
         return nil
@@ -117,20 +118,23 @@ class FloatViewControllerManager {
 
 
 extension FloatViewControllerManagerDelegate {
-    func viewDidLoad(_ floatWindow: FloatViewController) {}
-    func viewWillAppear(_ floatWindow: FloatViewController) {}
-    func viewWillLayoutSubviews(_ floatWindow: FloatViewController) {}
-    func viewDidLayoutSubviews(_ floatWindow: FloatViewController) {}
-    func viewDidAppear(_ floatWindow: FloatViewController) {}
-    func viewWillDrag(_ floatWindow: FloatViewController) {}
-    func viewDragging(_ floatWindow: FloatViewController) {}
-    func viewDidDrag(_ floatWindow: FloatViewController) {}
-    func viewDidMinimize(_ floatWindow: FloatViewController) {}
-    func viewWillMinimize(_ floatWindow: FloatViewController) {}
-    func viewDidRestore(_ floatWindow: FloatViewController) {}
-    func viewWillRestore(_ floatWindow: FloatViewController) {}
-    func viewWillDisappear(_ floatWindow: FloatViewController) {}
-    func viewDidDisappear(_ floatWindow: FloatViewController) {}
-    func allClosedWindows() {}
+    func viewDidLoad(_ floatView: FloatViewController) { }
+    func viewWillAppear(_ floatView: FloatViewController) { }
+    func viewWillLayoutSubviews(_ floatView: FloatViewController) { }
+    func viewDidLayoutSubviews(_ floatView: FloatViewController) { }
+    func viewDidAppear(_ floatView: FloatViewController) { }
+    func viewWillDrag(_ floatView: FloatViewController) { }
+    func viewDragging(_ floatView: FloatViewController) { }
+    func viewDidDrag(_ floatView: FloatViewController) { }
+    func viewWillMinimize(_ floatView: FloatViewController) { }
+    func viewDidMinimize(_ floatView: FloatViewController) { }
+    func viewWillRestore(_ floatView: FloatViewController) { }
+    func viewDidRestore(_ floatView: FloatViewController) { }
+    func viewActivated(_ floatView: FloatViewController) { }
+    func viewDesactivated(_ floatView: FloatViewController) { }
+    func viewWillDisappear(_ floatView: FloatViewController) { }
+    func viewDidDisappear(_ floatView: FloatViewController) { }
+    func allClosedWindows() { }
+    func didSelectedFloatView(_ floatView: FloatViewController) { }
 }
 

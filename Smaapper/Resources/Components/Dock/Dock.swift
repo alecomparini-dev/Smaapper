@@ -11,18 +11,17 @@ protocol DockDelegate: AnyObject {
     func numberOfItemsCallback() -> Int
     func cellItemCallback(_ indexItem: Int) -> UIView
     
-    func activatedItemDock(_ indexItem: Int)
-    func deactivatedItemDock(_ indexItem: Int)
+    func shouldSelectItemAt(_ indexItem: Int?)
+    func didSelectItemAt(_ indexItem: Int?)
+    func didDeselectItemAt(_ indexItem: Int?)
     
-    func didSelectItemAt(_ indexItem: Int)
+    func removeItem(_ indexItem: Int)
+    func insertItem(_ indexItem: Int)
 }
 
 class Dock: UIView {
     typealias closureGetCellItemAlias = (_ cellItem: UIView) -> Void
     weak var delegate: DockDelegate?
-
-    private(set) var _activeItem_old: Int?
-    private(set) var _activeItem: Int?
     
     private var closureGetCellItem: closureGetCellItemAlias?
     private var indexGetCellItem: Int?
@@ -50,33 +49,20 @@ class Dock: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    var activeItem: Int? {
-        get { self._activeItem }
-        set {
-            if isActivated(newValue) {return}
-            self._activeItem = newValue
-            if let newValue {
-                delegate?.activatedItemDock(newValue)
-            }
+    func getIndexSelected() -> Int? {
+        if let selectedIndexPaths = collection.indexPathsForSelectedItems?.first {
+            let selectedIndex = selectedIndexPaths.item
+            return selectedIndex
         }
+        return nil
     }
-    
-    var deactiveItem: Int? {
-        get { nil }
-        set {
-            self._activeItem = nil
-            if let newValue {
-                delegate?.deactivatedItemDock(newValue)
-            }
-        }
-    }
-    
+
     func setClosureGetCellItem(_ indexItem: Int, closure: @escaping closureGetCellItemAlias) {
         self.indexGetCellItem = indexItem
         self.closureGetCellItem = closure
     }
-    
 
+    
     
 //  MARK: - PRIVATE Area
     
@@ -85,11 +71,7 @@ class Dock: UIView {
         self.indexGetCellItem = nil
         self.closureGetCellItem = nil
     }
-    
-    func isActivated(_ newValue: Int?) -> Bool {
-        return newValue == self._activeItem
-    }
-    
+
 }
 
 
@@ -130,13 +112,34 @@ extension Dock: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if getIndexSelected() == indexPath.row {return false}
+        print("vaiiiiii SELECIONrrrrr ")
+        delegate?.shouldSelectItemAt(indexPath.row)
+        return true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("SELECIONOUUU ")
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         delegate?.didSelectItemAt(indexPath.row)
-        deactiveItem = activeItem
-        activeItem = indexPath.row
-
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("DESELECIONOUUU !!!!!!!!!!!!!")
+        delegate?.didDeselectItemAt(indexPath.row)
+    }
+    
+    
+    
+}
+
+
+extension DockDelegate {
+    func shouldSelectItemAt(_ indexItem: Int?) {}
+    func didSelectItemAt(_ indexItem: Int?) {}
+    func didDeselectItemAt(_ indexItem: Int?) {}
+    func removeItem(_ indexItem: Int) {}
+    func insertItem(_ indexItem: Int) {}
 }
