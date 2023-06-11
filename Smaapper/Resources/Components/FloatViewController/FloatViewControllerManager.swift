@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol FloatManagerDelegate: AnyObject {
+protocol FloatViewControllerManagerDelegate: AnyObject {
     
     func viewDidLoad(_ floatWindow: FloatViewController)
     func viewWillAppear(_ floatWindow: FloatViewController)
@@ -21,7 +21,6 @@ protocol FloatManagerDelegate: AnyObject {
     func viewWillMinimize(_ floatWindow: FloatViewController)
     func viewDidMinimize(_ floatWindow: FloatViewController)
     
-    
     func viewWillRestore(_ floatWindow: FloatViewController)
     func viewDidRestore(_ floatWindow: FloatViewController)
     func viewActivated(_ floatWindow: FloatViewController)
@@ -34,16 +33,18 @@ protocol FloatManagerDelegate: AnyObject {
     
 }
 
-class FloatManager {
-    static let instance = FloatManager()
+class FloatViewControllerManager {
+    static let instance = FloatViewControllerManager()
     
-    weak var delegate: FloatManagerDelegate?
+    weak var delegate: FloatViewControllerManagerDelegate?
     
     private var _listWindows: [FloatViewController] = []
     private var _desactivateWindowSuperViewControl: Bool = false
     
     private init() {}
 
+    var lastActive: FloatViewController?
+    
     var listWindows: [FloatViewController] { self._listWindows }
     var countWindows: Int { self._listWindows.count }
     
@@ -53,7 +54,7 @@ class FloatManager {
     }
     
     func lastWindowActive() -> FloatViewController? {
-        return listWindows.first(where: { $0.lastActive })
+        return self.lastActive
     }
     
     func addWindowToManager(_ floatWindow: FloatViewController)  {
@@ -72,11 +73,11 @@ class FloatManager {
     
     func restoreAll() {
         self._listWindows.forEach { win in
-            win.viewRestore()
+            win.restore
         }
     }
     
-    func setDelegate(_ delegate: FloatManagerDelegate) {
+    func setDelegate(_ delegate: FloatViewControllerManagerDelegate) {
         self.delegate = delegate
     }
     
@@ -105,6 +106,7 @@ class FloatManager {
         TapGestureBuilder(superView)
             .setTouchEnded { [weak self] tapGesture in
                 guard let self else {return}
+                lastActive = nil
                 windowActive()?.viewDesactivated()
             }
         _desactivateWindowSuperViewControl = true
@@ -114,7 +116,7 @@ class FloatManager {
 }
 
 
-extension FloatManagerDelegate {
+extension FloatViewControllerManagerDelegate {
     func viewDidLoad(_ floatWindow: FloatViewController) {}
     func viewWillAppear(_ floatWindow: FloatViewController) {}
     func viewWillLayoutSubviews(_ floatWindow: FloatViewController) {}

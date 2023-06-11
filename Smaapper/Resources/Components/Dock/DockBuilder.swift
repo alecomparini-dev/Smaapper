@@ -42,6 +42,10 @@ class DockBuilder: BaseBuilder {
         }
     }
     
+    func isActivated(_ indexItem: Int) -> Bool {
+        return dock.isActivated(indexItem)
+    }
+    
 //  MARK: - GET Properties
     func getCellItem(_ indexItem: Int, closure: @escaping Dock.closureGetCellItemAlias ) {
         let indexPath = IndexPath(row: indexItem, section: 0)
@@ -50,6 +54,8 @@ class DockBuilder: BaseBuilder {
         }
         dock.setClosureGetCellItem(indexItem, closure: closure)
     }
+    
+    
     
 //  MARK: - SET Properties
     
@@ -115,17 +121,17 @@ class DockBuilder: BaseBuilder {
     }
     
     func selectItem(_ indexItem: Int, at: UICollectionView.ScrollPosition) {
-        if self.isShow {
-            let indexPath = IndexPath(row: indexItem, section: 0)
-            dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
-            dock.activeItem = indexItem
-        }
+        if isActivated(indexItem) {return}
+        dock.deactiveItem = dock.activeItem
+        dock.activeItem = indexItem
+        let indexPath = IndexPath(row: indexItem, section: 0)
+        dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
     }
     
     func deselectActiveItem(_ indexItem: Int) {
+        dock.deactiveItem = indexItem
         let indexPath = IndexPath(row: indexItem, section: 0)
         dock.collection.deselectItem(at: indexPath, animated: true)
-        dock.activeItem = nil
     }
     
     
@@ -134,7 +140,6 @@ class DockBuilder: BaseBuilder {
         self.dock.delegate = dockDelegate
     }
     
-
     
     
 //  MARK: - Private Function Area

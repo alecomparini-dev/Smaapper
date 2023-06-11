@@ -24,12 +24,11 @@ class FloatViewController: BaseBuilder {
     private(set) var id: UUID = UUID()
     private(set) var customAttribute: Any?
     private(set) var active: Bool = false
-    private(set) var lastActive: Bool = false
     
     private(set) var isMinimized: Bool = false
     private(set) var originalCenter: CGPoint = .zero
     
-    private var manager: FloatManager = FloatManager.instance
+    private var manager: FloatViewControllerManager = FloatViewControllerManager.instance
     private var actions: FloatViewControllerActions?
     
     private var _view: View = View()
@@ -69,17 +68,22 @@ class FloatViewController: BaseBuilder {
         viewWillAppear()
         viewWillLayoutSubviews()
         viewDidLayoutSubviews()
+        manager.lastActive = manager.windowActive()
         manager.windowActive()?.viewDesactivated()
         viewActivated()
         viewDidAppear()
     }
     
-    
     func dismiss() {
         viewWillDisappear()
+        removeWindowAnimation(callBackViewWillDisappear)
         viewDesactivated()
         manager.lastWindowActive()?.viewActivated()
+        manager.lastActive = nil
         manager.windowActive()?.bringToFront
+    }
+    private func callBackViewWillDisappear() {
+        viewDidDisappear()
     }
         
     
@@ -137,16 +141,17 @@ class FloatViewController: BaseBuilder {
 //  MARK: - ACTIVE / DEACTIVE
 
     func viewActivated() {
+        bringToFront
+        manager.lastActive = manager.windowActive()
+        manager.windowActive()?.viewDesactivated()
         if isMinimized {return}
         if active {return}
         active = true
-        lastActive = false
         manager.delegate?.viewActivated(self)
     }
     
     func viewDesactivated() {
         active = false
-        lastActive = true
         manager.delegate?.viewDesactivated(self)
     }
     
@@ -159,53 +164,35 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewWillMinimize() {
-        isMinimized = true
         originalCenter = self.view.center
-        minimizeAnimation(callBackViewMinimized)
         manager.delegate?.viewWillMinimize(self)
-    }
-    
-    private func callBackViewMinimized() {
-        viewDidMinimize()
     }
     
     func viewDidMinimize() {
         view.isHidden = true
+        isMinimized = true
         manager.delegate?.viewDidMinimize(self)
     }
     
-    func viewRestore() {
-        viewWillRestore()
-    }
-    
     func viewWillRestore() {
-        isMinimized = false
-        manager.delegate?.viewWillRestore(self)
         view.isHidden = false
-        restoreAnimation(callBackViewRestored)
+        manager.delegate?.viewWillRestore(self)
     }
-    private func callBackViewRestored() {
-        viewDidRestore()
-    }
-    
+
     func viewDidRestore() {
-        self.bringToFront
+        isMinimized = false
         manager.delegate?.viewDidRestore(self)
     }
     
 
 //  MARK: - Disappear Window
     func viewWillDisappear() {
-        removeWindowToManager()
         manager.delegate?.viewWillDisappear(self)
-        removeWindowAnimation(callBackViewWillDisappear)
     }
-    private func callBackViewWillDisappear() {
-        viewDidDisappear()
-    }
-    
+
     func viewDidDisappear() {
-        removeWindowToSuperview()
+        manager.removeWindowToManager(self)
+        self.view.removeFromSuperview()
         manager.delegate?.viewDidDisappear(self)
         manager.verifyAllClosedWindows()
     }
@@ -228,11 +215,11 @@ class FloatViewController: BaseBuilder {
                     build
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
-                            if active {return}
-                            self.bringToFront
-                            manager.windowActive()?.viewDesactivated()
-                            viewActivated()
                             viewWillDrag()
+                            if active {return}
+                            bringToFront
+                            viewActivated()
+                            
                         }
                         .setDragging { [weak self] draggable in
                             guard let self else {return}
@@ -288,21 +275,34 @@ class FloatViewController: BaseBuilder {
     }
 
     var minimize: Void {
+        viewWillMinimize()
+        minimizeAnimation(callBackViewMinimized)
         manager.lastWindowActive()?.viewActivated()
+        manager.lastActive = nil
         viewDesactivated()
-        viewMinimize()
+    }
+    private func callBackViewMinimized() {
+        viewDidMinimize()
     }
     
+    
     var restore: Void {
-        viewRestore()
-        manager.windowActive()?.viewDesactivated()
-        viewActivated()
+        viewWillRestore()
         bringToFront
+        restoreAnimation(callBackViewRestored)
+        manager.lastActive = manager.windowActive()
+        manager.windowActive()?.viewDesactivated()
+    }
+    private func callBackViewRestored() {
+        viewDidRestore()
+        viewActivated()
     }
     
     var select: Void {
-        self.bringToFront
-        manager.windowActive()?.viewDesactivated()
+        if isMinimized {
+            restore
+            return
+        }
         viewActivated()
     }
     
@@ -313,9 +313,6 @@ class FloatViewController: BaseBuilder {
         manager.addWindowToManager(self)
     }
     
-    private func removeWindowToManager() {
-        manager.removeWindowToManager(self)
-    }
     
     private func setHierarchyVisualization() {
         self.view.layer.zPosition = hierarchy
@@ -384,8 +381,6 @@ class FloatViewController: BaseBuilder {
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
                             if active {return}
-                            self.bringToFront
-                            manager.windowActive()?.viewDesactivated()
                             viewActivated()
                         }
                 }
@@ -398,9 +393,6 @@ class FloatViewController: BaseBuilder {
         decidePositionWindow()
     }
 
-    private func removeWindowToSuperview() {
-        self.view.removeFromSuperview()
-    }
     
     
 //  MARK: - ANIMATIONS
