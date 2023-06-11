@@ -277,13 +277,13 @@ class FloatViewController: BaseBuilder {
     
     var restore: Void {
         if !isMinimized {return}
+        select
         viewWillRestore()
         bringToFront
         restoreAnimation(callBackViewRestored)
     }
     private func callBackViewRestored() {
         viewDidRestore()
-        select
     }
     
     var select: Void {
