@@ -82,12 +82,6 @@ class HomeViewController: UIViewController {
         configDelegate()
         configDropdownMenu()
         configDock()
-        
-        TapGestureBuilder(homeScreen.viewFloatWindow.view)
-            .setTouchEnded {[weak self] tapGesture in
-                guard let self else {return}
-                self.homeScreen.dock.selectItem(nil, at: .centeredHorizontally)
-            }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -314,48 +308,49 @@ class HomeViewController: UIViewController {
     private func configIconsDock(_ indexItem: Int) -> UIView {
 //        let img = getIcon(indexItem)
         let iconDock = homeScreen.createIconsDock(iconsDock[indexItem])
+        
+        let win = FloatViewControllerManager.instance.listWindows[indexItem]
+        
+        if win.isMinimized {
+            minimizedItemDock(win, reload: true)
+        }
+        if win.active {
+            setShadowItemDock()
+        }
+        
         return iconDock
     }
     
-//
-//    private func activationItemDock(_ activeWindow: FloatViewController?) {
-//        if let activeWindow {
-//            if let indexWin = FloatViewControllerManager.instance.getIndex(activeWindow) {
-//                if indexWin != homeScreen.dock.view.activeItem {
-//                    homeScreen.dock.selectItem(indexWin, at: .centeredHorizontally)
-//                }
-//            }
-//        }
-//    }
-//
-//    private func minimizedItemDock(_ floatWindow: FloatViewController, reload: Bool = false) {
-//        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
-//            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
-//                self?.minimizeItemDock(cellItem, reload)
-//            }
-//        }
-//    }
-//
-//    private func restoredItemDock(_ floatWindow: FloatViewController) {
-//        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
-//            homeScreen.dock.getCellItem(index) { [weak self] cellItem in
-//                self?.restoreItemDock(cellItem)
-//            }
-//        }
-//    }
-//
-//    private func restoreItemDock(_ cellItem: UIView) {
-//        UIView.animate(withDuration: 0.3) {
-//            cellItem.transform = CGAffineTransform.identity
-//        }
-//    }
-//
-//    private func minimizeItemDock(_ cellItem: UIView, _ reload: Bool = false)  {
-//        let duration = (reload) ? 0 : 0.3
-//        UIView.animate(withDuration: duration) {
-//            cellItem.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-//        }
-//    }
+
+    private func restoredItemDock(_ floatWindow: FloatViewController) {
+        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
+            homeScreen.dock.getCellByIndex(index) { [weak self] cellItem in
+                self?.restoreItemDock(cellItem)
+            }
+        }
+    }
+
+    private func restoreItemDock(_ cellItem: UIView) {
+        UIView.animate(withDuration: 0.3) {
+            cellItem.transform = CGAffineTransform.identity
+        }
+    }
+
+
+    private func minimizedItemDock(_ floatWindow: FloatViewController, reload: Bool = false) {
+        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
+            homeScreen.dock.getCellByIndex(index) { [weak self] cellItem in
+                self?.minimizeItemDock(cellItem, reload)
+            }
+        }
+    }
+    
+    private func minimizeItemDock(_ cellItem: UIView, _ reload: Bool = false)  {
+        let duration = (reload) ? 0.0 : 0.3
+        UIView.animate(withDuration: duration) {
+            cellItem.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }
+    }
     
     
 //  MARK: - FLOATWINDOW Area
@@ -425,7 +420,10 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     }
     
     func viewDidDeselectFloatView(_ floatView: FloatViewController) {
-        homeScreen.dock.selectItem(nil, at: .centeredHorizontally)
+        if let index = FloatViewControllerManager.instance.getIndex(floatView) {
+            homeScreen.dock.deselect(index)
+        }
+        
     }
     
     func viewWillDisappear(_ floatView: FloatViewController) {
@@ -438,9 +436,13 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
         }
     }
     
+    func viewWillMinimize(_ floatView: FloatViewController) {
+        minimizedItemDock(floatView)
+    }
     
-    
-    
+    func viewWillRestore(_ floatView: FloatViewController) {
+        restoredItemDock(floatView)
+    }
     
     func viewWillDrag(_ floatView: FloatViewController) {
         floatView.view.alpha = 0.9
@@ -463,14 +465,13 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
 //  MARK: - Extension DOCK DELEGATE
 
 extension HomeViewController: DockDelegate {
+    
     func shouldSelectItemAt(_ indexItem: Int) -> Bool {
         let floatView = FloatViewControllerManager.instance.listWindows[indexItem]
-        
         if homeScreen.dock.isSelected(indexItem) {
             floatView.minimize
             return false
         }
-        
         return true
     }
     

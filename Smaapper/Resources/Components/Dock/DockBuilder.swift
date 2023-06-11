@@ -151,13 +151,21 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-    func removeItem(_ indexItem: Int) {
+    func deselect(_ indexItem: Int) {
         let indexPath = IndexPath(row: indexItem, section: 0)
+        dock.collection.deselectItem(at: indexPath, animated: true)
+        dock.delegate?.didDeselectItemAt(indexItem)
+    }
+    
+    func removeItem(_ indexItem: Int) {
         dock.collection.performBatchUpdates({
+            let indexPath = IndexPath(row: indexItem, section: 0)
             dock.collection.deleteItems(at: [indexPath])
-        }) { [weak self] _ in
-            guard let self else {return}
-            dock.delegate?.removeItem(indexItem)
+        }, completion: nil)
+        dock.delegate?.removeItem(indexItem)
+        let visibleIndexPaths = dock.collection.indexPathsForVisibleItems
+        for indexPath in visibleIndexPaths {
+            _ = dock.collectionView(dock.collection, cellForItemAt: indexPath)
         }
         autoResizingContainer()
     }
