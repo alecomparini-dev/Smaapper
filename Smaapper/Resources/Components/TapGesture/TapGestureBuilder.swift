@@ -27,6 +27,7 @@ class TapGestureBuilder {
     private func initialization() {
         enableUserInteractionComponent()
         configTapGestureDelegate()
+        setCancelsTouchesInView(false)
     }
     
     

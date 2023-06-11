@@ -20,13 +20,12 @@ class FloatViewController: BaseBuilder {
     private var titleWindow: TitleFloatView?
     private var titleHeight: CGFloat = 30
     
-    
     private(set) var id: UUID = UUID()
     private(set) var customAttribute: Any?
-    private(set) var active: Bool = false
     
     private(set) var isMinimized: Bool = false
     private(set) var originalCenter: CGPoint = .zero
+    private(set) var active: Bool = false
     
     private var manager: FloatViewControllerManager = FloatViewControllerManager.instance
     private var actions: FloatViewControllerActions?
@@ -68,20 +67,16 @@ class FloatViewController: BaseBuilder {
         viewWillAppear()
         viewWillLayoutSubviews()
         viewDidLayoutSubviews()
-        manager.lastActive = manager.windowActive()
-        manager.windowActive()?.viewDesactivated()
-        viewActivated()
         viewDidAppear()
+        select
     }
     
     func dismiss() {
+        deselect
         viewWillDisappear()
         removeWindowAnimation(callBackViewWillDisappear)
-        viewDesactivated()
-        manager.lastWindowActive()?.viewActivated()
-        manager.lastActive = nil
-        manager.windowActive()?.bringToFront
     }
+    
     private func callBackViewWillDisappear() {
         viewDidDisappear()
     }
@@ -140,21 +135,17 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - ACTIVE / DEACTIVE
 
-    func viewActivated() {
-        bringToFront
-        manager.lastActive = manager.windowActive()
-        manager.windowActive()?.viewDesactivated()
-        if isMinimized {return}
-        if active {return}
-        active = true
-        manager.delegate?.viewActivated(self)
+    func viewShouldSelectFloatView() {
+        manager.delegate?.viewShouldSelectFloatView(self)
     }
     
-    func viewDesactivated() {
-        active = false
-        manager.delegate?.viewDesactivated(self)
+    func viewDidSelectFloatView() {
+        manager.delegate?.viewDidSelectFloatView(self)
     }
     
+    func viewDidDeselectFloatView() {
+        manager.delegate?.viewDidDeselectFloatView(self)
+    }
     
     
 //  MARK: - MINIMIZE AND RESTORED
@@ -216,9 +207,7 @@ class FloatViewController: BaseBuilder {
                         .setBeganDragging {[weak self] draggable in
                             guard let self else {return}
                             viewWillDrag()
-                            if active {return}
-                            bringToFront
-                            viewActivated()
+                            select
                             
                         }
                         .setDragging { [weak self] draggable in
@@ -268,42 +257,56 @@ class FloatViewController: BaseBuilder {
         return self
     }
     
+
     
 //  MARK: - Actions
+
     var bringToFront: Void {
         superView.bringSubviewToFront(self.view)
     }
 
     var minimize: Void {
+        if isMinimized {return}
+        deselect
         viewWillMinimize()
         minimizeAnimation(callBackViewMinimized)
-        manager.lastWindowActive()?.viewActivated()
-        manager.lastActive = nil
-        viewDesactivated()
     }
     private func callBackViewMinimized() {
         viewDidMinimize()
     }
     
-    
     var restore: Void {
+        if !isMinimized {return}
         viewWillRestore()
         bringToFront
         restoreAnimation(callBackViewRestored)
-        manager.lastActive = manager.windowActive()
-        manager.windowActive()?.viewDesactivated()
     }
     private func callBackViewRestored() {
         viewDidRestore()
-        viewActivated()
+        select
     }
     
     var select: Void {
-        if isMinimized {
-            restore
-            return
+        if active {return}
+        
+        if let floatViewSelect = manager.floatViewSelected() {
+            floatViewSelect.deselect
         }
-        viewActivated()
+        
+        viewShouldSelectFloatView()
+        
+        bringToFront
+        
+        active = true
+        
+        viewDidSelectFloatView()
+    }
+    
+    
+    var deselect: Void {
+        if !active {return}
+        active = false
+        viewDidDeselectFloatView()
     }
     
     
@@ -380,8 +383,7 @@ class FloatViewController: BaseBuilder {
                         .setCancelsTouchesInView(false)
                         .setTouchEnded { [weak self] tapGesture in
                             guard let self else {return}
-                            if active {return}
-                            viewActivated()
+                            select
                         }
                 }
         }

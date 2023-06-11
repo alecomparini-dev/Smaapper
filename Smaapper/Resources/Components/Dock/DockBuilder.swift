@@ -42,20 +42,6 @@ class DockBuilder: BaseBuilder {
         }
     }
     
-    func isActivated(_ indexItem: Int) -> Bool {
-        return dock.isActivated(indexItem)
-    }
-    
-//  MARK: - GET Properties
-    func getCellItem(_ indexItem: Int, closure: @escaping Dock.closureGetCellItemAlias ) {
-        let indexPath = IndexPath(row: indexItem, section: 0)
-        if let cell = dock.collection.cellForItem(at: indexPath) {
-            return closure(cell)
-        }
-        dock.setClosureGetCellItem(indexItem, closure: closure)
-    }
-    
-    
     
 //  MARK: - SET Properties
     
@@ -114,24 +100,79 @@ class DockBuilder: BaseBuilder {
     }
     
     
-//  MARK: - SET Actions
+//  MARK: - GET Properties Actions
+    func getCellByIndex(_ indexItem: Int, closure: @escaping Dock.closureGetCellItemAlias ) {
+        if let cell = getCellByIndex(indexItem) {
+            return closure(cell)
+        }
+        dock.setClosureGetCellItem(indexItem, closure: closure)
+    }
+    
+    func getCellSelected(closure: @escaping Dock.closureGetCellItemAlias ) {
+        guard let indexSelected = dock.getIndexSelected() else {return}
+        if let cell = getCellByIndex(indexSelected) {
+            return closure(cell)
+        }
+        dock.setClosureGetCellItem(indexSelected, closure: closure)
+    }
+
+    func getIndexSelected() -> Int? { dock.getIndexSelected() }
+
+    func isSelected(_ indexItem: Int) -> Bool {
+        return getIndexSelected() == indexItem
+    }
+    
+    
+//  MARK: - Actions
+    
     func reload() {
         dock.collection.reloadData()
         autoResizingContainer()
     }
-    
-    func selectItem(_ indexItem: Int, at: UICollectionView.ScrollPosition) {
-        if isActivated(indexItem) {return}
-        dock.deactiveItem = dock.activeItem
-        dock.activeItem = indexItem
-        let indexPath = IndexPath(row: indexItem, section: 0)
+        
+    func selectItem(_ indexItem: Int?, at: UICollectionView.ScrollPosition) {
+        if let indexItem {
+            if isSelected(indexItem) {return}
+        }
+        
+        if let indexItem {
+            if !(dock.delegate?.shouldSelectItemAt(indexItem) ?? true) { return }
+        }
+        
+        if let indexSelect = dock.getIndexSelected() {
+            dock.delegate?.didDeselectItemAt(indexSelect)
+        }
+        
+        let indexPath = IndexPath(row: indexItem ?? -1, section: 0)
         dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
+        
+        if let indexItem {
+            dock.delegate?.didSelectItemAt(indexItem)
+        }
     }
     
-    func deselectActiveItem(_ indexItem: Int) {
-        dock.deactiveItem = indexItem
+    func removeItem(_ indexItem: Int) {
         let indexPath = IndexPath(row: indexItem, section: 0)
-        dock.collection.deselectItem(at: indexPath, animated: true)
+        dock.collection.performBatchUpdates({
+            dock.collection.deleteItems(at: [indexPath])
+        }) { [weak self] _ in
+            guard let self else {return}
+            dock.delegate?.removeItem(indexItem)
+        }
+        autoResizingContainer()
+    }
+    
+    func insertItem(_ indexItem: Int) {
+        let indexPath = IndexPath(row: indexItem, section: 0)
+        dock.collection.performBatchUpdates({
+            dock.collection.insertItems(at: [indexPath])
+        }) { [weak self] _ in
+            guard let self else {return}
+            dock.delegate?.insertItem(indexItem)
+            selectItem(indexItem, at: .centeredHorizontally)
+        }
+        autoResizingContainer()
+        
     }
     
     
@@ -155,6 +196,15 @@ class DockBuilder: BaseBuilder {
                 self?.alreadyApplied = true
             }
         }
+    }
+    
+    private func getCellByIndex(_ index: Int?) -> UIView? {
+        guard let index else { return nil}
+        let indexPath = IndexPath(row: index, section: 0)
+        if let selectedCell = dock.collection.cellForItem(at: indexPath) {
+            return selectedCell
+        }
+        return nil
     }
     
     private func RegisterCell() {
