@@ -483,7 +483,6 @@ extension HomeViewController: DockDelegate {
         }
         
         if activationFloatViewVsDock == (floatView: true, dock: true) {
-            print("caralho os dois estão ativados !!!!!!!!!")
             activationFloatViewVsDock = (floatView: false, dock: false)
         }
         
