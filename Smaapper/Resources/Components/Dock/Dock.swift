@@ -21,12 +21,14 @@ class Dock: UIView {
     typealias closureGetCellItemAlias = (_ cellItem: UIView) -> Void
     weak var delegate: DockDelegate?
 
-    private var _activeItem: Int?
+    private(set) var _activeItem_old: Int?
+    private(set) var _activeItem: Int?
     
     private var closureGetCellItem: closureGetCellItemAlias?
     private var indexGetCellItem: Int?
     
-    var id: UUID = UUID()
+    private(set) var id: UUID = UUID()
+    
     let hierarchy: CGFloat = 1100
     let marginContainer: CGFloat = 8
     var customItemSize: [Int:CGSize] = [:]
@@ -34,7 +36,6 @@ class Dock: UIView {
     var isUserInteractionEnabledItems = false
     var blurEnabled = false
     var opacity: CGFloat = 1.0
-    var selectItem: Int?
     
     private(set) var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     private(set) var container = UIView()
@@ -52,11 +53,21 @@ class Dock: UIView {
     var activeItem: Int? {
         get { self._activeItem }
         set {
-            if isAlreadyActivated(newValue) {return}
-            if isActivationOfNilItem(newValue) {return}
-            invokeDeactivedItem(self._activeItem)
+            if isActivated(newValue) {return}
             self._activeItem = newValue
-            invokeActivatedItem(self._activeItem)
+            if let newValue {
+                delegate?.activatedItemDock(newValue)
+            }
+        }
+    }
+    
+    var deactiveItem: Int? {
+        get { nil }
+        set {
+            self._activeItem = nil
+            if let newValue {
+                delegate?.deactivatedItemDock(newValue)
+            }
         }
     }
     
@@ -65,33 +76,18 @@ class Dock: UIView {
         self.closureGetCellItem = closure
     }
     
-    private func isActivationOfNilItem(_ newValue: Int?) -> Bool {
-        if newValue != nil { return false }
-        invokeDeactivedItem(self._activeItem)
-        self._activeItem = newValue
-        return true
-    }
+
     
-    private func isAlreadyActivated(_ newValue: Int?) -> Bool {
-        return newValue == self._activeItem
-    }
-    
-    private func invokeDeactivedItem(_ deactiveItem: Int?) {
-        if let deactiveItem {
-            delegate?.deactivatedItemDock(deactiveItem)
-        }
-    }
-    
-    private func invokeActivatedItem(_ activeItem: Int?) {
-        if let activeItem {
-            delegate?.activatedItemDock(activeItem)
-        }
-    }
+//  MARK: - PRIVATE Area
     
     private func invokeGetCellItem(_ cell: UIView) {
         self.closureGetCellItem?(cell)
         self.indexGetCellItem = nil
         self.closureGetCellItem = nil
+    }
+    
+    func isActivated(_ newValue: Int?) -> Bool {
+        return newValue == self._activeItem
     }
     
 }
@@ -136,8 +132,10 @@ extension Dock: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        activeItem = indexPath.row
         delegate?.didSelectItemAt(indexPath.row)
+        deactiveItem = activeItem
+        activeItem = indexPath.row
+
     }
     
     

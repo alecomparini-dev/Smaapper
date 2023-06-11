@@ -75,7 +75,7 @@
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
-		02AAD6AE2A28D99B009381C3 /* FloatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatManager.swift */; };
+		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
@@ -197,7 +197,7 @@
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
-		02AAD6AD2A28D99B009381C3 /* FloatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatManager.swift; sourceTree = "<group>"; };
+		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
@@ -668,7 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				0281DAE22A180A7500E44F04 /* TitleView */,
-				02AAD6AD2A28D99B009381C3 /* FloatManager.swift */,
+				02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */,
 				02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */,
 				0281DAE02A18089800E44F04 /* FloatViewController.swift */,
 			);
@@ -1070,7 +1070,7 @@
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
 				0234A91E29F9FD3A008392EC /* Alert.swift in Sources */,
-				02AAD6AE2A28D99B009381C3 /* FloatManager.swift in Sources */,
+				02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
