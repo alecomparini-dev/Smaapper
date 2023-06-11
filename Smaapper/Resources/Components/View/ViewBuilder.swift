@@ -34,6 +34,9 @@ class ViewBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: ViewActions) -> ViewActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+        }
         self.actions = action(ViewActions(self))
         return self
     }

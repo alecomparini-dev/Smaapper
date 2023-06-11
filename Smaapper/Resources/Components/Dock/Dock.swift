@@ -11,9 +11,9 @@ protocol DockDelegate: AnyObject {
     func numberOfItemsCallback() -> Int
     func cellItemCallback(_ indexItem: Int) -> UIView
     
-    func shouldSelectItemAt(_ indexItem: Int?)
-    func didSelectItemAt(_ indexItem: Int?)
-    func didDeselectItemAt(_ indexItem: Int?)
+    func shouldSelectItemAt(_ indexItem: Int) -> Bool
+    func didSelectItemAt(_ indexItem: Int)
+    func didDeselectItemAt(_ indexItem: Int)
     
     func removeItem(_ indexItem: Int)
     func insertItem(_ indexItem: Int)
@@ -97,7 +97,6 @@ extension Dock: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DockCell.identifier, for: indexPath) as! DockCell
         
         if let delegate {
@@ -105,7 +104,6 @@ extension Dock: UICollectionViewDataSource {
             item.isUserInteractionEnabled = isUserInteractionEnabledItems
             cell.setupCell(item)
         }
-        
         if self.indexGetCellItem == indexPath.row  {
             invokeGetCellItem(cell)
         }
@@ -113,33 +111,26 @@ extension Dock: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if getIndexSelected() == indexPath.row {return false}
-        print("vaiiiiii SELECIONrrrrr ")
-        delegate?.shouldSelectItemAt(indexPath.row)
-        return true
+        return delegate?.shouldSelectItemAt(indexPath.row) ?? true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("SELECIONOUUU ")
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         delegate?.didSelectItemAt(indexPath.row)
     }
-    
-    
+        
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("DESELECIONOUUU !!!!!!!!!!!!!")
         delegate?.didDeselectItemAt(indexPath.row)
     }
-    
     
     
 }
 
 
 extension DockDelegate {
-    func shouldSelectItemAt(_ indexItem: Int?) {}
-    func didSelectItemAt(_ indexItem: Int?) {}
-    func didDeselectItemAt(_ indexItem: Int?) {}
+    func shouldSelectItemAt(_ indexItem: Int) -> Bool { return true }
+    func didSelectItemAt(_ indexItem: Int) {}
+    func didDeselectItemAt(_ indexItem: Int) {}
     func removeItem(_ indexItem: Int) {}
     func insertItem(_ indexItem: Int) {}
 }

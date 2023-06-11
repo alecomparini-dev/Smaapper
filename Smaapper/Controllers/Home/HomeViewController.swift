@@ -50,6 +50,8 @@ class HomeViewController: UIViewController {
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
     
+    private var indexCloseWin: Int?
+    
     var delegateFloatViewController: HomeFloatViewControllerDelegate?
     
     private let viewModel = HomeViewModel()
@@ -80,34 +82,22 @@ class HomeViewController: UIViewController {
         configDelegate()
         configDropdownMenu()
         configDock()
+        
+        TapGestureBuilder(homeScreen.viewFloatWindow.view)
+            .setTouchEnded {[weak self] tapGesture in
+                guard let self else {return}
+                self.homeScreen.dock.selectItem(nil, at: .centeredHorizontally)
+            }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         homeScreen.dock.isShow = true
         
-        homeScreen.viewFloatWindow.setActions { build in
-            build
-                .setTouch { component, tapGesture in
-                    self.icons.insert(self.iconsDock[self.icons.count+1], at: self.icons.count)
-                    self.homeScreen.dock.insertItem(self.icons.count-1)
-                }
-        }
-        
-        homeScreen.askChatGPTView.setActions { build in
-            build
-                .setTouch { component, tapGesture in
-                    if let indexSelected = self.homeScreen.dock.getIndexSelected() {
-                        self.icons.remove(at: indexSelected)
-                        self.homeScreen.dock.removeItem(indexSelected)
-                    }
-                }
-        }
         
         if let rowTappedCategory {
             addFloatViewController(rowTappedCategory)
         }
-//        reloadDock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -280,10 +270,10 @@ class HomeViewController: UIViewController {
         }
     }
 
-    private func reloadDock() {
-        setDockAlignment()
-        homeScreen.dock.reload()
-    }
+//    private func reloadDock() {
+//        setDockAlignment()
+//        homeScreen.dock.reload()
+//    }
 
 
     private func getIcon(_ index: Int) -> String {
@@ -370,19 +360,7 @@ class HomeViewController: UIViewController {
     
 //  MARK: - FLOATWINDOW Area
     
-    private func selectWindow(_ win : FloatViewController) {
-        if win.isMinimized {
-            win.restore
-            return
-        }
 
-        if win.active {
-            win.minimize
-            return
-        }
-
-        win.select
-    }
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
         let idApp: String = getIdAppByCategory(category)
@@ -435,6 +413,34 @@ extension HomeViewController: CategoriesViewControllerDelegate {
 //  MARK: - Extension FLOATWINDOW-MANAGER-DELEGATE
 
 extension HomeViewController: FloatViewControllerManagerDelegate {
+
+    func viewWillAppear(_ floatView: FloatViewController) {
+        homeScreen.dock.insertItem(FloatViewControllerManager.instance.listWindows.count - 1)
+    }
+    
+    func viewDidSelectFloatView(_ floatView: FloatViewController) {
+        if let index = FloatViewControllerManager.instance.getIndex(floatView) {
+            homeScreen.dock.selectItem(index, at: .centeredHorizontally)
+        }
+    }
+    
+    func viewDidDeselectFloatView(_ floatView: FloatViewController) {
+        homeScreen.dock.selectItem(nil, at: .centeredHorizontally)
+    }
+    
+    func viewWillDisappear(_ floatView: FloatViewController) {
+        self.indexCloseWin = FloatViewControllerManager.instance.getIndex(floatView)
+    }
+
+    func viewDidDisappear(_ floatView: FloatViewController) {
+        if let indexCloseWin {
+            homeScreen.dock.removeItem(indexCloseWin)
+        }
+    }
+    
+    
+    
+    
     
     func viewWillDrag(_ floatView: FloatViewController) {
         floatView.view.alpha = 0.9
@@ -457,24 +463,43 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
 //  MARK: - Extension DOCK DELEGATE
 
 extension HomeViewController: DockDelegate {
-    
-    func didDeselectItemAt(_ indexItem: Int?) {
-        if let indexItem {
-            removeShadowItemDock(indexItem)
+    func shouldSelectItemAt(_ indexItem: Int) -> Bool {
+        let floatView = FloatViewControllerManager.instance.listWindows[indexItem]
+        
+        if homeScreen.dock.isSelected(indexItem) {
+            floatView.minimize
+            return false
         }
+        
+        return true
     }
     
-    func didSelectItemAt(_ indexItem: Int?) {
+    func didSelectItemAt(_ indexItem: Int) {
         setShadowItemDock()
+        activeFloatView(indexItem)
+    }
+    
+    func didDeselectItemAt(_ indexItem: Int) {
+        removeShadowItemDock(indexItem)
     }
     
     func numberOfItemsCallback() -> Int {
-//        return FloatViewControllerManager.instance.listWindows.count
-        return icons.count
+        return FloatViewControllerManager.instance.listWindows.count
     }
     
     func cellItemCallback(_ indexItem: Int) -> UIView {
         return configIconsDock(indexItem)
+    }
+    
+    private func activeFloatView(_ indexItem: Int)  {
+        let floatView = FloatViewControllerManager.instance.listWindows[indexItem]
+        
+        if floatView.isMinimized {
+            floatView.restore
+            return
+        }
+        
+        floatView.select
     }
 
 }

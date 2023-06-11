@@ -23,15 +23,15 @@ protocol FloatViewControllerManagerDelegate: AnyObject {
     
     func viewWillRestore(_ floatView: FloatViewController)
     func viewDidRestore(_ floatView: FloatViewController)
-    func viewActivated(_ floatView: FloatViewController)
-    func viewDesactivated(_ floatView: FloatViewController)
+    
     func viewWillDisappear(_ floatView: FloatViewController)
     func viewDidDisappear(_ floatView: FloatViewController)
     
-    
     func allClosedWindows()
-    func didSelectedFloatView(_ floatView: FloatViewController)
-    
+
+    func viewShouldSelectFloatView(_ floatView: FloatViewController)
+    func viewDidSelectFloatView(_ floatView: FloatViewController)
+    func viewDidDeselectFloatView(_ floatView: FloatViewController)
 }
 
 class FloatViewControllerManager {
@@ -50,7 +50,7 @@ class FloatViewControllerManager {
     var countWindows: Int { self._listWindows.count }
     
     
-    func windowActive() -> FloatViewController? {
+    func floatViewSelected() -> FloatViewController? {
         return listWindows.first(where: { $0.active })
     }
     
@@ -78,6 +78,12 @@ class FloatViewControllerManager {
         }
     }
     
+    
+    func selectFloatView(_ floatView: FloatViewController) {
+       
+    }
+    
+    
     func setDelegate(_ delegate: FloatViewControllerManagerDelegate) {
         self.delegate = delegate
     }
@@ -102,13 +108,12 @@ class FloatViewControllerManager {
         
     func configDesactivateWindowWhenTappedSuperView(_ superView: UIView) {
         if self._desactivateWindowSuperViewControl { return }
-        
         superView.isUserInteractionEnabled = true
         TapGestureBuilder(superView)
+            .setCancelsTouchesInView(false)
             .setTouchEnded { [weak self] tapGesture in
                 guard let self else {return}
-                lastActive = nil
-                windowActive()?.viewDesactivated()
+                floatViewSelected()?.deselect
             }
         _desactivateWindowSuperViewControl = true
     }
@@ -130,11 +135,12 @@ extension FloatViewControllerManagerDelegate {
     func viewDidMinimize(_ floatView: FloatViewController) { }
     func viewWillRestore(_ floatView: FloatViewController) { }
     func viewDidRestore(_ floatView: FloatViewController) { }
-    func viewActivated(_ floatView: FloatViewController) { }
-    func viewDesactivated(_ floatView: FloatViewController) { }
     func viewWillDisappear(_ floatView: FloatViewController) { }
     func viewDidDisappear(_ floatView: FloatViewController) { }
     func allClosedWindows() { }
-    func didSelectedFloatView(_ floatView: FloatViewController) { }
+    
+    func viewShouldSelectFloatView(_ floatView: FloatViewController) { }
+    func viewDidSelectFloatView(_ floatView: FloatViewController) { }
+    func viewDidDeselectFloatView(_ floatView: FloatViewController) { }
 }
 

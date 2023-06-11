@@ -131,15 +131,24 @@ class DockBuilder: BaseBuilder {
     }
         
     func selectItem(_ indexItem: Int?, at: UICollectionView.ScrollPosition) {
-        let indexSelect = dock.getIndexSelected()
-        dock.delegate?.didDeselectItemAt(indexSelect)
+        if let indexItem {
+            if isSelected(indexItem) {return}
+        }
         
-        dock.delegate?.shouldSelectItemAt(indexItem)
+        if let indexItem {
+            if !(dock.delegate?.shouldSelectItemAt(indexItem) ?? true) { return }
+        }
+        
+        if let indexSelect = dock.getIndexSelected() {
+            dock.delegate?.didDeselectItemAt(indexSelect)
+        }
         
         let indexPath = IndexPath(row: indexItem ?? -1, section: 0)
         dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
         
-        dock.delegate?.didSelectItemAt(indexItem)
+        if let indexItem {
+            dock.delegate?.didSelectItemAt(indexItem)
+        }
     }
     
     func removeItem(_ indexItem: Int) {

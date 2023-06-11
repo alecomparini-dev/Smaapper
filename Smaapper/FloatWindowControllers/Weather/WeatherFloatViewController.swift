@@ -30,15 +30,25 @@ class WeatherFloatViewController: FloatViewController {
         configDelegate()
     }
     
-    override func viewActivated() {
-        super.viewActivated()
+    override func viewDidSelectFloatView() {
+        super.viewDidSelectFloatView()
         setShadow()
     }
     
-    override func viewDesactivated() {
-        super.viewDesactivated()
+    override func viewDidDeselectFloatView() {
+        super.viewDidDeselectFloatView()
         removeShadow()
     }
+    
+//    override func viewActivated() {
+//        super.viewActivated()
+//        setShadow()
+//    }
+//
+//    override func viewDesactivated() {
+//        super.viewDesactivated()
+//        removeShadow()
+//    }
     
     
 //  MARK: - PRIVATE Area
