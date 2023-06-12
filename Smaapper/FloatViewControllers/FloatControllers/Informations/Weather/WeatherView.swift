@@ -1,25 +1,26 @@
 //
-//  RuleOfThreeView.swift
+//  WeatherView.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 12/06/23.
+//  Created by Alessandro Comparini on 30/05/23.
 //
 
 import UIKit
 
-protocol RuleOfThreeViewDelegate: AnyObject {
+protocol WeatherViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
 }
 
-class RuleOfThreeView: ViewBuilder {
+class WeatherView: ViewBuilder {
     
-    weak var delegate: RuleOfThreeViewDelegate?
+    weak var delegate: WeatherViewDelegate?
     
     override init() {
         super.init()
         initialization()
     }
+    
     
     private func initialization() {
         configStyles()
@@ -27,8 +28,10 @@ class RuleOfThreeView: ViewBuilder {
         configConstraints()
     }
     
+    //  MARK: - LAZY Area
+    
     lazy var temperatureImageView: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "3.square.fill"))
+        let img = ImageViewBuilder(UIImage(systemName: "cloud.sun.fill"))
             .setSize(80)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setContentMode(.center)
@@ -39,9 +42,16 @@ class RuleOfThreeView: ViewBuilder {
         return img
     }()
     
+    
     lazy var titleView: ViewBuilder = {
-        let view = UtilsFloatView.titleFloatView(self, #selector(minimizeWindow), #selector(closeWindow))
+        let view = TitleFloatView(title: "Weather", logo: "cloud.sun.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+            .setConstraints { build in
+                build
+                    .setPinTop.equalToSuperView
+                    .setHeight.equalToConstant(25)
+            }
         return view
+
     }()
     @objc private func minimizeWindow() {
         delegate?.minimizeWindow()
@@ -49,7 +59,7 @@ class RuleOfThreeView: ViewBuilder {
     @objc private func closeWindow() {
         delegate?.closeWindow()
     }
-    
+
     
 //  MARK: - PRIVATE Area
     
@@ -71,12 +81,14 @@ class RuleOfThreeView: ViewBuilder {
     
     private func addElements() {
         temperatureImageView.add(insideTo: self.view)
+        titleView.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         temperatureImageView.applyConstraint()
+        titleView.applyConstraint()
     }
     
     
-    
+
 }

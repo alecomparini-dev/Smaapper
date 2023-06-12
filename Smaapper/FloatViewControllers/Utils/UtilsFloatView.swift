@@ -38,59 +38,6 @@ class UtilsFloatView {
         view.view.removeShadowByID("activeFloatView")
     }
     
-    static func titleFloatView(_ target: Any, _ actionMinimize: Selector, _ actionClose: Selector)  -> ViewBuilder {
-        let view = ViewBuilder()
-        
-        let btnMin = minimizeWindowButton(target, actionMinimize)
-        btnMin.add(insideTo: view.view)
-        btnMin.applyConstraint()
-    
-        let btnClose = closeWindowButton(target, actionClose)
-        btnClose.add(insideTo: view.view)
-        btnClose.applyConstraint()
-
-        return view
-    }
-    
-    
-    static private func minimizeWindowButton(_ target: Any, _ action: Selector) -> ButtonImageBuilder {
-        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "minus.square.fill")))
-            .setImageSize(14)
-            .setImageWeight(.semibold)
-            .setTitleAlignment(.center)
-            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.8))
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(25)
-                    .setTop.equalToSuperView(7)
-                    .setTrailing.equalToSuperView(-7)
-            }
-            .setActions { build in
-                build
-                    .setTarget(target, action, .touchUpInside)
-            }
-        return btn
-    }
-    
-    
-    static private func closeWindowButton(_ target: Any, _ action: Selector) -> ButtonImageBuilder {
-        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
-            .setImageSize(10)
-            .setImageWeight(.semibold)
-            .setTitleAlignment(.center)
-            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
-            .setConstraints { build in
-                build
-                    .setSize.equalToConstant(25)
-                    .setTop.equalToSuperView(7)
-                    .setLeading.equalToSuperView(8)
-            }
-            .setActions { build in
-                build
-                    .setTarget(target, action, .touchUpInside)
-            }
-        return btn
-    }
     
     
 }

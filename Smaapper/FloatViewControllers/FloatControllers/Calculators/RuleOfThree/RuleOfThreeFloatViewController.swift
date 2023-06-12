@@ -1,20 +1,18 @@
 //
-//  WeatherViewController.swift
+//  RuleOfThreeFloatViewController.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 30/05/23.
+//  Created by Alessandro Comparini on 12/06/23.
 //
 
-import UIKit
+import Foundation
 
 
-class WeatherFloatViewController: FloatViewController {
-    static let identifierApp = "weather"
+class RuleOfThreeFloatViewController: FloatViewController {
+    static let identifierApp = "rule_of_3"
     
-    private var titleView: UIView?
-    
-    lazy var screen: WeatherView = {
-        let view = WeatherView()
+    lazy var screen: RuleOfThreeView = {
+        let view = RuleOfThreeView()
         return view
     }()
     
@@ -22,10 +20,10 @@ class WeatherFloatViewController: FloatViewController {
         view = screen.view
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 100, width: 160, height: 250))
-        setTitleWindow(screen.titleView.view)
+        setFrameWindow(CGRect(x: 50, y: 150, width: 250, height: 150))
         setTitleHeight(35)
         setEnabledDraggable(true)
         configDelegate()
@@ -56,13 +54,12 @@ class WeatherFloatViewController: FloatViewController {
         UtilsFloatView.removeShadowActiveFloatView(screen)
     }
     
-    
 }
 
 
 //  MARK: - EXTENSIONWeatherViewDelegate
 
-extension WeatherFloatViewController: WeatherViewDelegate {
+extension RuleOfThreeFloatViewController: RuleOfThreeViewDelegate {
     
     func closeWindow() {
         self.dismiss()
@@ -74,3 +71,4 @@ extension WeatherFloatViewController: WeatherViewDelegate {
 
     
 }
+
