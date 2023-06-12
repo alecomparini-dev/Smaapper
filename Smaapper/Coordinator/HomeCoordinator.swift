@@ -24,15 +24,22 @@ class HomeCoordinator: Coordinator {
 }
 
 extension HomeCoordinator: HomeFloatViewControllerDelegate {
+    
     func openFloatViewController(_ idApp: String, where component: UIView) {
+        
         switch idApp {
+            
             case WeatherFloatViewController.identifierApp:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)
                 
+            case RuleOfThreeFloatViewController.identifierApp:
+                let coodinator = RuleOfThreeCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+                
             default:
-            let coodinator = WeatherCoordinator(floatNavigationController)
-            coodinator.start(where: component)
+                let coodinator = WeatherCoordinator(floatNavigationController)
+                coodinator.start(where: component)
         }
     }
     

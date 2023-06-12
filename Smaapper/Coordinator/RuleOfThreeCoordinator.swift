@@ -1,13 +1,13 @@
 //
-//  WeatherCoordinator.swift
+//  RuleOfThreeCoordinator.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 09/06/23.
+//  Created by Alessandro Comparini on 12/06/23.
 //
 
 import UIKit
 
-class WeatherCoordinator: Coordinator {
+class RuleOfThreeCoordinator: Coordinator {
 
     var floatNavigationController: FloatNavigationController
     
@@ -16,14 +16,12 @@ class WeatherCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = WeatherFloatViewController()
-        weather.setCustomAttribute(WeatherFloatViewController.identifierApp)
+        let weather = RuleOfThreeFloatViewController()
+        weather.setCustomAttribute(RuleOfThreeFloatViewController.identifierApp)
         floatNavigationController.present(weather, where: component )
     }
 
-    func start() {
-        
-    }
-
+    func start() {}
     
 }
+

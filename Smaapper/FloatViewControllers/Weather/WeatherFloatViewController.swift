@@ -24,6 +24,7 @@ class WeatherFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setFrameWindow(CGRect(x: 50, y: 100, width: 160, height: 250))
         setTitleWindow(screen.titleView.view)
         setTitleHeight(35)
         setEnabledDraggable(true)
@@ -40,16 +41,6 @@ class WeatherFloatViewController: FloatViewController {
         removeShadow()
     }
     
-//    override func viewActivated() {
-//        super.viewActivated()
-//        setShadow()
-//    }
-//
-//    override func viewDesactivated() {
-//        super.viewDesactivated()
-//        removeShadow()
-//    }
-    
     
 //  MARK: - PRIVATE Area
     
@@ -58,20 +49,11 @@ class WeatherFloatViewController: FloatViewController {
     }
     
     private func setShadow() {
-        self.setShadow { build in
-            build
-                .setColor(Theme.shared.currentTheme.primary)
-                .setOffset(width: 0, height: 0)
-                .setOpacity(0.8)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeWindow")
-                .apply()
-        }
+        UtilsFloatView.setShadowActiveFloatView(screen)
     }
     
     private func removeShadow() {
-        self.view.removeShadowByID("activeWindow")
+        UtilsFloatView.removeShadowActiveFloatView(screen)
     }
     
     
