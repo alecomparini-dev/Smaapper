@@ -16,7 +16,7 @@ class HomeViewDockController {
     
     private var dock = DockBuilder()
     
-    init() {  }
+    init() { }
     
     init(_ dock: DockBuilder) {
         self.dock = dock
@@ -95,6 +95,16 @@ class HomeViewDockController {
         }
     }
     
+    func configItemDock(_ indexItem: Int) {
+        let win = floatManager.listFloatView[indexItem]
+        if win.isMinimized {
+            minimizedItemDock(win, reload: true)
+        }
+        if win.active {
+            setShadowItemDock()
+        }
+    }
+    
     
 //  MARK: - MANIPULATION DOCK
     
@@ -118,6 +128,7 @@ class HomeViewDockController {
         return dock.isSelected(indexItem)
     }
     
+    
 //  MARK: - PRIVATE Area
     func setConstraintAlignmentHorizontalDock(_ view: UIView) {
         self.adjustTrailingDock = dock.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
@@ -127,17 +138,13 @@ class HomeViewDockController {
     
     private func isShowDockIfOneWindow() -> Bool {
         if (floatManager.countFloatView == 1 ) {
-            if floatManager.listFloatView[0].isMinimized {
-                return true
-            }
+            if floatManager.listFloatView[0].isMinimized { return true }
         }
         return false
     }
     
     private func isShowDockIfMoreThanOneWindow() -> Bool {
-        if floatManager.countFloatView >= 2 {
-            return true
-        }
+        if floatManager.countFloatView >= 2 { return true }
         return false
     }
 

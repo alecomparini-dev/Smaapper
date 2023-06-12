@@ -13,34 +13,28 @@ protocol HomeFloatViewControllerDelegate: AnyObject {
 
 class HomeViewController: UIViewController {
     
+    var delegateFloatViewController: HomeFloatViewControllerDelegate?
     
     private let floatManager = FloatViewControllerManager.instance
     private var adjustTrailingDock = NSLayoutConstraint()
-    
     
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
     
     private var dockController = HomeViewDockController()
-    
     private var indexCloseWin: Int?
-    
-    var delegateFloatViewController: HomeFloatViewControllerDelegate?
     
     private let viewModel = HomeViewModel()
     private var categoriesVC: CategoriesViewController?
-    
-    
     private var resultDropdownMenu: DropdownMenuData?
+    private var weather: WeatherFloatViewController?
+    
     private var categories: DropdownMenuData = []
-    private var turnOnMenuButton = false
+ 
     private var indexSection = 0
     private var indexRow = 0
     private var rowTappedDropdownMenu: (section: Int, row: Int) = (0,0)
     private var rowTappedCategory: (section: Int, row: Int)?
-    
-    private var weather: WeatherFloatViewController?
-    
     
     
     lazy var homeScreen: HomeView = {
@@ -216,8 +210,11 @@ class HomeViewController: UIViewController {
         homeScreen.askChatGPTView.setHidden(true)
     }
     
-    
-//  MARK: - DOCK Area
+    private func getIcon(_ index: Int) -> String {
+        let win = floatManager.listFloatView[index]
+        let idApp = win.customAttribute as! String
+        return getImageById(idApp)
+    }
     
     private func getImageById(_ idApp: String) -> String {
         let filteredItems = categories
@@ -227,27 +224,6 @@ class HomeViewController: UIViewController {
         return filteredItems?.leftImage ?? ""
     }
     
-    private func getIcon(_ index: Int) -> String {
-        let win = floatManager.listFloatView[index]
-        let idApp = win.customAttribute as! String
-        return getImageById(idApp)
-    }
-
-    private func configIconsDock(_ indexItem: Int) -> UIView {
-        let img = getIcon(indexItem)
-        let iconDock = homeScreen.createIconsDock(img)
-        
-        let win = floatManager.listFloatView[indexItem]
-        
-        if win.isMinimized {
-            dockController.minimizedItemDock(win, reload: true)
-        }
-        if win.active {
-            dockController.setShadowItemDock()
-        }
-        return iconDock
-    }
-
     
 //  MARK: - FLOATWINDOW Area
     
@@ -377,7 +353,10 @@ extension HomeViewController: DockDelegate {
     }
     
     func cellItemCallback(_ indexItem: Int) -> UIView {
-        return configIconsDock(indexItem)
+        let img = getIcon(indexItem)
+        let iconDock = homeScreen.createIconsDock(img)
+        dockController.configItemDock(indexItem)
+        return iconDock
     }
     
     func shouldSelectItemAt(_ indexItem: Int) -> Bool {

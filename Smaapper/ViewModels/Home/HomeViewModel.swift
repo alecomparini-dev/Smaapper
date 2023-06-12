@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 class HomeViewModel {
     
     private let service: HomeService = HomeService()
