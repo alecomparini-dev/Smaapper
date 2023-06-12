@@ -116,6 +116,10 @@ class DockBuilder: BaseBuilder {
         dock.setClosureGetCellItem(indexSelected, closure: closure)
     }
 
+    func getIndexForVisibleItems() -> [Int] {
+        return dock.collection.indexPathsForVisibleItems.compactMap({$0.row})
+    }
+    
     func getIndexSelected() -> Int? { dock.getIndexSelected() }
 
     func isSelected(_ indexItem: Int) -> Bool {
@@ -126,32 +130,29 @@ class DockBuilder: BaseBuilder {
 //  MARK: - Actions
     
     func reload() {
+        if !isShow {return}
         dock.collection.reloadData()
         autoResizingContainer()
     }
         
-    func selectItem(_ indexItem: Int?, at: UICollectionView.ScrollPosition) {
-        if let indexItem {
-            if isSelected(indexItem) {return}
-        }
+    func selectItem(_ indexItem: Int, at: UICollectionView.ScrollPosition) {
+//        if !isShow {return}
+        if isSelected(indexItem) {return}
         
-        if let indexItem {
-            if !(dock.delegate?.shouldSelectItemAt(indexItem) ?? true) { return }
-        }
+        if !(dock.delegate?.shouldSelectItemAt(indexItem) ?? true) { return }
         
         if let indexSelect = dock.getIndexSelected() {
             dock.delegate?.didDeselectItemAt(indexSelect)
         }
         
-        let indexPath = IndexPath(row: indexItem ?? -1, section: 0)
+        let indexPath = IndexPath(row: indexItem, section: 0)
         dock.collection.selectItem(at: indexPath, animated: true, scrollPosition: at)
         
-        if let indexItem {
-            dock.delegate?.didSelectItemAt(indexItem)
-        }
+        dock.delegate?.didSelectItemAt(indexItem)
     }
     
     func deselect(_ indexItem: Int) {
+//        if !isShow {return}
         let indexPath = IndexPath(row: indexItem, section: 0)
         dock.collection.deselectItem(at: indexPath, animated: true)
         dock.delegate?.didDeselectItemAt(indexItem)
@@ -171,6 +172,10 @@ class DockBuilder: BaseBuilder {
     }
     
     func insertItem(_ indexItem: Int) {
+        if getIndexForVisibleItems().count < indexItem {
+            reload()
+            return
+        }
         let indexPath = IndexPath(row: indexItem, section: 0)
         dock.collection.performBatchUpdates({
             dock.collection.insertItems(at: [indexPath])

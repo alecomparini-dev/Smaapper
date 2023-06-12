@@ -13,42 +13,15 @@ protocol HomeFloatViewControllerDelegate: AnyObject {
 
 class HomeViewController: UIViewController {
     
-    private var icons = [String]()
-                             
-    private var iconsDock = ["paperplane.fill",
-                             "square.and.arrow.up.trianglebadge.exclamationmark",
-                             "paintbrush.fill",
-                             "die.face.5",
-                             "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
-                             "fan.oscillation.fill",
-                             "light.beacon.max.fill",
-                             "door.left.hand.closed",
-                             "eraser.fill",
-                             "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
-                             "fan.oscillation.fill",
-                             "light.beacon.max.fill",
-                             "door.left.hand.closed",
-                             "eraser.fill",
-                             "pianokeys.inverse",
-                             "level.fill",
-                             "puzzlepiece.extension",
-                             "fan.oscillation.fill",
-                             "light.beacon.max.fill",
-                             "door.left.hand.closed",
-                             "eraser.fill",
-                             "xmark.seal",
-                             "scribble",
-                             "bolt.horizontal"
-    ]
     
+    private let floatManager = FloatViewControllerManager.instance
+    private var adjustTrailingDock = NSLayoutConstraint()
     
     
     static let favoritesID = "Favorites"
     static let categoriesID = "Categories"
+    
+    private var dockController = HomeViewDockController()
     
     private var indexCloseWin: Int?
     
@@ -57,7 +30,7 @@ class HomeViewController: UIViewController {
     private let viewModel = HomeViewModel()
     private var categoriesVC: CategoriesViewController?
     
-    private var adjustTrailingDock = NSLayoutConstraint()
+    
     private var resultDropdownMenu: DropdownMenuData?
     private var categories: DropdownMenuData = []
     private var turnOnMenuButton = false
@@ -67,6 +40,8 @@ class HomeViewController: UIViewController {
     private var rowTappedCategory: (section: Int, row: Int)?
     
     private var weather: WeatherFloatViewController?
+    
+    
     
     lazy var homeScreen: HomeView = {
         let home = HomeView(frame: .zero)
@@ -79,32 +54,32 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configDelegate()
+        configDockController()
         configDropdownMenu()
-        configDock()
+        configDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        homeScreen.dock.isShow = true
-        
-        
         if let rowTappedCategory {
             addFloatViewController(rowTappedCategory)
         }
+        dockController.isShow = true
+        dockController.verifyShowDock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         rowTappedCategory = nil
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+
     
     //  MARK: - Private Function Area
+    
+    private func configDockController() {
+        self.dockController = HomeViewDockController(homeScreen.dock)
+        dockController.setConstraintAlignmentHorizontalDock(self.view)
+    }
     
     private func configDropdownMenu() {
         fetchDropdownMenu()
@@ -112,20 +87,10 @@ class HomeViewController: UIViewController {
         homeScreen.dropdownMenu.isShow = false
     }
     
-    private func configDock() {
-        setConstraintAlignmentHorizontalDock()
-        setDockAlignment()
-    }
-    
-    private func setConstraintAlignmentHorizontalDock() {
-        self.adjustTrailingDock = homeScreen.dock.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
-        adjustTrailingDock.isActive = true
-    }
-    
     private func configDelegate() {
         homeScreen.setDelegate(self)
-        FloatViewControllerManager.instance.setDelegate(self)
-        homeScreen.dock.setDelegate(self)
+        floatManager.setDelegate(self)
+        dockController.setDelegate(self)
     }
     
     private func openCloseDropdownMenu() {
@@ -254,28 +219,6 @@ class HomeViewController: UIViewController {
     
 //  MARK: - DOCK Area
     
-    private func setDockAlignment() {
-        if FloatViewControllerManager.instance.countWindows == 4 {
-            self.adjustTrailingDock.constant = -50
-        }
-
-        if FloatViewControllerManager.instance.countWindows > 4 {
-            self.adjustTrailingDock.constant = -90
-        }
-    }
-
-//    private func reloadDock() {
-//        setDockAlignment()
-//        homeScreen.dock.reload()
-//    }
-
-
-    private func getIcon(_ index: Int) -> String {
-        let win = FloatViewControllerManager.instance.listWindows[index]
-        let idApp = win.customAttribute as! String
-        return getImageById(idApp)
-    }
-
     private func getImageById(_ idApp: String) -> String {
         let filteredItems = categories
             .compactMap { $0.items?.compactMap { $0 } }
@@ -284,78 +227,29 @@ class HomeViewController: UIViewController {
         return filteredItems?.leftImage ?? ""
     }
     
+    private func getIcon(_ index: Int) -> String {
+        let win = floatManager.listFloatView[index]
+        let idApp = win.customAttribute as! String
+        return getImageById(idApp)
+    }
 
-    private func setShadowItemDock() {
-        self.homeScreen.dock.getCellSelected { cellItem in
-            Shadow(cellItem.subviews[0].subviews[0])
-                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
-                .setOffset(width: 0, height: 0)
-                .setOpacity(1)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeItemDock")
-                .apply()
-        }
-    }
-    
-    private func removeShadowItemDock(_ indexItem: Int) {
-        self.homeScreen.dock.getCellByIndex(indexItem) { cellItem in
-            cellItem.subviews[0].subviews[0].removeShadowByID("activeItemDock")
-        }
-    }
-    
-    
     private func configIconsDock(_ indexItem: Int) -> UIView {
-//        let img = getIcon(indexItem)
-        let iconDock = homeScreen.createIconsDock(iconsDock[indexItem])
+        let img = getIcon(indexItem)
+        let iconDock = homeScreen.createIconsDock(img)
         
-        let win = FloatViewControllerManager.instance.listWindows[indexItem]
+        let win = floatManager.listFloatView[indexItem]
         
         if win.isMinimized {
-            minimizedItemDock(win, reload: true)
+            dockController.minimizedItemDock(win, reload: true)
         }
         if win.active {
-            setShadowItemDock()
+            dockController.setShadowItemDock()
         }
-        
         return iconDock
     }
-    
 
-    private func restoredItemDock(_ floatWindow: FloatViewController) {
-        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
-            homeScreen.dock.getCellByIndex(index) { [weak self] cellItem in
-                self?.restoreItemDock(cellItem)
-            }
-        }
-    }
-
-    private func restoreItemDock(_ cellItem: UIView) {
-        UIView.animate(withDuration: 0.3) {
-            cellItem.transform = CGAffineTransform.identity
-        }
-    }
-
-
-    private func minimizedItemDock(_ floatWindow: FloatViewController, reload: Bool = false) {
-        if let index = FloatViewControllerManager.instance.getIndex(floatWindow) {
-            homeScreen.dock.getCellByIndex(index) { [weak self] cellItem in
-                self?.minimizeItemDock(cellItem, reload)
-            }
-        }
-    }
-    
-    private func minimizeItemDock(_ cellItem: UIView, _ reload: Bool = false)  {
-        let duration = (reload) ? 0.0 : 0.3
-        UIView.animate(withDuration: duration) {
-            cellItem.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        }
-    }
-    
     
 //  MARK: - FLOATWINDOW Area
-    
-
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
         let idApp: String = getIdAppByCategory(category)
@@ -410,38 +304,50 @@ extension HomeViewController: CategoriesViewControllerDelegate {
 extension HomeViewController: FloatViewControllerManagerDelegate {
 
     func viewWillAppear(_ floatView: FloatViewController) {
-        homeScreen.dock.insertItem(FloatViewControllerManager.instance.listWindows.count - 1)
+        dockController.insertItem(floatManager.countFloatView - 1)
+    }
+    
+    func viewDidAppear(_ floatView: FloatViewController) {
+        dockController.verifyShowDock()
     }
     
     func viewDidSelectFloatView(_ floatView: FloatViewController) {
-        if let index = FloatViewControllerManager.instance.getIndex(floatView) {
-            homeScreen.dock.selectItem(index, at: .centeredHorizontally)
+        if let index = floatManager.getIndex(floatView) {
+            dockController.selectItem(index, at: .centeredHorizontally)
         }
     }
     
     func viewDidDeselectFloatView(_ floatView: FloatViewController) {
-        if let index = FloatViewControllerManager.instance.getIndex(floatView) {
-            homeScreen.dock.deselect(index)
+        if let index = floatManager.getIndex(floatView) {
+            dockController.deselect(index)
         }
-        
     }
     
     func viewWillDisappear(_ floatView: FloatViewController) {
-        self.indexCloseWin = FloatViewControllerManager.instance.getIndex(floatView)
+        self.indexCloseWin = floatManager.getIndex(floatView)
     }
 
     func viewDidDisappear(_ floatView: FloatViewController) {
+        dockController.verifyShowDock()
         if let indexCloseWin {
-            homeScreen.dock.removeItem(indexCloseWin)
+            dockController.removeItem(indexCloseWin)
         }
     }
     
     func viewWillMinimize(_ floatView: FloatViewController) {
-        minimizedItemDock(floatView)
+        dockController.minimizedItemDock(floatView)
+    }
+    
+    func viewDidMinimize(_ floatView: FloatViewController) {
+        dockController.verifyShowDock()
     }
     
     func viewWillRestore(_ floatView: FloatViewController) {
-        restoredItemDock(floatView)
+        dockController.restoredItemDock(floatView)
+    }
+    
+    func viewDidRestore(_ floatView: FloatViewController) {
+        dockController.verifyShowDock()
     }
     
     func viewWillDrag(_ floatView: FloatViewController) {
@@ -466,9 +372,17 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
 
 extension HomeViewController: DockDelegate {
     
+    func numberOfItemsCallback() -> Int {
+        return floatManager.countFloatView
+    }
+    
+    func cellItemCallback(_ indexItem: Int) -> UIView {
+        return configIconsDock(indexItem)
+    }
+    
     func shouldSelectItemAt(_ indexItem: Int) -> Bool {
-        let floatView = FloatViewControllerManager.instance.listWindows[indexItem]
-        if homeScreen.dock.isSelected(indexItem) {
+        let floatView = floatManager.listFloatView[indexItem]
+        if dockController.isSelected(indexItem) {
             floatView.minimize
             return false
         }
@@ -476,24 +390,17 @@ extension HomeViewController: DockDelegate {
     }
     
     func didSelectItemAt(_ indexItem: Int) {
-        setShadowItemDock()
+        dockController.setShadowItemDock()
         activeFloatView(indexItem)
     }
     
     func didDeselectItemAt(_ indexItem: Int) {
-        removeShadowItemDock(indexItem)
+        dockController.removeShadowItemDock(indexItem)
     }
     
-    func numberOfItemsCallback() -> Int {
-        return FloatViewControllerManager.instance.listWindows.count
-    }
-    
-    func cellItemCallback(_ indexItem: Int) -> UIView {
-        return configIconsDock(indexItem)
-    }
     
     private func activeFloatView(_ indexItem: Int)  {
-        let floatView = FloatViewControllerManager.instance.listWindows[indexItem]
+        let floatView = floatManager.listFloatView[indexItem]
         
         if floatView.isMinimized {
             floatView.restore

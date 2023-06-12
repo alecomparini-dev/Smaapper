@@ -110,6 +110,7 @@
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
 		02E974182A339B3E00BF14EE /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */; };
+		02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9741B2A37612A00BF14EE /* HomeViewDockController.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -232,6 +233,7 @@
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
+		02E9741B2A37612A00BF14EE /* HomeViewDockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDockController.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 			children = (
 				0234A90129F9FD3A008392EC /* HomeView.swift */,
 				0234A90229F9FD3A008392EC /* HomeViewController.swift */,
+				02E9741B2A37612A00BF14EE /* HomeViewDockController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
+				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
