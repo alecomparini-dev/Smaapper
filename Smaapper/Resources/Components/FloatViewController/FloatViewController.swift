@@ -96,7 +96,7 @@ class FloatViewController: BaseBuilder {
         setHierarchyVisualization()
         addWindowsToManager()
         configTouchForActivateWindow()
-        manager.configDesactivateWindowWhenTappedSuperView(superView)
+        manager.enableDeactivationFloatViewWhenTappedSuperview(superView)
         manager.delegate?.viewDidLoad(self)
     }
 
@@ -130,7 +130,6 @@ class FloatViewController: BaseBuilder {
     func viewDidDrag(){
         manager.delegate?.viewDidDrag(self)
     }
-
 
     
 //  MARK: - ACTIVE / DEACTIVE

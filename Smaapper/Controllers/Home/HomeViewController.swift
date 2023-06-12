@@ -58,8 +58,6 @@ class HomeViewController: UIViewController {
         if let rowTappedCategory {
             addFloatViewController(rowTappedCategory)
         }
-        dockController.isShow = true
-        dockController.verifyShowDock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +71,8 @@ class HomeViewController: UIViewController {
     private func configDockController() {
         self.dockController = HomeViewDockController(homeScreen.dock)
         dockController.setConstraintAlignmentHorizontalDock(self.view)
+        dockController.isShow = true
+        dockController.verifyShowDock()
     }
     
     private func configDropdownMenu() {
@@ -237,8 +237,9 @@ class HomeViewController: UIViewController {
         return self.categories[category.section].items?[category.row].id ?? ""
     }
     
+    
 }
-
+    
 
 //  MARK: - EXTENSION HomeViewDelegate
 

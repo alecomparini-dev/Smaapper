@@ -100,6 +100,10 @@ class ListBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: ListActions) -> ListActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+            return self
+        }
         self.actions = action(ListActions(self))
         return self
     }

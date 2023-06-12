@@ -10,9 +10,9 @@ import UIKit
 class ImageViewBuilder: BaseBuilder {
     
     private var imageView: ImageView
+    private var actions: ImageViewActions?
     
     var view: ImageView { self.imageView }
-    private var actions: ImageViewActions?
     
     init() {
         self.imageView = ImageView()
@@ -66,6 +66,10 @@ class ImageViewBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: ImageViewActions) -> ImageViewActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+            return self
+        }
         self.actions = action(ImageViewActions(self))
         return self
     }

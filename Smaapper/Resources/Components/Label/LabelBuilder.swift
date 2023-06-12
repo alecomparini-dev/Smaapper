@@ -12,7 +12,7 @@ class LabelBuilder: BaseBuilder {
     private var label: Label
     var view: Label { self.label }
     
-    private(set) var actions: LabelActions?
+    private var actions: LabelActions?
     
     init() {
         self.label = Label()
@@ -79,6 +79,10 @@ class LabelBuilder: BaseBuilder {
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: LabelActions) -> LabelActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+            return self
+        }
         self.actions = action(LabelActions(self))
         return self
     }

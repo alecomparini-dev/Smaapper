@@ -13,7 +13,6 @@ protocol TapGestureDelegate: AnyObject {
     func touchCancelled(_ tapGesture: TapGesture)
 }
 
-
 class TapGesture: UITapGestureRecognizer {
     
     enum GestureRelativeTo {
@@ -39,6 +38,7 @@ class TapGesture: UITapGestureRecognizer {
     private func initialization() {
         self.addTarget(self, action: #selector(objcTapGesture(_:)))
         self.component?.addGestureRecognizer(self)
+        delegate = self
     }
     
     
@@ -106,4 +106,11 @@ class TapGesture: UITapGestureRecognizer {
         self._touchPositionWindow = self.location(in: nil)
     }
         
+}
+
+
+extension TapGesture: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
