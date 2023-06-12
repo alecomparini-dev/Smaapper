@@ -24,11 +24,12 @@ class BaseBuilder {
         self._component = component
     }
 
+    
 //  MARK: - GET Properties
     
     var component: UIView {
-        get { self._component  ?? UIView()}
-        set { self._component = newValue}
+        get { self._component ?? UIView() }
+        set { self._component = newValue }
     }
     
         
@@ -71,12 +72,11 @@ class BaseBuilder {
         
     @discardableResult
     func setBackgroundColorLayer(_ color: UIColor) -> Self {
-
+        let layer = CAShapeLayer()
+        layer.fillColor = color.cgColor
+        layer.backgroundColor = color.cgColor
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
-            let layer = CAShapeLayer()
-            layer.fillColor = color.cgColor
-            layer.backgroundColor = color.cgColor
             let position = UInt32(self.countShadows())
             self.component.layer.insertSublayer(layer, at: position )
             layer.path = self.component.replicateFormat().cgPath

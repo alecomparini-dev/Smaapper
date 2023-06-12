@@ -9,7 +9,7 @@ import UIKit
 
 class ViewBuilder: BaseBuilder {
     
-    private(set) var actions: ViewActions?
+    private var actions: ViewActions?
     private var _view: View
     
     var view: View {
@@ -36,6 +36,7 @@ class ViewBuilder: BaseBuilder {
     func setActions(_ action: (_ build: ViewActions) -> ViewActions) -> Self {
         if let actions = self.actions {
             self.actions = action(actions)
+            return self
         }
         self.actions = action(ViewActions(self))
         return self

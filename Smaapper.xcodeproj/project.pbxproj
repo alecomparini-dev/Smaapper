@@ -287,9 +287,8 @@
 		021848B12A262577007E68A4 /* FloatViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				02E974392A379EAF00BF14EE /* Controllers */,
 				02E974222A37890B00BF14EE /* Utils */,
-				02E9741D2A37886300BF14EE /* RuleOfThree */,
-				021848B22A262584007E68A4 /* Weather */,
 			);
 			path = FloatViewControllers;
 			sourceTree = "<group>";
@@ -357,7 +356,6 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				02E974102A33949900BF14EE /* FloatNavigationController */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
@@ -370,6 +368,7 @@
 				026F79782A00775E003947A6 /* DropdownMenu */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
 				0234A89C29F9FD3A008392EC /* Extension */,
+				02E974102A33949900BF14EE /* FloatNavigationController */,
 				0281DADF2A18087800E44F04 /* FloatViewController */,
 				0234A94729FA9E79008392EC /* Gradient */,
 				0234A88D29F9FD3A008392EC /* ImageView */,
@@ -915,6 +914,151 @@
 				02E974232A37892900BF14EE /* UtilsFloatView.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		02E974272A379B7D00BF14EE /* AlcoholOrGasoline */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AlcoholOrGasoline;
+			sourceTree = "<group>";
+		};
+		02E974282A379B9A00BF14EE /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		02E974292A379BAA00BF14EE /* BMICalculator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BMICalculator;
+			sourceTree = "<group>";
+		};
+		02E9742A2A379BC300BF14EE /* TapeMeasure */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TapeMeasure;
+			sourceTree = "<group>";
+		};
+		02E9742B2A379BD500BF14EE /* WhatFlower */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WhatFlower;
+			sourceTree = "<group>";
+		};
+		02E9742C2A379BF100BF14EE /* ARDice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ARDice;
+			sourceTree = "<group>";
+		};
+		02E9742E2A379C1F00BF14EE /* Hangman */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Hangman;
+			sourceTree = "<group>";
+		};
+		02E9742F2A379C3B00BF14EE /* AskChatGPT */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AskChatGPT;
+			sourceTree = "<group>";
+		};
+		02E974302A379C6100BF14EE /* UpcomingHolidays */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UpcomingHolidays;
+			sourceTree = "<group>";
+		};
+		02E974312A379CB100BF14EE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				02E974272A379B7D00BF14EE /* AlcoholOrGasoline */,
+				02E974322A379CCA00BF14EE /* QRCodeReader */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		02E974322A379CCA00BF14EE /* QRCodeReader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QRCodeReader;
+			sourceTree = "<group>";
+		};
+		02E974332A379CDA00BF14EE /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				02E974292A379BAA00BF14EE /* BMICalculator */,
+				02E9741D2A37886300BF14EE /* RuleOfThree */,
+				02E974282A379B9A00BF14EE /* Calculator */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		02E974342A379D0700BF14EE /* AR - Augmented Reality */ = {
+			isa = PBXGroup;
+			children = (
+				02E974352A379D2B00BF14EE /* InvisibleDevice */,
+				02E9742B2A379BD500BF14EE /* WhatFlower */,
+				02E9742A2A379BC300BF14EE /* TapeMeasure */,
+				02E9742C2A379BF100BF14EE /* ARDice */,
+			);
+			path = "AR - Augmented Reality";
+			sourceTree = "<group>";
+		};
+		02E974352A379D2B00BF14EE /* InvisibleDevice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = InvisibleDevice;
+			sourceTree = "<group>";
+		};
+		02E974362A379D3C00BF14EE /* Games-Entertainment */ = {
+			isa = PBXGroup;
+			children = (
+				02E9742E2A379C1F00BF14EE /* Hangman */,
+				02E974372A379DA500BF14EE /* TicTacToe */,
+			);
+			path = "Games-Entertainment";
+			sourceTree = "<group>";
+		};
+		02E974372A379DA500BF14EE /* TicTacToe */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TicTacToe;
+			sourceTree = "<group>";
+		};
+		02E974382A379E0600BF14EE /* Informations */ = {
+			isa = PBXGroup;
+			children = (
+				02E974302A379C6100BF14EE /* UpcomingHolidays */,
+				021848B22A262584007E68A4 /* Weather */,
+				02E9742F2A379C3B00BF14EE /* AskChatGPT */,
+			);
+			path = Informations;
+			sourceTree = "<group>";
+		};
+		02E974392A379EAF00BF14EE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				02E974382A379E0600BF14EE /* Informations */,
+				02E974332A379CDA00BF14EE /* Calculators */,
+				02E974342A379D0700BF14EE /* AR - Augmented Reality */,
+				02E974362A379D3C00BF14EE /* Games-Entertainment */,
+				02E974312A379CB100BF14EE /* Utilities */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {

@@ -106,6 +106,7 @@ class DropdownMenuBuilder: BaseBuilder {
     func setActions(_ action: (_ build: DropdownMenuActions) -> DropdownMenuActions) -> Self {
         if let actions = self.actions {
             self.actions = action(actions)
+            return self
         }
         self.actions = action(DropdownMenuActions())
         return self

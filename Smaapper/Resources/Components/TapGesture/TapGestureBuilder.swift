@@ -11,9 +11,9 @@ class TapGestureBuilder {
     
     typealias touchGestureAlias = (_ tapGesture: TapGesture) -> Void
     
-    private var touchMoved: [touchGestureAlias] = []
-    private var touchEnded: [touchGestureAlias] = []
-    private var touchCancelled: [touchGestureAlias] = []
+    private var touchMoved: touchGestureAlias?
+    private var touchEnded: touchGestureAlias?
+    private var touchCancelled: touchGestureAlias?
     
     private var tapGesture: TapGesture
     private weak var component: UIView?
@@ -53,19 +53,19 @@ class TapGestureBuilder {
     
     @discardableResult
     func setTouchEnded(_ closure: @escaping touchGestureAlias) -> Self {
-        self.touchEnded.append(closure)
+        self.touchEnded = closure
         return self
     }
     
     @discardableResult
     func setTouchMoved(_ closure: @escaping touchGestureAlias) -> Self {
-        self.touchMoved.append(closure)
+        self.touchMoved = closure
         return self
     }
     
     @discardableResult
     func setTouchCancelled(_ closure: @escaping touchGestureAlias) -> Self {
-        self.touchCancelled.append(closure)
+        self.touchCancelled = closure
         return self
     }
     
@@ -91,21 +91,15 @@ class TapGestureBuilder {
 extension TapGestureBuilder: TapGestureDelegate {
     
     func touchMoved(_ tapGesture: TapGesture) {
-        self.touchMoved.forEach({ closure in
-            closure(tapGesture)
-        })
+        self.touchMoved?(tapGesture)
     }
     
     func touchEnded(_ tapGesture: TapGesture) {
-        self.touchEnded.forEach({ closure in
-            closure(tapGesture)
-        })
+        self.touchEnded?(tapGesture)
     }
     
     func touchCancelled(_ tapGesture: TapGesture) {
-        self.touchCancelled.forEach({ closure in
-            closure(tapGesture)
-        })
+        self.touchCancelled?(tapGesture)
     }
     
 }
