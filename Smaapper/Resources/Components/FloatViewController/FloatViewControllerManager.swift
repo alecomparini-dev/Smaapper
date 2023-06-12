@@ -39,7 +39,6 @@ class FloatViewControllerManager {
     
     private init() {}
 
-    var lastActive: FloatViewController?
     var listFloatView: [FloatViewController] { self._listWindows }
     var countFloatView: Int { self._listWindows.count }
         
@@ -47,7 +46,7 @@ class FloatViewControllerManager {
         return listFloatView.first(where: { $0.active })
     }
     
-    func addWindowToManager(_ floatView: FloatViewController)  {
+    func addFloatView(_ floatView: FloatViewController)  {
         self._listWindows.append(floatView)
     }
     

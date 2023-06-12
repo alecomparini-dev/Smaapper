@@ -1,18 +1,20 @@
 //
-//  RuleOfThreeFloatViewController.swift
+//  WeatherViewController.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 12/06/23.
+//  Created by Alessandro Comparini on 30/05/23.
 //
 
-import Foundation
+import UIKit
 
 
-class RuleOfThreeFloatViewController: FloatViewController {
-    static let identifierApp = "rule_of_3"
+class WeatherFloatViewController: FloatViewController {
+    static let identifierApp = "weather"
     
-    lazy var screen: RuleOfThreeView = {
-        let view = RuleOfThreeView()
+    private var titleView: UIView?
+    
+    lazy var screen: WeatherView = {
+        let view = WeatherView()
         return view
     }()
     
@@ -20,11 +22,9 @@ class RuleOfThreeFloatViewController: FloatViewController {
         view = screen.view
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 150, width: 250, height: 150))
-        setTitleWindow(screen.titleView.view)
+        setFrameWindow(CGRect(x: 50, y: 100, width: 160, height: 250))
         setTitleHeight(35)
         setEnabledDraggable(true)
         configDelegate()
@@ -47,7 +47,6 @@ class RuleOfThreeFloatViewController: FloatViewController {
         screen.delegate = self
     }
     
-    
     private func setShadow() {
         UtilsFloatView.setShadowActiveFloatView(screen)
     }
@@ -61,7 +60,7 @@ class RuleOfThreeFloatViewController: FloatViewController {
 
 //  MARK: - EXTENSIONWeatherViewDelegate
 
-extension RuleOfThreeFloatViewController: RuleOfThreeViewDelegate {
+extension WeatherFloatViewController: WeatherViewDelegate {
     
     func closeWindow() {
         self.dismiss()
@@ -73,4 +72,3 @@ extension RuleOfThreeFloatViewController: RuleOfThreeViewDelegate {
 
     
 }
-

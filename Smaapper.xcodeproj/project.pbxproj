@@ -115,6 +115,7 @@
 		02E974212A3788A200BF14EE /* RuleOfThreeFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974202A3788A200BF14EE /* RuleOfThreeFloatViewController.swift */; };
 		02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974232A37892900BF14EE /* UtilsFloatView.swift */; };
 		02E974262A378AFE00BF14EE /* RuleOfThreeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */; };
+		02E9743E2A37C55E00BF14EE /* TitleFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -242,6 +243,7 @@
 		02E974202A3788A200BF14EE /* RuleOfThreeFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleOfThreeFloatViewController.swift; sourceTree = "<group>"; };
 		02E974232A37892900BF14EE /* UtilsFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsFloatView.swift; sourceTree = "<group>"; };
 		02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleOfThreeCoordinator.swift; sourceTree = "<group>"; };
+		02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFloatView.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -287,7 +289,8 @@
 		021848B12A262577007E68A4 /* FloatViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				02E974392A379EAF00BF14EE /* Controllers */,
+				02E9743B2A37C25400BF14EE /* CustomFloatViews */,
+				02E974392A379EAF00BF14EE /* FloatControllers */,
 				02E974222A37890B00BF14EE /* Utils */,
 			);
 			path = FloatViewControllers;
@@ -848,6 +851,7 @@
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				02E9743A2A37B9AB00BF14EE /* DockView */,
 				021848AB2A251793007E68A4 /* AskChatGPTView */,
 				02D581552A21205C00150AF9 /* WeatherForecastView */,
 			);
@@ -1049,7 +1053,7 @@
 			path = Informations;
 			sourceTree = "<group>";
 		};
-		02E974392A379EAF00BF14EE /* Controllers */ = {
+		02E974392A379EAF00BF14EE /* FloatControllers */ = {
 			isa = PBXGroup;
 			children = (
 				02E974382A379E0600BF14EE /* Informations */,
@@ -1058,7 +1062,30 @@
 				02E974362A379D3C00BF14EE /* Games-Entertainment */,
 				02E974312A379CB100BF14EE /* Utilities */,
 			);
-			path = Controllers;
+			path = FloatControllers;
+			sourceTree = "<group>";
+		};
+		02E9743A2A37B9AB00BF14EE /* DockView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DockView;
+			sourceTree = "<group>";
+		};
+		02E9743B2A37C25400BF14EE /* CustomFloatViews */ = {
+			isa = PBXGroup;
+			children = (
+				02E9743C2A37C53200BF14EE /* TitleFloatView */,
+			);
+			path = CustomFloatViews;
+			sourceTree = "<group>";
+		};
+		02E9743C2A37C53200BF14EE /* TitleFloatView */ = {
+			isa = PBXGroup;
+			children = (
+				02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */,
+			);
+			path = TitleFloatView;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {
@@ -1197,6 +1224,7 @@
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
 				02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */,
+				02E9743E2A37C55E00BF14EE /* TitleFloatView.swift in Sources */,
 				02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */,
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,

@@ -1,26 +1,25 @@
 //
-//  WeatherView.swift
+//  RuleOfThreeView.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 30/05/23.
+//  Created by Alessandro Comparini on 12/06/23.
 //
 
 import UIKit
 
-protocol WeatherViewDelegate: AnyObject {
+protocol RuleOfThreeViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
 }
 
-class WeatherView: ViewBuilder {
+class RuleOfThreeView: ViewBuilder {
     
-    weak var delegate: WeatherViewDelegate?
+    weak var delegate: RuleOfThreeViewDelegate?
     
     override init() {
         super.init()
         initialization()
     }
-    
     
     private func initialization() {
         configStyles()
@@ -28,23 +27,13 @@ class WeatherView: ViewBuilder {
         configConstraints()
     }
     
-    //  MARK: - LAZY Area
-    
-    lazy var temperatureImageView: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "cloud.sun.fill"))
-            .setSize(80)
-            .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setContentMode(.center)
+    lazy var titleView: ViewBuilder = {
+        let view = TitleFloatView(title: "Rule of 3",logo: "3.square.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
-                    .setAlignmentCenterXY.equalToSuperView
+                    .setPinTop.equalToSuperView
+                    .setHeight.equalToConstant(25)
             }
-        return img
-    }()
-    
-    
-    lazy var titleView: ViewBuilder = {
-        let view = UtilsFloatView.titleFloatView(self, #selector(minimizeWindow), #selector(closeWindow))
         return view
     }()
     @objc private func minimizeWindow() {
@@ -53,7 +42,7 @@ class WeatherView: ViewBuilder {
     @objc private func closeWindow() {
         delegate?.closeWindow()
     }
-
+    
     
 //  MARK: - PRIVATE Area
     
@@ -74,13 +63,12 @@ class WeatherView: ViewBuilder {
     }
     
     private func addElements() {
-        temperatureImageView.add(insideTo: self.view)
+        titleView.add(insideTo: self.view)
     }
     
     private func configConstraints() {
-        temperatureImageView.applyConstraint()
+        titleView.applyConstraint()
     }
     
     
-
 }

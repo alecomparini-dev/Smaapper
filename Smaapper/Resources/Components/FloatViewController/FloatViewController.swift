@@ -94,7 +94,7 @@ class FloatViewController: BaseBuilder {
     func viewDidLoad() {
         addFloatWindow()
         setHierarchyVisualization()
-        addWindowsToManager()
+        manager.addFloatView(self)
         configTouchForActivateWindow()
         manager.enableDeactivationFloatViewWhenTappedSuperview(superView)
         manager.delegate?.viewDidLoad(self)
@@ -181,21 +181,13 @@ class FloatViewController: BaseBuilder {
     }
 
     func viewDidDisappear() {
-        manager.removeWindowToManager(self)
-        self.view.removeFromSuperview()
+        removeFloatView()
         manager.delegate?.viewDidDisappear(self)
         manager.verifyAllClosedWindows()
     }
     
     
 //  MARK: - SET Properties
-    
-    @discardableResult
-    func setTitleWindow(_ titleWindow: UIView ) -> Self {
-        self.titleWindow = TitleFloatView().setTitleView(titleWindow)
-        self.view.bringSubviewToFront(titleWindow)
-        return self
-    }
     
     @discardableResult
     func setEnabledDraggable(_ enabled: Bool) -> Self {
@@ -207,7 +199,6 @@ class FloatViewController: BaseBuilder {
                             guard let self else {return}
                             viewWillDrag()
                             select
-                            
                         }
                         .setDragging { [weak self] draggable in
                             guard let self else {return}
@@ -241,6 +232,12 @@ class FloatViewController: BaseBuilder {
     }
     
     @discardableResult
+    func setCustomAttribute(_ attribute: Any) -> Self {
+        self.customAttribute = attribute
+        return self
+    }
+    
+    @discardableResult
     func setActions(_ action: (_ build: FloatViewControllerActions) -> FloatViewControllerActions ) -> Self {
         if let actions = self.actions {
             self.actions = action(actions)
@@ -249,14 +246,6 @@ class FloatViewController: BaseBuilder {
         self.actions = action(FloatViewControllerActions(self))
         return self
     }
-    
-    @discardableResult
-    func setCustomAttribute(_ attribute: Any) -> Self {
-        self.customAttribute = attribute
-        return self
-    }
-    
-
     
 //  MARK: - Actions
 
@@ -287,20 +276,12 @@ class FloatViewController: BaseBuilder {
     
     var select: Void {
         if active {return}
-        
-        if let floatViewSelect = manager.floatViewSelected() {
-            floatViewSelect.deselect
-        }
-        
+        manager.floatViewSelected()?.deselect
         viewShouldSelectFloatView()
-        
         bringToFront
-        
         active = true
-        
         viewDidSelectFloatView()
     }
-    
     
     var deselect: Void {
         if !active {return}
@@ -311,11 +292,11 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - PRIVATE Function Area
     
-    private func addWindowsToManager() {
-        manager.addWindowToManager(self)
+    private func removeFloatView() {
+        manager.removeWindowToManager(self)
+        self.view.removeFromSuperview()
     }
-    
-    
+        
     private func setHierarchyVisualization() {
         self.view.layer.zPosition = hierarchy
     }
@@ -340,7 +321,6 @@ class FloatViewController: BaseBuilder {
         self.view.frame = CGRect(x: 50, y: 100, width: 200, height: 350)
     }
     
-    
     private func configSizeWindow(_ sizeWindow: CGSize) {
         self.view.frame = CGRect(x: 50, y: 100, width: sizeWindow.width, height: sizeWindow.height)
     }
@@ -353,48 +333,20 @@ class FloatViewController: BaseBuilder {
         self.view.frame = frame
     }
     
-    private func configTitleWindowView() {
-        if let titleWindow {
-            addTitleWindow(titleWindow)
-            configTitleWindowConstraints(titleWindow)
-            titleWindow.isShow = true
-            titleWindow.isUserInteractionEnabled = true
-        }
-    }
-    
-    private func addTitleWindow(_ titleWindow: UIView) {
-        titleWindow.add(insideTo: self.view)
-    }
-    
-    private func configTitleWindowConstraints(_ titleWindow: UIView) {
-        titleWindow.makeConstraints({ make in
-            make
-                .setPinTop.equalToSuperView
-                .setHeight.equalToConstant(titleHeight)
-        })
-    }
-    
     private func configTouchForActivateWindow() {
         self.setActions { build in
             build
-                .setTapGesture { build in
-                    build
-                        .setCancelsTouchesInView(false)
-                        .setTouchEnded { [weak self] tapGesture in
-                            guard let self else {return}
-                            select
-                        }
-                }
+                .setTouch({ [weak self] _,_  in
+                    guard let self else {return}
+                    select
+                })
         }
-        
     }
     
     private func configSetProperties() {
-        configTitleWindowView()
         decidePositionWindow()
     }
 
-    
     
 //  MARK: - ANIMATIONS
     
@@ -406,7 +358,6 @@ class FloatViewController: BaseBuilder {
         })
     }
     
-    
     private func minimizeAnimation(_ closure: @escaping () -> Void ) {
         UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
             guard let self else {return}
@@ -417,7 +368,6 @@ class FloatViewController: BaseBuilder {
             closure()
         })
     }
-    
     
     private func restoreAnimation(_ closure: @escaping () -> Void ) {
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
