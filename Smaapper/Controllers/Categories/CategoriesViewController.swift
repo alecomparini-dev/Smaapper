@@ -43,7 +43,6 @@ class CategoriesViewController: UIViewController {
         configDelegate()
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

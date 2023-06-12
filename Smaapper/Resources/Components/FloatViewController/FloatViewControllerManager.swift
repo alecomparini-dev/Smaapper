@@ -46,12 +46,12 @@ class FloatViewControllerManager {
 
     var lastActive: FloatViewController?
     
-    var listWindows: [FloatViewController] { self._listWindows }
-    var countWindows: Int { self._listWindows.count }
+    var listFloatView: [FloatViewController] { self._listWindows }
+    var countFloatView: Int { self._listWindows.count }
     
     
     func floatViewSelected() -> FloatViewController? {
-        return listWindows.first(where: { $0.active })
+        return listFloatView.first(where: { $0.active })
     }
     
     func lastWindowActive() -> FloatViewController? {
@@ -89,7 +89,7 @@ class FloatViewControllerManager {
     }
     
     func getIndex(_ floatView: FloatViewController) -> Int? {
-        if let index = listWindows.firstIndex(where: { $0.id == floatView.id }) {
+        if let index = listFloatView.firstIndex(where: { $0.id == floatView.id }) {
             return index
         }
         return nil
@@ -100,7 +100,7 @@ class FloatViewControllerManager {
     
     
     func verifyAllClosedWindows() {
-        if self.countWindows == 0 {
+        if self.countFloatView == 0 {
             delegate?.allClosedWindows()
         }
     }
