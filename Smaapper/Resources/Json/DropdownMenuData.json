@@ -59,8 +59,8 @@
                         "rightImage": "calc",
                         "items": [
                             {
-                                "id": "rule_of_3",
-                                "title": "Rule of 3",
+                                "id": "proportion",
+                                "title": "Proportion",
                                 "leftImage": "3.square.fill",
                                 "rightImage": "chevron.forward"
                             },

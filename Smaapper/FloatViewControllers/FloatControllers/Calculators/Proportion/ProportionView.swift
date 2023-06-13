@@ -1,5 +1,5 @@
 //
-//  RuleOfThreeView.swift
+//  ProportionView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/06/23.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol RuleOfThreeViewDelegate: AnyObject {
+protocol ProportionViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
 }
 
-class RuleOfThreeView: ViewBuilder {
+class ProportionView: ViewBuilder {
     
-    weak var delegate: RuleOfThreeViewDelegate?
+    weak var delegate: ProportionViewDelegate?
     
     override init() {
         super.init()
@@ -28,7 +28,7 @@ class RuleOfThreeView: ViewBuilder {
     }
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(title: "Rule of 3",logo: "3.square.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(title: "Proportion",logo: "3.square.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView

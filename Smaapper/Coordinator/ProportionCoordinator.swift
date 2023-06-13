@@ -1,5 +1,5 @@
 //
-//  RuleOfThreeCoordinator.swift
+//  ProportionCoordinator.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RuleOfThreeCoordinator: Coordinator {
+class ProportionCoordinator: Coordinator {
 
     var floatNavigationController: FloatNavigationController
     
@@ -16,8 +16,8 @@ class RuleOfThreeCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = RuleOfThreeFloatViewController()
-        weather.setCustomAttribute(RuleOfThreeFloatViewController.identifierApp)
+        let weather = ProportionFloatViewController()
+        weather.setCustomAttribute(ProportionFloatViewController.identifierApp)
         floatNavigationController.present(weather, where: component )
     }
 
