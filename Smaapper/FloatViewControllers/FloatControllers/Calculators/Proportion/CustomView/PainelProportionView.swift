@@ -13,7 +13,6 @@ class PainelProportionView: ViewBuilder {
         super.init()
         addElements()
         configContraints()
-        setFocus()
     }
     
 //  MARK: - STACK VIEW Area
@@ -101,9 +100,6 @@ class PainelProportionView: ViewBuilder {
     
     
 //  MARK: - PRIVATE Area
-    private func setFocus() {
-//        textFieldA.view.becomeFirstResponder()
-    }
     
     private func defaultTextField(_ placeHolder: String) -> TextFieldBuilder {
         let txt = TextFieldBuilder(placeHolder)

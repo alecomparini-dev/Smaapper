@@ -15,7 +15,7 @@ class TapGestureBuilder {
     private var touchEnded: [touchGestureAlias] = []
     private var touchCancelled: [touchGestureAlias] = []
     
-    private var tapGesture: TapGesture
+    private let tapGesture: TapGesture
     private weak var component: UIView?
     
     init(_ component: UIView) {
@@ -30,7 +30,7 @@ class TapGestureBuilder {
     }
     
     
-    //  MARK: - Set Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setNumberOfTapsRequired(_ numberOfTaps: Int) -> Self {
@@ -72,6 +72,10 @@ class TapGestureBuilder {
     func setIsEnabled(_ enabled: Bool ) -> Self {
         self.tapGesture.isEnabled = enabled
         return self
+    }
+    
+    func removeTapGesture() {
+        self.component?.removeGestureRecognizer(tapGesture)
     }
     
     

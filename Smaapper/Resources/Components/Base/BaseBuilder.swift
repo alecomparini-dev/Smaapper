@@ -85,7 +85,7 @@ class BaseBuilder {
     }
     
     @discardableResult
-    func setUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
+    func setIsUserInteractionEnabled(_ interactionEnabled: Bool) -> Self {
         self.component.isUserInteractionEnabled = interactionEnabled
         return self
     }
