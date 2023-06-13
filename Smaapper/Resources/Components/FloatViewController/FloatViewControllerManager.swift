@@ -88,7 +88,7 @@ class FloatViewControllerManager {
 //  MARK: - PRIVATE Area
     private func setTapGestureOnSuperview(_ superView: UIView) {
         TapGestureBuilder(superView)
-            .setCancelsTouchesInView(false)
+            .setCancelsTouchesInView(true)
             .setTouchEnded { [weak self] tapGesture in
                 guard let self else {return}
                 floatViewSelected()?.deselect

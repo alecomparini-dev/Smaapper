@@ -137,6 +137,12 @@
                         "rightImage": "game",
                         "items": [
                             {
+                                "id": "quiz",
+                                "title": "Quiz",
+                                "leftImage": "checkmark.circle.badge.questionmark.fill",
+                                "rightImage": "chevron.forward"
+                            },
+                            {
                                 "id": "dominoes",
                                 "title": "Dominoes",
                                 "leftImage": "rectangle.trailinghalf.filled",

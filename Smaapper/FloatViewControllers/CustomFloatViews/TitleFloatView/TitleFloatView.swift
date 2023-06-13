@@ -76,7 +76,7 @@ class TitleFloatView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(logoImageView.view)
-                    .setLeading.equalTo(logoImageView.view, .trailing, 3)
+                    .setLeading.equalTo(logoImageView.view, .trailing, 5)
                     .setTrailing.equalTo(minimizeButton.view, .leading, -5)
                     .setHeight.equalToConstant(25)
             }
