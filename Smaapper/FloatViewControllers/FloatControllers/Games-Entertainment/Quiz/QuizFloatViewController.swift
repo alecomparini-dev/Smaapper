@@ -1,5 +1,5 @@
 //
-//  RuleOfThreeFloatViewController.swift
+//  QuizFloatViewController.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/06/23.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-class RuleOfThreeFloatViewController: FloatViewController {
-    static let identifierApp = "rule_of_3"
+
+class QuizFloatViewController: FloatViewController {
+    static let identifierApp = "quiz"
     
-    lazy var screen: RuleOfThreeView = {
-        let view = RuleOfThreeView()
+    lazy var screen: QuizView = {
+        let view = QuizView()
         return view
     }()
     
@@ -22,7 +23,7 @@ class RuleOfThreeFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 150, width: 250, height: 150))
+        setFrameWindow(CGRect(x: 20, y: 150, width: 270, height: 350))
         setEnabledDraggable(true)
         configDelegate()
     }
@@ -55,9 +56,9 @@ class RuleOfThreeFloatViewController: FloatViewController {
 }
 
 
-//  MARK: - EXTENSIONWeatherViewDelegate
+//  MARK: - EXTENSION WeatherViewDelegate
 
-extension RuleOfThreeFloatViewController: RuleOfThreeViewDelegate {
+extension QuizFloatViewController: QuizViewDelegate {
     
     func closeWindow() {
         self.dismiss()

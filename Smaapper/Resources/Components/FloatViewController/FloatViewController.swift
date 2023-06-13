@@ -214,12 +214,6 @@ class FloatViewController: BaseBuilder {
     }
     
     @discardableResult
-    func setTitleHeight(_ height: CGFloat) -> Self {
-        self.titleHeight = height
-        return self
-    }
-    
-    @discardableResult
     func setSizeWindow(_ sizeWindow: CGSize) -> Self {
         self.sizeWindow = sizeWindow
         return self
@@ -275,7 +269,7 @@ class FloatViewController: BaseBuilder {
     }
     
     var select: Void {
-        if active {return}
+        if active { return }
         manager.floatViewSelected()?.deselect
         viewShouldSelectFloatView()
         bringToFront

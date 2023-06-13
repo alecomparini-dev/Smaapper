@@ -38,7 +38,7 @@ class TapGesture: UITapGestureRecognizer {
     private func initialization() {
         self.addTarget(self, action: #selector(objcTapGesture(_:)))
         self.component?.addGestureRecognizer(self)
-        delegate = self
+//        delegate = self
     }
     
     
@@ -111,6 +111,6 @@ class TapGesture: UITapGestureRecognizer {
 
 extension TapGesture: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return gestureRecognizer.cancelsTouchesInView
     }
 }

@@ -11,8 +11,6 @@ import UIKit
 class WeatherFloatViewController: FloatViewController {
     static let identifierApp = "weather"
     
-    private var titleView: UIView?
-    
     lazy var screen: WeatherView = {
         let view = WeatherView()
         return view
@@ -25,7 +23,6 @@ class WeatherFloatViewController: FloatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setFrameWindow(CGRect(x: 50, y: 100, width: 160, height: 250))
-        setTitleHeight(35)
         setEnabledDraggable(true)
         configDelegate()
     }

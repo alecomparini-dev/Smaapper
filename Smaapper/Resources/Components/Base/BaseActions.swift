@@ -39,6 +39,10 @@ class BaseActions {
     
     @discardableResult
     func setTapGesture(_ build: (_ build: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        if let tapGesture = self.tapGesture {
+            self.tapGesture = build(tapGesture)
+            return self
+        }
         self.tapGesture = build(TapGestureBuilder(baseBuilder.component))
         return self
     }

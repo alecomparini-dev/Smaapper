@@ -36,7 +36,11 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
             case RuleOfThreeFloatViewController.identifierApp:
                 let coodinator = RuleOfThreeCoordinator(floatNavigationController)
                 coodinator.start(where: component)
-                
+            
+            case QuizFloatViewController.identifierApp:
+                let coodinator = QuizCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

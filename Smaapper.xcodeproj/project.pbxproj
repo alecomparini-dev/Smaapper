@@ -116,6 +116,9 @@
 		02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974232A37892900BF14EE /* UtilsFloatView.swift */; };
 		02E974262A378AFE00BF14EE /* RuleOfThreeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */; };
 		02E9743E2A37C55E00BF14EE /* TitleFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */; };
+		02E974412A37D25600BF14EE /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974402A37D25600BF14EE /* QuizView.swift */; };
+		02E974432A37D27400BF14EE /* QuizFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974422A37D27400BF14EE /* QuizFloatViewController.swift */; };
+		02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974442A37D30600BF14EE /* QuizCoordinator.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -244,6 +247,9 @@
 		02E974232A37892900BF14EE /* UtilsFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsFloatView.swift; sourceTree = "<group>"; };
 		02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleOfThreeCoordinator.swift; sourceTree = "<group>"; };
 		02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFloatView.swift; sourceTree = "<group>"; };
+		02E974402A37D25600BF14EE /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		02E974422A37D27400BF14EE /* QuizFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizFloatViewController.swift; sourceTree = "<group>"; };
+		02E974442A37D30600BF14EE /* QuizCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCoordinator.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -891,6 +897,7 @@
 				02E974152A3399B100BF14EE /* HomeCoordinator.swift */,
 				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 				02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */,
+				02E974442A37D30600BF14EE /* QuizCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1030,6 +1037,7 @@
 		02E974362A379D3C00BF14EE /* Games-Entertainment */ = {
 			isa = PBXGroup;
 			children = (
+				02E9743F2A37D20600BF14EE /* Quiz */,
 				02E9742E2A379C1F00BF14EE /* Hangman */,
 				02E974372A379DA500BF14EE /* TicTacToe */,
 			);
@@ -1086,6 +1094,15 @@
 				02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */,
 			);
 			path = TitleFloatView;
+			sourceTree = "<group>";
+		};
+		02E9743F2A37D20600BF14EE /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				02E974402A37D25600BF14EE /* QuizView.swift */,
+				02E974422A37D27400BF14EE /* QuizFloatViewController.swift */,
+			);
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 		02F45AF62A043F760096A75A /* Resize */ = {
@@ -1239,6 +1256,7 @@
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */,
+				02E974412A37D25600BF14EE /* QuizView.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,
 				02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */,
@@ -1246,6 +1264,7 @@
 				02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
+				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
 				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,
@@ -1271,6 +1290,7 @@
 				020D0E5B2A1EADB6007F3992 /* Dock.swift in Sources */,
 				02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */,
 				02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */,
+				02E974432A37D27400BF14EE /* QuizFloatViewController.swift in Sources */,
 				0234A91629F9FD3A008392EC /* ConstraintsConstants.swift in Sources */,
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
 				020D0E562A1E73C0007F3992 /* DropdownMenuFooterBuilder.swift in Sources */,
