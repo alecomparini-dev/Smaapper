@@ -30,7 +30,7 @@ class QuizView: ViewBuilder {
     }
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(title: "Quiz",logo: "checkmark.circle.badge.questionmark.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "checkmark.circle.badge.questionmark.fill", title: "Quiz", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView

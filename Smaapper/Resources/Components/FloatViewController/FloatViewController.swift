@@ -312,7 +312,7 @@ class FloatViewController: BaseBuilder {
     }
     
     private func configAutoPositionWindow() {
-        self.view.frame = CGRect(x: 50, y: 100, width: 200, height: 350)
+        self.view.frame = CGRect(x: 50, y: 100, width: 200, height: 380)
     }
     
     private func configSizeWindow(_ sizeWindow: CGSize) {
@@ -333,7 +333,7 @@ class FloatViewController: BaseBuilder {
                 .setTouch({ [weak self] _,_  in
                     guard let self else {return}
                     select
-                })
+                }, false)
         }
     }
     

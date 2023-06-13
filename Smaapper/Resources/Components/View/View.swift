@@ -31,3 +31,11 @@ class View: UIView {
 
     
 }
+
+extension View: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            print("chamouuu")
+        }
+    
+}

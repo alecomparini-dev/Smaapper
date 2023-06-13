@@ -66,8 +66,8 @@ class HomeViewController: UIViewController {
     }
 
     
-    //  MARK: - Private Function Area
-    
+//  MARK: - Private Function Area
+
     private func configDockController() {
         self.dockController = HomeViewDockController(homeScreen.dock)
         dockController.setConstraintAlignmentHorizontalDock(self.view)

@@ -44,7 +44,7 @@ class WeatherView: ViewBuilder {
     
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(title: "Weather", logo: "cloud.sun.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "cloud.sun.fill", title: "Weather", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView

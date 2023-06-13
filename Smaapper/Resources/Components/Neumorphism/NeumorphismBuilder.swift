@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Neumorphism {
+class NeumorphismBuilder {
     
     enum Shadow {
         case light
@@ -71,7 +71,7 @@ class Neumorphism {
     }
 
     @discardableResult
-    func setShadowColor(to shadow: Neumorphism.Shadow, _ color: UIColor) -> Self {
+    func setShadowColor(to shadow: NeumorphismBuilder.Shadow, _ color: UIColor) -> Self {
         switch shadow {
             case .light:
                 self.lightShadowColor = color
@@ -100,7 +100,7 @@ class Neumorphism {
     }
 
     @discardableResult
-    func setDistance(to: Neumorphism.Shadow, percent distance: CGFloat) -> Self {
+    func setDistance(to: NeumorphismBuilder.Shadow, percent distance: CGFloat) -> Self {
         if !validatePercent("distance", distance, 10) {
             return self
         }
@@ -126,7 +126,7 @@ class Neumorphism {
     }
     
     @discardableResult
-    func setBlur(to: Neumorphism.Shadow, percent blur: CGFloat) -> Self {
+    func setBlur(to: NeumorphismBuilder.Shadow, percent blur: CGFloat) -> Self {
         if !validatePercent("blur", blur, 10) {
             return self
         }
@@ -152,7 +152,7 @@ class Neumorphism {
     }
 
     @discardableResult
-    func setIntensity(to: Neumorphism.Shadow, percent intensity: CGFloat) -> Self {
+    func setIntensity(to: NeumorphismBuilder.Shadow, percent intensity: CGFloat) -> Self {
         if !validatePercent("intensity", intensity, 100) {
             return self
         }
@@ -183,10 +183,8 @@ class Neumorphism {
     @discardableResult
     func apply() -> Self {
         self.calculateShadeColorByColorReference()
-//        DispatchQueue.main.async {
             self.applyShadow()
             self.applyShape()
-//        }
         return self
     }
     
