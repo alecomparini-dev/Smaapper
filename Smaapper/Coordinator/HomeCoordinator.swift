@@ -41,6 +41,14 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
                 let coodinator = QuizCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
+            case UpcomingHolidaysFloatViewController.identifierApp:
+                let coodinator = UpcomingHolidaysCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
+            case BMICalculatorFloatViewController.identifierApp:
+                let coodinator = BMICalculatorCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

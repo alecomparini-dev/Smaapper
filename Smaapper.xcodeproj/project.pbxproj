@@ -70,7 +70,6 @@
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
 		0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatViewController.swift */; };
-		0281DAE42A180A8300E44F04 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE32A180A8300E44F04 /* TitleView.swift */; };
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
@@ -119,6 +118,12 @@
 		02E974412A37D25600BF14EE /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974402A37D25600BF14EE /* QuizView.swift */; };
 		02E974432A37D27400BF14EE /* QuizFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974422A37D27400BF14EE /* QuizFloatViewController.swift */; };
 		02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974442A37D30600BF14EE /* QuizCoordinator.swift */; };
+		02E974472A37EF9200BF14EE /* UpcomingHolidaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974462A37EF9200BF14EE /* UpcomingHolidaysView.swift */; };
+		02E974492A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974482A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift */; };
+		02E9744B2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */; };
+		02E9744D2A37F2EA00BF14EE /* BMICalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9744C2A37F2EA00BF14EE /* BMICalculatorView.swift */; };
+		02E9744F2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9744E2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift */; };
+		02E974512A37F3DF00BF14EE /* BMICalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */; };
 		02F45AF82A043F820096A75A /* Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AF72A043F820096A75A /* Resize.swift */; };
 		02F45AFB2A046F720096A75A /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFA2A046F720096A75A /* List.swift */; };
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
@@ -201,7 +206,6 @@
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0281DAE02A18089800E44F04 /* FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewController.swift; sourceTree = "<group>"; };
-		0281DAE32A180A8300E44F04 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
@@ -250,6 +254,12 @@
 		02E974402A37D25600BF14EE /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		02E974422A37D27400BF14EE /* QuizFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizFloatViewController.swift; sourceTree = "<group>"; };
 		02E974442A37D30600BF14EE /* QuizCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCoordinator.swift; sourceTree = "<group>"; };
+		02E974462A37EF9200BF14EE /* UpcomingHolidaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingHolidaysView.swift; sourceTree = "<group>"; };
+		02E974482A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingHolidaysFloatViewController.swift; sourceTree = "<group>"; };
+		02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingHolidaysCoordinator.swift; sourceTree = "<group>"; };
+		02E9744C2A37F2EA00BF14EE /* BMICalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorView.swift; sourceTree = "<group>"; };
+		02E9744E2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorFloatViewController.swift; sourceTree = "<group>"; };
+		02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMICalculatorCoordinator.swift; sourceTree = "<group>"; };
 		02F45AF72A043F820096A75A /* Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resize.swift; sourceTree = "<group>"; };
 		02F45AFA2A046F720096A75A /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -688,20 +698,11 @@
 		0281DADF2A18087800E44F04 /* FloatViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0281DAE22A180A7500E44F04 /* TitleView */,
-				02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */,
 				02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */,
+				02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */,
 				0281DAE02A18089800E44F04 /* FloatViewController.swift */,
 			);
 			path = FloatViewController;
-			sourceTree = "<group>";
-		};
-		0281DAE22A180A7500E44F04 /* TitleView */ = {
-			isa = PBXGroup;
-			children = (
-				0281DAE32A180A8300E44F04 /* TitleView.swift */,
-			);
-			path = TitleView;
 			sourceTree = "<group>";
 		};
 		0281DAE52A1843C200E44F04 /* ClockNeumorphism */ = {
@@ -898,6 +899,8 @@
 				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 				02E974252A378AFE00BF14EE /* RuleOfThreeCoordinator.swift */,
 				02E974442A37D30600BF14EE /* QuizCoordinator.swift */,
+				02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */,
+				02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -944,6 +947,8 @@
 		02E974292A379BAA00BF14EE /* BMICalculator */ = {
 			isa = PBXGroup;
 			children = (
+				02E9744C2A37F2EA00BF14EE /* BMICalculatorView.swift */,
+				02E9744E2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift */,
 			);
 			path = BMICalculator;
 			sourceTree = "<group>";
@@ -986,6 +991,8 @@
 		02E974302A379C6100BF14EE /* UpcomingHolidays */ = {
 			isa = PBXGroup;
 			children = (
+				02E974462A37EF9200BF14EE /* UpcomingHolidaysView.swift */,
+				02E974482A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift */,
 			);
 			path = UpcomingHolidays;
 			sourceTree = "<group>";
@@ -1234,6 +1241,7 @@
 				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
 				020D0E662A1ED628007F3992 /* TextField.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
+				02E9744D2A37F2EA00BF14EE /* BMICalculatorView.swift in Sources */,
 				02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */,
 				02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
@@ -1247,7 +1255,6 @@
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
 				02E974142A3398F000BF14EE /* Coordinator.swift in Sources */,
-				0281DAE42A180A8300E44F04 /* TitleView.swift in Sources */,
 				020D0E682A1ED645007F3992 /* TextFieldBuilder.swift in Sources */,
 				02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */,
 				021848AD2A2517B2007E68A4 /* AskChatGPTView.swift in Sources */,
@@ -1267,6 +1274,7 @@
 				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
+				02E974492A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift in Sources */,
 				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
@@ -1299,6 +1307,8 @@
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
+				02E9744F2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift in Sources */,
+				02E974512A37F3DF00BF14EE /* BMICalculatorCoordinator.swift in Sources */,
 				021848B72A262664007E68A4 /* WeatherView.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
@@ -1306,6 +1316,7 @@
 				021848BD2A26C213007E68A4 /* Draggable.swift in Sources */,
 				0234A91B29F9FD3A008392EC /* StartOfConstraintsAlignmentFlow.swift in Sources */,
 				020D0E5D2A1EADCF007F3992 /* DockBuilder.swift in Sources */,
+				02E9744B2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
@@ -1336,6 +1347,7 @@
 				0234A96329FC0659008392EC /* IconButtonBuilder.swift in Sources */,
 				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
 				020D0E4B2A1E5A6F007F3992 /* DropdownMenu.swift in Sources */,
+				02E974472A37EF9200BF14EE /* UpcomingHolidaysView.swift in Sources */,
 				020D0E632A1ECE02007F3992 /* ViewBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

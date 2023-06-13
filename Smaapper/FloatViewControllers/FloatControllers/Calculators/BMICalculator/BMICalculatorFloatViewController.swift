@@ -1,5 +1,5 @@
 //
-//  QuizFloatViewController.swift
+//  BMICalculatorFloatViewController.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/06/23.
@@ -8,11 +8,11 @@
 import UIKit
 
 
-class QuizFloatViewController: FloatViewController {
-    static let identifierApp = "quiz"
+class BMICalculatorFloatViewController: FloatViewController {
+    static let identifierApp = "bmi_calculator"
     
-    lazy var screen: QuizView = {
-        let view = QuizView()
+    lazy var screen: BMICalculatorView = {
+        let view = BMICalculatorView()
         return view
     }()
     
@@ -22,7 +22,7 @@ class QuizFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 20, y: 150, width: 270, height: 350))
+        setFrameWindow(CGRect(x: 120, y: 200, width: 170, height: 200))
         setEnabledDraggable(true)
         configDelegate()
     }
@@ -55,9 +55,9 @@ class QuizFloatViewController: FloatViewController {
 }
 
 
-//  MARK: - EXTENSION WeatherViewDelegate
+//  MARK: - EXTENSIONWeatherViewDelegate
 
-extension QuizFloatViewController: QuizViewDelegate {
+extension BMICalculatorFloatViewController: BMICalculatorViewDelegate {
     
     func closeWindow() {
         self.dismiss()

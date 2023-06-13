@@ -1,5 +1,5 @@
 //
-//  QuizFloatViewController.swift
+//  UpcomingHolidaysFloatViewController.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/06/23.
@@ -8,11 +8,11 @@
 import UIKit
 
 
-class QuizFloatViewController: FloatViewController {
-    static let identifierApp = "quiz"
+class UpcomingHolidaysFloatViewController: FloatViewController {
+    static let identifierApp = "upcoming_holidays"
     
-    lazy var screen: QuizView = {
-        let view = QuizView()
+    lazy var screen: UpcomingHolidaysView = {
+        let view = UpcomingHolidaysView()
         return view
     }()
     
@@ -22,7 +22,7 @@ class QuizFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 20, y: 150, width: 270, height: 350))
+        setFrameWindow(CGRect(x: 50, y: 200, width: 200, height: 300))
         setEnabledDraggable(true)
         configDelegate()
     }
@@ -36,7 +36,7 @@ class QuizFloatViewController: FloatViewController {
         super.viewDidDeselectFloatView()
         removeShadow()
     }
-    
+
     
 //  MARK: - PRIVATE Area
     
@@ -57,7 +57,7 @@ class QuizFloatViewController: FloatViewController {
 
 //  MARK: - EXTENSION WeatherViewDelegate
 
-extension QuizFloatViewController: QuizViewDelegate {
+extension UpcomingHolidaysFloatViewController: UpcomingHolidaysViewDelegate {
     
     func closeWindow() {
         self.dismiss()
@@ -66,7 +66,5 @@ extension QuizFloatViewController: QuizViewDelegate {
     func minimizeWindow() {
         self.minimize
     }
-
     
 }
-
