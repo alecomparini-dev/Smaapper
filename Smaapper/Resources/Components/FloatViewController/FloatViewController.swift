@@ -279,6 +279,7 @@ class FloatViewController: BaseBuilder {
     
     var deselect: Void {
         if !active {return}
+        self.view.endEditing(false)
         active = false
         viewDidDeselectFloatView()
     }

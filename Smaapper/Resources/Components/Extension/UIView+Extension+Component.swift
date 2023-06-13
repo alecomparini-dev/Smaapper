@@ -91,8 +91,14 @@ extension UIView {
     
 //  MARK: - hideKeyboardWhenViewTapped
     
+    func hideKeyboardWhenViewTapped() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        self.addGestureRecognizer(tap)
+    }
 
-
+    
+//  MARK: - PRIVATE Area
     private func setBackgroundColorLayer(_ color: UIColor) {
         let layer = CAShapeLayer()
         layer.frame = self.bounds

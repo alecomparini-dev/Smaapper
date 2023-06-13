@@ -14,6 +14,16 @@ class TextField: UITextField {
          case right
      }
     
+    static private var currentMainWindow: UIWindow?
+    static private func hideKeyboardWhenViewTapped() {
+        let mainWindow = CurrentWindow.window
+        if (mainWindow == currentMainWindow) { return }
+        mainWindow?.hideKeyboardWhenViewTapped()
+        CurrentWindow.rootView?.hideKeyboardWhenViewTapped()
+        currentMainWindow = mainWindow
+        
+    }
+    
     init() {
         super.init(frame: .zero)
         addHideKeyboardWhenTouchReturn()
@@ -32,7 +42,7 @@ class TextField: UITextField {
 //  MARK: - ACTIONS THIS COMPONENT
     private func addHideKeyboardWhenTouchReturn(){
         self.addTarget(self, action: #selector(textFieldDidEndOnExit), for: .editingDidEndOnExit)
-//        TextField.hideKeyboardWhenViewTapped()
+        TextField.hideKeyboardWhenViewTapped()
     }
     
     @objc
@@ -41,3 +51,4 @@ class TextField: UITextField {
     }
     
 }
+

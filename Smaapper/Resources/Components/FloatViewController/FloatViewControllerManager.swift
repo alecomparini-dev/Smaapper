@@ -35,7 +35,8 @@ class FloatViewControllerManager {
     weak var delegate: FloatViewControllerManagerDelegate?
     
     private var _listWindows: [FloatViewController] = []
-    private var enableDeactivationFloatViewWhenTappedSuperview: Bool = false
+    private var enableDeactivationFloatViewWhenTappedSuperview: TapGestureBuilder?
+    
     
     private init() {}
 
@@ -80,20 +81,28 @@ class FloatViewControllerManager {
     }
     
     func enableDeactivationFloatViewWhenTappedSuperview(_ superView: UIView) {
-        if self.enableDeactivationFloatViewWhenTappedSuperview { return }
-        setTapGestureOnSuperview(superView)
-        enableDeactivationFloatViewWhenTappedSuperview = true
+        if enableDeactivationFloatViewWhenTappedSuperview == nil {
+            setTapGestureOnSuperview(superView)
+        }
     }
     
     
 //  MARK: - PRIVATE Area
+    
     private func setTapGestureOnSuperview(_ superView: UIView) {
-        TapGestureBuilder(superView)
+        enableDeactivationFloatViewWhenTappedSuperview = TapGestureBuilder(superView)
             .setCancelsTouchesInView(true)
             .setTouchEnded { [weak self] tapGesture in
                 guard let self else {return}
+                superView.endEditing(true)
                 floatViewSelected()?.deselect
+                if countFloatView == 0 { removeDeactivationFloatViewWhenTappedSuperview() }
             }
+    }
+    
+    private func removeDeactivationFloatViewWhenTappedSuperview() {
+        enableDeactivationFloatViewWhenTappedSuperview?.removeTapGesture()
+        enableDeactivationFloatViewWhenTappedSuperview = nil
     }
 
     
