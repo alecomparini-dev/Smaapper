@@ -29,7 +29,7 @@ class UpcomingHolidaysView: ViewBuilder {
     }
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(title: "Upcoming Holidays",logo: "calendar.badge.exclamationmark", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "calendar.badge.exclamationmark", title: "Upcoming Holidays", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView

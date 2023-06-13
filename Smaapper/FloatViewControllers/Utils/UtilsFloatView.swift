@@ -16,6 +16,8 @@ class UtilsFloatView {
                 .setShape(.concave)
                 .setLightPosition(.leftTop)
                 .setBlur(to: .light, percent: 5)
+                .setBlur(to: .dark, percent: 20)
+                .setDistance(to: .dark, percent: 20)
                 .apply()
         }
     }

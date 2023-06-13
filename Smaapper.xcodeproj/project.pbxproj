@@ -66,7 +66,7 @@
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
-		026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* Neumorphism.swift */; };
+		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
 		0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatViewController.swift */; };
@@ -105,6 +105,7 @@
 		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
 		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
+		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -202,7 +203,7 @@
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
-		026F797C2A0172D0003947A6 /* Neumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Neumorphism.swift; sourceTree = "<group>"; };
+		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0281DAE02A18089800E44F04 /* FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +242,7 @@
 		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
 		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
+		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -656,7 +658,7 @@
 		026F797B2A0172AE003947A6 /* Neumorphism */ = {
 			isa = PBXGroup;
 			children = (
-				026F797C2A0172D0003947A6 /* Neumorphism.swift */,
+				026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */,
 			);
 			path = Neumorphism;
 			sourceTree = "<group>";
@@ -891,6 +893,14 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		02D71C292A38D9C900DCA291 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		02E9740F2A336A2600BF14EE /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +926,7 @@
 		02E9741D2A37886300BF14EE /* Proportion */ = {
 			isa = PBXGroup;
 			children = (
+				02D71C292A38D9C900DCA291 /* CustomView */,
 				02E9741E2A37887B00BF14EE /* ProportionView.swift */,
 				02E974202A3788A200BF14EE /* ProportionFloatViewController.swift */,
 			);
@@ -1286,12 +1297,13 @@
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
-				026F797D2A0172D0003947A6 /* Neumorphism.swift in Sources */,
+				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
 				02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */,
 				02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */,
+				02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,

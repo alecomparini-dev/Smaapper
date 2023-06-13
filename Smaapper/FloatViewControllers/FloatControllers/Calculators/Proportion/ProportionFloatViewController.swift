@@ -19,22 +19,21 @@ class ProportionFloatViewController: FloatViewController {
         view = screen.view
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 150, width: 270, height: 190))
+        setFrameWindow(CGRect(x: 50, y: 150, width: 270, height: 180))
         setEnabledDraggable(true)
         configDelegate()
     }
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
-        setShadow()
+        UtilsFloatView.setShadowActiveFloatView(screen)
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
-        removeShadow()
+        UtilsFloatView.removeShadowActiveFloatView(screen)
     }
     
     
@@ -44,13 +43,6 @@ class ProportionFloatViewController: FloatViewController {
         screen.delegate = self
     }
     
-    private func setShadow() {
-        UtilsFloatView.setShadowActiveFloatView(screen)
-    }
-    
-    private func removeShadow() {
-        UtilsFloatView.removeShadowActiveFloatView(screen)
-    }
     
 }
 

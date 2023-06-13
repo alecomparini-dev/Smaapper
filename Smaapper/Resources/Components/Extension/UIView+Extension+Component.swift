@@ -71,8 +71,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeNeumorphism(_ neumorphism: (_ make: Neumorphism) -> Neumorphism) -> Self {
-        _ = neumorphism(Neumorphism(self))
+    func makeNeumorphism(_ neumorphism: (_ make: NeumorphismBuilder) -> NeumorphismBuilder) -> Self {
+        _ = neumorphism(NeumorphismBuilder(self))
         return self
     }
     
@@ -91,12 +91,7 @@ extension UIView {
     
 //  MARK: - hideKeyboardWhenViewTapped
     
-    func hideKeyboardWhenViewTapped() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(UIView.endEditing(_:)))
-        tap.cancelsTouchesInView = false
-        self.addGestureRecognizer(tap)
-    }
-    
+
 
     private func setBackgroundColorLayer(_ color: UIColor) {
         let layer = CAShapeLayer()

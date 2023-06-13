@@ -44,7 +44,7 @@ class BMICalculatorView: ViewBuilder {
     
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(title: "BMI Calculator", logo: "scalemass.fill", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "scalemass.fill", title: "BMI Calculator", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView

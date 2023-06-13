@@ -14,7 +14,7 @@ class BaseBuilder {
     private(set) var constraintsFlow: StartOfConstraintsFlow?
     private(set) var border: BorderBuilder?
     private(set) var shadow: Shadow?
-    private(set) var neumorphism: Neumorphism?
+    private(set) var neumorphism: NeumorphismBuilder?
     private(set) var gradient: GradientBuilder?
     private(set) var blur: Blur?
     
@@ -47,8 +47,8 @@ class BaseBuilder {
     }
 
     @discardableResult
-    func setNeumorphism(_ build: (_ build: Neumorphism) -> Neumorphism) -> Self {
-        self.neumorphism = build(Neumorphism(component))
+    func setNeumorphism(_ build: (_ build: NeumorphismBuilder) -> NeumorphismBuilder) -> Self {
+        self.neumorphism = build(NeumorphismBuilder(component))
         return self
     }
 

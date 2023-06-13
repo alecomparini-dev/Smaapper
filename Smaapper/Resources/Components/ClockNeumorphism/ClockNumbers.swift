@@ -11,7 +11,7 @@ import UIKit
 class ClockNumbers: View {
     
     private var weight: CGFloat = 5
-    private var neumorphism: Neumorphism?
+    private var neumorphism: NeumorphismBuilder?
     private var number: Int = 0
     
     private let hasLeftTopStroke = [4,5,6,8,9,0]
@@ -121,8 +121,8 @@ class ClockNumbers: View {
     
 //  MARK: - Private Functions Area
     
-    private func configNeumorphism(_ component: UIView, _ lightPosition: Neumorphism.LightPosition = .leftTop) {
-        Neumorphism(component)
+    private func configNeumorphism(_ component: UIView, _ lightPosition: NeumorphismBuilder.LightPosition = .leftTop) {
+        NeumorphismBuilder(component)
             .setReferenceColor(Theme.shared.currentTheme.surfaceContainerHigh)
             .setShape(.concave)
             .setLightPosition(lightPosition)
@@ -239,7 +239,7 @@ class ClockNumbers: View {
         })
     }
     
-    private func createView(_ withNeumorphism: Bool, _ lightPosition: Neumorphism.LightPosition = .leftTop) -> ViewBuilder {
+    private func createView(_ withNeumorphism: Bool, _ lightPosition: NeumorphismBuilder.LightPosition = .leftTop) -> ViewBuilder {
         let v = ViewBuilder()
         if withNeumorphism {
             configNeumorphism(v.view, lightPosition)

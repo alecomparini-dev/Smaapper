@@ -13,10 +13,10 @@ class TitleFloatView: ViewBuilder {
     private var minimizeClosure: Selector
     
     private let title: String
-    private let logo: String
+    private let logo: String?
     private let target: Any
     
-    init(title: String = "", logo: String, target: Any, closeClosure: Selector, minimizeClosure: Selector ) {
+    init(logo: String? = nil, title: String = "", target: Any, closeClosure: Selector, minimizeClosure: Selector ) {
         self.title = title
         self.logo = logo
         self.closeClosure = closeClosure
@@ -36,9 +36,9 @@ class TitleFloatView: ViewBuilder {
     
     lazy var closeButton: ButtonImageBuilder = {
         let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
-            .setImageSize(10)
+            .setImageSize(11)
             .setImageWeight(.semibold)
-            .setTitleAlignment(.center)
+            .setImagePlacement(.all)
             .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
@@ -54,7 +54,8 @@ class TitleFloatView: ViewBuilder {
     }()
     
     lazy var logoImageView: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: self.logo))
+        guard let logo else {return ImageViewBuilder()}
+        let img = ImageViewBuilder(UIImage(systemName: logo))
             .setSize(14)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setContentMode(.center)
@@ -94,7 +95,7 @@ class TitleFloatView: ViewBuilder {
                 build
                     .setVerticalAlignmentY.equalTo(closeButton.view)
                     .setSize.equalToConstant(25)
-                    .setTrailing.equalToSuperView(-7)
+                    .setTrailing.equalToSuperView(-10)
             }
             .setActions { build in
                 build
