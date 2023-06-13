@@ -85,6 +85,7 @@ class FloatViewControllerManager {
         enableDeactivationFloatViewWhenTappedSuperview = true
     }
     
+    
 //  MARK: - PRIVATE Area
     private func setTapGestureOnSuperview(_ superView: UIView) {
         TapGestureBuilder(superView)
@@ -97,12 +98,14 @@ class FloatViewControllerManager {
 
     
 //  MARK: - DELEGATE
+    
     func setDelegate(_ delegate: FloatViewControllerManagerDelegate) {
         self.delegate = delegate
     }
-
 }
 
+
+//  MARK: - EXTENSION FloatViewControllerManagerDelegate
 
 extension FloatViewControllerManagerDelegate {
     func viewDidLoad(_ floatView: FloatViewController) { }

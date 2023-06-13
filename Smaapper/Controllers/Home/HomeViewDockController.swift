@@ -69,6 +69,7 @@ class HomeViewDockController {
     }
     
     func setShadowItemDock() {
+        
         dock.getCellSelected { cellItem in
             Shadow(cellItem.subviews[0].subviews[0])
                 .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
