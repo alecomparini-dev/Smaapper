@@ -18,5 +18,7 @@ class FloatViewControllerActions: BaseActions {
         super.init(floatWindow)
     }
     
+    
+    
 
 }

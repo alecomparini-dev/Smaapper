@@ -15,6 +15,7 @@ class PainelProportionView: ViewBuilder {
         configContraints()
     }
     
+    
 //  MARK: - STACK VIEW Area
 
     lazy var stackVertical: StackBuilder = {
@@ -32,7 +33,7 @@ class PainelProportionView: ViewBuilder {
     lazy var stackHorizontal1: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
-            .setSpacing(5)
+            .setSpacing(10)
             .setDistribution(.fillEqually)
         return stack
     }()
@@ -40,7 +41,7 @@ class PainelProportionView: ViewBuilder {
     lazy var stackHorizontal2: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
-            .setSpacing(5)
+            .setSpacing(10)
             .setDistribution(.fillEqually)
         return stack
     }()
@@ -85,6 +86,7 @@ class PainelProportionView: ViewBuilder {
     
     lazy var textFieldA: TextFieldBuilder = {
         let txt = defaultTextField("A")
+            
         return txt
     }()
     
@@ -99,11 +101,12 @@ class PainelProportionView: ViewBuilder {
     }()
     
     
+    
 //  MARK: - PRIVATE Area
     
     private func defaultTextField(_ placeHolder: String) -> TextFieldBuilder {
         let txt = TextFieldBuilder(placeHolder)
-            .setKeyboardType(.numberPad)
+            .setKeyboardType(.decimalPad)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainerHighest)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setAlignment(.center)
@@ -116,7 +119,7 @@ class PainelProportionView: ViewBuilder {
             })
             .setConstraints { build in
                 build
-                    .setLeading.setTrailing.equalToSuperView(5)
+                    .setLeading.setTrailing.equalToSuperView
                     .setVerticalAlignmentY.equalToSuperView
                     .setHeight.equalToConstant(35)
             }

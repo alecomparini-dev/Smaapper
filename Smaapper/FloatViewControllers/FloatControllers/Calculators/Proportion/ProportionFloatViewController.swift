@@ -21,7 +21,7 @@ class ProportionFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 150, width: 270, height: 180))
+        setFrameWindow(CGRect(x: 50, y: 150, width: 280, height: 180))
         setEnabledDraggable(true)
         configDelegate()
     }

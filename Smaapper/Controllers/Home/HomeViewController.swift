@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     private var weather: WeatherFloatViewController?
     
     private var categories: DropdownMenuData = []
- 
+    
     private var indexSection = 0
     private var indexRow = 0
     private var rowTappedDropdownMenu: (section: Int, row: Int) = (0,0)
@@ -51,6 +51,7 @@ class HomeViewController: UIViewController {
         configDockController()
         configDropdownMenu()
         configDelegate()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,10 +65,10 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         rowTappedCategory = nil
     }
-
     
-//  MARK: - Private Function Area
-
+    
+    //  MARK: - Private Function Area
+    
     private func configDockController() {
         self.dockController = HomeViewDockController(homeScreen.dock)
         dockController.setConstraintAlignmentHorizontalDock(self.view)
@@ -201,7 +202,7 @@ class HomeViewController: UIViewController {
         if items[rowTappedDropdownMenu.row].title == HomeViewController.categoriesID {
             self.categories = items[rowTappedDropdownMenu.row].subMenu ?? []
             showCategoriesViewController(categories)
-        }   
+        }
     }
     
     private func hideElementsForShowingFloatView() {
@@ -225,7 +226,7 @@ class HomeViewController: UIViewController {
     }
     
     
-//  MARK: - FLOATWINDOW Area
+    //  MARK: - FLOATWINDOW Area
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
         let idApp: String = getIdAppByCategory(category)
@@ -238,8 +239,26 @@ class HomeViewController: UIViewController {
     }
     
     
+    
+    lazy var textField: TextFieldBuilder = {
+        let txt = TextFieldBuilder()
+            .setKeyboardType(.decimalPad)
+            .setBorder({ build in
+                build
+                    .setWidth(1)
+            })
+            .setConstraints { build in
+                build
+                    .setAlignmentCenterXY.equalToSuperView
+                    .setSize.equalToConstant(50)
+            }
+        return txt
+    }()
+    
 }
     
+
+
 
 //  MARK: - EXTENSION HomeViewDelegate
 
