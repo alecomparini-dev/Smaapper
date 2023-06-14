@@ -13,8 +13,8 @@ struct ThemeDarkDefault: ThemeProtocol {
     var backgroundColor: UIColor { UIColor.HEX("#292D2E")}
     var backgroundColorGradient: [UIColor] { [backgroundColor, backgroundColor.adjustBrightness(-60)] }
     
-//    var primary: UIColor { UIColor.HEX("#ec9355") }
-    var primary: UIColor { UIColor.HEX("#ff935d") }
+    var primary: UIColor { UIColor.HEX("#ec9355") }
+//    var primary: UIColor { UIColor.HEX("#ff935d") }
     var primaryGradient: [UIColor] { [primary, UIColor.HEX("#FF6517")] }
     var onPrimary:UIColor { UIColor.HEX("#0f1010") }
     

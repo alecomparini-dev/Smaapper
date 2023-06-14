@@ -106,6 +106,7 @@
 		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
+		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -243,6 +244,7 @@
 		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
+		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 		0234A8E729F9FD3A008392EC /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				02D71C2C2A3A187600DCA291 /* TextFieldConfigKeyboard */,
 				02B792682A1EE56E006CEE8E /* TextFieldPassword */,
 				02B792652A1EE409006CEE8E /* TextFieldImage */,
 				020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */,
@@ -899,6 +902,14 @@
 				02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		02D71C2C2A3A187600DCA291 /* TextFieldConfigKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */,
+			);
+			path = TextFieldConfigKeyboard;
 			sourceTree = "<group>";
 		};
 		02E9740F2A336A2600BF14EE /* Coordinator */ = {
@@ -1247,6 +1258,7 @@
 			files = (
 				0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */,
 				02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */,
+				02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
 				02E9741F2A37887B00BF14EE /* ProportionView.swift in Sources */,
 				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
