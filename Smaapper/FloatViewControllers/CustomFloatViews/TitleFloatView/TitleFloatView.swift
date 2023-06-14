@@ -35,16 +35,16 @@ class TitleFloatView: ViewBuilder {
 //  MARK: - LAZY Area
     
     lazy var closeButton: ButtonImageBuilder = {
-        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "xmark")))
-            .setImageSize(11)
+        let img = ImageViewBuilder(UIImage(systemName: "xmark"))
+        let btn = ButtonImageBuilder(img.view)
+            .setImageSize(12)
             .setImageWeight(.semibold)
-            .setImagePlacement(.all)
             .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
-                    .setTop.equalToSuperView(7)
-                    .setSize.equalToConstant(24)
-                    .setLeading.equalToSuperView(8)
+                    .setTop.equalToSuperView
+                    .setLeading.equalToSuperView
+                    .setSize.equalToConstant(20)
             }
             .setActions { build in
                 build
@@ -58,11 +58,11 @@ class TitleFloatView: ViewBuilder {
         let img = ImageViewBuilder(UIImage(systemName: logo))
             .setSize(14)
             .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setContentMode(.center)
+            .setContentMode(.left)
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(closeButton.view)
-                    .setLeading.equalTo(closeButton.view, .trailing)
+                    .setLeading.equalTo(closeButton.view, .trailing, 6)
                     .setWidth.equalToConstant(22)
             }
         return img
@@ -73,11 +73,11 @@ class TitleFloatView: ViewBuilder {
         let label = LabelBuilder(self.title)
             .setFont(UIFont.systemFont(ofSize: 12, weight: .thin))
             .setColor(Theme.shared.currentTheme.onSurface)
-            .setTextAlignment(.natural)
+            .setTextAlignment(.left)
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(logoImageView.view)
-                    .setLeading.equalTo(logoImageView.view, .trailing, 5)
+                    .setLeading.equalTo(logoImageView.view, .trailing)
                     .setTrailing.equalTo(minimizeButton.view, .leading, -5)
                     .setHeight.equalToConstant(25)
             }
@@ -86,21 +86,22 @@ class TitleFloatView: ViewBuilder {
     
     
     lazy var minimizeButton: ButtonImageBuilder = {
-        let btn = ButtonImageBuilder(UIImageView(image: UIImage(systemName: "minus.square.fill")))
-            .setImageSize(14)
+        let img = ImageViewBuilder(UIImage(systemName: "minus.square.fill"))
+        let btn = ButtonImageBuilder(img.view)
+            .setImageSize(16)
             .setImageWeight(.semibold)
-            .setTitleAlignment(.center)
             .setImageColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.8))
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(closeButton.view)
-                    .setSize.equalToConstant(25)
-                    .setTrailing.equalToSuperView(-10)
+                    .setTrailing.equalToSuperView(-2)
+                    .setSize.equalToConstant(20)
             }
             .setActions { build in
                 build
                     .setTarget(self.target, self.minimizeClosure, .touchUpInside)
             }
+        btn.view.imageView?.contentMode = .right
         return btn
     }()
     

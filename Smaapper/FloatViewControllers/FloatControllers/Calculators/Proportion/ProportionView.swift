@@ -31,7 +31,7 @@ class ProportionView: ViewBuilder {
         let view = TitleFloatView(logo: "3.square.fill", title: "Proportion", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
-                    .setPinTop.equalToSuperView
+                    .setPinTop.equalToSuperView(12)
                     .setHeight.equalToConstant(25)
             }
         return view
@@ -48,9 +48,10 @@ class ProportionView: ViewBuilder {
         let view = PainelProportionView()
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleView.view, .bottom, 20)
-                    .setTrailing.equalToSuperView(-70)
-                    .setLeading.setBottom.equalToSuperView(15)
+                    .setTop.equalTo(okButton.view, .top)
+                    .setTrailing.equalTo(okButton.view, .leading, -15)
+                    .setLeading.equalToSuperView(15)
+                    .setBottom.equalTo(okButton.view, .bottom)
             }
         return view
     }()
@@ -64,8 +65,8 @@ class ProportionView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setTop.equalTo(titleView.view, .bottom, 20)
-                    .setBottom.equalTo(threePointsButton.view, .top, -15)
-                    .setLeading.setTrailing.equalTo(threePointsButton.view, 6)
+                    .setBottom.equalTo(historyButton.view, .top, -12)
+                    .setLeading.setTrailing.equalTo(historyButton.view, 6)
             }
         return stack
     }()
@@ -96,35 +97,39 @@ class ProportionView: ViewBuilder {
             })
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleView.view, .bottom, 20)
-                    .setBottom.equalTo(threePointsButton.view, .top, -15)
-                    .setLeading.equalTo(threePointsButton.view, .leading, 3)
-                    .setTrailing.equalTo(threePointsButton.view, .trailing, -1)
+                    .setTop.equalTo(titleView.view, .bottom, 10)
+                    .setTrailing.equalToSuperView(-14)
+                    .setBottom.equalToSuperView(-30)
+                    .setWidth.equalToConstant(42)
             }
         defaultNeumorphism(btn.view)
         return btn
     }()
     
-    lazy var threePointsButton: ButtonImageBuilder = {
-        let btn = self.defaultButtonImage("ellipsis")
+    lazy var historyButton: ButtonImageBuilder = {
+        let img = UIImageView(image: UIImage(systemName: "ellipsis"))
+        let btn = ButtonImageBuilder(img)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
+            .setImageSize(18)
+            .setImageWeight(.thin)
+            .setImagePlacement(.all)
             .setBorder({ build in
                 build
                     .setCornerRadius(9)
             })
-            .setNeumorphism { build in
+            .setGradient({ build in
                 build
-                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
-                    .setShape(.convex)
-                    .setLightPosition(.leftTop)
-                    .setBlur(percent: 0)
-                    .setDistance(percent: 0)
+                    .setAxialGradient(.leftTopToRightBottom)
+                    .setGradientColors([Theme.shared.currentTheme.surfaceContainerLowest,
+                                        Theme.shared.currentTheme.surfaceContainerHighest])
+                    
                     .apply()
-            }
+            })
             .setConstraints { build in
                 build
-                    .setBottom.equalToSafeArea(-10)
-                    .setTrailing.equalToSafeArea(-10)
-                    .setWidth.equalToConstant(47)
+                    .setHorizontalAlignmentX.equalToSuperView
+                    .setBottom.equalToSuperView(-8)
+                    .setWidth.equalToConstant(55)
                     .setHeight.equalToConstant(18)
             }
         return btn
@@ -176,7 +181,7 @@ class ProportionView: ViewBuilder {
     }
     
     private func addElements() {
-        threePointsButton.add(insideTo: self.view)
+        historyButton.add(insideTo: self.view)
         titleView.add(insideTo: self.view)
         painelProportion.add(insideTo: self.view)
         stackViewButtons.add(insideTo: self.view)
@@ -189,7 +194,7 @@ class ProportionView: ViewBuilder {
         titleView.applyConstraint()
         painelProportion.applyConstraint()
         okButton.applyConstraint()
-        threePointsButton.applyConstraint()
+        historyButton.applyConstraint()
         stackViewButtons.applyConstraint()
     }
     

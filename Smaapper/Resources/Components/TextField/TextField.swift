@@ -21,12 +21,12 @@ class TextField: UITextField {
         mainWindow?.hideKeyboardWhenViewTapped()
         CurrentWindow.rootView?.hideKeyboardWhenViewTapped()
         currentMainWindow = mainWindow
-        
     }
     
     init() {
         super.init(frame: .zero)
         addHideKeyboardWhenTouchReturn()
+        delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -39,15 +39,37 @@ class TextField: UITextField {
     }
     
     
+
+    
 //  MARK: - ACTIONS THIS COMPONENT
+    
+    private func validateKeyboardDecimal(_ character: String) -> Bool {
+        let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            numberFormatter.decimalSeparator = "."
+        return true
+    }
+    
     private func addHideKeyboardWhenTouchReturn(){
-        self.addTarget(self, action: #selector(textFieldDidEndOnExit), for: .editingDidEndOnExit)
+        self.addTarget(self, action: #selector(textFieldEditingDidEndOnExit), for: .editingDidEndOnExit)
         TextField.hideKeyboardWhenViewTapped()
     }
     
     @objc
-    private func textFieldDidEndOnExit() {
+    func textFieldEditingDidEndOnExit(_ textField: UITextField) {
         self.resignFirstResponder()
+    }
+    
+}
+
+//  MARK: - EXTENSION
+extension TextField: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if self.keyboardType == .decimalPad {
+            return validateKeyboardDecimal(string)
+        }
+        return true
     }
     
 }
