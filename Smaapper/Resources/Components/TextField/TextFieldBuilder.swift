@@ -158,8 +158,8 @@ class TextFieldBuilder: BaseBuilder {
     
 //  MARK: - DELEGATE TextField
     @discardableResult
-    func setDelegate(_ delegate: UITextFieldDelegate) -> Self {
-        _textField.delegate = delegate
+    func setDelegate(_ delegate: TextFieldDelegate) -> Self {
+        _textField.delegateTextField = delegate
         return self
     }
     

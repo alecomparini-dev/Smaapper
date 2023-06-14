@@ -41,8 +41,8 @@ class ProportionFloatViewController: FloatViewController {
     
     private func configDelegate() {
         screen.delegate = self
+        screen.setTextFieldDelegate(self)
     }
-    
     
 }
 
@@ -50,7 +50,7 @@ class ProportionFloatViewController: FloatViewController {
 //  MARK: - EXTENSIONWeatherViewDelegate
 
 extension ProportionFloatViewController: ProportionViewDelegate {
-    
+
     func closeWindow() {
         self.dismiss()
     }
@@ -59,6 +59,14 @@ extension ProportionFloatViewController: ProportionViewDelegate {
         self.minimize
     }
 
-    
 }
 
+
+//  MARK: - EXTENSION TextFieldDelegate
+extension ProportionFloatViewController: TextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: TextField) {
+        self.select
+    }
+    
+}

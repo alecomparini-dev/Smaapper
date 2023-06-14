@@ -20,7 +20,6 @@ class PainelProportionView: ViewBuilder {
     
     
 //  MARK: - STACK VIEW Area
-
     lazy var stackVertical: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.vertical)
@@ -84,7 +83,6 @@ class PainelProportionView: ViewBuilder {
     }()
     
     
-    
 //  MARK: - TEXTFIELDS Area
     
     lazy var textFieldA: TextFieldBuilder = {
@@ -105,7 +103,13 @@ class PainelProportionView: ViewBuilder {
         return txt
     }()
     
-    
+
+//  MARK: - PUBLIC Area
+    func configDelegate(_ delegate: TextFieldDelegate) {
+        textFieldA.setDelegate(delegate)
+        textFieldB.setDelegate(delegate)
+        textFieldC.setDelegate(delegate)
+    }
     
 //  MARK: - PRIVATE Area
     
