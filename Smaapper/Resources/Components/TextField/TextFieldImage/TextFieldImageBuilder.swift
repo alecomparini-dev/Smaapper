@@ -78,7 +78,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
         self.setFrameImage(image)
         self.addImageInsidePaddingView(image, paddingView)
         self.setImageAlignmentInPaddingView(image, paddingView, position)
-        addPaddingToTextField(paddingView, position)
+        self.setPadding(paddingView, position)
         setTintColor(self.textField.textColor ?? .black)
         return self
     }

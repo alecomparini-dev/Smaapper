@@ -7,17 +7,25 @@
 
 import UIKit
 
-
 class TextFieldBuilder: BaseBuilder {
-    typealias callBackKeyboardAlias = (_ textField: UITextField) -> Void
+    typealias completionKeyboardAlias = (_ textField: UITextField) -> Void
+    typealias completionNavigationKeyboardAlias = (_ currentTextField: UITextField, _ navigation: NavigationTextField) -> Void
     
-    private var callBackKeyboard: callBackKeyboardAlias?
+    enum NavigationTextField {
+        case next
+        case previous
+    }
+    
+    private var completionDoneKeyboard: completionKeyboardAlias?
+    private var completionButtonKeyboard: completionKeyboardAlias?
+    private var completionNavigationKeyboard: completionNavigationKeyboardAlias?
     
     private var _textField: TextField
     var textField: TextField { self._textField }
     var view: TextField { self._textField }
     
     private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
+    private var toolbar: UIToolbar?
     
     init() {
         self._textField = TextField()
@@ -89,28 +97,23 @@ class TextFieldBuilder: BaseBuilder {
         return self
     }
     
-    private func addAutomaticButtomItemDone() {
-        if callBackKeyboard != nil { return }
-        if _textField.keyboardType == .decimalPad {
-            self.setButtonItemKeyboard(.done) { textField in
-                textField.resignFirstResponder()
-            }
-        }
-    }
-    
     @discardableResult
-    func setButtonItemKeyboard(_ barButtonSystemItem: UIBarButtonItem.SystemItem, completion: callBackKeyboardAlias? = nil) -> Self {
-        callBackKeyboard = completion
-        addBarButtonItem(barButtonSystemItem)
+    func setButtonDoneKeyboard(_ completion: completionKeyboardAlias? = nil) -> Self {
+        completionDoneKeyboard = completion
+        addBarButtonItem(.done)
         return self
     }
     
+    @discardableResult
+    func setNavigationTextFieldKeyboard(_ completion: completionNavigationKeyboardAlias? = nil) -> Self {
+        completionNavigationKeyboard = completion
+        return self
+    }
     
- 
-    @objc
-    private func doneButtonTapped() {
-        _textField.textFieldEditingDidEndOnExit(_textField)
-        callBackKeyboard?(_textField)
+    @discardableResult
+    func setButtonKeyboard(_ barButtonSystemItem: [UIBarButtonItem.SystemItem], completion: completionKeyboardAlias? = nil) -> Self {
+        completionButtonKeyboard = completion
+        return self
     }
     
     @discardableResult
@@ -158,6 +161,12 @@ class TextFieldBuilder: BaseBuilder {
     @discardableResult
     func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 0))
+        setPadding(paddingView, position)
+        return self
+    }
+    
+    @discardableResult
+    func setPadding(_ paddingView: UIView, _ position: TextField.Position? = nil) -> Self {
         if let position {
             addPaddingToTextField(paddingView, position)
             return self
@@ -167,22 +176,17 @@ class TextFieldBuilder: BaseBuilder {
         return self
     }
     
-    func addPaddingToTextField(_ paddingView: UIView, _ position: TextField.Position ) {
-        switch position {
-            case .left:
-                _textField.leftView = paddingView
-                _textField.leftViewMode = .always
-            
-            case .right:
-                _textField.rightView = paddingView
-                _textField.rightViewMode = .always
-        }
-        
+    
+//  MARK: - DELEGATE TextField
+    @discardableResult
+    func setDelegate(_ delegate: UITextFieldDelegate) -> Self {
+        _textField.delegate = delegate
+        return self
     }
-
-
+    
         
 //  MARK: - PRIVATE Area
+    
     private func addBarButtonItem(_ barButtonSystemItem: UIBarButtonItem.SystemItem) {
         let toolbar = createToolBar()
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -196,6 +200,34 @@ class TextFieldBuilder: BaseBuilder {
         toolbar.barStyle = .default
         toolbar.sizeToFit()
         return toolbar
+    }
+    
+    private func addAutomaticButtomItemDone() {
+        if completionDoneKeyboard != nil { return }
+        if _textField.keyboardType == .decimalPad {
+            self.setButtonDoneKeyboard { textField in
+                textField.resignFirstResponder()
+            }
+        }
+    }
+    
+    private func addPaddingToTextField(_ paddingView: UIView, _ position: TextField.Position ) {
+        switch position {
+            case .left:
+                _textField.leftView = paddingView
+                _textField.leftViewMode = .always
+            
+            case .right:
+                _textField.rightView = paddingView
+                _textField.rightViewMode = .always
+        }
+    }
+    
+    
+//  MARK: - OBJC Area
+    @objc private func doneButtonTapped() {
+        _textField.textFieldEditingDidEndOnExit(_textField)
+        completionDoneKeyboard?(_textField)
     }
     
 }

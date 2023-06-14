@@ -39,14 +39,15 @@ class TextField: UITextField {
     }
     
     
-
-    
 //  MARK: - ACTIONS THIS COMPONENT
     
     private func validateKeyboardDecimal(_ character: String) -> Bool {
+        guard let text = self.text else { return true}
         let numberFormatter = NumberFormatter()
-            numberFormatter.numberStyle = .decimal
-            numberFormatter.decimalSeparator = "."
+        let decimalSeparator = numberFormatter.decimalSeparator ?? ""
+        if character == decimalSeparator {
+            return !text.contains(decimalSeparator)
+        }
         return true
     }
     
@@ -64,7 +65,6 @@ class TextField: UITextField {
 
 //  MARK: - EXTENSION
 extension TextField: UITextFieldDelegate {
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if self.keyboardType == .decimalPad {
             return validateKeyboardDecimal(string)
