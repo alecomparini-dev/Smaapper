@@ -25,6 +25,7 @@ class ProportionView: ViewBuilder {
         configStyles()
         addElements()
         configConstraints()
+//        configDelegates()
     }
     
     lazy var titleView: ViewBuilder = {
@@ -129,6 +130,12 @@ class ProportionView: ViewBuilder {
     }()
     
     
+//  MARK: - PUBLIC Area
+    func setTextFieldDelegate(_ delegate: TextFieldDelegate) {
+        painelProportion.configDelegate(delegate)
+    }
+    
+    
 //  MARK: - PRIVATE Area
     
     private func defaultButtonImage(_ image: String) -> ButtonImageBuilder {
@@ -202,3 +209,6 @@ class ProportionView: ViewBuilder {
     }
     
 }
+
+
+
