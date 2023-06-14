@@ -9,6 +9,9 @@ import UIKit
 
 class PainelProportionView: ViewBuilder {
     
+    private var listTextFields: [UITextField] = []
+    private var initialIndex: Int = 0
+    
     override init() {
         super.init()
         addElements()
@@ -86,17 +89,19 @@ class PainelProportionView: ViewBuilder {
     
     lazy var textFieldA: TextFieldBuilder = {
         let txt = defaultTextField("A")
-            
+        listTextFields.append(txt.view)
         return txt
     }()
     
     lazy var textFieldB: TextFieldBuilder = {
         let txt = defaultTextField("B")
+        listTextFields.append(txt.view)
         return txt
     }()
     
     lazy var textFieldC: TextFieldBuilder = {
         let txt = defaultTextField("C")
+        listTextFields.append(txt.view)
         return txt
     }()
     
@@ -106,7 +111,14 @@ class PainelProportionView: ViewBuilder {
     
     private func defaultTextField(_ placeHolder: String) -> TextFieldBuilder {
         let txt = TextFieldBuilder(placeHolder)
-            .setKeyboardType(.decimalPad)
+            .setKeyboard({ buid in
+                buid
+                    .setKeyboardType(.decimalPad)
+                    .setClearButton()
+                    .setNavigationButtonTextField { currentTextField, navigation in
+                        self.navigationTextFields(currentTextField, navigation)
+                    }
+            })
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainerHighest)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setAlignment(.center)
@@ -126,6 +138,38 @@ class PainelProportionView: ViewBuilder {
         return txt
     }
     
+    private func navigationTextFields(_ textField: UITextField, _ navigation:TextFieldConfigKeyboard.NavigationTextField ) {
+        
+        switch navigation {
+            case .next:
+                moveNextTextField(textField)
+            case .previous:
+                movePreviousTextField(textField)
+        }
+    }
+    
+    private func moveNextTextField(_ textField: UITextField) {
+        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
+        let nextIndex = currentIndex + 1
+        if nextIndex < listTextFields.count {
+            let nextTextField = listTextFields[nextIndex]
+            nextTextField.becomeFirstResponder()
+        } else {
+            listTextFields[0].becomeFirstResponder()
+        }
+    }
+    
+    private func movePreviousTextField(_ textField: UITextField) {
+        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
+        let nextIndex = currentIndex - 1
+        if nextIndex < 0 {
+            listTextFields[listTextFields.count-1].becomeFirstResponder()
+        } else {
+            let nextTextField = listTextFields[nextIndex]
+            nextTextField.becomeFirstResponder()
+        }
+    }
+
     private func addElements() {
         stackVertical.add(insideTo: self.view)
         stackHorizontal1.add(insideTo: stackVertical.view)

@@ -58,7 +58,7 @@ class TextField: UITextField {
     
     @objc
     func textFieldEditingDidEndOnExit(_ textField: UITextField) {
-        self.resignFirstResponder()
+        textField.resignFirstResponder()
     }
     
 }

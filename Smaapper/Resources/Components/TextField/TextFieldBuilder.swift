@@ -8,19 +8,15 @@
 import UIKit
 
 class TextFieldBuilder: BaseBuilder {
-    typealias completionKeyboardAlias = (_ textField: UITextField) -> Void
-    typealias completionNavigationKeyboardAlias = (_ currentTextField: UITextField, _ navigation: NavigationTextField) -> Void
     
     enum NavigationTextField {
         case next
         case previous
     }
     
-    private var completionDoneKeyboard: completionKeyboardAlias?
-    private var completionButtonKeyboard: completionKeyboardAlias?
-    private var completionNavigationKeyboard: completionNavigationKeyboardAlias?
+    private var textFieldConfigKeyboard: TextFieldConfigKeyboard?
+    private let _textField: TextField
     
-    private var _textField: TextField
     var textField: TextField { self._textField }
     var view: TextField { self._textField }
     
@@ -46,8 +42,11 @@ class TextFieldBuilder: BaseBuilder {
         self.setAutoCapitalization(.none)
             .setAutoCorrectionType(.no)
             .setPlaceHolderColor(.systemGray2)
-            .setKeyboardType(.default)
             .setPadding(7, .left)
+            .setKeyboard { buid in
+                buid
+                    .setKeyboardAppearance(.light)
+            }
     }
     
     
@@ -87,32 +86,6 @@ class TextFieldBuilder: BaseBuilder {
     @discardableResult
     func setTextColor(_ textColor: UIColor) -> Self {
         _textField.textColor = textColor
-        return self
-    }
-    
-    @discardableResult
-    func setKeyboardType(_ keyboardType: UIKeyboardType) -> Self {
-        _textField.keyboardType = keyboardType
-        addAutomaticButtomItemDone()
-        return self
-    }
-    
-    @discardableResult
-    func setButtonDoneKeyboard(_ completion: completionKeyboardAlias? = nil) -> Self {
-        completionDoneKeyboard = completion
-        addBarButtonItem(.done)
-        return self
-    }
-    
-    @discardableResult
-    func setNavigationTextFieldKeyboard(_ completion: completionNavigationKeyboardAlias? = nil) -> Self {
-        completionNavigationKeyboard = completion
-        return self
-    }
-    
-    @discardableResult
-    func setButtonKeyboard(_ barButtonSystemItem: [UIBarButtonItem.SystemItem], completion: completionKeyboardAlias? = nil) -> Self {
-        completionButtonKeyboard = completion
         return self
     }
     
@@ -176,6 +149,12 @@ class TextFieldBuilder: BaseBuilder {
         return self
     }
     
+    @discardableResult
+    func setKeyboard(_ configKeyboard: (_ buid: TextFieldConfigKeyboard) -> TextFieldConfigKeyboard ) -> Self {
+        self.textFieldConfigKeyboard = configKeyboard(TextFieldConfigKeyboard(self._textField))
+        return self
+    }
+    
     
 //  MARK: - DELEGATE TextField
     @discardableResult
@@ -186,30 +165,6 @@ class TextFieldBuilder: BaseBuilder {
     
         
 //  MARK: - PRIVATE Area
-    
-    private func addBarButtonItem(_ barButtonSystemItem: UIBarButtonItem.SystemItem) {
-        let toolbar = createToolBar()
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        toolbar.items = [flexSpace,doneButton]
-        self._textField.inputAccessoryView = toolbar
-    }
-    
-    private func createToolBar() -> UIToolbar {
-        let toolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        toolbar.barStyle = .default
-        toolbar.sizeToFit()
-        return toolbar
-    }
-    
-    private func addAutomaticButtomItemDone() {
-        if completionDoneKeyboard != nil { return }
-        if _textField.keyboardType == .decimalPad {
-            self.setButtonDoneKeyboard { textField in
-                textField.resignFirstResponder()
-            }
-        }
-    }
     
     private func addPaddingToTextField(_ paddingView: UIView, _ position: TextField.Position ) {
         switch position {
@@ -224,10 +179,5 @@ class TextFieldBuilder: BaseBuilder {
     }
     
     
-//  MARK: - OBJC Area
-    @objc private func doneButtonTapped() {
-        _textField.textFieldEditingDidEndOnExit(_textField)
-        completionDoneKeyboard?(_textField)
-    }
-    
+
 }

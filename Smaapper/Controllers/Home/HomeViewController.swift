@@ -239,10 +239,12 @@ class HomeViewController: UIViewController {
     }
     
     
-    
     lazy var textField: TextFieldBuilder = {
         let txt = TextFieldBuilder()
-            .setKeyboardType(.decimalPad)
+            .setKeyboard({ buid in
+                buid
+                    .setKeyboardType(.decimalPad)
+            })
             .setBorder({ build in
                 build
                     .setWidth(1)

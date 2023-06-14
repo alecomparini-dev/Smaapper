@@ -36,13 +36,6 @@ class ProportionView: ViewBuilder {
             }
         return view
     }()
-    @objc private func minimizeWindow() {
-        delegate?.minimizeWindow()
-    }
-    
-    @objc private func closeWindow() {
-        delegate?.closeWindow()
-    }
     
     lazy var painelProportion: PainelProportionView = {
         let view = PainelProportionView()
@@ -110,7 +103,7 @@ class ProportionView: ViewBuilder {
         let img = UIImageView(image: UIImage(systemName: "ellipsis"))
         let btn = ButtonImageBuilder(img)
             .setImageColor(Theme.shared.currentTheme.onSurface)
-            .setImageSize(18)
+            .setImageSize(15)
             .setImageWeight(.thin)
             .setImagePlacement(.all)
             .setBorder({ build in
@@ -198,5 +191,14 @@ class ProportionView: ViewBuilder {
         stackViewButtons.applyConstraint()
     }
     
+//  MARK: - OBJCT Area
+    
+    @objc private func minimizeWindow() {
+        delegate?.minimizeWindow()
+    }
+    
+    @objc private func closeWindow() {
+        delegate?.closeWindow()
+    }
     
 }
