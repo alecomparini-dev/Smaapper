@@ -47,7 +47,7 @@ class BMICalculatorView: ViewBuilder {
         let view = TitleFloatView(logo: "scalemass.fill", title: "BMI Calculator", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
-                    .setPinTop.equalToSuperView
+                    .setPinTop.equalToSuperView(12)
                     .setHeight.equalToConstant(25)
             }
         return view

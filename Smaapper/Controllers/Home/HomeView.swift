@@ -71,10 +71,6 @@ class HomeView: ViewBuilder {
                     .setHeight.equalToConstant(70)
                     .setWidth.equalToConstant(115)
             }
-            .setActions { build in
-                build
-                    .setDraggable()
-            }
         return view
     }()
     

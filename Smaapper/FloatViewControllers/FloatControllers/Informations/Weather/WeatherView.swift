@@ -47,7 +47,7 @@ class WeatherView: ViewBuilder {
         let view = TitleFloatView(logo: "cloud.sun.fill", title: "Weather", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
-                    .setPinTop.equalToSuperView
+                    .setPinTop.equalToSuperView(12)
                     .setHeight.equalToConstant(25)
             }
         return view

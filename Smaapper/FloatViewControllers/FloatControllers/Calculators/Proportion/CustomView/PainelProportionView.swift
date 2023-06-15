@@ -65,20 +65,51 @@ class PainelProportionView: ViewBuilder {
         return view
     }()
 
+    
+    lazy var resultLabel: LabelBuilder = {
+        let label = LabelBuilder("0.0")
+            .setFont(UIFont.systemFont(ofSize: 18, weight: .semibold))
+            .setColor(Theme.shared.currentTheme.onSurface)
+            .setTextAlignment(.center)
+            .setConstraints { build in
+                build
+                    .setAlignmentCenterXY.equalToSuperView
+                    .setLeading.setTrailing.equalToSuperView
+            }
+        return label
+    }()
+    
     lazy var viewResult: ViewBuilder = {
         let view = ViewBuilder()
         view.view.layer.masksToBounds = true
-        let label = LabelBuilder("0.0")
-            .setFont(UIFont.systemFont(ofSize: 18, weight: .semibold))
-            .setColor(Theme.shared.currentTheme.primary)
-            .setTextAlignment(.center)
+        return view
+    }()
+    
+    lazy var underLineResult: ViewBuilder = {
+       var view = ViewBuilder()
+            .setGradient({ build in
+                build
+                    .setGradientColors(Theme.shared.currentTheme.primaryGradient)
+                    .setAxialGradient(.leftToRight)
+                    .apply()
+            })
+            .setBorder({ build in
+                build.setCornerRadius(2)
+            })
+            .setShadow({ build in
+                build
+                    .setOffset(width: 3, height: 3)
+                    .setColor(.black.withAlphaComponent(0.8))
+                    .setOpacity(1)
+                    .setRadius(3)
+                    .apply()
+            })
             .setConstraints { build in
-                build.setAlignmentCenterXY.equalToSuperView
-                    .setLeading.setTrailing.equalToSuperView
+                build
+                    .setTop.equalTo(textFieldC.view, .bottom )
+                    .setLeading.setTrailing.equalToSuperView(5)
+                    .setHeight.equalToConstant(2)
             }
-        label.add(insideTo: view.view)
-        label.applyConstraint()
-        
         return view
     }()
     
@@ -179,14 +210,19 @@ class PainelProportionView: ViewBuilder {
         stackHorizontal1.add(insideTo: stackVertical.view)
         stackHorizontal2.add(insideTo: stackVertical.view)
         
-        textFieldA.add(insideTo: viewA.view)
-        textFieldB.add(insideTo: viewB.view)
-        textFieldC.add(insideTo: viewC.view)
-
         viewA.add(insideTo: stackHorizontal1.view)
         viewB.add(insideTo: stackHorizontal1.view)
         viewC.add(insideTo: stackHorizontal2.view)
         viewResult.add(insideTo: stackHorizontal2.view)
+        
+        resultLabel.add(insideTo: viewResult.view)
+        underLineResult.add(insideTo: viewResult.view)
+        
+        textFieldA.add(insideTo: viewA.view)
+        textFieldB.add(insideTo: viewB.view)
+        textFieldC.add(insideTo: viewC.view)
+
+        
     }
     
     private func configContraints() {
@@ -194,6 +230,9 @@ class PainelProportionView: ViewBuilder {
         textFieldA.applyConstraint()
         textFieldB.applyConstraint()
         textFieldC.applyConstraint()
+        
+        resultLabel.applyConstraint()
+        underLineResult.applyConstraint()
     }
     
 }
