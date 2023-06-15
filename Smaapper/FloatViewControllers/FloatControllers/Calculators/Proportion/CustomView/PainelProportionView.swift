@@ -142,6 +142,7 @@ class PainelProportionView: ViewBuilder {
         textFieldC.setDelegate(delegate)
     }
     
+    
 //  MARK: - PRIVATE Area
     
     private func defaultTextField(_ placeHolder: String) -> TextFieldBuilder {
@@ -150,8 +151,8 @@ class PainelProportionView: ViewBuilder {
                 buid
                     .setKeyboardType(.decimalPad)
                     .setClearButton()
-                    .setNavigationButtonTextField { currentTextField, navigation in
-                        self.navigationTextFields(currentTextField, navigation)
+                    .setNavigationButtonTextField {
+                        return self.listTextFields
                     }
             })
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainerHighest)
@@ -173,37 +174,6 @@ class PainelProportionView: ViewBuilder {
         return txt
     }
     
-    private func navigationTextFields(_ textField: UITextField, _ navigation:TextFieldConfigKeyboard.NavigationTextField ) {
-        switch navigation {
-            case .next:
-                moveNextTextField(textField)
-            
-            case .previous:
-                movePreviousTextField(textField)
-        }
-    }
-    
-    private func moveNextTextField(_ textField: UITextField) {
-        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
-        let nextIndex = currentIndex + 1
-        if nextIndex < listTextFields.count {
-            let nextTextField = listTextFields[nextIndex]
-            nextTextField.becomeFirstResponder()
-        } else {
-            listTextFields[0].becomeFirstResponder()
-        }
-    }
-    
-    private func movePreviousTextField(_ textField: UITextField) {
-        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
-        let nextIndex = currentIndex - 1
-        if nextIndex < 0 {
-            listTextFields[listTextFields.count-1].becomeFirstResponder()
-        } else {
-            let nextTextField = listTextFields[nextIndex]
-            nextTextField.becomeFirstResponder()
-        }
-    }
 
     private func addElements() {
         stackVertical.add(insideTo: self.view)
@@ -222,7 +192,6 @@ class PainelProportionView: ViewBuilder {
         textFieldB.add(insideTo: viewB.view)
         textFieldC.add(insideTo: viewC.view)
 
-        
     }
     
     private func configContraints() {
@@ -235,4 +204,5 @@ class PainelProportionView: ViewBuilder {
         underLineResult.applyConstraint()
     }
     
+
 }
