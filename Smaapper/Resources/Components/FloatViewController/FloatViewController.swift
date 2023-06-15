@@ -104,7 +104,61 @@ class FloatViewController: BaseBuilder {
         manager.delegate?.viewWillAppear(self)
     }
     
-    func viewWillLayoutSubviews(){
+    
+//--------------------------------------------------------------------------------------------------------------------------------
+    private func configKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        
+        let constantVisibility = 25.0
+        let textFields = AllTextFieldsInView.get(self.view)
+        let textFieldActive = textFields.first { $0.isFirstResponder }
+        let positionYWin = self.view.frame.minY
+        let originalYKeyboard = keyboardFrame.origin.y
+        var positionGlobalTextFieldActive = CGRect()
+        if let textFieldActive {
+            positionGlobalTextFieldActive = textFieldActive.convert(textFieldActive.bounds, to: nil)
+        }
+        let positionRelativeTextField = positionGlobalTextFieldActive.maxY - positionYWin
+        let positionFinal = originalYKeyboard - (positionRelativeTextField + constantVisibility)
+        
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            viewWillLayoutSubviews()
+            view.frame.origin = CGPoint(x: view.frame.origin.x, y: positionFinal)
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            viewDidLayoutSubviews()
+        })
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        viewWillLayoutSubviews()
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            view.center = originalCenter
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            viewDidLayoutSubviews()
+        })
+    }
+    
+    private func unregisterKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+
+//--------------------------------------------------------------------------------------------------------------------------------
+    
+    
+    func viewWillLayoutSubviews() {
         manager.delegate?.viewWillLayoutSubviews(self)
     }
     
@@ -113,6 +167,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidAppear() {
+        registerPositionFloatView()
         self.view.isHidden = false
         manager.delegate?.viewDidAppear(self)
     }
@@ -128,6 +183,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidDrag(){
+        registerPositionFloatView()
         manager.delegate?.viewDidDrag(self)
     }
 
@@ -139,10 +195,12 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidSelectFloatView() {
+        configKeyboard()
         manager.delegate?.viewDidSelectFloatView(self)
     }
     
     func viewDidDeselectFloatView() {
+        unregisterKeyboardNotifications()
         manager.delegate?.viewDidDeselectFloatView(self)
     }
     
@@ -154,7 +212,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewWillMinimize() {
-        originalCenter = self.view.center
+        registerPositionFloatView()
         manager.delegate?.viewWillMinimize(self)
     }
     
@@ -287,6 +345,10 @@ class FloatViewController: BaseBuilder {
     
     
 //  MARK: - PRIVATE Function Area
+    
+    private func registerPositionFloatView() {
+        originalCenter = self.view.center
+    }
     
     private func removeFloatView() {
         manager.removeWindowToManager(self)

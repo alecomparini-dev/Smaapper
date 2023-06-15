@@ -87,7 +87,7 @@ class TextFieldConfigKeyboard {
     }
     
     private func createClearButtonItem() -> UIBarButtonItem{
-        let img = UIImage(systemName: "xmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        let img = UIImage(systemName: "eraser.line.dashed")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
         return UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(clearButtonTapped))
     }
     
