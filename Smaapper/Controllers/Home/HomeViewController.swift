@@ -347,13 +347,9 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
         dockController.verifyShowDock()
     }
     
-    func viewWillDrag(_ floatView: FloatViewController) {
-        floatView.view.alpha = 0.9
-    }
+    func viewWillDrag(_ floatView: FloatViewController) {}
     
-    func viewDidDrag(_ floatView: FloatViewController) {
-        floatView.view.alpha = 1
-    }
+    func viewDidDrag(_ floatView: FloatViewController) {}
 
     func allClosedWindows() {
         showElementsOnScreen()
