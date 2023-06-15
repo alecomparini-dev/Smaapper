@@ -42,6 +42,8 @@ class FloatViewControllerManager {
 
     var listFloatView: [FloatViewController] { self._listWindows }
     var countFloatView: Int { self._listWindows.count }
+    
+    var countFloatViewMinimized: Int { self._listWindows.filter { $0.isMinimized }.count }
         
     func floatViewSelected() -> FloatViewController? {
         return listFloatView.first(where: { $0.active })

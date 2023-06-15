@@ -33,7 +33,7 @@ class QuizView: ViewBuilder {
         let view = TitleFloatView(logo: "checkmark.circle.badge.questionmark.fill", title: "Quiz", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
-                    .setPinTop.equalToSuperView
+                    .setPinTop.equalToSuperView(12)
                     .setHeight.equalToConstant(25)
             }
         return view

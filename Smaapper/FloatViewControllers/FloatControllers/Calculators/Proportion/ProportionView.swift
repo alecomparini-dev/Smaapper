@@ -25,7 +25,6 @@ class ProportionView: ViewBuilder {
         configStyles()
         addElements()
         configConstraints()
-//        configDelegates()
     }
     
     lazy var titleView: ViewBuilder = {
@@ -42,9 +41,9 @@ class ProportionView: ViewBuilder {
         let view = PainelProportionView()
             .setConstraints { build in
                 build
-                    .setTop.equalTo(okButton.view, .top)
-                    .setTrailing.equalTo(okButton.view, .leading, -15)
-                    .setLeading.equalToSuperView(15)
+                    .setTop.equalTo(okButton.view, .top, -6)
+                    .setTrailing.equalTo(okButton.view, .leading, -13)
+                    .setLeading.equalToSuperView(13)
                     .setBottom.equalTo(okButton.view, .bottom)
             }
         return view
@@ -94,7 +93,7 @@ class ProportionView: ViewBuilder {
                     .setTop.equalTo(titleView.view, .bottom, 10)
                     .setTrailing.equalToSuperView(-14)
                     .setBottom.equalToSuperView(-30)
-                    .setWidth.equalToConstant(42)
+                    .setWidth.equalToConstant(44)
             }
         defaultNeumorphism(btn.view)
         return btn
@@ -104,12 +103,12 @@ class ProportionView: ViewBuilder {
         let img = UIImageView(image: UIImage(systemName: "ellipsis"))
         let btn = ButtonImageBuilder(img)
             .setImageColor(Theme.shared.currentTheme.onSurface)
-            .setImageSize(15)
+            .setImageSize(12)
             .setImageWeight(.thin)
             .setImagePlacement(.all)
             .setBorder({ build in
                 build
-                    .setCornerRadius(9)
+                    .setCornerRadius(7)
             })
             .setGradient({ build in
                 build
@@ -124,7 +123,7 @@ class ProportionView: ViewBuilder {
                     .setHorizontalAlignmentX.equalToSuperView
                     .setBottom.equalToSuperView(-8)
                     .setWidth.equalToConstant(55)
-                    .setHeight.equalToConstant(18)
+                    .setHeight.equalToConstant(15)
             }
         return btn
     }()

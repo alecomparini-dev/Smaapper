@@ -205,11 +205,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func hideElementsForShowingFloatView() {
-        homeScreen.clock.setOpacity(0.6)
-        homeScreen.weather.setHidden(true)
-        homeScreen.askChatGPTView.setHidden(true)
-    }
+
     
     private func getIcon(_ index: Int) -> String {
         let win = floatManager.listFloatView[index]
@@ -230,7 +226,7 @@ class HomeViewController: UIViewController {
     
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
         let idApp: String = getIdAppByCategory(category)
-        hideElementsForShowingFloatView()
+        hideElementsOnScreen()
         delegateFloatViewController?.openFloatViewController(idApp, where: homeScreen.viewFloatWindow.view)
     }
     
@@ -327,6 +323,7 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
 
     func viewDidDisappear(_ floatView: FloatViewController) {
         dockController.verifyShowDock()
+        verifyShowElementsOnScreen()
         if let indexCloseWin {
             dockController.removeItem(indexCloseWin)
         }
@@ -338,10 +335,12 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     
     func viewDidMinimize(_ floatView: FloatViewController) {
         dockController.verifyShowDock()
+        verifyShowElementsOnScreen()
     }
     
     func viewWillRestore(_ floatView: FloatViewController) {
         dockController.restoredItemDock(floatView)
+        hideElementsOnScreen()
     }
     
     func viewDidRestore(_ floatView: FloatViewController) {
@@ -357,11 +356,29 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     }
 
     func allClosedWindows() {
-        self.homeScreen.clock.setOpacity(1)
-        self.homeScreen.weather.setHidden(false)
-        self.homeScreen.askChatGPTView.setHidden(false)
+        showElementsOnScreen()
+    }
+    
+    private func verifyShowElementsOnScreen() {
+        if FloatViewControllerManager.instance.countFloatViewMinimized ==
+            FloatViewControllerManager.instance.countFloatView {
+            showElementsOnScreen()
+            return
+        }
+        hideElementsOnScreen()
     }
 
+    private func hideElementsOnScreen() {
+        homeScreen.clock.setOpacity(0.6)
+        homeScreen.weather.setHidden(true)
+        homeScreen.askChatGPTView.setHidden(true)
+    }
+    
+    private func showElementsOnScreen() {
+        homeScreen.clock.setOpacity(1)
+        homeScreen.weather.setHidden(false)
+        homeScreen.askChatGPTView.setHidden(false)
+    }
 
 }
 
