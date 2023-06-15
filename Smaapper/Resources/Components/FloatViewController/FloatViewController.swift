@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class FloatViewController: BaseBuilder {
     
     private let hierarchy: CGFloat = 1000
@@ -17,12 +16,10 @@ class FloatViewController: BaseBuilder {
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
-    private var titleWindow: TitleFloatView?
-    private var titleHeight: CGFloat = 30
+    private var textFields: [UITextField] = []
     
     private(set) var id: UUID = UUID()
     private(set) var customAttribute: Any?
-    
     private(set) var isMinimized: Bool = false
     private(set) var originalCenter: CGPoint = .zero
     private(set) var active: Bool = false
@@ -106,58 +103,19 @@ class FloatViewController: BaseBuilder {
     
     
 //--------------------------------------------------------------------------------------------------------------------------------
-    private func configKeyboard() {
+    
+    private func configRepositionFloatViewWhenShowKeyboard() {
+        self.textFields = AllTextFieldsInView.get(self.view)
+        if textFields.count > 0 {
+            registerKeyboardNotifications()
+        }
+    }
+    
+    private func registerKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func keyboardWillShow(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        
-        let constantVisibility = 25.0
-        let textFields = AllTextFieldsInView.get(self.view)
-        let textFieldActive = textFields.first { $0.isFirstResponder }
-        let positionYWin = self.view.frame.minY
-        let originalYKeyboard = keyboardFrame.origin.y
-        var positionGlobalTextFieldActive = CGRect()
-        if let textFieldActive {
-            positionGlobalTextFieldActive = textFieldActive.convert(textFieldActive.bounds, to: nil)
-        }
-        let positionRelativeTextField = positionGlobalTextFieldActive.maxY - positionYWin
-        let positionFinal = originalYKeyboard - (positionRelativeTextField + constantVisibility)
-        
-        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
-            guard let self else {return}
-            viewWillLayoutSubviews()
-            view.frame.origin = CGPoint(x: view.frame.origin.x, y: positionFinal)
-        }, completion: { [weak self] _ in
-            guard let self else {return}
-            viewDidLayoutSubviews()
-        })
-    }
-
-    @objc func keyboardWillHide(_ notification: Notification) {
-        viewWillLayoutSubviews()
-        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
-            guard let self else {return}
-            view.center = originalCenter
-        }, completion: { [weak self] _ in
-            guard let self else {return}
-            viewDidLayoutSubviews()
-        })
-    }
-    
-    private func unregisterKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-
-//--------------------------------------------------------------------------------------------------------------------------------
-    
-    
     func viewWillLayoutSubviews() {
         manager.delegate?.viewWillLayoutSubviews(self)
     }
@@ -167,7 +125,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidAppear() {
-        registerPositionFloatView()
+        setPositionFloatView()
         self.view.isHidden = false
         manager.delegate?.viewDidAppear(self)
     }
@@ -183,7 +141,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidDrag(){
-        registerPositionFloatView()
+        setPositionFloatView()
         manager.delegate?.viewDidDrag(self)
     }
 
@@ -195,7 +153,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewDidSelectFloatView() {
-        configKeyboard()
+        configRepositionFloatViewWhenShowKeyboard()
         manager.delegate?.viewDidSelectFloatView(self)
     }
     
@@ -212,7 +170,7 @@ class FloatViewController: BaseBuilder {
     }
     
     func viewWillMinimize() {
-        registerPositionFloatView()
+        setPositionFloatView()
         manager.delegate?.viewWillMinimize(self)
     }
     
@@ -310,10 +268,9 @@ class FloatViewController: BaseBuilder {
         if isMinimized {return}
         deselect
         viewWillMinimize()
-        minimizeAnimation(callBackViewMinimized)
-    }
-    private func callBackViewMinimized() {
-        viewDidMinimize()
+        minimizeAnimation { [weak self] in
+            self?.viewDidMinimize()
+        }
     }
     
     var restore: Void {
@@ -321,10 +278,9 @@ class FloatViewController: BaseBuilder {
         select
         viewWillRestore()
         bringToFront
-        restoreAnimation(callBackViewRestored)
-    }
-    private func callBackViewRestored() {
-        viewDidRestore()
+        restoreAnimation { [weak self] in
+            self?.viewDidRestore()
+        }
     }
     
     var select: Void {
@@ -346,7 +302,7 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - PRIVATE Function Area
     
-    private func registerPositionFloatView() {
+    private func setPositionFloatView() {
         originalCenter = self.view.center
     }
     
@@ -406,6 +362,57 @@ class FloatViewController: BaseBuilder {
     }
 
     
+//  MARK: - CONTROL REPOSITION FLOATWINDOW
+    
+    private func configRepositionFloatViewIfNeeded(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        
+        let constantVisibility = 25.0
+        if let textFieldAbsolutePosition = calculateAbsolutePositionTextField() {
+            let textFieldPositionWithIncreasedVisibility = textFieldAbsolutePosition + constantVisibility
+            
+            let keyboardPosition = keyboardFrame.origin.y
+            if textFieldPositionWithIncreasedVisibility <= keyboardPosition { return }
+            
+            let floatViewPositionY = self.view.frame.minY
+            let finalPosition = keyboardPosition - (textFieldPositionWithIncreasedVisibility - floatViewPositionY)
+            repositionFloatViewShowKeyboardAnimation(finalPosition)
+        }
+    }
+    
+    private func calculateAbsolutePositionTextField() -> CGFloat? {
+        if let textFieldActive = getTextFieldActive() {
+            return textFieldActive.convert(textFieldActive.bounds, to: nil).maxY
+        }
+        return nil
+    }
+    
+    private func getTextFieldActive() -> UITextField? {
+        return self.textFields.first { $0.isFirstResponder }
+    }
+    
+    private func unregisterKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func repositionFloatViewHideKeyboard() {
+        view.center = originalCenter
+    }
+    
+    
+//  MARK: - OBJC Area
+    @objc func keyboardWillShow(_ notification: Notification) {
+        configRepositionFloatViewIfNeeded(notification)
+    }
+    
+    @objc func keyboardWillHide() {
+        viewWillLayoutSubviews()
+        repositionFloatViewHideKeyboard()
+        viewDidLayoutSubviews()
+    }
+
+    
 //  MARK: - ANIMATIONS
     
     private func removeWindowAnimation(_ closure: @escaping () -> Void ) {
@@ -437,4 +444,16 @@ class FloatViewController: BaseBuilder {
             closure()
         })
     }
+    
+    private func repositionFloatViewShowKeyboardAnimation(_ finalPosition: CGFloat) {
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            viewWillLayoutSubviews()
+            view.frame.origin = CGPoint(x: view.frame.origin.x, y: finalPosition)
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            viewDidLayoutSubviews()
+        })
+    }
+    
 }

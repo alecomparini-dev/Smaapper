@@ -143,10 +143,10 @@ class PainelProportionView: ViewBuilder {
     }
     
     private func navigationTextFields(_ textField: UITextField, _ navigation:TextFieldConfigKeyboard.NavigationTextField ) {
-        
         switch navigation {
             case .next:
                 moveNextTextField(textField)
+            
             case .previous:
                 movePreviousTextField(textField)
         }
@@ -182,12 +182,11 @@ class PainelProportionView: ViewBuilder {
         textFieldA.add(insideTo: viewA.view)
         textFieldB.add(insideTo: viewB.view)
         textFieldC.add(insideTo: viewC.view)
-        
+
         viewA.add(insideTo: stackHorizontal1.view)
         viewB.add(insideTo: stackHorizontal1.view)
         viewC.add(insideTo: stackHorizontal2.view)
         viewResult.add(insideTo: stackHorizontal2.view)
-        
     }
     
     private func configContraints() {
