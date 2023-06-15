@@ -9,8 +9,8 @@ import UIKit
 
 
 class TextFieldConfigKeyboard {
+    typealias callBackListTextFieldsAlias = () -> [UITextField]
     typealias completionKeyboardAlias = (_ textField: UITextField) -> Void
-    typealias completionNavigationKeyboardAlias = (_ currentTextField: UITextField, _ navigation: NavigationTextField) -> Void
 
     enum NavigationTextField {
         case next
@@ -19,7 +19,7 @@ class TextFieldConfigKeyboard {
     static private let keyboardTypeWithOutReturn: [UIKeyboardType] = [.decimalPad, .asciiCapableNumberPad, .numberPad, .twitter, .phonePad]
     
     private var completionDoneKeyboard: completionKeyboardAlias?
-    private var completionNavigationKeyboard: completionNavigationKeyboardAlias?
+    private var callBackListTextFields: callBackListTextFieldsAlias?
     
     private var toolbar: UIToolbar?
     
@@ -58,10 +58,10 @@ class TextFieldConfigKeyboard {
     }
     
     @discardableResult
-    func setNavigationButtonTextField(_ completion: @escaping completionNavigationKeyboardAlias) -> Self {
-        completionNavigationKeyboard = completion
+    func setNavigationButtonTextField(_ callBackListTextFields: @escaping callBackListTextFieldsAlias ) -> Self {
         createToolbar()
         addNavigationsButtons()
+        self.callBackListTextFields = callBackListTextFields
         return self
     }
 
@@ -153,6 +153,34 @@ class TextFieldConfigKeyboard {
     }
     
     
+//  MARK: - NAVIAGATION Area
+    
+    private func moveNextTextField(_ textField: UITextField) {
+        guard let listTextFields = callBackListTextFields?() else {return}
+        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
+        let nextIndex = currentIndex + 1
+        if nextIndex < listTextFields.count {
+            let nextTextField = listTextFields[nextIndex]
+            nextTextField.becomeFirstResponder()
+        } else {
+            listTextFields[0].becomeFirstResponder()
+        }
+    }
+    
+    private func movePreviousTextField(_ textField: UITextField) {
+        guard let listTextFields = callBackListTextFields?() else {return}
+        guard let currentIndex = listTextFields.firstIndex(of: textField) else {return}
+        
+        let nextIndex = currentIndex - 1
+        if nextIndex < 0 {
+            listTextFields[listTextFields.count-1].becomeFirstResponder()
+        } else {
+            let nextTextField = listTextFields[nextIndex]
+            nextTextField.becomeFirstResponder()
+        }
+    }
+    
+    
 //  MARK: - OBJC Area
     @objc private func doneButtonTapped() {
         guard let textField else {return}
@@ -162,12 +190,12 @@ class TextFieldConfigKeyboard {
     
     @objc private func navigationNextButtonTapped() {
         guard let textField else {return}
-        completionNavigationKeyboard?(textField, .next )
+        moveNextTextField(textField)
     }
     
     @objc private func navigationPreviousButtonTapped() {
         guard let textField else {return}
-        completionNavigationKeyboard?(textField, .previous )
+        movePreviousTextField(textField)
     }
     
     @objc private func clearButtonTapped() {
