@@ -47,53 +47,58 @@ class ProportionFloatViewController: FloatViewController {
     private func configDelegate() {
         screen.delegate = self
         screen.setTextFieldDelegate(self)
+        screen.setPainelDelegate(self)
     }
     
     private func calculateResult() {
         getNumbersForCalculate()
-        if !isValidFields() { return }
+        if !isValidFields() {
+            presentResult(0)
+            return
+        }
         let result = (proportionC * proportionB) / proportionA
         presentResult(result)
     }
     
     private func presentResult(_ result: Double) {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 5
-        if let formattedString = formatter.string(from: NSNumber(value: result)) {
-            screen.painel.resultLabel.setText(formattedString)
+        if result == .zero {
+            screen.painel.resultLabel.setText("0.0")
+            return
         }
+        let formattedResult = NumberFormatterBuilder().setMaximumFractionDigits(4).getString(result)
+        screen.painel.resultLabel.setText(formattedResult ?? "0.0")
     }
     
     private func isValidFields() -> Bool {
-//        let alert = Alert(controller: home, title: "Number Incorrect", message: "Number 65. Incorrect", typeAlert: Warning())
-//        alert.present()
+        if isFieldsEmpty() || proportionA == .zero {
+            return false
+        }
         return true
     }
     
-    private func getNumbersForCalculate() {
     
-        if let text = screen.painel.textFieldA.view.text {
-            self.proportionA = getDoubleValueOfTextField(text)
+    private func isFieldsEmpty() -> Bool {
+        if let textFieldEmpty = screen.painel.listTextFields.first(where: { ($0.text?.isEmpty) ?? false }) {
+            textFieldEmpty.becomeFirstResponder()
+            return true
         }
-        
-        if let text = screen.painel.textFieldB.view.text {
-            self.proportionB = getDoubleValueOfTextField(text)
-        }
-        
-        if let text = screen.painel.textFieldC.view.text {
-            self.proportionC = getDoubleValueOfTextField(text)
-        }
+        return false
     }
     
-    private func getDoubleValueOfTextField(_ text: String) -> Double {
-        var textResult = text
-        if Utils.decimalSeparator != "." {
-            textResult = textResult.replacingOccurrences(of: ".", with: "")
+    private func getNumbersForCalculate() {
+        proportionA = screen.painel.textFieldA.getNumber.doubleValue
+        proportionB = screen.painel.textFieldB.getNumber.doubleValue
+        proportionC = screen.painel.textFieldC.getNumber.doubleValue
+    }
+    
+    private func getDoubleValueOfTextField(_ text: String?) -> Double {
+        if var textResult = text {
+            if Utils.decimalSeparator != "." {
+                textResult = textResult.replacingOccurrences(of: ".", with: "")
+            }
+            return Double(textResult.replacingOccurrences(of: Utils.decimalSeparator, with: ".")) ?? 0.0
         }
-        textResult = textResult.replacingOccurrences(of: Utils.decimalSeparator, with: ".")
-        return Double(textResult) ?? 0
+        return 0.0
     }
     
 }
@@ -125,5 +130,17 @@ extension ProportionFloatViewController: TextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: TextField) {
         self.select
     }
+    
+}
+
+
+//  MARK: - EXTENSION PainelProportionViewDelegate
+extension ProportionFloatViewController: PainelProportionViewDelegate {
+    
+    func doneKeyboard(_ textField: UITextField) {
+        calculateResult()
+        self.view.endEditing(true)
+    }
+    
     
 }

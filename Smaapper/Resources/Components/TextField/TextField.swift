@@ -57,10 +57,11 @@ class TextField: UITextField {
     
     private func validateKeyboardDecimal(_ character: String) -> Bool {
         guard let text = self.text else { return true}
-        let numberFormatter = NumberFormatter()
-        let decimalSeparator = numberFormatter.decimalSeparator ?? ""
-        if character == decimalSeparator {
-            return !text.contains(decimalSeparator)
+        let separators: [String] = [".", ","]
+        if separators.contains(character) {
+            return !separators.contains { separator in
+                return text.contains(separator)
+            }
         }
         return true
     }
@@ -78,8 +79,22 @@ class TextField: UITextField {
 }
 
 
-//  MARK: - EXTENSION
+//  MARK: - EXTENSION UITextFieldDelegate
+
 extension TextField: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let delegate = delegateTextField {
+            if !delegate.textField(self, shouldChangeCharactersIn: range, replacementString: string) {
+                return false
+            }
+        }
+        if self.keyboardType == .decimalPad {
+            return validateKeyboardDecimal(string)
+        }
+        return true
+    }
+    
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let delegate = delegateTextField {
             if !delegate.textFieldShouldBeginEditing(self) {
@@ -106,18 +121,7 @@ extension TextField: UITextFieldDelegate {
         delegateTextField?.textFieldDidEndEditing(self, reason: reason)
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let delegate = delegateTextField {
-            if !delegate.textField(self, shouldChangeCharactersIn: range, replacementString: string) {
-                return false
-            }
-        }
-        if self.keyboardType == .decimalPad {
-            return validateKeyboardDecimal(string)
-        }
-        return true
-    }
-    
+
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegateTextField?.textFieldDidChangeSelection(self)
     }
@@ -153,10 +157,5 @@ extension TextFieldDelegate {
     func textFieldShouldClear(_ textField: TextField) -> Bool { return true}
     func textFieldShouldReturn(_ textField: TextField) -> Bool { return true}
     
-    func textField(_ textField: TextField, editMenuForCharactersIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? { return nil}
-    @available(iOS 16.0, *)
-    func textField(_ textField: TextField, willPresentEditMenuWith animator: UIEditMenuInteractionAnimating) {}
-    @available(iOS 16.0, *)
-    func textField(_ textField: TextField, willDismissEditMenuWith animator: UIEditMenuInteractionAnimating) {}
 }
 
