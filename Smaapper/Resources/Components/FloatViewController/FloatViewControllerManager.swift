@@ -42,7 +42,6 @@ class FloatViewControllerManager {
 
     var listFloatView: [FloatViewController] { self._listWindows }
     var countFloatView: Int { self._listWindows.count }
-    
     var countFloatViewMinimized: Int { self._listWindows.filter { $0.isMinimized }.count }
         
     func floatViewSelected() -> FloatViewController? {
@@ -98,13 +97,18 @@ class FloatViewControllerManager {
                 guard let self else {return}
                 superView.endEditing(true)
                 floatViewSelected()?.deselect
-                if countFloatView == 0 { removeDeactivationFloatViewWhenTappedSuperview() }
             }
     }
     
-    private func removeDeactivationFloatViewWhenTappedSuperview() {
-        enableDeactivationFloatViewWhenTappedSuperview?.removeTapGesture()
-        enableDeactivationFloatViewWhenTappedSuperview = nil
+    func removeDeactivationFloatViewWhenTappedSuperview() {
+        if self.countFloatView == 0 || isAllMinimized() {
+            enableDeactivationFloatViewWhenTappedSuperview?.removeTapGesture()
+            enableDeactivationFloatViewWhenTappedSuperview = nil
+        }
+    }
+    
+    func isAllMinimized() -> Bool {
+        return countFloatView == countFloatViewMinimized
     }
 
     

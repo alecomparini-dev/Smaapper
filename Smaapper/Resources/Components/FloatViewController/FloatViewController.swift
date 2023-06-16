@@ -178,6 +178,7 @@ class FloatViewController: BaseBuilder {
         view.isHidden = true
         isMinimized = true
         manager.delegate?.viewDidMinimize(self)
+        manager.removeDeactivationFloatViewWhenTappedSuperview()
     }
     
     func viewWillRestore() {
@@ -200,6 +201,7 @@ class FloatViewController: BaseBuilder {
         removeFloatView()
         manager.delegate?.viewDidDisappear(self)
         manager.verifyAllClosedWindows()
+        manager.removeDeactivationFloatViewWhenTappedSuperview()
     }
     
     
@@ -269,7 +271,8 @@ class FloatViewController: BaseBuilder {
         deselect
         viewWillMinimize()
         minimizeAnimation { [weak self] in
-            self?.viewDidMinimize()
+            guard let self else {return}
+            viewDidMinimize()
         }
     }
     
