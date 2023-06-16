@@ -39,6 +39,7 @@ class HomeView: ViewBuilder {
     
     lazy var viewFloatWindow: ViewBuilder = {
         let view = ViewBuilder()
+//            .setBackgroundColor(.red)
             .setConstraints { build in
                 build
                     .setPin.equalToSuperView

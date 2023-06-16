@@ -186,6 +186,12 @@ class TextFieldBuilder: BaseBuilder {
         return self
     }
     
+    @discardableResult
+    func setFocus() -> Self {
+        self.view.becomeFirstResponder()
+        return self
+    }
+    
     
     
 //  MARK: - DELEGATE TextField

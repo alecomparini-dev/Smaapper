@@ -58,11 +58,12 @@ class ProportionFloatViewController: FloatViewController {
         }
         let result = (proportionC * proportionB) / proportionA
         presentResult(result)
+        showStackButtons()
     }
     
     private func presentResult(_ result: Double) {
         if result == .zero {
-            screen.painel.resultLabel.setText("0.0")
+            restartResult()
             return
         }
         let formattedResult = NumberFormatterBuilder().setMaximumFractionDigits(4).getString(result)
@@ -101,6 +102,26 @@ class ProportionFloatViewController: FloatViewController {
         return 0.0
     }
     
+    private func showStackButtons() {
+        screen.okButton.setHidden(true)
+        screen.stackViewButtons.setHidden(false)
+    }
+    
+    private func showOkButton() {
+        screen.okButton.setHidden(false)
+        screen.stackViewButtons.setHidden(true)
+    }
+    
+    private func clearTextFields() {
+        screen.painel.listTextFields.forEach { textField in
+            textField.text = ""
+        }
+    }
+    
+    private func restartResult() {
+        screen.painel.resultLabel.setText("0.0")
+    }
+    
 }
 
 
@@ -120,7 +141,17 @@ extension ProportionFloatViewController: ProportionViewDelegate {
         calculateResult()
     }
 
-
+    func copyButton() {
+        UIPasteboard.general.string = screen.painel.resultLabel.view.text
+    }
+    
+    func refreshButton() {
+        showOkButton()
+        clearTextFields()
+        restartResult()
+        screen.painel.textFieldA.setFocus()
+    }
+        
 }
 
 
@@ -129,6 +160,11 @@ extension ProportionFloatViewController: TextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: TextField) {
         self.select
+    }
+    
+    func textField(_ textField: TextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        showOkButton()
+        return true
     }
     
 }

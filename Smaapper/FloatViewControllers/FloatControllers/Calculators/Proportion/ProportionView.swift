@@ -11,6 +11,8 @@ protocol ProportionViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
     func okButton()
+    func copyButton()
+    func refreshButton()
 }
 
 class ProportionView: ViewBuilder {
@@ -54,25 +56,34 @@ class ProportionView: ViewBuilder {
         let stack = StackBuilder()
             .setHidden(true)
             .setAxis(.vertical)
-            .setSpacing(12)
+            .setSpacing(14)
             .setDistribution(.fillEqually)
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleView.view, .bottom, 20)
-                    .setBottom.equalTo(historyButton.view, .top, -12)
-                    .setLeading.setTrailing.equalTo(historyButton.view, 6)
+                    .setTop.equalTo(titleView.view, .bottom, 10)
+                    .setTrailing.equalToSuperView(-14)
+                    .setBottom.equalTo(historyButton.view, .top, -10)
+                    .setWidth.equalToConstant(44)
             }
         return stack
     }()
     
     lazy var refreshButton: ButtonImageBuilder = {
         let btn = self.defaultButtonImage("arrow.counterclockwise")
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(refreshButtonTapped), .touchUpInside)
+            }
         defaultNeumorphism(btn.view)
         return btn
     }()
-    
-    lazy var saveButton: ButtonImageBuilder = {
-        let btn = self.defaultButtonImage("square.and.arrow.down")
+
+    lazy var copyButton: ButtonImageBuilder = {
+        let btn = self.defaultButtonImage("doc.on.doc")
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(copyButtonTapped), .touchUpInside)
+            }
         defaultNeumorphism(btn.view)
         return btn
     }()
@@ -93,7 +104,7 @@ class ProportionView: ViewBuilder {
                 build
                     .setTop.equalTo(titleView.view, .bottom, 10)
                     .setTrailing.equalToSuperView(-14)
-                    .setBottom.equalToSuperView(-30)
+                    .setBottom.equalTo(historyButton.view, .top, -10)
                     .setWidth.equalToConstant(44)
             }
             .setActions { build in
@@ -103,10 +114,7 @@ class ProportionView: ViewBuilder {
         defaultNeumorphism(btn.view)
         return btn
     }()
-    @objc private func okButtonTapped() {
-        delegate?.okButton()
-    }
-    
+
     lazy var historyButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "ellipsis"))
         let btn = ButtonImageBuilder(img)
@@ -154,10 +162,9 @@ class ProportionView: ViewBuilder {
             .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageSize(14)
             .setImageWeight(.thin)
-            .setImagePlacement(.all)
             .setBorder({ build in
                 build
-                    .setCornerRadius(10)
+                    .setCornerRadius(5)
             })
         return btn
     }
@@ -196,7 +203,7 @@ class ProportionView: ViewBuilder {
         painel.add(insideTo: self.view)
         stackViewButtons.add(insideTo: self.view)
         refreshButton.add(insideTo: stackViewButtons.view)
-        saveButton.add(insideTo: stackViewButtons.view)
+        copyButton.add(insideTo: stackViewButtons.view)
         okButton.add(insideTo: self.view)
     }
     
@@ -208,6 +215,7 @@ class ProportionView: ViewBuilder {
         stackViewButtons.applyConstraint()
     }
     
+    
 //  MARK: - OBJCT Area
     
     @objc private func minimizeWindow() {
@@ -216,6 +224,18 @@ class ProportionView: ViewBuilder {
     
     @objc private func closeWindow() {
         delegate?.closeWindow()
+    }
+    
+    @objc private func okButtonTapped() {
+        delegate?.okButton()
+    }
+    
+    @objc private func copyButtonTapped() {
+        delegate?.copyButton()
+    }
+    
+    @objc private func refreshButtonTapped() {
+        delegate?.refreshButton()
     }
     
 }

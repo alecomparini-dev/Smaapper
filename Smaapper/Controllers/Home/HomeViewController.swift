@@ -51,7 +51,6 @@ class HomeViewController: UIViewController {
         configDockController()
         configDropdownMenu()
         configDelegate()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -352,8 +351,7 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     }
     
     private func verifyShowElementsOnScreen() {
-        if FloatViewControllerManager.instance.countFloatViewMinimized ==
-            FloatViewControllerManager.instance.countFloatView {
+        if FloatViewControllerManager.instance.isAllMinimized() {
             showElementsOnScreen()
             return
         }
