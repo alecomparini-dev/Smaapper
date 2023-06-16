@@ -15,13 +15,14 @@ class PainelProportionView: ViewBuilder {
     
     weak var delegate: PainelProportionViewDelegate?
     
-    private var listTextFields: [UITextField] = []
+    private(set) var listTextFields: [UITextField] = []
     private var initialIndex: Int = 0
     
     override init() {
         super.init()
         addElements()
         configContraints()
+        setListTextFields()
     }
     
     
@@ -124,19 +125,16 @@ class PainelProportionView: ViewBuilder {
     
     lazy var textFieldA: TextFieldBuilder = {
         let txt = defaultTextField("A")
-        listTextFields.append(txt.view)
         return txt
     }()
     
     lazy var textFieldB: TextFieldBuilder = {
         let txt = defaultTextField("B")
-        listTextFields.append(txt.view)
         return txt
     }()
     
     lazy var textFieldC: TextFieldBuilder = {
         let txt = defaultTextField("C")
-        listTextFields.append(txt.view)
         return txt
     }()
     
@@ -158,7 +156,6 @@ class PainelProportionView: ViewBuilder {
                     .setKeyboardType(.decimalPad)
                     .setDoneButton({ [weak self] textField in
                         guard let self else {return}
-                        print("done caralho")
                         delegate?.doneKeyboard(textField)
                     })
                     .setClearButton()
@@ -213,6 +210,12 @@ class PainelProportionView: ViewBuilder {
         
         resultLabel.applyConstraint()
         underLineResult.applyConstraint()
+    }
+    
+    private func setListTextFields() {
+        listTextFields.append(textFieldA.view)
+        listTextFields.append(textFieldB.view)
+        listTextFields.append(textFieldC.view)
     }
     
 

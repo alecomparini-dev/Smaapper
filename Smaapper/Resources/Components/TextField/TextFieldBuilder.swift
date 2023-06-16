@@ -49,6 +49,27 @@ class TextFieldBuilder: BaseBuilder {
             }
     }
     
+//  MARK: - GET Properties
+    var getNumber: NSNumber {
+        let numberFormatter = NumberFormatterBuilder().setMaximumFractionDigits(10).removeGroupingSeparator()
+        return numberFormatter.getNumber(self.textField.text ?? "0.0") ?? 0.0
+    }
+    
+    func getNumber(_ buildFormatter: ((_ build: NumberFormatterBuilder) -> NumberFormatterBuilder)) -> NSNumber {
+        let numberFormatter = buildFormatter(NumberFormatterBuilder())
+        return numberFormatter.getNumber(self.textField.text ?? "0.0") ?? 0.0
+    }
+    
+    private func getDoubleValueOfTextField(_ text: String?) -> Double {
+        if var textResult = text {
+            if NumberFormatterBuilder.get.decimalSeparator != "." {
+                textResult = textResult.replacingOccurrences(of: ".", with: "")
+            }
+            return Double(textResult.replacingOccurrences(of: NumberFormatterBuilder.get.decimalSeparator, with: ".")) ?? 0.0
+        }
+        return 0.0
+    }
+    
     
 //  MARK: - Properties
     @discardableResult
@@ -92,6 +113,16 @@ class TextFieldBuilder: BaseBuilder {
     @discardableResult
     func setText(_ text: String) -> Self {
         _textField.text = text
+        return self
+    }
+    
+    @discardableResult
+    func setTextNumber(_ number: Any, _ buildFormatter: (_ build: NumberFormatterBuilder) -> NumberFormatterBuilder ) -> Self {
+        let numberFormatter = buildFormatter(NumberFormatterBuilder())
+        if let numberFormatted = numberFormatter.getString(number) {
+            setText(numberFormatted)
+        }
+        setText("0.0")
         return self
     }
     
@@ -154,6 +185,7 @@ class TextFieldBuilder: BaseBuilder {
         self.textFieldConfigKeyboard = configKeyboard(TextFieldConfigKeyboard(self._textField))
         return self
     }
+    
     
     
 //  MARK: - DELEGATE TextField

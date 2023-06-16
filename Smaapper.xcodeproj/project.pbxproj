@@ -109,6 +109,7 @@
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
 		02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */; };
 		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
+		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -249,6 +250,7 @@
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
 		02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTextFieldsInView.swift; sourceTree = "<group>"; };
 		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 		0284368A2A1D296700B596DA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				02D71C372A3C86A500DCA291 /* NumberFormatter */,
 				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
 				02D581682A23A2DC00150AF9 /* ValidatePercent.swift */,
 				02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */,
@@ -916,6 +919,14 @@
 				02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */,
 			);
 			path = TextFieldConfigKeyboard;
+			sourceTree = "<group>";
+		};
+		02D71C372A3C86A500DCA291 /* NumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */,
+			);
+			path = NumberFormatter;
 			sourceTree = "<group>";
 		};
 		02E9740F2A336A2600BF14EE /* Coordinator */ = {
@@ -1308,6 +1319,7 @@
 				0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */,
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
+				02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */,
 				02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */,
 				02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,

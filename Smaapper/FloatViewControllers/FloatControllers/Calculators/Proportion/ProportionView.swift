@@ -141,6 +141,10 @@ class ProportionView: ViewBuilder {
         painel.configDelegate(delegate)
     }
     
+    func setPainelDelegate(_ delegate: PainelProportionViewDelegate) {
+        painel.delegate = delegate
+    }
+    
     
 //  MARK: - PRIVATE Area
     

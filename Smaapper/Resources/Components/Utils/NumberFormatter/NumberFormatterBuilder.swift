@@ -1,0 +1,97 @@
+//
+//  NumberFormatterBuilder.swift
+//  Smaapper
+//
+//  Created by Alessandro Comparini on 16/06/23.
+//
+
+import Foundation
+
+
+class NumberFormatterBuilder: NumberFormatter {
+    
+    static var get: NumberFormatter { return NumberFormatter()}
+    
+    override init() {
+        super.init()
+        initialization()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func initialization() {
+        setNumberStyle(.decimal)
+        setMinimumFractionDigits(0)
+        setMaximumFractionDigits(2)
+    }
+    
+    
+//  MARK: - GET Properties
+    
+    func getNumber(_ value: String) -> NSNumber? {
+        let sanitizedValue = sanitizationNumber(value)
+        if let formattedString = self.number(from: sanitizedValue) {
+            return formattedString
+        }
+        return nil
+    }
+    
+    private func sanitizationNumber(_ value: String) -> String {
+        return value.replacingOccurrences(of: ".", with: decimalSeparator).replacingOccurrences(of: ",", with: decimalSeparator)
+    }
+    
+    func getNumber(_ value: Double) -> NSNumber? {
+        return getNumber("\(value)")
+    }
+    
+    func getString(_ value: Any) -> String? {
+        if let doubleValue = value as? Double {
+            if doubleValue.isNaN { return nil }
+            return self.getString(NSNumber(value: doubleValue))
+        }
+        return nil
+    }
+    
+    
+    
+//  MARK: - SET Properties
+    
+    @discardableResult
+    func setNumberStyle(_ style: NumberFormatter.Style) -> Self {
+        self.numberStyle = style
+        return self
+    }
+    
+    @discardableResult
+    func setMinimumFractionDigits(_ minimum: Int) -> Self {
+        self.minimumFractionDigits = minimum
+        return self
+    }
+    
+    @discardableResult
+    func setMaximumFractionDigits(_ maximum: Int) -> Self {
+        self.maximumFractionDigits = maximum
+        return self
+    }
+    
+    @discardableResult
+    func removeGroupingSeparator() -> Self {
+        self.usesGroupingSeparator = false
+        return self
+    }
+    
+    
+//  MARK: - PRIVATE Area
+    
+    
+    private func getString(_ value: NSNumber) -> String? {
+        if let formattedString = self.string(from: value) {
+            return formattedString
+        }
+        return nil
+    }
+    
+    
+}
