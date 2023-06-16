@@ -16,9 +16,9 @@ class UpcomingHolidaysCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = UpcomingHolidaysFloatViewController()
-        weather.setCustomAttribute(UpcomingHolidaysFloatViewController.identifierApp)
-        floatNavigationController.present(weather, where: component )
+        let controller = UpcomingHolidaysFloatViewController()
+        controller.setCustomAttribute(UpcomingHolidaysFloatViewController.identifierApp)
+        floatNavigationController.present(controller, where: component )
     }
 
     func start() {}

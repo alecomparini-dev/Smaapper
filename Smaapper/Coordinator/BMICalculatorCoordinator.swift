@@ -16,9 +16,9 @@ class BMICalculatorCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = BMICalculatorFloatViewController()
-        weather.setCustomAttribute(BMICalculatorFloatViewController.identifierApp)
-        floatNavigationController.present(weather, where: component )
+        let controller = BMICalculatorFloatViewController()
+        controller.setCustomAttribute(BMICalculatorFloatViewController.identifierApp)
+        floatNavigationController.present(controller, where: component )
     }
 
     func start() {

@@ -80,6 +80,7 @@ class ProportionView: ViewBuilder {
 
     lazy var copyButton: ButtonImageBuilder = {
         let btn = self.defaultButtonImage("doc.on.doc")
+            .setTintColor(Theme.shared.currentTheme.primary)
             .setActions { build in
                 build
                     .setTarget(self, #selector(copyButtonTapped), .touchUpInside)

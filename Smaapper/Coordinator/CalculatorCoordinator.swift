@@ -1,13 +1,13 @@
 //
-//  WeatherCoordinator.swift
+//  CalculatorCoordinator.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 09/06/23.
+//  Created by Alessandro Comparini on 16/06/23.
 //
 
 import UIKit
 
-class WeatherCoordinator: Coordinator {
+class CalculatorCoordinator: Coordinator {
 
     var floatNavigationController: FloatNavigationController
     
@@ -16,14 +16,12 @@ class WeatherCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let controller = WeatherFloatViewController()
-        controller.setCustomAttribute(WeatherFloatViewController.identifierApp)
+        let controller = CalculatorFloatViewController()
+        controller.setCustomAttribute(CalculatorFloatViewController.identifierApp)
         floatNavigationController.present(controller, where: component )
     }
 
-    func start() {
-        
-    }
-
+    func start() {}
     
 }
+

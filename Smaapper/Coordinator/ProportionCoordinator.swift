@@ -16,9 +16,9 @@ class ProportionCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = ProportionFloatViewController()
-        weather.setCustomAttribute(ProportionFloatViewController.identifierApp)
-        floatNavigationController.present(weather, where: component )
+        let controller = ProportionFloatViewController()
+        controller.setCustomAttribute(ProportionFloatViewController.identifierApp)
+        floatNavigationController.present(controller, where: component )
     }
 
     func start() {}
