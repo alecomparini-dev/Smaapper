@@ -10,6 +10,7 @@ import UIKit
 protocol ProportionViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
+    func okButton()
 }
 
 class ProportionView: ViewBuilder {
@@ -37,7 +38,7 @@ class ProportionView: ViewBuilder {
         return view
     }()
     
-    lazy var painelProportion: PainelProportionView = {
+    lazy var painel: PainelProportionView = {
         let view = PainelProportionView()
             .setConstraints { build in
                 build
@@ -95,9 +96,16 @@ class ProportionView: ViewBuilder {
                     .setBottom.equalToSuperView(-30)
                     .setWidth.equalToConstant(44)
             }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(okButtonTapped), .touchUpInside)
+            }
         defaultNeumorphism(btn.view)
         return btn
     }()
+    @objc private func okButtonTapped() {
+        delegate?.okButton()
+    }
     
     lazy var historyButton: ButtonImageBuilder = {
         let img = UIImageView(image: UIImage(systemName: "ellipsis"))
@@ -112,10 +120,9 @@ class ProportionView: ViewBuilder {
             })
             .setGradient({ build in
                 build
-                    .setAxialGradient(.leftTopToRightBottom)
-                    .setGradientColors([Theme.shared.currentTheme.surfaceContainerLowest,
-                                        Theme.shared.currentTheme.surfaceContainerHighest])
-                    
+                    .setAxialGradient(.rightBottomToLeftTop)
+                    .setGradientColors([Theme.shared.currentTheme.surfaceContainerHighest,
+                                        Theme.shared.currentTheme.surfaceContainerLow])
                     .apply()
             })
             .setConstraints { build in
@@ -131,7 +138,7 @@ class ProportionView: ViewBuilder {
     
 //  MARK: - PUBLIC Area
     func setTextFieldDelegate(_ delegate: TextFieldDelegate) {
-        painelProportion.configDelegate(delegate)
+        painel.configDelegate(delegate)
     }
     
     
@@ -182,7 +189,7 @@ class ProportionView: ViewBuilder {
     private func addElements() {
         historyButton.add(insideTo: self.view)
         titleView.add(insideTo: self.view)
-        painelProportion.add(insideTo: self.view)
+        painel.add(insideTo: self.view)
         stackViewButtons.add(insideTo: self.view)
         refreshButton.add(insideTo: stackViewButtons.view)
         saveButton.add(insideTo: stackViewButtons.view)
@@ -191,7 +198,7 @@ class ProportionView: ViewBuilder {
     
     private func configConstraints() {
         titleView.applyConstraint()
-        painelProportion.applyConstraint()
+        painel.applyConstraint()
         okButton.applyConstraint()
         historyButton.applyConstraint()
         stackViewButtons.applyConstraint()
