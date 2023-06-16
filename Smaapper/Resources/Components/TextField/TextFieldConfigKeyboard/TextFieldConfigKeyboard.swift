@@ -21,6 +21,7 @@ class TextFieldConfigKeyboard {
     private var completionDoneKeyboard: completionKeyboardAlias?
     private var callBackListTextFields: callBackListTextFieldsAlias?
     
+    private var isDoneButtonAlreadyIncluded = false
     private var toolbar: UIToolbar?
     
     private weak var textField: TextField?
@@ -44,6 +45,8 @@ class TextFieldConfigKeyboard {
     @discardableResult
     func setDoneButton(_ completion: @escaping completionKeyboardAlias) -> Self {
         completionDoneKeyboard = completion
+        if isDoneButtonAlreadyIncluded {return self}
+        isDoneButtonAlreadyIncluded = true
         createToolbar()
         addButtonItemToToolbar(UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonTapped)))
         return self
@@ -87,21 +90,23 @@ class TextFieldConfigKeyboard {
     }
     
     private func createClearButtonItem() -> UIBarButtonItem{
-        let img = UIImage(systemName: "eraser.line.dashed")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        let img = UIImage(systemName: "eraser.line.dashed")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 14))
         return UIBarButtonItem(image: img, style: .plain, target: self, action: #selector(clearButtonTapped))
     }
     
     private func addNavigationsButtons() {
-        let imgPrevious = UIImage(systemName: "arrow.backward")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        let imgPrevious = UIImage(systemName: "chevron.backward")
         let previous = UIBarButtonItem(image: imgPrevious, style: .plain, target: self, action: #selector(navigationPreviousButtonTapped))
-        let imgNext = UIImage(systemName: "arrow.right")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 15))
+        let imgNext = UIImage(systemName: "chevron.forward")
         let next = UIBarButtonItem(image: imgNext, style: .plain, target: self, action: #selector(navigationNextButtonTapped))
         addButtonItemToToolbar(previous)
+        addButtonItemToToolbar(createFixedSpace(10))
         addButtonItemToToolbar(next)
         addButtonItemToToolbar(createFixedSpace(10))
     }
     
     private func addAutomaticButtonOk() {
+        if isDoneButtonAlreadyIncluded {return}
         guard let keyboardType = textField?.keyboardType else {return}
         if TextFieldConfigKeyboard.keyboardTypeWithOutReturn.contains(keyboardType) {
             self.setDoneButton { [weak self] textField in

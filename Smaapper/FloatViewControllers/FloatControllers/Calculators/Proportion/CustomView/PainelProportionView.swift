@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol PainelProportionViewDelegate: AnyObject {
+    func doneKeyboard(_ textField: UITextField)
+}
+
 class PainelProportionView: ViewBuilder {
+    
+    weak var delegate: PainelProportionViewDelegate?
     
     private var listTextFields: [UITextField] = []
     private var initialIndex: Int = 0
@@ -65,11 +71,11 @@ class PainelProportionView: ViewBuilder {
         return view
     }()
 
-    
     lazy var resultLabel: LabelBuilder = {
         let label = LabelBuilder("0.0")
-            .setFont(UIFont.systemFont(ofSize: 18, weight: .semibold))
+            .setFont(UIFont.systemFont(ofSize: 17, weight: .semibold))
             .setColor(Theme.shared.currentTheme.onSurface)
+            .setNumberOfLines(2)
             .setTextAlignment(.center)
             .setConstraints { build in
                 build
@@ -106,7 +112,7 @@ class PainelProportionView: ViewBuilder {
             })
             .setConstraints { build in
                 build
-                    .setTop.equalTo(textFieldC.view, .bottom )
+                    .setTop.equalTo(textFieldC.view, .bottom, 2 )
                     .setLeading.setTrailing.equalToSuperView(5)
                     .setHeight.equalToConstant(2)
             }
@@ -150,6 +156,11 @@ class PainelProportionView: ViewBuilder {
             .setKeyboard({ buid in
                 buid
                     .setKeyboardType(.decimalPad)
+                    .setDoneButton({ [weak self] textField in
+                        guard let self else {return}
+                        print("done caralho")
+                        delegate?.doneKeyboard(textField)
+                    })
                     .setClearButton()
                     .setNavigationButtonTextField {
                         return self.listTextFields

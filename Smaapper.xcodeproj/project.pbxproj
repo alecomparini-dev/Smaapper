@@ -108,6 +108,7 @@
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
 		02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */; };
+		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -247,6 +248,7 @@
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
 		02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTextFieldsInView.swift; sourceTree = "<group>"; };
+		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
 				02D581682A23A2DC00150AF9 /* ValidatePercent.swift */,
 				02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */,
+				02D71C332A3BB9D100DCA291 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1353,6 +1356,7 @@
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
+				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
