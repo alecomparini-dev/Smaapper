@@ -16,9 +16,9 @@ class QuizCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let weather = QuizFloatViewController()
-        weather.setCustomAttribute(QuizFloatViewController.identifierApp)
-        floatNavigationController.present(weather, where: component )
+        let controller = QuizFloatViewController()
+        controller.setCustomAttribute(QuizFloatViewController.identifierApp)
+        floatNavigationController.present(controller, where: component )
     }
 
     func start() {}

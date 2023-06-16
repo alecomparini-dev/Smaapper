@@ -67,7 +67,7 @@
                             {
                                 "id": "calculator",
                                 "title": "Calculator",
-                                "leftImage": "plusminus.circle.fill",
+                                "leftImage": "equal.square.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {
@@ -217,7 +217,7 @@
                             {
                                 "id": "movie_series_recommendations",
                                 "title": "Movie/Series Recommendations",
-                                "leftImage": "film.stack.fill",
+                                "leftImage": "popcorn.fill",
                                 "rightImage": "chevron.forward"
                             }
                         ]

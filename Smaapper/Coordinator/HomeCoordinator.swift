@@ -16,9 +16,9 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        let homeViewController = HomeViewController()
-        homeViewController.delegateFloatViewController = self
-        floatNavigationController.pushViewController(homeViewController, animated: true)
+        let controller = HomeViewController()
+        controller.delegateFloatViewController = self
+        floatNavigationController.pushViewController(controller, animated: true)
     }
     
 }
@@ -47,6 +47,10 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
             
             case BMICalculatorFloatViewController.identifierApp:
                 let coodinator = BMICalculatorCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
+            case CalculatorFloatViewController.identifierApp:
+                let coodinator = CalculatorCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
             default:

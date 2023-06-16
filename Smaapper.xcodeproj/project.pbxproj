@@ -66,6 +66,11 @@
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
+		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
+		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
+		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
+		026C147D2A3CF34900F8D3E6 /* CalculatorNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */; };
+		026C147F2A3CF5A300F8D3E6 /* CaculatorButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */; };
 		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
@@ -207,6 +212,11 @@
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
+		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
+		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
+		026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNumberView.swift; sourceTree = "<group>"; };
+		026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaculatorButtonView.swift; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
@@ -653,6 +663,15 @@
 			path = Stack;
 			sourceTree = "<group>";
 		};
+		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */,
+				026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 		026F79782A00775E003947A6 /* DropdownMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -934,11 +953,12 @@
 			children = (
 				02E974132A3398F000BF14EE /* Coordinator.swift */,
 				02E974152A3399B100BF14EE /* HomeCoordinator.swift */,
-				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
+				02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */,
+				026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */,
 				02E974252A378AFE00BF14EE /* ProportionCoordinator.swift */,
 				02E974442A37D30600BF14EE /* QuizCoordinator.swift */,
 				02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */,
-				02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */,
+				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -979,6 +999,9 @@
 		02E974282A379B9A00BF14EE /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				026C14752A3CEC3B00F8D3E6 /* CustomView */,
+				026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */,
+				026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -1278,6 +1301,7 @@
 				02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
 				02E9741F2A37887B00BF14EE /* ProportionView.swift in Sources */,
+				026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */,
 				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
 				020D0E662A1ED628007F3992 /* TextField.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
@@ -1299,6 +1323,7 @@
 				02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */,
 				021848AD2A2517B2007E68A4 /* AskChatGPTView.swift in Sources */,
 				0234A91429F9FD3A008392EC /* EndOfConstraintsPositionFlow.swift in Sources */,
+				026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */,
 				02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
@@ -1335,6 +1360,7 @@
 				02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */,
 				02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */,
 				02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */,
+				026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
@@ -1362,6 +1388,7 @@
 				02E9744B2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
+				026C147F2A3CF5A300F8D3E6 /* CaculatorButtonView.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
@@ -1377,6 +1404,7 @@
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
+				026C147D2A3CF34900F8D3E6 /* CalculatorNumberView.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
