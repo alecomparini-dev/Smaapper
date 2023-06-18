@@ -45,9 +45,9 @@ class CaculatorButtonView: ViewBuilder {
                     .setShape(.concave)
                     .setLightPosition(.leftTop)
                     .setIntensity(to: .light, percent: 80)
-                    .setBlur(to: .light, percent: 4)
+                    .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark, percent: 5)
-                    .setDistance(to: .light, percent: 4)
+                    .setDistance(to: .light, percent: 3)
                     .apply()
             }
             .setConstraints { build in
@@ -58,6 +58,7 @@ class CaculatorButtonView: ViewBuilder {
     }()
     
     lazy var innerView: ViewBuilder = {
+        print(colorButton.adjustBrightness(-30).toHexString)
         let view = ViewBuilder()
             .setBorder({ build in
                 build
@@ -83,10 +84,10 @@ class CaculatorButtonView: ViewBuilder {
         let btn = ButtonBuilder()
             .setTitle("1", .normal)
             .setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
-            .setTintColor(Theme.shared.currentTheme.primary)
+            .setTintColor(Theme.shared.currentTheme.onSurface.adjustBrightness(-20))
             .setTitleAlignment(.center)
-            .setTitleSize(22)
-            .setTitleWeight(.medium)
+            .setTitleSize(18)
+            .setTitleWeight(.regular)
             .setConstraints { build in
                 build
                     .setPin.equalToSuperView
