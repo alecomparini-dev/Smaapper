@@ -177,8 +177,8 @@ class FloatViewController: BaseBuilder {
     func viewDidMinimize() {
         view.isHidden = true
         isMinimized = true
-        manager.delegate?.viewDidMinimize(self)
         manager.removeDeactivationFloatViewWhenTappedSuperview()
+        manager.delegate?.viewDidMinimize(self)
     }
     
     func viewWillRestore() {
@@ -188,6 +188,7 @@ class FloatViewController: BaseBuilder {
 
     func viewDidRestore() {
         isMinimized = false
+        manager.enableDeactivationFloatViewWhenTappedSuperview(superView)
         manager.delegate?.viewDidRestore(self)
     }
     
