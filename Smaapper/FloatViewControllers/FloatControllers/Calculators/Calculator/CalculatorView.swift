@@ -28,7 +28,7 @@ class CalculatorView: ViewBuilder {
     }
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: "equal.square.fill", title: "Calculator", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "", title: "", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -37,28 +37,70 @@ class CalculatorView: ViewBuilder {
         return view
     }()
     
-    lazy var digitOne: CaculatorButtonView = {
-        let view = CaculatorButtonView(Theme.shared.currentTheme.surfaceContainer, UIImageView())
+    
+//  MARK: - DISPLAY Area
+    
+    lazy var display: LabelBuilder = {
+        let label = LabelBuilder("123.456.789.0")
+//            .setBackgroundColor(.red)
+            .setTextAlignment(.right)
+            .setFont(UIFont.systemFont(ofSize: 33, weight: .thin))
+            .setColor(Theme.shared.currentTheme.onSurface)
             .setConstraints { build in
                 build
-                    .setTop.equalToSuperView(100)
-                    .setLeading.equalToSuperView(30)
-                    .setSize.equalToConstant(50)
+                    .setTop.equalTo(titleView.view, .bottom, 3)
+                    .setLeading.setTrailing.equalToSuperView(13)
+                    .setHeight.equalToConstant(50)
+            }
+        return label
+    }()
+    
+    
+    lazy var lineSeparator: ViewBuilder = {
+       var view = ViewBuilder()
+            .setGradient({ build in
+                build
+                    .setGradientColors(Theme.shared.currentTheme.primaryGradient)
+                    .setAxialGradient(.leftToRight)
+                    .apply()
+            })
+            .setBorder({ build in
+                build.setCornerRadius(2)
+            })
+            .setShadow({ build in
+                build
+                    .setOffset(width: 3, height: 3)
+                    .setColor(.black.withAlphaComponent(0.8))
+                    .setOpacity(1)
+                    .setRadius(3)
+                    .apply()
+            })
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(display.view, .bottom)
+                    .setLeading.setTrailing.equalToSuperView(15)
+                    .setHeight.equalToConstant(2)
             }
         return view
     }()
     
-    lazy var digit2: CaculatorButtonView = {
-        let view = CaculatorButtonView(Theme.shared.currentTheme.surfaceContainer, UIImageView())
+//  MARK: - BUTTONS
+    lazy var buttonsView: CalculatorButtonsView = {
+        let view = CalculatorButtonsView()
             .setConstraints { build in
                 build
-                    .setTop.equalTo(digitOne.view, .top)
-                    .setLeading.equalTo(digitOne.view, .trailing, 15)
-                    .setSize.equalToConstant(50)
+                    .setTop.equalTo(lineSeparator.view, .bottom, 13)
+                    .setLeading.setBottom.equalToSuperView(15)
+                    .setTrailing.equalToSuperView(-12)
             }
         return view
     }()
 
+
+//  MARK: - BUTTONS Area
+
+
+    
     
     
 //  MARK: - PRIVATE Area
@@ -70,8 +112,7 @@ class CalculatorView: ViewBuilder {
     
     private func configBorder() {
         self.setBorder { build in
-            build
-                .setCornerRadius(20)
+            build.setCornerRadius(20)
         }
     }
     
@@ -79,21 +120,22 @@ class CalculatorView: ViewBuilder {
         UtilsFloatView.configNeumorphisFloatView(self)
     }
     
-    
     private func addElements() {
+        display.add(insideTo: self.view)
         titleView.add(insideTo: self.view)
-        digitOne.add(insideTo: self.view)
-        digit2.add(insideTo: self.view)
+        buttonsView.add(insideTo: self.view)
+        lineSeparator.add(insideTo: self.view)
     }
     
     private func configConstraints() {
+        display.applyConstraint()
         titleView.applyConstraint()
-        digitOne.applyConstraint()
-        digit2.applyConstraint()
+        buttonsView.applyConstraint()
+        lineSeparator.applyConstraint()
     }
     
     
-//  MARK: - OBJCT Area
+//  MARK: - @OBJC Area
     
     @objc private func minimizeWindow() {
         delegate?.minimizeWindow()

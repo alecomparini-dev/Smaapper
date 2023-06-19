@@ -18,19 +18,19 @@ struct ThemeDarkDefault: ThemeProtocol {
     var primaryGradient: [UIColor] { [primary, UIColor.HEX("#FF6517")] }
     var onPrimary:UIColor { UIColor.HEX("#0f1010") }
     
-    var primaryContainer: UIColor {UIColor.HEX("#3d4248")}
+    var primaryContainer: UIColor {UIColor.HEX("#1F7799")}
     var onPrimaryContainer = UIColor.HEX("#FFFFFF")
     
-    var secondary: UIColor { UIColor.HEX("#2996f3") }
+    var secondary: UIColor { UIColor.HEX("#1a365b") }
     var secondaryGradient: [UIColor] { [secondary, UIColor.HEX("#ff6b00")] }
     var onSecondary = UIColor.HEX("#FFFFFF")
     var secondaryContainer: UIColor = .black
     var onSecondaryContainer: UIColor = .black
     
 //    var tertiary: UIColor { UIColor.HEX("#f54336") }
-    var tertiary: UIColor { UIColor.HEX("#f95726") }
+    var tertiary: UIColor { UIColor.HEX("#ee6c29") }
     var tertiaryGradient: [UIColor] { [tertiary, UIColor.HEX("#ff6b00")] }
-    var onTertiary: UIColor = .black
+    var onTertiary: UIColor { UIColor.HEX("#0f1010") }
     var tertiaryContainer: UIColor = .black
     var onTertiaryContainer: UIColor = .black
     

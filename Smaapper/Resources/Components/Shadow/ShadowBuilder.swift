@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Shadow {
+class ShadowBuilder {
     
     private var component: UIView
     private let shadow: CAShapeLayer
@@ -92,9 +92,7 @@ class Shadow {
         return self
     }
     
-    
-//  MARK: - Component private functions
-    
+//  MARK: - APPLY Shadow
     @discardableResult
     func apply() -> Self {
         self.insertSubLayer()
@@ -104,6 +102,9 @@ class Shadow {
         }
         return self
     }
+    
+    
+//  MARK: - PRIVATE Area
     
     private func getCornerRadius() -> CGFloat {
         if let cornerRadius {
@@ -143,8 +144,7 @@ class Shadow {
     private func shadowInitializers() {
         setDefault()
         shadow.shouldRasterize = true
-        shadow.rasterizationScale = UIScreen.main.scale
-        
+        shadow.rasterizationScale = UIScreen.main.scale   
     }
     
     private func setDefault(){

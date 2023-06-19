@@ -1,5 +1,5 @@
 //
-//  CaculatorButtonView.swift
+//  ButtonLogiView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 16/06/23.
@@ -7,12 +7,14 @@
 
 import UIKit
 
-
-
-class CaculatorButtonView: ViewBuilder {
+class ButtonLogiView: ViewBuilder {
+    
+    private let cornerRadiusOutline: CGFloat = 7
+    private let marginInner: CGFloat = 4.0
     
     private let colorButton: UIColor
-    private let image: UIImageView
+    private var image: UIImageView = UIImageView()
+    private var text: String = ""
     
     init(_ colorButton: UIColor, _ image: UIImageView) {
         self.colorButton = colorButton
@@ -20,10 +22,24 @@ class CaculatorButtonView: ViewBuilder {
         super.init()
         initialization()
     }
+
+    convenience init(_ colorButton: UIColor) {
+        self.init(colorButton, UIImageView())
+    }
+
+    init(_ colorButton: UIColor, _ text: String) {
+        self.colorButton = colorButton
+        self.text = text
+        super.init()
+        initialization()
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
+//  MARK: - PRIVATE Area
     
     private func initialization() {
         addElements()
@@ -37,7 +53,7 @@ class CaculatorButtonView: ViewBuilder {
         let view = ViewBuilder()
             .setBorder({ build in
                 build
-                    .setCornerRadius(7)
+                    .setCornerRadius(cornerRadiusOutline)
             })
             .setNeumorphism { build in
                 build
@@ -58,12 +74,7 @@ class CaculatorButtonView: ViewBuilder {
     }()
     
     lazy var innerView: ViewBuilder = {
-        print(colorButton.adjustBrightness(-30).toHexString)
         let view = ViewBuilder()
-            .setBorder({ build in
-                build
-                    .setCornerRadius(21)
-            })
             .setNeumorphism { build in
                 build
                     .setReferenceColor(colorButton)
@@ -71,22 +82,23 @@ class CaculatorButtonView: ViewBuilder {
                     .setLightPosition(.rightTop)
                     .setBlur(percent: 0)
                     .setDistance(percent: 0)
-                    .apply()
+//                    .apply()
             }
             .setConstraints { build in
                 build
-                    .setPin.equalToSuperView(4)
+                    .setPin.equalToSuperView(marginInner)
             }
         return view
     }()
     
-    lazy var button: ButtonBuilder = {
-        let btn = ButtonBuilder()
-            .setTitle("1", .normal)
+    lazy var button: ButtonImageBuilder = {
+        var btn = ButtonImageBuilder(self.image)
+            .setTitle(self.text, .normal)
             .setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
             .setTintColor(Theme.shared.currentTheme.onSurface.adjustBrightness(-20))
             .setTitleAlignment(.center)
-            .setTitleSize(18)
+            .setTitleSize(16)
+            .setImageSize(12)
             .setTitleWeight(.regular)
             .setConstraints { build in
                 build
@@ -95,6 +107,16 @@ class CaculatorButtonView: ViewBuilder {
         return btn
     }()
     
+    
+//  MARK: - SET Properties
+    @discardableResult
+    func configCornerRadiusInnerview(_ cornerRadius: CGFloat) -> Self {
+        innerView.setBorder({ build in
+            build
+                .setCornerRadius(cornerRadius - marginInner)
+        })
+        return self
+    }
     
     
 //  MARK: - PRIVATE Area
