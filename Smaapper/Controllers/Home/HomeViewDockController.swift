@@ -71,7 +71,7 @@ class HomeViewDockController {
     func setShadowItemDock() {
         
         dock.getCellSelected { cellItem in
-            Shadow(cellItem.subviews[0].subviews[0])
+            ShadowBuilder(cellItem.subviews[0].subviews[0])
                 .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)

@@ -65,8 +65,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeShadow(_ shadow: (_ make: Shadow) -> Shadow) -> Self {
-        _ = shadow(Shadow(self))
+    func makeShadow(_ shadow: (_ make: ShadowBuilder) -> ShadowBuilder) -> Self {
+        _ = shadow(ShadowBuilder(self))
         return self
     }
     

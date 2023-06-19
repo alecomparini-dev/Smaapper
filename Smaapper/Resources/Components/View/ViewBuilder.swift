@@ -31,6 +31,20 @@ class ViewBuilder: BaseBuilder {
     }
     
     
+//  MARK: - SET Properties
+    @discardableResult
+    func setSize(width: Int, height: Int) -> Self {
+        self.view.frame.size = CGSize(width: width, height: height)
+        return self
+    }
+    
+    @discardableResult
+    func setSize(_ size: CGSize) -> Self {
+        self.view.frame.size = size
+        return self
+    }
+    
+    
 //  MARK: - SET Actions
     @discardableResult
     func setActions(_ action: (_ build: ViewActions) -> ViewActions) -> Self {

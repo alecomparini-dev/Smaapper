@@ -21,7 +21,7 @@ class CalculatorFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 90, y: 215, width: 250, height: 370))
+        setFrameWindow(CGRect(x: 90, y: 215, width: 230, height: 390))
         setEnabledDraggable(true)
         configDelegate()
     }

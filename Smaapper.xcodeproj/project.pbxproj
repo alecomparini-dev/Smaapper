@@ -52,7 +52,7 @@
 		0234A91E29F9FD3A008392EC /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8B829F9FD3A008392EC /* Alert.swift */; };
 		0234A91F29F9FD3A008392EC /* Choose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8B929F9FD3A008392EC /* Choose.swift */; };
 		0234A92029F9FD3A008392EC /* Warning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BA29F9FD3A008392EC /* Warning.swift */; };
-		0234A92229F9FD3A008392EC /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BD29F9FD3A008392EC /* Shadow.swift */; };
+		0234A92229F9FD3A008392EC /* ShadowBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BD29F9FD3A008392EC /* ShadowBuilder.swift */; };
 		0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */; };
 		0234A93629F9FD3A008392EC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8E529F9FD3A008392EC /* Label.swift */; };
 		0234A93D29F9FD3A008392EC /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8F029F9FD3A008392EC /* Button.swift */; };
@@ -69,8 +69,8 @@
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
-		026C147D2A3CF34900F8D3E6 /* CalculatorNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */; };
-		026C147F2A3CF5A300F8D3E6 /* CaculatorButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */; };
+		026C147D2A3CF34900F8D3E6 /* CalculatorButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147C2A3CF34900F8D3E6 /* CalculatorButtonsView.swift */; };
+		026C147F2A3CF5A300F8D3E6 /* ButtonLogiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147E2A3CF5A300F8D3E6 /* ButtonLogiView.swift */; };
 		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
@@ -198,7 +198,7 @@
 		0234A8B829F9FD3A008392EC /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		0234A8B929F9FD3A008392EC /* Choose.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Choose.swift; sourceTree = "<group>"; };
 		0234A8BA29F9FD3A008392EC /* Warning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Warning.swift; sourceTree = "<group>"; };
-		0234A8BD29F9FD3A008392EC /* Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		0234A8BD29F9FD3A008392EC /* ShadowBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowBuilder.swift; sourceTree = "<group>"; };
 		0234A8BF29F9FD3A008392EC /* ShowsScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowsScroll.swift; sourceTree = "<group>"; };
 		0234A8E529F9FD3A008392EC /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		0234A8F029F9FD3A008392EC /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
-		026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorNumberView.swift; sourceTree = "<group>"; };
-		026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaculatorButtonView.swift; sourceTree = "<group>"; };
+		026C147C2A3CF34900F8D3E6 /* CalculatorButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButtonsView.swift; sourceTree = "<group>"; };
+		026C147E2A3CF5A300F8D3E6 /* ButtonLogiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLogiView.swift; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
@@ -325,7 +325,7 @@
 		021848B12A262577007E68A4 /* FloatViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				02E9743B2A37C25400BF14EE /* CustomFloatViews */,
+				02E9743B2A37C25400BF14EE /* CustomFloatView */,
 				02E974392A379EAF00BF14EE /* FloatControllers */,
 				02E974222A37890B00BF14EE /* Utils */,
 			);
@@ -553,7 +553,7 @@
 		0234A8BB29F9FD3A008392EC /* Shadow */ = {
 			isa = PBXGroup;
 			children = (
-				0234A8BD29F9FD3A008392EC /* Shadow.swift */,
+				0234A8BD29F9FD3A008392EC /* ShadowBuilder.swift */,
 			);
 			path = Shadow;
 			sourceTree = "<group>";
@@ -663,11 +663,18 @@
 			path = Stack;
 			sourceTree = "<group>";
 		};
+		025E84852A4079C900C2D944 /* ButtonLogiView */ = {
+			isa = PBXGroup;
+			children = (
+				026C147E2A3CF5A300F8D3E6 /* ButtonLogiView.swift */,
+			);
+			path = ButtonLogiView;
+			sourceTree = "<group>";
+		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				026C147C2A3CF34900F8D3E6 /* CalculatorNumberView.swift */,
-				026C147E2A3CF5A300F8D3E6 /* CaculatorButtonView.swift */,
+				026C147C2A3CF34900F8D3E6 /* CalculatorButtonsView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -891,7 +898,6 @@
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				02E9743A2A37B9AB00BF14EE /* DockView */,
 				021848AB2A251793007E68A4 /* AskChatGPTView */,
 				02D581552A21205C00150AF9 /* WeatherForecastView */,
 			);
@@ -1142,19 +1148,13 @@
 			path = FloatControllers;
 			sourceTree = "<group>";
 		};
-		02E9743A2A37B9AB00BF14EE /* DockView */ = {
+		02E9743B2A37C25400BF14EE /* CustomFloatView */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = DockView;
-			sourceTree = "<group>";
-		};
-		02E9743B2A37C25400BF14EE /* CustomFloatViews */ = {
-			isa = PBXGroup;
-			children = (
+				025E84852A4079C900C2D944 /* ButtonLogiView */,
 				02E9743C2A37C53200BF14EE /* TitleFloatView */,
 			);
-			path = CustomFloatViews;
+			path = CustomFloatView;
 			sourceTree = "<group>";
 		};
 		02E9743C2A37C53200BF14EE /* TitleFloatView */ = {
@@ -1388,7 +1388,7 @@
 				02E9744B2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
-				026C147F2A3CF5A300F8D3E6 /* CaculatorButtonView.swift in Sources */,
+				026C147F2A3CF5A300F8D3E6 /* ButtonLogiView.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
@@ -1404,7 +1404,7 @@
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
-				026C147D2A3CF34900F8D3E6 /* CalculatorNumberView.swift in Sources */,
+				026C147D2A3CF34900F8D3E6 /* CalculatorButtonsView.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
@@ -1417,7 +1417,7 @@
 				0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */,
 				021848B42A2625A5007E68A4 /* WeatherFloatViewController.swift in Sources */,
 				0234A96329FC0659008392EC /* IconButtonBuilder.swift in Sources */,
-				0234A92229F9FD3A008392EC /* Shadow.swift in Sources */,
+				0234A92229F9FD3A008392EC /* ShadowBuilder.swift in Sources */,
 				020D0E4B2A1E5A6F007F3992 /* DropdownMenu.swift in Sources */,
 				02E974472A37EF9200BF14EE /* UpcomingHolidaysView.swift in Sources */,
 				020D0E632A1ECE02007F3992 /* ViewBuilder.swift in Sources */,

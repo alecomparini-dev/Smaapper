@@ -46,10 +46,12 @@ class ButtonImageBuilder: ButtonBuilder {
     
 //  MARK: - Properties
     @discardableResult
-    func setImageButton(_ image: UIImageView) -> Self {
+    func setImageButton(_ image: UIImageView, _ state: UIControl.State = .normal) -> Self {
         guard let image = image.image else {return self}
-        super.view.configuration?.image = image
-        super.view.setImage(image, for: .normal)
+        if state == .normal {
+            super.view.configuration?.image = image
+        }
+        super.view.setImage(image, for: state)
         return self
     }
     
