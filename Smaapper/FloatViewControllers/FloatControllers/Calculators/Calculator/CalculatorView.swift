@@ -42,7 +42,6 @@ class CalculatorView: ViewBuilder {
     
     lazy var display: LabelBuilder = {
         let label = LabelBuilder("123.456.789.0")
-//            .setBackgroundColor(.red)
             .setTextAlignment(.right)
             .setFont(UIFont.systemFont(ofSize: 33, weight: .thin))
             .setColor(Theme.shared.currentTheme.onSurface)
@@ -54,7 +53,6 @@ class CalculatorView: ViewBuilder {
             }
         return label
     }()
-    
     
     lazy var lineSeparator: ViewBuilder = {
        var view = ViewBuilder()
@@ -83,6 +81,7 @@ class CalculatorView: ViewBuilder {
             }
         return view
     }()
+    
     
 //  MARK: - BUTTONS
     lazy var buttonsView: CalculatorButtonsView = {

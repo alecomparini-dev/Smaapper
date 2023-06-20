@@ -456,7 +456,7 @@ class CalculatorButtonsView: ViewBuilder {
         let btn = ButtonBuilder(",")
             .setBorder({ build in
                 build
-                    .setCornerRadius(7)
+                    .setCornerRadius(sizeButtons.height/2)
             })
             .setTitleSize(27)
             .setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
@@ -464,9 +464,10 @@ class CalculatorButtonsView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setAlignmentCenterXY.equalToSuperView
-                    .setLeading.setTrailing.equalToSuperView
-                    .setTop.setBottom.equalToSuperView(2)
+                    .setHeight.equalToConstant(sizeButtons.height)
+                    .setWidth.equalToConstant(sizeButtons.width)
             }
+            .setBackgroundColorLayer(Theme.shared.currentTheme.surfaceContainer.adjustBrightness(-20))
             .setActions { build in
                 build.setTarget(self, #selector(decimalSeparatorTapped), .touchUpInside)
             }
@@ -478,19 +479,18 @@ class CalculatorButtonsView: ViewBuilder {
         let btn = ButtonImageBuilder(img)
             .setBorder({ build in
                 build
-                    .setCornerRadius(7)
-                    .setWidth(0)
-                    .setColor(Theme.shared.currentTheme.surfaceContainerHighest)
+                    .setCornerRadius(sizeButtons.height/2)
             })
-            .setImageSize(16)
+            .setImageSize(13)
             .setImageWeight(.regular)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setConstraints { build in
                 build
                     .setAlignmentCenterXY.equalToSuperView
-                    .setLeading.setTrailing.equalToSuperView
-                    .setTop.setBottom.equalToSafeArea(2)
+                    .setHeight.equalToConstant(sizeButtons.height)
+                    .setWidth.equalToConstant(sizeButtons.width)
             }
+            .setBackgroundColorLayer(Theme.shared.currentTheme.surfaceContainer)
             .setActions { build in
                 build.setTarget(self, #selector(backspaceTapped), .touchUpInside)
             }
@@ -502,158 +502,102 @@ class CalculatorButtonsView: ViewBuilder {
     
     @objc private func oneTapped() {
         delegate?.calculatorButton(.one)
-        number1.outlineView.setShadow { build in
-            build
-                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
-                .setOffset(width: 0, height: 0)
-                .setOpacity(0)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeButton")
-                .apply()
-        }
-        
-        let shadowLayer = number1.outlineView.shadow?.getShadowById("activeButton")
-        if let shadowLayer {
-            removeShadowOpacityAnimation(shadowLayer)
-        }
-        
+        TappedButtonView(number1.outlineView.view).tapped
     }
 
     @objc private func twoTapped() {
         delegate?.calculatorButton(.two)
-        number2.outlineView.setShadow { build in
-            build
-                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
-                .setOffset(width: 0, height: 0)
-                .setOpacity(0)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeButton")
-                .apply()
-        }
-        
-        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
-        if let shadowLayer {
-            removeShadowOpacityAnimation(shadowLayer)
-        }
-
+        TappedButtonView(number2.outlineView.view).tapped
     }
     
-    func animateShadowOpacity() {
-//        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-//        animation.fromValue = 0.0
-//        animation.toValue = 1.0
-//        animation.duration = 1.0
-//        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
-//        shadowLayer?.add(animation, forKey: "shadowOpacityAnimation")
-//        shadowLayer?.shadowOpacity = 1.0
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-//            self.removeShadowOpacityAnimation()
-//        }
-        
-    }
-
-    func removeShadowOpacityAnimation(_ shadowLayer: CALayer) {
-        let animation = CABasicAnimation(keyPath: "shadowOpacity")
-        animation.fromValue = 1.0
-        animation.toValue = 1.0
-        animation.duration = 0.2
-        shadowLayer.add(animation, forKey: "shadowOpacityAnimation")
-        shadowLayer.shadowOpacity = 0.0
-        
-//        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
-//        shadowLayer?.removeAnimation(forKey: "shadowOpacityAnimation")
-//        shadowLayer?.shadowOpacity = 0.0
-    }
-    
-
     @objc private func threeTapped() {
         delegate?.calculatorButton(.three)
-        number3.outlineView.setShadow { build in
-            build
-                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
-                .setOffset(width: 0, height: 0)
-                .setOpacity(0)
-                .setRadius(2)
-                .setBringToFront()
-                .setID("activeButton")
-                .apply()
-        }
-        
-        let shadowLayer = number3.outlineView.shadow?.getShadowById("activeButton")
-        if let shadowLayer {
-            removeShadowOpacityAnimation(shadowLayer)
-        }
+        TappedButtonView(number3.outlineView.view).tapped
     }
 
     @objc private func fourTapped() {
         delegate?.calculatorButton(.four)
-        
+        TappedButtonView(number4.outlineView.view).tapped
     }
 
     @objc private func fiveTapped() {
         delegate?.calculatorButton(.five)
+        TappedButtonView(number5.outlineView.view).tapped
     }
 
     @objc private func sixTapped() {
         delegate?.calculatorButton(.zero)
+        TappedButtonView(number6.outlineView.view).tapped
     }
 
     @objc private func sevenTapped() {
         delegate?.calculatorButton(.seven)
+        TappedButtonView(number7.outlineView.view).tapped
     }
 
     @objc private func eightTapped() {
         delegate?.calculatorButton(.eight)
+        TappedButtonView(number8.outlineView.view).tapped
     }
 
     @objc private func nineTapped() {
         delegate?.calculatorButton(.nine)
+        TappedButtonView(number9.outlineView.view).tapped
     }
 
     @objc private func zeroTapped() {
         delegate?.calculatorButton(.zero)
+        TappedButtonView(number0.outlineView.view).tapped
     }
 
     @objc private func additionTapped() {
         delegate?.calculatorButton(.addition)
+        TappedButtonView(addition.outlineView.view).tapped
     }
 
     @objc private func subtractionTapped() {
         delegate?.calculatorButton(.subtraction)
+        TappedButtonView(subtraction.outlineView.view).tapped
     }
 
     @objc private func multiplicationTapped() {
         delegate?.calculatorButton(.multiplication)
+        TappedButtonView(multiplication.outlineView.view).tapped
     }
 
     @objc private func divisionTapped() {
         delegate?.calculatorButton(.division)
+        TappedButtonView(division.outlineView.view).tapped
     }
 
     @objc private func equalsTapped() {
         delegate?.calculatorButton(.equals)
+        TappedButtonView(equals.view).tapped
     }
 
     @objc private func clearTapped() {
         delegate?.calculatorButton(.clear)
+        TappedButtonView(clear.view).tapped
     }
 
     @objc private func plusMinusTapped() {
         delegate?.calculatorButton(.plusMinus)
+        TappedButtonView(plusMinus.view).tapped
     }
 
     @objc private func percentageTapped() {
         delegate?.calculatorButton(.percentage)
+        TappedButtonView(percentage.view).tapped
     }
 
     @objc private func decimalSeparatorTapped() {
         delegate?.calculatorButton(.decimalSeparator)
+        TappedButtonView(decimalSeparator.view).tapped
     }
 
     @objc private func backspaceTapped() {
         delegate?.calculatorButton(.backspace)
+        TappedButtonView(backspace.view).tapped
     }
 
 
