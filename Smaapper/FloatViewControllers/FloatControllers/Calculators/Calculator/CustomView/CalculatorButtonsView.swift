@@ -7,11 +7,40 @@
 
 import UIKit
 
+protocol CalculatorButtonsViewDelegate: AnyObject {
+    func calculatorButton(_ button: CalculatorButtonsView.CalculatorButtons )
+}
+
 class CalculatorButtonsView: ViewBuilder {
+    
+    weak var delegate: CalculatorButtonsViewDelegate?
     
     private let spacingVertical: CGFloat = 5
     private let spacingHorizontal: CGFloat = 10
     private let sizeButtons = CGSize(width: 43, height: 43)
+    
+    enum  CalculatorButtons {
+        case one
+        case two
+        case three
+        case four
+        case five
+        case six
+        case seven
+        case eight
+        case nine
+        case zero
+        case addition
+        case subtraction
+        case multiplication
+        case division
+        case equals
+        case clear
+        case plusMinus
+        case percentage
+        case decimalSeparator
+        case backspace
+    }
     
     override init() {
         super.init()
@@ -131,23 +160,22 @@ class CalculatorButtonsView: ViewBuilder {
         return view
     }()
     
-    
-    lazy var viewAdd: ViewBuilder = {
+    lazy var viewAddition: ViewBuilder = {
         let view = ViewBuilder()
         return view
     }()
     
-    lazy var viewSubtract: ViewBuilder = {
+    lazy var viewSubtraction: ViewBuilder = {
         let view = ViewBuilder()
         return view
     }()
     
-    lazy var viewMultiply: ViewBuilder = {
+    lazy var viewMultiplication: ViewBuilder = {
         let view = ViewBuilder()
         return view
     }()
     
-    lazy var viewDivide: ViewBuilder = {
+    lazy var viewDivision: ViewBuilder = {
         let view = ViewBuilder()
         return view
     }()
@@ -187,78 +215,120 @@ class CalculatorButtonsView: ViewBuilder {
 
     lazy var number0: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "0")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(zeroTapped), .touchUpInside)
+        }
         return btn
     }()
     
     lazy var number1: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "1")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(oneTapped), .touchUpInside)
+        }
         return btn
     }()
     
     lazy var number2: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "2")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(twoTapped), .touchUpInside)
+        }
         return btn
     }()
     
     lazy var number3: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "3")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(threeTapped), .touchUpInside)
+        }
         return btn
     }()
     
     lazy var number4: ButtonLogiView = {
-        let view = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "4")
-        return view
+        let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "4")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(fourTapped), .touchUpInside)
+        }
+        return btn
     }()
     
     lazy var number5: ButtonLogiView = {
-        let view = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "5")
-        return view
+        let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "5")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(fiveTapped), .touchUpInside)
+        }
+        return btn
     }()
     
     lazy var number6: ButtonLogiView = {
-        let view = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "6")
-        return view
+        let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "6")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(sixTapped), .touchUpInside)
+        }
+        return btn
     }()
     
     lazy var number7: ButtonLogiView = {
-        let view = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "7")
-        return view
+        let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "7")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(sevenTapped), .touchUpInside)
+        }
+        return btn
     }()
     
     lazy var number8: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "8")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(eightTapped), .touchUpInside)
+        }
         return btn
     }()
     
     lazy var number9: ButtonLogiView = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "9")
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(nineTapped), .touchUpInside)
+        }
         return btn
     }()
     
     
 //  MARK: - OPERATATION Area
     
-    lazy var add: ButtonLogiView = {
+    lazy var addition: ButtonLogiView = {
         let img = UIImageView(image: UIImage(systemName: "plus"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(additionTapped), .touchUpInside)
+        }
         return btn
     }()
     
-    lazy var subtract: ButtonLogiView = {
+    lazy var subtraction: ButtonLogiView = {
         let img = UIImageView(image: UIImage(systemName: "minus"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(subtractionTapped), .touchUpInside)
+        }
         return btn
     }()
     
-    lazy var multiply: ButtonLogiView = {
+    lazy var multiplication: ButtonLogiView = {
         let img = UIImageView(image: UIImage(systemName: "multiply"))
-        let view = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
-        return view
+        let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(multiplicationTapped), .touchUpInside)
+        }
+        return btn
     }()
     
-    lazy var divide: ButtonLogiView = {
+    lazy var division: ButtonLogiView = {
         let img = UIImageView(image: UIImage(systemName: "divide"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
+        btn.button.setActions { build in
+            build.setTarget(self, #selector(divisionTapped), .touchUpInside)
+        }
         return btn
     }()
     
@@ -289,6 +359,9 @@ class CalculatorButtonsView: ViewBuilder {
                     .setHeight.equalToConstant(sizeButtons.height)
                     .setWidth.equalToConstant(sizeButtons.width)
             }
+            .setActions { build in
+                build.setTarget(self, #selector(equalsTapped), .touchUpInside)
+            }
         return btn
     }()
     
@@ -317,6 +390,9 @@ class CalculatorButtonsView: ViewBuilder {
                     .setHeight.equalToConstant(sizeButtons.height)
                     .setWidth.equalToConstant(sizeButtons.width)
             }
+            .setActions { build in
+                build.setTarget(self, #selector(clearTapped), .touchUpInside)
+            }
         return btn
     }()
     
@@ -341,6 +417,9 @@ class CalculatorButtonsView: ViewBuilder {
                     .setAlignmentCenterXY.equalToSuperView
                     .setHeight.equalToConstant(sizeButtons.height)
                     .setWidth.equalToConstant(sizeButtons.width)
+            }
+            .setActions { build in
+                build.setTarget(self, #selector(plusMinusTapped), .touchUpInside)
             }
         return btn
     }()
@@ -367,6 +446,9 @@ class CalculatorButtonsView: ViewBuilder {
                     .setHeight.equalToConstant(sizeButtons.height)
                     .setWidth.equalToConstant(sizeButtons.width)
             }
+            .setActions { build in
+                build.setTarget(self, #selector(percentageTapped), .touchUpInside)
+            }
         return btn
     }()
     
@@ -384,6 +466,9 @@ class CalculatorButtonsView: ViewBuilder {
                     .setAlignmentCenterXY.equalToSuperView
                     .setLeading.setTrailing.equalToSuperView
                     .setTop.setBottom.equalToSuperView(2)
+            }
+            .setActions { build in
+                build.setTarget(self, #selector(decimalSeparatorTapped), .touchUpInside)
             }
         return btn
     }()
@@ -406,12 +491,171 @@ class CalculatorButtonsView: ViewBuilder {
                     .setLeading.setTrailing.equalToSuperView
                     .setTop.setBottom.equalToSafeArea(2)
             }
+            .setActions { build in
+                build.setTarget(self, #selector(backspaceTapped), .touchUpInside)
+            }
         return btn
     }()
     
+    
+//  MARK: - @OBJC Area
+    
+    @objc private func oneTapped() {
+        delegate?.calculatorButton(.one)
+        number1.outlineView.setShadow { build in
+            build
+                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
+                .setOffset(width: 0, height: 0)
+                .setOpacity(0)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("activeButton")
+                .apply()
+        }
+        
+        let shadowLayer = number1.outlineView.shadow?.getShadowById("activeButton")
+        if let shadowLayer {
+            removeShadowOpacityAnimation(shadowLayer)
+        }
+        
+    }
 
+    @objc private func twoTapped() {
+        delegate?.calculatorButton(.two)
+        number2.outlineView.setShadow { build in
+            build
+                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
+                .setOffset(width: 0, height: 0)
+                .setOpacity(0)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("activeButton")
+                .apply()
+        }
+        
+        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
+        if let shadowLayer {
+            removeShadowOpacityAnimation(shadowLayer)
+        }
+
+    }
     
+    func animateShadowOpacity() {
+//        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+//        animation.fromValue = 0.0
+//        animation.toValue = 1.0
+//        animation.duration = 1.0
+//        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
+//        shadowLayer?.add(animation, forKey: "shadowOpacityAnimation")
+//        shadowLayer?.shadowOpacity = 1.0
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//            self.removeShadowOpacityAnimation()
+//        }
+        
+    }
+
+    func removeShadowOpacityAnimation(_ shadowLayer: CALayer) {
+        let animation = CABasicAnimation(keyPath: "shadowOpacity")
+        animation.fromValue = 1.0
+        animation.toValue = 1.0
+        animation.duration = 0.2
+        shadowLayer.add(animation, forKey: "shadowOpacityAnimation")
+        shadowLayer.shadowOpacity = 0.0
+        
+//        let shadowLayer = number2.outlineView.shadow?.getShadowById("activeButton")
+//        shadowLayer?.removeAnimation(forKey: "shadowOpacityAnimation")
+//        shadowLayer?.shadowOpacity = 0.0
+    }
     
+
+    @objc private func threeTapped() {
+        delegate?.calculatorButton(.three)
+        number3.outlineView.setShadow { build in
+            build
+                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
+                .setOffset(width: 0, height: 0)
+                .setOpacity(0)
+                .setRadius(2)
+                .setBringToFront()
+                .setID("activeButton")
+                .apply()
+        }
+        
+        let shadowLayer = number3.outlineView.shadow?.getShadowById("activeButton")
+        if let shadowLayer {
+            removeShadowOpacityAnimation(shadowLayer)
+        }
+    }
+
+    @objc private func fourTapped() {
+        delegate?.calculatorButton(.four)
+        
+    }
+
+    @objc private func fiveTapped() {
+        delegate?.calculatorButton(.five)
+    }
+
+    @objc private func sixTapped() {
+        delegate?.calculatorButton(.zero)
+    }
+
+    @objc private func sevenTapped() {
+        delegate?.calculatorButton(.seven)
+    }
+
+    @objc private func eightTapped() {
+        delegate?.calculatorButton(.eight)
+    }
+
+    @objc private func nineTapped() {
+        delegate?.calculatorButton(.nine)
+    }
+
+    @objc private func zeroTapped() {
+        delegate?.calculatorButton(.zero)
+    }
+
+    @objc private func additionTapped() {
+        delegate?.calculatorButton(.addition)
+    }
+
+    @objc private func subtractionTapped() {
+        delegate?.calculatorButton(.subtraction)
+    }
+
+    @objc private func multiplicationTapped() {
+        delegate?.calculatorButton(.multiplication)
+    }
+
+    @objc private func divisionTapped() {
+        delegate?.calculatorButton(.division)
+    }
+
+    @objc private func equalsTapped() {
+        delegate?.calculatorButton(.equals)
+    }
+
+    @objc private func clearTapped() {
+        delegate?.calculatorButton(.clear)
+    }
+
+    @objc private func plusMinusTapped() {
+        delegate?.calculatorButton(.plusMinus)
+    }
+
+    @objc private func percentageTapped() {
+        delegate?.calculatorButton(.percentage)
+    }
+
+    @objc private func decimalSeparatorTapped() {
+        delegate?.calculatorButton(.decimalSeparator)
+    }
+
+    @objc private func backspaceTapped() {
+        delegate?.calculatorButton(.backspace)
+    }
+
 
 //  MARK: - PRIVATE Area
 
@@ -492,10 +736,10 @@ class CalculatorButtonsView: ViewBuilder {
     }
     
     private func addOperationsToViews() {
-        add.add(insideTo: viewAdd.view)
-        subtract.add(insideTo: viewSubtract.view)
-        divide.add(insideTo: viewDivide.view)
-        multiply.add(insideTo: viewMultiply.view)
+        addition.add(insideTo: viewAddition.view)
+        subtraction.add(insideTo: viewSubtraction.view)
+        division.add(insideTo: viewDivision.view)
+        multiplication.add(insideTo: viewMultiplication.view)
         equals.add(insideTo: viewEquals.view)
     }
     
@@ -519,28 +763,28 @@ class CalculatorButtonsView: ViewBuilder {
         viewAC.add(insideTo: stackHorizontal5.view)
         viewPlusMinus.add(insideTo: stackHorizontal5.view)
         viewPercentage.add(insideTo: stackHorizontal5.view)
-        viewDivide.add(insideTo: stackHorizontal5.view)
+        viewDivision.add(insideTo: stackHorizontal5.view)
     }
     
     private func addViewsToStackHorizontal4() {
         view7.add(insideTo: stackHorizontal4.view)
         view8.add(insideTo: stackHorizontal4.view)
         view9.add(insideTo: stackHorizontal4.view)
-        viewMultiply.add(insideTo: stackHorizontal4.view)
+        viewMultiplication.add(insideTo: stackHorizontal4.view)
     }
     
     private func addViewsToStackHorizontal3() {
         view4.add(insideTo: stackHorizontal3.view)
         view5.add(insideTo: stackHorizontal3.view)
         view6.add(insideTo: stackHorizontal3.view)
-        viewSubtract.add(insideTo: stackHorizontal3.view)
+        viewSubtraction.add(insideTo: stackHorizontal3.view)
     }
     
     private func addViewsToStackHorizontal2() {
         view1.add(insideTo: stackHorizontal2.view)
         view2.add(insideTo: stackHorizontal2.view)
         view3.add(insideTo: stackHorizontal2.view)
-        viewAdd.add(insideTo: stackHorizontal2.view)
+        viewAddition.add(insideTo: stackHorizontal2.view)
     }
     
     private func addViewsToStackHorizontal1() {
@@ -564,10 +808,10 @@ class CalculatorButtonsView: ViewBuilder {
     }
     
     private func configOperationsConstraints() {
-        add.applyConstraint()
-        subtract.applyConstraint()
-        divide.applyConstraint()
-        multiply.applyConstraint()
+        addition.applyConstraint()
+        subtraction.applyConstraint()
+        division.applyConstraint()
+        multiplication.applyConstraint()
         equals.applyConstraint()
     }
     
