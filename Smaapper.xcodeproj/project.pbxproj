@@ -66,6 +66,7 @@
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
+		025E84882A41D57A00C2D944 /* TappedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* TappedButtonView.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -212,6 +213,7 @@
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
+		025E84872A41D57A00C2D944 /* TappedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappedButtonView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -671,6 +673,14 @@
 			path = ButtonLogiView;
 			sourceTree = "<group>";
 		};
+		025E84862A41D50300C2D944 /* TappedButtonView */ = {
+			isa = PBXGroup;
+			children = (
+				025E84872A41D57A00C2D944 /* TappedButtonView.swift */,
+			);
+			path = TappedButtonView;
+			sourceTree = "<group>";
+		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -898,6 +908,7 @@
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				025E84862A41D50300C2D944 /* TappedButtonView */,
 				021848AB2A251793007E68A4 /* AskChatGPTView */,
 				02D581552A21205C00150AF9 /* WeatherForecastView */,
 			);
@@ -1338,6 +1349,7 @@
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
+				025E84882A41D57A00C2D944 /* TappedButtonView.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
 				02E974492A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift in Sources */,
 				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,
