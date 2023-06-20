@@ -9,7 +9,7 @@ import UIKit
 
 class ShadowBuilder {
     
-    private var component: UIView
+    private(set) var component: UIView
     private let shadow: CAShapeLayer
     private var shadowAt: UInt32 = 0
     private var isBringToFront: Bool = false
@@ -90,6 +90,14 @@ class ShadowBuilder {
     func setID(_ id: String) -> Self {
         shadow.name = id
         return self
+    }
+    
+//  MARK: - GET Properties
+    func getShadowById(_ id: String) -> CALayer? {
+        if let layerToRemove = self.component.layer.sublayers?.first(where: { $0.name == id }) {
+            return layerToRemove
+        }
+        return nil
     }
     
 //  MARK: - APPLY Shadow
