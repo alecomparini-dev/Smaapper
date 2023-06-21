@@ -117,7 +117,7 @@ class TextFieldBuilder: BaseBuilder {
     }
     
     @discardableResult
-    func setTextNumber(_ number: Any, _ buildFormatter: (_ build: NumberFormatterBuilder) -> NumberFormatterBuilder ) -> Self {
+    func setTextNumber(_ number: String, _ buildFormatter: (_ build: NumberFormatterBuilder) -> NumberFormatterBuilder ) -> Self {
         let numberFormatter = buildFormatter(NumberFormatterBuilder())
         if let numberFormatted = numberFormatter.getString(number) {
             setText(numberFormatted)

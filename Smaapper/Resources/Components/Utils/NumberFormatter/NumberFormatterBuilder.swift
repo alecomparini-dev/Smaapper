@@ -38,20 +38,26 @@ class NumberFormatterBuilder: NumberFormatter {
         return nil
     }
     
-    private func sanitizationNumber(_ value: String) -> String {
-        return value.replacingOccurrences(of: ".", with: decimalSeparator).replacingOccurrences(of: ",", with: decimalSeparator)
-    }
-    
     func getNumber(_ value: Double) -> NSNumber? {
         return getNumber("\(value)")
     }
     
-    func getString(_ value: Any) -> String? {
-        if let doubleValue = value as? Double {
-            if doubleValue.isNaN { return nil }
-            return self.getString(NSNumber(value: doubleValue))
+    private func sanitizationNumber(_ value: String) -> String {
+        return value.replacingOccurrences(of: ".", with: decimalSeparator).replacingOccurrences(of: ",", with: decimalSeparator)
+    }
+    
+
+    func getString(_ value: String) -> String? {
+        let sanitizedValue = sanitizationNumber(value)
+        if let formattedString = self.number(from: sanitizedValue) {
+            return "\(formattedString)"
         }
         return nil
+    }
+    
+    func getString(_ value: Double) -> String? {
+        if value.isNaN { return nil }
+        return self.getString(NSNumber(value: value))
     }
     
     

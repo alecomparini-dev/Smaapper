@@ -34,6 +34,8 @@ class LabelBuilder: BaseBuilder {
         let _ = self.setTextAlignment(aligment)
     }
     
+//  MARK: - GET Properties
+    var getText: String? { return label.text }
     
 //  MARK: - SET Properties
     

@@ -19,7 +19,7 @@ class CalculatorButtonsView: ViewBuilder {
     private let spacingHorizontal: CGFloat = 10
     private let sizeButtons = CGSize(width: 43, height: 43)
     
-    enum  CalculatorButtons {
+    enum CalculatorButtons {
         case one
         case two
         case three
@@ -526,7 +526,7 @@ class CalculatorButtonsView: ViewBuilder {
     }
 
     @objc private func sixTapped() {
-        delegate?.calculatorButton(.zero)
+        delegate?.calculatorButton(.six)
         TappedButtonView(number6.outlineView.view).tapped
     }
 
