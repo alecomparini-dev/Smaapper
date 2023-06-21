@@ -11,7 +11,7 @@ class CalculatorFloatViewController: FloatViewController {
     static let identifierApp = "calculator"
     
     private var operation: CalculatorOperationProtocol?
-    private var display: Double = 0.0
+    private var numberOfDisplay: Double = 0.0
     
     private let calc: Calculation = Calculation()
     private let numberFormatter: NumberFormatterBuilder = NumberFormatterBuilder()
