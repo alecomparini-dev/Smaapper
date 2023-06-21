@@ -27,6 +27,9 @@ class CalculatorView: ViewBuilder {
         configConstraints()
     }
     
+    
+//  MARK: - LAZY AREA
+    
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: "", title: "", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
@@ -41,7 +44,7 @@ class CalculatorView: ViewBuilder {
 //  MARK: - DISPLAY Area
     
     lazy var display: LabelBuilder = {
-        let label = LabelBuilder("123.456.789.0")
+        let label = LabelBuilder("0")
             .setTextAlignment(.right)
             .setFont(UIFont.systemFont(ofSize: 33, weight: .thin))
             .setColor(Theme.shared.currentTheme.onSurface)
@@ -83,7 +86,7 @@ class CalculatorView: ViewBuilder {
     }()
     
     
-//  MARK: - BUTTONS
+//  MARK: - BUTTONS Area
     lazy var buttonsView: CalculatorButtonsView = {
         let view = CalculatorButtonsView()
             .setConstraints { build in
@@ -94,12 +97,6 @@ class CalculatorView: ViewBuilder {
             }
         return view
     }()
-
-
-//  MARK: - BUTTONS Area
-
-
-    
     
     
 //  MARK: - PRIVATE Area
