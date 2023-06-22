@@ -15,7 +15,7 @@ class CalculatorFloatViewController: FloatViewController {
     private let calc: Calculation = Calculation()
     private let numberFormatter: NumberFormatterBuilder = NumberFormatterBuilder()
     private var isPercentageTapped: Bool = false
-    private var isClearDisplay: Bool = false
+    private var isFinishedTypingNumber: Bool = true
     private var isCurrentValue: Bool = false
     
     lazy var screen: CalculatorView = {
@@ -52,8 +52,7 @@ class CalculatorFloatViewController: FloatViewController {
             .setNumberStyle(.decimal)
             .setMinimumFractionDigits(0)
             .setMaximumFractionDigits(5)
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 5
+            .removeGroupingSeparator()
     }
     
     private func configDelegate() {
@@ -70,14 +69,18 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func setPlusMinus() {
-        var value = numberFormatter.getNumber(getDisplayValue)?.doubleValue ?? 0
-        value = value * -1
-        clearDisplay()
-        setValue(numberFormatter.getString(value) ?? "0")
+        if var numberDisplay = sanitizeDouble(getDisplayValue) {
+            numberDisplay *= -1
+            screen.display.setText(numberFormatter.getString(numberDisplay) ?? "0")
+        }
+    }
+    
+    private func sanitizeDouble(_ number: String) -> Double? {
+        return Double(number.replacingOccurrences(of: ",", with: "."))
     }
     
     private func configPercentage() {
-        isClearDisplay = true
+        isFinishedTypingNumber = true
         if isPercentageTapped { return }
         if isDisplayZero() {return}
         
@@ -118,9 +121,9 @@ class CalculatorFloatViewController: FloatViewController {
         
     }
     
-    private func setValue(_ value: String) {
+    private func setNumber(_ value: String) {
         isPercentageTapped = false
-        configValueToDisplay(value)
+        setNumberOnDisplay(value)
         setNumberToCalculation()
     }
     
@@ -143,33 +146,37 @@ class CalculatorFloatViewController: FloatViewController {
         return result
     }
     
-    private var setBackspace: Void {
+    private func setBackspace() {
         if isDisplayZero() {return}
+        
         let display = getDisplayValue
-        clearDisplay()
+        
         if display.count > 1 {
-            configValueToDisplay(String(display.dropLast()))
+            let number = String(display.dropLast())
+            screen.display.setText(number)
         }
+        
         if display.count == 1 {
             calc.currentValue = nil
+            clearDisplay()
         }
         return
     }
     
     private func resetCalculator() {
-        calc.previousValue = nil
-        calc.currentValue = nil
-        calc.operation = nil
+        calc.resetCalculation()
+        calc.result = nil
         operation = nil
+        isFinishedTypingNumber = true
         clearDisplay()
     }
     
     private func clearDisplay() {
-        setValueOnDisplay("0")
+        screen.display.setText("0")
     }
     
-    private var setDecimalSeparator: Void {
-        configValueToDisplay(",")
+    private func setDecimalSeparator() {
+        screen.display.setText(getDisplayValue + setDecimalSeparatorOnDisplay())
     }
        
     private func isDisplayZero() -> Bool {
@@ -180,46 +187,53 @@ class CalculatorFloatViewController: FloatViewController {
         return false
     }
     
-    private func setValueOnDisplay(_ value: String) {
-        let decimalSeparator = NumberFormatterBuilder.get.decimalSeparator ?? "."
-//        var valueFormatted = numberFormatter.getString(value) ?? "0"
-//        if value.contains(decimalSeparator) {
-//            valueFormatted = value
-//        }
+    private func configDisplayWhenZero(_ value: String) {
+        guard let display = Double(screen.display.getText ?? "") else { return }
         
-        screen.display.setText(value.replacingOccurrences(of: ".", with: NumberFormatterBuilder.get.decimalSeparator))
-    }
-    
-    private func configValueToDisplay(_ value: String) {
-        guard var display = screen.display.getText else { return }
-        if isClearDisplay {
-            clearDisplay()
-            isClearDisplay = false
-            display = ""
+        if display.sign == .minus {
+            screen.display.setText("-" + value)
+        } else {
+            screen.display.setText(value)
         }
-        
-        if isDisplayZero() {display = ""}
         
         if value == NumberFormatterBuilder.get.decimalSeparator {
-            display += setDecimalSeparatorOnDisplay()
-        } else {
-            display += value
+            let valueFormatted = setDecimalSeparatorOnDisplay()
+            screen.display.setText(getDisplayValue + valueFormatted)
         }
-        setValueOnDisplay(display)
     }
     
-    private func setDecimalSeparatorOnDisplay() -> String {
-        let display = screen.display.getText ?? ""
-        if display.contains(NumberFormatterBuilder.get.decimalSeparator) { return "" }
-        if isDisplayZero() {
-            return "0\(NumberFormatterBuilder.get.decimalSeparator ?? ".")"
+    private func setNumberOnDisplay(_ value: String) {
+        if isFinishedTypingNumber {
+            screen.display.setText(value)
+            isFinishedTypingNumber = false
+            return
         }
+        
+        if isDisplayZero() {
+            configDisplayWhenZero(value)
+            return
+        }
+        
+        screen.display.setText(getDisplayValue + value)
+
+    }
+    
+//    private func isInt(_ value: String) -> Bool {
+//        if let number = Double(value) {
+//            return floor(number) == number
+//        }
+//        return false
+//    }
+    
+    private func setDecimalSeparatorOnDisplay() -> String {
+        isFinishedTypingNumber = false
+        let display = getDisplayValue
+        if display.contains(NumberFormatterBuilder.get.decimalSeparator) { return "" }
         return NumberFormatterBuilder.get.decimalSeparator
     }
     
     private func setNumberToCalculation() {
-        let numberDisplay: Double = numberFormatter.getNumber(getDisplayValue)?.doubleValue ?? 0
-//        let numberDisplay: Double = Double(truncating: numberFormatter.getNumber(getDisplayValue) ?? 0)
+        guard let numberDisplay: Double = Double(getDisplayValue) else {return}
         if operation == nil {
             calc.previousValue = numberDisplay
         } else {
@@ -233,7 +247,6 @@ class CalculatorFloatViewController: FloatViewController {
         }
         makeCalculation()
         setOperation(operation)
-        isClearDisplay = true
     }
     
     private func setOperation(_ operation: CalculatorOperationProtocol?) {
@@ -245,21 +258,18 @@ class CalculatorFloatViewController: FloatViewController {
     
     private func makeCalculation() {
         if let result = calc.calculate {
-            setValueOnDisplay("\(result)")
+            if result == floor(result) {
+                screen.display.setText("\(Int(result))")
+            } else {
+                screen.display.setText("\(result)")
+            }
             operation = nil
             calc.previousValue = result
         }
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
 
 
@@ -285,40 +295,40 @@ extension CalculatorFloatViewController: CalculatorButtonsViewDelegate {
         
         switch button {
             case .one:
-                setValue("1")
+                setNumber("1")
 
             case .two:
-                setValue("2")
+                setNumber("2")
 
             case .three:
-                setValue("3")
+                setNumber("3")
 
             case .four:
-                setValue("4")
+                setNumber("4")
 
             case .five:
-                setValue("5")
+                setNumber("5")
 
             case .six:
-                setValue("6")
+                setNumber("6")
 
             case .seven:
-                setValue("7")
+                setNumber("7")
 
             case .eight:
-                setValue("8")
+                setNumber("8")
 
             case .nine:
-                setValue("9")
+                setNumber("9")
 
             case .zero:
-                setValue("0")
+                setNumber("0")
             
             case .decimalSeparator:
-                setDecimalSeparator
+                setDecimalSeparator()
             
             case .backspace:
-                setBackspace
+                setBackspace()
 
             case .addition:
                 configCalculation(AdditionOperation())
