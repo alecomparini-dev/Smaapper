@@ -68,10 +68,17 @@ class CalculatorFloatViewController: FloatViewController {
         UtilsFloatView.removeShadowActiveFloatView(screen)
     }
     
-    private func setPlusMinus() {
-        if var numberDisplay = sanitizeDouble(getDisplayValue) {
-            numberDisplay *= -1
+    private func setDisplay(_ number: String) {
+        if let numberDisplay = sanitizeDouble(number) {
             screen.display.setText(numberFormatter.getString(numberDisplay) ?? "0")
+        }
+    }
+    
+    private func setPlusMinus() {
+        if var numberDisplay = sanitizeDouble(getDisplayValue()) {
+            numberDisplay *= -1
+            setDisplay("\(numberDisplay)")
+            setNumberToCalculation()
         }
     }
     
@@ -80,7 +87,6 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func configPercentage() {
-        isFinishedTypingNumber = true
         if isPercentageTapped { return }
         if isDisplayZero() {return}
         
@@ -131,7 +137,7 @@ class CalculatorFloatViewController: FloatViewController {
         makeCalculation()
     }
     
-    private var getDisplayValue: String {
+    private func getDisplayValue() -> String {
         if let display = screen.display.getText {
             return display
         }
@@ -141,7 +147,7 @@ class CalculatorFloatViewController: FloatViewController {
     private func calculate() -> Double? {
         let result = calc.calculate
         if result == nil {
-            calc.previousValue = Double(getDisplayValue)
+            calc.previousValue = Double(getDisplayValue())
         }
         return result
     }
@@ -149,7 +155,7 @@ class CalculatorFloatViewController: FloatViewController {
     private func setBackspace() {
         if isDisplayZero() {return}
         
-        let display = getDisplayValue
+        let display = getDisplayValue()
         
         if display.count > 1 {
             let number = String(display.dropLast())
@@ -176,12 +182,12 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func setDecimalSeparator() {
-        screen.display.setText(getDisplayValue + setDecimalSeparatorOnDisplay())
+        screen.display.setText(getDisplayValue() + setDecimalSeparatorOnDisplay())
     }
        
     private func isDisplayZero() -> Bool {
-        let display = screen.display.getText ?? "0"
-        if Double(display) == 0 {
+        let display = getDisplayValue()
+        if Double(display) == 0.0 {
             return true
         }
         return false
@@ -196,10 +202,10 @@ class CalculatorFloatViewController: FloatViewController {
             screen.display.setText(value)
         }
         
-        if value == NumberFormatterBuilder.get.decimalSeparator {
-            let valueFormatted = setDecimalSeparatorOnDisplay()
-            screen.display.setText(getDisplayValue + valueFormatted)
-        }
+//        if value == NumberFormatterBuilder.get.decimalSeparator {
+//            let valueFormatted = setDecimalSeparatorOnDisplay()
+//            screen.display.setText(getDisplayValue() + valueFormatted)
+//        }
     }
     
     private func setNumberOnDisplay(_ value: String) {
@@ -208,14 +214,11 @@ class CalculatorFloatViewController: FloatViewController {
             isFinishedTypingNumber = false
             return
         }
-        
         if isDisplayZero() {
             configDisplayWhenZero(value)
             return
         }
-        
-        screen.display.setText(getDisplayValue + value)
-
+        screen.display.setText(getDisplayValue() + value)
     }
     
 //    private func isInt(_ value: String) -> Bool {
@@ -227,13 +230,14 @@ class CalculatorFloatViewController: FloatViewController {
     
     private func setDecimalSeparatorOnDisplay() -> String {
         isFinishedTypingNumber = false
-        let display = getDisplayValue
+        let display = getDisplayValue()
         if display.contains(NumberFormatterBuilder.get.decimalSeparator) { return "" }
         return NumberFormatterBuilder.get.decimalSeparator
     }
     
     private func setNumberToCalculation() {
-        guard let numberDisplay: Double = Double(getDisplayValue) else {return}
+        guard let numberDisplay = sanitizeDouble(getDisplayValue()) else {return}
+        
         if operation == nil {
             calc.previousValue = numberDisplay
         } else {
@@ -243,7 +247,7 @@ class CalculatorFloatViewController: FloatViewController {
     
     private func configCalculation(_ operation: CalculatorOperationProtocol) {
         if calc.previousValue == nil {
-            calc.previousValue = Double(getDisplayValue)
+            calc.previousValue = Double(getDisplayValue())
         }
         makeCalculation()
         setOperation(operation)
@@ -257,17 +261,13 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func makeCalculation() {
+        isFinishedTypingNumber = true
         if let result = calc.calculate {
-            if result == floor(result) {
-                screen.display.setText("\(Int(result))")
-            } else {
-                screen.display.setText("\(result)")
-            }
+            setDisplay("\(result)")
             operation = nil
             calc.previousValue = result
         }
     }
-    
     
 
 }
@@ -347,15 +347,12 @@ extension CalculatorFloatViewController: CalculatorButtonsViewDelegate {
             
             case .equals:
                 setEquals()
-                break
             
             case .clear:
                 resetCalculator()
-                break
         
             case .plusMinus:
                 setPlusMinus()
-                break
                 
         }
     }
