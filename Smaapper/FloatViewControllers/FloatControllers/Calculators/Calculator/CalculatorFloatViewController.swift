@@ -72,9 +72,15 @@ class CalculatorFloatViewController: FloatViewController {
         if let numberDisplay = sanitizeDouble(number) {
             screen.display.setText(numberFormatter.getString(numberDisplay) ?? "0")
         }
+
+
     }
     
     private func setPlusMinus() {
+        if !isPercentageTapped {
+            finishedTypingNumber()
+        }
+
         if var numberDisplay = sanitizeDouble(getDisplayValue()) {
             numberDisplay *= -1
             setDisplay("\(numberDisplay)")
@@ -94,7 +100,6 @@ class CalculatorFloatViewController: FloatViewController {
         let num1 = calc.previousValue
         let num2 = calc.currentValue
         
-        //Calculando Percentagem
         var basePercentage = num1
         if operation != nil {
             basePercentage = num2
@@ -122,9 +127,7 @@ class CalculatorFloatViewController: FloatViewController {
             setOperation(operation)
             makeCalculation()
         }
-        
         isPercentageTapped = true
-        
     }
     
     private func setNumber(_ value: String) {
@@ -182,7 +185,9 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func setDecimalSeparator() {
+        finishedTypingNumber()
         screen.display.setText(getDisplayValue() + setDecimalSeparatorOnDisplay())
+        setNumberToCalculation()
     }
        
     private func isDisplayZero() -> Bool {
@@ -201,32 +206,24 @@ class CalculatorFloatViewController: FloatViewController {
         } else {
             screen.display.setText(value)
         }
-        
-//        if value == NumberFormatterBuilder.get.decimalSeparator {
-//            let valueFormatted = setDecimalSeparatorOnDisplay()
-//            screen.display.setText(getDisplayValue() + valueFormatted)
-//        }
+    }
+    
+    private func finishedTypingNumber() {
+        if isFinishedTypingNumber {
+            clearDisplay()
+            isFinishedTypingNumber = false
+        }
     }
     
     private func setNumberOnDisplay(_ value: String) {
-        if isFinishedTypingNumber {
-            screen.display.setText(value)
-            isFinishedTypingNumber = false
-            return
-        }
+        finishedTypingNumber()
+        
         if isDisplayZero() {
             configDisplayWhenZero(value)
             return
         }
         screen.display.setText(getDisplayValue() + value)
     }
-    
-//    private func isInt(_ value: String) -> Bool {
-//        if let number = Double(value) {
-//            return floor(number) == number
-//        }
-//        return false
-//    }
     
     private func setDecimalSeparatorOnDisplay() -> String {
         isFinishedTypingNumber = false
