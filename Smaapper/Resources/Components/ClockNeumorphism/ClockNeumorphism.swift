@@ -41,7 +41,7 @@ class ClockNeumorphism: ViewBuilder {
     
     private func initialization() {
         addElements()
-        configConstraint()
+        configConstraints()
         startClock()
     }
     
@@ -237,7 +237,7 @@ class ClockNeumorphism: ViewBuilder {
         day.add(insideTo: self.view)
     }
     
-    private func configConstraint() {
+    private func configConstraints() {
         configStackHoursConstraint()
         configTwoPointsConstraint()
         configStackMinutesConstraint()

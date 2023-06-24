@@ -1,13 +1,13 @@
 //
-//  WeatherCoordinator.swift
+//  HangmanCoordinator.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 09/06/23.
+//  Created by Alessandro Comparini on 23/06/23.
 //
 
 import UIKit
 
-class WeatherCoordinator: Coordinator {
+class HangmanCoordinator: Coordinator {
 
     var floatNavigationController: FloatNavigationController
     
@@ -16,8 +16,8 @@ class WeatherCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let controller = WeatherFloatViewController()
-        controller.setCustomAttribute(WeatherFloatViewController.identifierApp)
+        let controller = HangmanFloatViewController()
+        controller.setCustomAttribute(HangmanFloatViewController.identifierApp)
         floatNavigationController.present(controller, where: component )
     }
 

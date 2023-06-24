@@ -53,6 +53,10 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
                 let coodinator = CalculatorCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
+            case HangmanFloatViewController.identifierApp:
+                let coodinator = HangmanCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

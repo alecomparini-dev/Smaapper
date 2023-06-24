@@ -188,7 +188,6 @@ class NeumorphismBuilder {
         return self
     }
     
-    
     private func applyShadow() {
         let (offSetDarkShadow, offSetLightShadow) = self.calculateLightPosition()
         self.applyDarkShadow(offSetDarkShadow)

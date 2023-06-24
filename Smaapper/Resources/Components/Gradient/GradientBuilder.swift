@@ -75,6 +75,12 @@ class GradientBuilder {
         return self
     }
     
+    @discardableResult
+    func setID(_ id: String) -> Self {
+        self.gradient.name = id
+        return self
+    }
+    
     
     
 //  MARK: - Apply Gradient
@@ -133,7 +139,6 @@ class GradientBuilder {
         gradient.maskedCorners = component.layer.maskedCorners
     }
     
-
     private func calculateIndexLayer() -> UInt32 {
         return UInt32(self.component?.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0)
     }
@@ -171,4 +176,13 @@ class GradientBuilder {
     }
     
     
+}
+
+//  MARK: - EXTENSION UIView
+extension UIView {
+    func revemoGradientByID(_ id: String) {
+        if let gradientLayer = self.layer.sublayers?.first(where: { $0.name == id }) {
+            gradientLayer.removeFromSuperlayer()
+        }
+    }
 }
