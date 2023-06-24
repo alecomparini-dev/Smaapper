@@ -92,13 +92,15 @@ class ShadowBuilder {
         return self
     }
     
+    
 //  MARK: - GET Properties
     func getShadowById(_ id: String) -> CALayer? {
-        if let layerToRemove = self.component.layer.sublayers?.first(where: { $0.name == id }) {
-            return layerToRemove
+        if let layer = self.component.layer.sublayers?.first(where: { $0.name == id }) {
+            return layer
         }
         return nil
     }
+    
     
 //  MARK: - APPLY Shadow
     @discardableResult
@@ -171,6 +173,4 @@ extension UIView {
             layerToRemove.removeFromSuperlayer()
         }
     }
-
-    
 }

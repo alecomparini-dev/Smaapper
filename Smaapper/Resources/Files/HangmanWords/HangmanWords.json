@@ -1,0 +1,23 @@
+{
+    "telhado": {
+        "word": ["te", "lha", "do"],
+        "tip" : ["Construção Civil", "Casa tem", "Fica na parte de cima da casa"]
+    },
+    
+    "fotossintese": {
+        "word": ["fo", "to", "ssín", "te", "se"],
+        "tip" : ["Ocorre nos cloroplastos", "Usa energia solar", "As plantas fazem"]
+    },
+    
+    "primavera": {
+        "word": ["pri", "ma", "ve", "ra"],
+        "tip" : ["Estação do ano", "Temperaturas amenas", "Floração de diversas plantas "]
+    },
+    
+    "serendipidade": {
+        "word": ["se", "ren", "di", "pi", "da", "de"],
+        "tip" : ["Foi usado pela primeira vez por Horace Walpole em 1754", "Um termo que descreve uma descoberta feliz e inesperada", "Pode ocorrer quando você encontra algo valioso sem estar procurando"]
+    },
+    
+    
+}

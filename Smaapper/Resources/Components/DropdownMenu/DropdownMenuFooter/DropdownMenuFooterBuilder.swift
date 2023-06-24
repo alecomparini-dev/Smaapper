@@ -97,7 +97,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
     
     private func configDropdownMenuFooter() {
         addElements()
-        configConstraint()
+        configConstraints()
         configCornerRadius()
         configFooter()
         configGradient()
@@ -121,7 +121,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
         
     }
     
-    private func configConstraint() {
+    private func configConstraints() {
         _dropdownFooter.stackView.setConstraints({ build in
             build
                 .setPinBottom.equalToSuperView
