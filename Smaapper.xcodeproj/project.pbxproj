@@ -82,6 +82,7 @@
 		026CF1682A49CBE1009CEE6E /* GallowsKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1672A49CBE1009CEE6E /* GallowsKeyboardView.swift */; };
 		026CF16A2A49D78E009CEE6E /* GallowsLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */; };
 		026CF16E2A4A140B009CEE6E /* GallowsWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */; };
+		026CF1722A4A4832009CEE6E /* GallowsLetterInWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */; };
 		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
@@ -251,6 +252,7 @@
 		026CF1672A49CBE1009CEE6E /* GallowsKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsKeyboardView.swift; sourceTree = "<group>"; };
 		026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterView.swift; sourceTree = "<group>"; };
 		026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsWordView.swift; sourceTree = "<group>"; };
+		026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterInWordView.swift; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
@@ -764,12 +766,13 @@
 			path = DefaultFloatViewButton;
 			sourceTree = "<group>";
 		};
-		026CF16C2A4A13BD009CEE6E /* GallowsWordView */ = {
+		026CF16C2A4A13BD009CEE6E /* GallowsWord */ = {
 			isa = PBXGroup;
 			children = (
 				026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */,
+				026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */,
 			);
-			path = GallowsWordView;
+			path = GallowsWord;
 			sourceTree = "<group>";
 		};
 		026F79782A00775E003947A6 /* DropdownMenu */ = {
@@ -1313,7 +1316,7 @@
 		02FB2CA02A45D7D900C7FC98 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF16C2A4A13BD009CEE6E /* GallowsWordView */,
+				026CF16C2A4A13BD009CEE6E /* GallowsWord */,
 				026CF1662A49CBCB009CEE6E /* GallowsKeyboardView */,
 				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
 				02FB2CA62A45E19D00C7FC98 /* GallowsView */,
@@ -1569,6 +1572,7 @@
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
+				026CF1722A4A4832009CEE6E /* GallowsLetterInWordView.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
