@@ -8,7 +8,7 @@
 import UIKit
 
 class ArmsDownDollView: ViewBuilder {
-    private let hide = false
+    private let hide = true
     
     override init() {
         super.init()

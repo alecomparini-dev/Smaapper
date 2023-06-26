@@ -81,7 +81,7 @@ class GallowsView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setTop.equalTo(topGallows.view, .bottom, -2)
-                    .setHorizontalAlignmentX.equalTo(baseGallows.view, 15)
+                    .setHorizontalAlignmentX.equalTo(baseGallows.view, 10)
                     .setWidth.equalToConstant(3)
                     .setHeight.equalToConstant(23)
             }
