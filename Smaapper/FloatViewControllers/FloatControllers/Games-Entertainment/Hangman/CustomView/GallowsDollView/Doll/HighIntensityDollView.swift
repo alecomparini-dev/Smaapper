@@ -50,30 +50,32 @@ class HighIntensityDollView: ViewBuilder {
 
 //  MARK: - EXTENSION GallowsDollProtocol
 extension HighIntensityDollView: DollProtocol {
+    func firstError() {
+        
+    }
+    
+    func secondError() {
+        
+    }
+    
+    func thirdError() {
+        
+    }
+    
+    func fourthError() {
+        
+    }
+    
+    func fifthError() {
+        
+    }
+    
+    func sixthError() {
+        
+    }
+    
 
-    func head() {
-            
-    }
-    
-    func torso() {
-        
-    }
-    
-    func rightArm() {
-        
-    }
-    
-    func leftArm() {
-        
-    }
-    
-    func rightLeg() {
-        
-    }
-    
-    func leftLeg() {
-        
-    }
+
     
     
 }

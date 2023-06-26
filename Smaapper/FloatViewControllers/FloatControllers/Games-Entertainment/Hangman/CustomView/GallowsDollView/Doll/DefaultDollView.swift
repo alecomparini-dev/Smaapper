@@ -8,6 +8,7 @@
 import UIKit
 
 class DefaultDollView: ViewBuilder {
+    private let hide = false
     
     override init() {
         super.init()
@@ -37,27 +38,30 @@ class DefaultDollView: ViewBuilder {
     lazy var torsoView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(true)
+//            .setHidden(hide)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
+//            .setBackgroundColor(.yellow.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
-                    .setTop.equalToSuperView(20)
+                    .setTop.equalToSuperView(21)
                     .setHorizontalAlignmentX.equalToSuperView
-                    .setWidth.equalToConstant(17)
-                    .setHeight.equalToConstant(35)
+                    .setWidth.equalToConstant(30)
+                    .setHeight.equalToConstant(37)
             }
         return view
     }()
     
     lazy var rightArmView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(false)
+            .setHidden(true)
+            .setHidden(hide)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
 //            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(5)
                     .setLeading.equalToSuperView(5)
-                    .setTrailing.equalTo(torsoView.view, .leading)
+                    .setTrailing.equalTo(torsoView.view, .leading, 6.5)
                     .setHeight.equalToConstant(25)
             }
         return view
@@ -66,12 +70,14 @@ class DefaultDollView: ViewBuilder {
     lazy var leftArmView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(true)
+            .setHidden(hide)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
+//            .setBackgroundColor(.systemPink.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(5)
+                    .setLeading.equalTo(torsoView.view, .trailing, -6.5)
                     .setTrailing.equalToSuperView(-5)
-                    .setWidth.equalToConstant(37)
                     .setHeight.equalToConstant(25)
             }
         return view
@@ -80,13 +86,15 @@ class DefaultDollView: ViewBuilder {
     lazy var rightLegView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(true)
+            .setHidden(hide)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
+//            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
-                    .setTop.equalTo(torsoView.view, .bottom, -2)
+                    .setTop.equalTo(torsoView.view, .bottom)
                     .setLeading.equalToSuperView(5)
-                    .setTrailing.equalTo(torsoView.view, .leading, 15)
-                    .setBottom.equalToSafeArea(-5)
+                    .setTrailing.equalTo(torsoView.view, .leading, 13)
+                    .setBottom.equalToSafeArea
             }
         return view
     }()
@@ -94,13 +102,15 @@ class DefaultDollView: ViewBuilder {
     lazy var leftLegView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(true)
+            .setHidden(hide)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
+//            .setBackgroundColor(.cyan.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
-                    .setTop.equalTo(torsoView.view, .bottom, -2)
-                    .setLeading.equalTo(torsoView.view, .trailing, -15)
-                    .setTrailing.equalToSuperView(5)
-                    .setBottom.equalToSafeArea(-5)
+                    .setTop.equalTo(torsoView.view, .bottom)
+                    .setLeading.equalTo(torsoView.view, .trailing, -13)
+                    .setTrailing.equalToSuperView(-5)
+                    .setBottom.equalToSafeArea
             }
         return view
     }()
@@ -123,10 +133,6 @@ class DefaultDollView: ViewBuilder {
         torsoView.applyConstraint()
         rightLegView.applyConstraint()
         leftLegView.applyConstraint()
-        
-        
-        
-        
     }
     
 }
@@ -134,30 +140,32 @@ class DefaultDollView: ViewBuilder {
 
 //  MARK: - EXTENSION GallowsDollProtocol
 extension DefaultDollView: DollProtocol {
+    func firstError() {
+        
+    }
+    
+    func secondError() {
+        
+    }
+    
+    func thirdError() {
+        
+    }
+    
+    func fourthError() {
+        
+    }
+    
+    func fifthError() {
+        
+    }
+    
+    func sixthError() {
+        
+    }
+    
 
-    func head() {
-            
-    }
-    
-    func torso() {
-        
-    }
-    
-    func rightArm() {
-        
-    }
-    
-    func leftArm() {
-        
-    }
-    
-    func rightLeg() {
-        
-    }
-    
-    func leftLeg() {
-        
-    }
+
     
     
 }
