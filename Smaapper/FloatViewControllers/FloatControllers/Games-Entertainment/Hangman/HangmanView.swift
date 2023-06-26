@@ -77,11 +77,23 @@ class HangmanView: ViewBuilder {
         return img
     }()
     
+    lazy var gallowsWordView: GallowsWordView = {
+        let img = GallowsWordView(["A"])
+//            .setBackgroundColor(.red)
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(painelGallowsView.view, .bottom, 50)
+                    .setLeading.setTrailing.equalToSuperView(15)
+                    .setHeight.equalToConstant(65)
+            }
+        return img
+    }()
+    
     lazy var gallowsKeyboardView: GallowsKeyboardView = {
         let img = GallowsKeyboardView()
             .setConstraints { build in
                 build
-                    .setTop.equalTo(painelGallowsView.view, .bottom, 130)
+                    .setTop.equalTo(gallowsWordView.view, .bottom, 15)
                     .setPinBottom.equalToSuperView(15)
             }
         return img
@@ -119,13 +131,16 @@ class HangmanView: ViewBuilder {
         titleView.add(insideTo: self.view)
         painelGallowsView.add(insideTo: self.view)
         gallowsView.add(insideTo: painelGallowsView.view)
+        gallowsWordView.add(insideTo: self.view)
         gallowsKeyboardView.add(insideTo: self.view)
+        
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         painelGallowsView.applyConstraint()
         gallowsView.applyConstraint()
+        gallowsWordView.applyConstraint()
         gallowsKeyboardView.applyConstraint()
     }
     
