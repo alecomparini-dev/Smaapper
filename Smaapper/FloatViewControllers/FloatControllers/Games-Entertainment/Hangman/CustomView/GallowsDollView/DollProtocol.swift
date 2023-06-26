@@ -8,10 +8,10 @@
 import Foundation
 
 protocol DollProtocol: ViewBuilder {
-    func head()
-    func torso()
-    func rightArm()
-    func leftArm()
-    func rightLeg()
-    func leftLeg()
+    func firstError()
+    func secondError()
+    func thirdError()
+    func fourthError()
+    func fifthError()
+    func sixthError()
 }

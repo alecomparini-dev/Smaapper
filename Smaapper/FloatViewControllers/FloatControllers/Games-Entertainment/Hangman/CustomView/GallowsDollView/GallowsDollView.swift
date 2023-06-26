@@ -48,28 +48,29 @@ class GallowsDollView: ViewBuilder {
 //  MARK: - EXTENSION DollProtocol
 
 extension GallowsDollView: DollProtocol {
-    func head() {
-        self.doll.head()
+
+    func firstError() {
+        self.doll.firstError()
     }
     
-    func torso() {
-        self.doll.torso()
+    func secondError() {
+        self.doll.secondError()
     }
     
-    func rightArm() {
-        self.doll.rightArm()
+    func thirdError() {
+        self.doll.thirdError()
     }
     
-    func leftArm() {
-        self.doll.leftArm()
+    func fourthError() {
+        self.doll.fourthError()
     }
     
-    func rightLeg() {
-        self.doll.rightLeg()
+    func fifthError() {
+        self.doll.fifthError()
     }
     
-    func leftLeg() {
-        self.doll.leftLeg()
+    func sixthError() {
+        self.doll.sixthError()
     }
     
     

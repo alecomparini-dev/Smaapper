@@ -155,7 +155,6 @@
 		02FB2CAB2A45E59A00C7FC98 /* DollProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAA2A45E59A00C7FC98 /* DollProtocol.swift */; };
 		02FB2CAD2A45F18E00C7FC98 /* WaveDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */; };
 		02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */; };
-		02FB2CB12A45F41000C7FC98 /* SnowboardingDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB02A45F41000C7FC98 /* SnowboardingDollView.swift */; };
 		02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB22A46037300C7FC98 /* FallDollView.swift */; };
 		02FB2CB52A46058900C7FC98 /* HighIntensityDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */; };
 /* End PBXBuildFile section */
@@ -322,7 +321,6 @@
 		02FB2CAA2A45E59A00C7FC98 /* DollProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DollProtocol.swift; sourceTree = "<group>"; };
 		02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveDollView.swift; sourceTree = "<group>"; };
 		02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmsDownDollView.swift; sourceTree = "<group>"; };
-		02FB2CB02A45F41000C7FC98 /* SnowboardingDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowboardingDollView.swift; sourceTree = "<group>"; };
 		02FB2CB22A46037300C7FC98 /* FallDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDollView.swift; sourceTree = "<group>"; };
 		02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighIntensityDollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1322,7 +1320,6 @@
 				02FB2CA82A45E26B00C7FC98 /* DefaultDollView.swift */,
 				02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */,
 				02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */,
-				02FB2CB02A45F41000C7FC98 /* SnowboardingDollView.swift */,
 				02FB2CB22A46037300C7FC98 /* FallDollView.swift */,
 				02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */,
 			);
@@ -1552,7 +1549,6 @@
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
-				02FB2CB12A45F41000C7FC98 /* SnowboardingDollView.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				024957F22A420F260077C36D /* Calculation.swift in Sources */,

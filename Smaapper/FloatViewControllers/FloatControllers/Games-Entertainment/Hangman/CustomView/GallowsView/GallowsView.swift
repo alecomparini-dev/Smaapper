@@ -81,9 +81,9 @@ class GallowsView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setTop.equalTo(topGallows.view, .bottom, -2)
-                    .setHorizontalAlignmentX.equalTo(baseGallows.view, 10)
+                    .setHorizontalAlignmentX.equalTo(baseGallows.view, 15)
                     .setWidth.equalToConstant(3)
-                    .setHeight.equalToConstant(30)
+                    .setHeight.equalToConstant(23)
             }
         return view
     }()
@@ -91,15 +91,15 @@ class GallowsView: ViewBuilder {
     lazy var ropeCircleGallows: ImageViewBuilder = {
         let img = UIImage(systemName: "transmission")
         var view = ImageViewBuilder(img)
-            .setHidden(true)
+            .setHidden(false)
             .setContentMode(.redraw)
             .setTintColor(Theme.shared.currentTheme.primary)
             .setConstraints { build in
                 build
                     .setTop.equalTo(ropeGallows.view, .bottom, -2)
-                    .setHorizontalAlignmentX.equalTo(ropeGallows.view, -2)
-                    .setWidth.equalToConstant(20)
-                    .setHeight.equalToConstant(25)
+                    .setHorizontalAlignmentX.equalTo(ropeGallows.view, -1)
+                    .setWidth.equalToConstant(16)
+                    .setHeight.equalToConstant(20)
             }
         return view
     }()
@@ -147,7 +147,7 @@ class GallowsView: ViewBuilder {
             .setConstraints { build in
                 build
                     .setBottom.equalToSuperView
-                    .setLeading.equalToSuperView(10)
+                    .setLeading.equalToSuperView(15)
                     .setTrailing.equalToSuperView(-20)
                     .setHeight.equalToConstant(3)
             }
@@ -155,8 +155,9 @@ class GallowsView: ViewBuilder {
     }()
     
     lazy var gallowsDollView: GallowsDollView = {
-        let doll = GallowsDollView(DefaultDollView())
+        let doll = GallowsDollView(ArmsDownDollView())
             .setHidden(false)
+//            .setHidden(true)
             .setConstraints { build in
                 build
                     .setHorizontalAlignmentX.equalTo(ropeGallows.view)
