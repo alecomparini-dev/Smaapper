@@ -21,12 +21,12 @@ class HangmanView: ViewBuilder {
         initialization()
     }
     
-    
     private func initialization() {
         configStyles()
         addElements()
         configConstraints()
     }
+    
     
     //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
@@ -78,8 +78,7 @@ class HangmanView: ViewBuilder {
     }()
     
     lazy var gallowsWordView: GallowsWordView = {
-        let img = GallowsWordView(["A"])
-//            .setBackgroundColor(.red)
+        let img = GallowsWordView()
             .setConstraints { build in
                 build
                     .setTop.equalTo(painelGallowsView.view, .bottom, 50)
