@@ -40,7 +40,7 @@ class ButtonImageBuilder: ButtonBuilder {
     private func initialization(_ image: UIImageView, _ state: UIControl.State, _ size: CGFloat? = nil) {
         setImageButton(image)
             .setImageSize(size)
-            .setImagePadding(5)
+            .setImagePadding(0)
     }
     
     

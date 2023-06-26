@@ -72,8 +72,6 @@ class CalculatorFloatViewController: FloatViewController {
         if let numberDisplay = sanitizeDouble(number) {
             screen.display.setText(numberFormatter.getString(numberDisplay) ?? "0")
         }
-
-
     }
     
     private func setPlusMinus() {
@@ -286,9 +284,9 @@ extension CalculatorFloatViewController: CalculatorViewDelegate {
 
 
 //  MARK: - EXTENSION CalculatorButtonsViewDelegate
-extension CalculatorFloatViewController: CalculatorButtonsViewDelegate {
+extension CalculatorFloatViewController: CalculatorButtonPanelViewDelegate {
     
-    func calculatorButton(_ button: CalculatorButtonsView.CalculatorButtons) {
+    func calculatorButton(_ button: CalculatorButtonPanelView.CalculatorButtons) {
         
         switch button {
             case .one:

@@ -87,8 +87,8 @@ class CalculatorView: ViewBuilder {
     
     
 //  MARK: - BUTTONS Area
-    lazy var buttonsView: CalculatorButtonsView = {
-        let view = CalculatorButtonsView()
+    lazy var buttonsView: CalculatorButtonPanelView = {
+        let view = CalculatorButtonPanelView()
             .setConstraints { build in
                 build
                     .setTop.equalTo(lineSeparator.view, .bottom, 13)

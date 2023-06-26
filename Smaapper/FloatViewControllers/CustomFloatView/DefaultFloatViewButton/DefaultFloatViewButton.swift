@@ -1,5 +1,5 @@
 //
-//  ButtonLogiView.swift
+//  CalculatorButtonView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 16/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ButtonLogiView: ViewBuilder {
+class DefaultFloatViewButton: ViewBuilder {
     
     private let cornerRadiusOutline: CGFloat = 7
     private let marginInner: CGFloat = 4.0
@@ -73,26 +73,9 @@ class ButtonLogiView: ViewBuilder {
         return view
     }()
     
-    lazy var innerView: ViewBuilder = {
-        let view = ViewBuilder()
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(colorButton)
-                    .setShape(.concave)
-                    .setLightPosition(.rightTop)
-                    .setBlur(percent: 0)
-                    .setDistance(percent: 0)
-//                    .apply()
-            }
-            .setConstraints { build in
-                build
-                    .setPin.equalToSuperView(marginInner)
-            }
-        return view
-    }()
-    
     lazy var button: ButtonImageBuilder = {
         var btn = ButtonImageBuilder(self.image)
+            .setImagePadding(0)
             .setTitle(self.text, .normal)
             .setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
             .setTintColor(Theme.shared.currentTheme.onSurface.adjustBrightness(-20))
@@ -108,27 +91,15 @@ class ButtonLogiView: ViewBuilder {
     }()
     
     
-//  MARK: - SET Properties
-    @discardableResult
-    func configCornerRadiusInnerview(_ cornerRadius: CGFloat) -> Self {
-        innerView.setBorder({ build in
-            build
-                .setCornerRadius(cornerRadius - marginInner)
-        })
-        return self
-    }
-    
     
 //  MARK: - PRIVATE Area
     private func addElements() {
         outlineView.add(insideTo: self.view)
-        innerView.add(insideTo: self.outlineView.view)
-        button.add(insideTo: self.innerView.view)
+        button.add(insideTo: self.outlineView.view)
     }
     
     private func configConstraints() {
         outlineView.applyConstraint()
-        innerView.applyConstraint()
         button.applyConstraint()
     }
     

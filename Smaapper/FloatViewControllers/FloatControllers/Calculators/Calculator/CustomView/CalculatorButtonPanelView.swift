@@ -1,5 +1,5 @@
 //
-//  CalculatorButtonsView.swift
+//  CalculatorButtonPanelViewDelegate.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 16/06/23.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol CalculatorButtonsViewDelegate: AnyObject {
-    func calculatorButton(_ button: CalculatorButtonsView.CalculatorButtons )
+protocol CalculatorButtonPanelViewDelegate: AnyObject {
+    func calculatorButton(_ button: CalculatorButtonPanelView.CalculatorButtons )
 }
 
-class CalculatorButtonsView: ViewBuilder {
+class CalculatorButtonPanelView: ViewBuilder {
     
-    weak var delegate: CalculatorButtonsViewDelegate?
+    weak var delegate: CalculatorButtonPanelViewDelegate?
     
     private let spacingVertical: CGFloat = 5
     private let spacingHorizontal: CGFloat = 10
@@ -67,7 +67,7 @@ class CalculatorButtonsView: ViewBuilder {
         return stack
     }()
     
-    lazy var stackHorizontal1: StackBuilder = {
+    lazy var horizontalStack1: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
             .setSpacing(spacingHorizontal)
@@ -75,7 +75,7 @@ class CalculatorButtonsView: ViewBuilder {
         return stack
     }()
     
-    lazy var stackHorizontal2: StackBuilder = {
+    lazy var horizontalStack2: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
             .setSpacing(spacingHorizontal)
@@ -83,7 +83,7 @@ class CalculatorButtonsView: ViewBuilder {
         return stack
     }()
     
-    lazy var stackHorizontal3: StackBuilder = {
+    lazy var horizontalStack3: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
             .setSpacing(spacingHorizontal)
@@ -91,7 +91,7 @@ class CalculatorButtonsView: ViewBuilder {
         return stack
     }()
     
-    lazy var stackHorizontal4: StackBuilder = {
+    lazy var horizontalStack4: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
             .setSpacing(spacingHorizontal)
@@ -99,7 +99,7 @@ class CalculatorButtonsView: ViewBuilder {
         return stack
     }()
     
-    lazy var stackHorizontal5: StackBuilder = {
+    lazy var horizontalStack5: StackBuilder = {
         let stack = StackBuilder()
             .setAxis(.horizontal)
             .setSpacing(spacingHorizontal)
@@ -213,7 +213,7 @@ class CalculatorButtonsView: ViewBuilder {
     
 //  MARK: - NUMBERS Area
 
-    lazy var number0: ButtonLogiView = {
+    lazy var number0: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "0")
         btn.button.setActions { build in
             build.setTarget(self, #selector(zeroTapped), .touchUpInside)
@@ -221,7 +221,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number1: ButtonLogiView = {
+    lazy var number1: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "1")
         btn.button.setActions { build in
             build.setTarget(self, #selector(oneTapped), .touchUpInside)
@@ -229,7 +229,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number2: ButtonLogiView = {
+    lazy var number2: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "2")
         btn.button.setActions { build in
             build.setTarget(self, #selector(twoTapped), .touchUpInside)
@@ -237,7 +237,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number3: ButtonLogiView = {
+    lazy var number3: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "3")
         btn.button.setActions { build in
             build.setTarget(self, #selector(threeTapped), .touchUpInside)
@@ -245,7 +245,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number4: ButtonLogiView = {
+    lazy var number4: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "4")
         btn.button.setActions { build in
             build.setTarget(self, #selector(fourTapped), .touchUpInside)
@@ -253,7 +253,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number5: ButtonLogiView = {
+    lazy var number5: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "5")
         btn.button.setActions { build in
             build.setTarget(self, #selector(fiveTapped), .touchUpInside)
@@ -261,7 +261,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number6: ButtonLogiView = {
+    lazy var number6: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "6")
         btn.button.setActions { build in
             build.setTarget(self, #selector(sixTapped), .touchUpInside)
@@ -269,7 +269,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number7: ButtonLogiView = {
+    lazy var number7: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "7")
         btn.button.setActions { build in
             build.setTarget(self, #selector(sevenTapped), .touchUpInside)
@@ -277,7 +277,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number8: ButtonLogiView = {
+    lazy var number8: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "8")
         btn.button.setActions { build in
             build.setTarget(self, #selector(eightTapped), .touchUpInside)
@@ -285,7 +285,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var number9: ButtonLogiView = {
+    lazy var number9: DefaultFloatViewButton = {
         let btn = createButtonLogiView(Theme.shared.currentTheme.surfaceContainer, "9")
         btn.button.setActions { build in
             build.setTarget(self, #selector(nineTapped), .touchUpInside)
@@ -296,7 +296,7 @@ class CalculatorButtonsView: ViewBuilder {
     
 //  MARK: - OPERATATION Area
     
-    lazy var addition: ButtonLogiView = {
+    lazy var addition: DefaultFloatViewButton = {
         let img = UIImageView(image: UIImage(systemName: "plus"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
         btn.button.setActions { build in
@@ -305,7 +305,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var subtraction: ButtonLogiView = {
+    lazy var subtraction: DefaultFloatViewButton = {
         let img = UIImageView(image: UIImage(systemName: "minus"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
         btn.button.setActions { build in
@@ -314,7 +314,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var multiplication: ButtonLogiView = {
+    lazy var multiplication: DefaultFloatViewButton = {
         let img = UIImageView(image: UIImage(systemName: "multiply"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
         btn.button.setActions { build in
@@ -323,7 +323,7 @@ class CalculatorButtonsView: ViewBuilder {
         return btn
     }()
     
-    lazy var division: ButtonLogiView = {
+    lazy var division: DefaultFloatViewButton = {
         let img = UIImageView(image: UIImage(systemName: "divide"))
         let btn = createOperationsButtonLogiView(Theme.shared.currentTheme.secondary, img)
         btn.button.setActions { build in
@@ -603,33 +603,32 @@ class CalculatorButtonsView: ViewBuilder {
 
 //  MARK: - PRIVATE Area
 
-    private func createButtonLogiView(_ color: UIColor, _ text: String) -> ButtonLogiView {
-        let btnView = ButtonLogiView(color, text)
+    private func createButtonLogiView(_ color: UIColor, _ text: String) -> DefaultFloatViewButton {
+        let btnView = DefaultFloatViewButton(color, text)
         configButtonLogiView(btnView)
         return btnView
     }
     
-    private func createOperationsButtonLogiView(_ color: UIColor, _ image: UIImageView) -> ButtonLogiView {
-        let btnView = ButtonLogiView(color, image)
+    private func createOperationsButtonLogiView(_ color: UIColor, _ image: UIImageView) -> DefaultFloatViewButton {
+        let btnView = DefaultFloatViewButton(color, image)
         configButtonLogiView(btnView)
         btnView.button.setImageWeight(.bold)
         return btnView
     }
     
-    private func createAuxiliaryButtonLogiView(_ image: UIImageView) -> ButtonLogiView {
-        let btnView = ButtonLogiView(Theme.shared.currentTheme.surfaceContainerHighest, image)
+    private func createAuxiliaryButtonLogiView(_ image: UIImageView) -> DefaultFloatViewButton {
+        let btnView = DefaultFloatViewButton(Theme.shared.currentTheme.surfaceContainerHighest, image)
         configButtonLogiView(btnView)
         return btnView
     }
 
-    private func createAuxiliaryButtonLogiView(_ text: String) -> ButtonLogiView {
-        let btnView = ButtonLogiView(Theme.shared.currentTheme.surfaceContainerHighest, text)
+    private func createAuxiliaryButtonLogiView(_ text: String) -> DefaultFloatViewButton {
+        let btnView = DefaultFloatViewButton(Theme.shared.currentTheme.surfaceContainerHighest, text)
         configButtonLogiView(btnView)
         return btnView
     }
 
-    private func configButtonLogiView(_ btnView: ButtonLogiView) {
-        btnView.configCornerRadiusInnerview(sizeButtons.height/2)
+    private func configButtonLogiView(_ btnView: DefaultFloatViewButton) {
         btnView.setConstraints { build in
             build
                 .setAlignmentCenterXY.equalToSuperView
@@ -653,11 +652,11 @@ class CalculatorButtonsView: ViewBuilder {
 
     private func addStacks() {
         stackVertical.add(insideTo: self.view)
-        stackHorizontal5.add(insideTo: stackVertical.view)
-        stackHorizontal4.add(insideTo: stackVertical.view)
-        stackHorizontal3.add(insideTo: stackVertical.view)
-        stackHorizontal2.add(insideTo: stackVertical.view)
-        stackHorizontal1.add(insideTo: stackVertical.view)
+        horizontalStack5.add(insideTo: stackVertical.view)
+        horizontalStack4.add(insideTo: stackVertical.view)
+        horizontalStack3.add(insideTo: stackVertical.view)
+        horizontalStack2.add(insideTo: stackVertical.view)
+        horizontalStack1.add(insideTo: stackVertical.view)
     }
 
     private func addElementsToViews() {
@@ -696,46 +695,46 @@ class CalculatorButtonsView: ViewBuilder {
     }
     
     private func addViewsToStacks() {
-        addViewsToStackHorizontal5()
-        addViewsToStackHorizontal4()
-        addViewsToStackHorizontal3()
-        addViewsToStackHorizontal2()
-        addViewsToStackHorizontal1()
+        addViewsToHorizontalStack5()
+        addViewsToHorizontalStack4()
+        addViewsToHorizontalStack3()
+        addViewsToHorizontalStack2()
+        addViewsToHorizontalStack1()
     }
 
-    private func addViewsToStackHorizontal5() {
-        viewAC.add(insideTo: stackHorizontal5.view)
-        viewPlusMinus.add(insideTo: stackHorizontal5.view)
-        viewPercentage.add(insideTo: stackHorizontal5.view)
-        viewDivision.add(insideTo: stackHorizontal5.view)
+    private func addViewsToHorizontalStack5() {
+        viewAC.add(insideTo: horizontalStack5.view)
+        viewPlusMinus.add(insideTo: horizontalStack5.view)
+        viewPercentage.add(insideTo: horizontalStack5.view)
+        viewDivision.add(insideTo: horizontalStack5.view)
     }
     
-    private func addViewsToStackHorizontal4() {
-        view7.add(insideTo: stackHorizontal4.view)
-        view8.add(insideTo: stackHorizontal4.view)
-        view9.add(insideTo: stackHorizontal4.view)
-        viewMultiplication.add(insideTo: stackHorizontal4.view)
+    private func addViewsToHorizontalStack4() {
+        view7.add(insideTo: horizontalStack4.view)
+        view8.add(insideTo: horizontalStack4.view)
+        view9.add(insideTo: horizontalStack4.view)
+        viewMultiplication.add(insideTo: horizontalStack4.view)
     }
     
-    private func addViewsToStackHorizontal3() {
-        view4.add(insideTo: stackHorizontal3.view)
-        view5.add(insideTo: stackHorizontal3.view)
-        view6.add(insideTo: stackHorizontal3.view)
-        viewSubtraction.add(insideTo: stackHorizontal3.view)
+    private func addViewsToHorizontalStack3() {
+        view4.add(insideTo: horizontalStack3.view)
+        view5.add(insideTo: horizontalStack3.view)
+        view6.add(insideTo: horizontalStack3.view)
+        viewSubtraction.add(insideTo: horizontalStack3.view)
     }
     
-    private func addViewsToStackHorizontal2() {
-        view1.add(insideTo: stackHorizontal2.view)
-        view2.add(insideTo: stackHorizontal2.view)
-        view3.add(insideTo: stackHorizontal2.view)
-        viewAddition.add(insideTo: stackHorizontal2.view)
+    private func addViewsToHorizontalStack2() {
+        view1.add(insideTo: horizontalStack2.view)
+        view2.add(insideTo: horizontalStack2.view)
+        view3.add(insideTo: horizontalStack2.view)
+        viewAddition.add(insideTo: horizontalStack2.view)
     }
     
-    private func addViewsToStackHorizontal1() {
-        viewDecimalSeparator.add(insideTo: stackHorizontal1.view)
-        view0.add(insideTo: stackHorizontal1.view)
-        viewBackspace.add(insideTo: stackHorizontal1.view)
-        viewEquals.add(insideTo: stackHorizontal1.view)
+    private func addViewsToHorizontalStack1() {
+        viewDecimalSeparator.add(insideTo: horizontalStack1.view)
+        view0.add(insideTo: horizontalStack1.view)
+        viewBackspace.add(insideTo: horizontalStack1.view)
+        viewEquals.add(insideTo: horizontalStack1.view)
     }
     
     private func configNumbersConstraints() {

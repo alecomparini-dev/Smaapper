@@ -22,9 +22,21 @@ class HangmanFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 90, y: 180, width: 270, height: 500))
+        calculatePositionFloatView()
+//        setFrameWindow(CGRect(x: 30, y: 40, width: 290, height: 550))
         setEnabledDraggable(true)
         configDelegate()
+    }
+    
+    private func calculatePositionFloatView() {
+        var y: CGFloat = 30
+        if #available(iOS 11.0, *) {
+            let window = Utils.currentWindow
+            if let topSafeAreaInset = window?.safeAreaInsets.top {
+                y = topSafeAreaInset
+            }
+        }
+        setFrameWindow(CGRect(x: 30, y: y, width: 290, height: 550))
     }
     
     override func viewDidSelectFloatView() {

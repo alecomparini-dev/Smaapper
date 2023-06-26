@@ -30,7 +30,7 @@ class HangmanView: ViewBuilder {
     
     //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: "figure.mixed.cardio", title: "Hangman", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: "", title: "", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -58,7 +58,7 @@ class HangmanView: ViewBuilder {
             }
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleView.view, .bottom, 15)
+                    .setTop.equalTo(titleView.view, .bottom, 5)
                     .setLeading.equalToSuperView(25)
                     .setTrailing.equalToSuperView(-20)
                     .setHeight.equalToConstant(170)
@@ -73,6 +73,16 @@ class HangmanView: ViewBuilder {
                     .setTop.equalToSuperView(13)
                     .setBottom.equalToSuperView(-18)
                     .setLeading.setTrailing.equalToSuperView
+            }
+        return img
+    }()
+    
+    lazy var gallowsKeyboardView: GallowsKeyboardView = {
+        let img = GallowsKeyboardView()
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(painelGallowsView.view, .bottom, 130)
+                    .setPinBottom.equalToSuperView(15)
             }
         return img
     }()
@@ -109,12 +119,14 @@ class HangmanView: ViewBuilder {
         titleView.add(insideTo: self.view)
         painelGallowsView.add(insideTo: self.view)
         gallowsView.add(insideTo: painelGallowsView.view)
+        gallowsKeyboardView.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         painelGallowsView.applyConstraint()
         gallowsView.applyConstraint()
+        gallowsKeyboardView.applyConstraint()
     }
     
     
