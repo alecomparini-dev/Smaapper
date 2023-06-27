@@ -27,7 +27,7 @@ class GallowsLetterInWordView: ViewBuilder {
     
     lazy var label: LabelBuilder = {
         let label = LabelBuilder(letter)
-            .setHidden(true)
+            .setHidden(false)
             .setFont(UIFont.systemFont(ofSize: 20, weight: .regular))
             .setColor(Theme.shared.currentTheme.onSurface)
             .setTextAlignment(.center)

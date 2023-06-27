@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     static let categoriesID = "Categories"
     
     private var dockController = HomeViewDockController()
-    private var indexCloseWin: Int?
+    private var removeDockItemAtFloatViewIndex: Int?
     
     private let viewModel = HomeViewModel()
     private var categoriesVC: CategoriesViewController?
@@ -108,12 +108,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func configRowsHeightOfDropdowMenu() {
-        guard let resultDropdownMenu else {return }
-        let lastSection = resultDropdownMenu.count - 1
-        homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
-    }
-    
     private func populateDropdownMenu() {
         guard let resultDropdownMenu else {return }
         resultDropdownMenu.enumerated().forEach { (index,sectionMenu) in
@@ -138,6 +132,12 @@ class HomeViewController: UIViewController {
             let row: Row = self.createRowView(row)
             homeScreen.dropdownMenu.setRowInSection(section, row)
         }
+    }
+    
+    private func configRowsHeightOfDropdowMenu() {
+        guard let resultDropdownMenu else {return }
+        let lastSection = resultDropdownMenu.count - 1
+        homeScreen.dropdownMenu.setSectionFooterHeight(forSection: lastSection, 1)
     }
     
     private func createRowView(_ row: RowDropdownMenuData) -> Row {
@@ -317,14 +317,14 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     }
     
     func viewWillDisappear(_ floatView: FloatViewController) {
-        self.indexCloseWin = floatManager.getIndex(floatView)
+        self.removeDockItemAtFloatViewIndex = floatManager.getIndex(floatView)
     }
 
     func viewDidDisappear(_ floatView: FloatViewController) {
         dockController.verifyShowDock()
         verifyShowElementsOnScreen()
-        if let indexCloseWin {
-            dockController.removeItem(indexCloseWin)
+        if let removeDockItemAtFloatViewIndex {
+            dockController.removeItem(removeDockItemAtFloatViewIndex)
         }
     }
     

@@ -1,23 +1,357 @@
 {
-    "telhado": {
-        "word": ["te", "lha", "do"],
-        "tip" : ["Construção Civil", "Casa tem", "Fica na parte de cima da casa"]
-    },
-    
-    "fotossintese": {
-        "word": ["fo", "to", "ssín", "te", "se"],
-        "tip" : ["Ocorre nos cloroplastos", "Usa energia solar", "As plantas fazem"]
-    },
-    
-    "primavera": {
-        "word": ["pri", "ma", "ve", "ra"],
-        "tip" : ["Estação do ano", "Temperaturas amenas", "Floração de diversas plantas "]
-    },
-    
-    "serendipidade": {
-        "word": ["se", "ren", "di", "pi", "da", "de"],
-        "tip" : ["Foi usado pela primeira vez por Horace Walpole em 1754", "Um termo que descreve uma descoberta feliz e inesperada", "Pode ocorrer quando você encontra algo valioso sem estar procurando"]
-    },
-    
-    
+    "words": [
+        {
+            "word": "resiliencia",
+            "syllables": [
+                "re",
+                "si",
+                "li",
+                "ên",
+                "ci",
+                "a"
+            ],
+            "subject": "Psicologia",
+            "tip": [
+                "Capacidade de se adaptar e se recuperar diante de adversidades",
+                "Força emocional e mental",
+                "Enfrentar e superar desafios",
+                "Flexibilidade e resistência",
+                "Característica de pessoas resilientes"
+            ]
+        },
+        {
+            "word": "cosmologia",
+            "syllables": [
+                "cos",
+                "mo",
+                "lo",
+                "gi",
+                "a"
+            ],
+            "subject": "Astronomia",
+            "tip": [
+                "Investiga a formação de estrelas, planetas e galáxias",
+                "Explora a expansão do universo",
+                "Estudo da origem, estrutura e evolução do universo",
+                "Pesquisa das teorias do Big Bang e da gravidade",
+                "Compreensão das leis que regem o cosmos"
+            ]
+        },
+        {
+            "word": "equilibrio",
+            "syllables": [
+                "e",
+                "qui",
+                "lí",
+                "bri",
+                "o"
+            ],
+            "subject": "Física",
+            "tip": [
+                "Estado em que as forças se compensam",
+                "Ponto de estabilidade",
+                "Distribuição uniforme de peso",
+                "Condição de repouso ou movimento constante",
+                "Princípio da conservação de energia"
+            ]
+        },
+        {
+            "word": "emancipacao",
+            "syllables": [
+                "e",
+                "man",
+                "ci",
+                "pa",
+                "ção"
+            ],
+            "subject": "Sociologia",
+            "tip": [
+                "Processo de conquista de autonomia e liberdade",
+                "Libertação de restrições e opressões",
+                "Luta por direitos e igualdade",
+                "Romper com dependências e tutelas",
+                "Buscar a própria realização e independência"
+            ]
+        },
+        {
+            "word": "consciencia",
+            "syllables": [
+                "cons",
+                "ci",
+                "ên",
+                "ci",
+                "a"
+            ],
+            "subject": "Filosofia",
+            "tip": [
+                "Percepção e conhecimento de si mesmo e do mundo",
+                "Estado de estar desperto e alerta",
+                "Capacidade de pensar, raciocinar e refletir",
+                "Noção da existência e individualidade",
+                "Reflexão sobre valores e moralidade"
+            ]
+        },
+        {
+            "word": "harmonia",
+            "syllables": [
+                "har",
+                "mo",
+                "ni",
+                "a"
+            ],
+            "subject": "Música",
+            "tip": [
+                "Combinação agradável de sons",
+                "Equilíbrio e proporção entre notas",
+                "Consonância e coerência musical",
+                "Sensação de paz e equilíbrio sonoro",
+                "Relação harmoniosa entre elementos musicais"
+            ]
+        },
+        {
+            "word": "abundancia",
+            "syllables": [
+                "a",
+                "bun",
+                "dân",
+                "ci",
+                "a"
+            ],
+            "subject": "Economia",
+            "tip": [
+                "Grande quantidade ou riqueza de recursos",
+                "Prosperidade e fartura",
+                "Disponibilidade suficiente de bens e serviços",
+                "Estado de plenitude e opulência",
+                "Contraponto à escassez e à falta"
+            ]
+        },
+        {
+            "word": "inovacao",
+            "syllables": [
+                "i",
+                "no",
+                "va",
+                "ção"
+            ],
+            "subject": "Tecnologia",
+            "tip": [
+                "Introdução de novas ideias, métodos ou tecnologias",
+                "Renovação e melhoria de processos",
+                "Criatividade e originalidade",
+                "Estímulo à mudança e ao progresso",
+                "Capacidade de adaptação e reinvenção"
+            ]
+        },
+        {
+            "word": "resistencia",
+            "syllables": [
+                "re",
+                "sis",
+                "tên",
+                "ci",
+                "a"
+            ],
+            "subject": "Engenharia",
+            "tip": [
+                "Capacidade de um material suportar forças e pressões",
+                "Propriedade de não se deformar ou romper facilmente",
+                "Resistência à tração, compressão ou torção",
+                "Característica importante na construção de estruturas",
+                "Medida pela tensão e pela resistência dos materiais"
+            ]
+        },
+        {
+            "word": "globalizacao",
+            "syllables": [
+                "glo",
+                "ba",
+                "li",
+                "za",
+                "ção"
+            ],
+            "subject": "Economia",
+            "tip": [
+                "Integração e interconexão mundial",
+                "Interdependência econômica e cultural entre países",
+                "Expansão de mercados e trocas comerciais",
+                "Fluxo de informações e avanços tecnológicos",
+                "Mundialização dos negócios e das relações sociais"
+            ]
+        },
+        {
+            "word": "quimera",
+            "syllables": [
+                "qui",
+                "me",
+                "ra"
+            ],
+            "subject": "Mitologia",
+            "tip": [
+                "Criatura mítica com partes de diferentes animais",
+                "Representação de ilusão ou fantasia",
+                "Símbolo de algo impossível ou irreal",
+                "Relacionada à imaginação e ao sobrenatural",
+                "Presente em diversas culturas e mitos"
+            ]
+        },
+        {
+            "word": "efêmero",
+            "syllables": [
+                "e",
+                "fê",
+                "me",
+                "ro"
+            ],
+            "subject": "Tempo",
+            "tip": [
+                "De curta duração ou passageiro",
+                "Que dura apenas por um breve período",
+                "Transitório e fugaz",
+                "Relacionado a momentos rápidos e passageiros",
+                "Contraposto à permanência e à eternidade"
+            ]
+        },
+        {
+            "word": "arbítrio",
+            "syllables": [
+                "ar",
+                "bí",
+                "tri",
+                "o"
+            ],
+            "subject": "Filosofia",
+            "tip": [
+                "Liberdade de agir e decidir por si mesmo",
+                "Autonomia e livre vontade",
+                "Capacidade de fazer escolhas conscientes",
+                "Responsabilidade individual",
+                "Contraposto ao determinismo e ao destino"
+            ]
+        },
+        {
+            "word": "proparoxítona",
+            "syllables": [
+                "pro",
+                "pa",
+                "ro",
+                "xí",
+                "to",
+                "na"
+            ],
+            "subject": "Linguística",
+            "tip": [
+                "Palavra com acento tônico na antepenúltima sílaba",
+                "Regra de acentuação gráfica",
+                "Exemplos: ótimo, médico, câmera",
+                "Diferente de oxítona e paroxítona",
+                "Característica da língua portuguesa"
+            ]
+        },
+        {
+            "word": "anacronismo",
+            "syllables": [
+                "a",
+                "na",
+                "cro",
+                "nis",
+                "mo"
+            ],
+            "subject": "História",
+            "tip": [
+                "Erro de colocar algo fora de seu contexto temporal",
+                "Inadequação temporal",
+                "Presença de elementos fora de sua época",
+                "Contraste entre diferentes períodos históricos",
+                "Interpretação anacrônica de fatos ou objetos"
+            ]
+        },
+        {
+            "word": "hegemonia",
+            "syllables": [
+                "he",
+                "ge",
+                "mo",
+                "ni",
+                "a"
+            ],
+            "subject": "Política",
+            "tip": [
+                "Domínio ou supremacia de um grupo sobre outros",
+                "Controle político, econômico ou cultural",
+                "Influência e liderança exercidas por uma nação ou instituição",
+                "Busca de poder e controle de recursos",
+                "Conceito desenvolvido por Antonio Gramsci"
+            ]
+        },
+        {
+            "word": "paradigma",
+            "syllables": [
+                "pa",
+                "ra",
+                "dig",
+                "ma"
+            ],
+            "subject": "Ciência",
+            "tip": [
+                "Modelo, padrão ou exemplo a ser seguido",
+                "Conceito fundamental de uma teoria científica",
+                "Estrutura de pensamento e visão de mundo",
+                "Mudança de paradigma implica em uma transformação profunda",
+                "Termo popularizado por Thomas Kuhn"
+            ]
+        },
+        {
+            "word": "nefelibata",
+            "syllables": [
+                "ne",
+                "fe",
+                "li",
+                "ba",
+                "ta"
+            ],
+            "subject": "Literatura",
+            "tip": [
+                "Aquele que caminha nas nuvens",
+                "Sonhador, idealista",
+                "Indivíduo que vive com a cabeça nas nuvens",
+                "Alguém que busca a liberdade e a fantasia",
+                "Personagem romântico e utópico"
+            ]
+        },
+        {
+            "word": "sagacidade",
+            "syllables": [
+                "sa",
+                "ga",
+                "ci",
+                "da",
+                "de"
+            ],
+            "subject": "Inteligência",
+            "tip": [
+                "Agudeza mental e perspicácia",
+                "Capacidade de raciocínio rápido e astuto",
+                "Inteligência aguçada e observadora",
+                "Habilidade de entender e solucionar problemas",
+                "Qualidade de pessoas astutas e espertas"
+            ]
+        },
+        {
+            "word": "convicção",
+            "syllables": [
+                "con",
+                "vic",
+                "ção"
+            ],
+            "subject": "Psicologia",
+            "tip": [
+                "Certeza profunda e firmeza de pensamento",
+                "Crença forte e inabalável",
+                "Estado de convencimento e confiança",
+                "Sentimento de segurança em uma ideia ou princípio",
+                "Relacionado a valores, ideologias e crenças pessoais"
+            ]
+        }
+    ]
 }

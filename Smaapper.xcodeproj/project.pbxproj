@@ -83,6 +83,10 @@
 		026CF16A2A49D78E009CEE6E /* GallowsLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */; };
 		026CF16E2A4A140B009CEE6E /* GallowsWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */; };
 		026CF1722A4A4832009CEE6E /* GallowsLetterInWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */; };
+		026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1742A4B16D7009CEE6E /* HangmanViewModel.swift */; };
+		026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1772A4B172F009CEE6E /* HangmanService.swift */; };
+		026CF17B2A4B2229009CEE6E /* HangmanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF17A2A4B2229009CEE6E /* HangmanData.swift */; };
+		026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF17C2A4B2238009CEE6E /* HangmanWord.swift */; };
 		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
@@ -253,6 +257,10 @@
 		026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterView.swift; sourceTree = "<group>"; };
 		026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsWordView.swift; sourceTree = "<group>"; };
 		026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterInWordView.swift; sourceTree = "<group>"; };
+		026CF1742A4B16D7009CEE6E /* HangmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanViewModel.swift; sourceTree = "<group>"; };
+		026CF1772A4B172F009CEE6E /* HangmanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanService.swift; sourceTree = "<group>"; };
+		026CF17A2A4B2229009CEE6E /* HangmanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanData.swift; sourceTree = "<group>"; };
+		026CF17C2A4B2238009CEE6E /* HangmanWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanWord.swift; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
@@ -766,13 +774,38 @@
 			path = DefaultFloatViewButton;
 			sourceTree = "<group>";
 		};
-		026CF16C2A4A13BD009CEE6E /* GallowsWord */ = {
+		026CF16C2A4A13BD009CEE6E /* GallowsWordView */ = {
 			isa = PBXGroup;
 			children = (
 				026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */,
 				026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */,
 			);
-			path = GallowsWord;
+			path = GallowsWordView;
+			sourceTree = "<group>";
+		};
+		026CF1732A4B15F7009CEE6E /* Hangman */ = {
+			isa = PBXGroup;
+			children = (
+				026CF1742A4B16D7009CEE6E /* HangmanViewModel.swift */,
+			);
+			path = Hangman;
+			sourceTree = "<group>";
+		};
+		026CF1762A4B1703009CEE6E /* HangmanService */ = {
+			isa = PBXGroup;
+			children = (
+				026CF1772A4B172F009CEE6E /* HangmanService.swift */,
+			);
+			path = HangmanService;
+			sourceTree = "<group>";
+		};
+		026CF1792A4B2211009CEE6E /* HangmanData */ = {
+			isa = PBXGroup;
+			children = (
+				026CF17A2A4B2229009CEE6E /* HangmanData.swift */,
+				026CF17C2A4B2238009CEE6E /* HangmanWord.swift */,
+			);
+			path = HangmanData;
 			sourceTree = "<group>";
 		};
 		026F79782A00775E003947A6 /* DropdownMenu */ = {
@@ -878,6 +911,7 @@
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				026CF1732A4B15F7009CEE6E /* Hangman */,
 				02C5F4402A0BF44400D75D9F /* Home */,
 			);
 			path = ViewModels;
@@ -912,19 +946,20 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		02C5F4432A0BF62500D75D9F /* DropdownMenu */ = {
+		02C5F4432A0BF62500D75D9F /* DropdownMenuData */ = {
 			isa = PBXGroup;
 			children = (
 				02C5F4372A0BE74000D75D9F /* SectionDropdownMenuModel.swift */,
 				02C5F4392A0BE74D00D75D9F /* RowDropdownMenuModel.swift */,
 			);
-			path = DropdownMenu;
+			path = DropdownMenuData;
 			sourceTree = "<group>";
 		};
 		02C5F4442A0BF7C900D75D9F /* Codable */ = {
 			isa = PBXGroup;
 			children = (
-				02C5F4432A0BF62500D75D9F /* DropdownMenu */,
+				026CF1792A4B2211009CEE6E /* HangmanData */,
+				02C5F4432A0BF62500D75D9F /* DropdownMenuData */,
 			);
 			path = Codable;
 			sourceTree = "<group>";
@@ -932,6 +967,7 @@
 		02C5F4452A0C1A7200D75D9F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				026CF1762A4B1703009CEE6E /* HangmanService */,
 				02C5F4462A0C1A8800D75D9F /* HomeService */,
 				02C5F4492A0C1B1700D75D9F /* GenericService.swift */,
 			);
@@ -1316,7 +1352,7 @@
 		02FB2CA02A45D7D900C7FC98 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF16C2A4A13BD009CEE6E /* GallowsWord */,
+				026CF16C2A4A13BD009CEE6E /* GallowsWordView */,
 				026CF1662A49CBCB009CEE6E /* GallowsKeyboardView */,
 				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
 				02FB2CA62A45E19D00C7FC98 /* GallowsView */,
@@ -1475,6 +1511,7 @@
 				02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
 				020D0E5F2A1ECD0A007F3992 /* DropdownMenuActions.swift in Sources */,
+				026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				02FB2CA42A45E11300C7FC98 /* GallowsDollView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
@@ -1494,6 +1531,7 @@
 				026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */,
 				02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
+				026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */,
 				02E974412A37D25600BF14EE /* QuizView.swift in Sources */,
@@ -1521,6 +1559,7 @@
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				02FB2C972A45C33900C7FC98 /* HangmanView.swift in Sources */,
 				0234A91729F9FD3A008392EC /* tests.swift in Sources */,
+				026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
@@ -1588,6 +1627,7 @@
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
 				026C147D2A3CF34900F8D3E6 /* CalculatorButtonPanelView.swift in Sources */,
 				024957E62A41F6670077C36D /* CalculatorOperationProtocol.swift in Sources */,
+				026CF17B2A4B2229009CEE6E /* HangmanData.swift in Sources */,
 				02C5F4382A0BE74000D75D9F /* SectionDropdownMenuModel.swift in Sources */,
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,

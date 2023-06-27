@@ -50,6 +50,7 @@ class GallowsWordView: ViewBuilder {
     
     lazy var horizontalStack2: StackBuilder = {
         let stack = StackBuilder()
+            .setHidden(true)
             .setAxis(.horizontal)
             .setAlignment(.center)
             .setSpacing(spacingHorizontal)
@@ -60,15 +61,15 @@ class GallowsWordView: ViewBuilder {
     
 //  MARK: - SET PROPERTIES
     
-    func createWord(_ word: [String]) -> [GallowsLetterInWordView] {
+    func createWord(_ word: String) -> [GallowsLetterInWordView] {
         var letters: [GallowsLetterInWordView] = []
         word.forEach { letter in
-            letters.append(createLetter(letter))
+            letters.append(createLetter(String(letter)))
         }
         return letters
     }
     
-    func insertLetterInStack(_ letter: ViewBuilder, _ horizontalStack: StackBuilder) {
+    func insertLetterInStack(_ letter: GallowsLetterInWordView, _ horizontalStack: StackBuilder) {
         letter.add(insideTo: horizontalStack.view)
         letter.applyConstraint()
     }
@@ -79,7 +80,7 @@ class GallowsWordView: ViewBuilder {
         space.applyConstraint()
     }
 
-    func revealLetterInWord(_ letter: String) {
+    func revealLetterInWord(_ letter: GallowsLetterInWordView) {
         
     }
     
@@ -106,7 +107,6 @@ class GallowsWordView: ViewBuilder {
                     .setWidth.equalToConstant(22)
                     .setHeight.equalToConstant(26)
             }
-        
         return letter
     }
     
