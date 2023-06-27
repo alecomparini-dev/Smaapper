@@ -11,6 +11,8 @@ class GallowsKeyboardView: ViewBuilder {
     
     private let spacingHorizontal: CGFloat = 8
     
+    private let lettersOfKeyboard: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç"]
+    
     override init() {
         super.init()
         initialization()
@@ -100,144 +102,6 @@ class GallowsKeyboardView: ViewBuilder {
         return stack
     }()
     
-
-//  MARK: - LAZY WORDS Area
-    
-    lazy var letterA: GallowsLetterView = {
-        let letter = getGallowsLetterView("A")
-        return letter
-    }()
-    
-    lazy var letterB: GallowsLetterView = {
-        let letter = getGallowsLetterView("B")
-        return letter
-    }()
-    
-    lazy var letterC: GallowsLetterView = {
-        let letter = getGallowsLetterView("C")
-        return letter
-    }()
-    
-    lazy var letterD: GallowsLetterView = {
-        let letter = getGallowsLetterView("D")
-        return letter
-    }()
-    
-    lazy var letterE: GallowsLetterView = {
-        let letter = getGallowsLetterView("E")
-        return letter
-    }()
-    
-    lazy var letterF: GallowsLetterView = {
-        let letter = getGallowsLetterView("F")
-        return letter
-    }()
-    
-    lazy var letterG: GallowsLetterView = {
-        let letter = getGallowsLetterView("G")
-        return letter
-    }()
-    
-    lazy var letterH: GallowsLetterView = {
-        let letter = getGallowsLetterView("H")
-        return letter
-    }()
-    
-    lazy var letterI: GallowsLetterView = {
-        let letter = getGallowsLetterView("I")
-        return letter
-    }()
-    
-    lazy var letterJ: GallowsLetterView = {
-        let letter = getGallowsLetterView("J")
-        return letter
-    }()
-    
-    lazy var letterK: GallowsLetterView = {
-        let letter = getGallowsLetterView("K")
-        return letter
-    }()
-    
-    lazy var letterL: GallowsLetterView = {
-        let letter = getGallowsLetterView("L")
-        return letter
-    }()
-    
-    lazy var letterM: GallowsLetterView = {
-        let letter = getGallowsLetterView("M")
-        return letter
-    }()
-    
-    lazy var letterN: GallowsLetterView = {
-        let letter = getGallowsLetterView("N")
-        return letter
-    }()
-    
-    lazy var letterO: GallowsLetterView = {
-        let letter = getGallowsLetterView("O")
-        return letter
-    }()
-    
-    lazy var letterP: GallowsLetterView = {
-        let letter = getGallowsLetterView("P")
-        return letter
-    }()
-    
-    lazy var letterQ: GallowsLetterView = {
-        let letter = getGallowsLetterView("Q")
-        return letter
-    }()
-    
-    lazy var letterR: GallowsLetterView = {
-        let letter = getGallowsLetterView("R")
-        return letter
-    }()
-    
-    lazy var letterS: GallowsLetterView = {
-        let letter = getGallowsLetterView("S")
-        return letter
-    }()
-    
-    lazy var letterT: GallowsLetterView = {
-        let letter = getGallowsLetterView("T")
-        return letter
-    }()
-    
-    lazy var letterU: GallowsLetterView = {
-        let letter = getGallowsLetterView("U")
-        return letter
-    }()
-    
-    lazy var letterV: GallowsLetterView = {
-        let letter = getGallowsLetterView("V")
-        return letter
-    }()
-    
-    lazy var letterW: GallowsLetterView = {
-        let letter = getGallowsLetterView("W")
-        return letter
-    }()
-    
-    lazy var letterX: GallowsLetterView = {
-        let letter = getGallowsLetterView("X")
-        return letter
-    }()
-    
-    lazy var letterY: GallowsLetterView = {
-        let letter = getGallowsLetterView("Y")
-        return letter
-    }()
-    
-    lazy var letterZ: GallowsLetterView = {
-        let letter = getGallowsLetterView("Z")
-        return letter
-    }()
-    
-    lazy var letterCedilha: GallowsLetterView = {
-        let letter = getGallowsLetterView("Ç")
-        return letter
-    }()
-
     
 //  MARK: - LAZY HINT
 
@@ -254,6 +118,11 @@ class GallowsKeyboardView: ViewBuilder {
     private func addElements() {
         addStackElements()
         addLetterToHorizontalStacks()
+        addHintToRightHorizontalStack1()
+    }
+    
+    private func addHintToRightHorizontalStack1() {
+        hintButton.add(insideTo: rightHorizontalStack1.view)
     }
     
     private func addStackElements() {
@@ -268,61 +137,39 @@ class GallowsKeyboardView: ViewBuilder {
     }
     
     private func addLetterToHorizontalStacks() {
-        addWordsToHorizontalStack5()
-        addWordsToHorizontalStack4()
-        addWordsToHorizontalStack3()
-        addWordsToHorizontalStack2()
-        addWordsToHorizontalStack1()
+        lettersOfKeyboard.enumerated().forEach { index,letter in
+            switch index {
+            case 0...5:
+                addLetterToHorizontalStack(letter, stack: horizontalStack5)
+            
+            case 6...11:
+                addLetterToHorizontalStack(letter, stack: horizontalStack4)
+                
+            case 12...17:
+                addLetterToHorizontalStack(letter, stack: horizontalStack3)
+                
+            case 18...23:
+                addLetterToHorizontalStack(letter, stack: horizontalStack2)
+                
+            case 24...26:
+                addLetterToHorizontalStack(letter, stack: leftHorizontalStack1)
+                
+            default:
+                break
+            }
+        }
     }
     
-    private func addWordsToHorizontalStack5() {
-        letterA.add(insideTo: horizontalStack5.view)
-        letterB.add(insideTo: horizontalStack5.view)
-        letterC.add(insideTo: horizontalStack5.view)
-        letterD.add(insideTo: horizontalStack5.view)
-        letterE.add(insideTo: horizontalStack5.view)
-        letterF.add(insideTo: horizontalStack5.view)
+    private func addLetterToHorizontalStack(_ letter: String, stack: StackBuilder) {
+        let letterView = createGallowsLetterView(letter)
+        letterView.add(insideTo: stack.view)
     }
     
-    private func addWordsToHorizontalStack4() {
-        letterG.add(insideTo: horizontalStack4.view)
-        letterH.add(insideTo: horizontalStack4.view)
-        letterI.add(insideTo: horizontalStack4.view)
-        letterJ.add(insideTo: horizontalStack4.view)
-        letterK.add(insideTo: horizontalStack4.view)
-        letterL.add(insideTo: horizontalStack4.view)
-    }
-    
-    private func addWordsToHorizontalStack3() {
-        letterM.add(insideTo: horizontalStack3.view)
-        letterN.add(insideTo: horizontalStack3.view)
-        letterO.add(insideTo: horizontalStack3.view)
-        letterP.add(insideTo: horizontalStack3.view)
-        letterQ.add(insideTo: horizontalStack3.view)
-        letterR.add(insideTo: horizontalStack3.view)
-    }
-    
-    private func addWordsToHorizontalStack2() {
-        letterS.add(insideTo: horizontalStack2.view)
-        letterT.add(insideTo: horizontalStack2.view)
-        letterU.add(insideTo: horizontalStack2.view)
-        letterV.add(insideTo: horizontalStack2.view)
-        letterW.add(insideTo: horizontalStack2.view)
-        letterX.add(insideTo: horizontalStack2.view)
-    }
-    
-    private func addWordsToHorizontalStack1() {
-        letterY.add(insideTo: leftHorizontalStack1.view)
-        letterZ.add(insideTo: leftHorizontalStack1.view)
-        letterCedilha.add(insideTo: leftHorizontalStack1.view)
-        hintButton.add(insideTo: rightHorizontalStack1.view)
-    }
-
     private func configConstraints() {
         verticalStack.applyConstraint()
     }
 
-    private func getGallowsLetterView(_ text: String) -> GallowsLetterView {
+    private func createGallowsLetterView(_ text: String) -> GallowsLetterView {
         let letter = GallowsLetterView(text, Theme.shared.currentTheme.surfaceContainer)
         letter.gallowsLetter.button.setTitleSize(14)
         return letter
