@@ -17,9 +17,6 @@ class GallowsWordView: ViewBuilder {
     override init() {
         super.init()
         initialization()
-        
-        deletar()
-        
     }
     
     private func initialization() {
@@ -122,65 +119,6 @@ class GallowsWordView: ViewBuilder {
             }
         return space
     }
-    
-    
-    
-    
-    private func deletar() {
-        let letters = createWord(["A","L","E","S", "S","A","N", "D","R","O", "L","U","I","Z" ])
-        
-        letters.enumerated().forEach { (index,letter) in
-            if index < 10 {
-                insertLetterInStack(letter, horizontalStack1)
-            } else {
-                insertLetterInStack(letter, horizontalStack2)
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2 ) {
-            letters[4].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-            letters[4].label.setHidden(false)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2 ) {
-                letters[7].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-                letters[7].label.setHidden(false)
-                
-            }
-            
-        }
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6 ) {
-            letters[1].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-            letters[1].label.setHidden(false)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1 ) {
-                letters[10].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-                letters[10].label.setHidden(false)
-                
-            }
-            
-        }
-        
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12 ) {
-            letters[8].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-            letters[8].label.setHidden(false)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2 ) {
-                letters[3].underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
-                letters[3].label.setHidden(false)
-                
-            }
-            
-        }
-
-
-
-        
-    }
-    
-    
     
     
 }
