@@ -9,7 +9,7 @@ import UIKit
 
 class ViewBuilder: BaseBuilder {
     
-    private var actions: ViewActions?
+    private(set) var actions: ViewActions?
     private var _view: View
     
     var view: View {

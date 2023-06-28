@@ -49,6 +49,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func configDelegate() {
         screen.delegate = self
+        screen.gallowsKeyboardView.delegate = self
     }
     
     private func setShadow() {
@@ -76,7 +77,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func getIndexOfLastPlayedWord() {
         // Implementar
-        self.lastPlayedWord = ""
+        self.lastPlayedWord = "arbitrio"
         fetchWords()
     }
     
@@ -98,6 +99,12 @@ class HangmanFloatViewController: FloatViewController {
         let word = hangmanWord[currentIndexPlayedWord]
         let letters: [GallowsLetterInWordView] = screen.gallowsWordView.createWord(word.syllables.joined().uppercased())
         positionLetters(letters)
+        setTipLabel()
+    }
+    
+    private func setTipLabel() {
+        let tip = hangmanWord[currentIndexPlayedWord].subject
+        screen.tipDescriptionLabel.setText(tip)
     }
     
     private func isLastWordByIndex(_ index: Int) -> Bool {
@@ -129,7 +136,6 @@ class HangmanFloatViewController: FloatViewController {
         screen.gallowsWordView.insertLetterInStack(letter, screen.gallowsWordView.horizontalStack2)
     }
     
-    
     private func calculateIndexToBreakLine() -> Int {
         if hangmanWord[currentIndexPlayedWord].word.count <= quantityLetterByLine {return quantityLetterByLine}
         let syllabesWord = hangmanWord[currentIndexPlayedWord].syllables
@@ -141,6 +147,14 @@ class HangmanFloatViewController: FloatViewController {
             return result
         }
         return indexToBreakLine
+    }
+    
+    private func verifyMatchToGallowsWord(_ letter: String) -> [Int] {
+        let currentWord = hangmanWord[currentIndexPlayedWord].syllables.joined().folding(options: .diacriticInsensitive, locale: nil)
+        let indices = currentWord.enumerated().compactMap { index,char in
+            return (char == Character(letter.lowercased())) ? index : nil
+        }
+        return indices
     }
     
 }
@@ -161,4 +175,14 @@ extension HangmanFloatViewController: HangmanViewDelegate {
     
 }
 
+
+//  MARK: - EXTENSION GallowsKeyboardViewDelegate
+extension HangmanFloatViewController: GallowsKeyboardViewDelegate {
+    func letterKeyboardTapped(_ letter: String) {
+        let matchIndex = verifyMatchToGallowsWord(letter)
+        
+        print(matchIndex)
+    }
+    
+}
 
