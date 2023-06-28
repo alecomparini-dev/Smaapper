@@ -7,10 +7,14 @@
 
 import UIKit
 
+protocol GallowsKeyboardViewDelegate: AnyObject {
+    func letterKeyboardTapped(_ letter: String)
+}
+
 class GallowsKeyboardView: ViewBuilder {
+    weak var delegate: GallowsKeyboardViewDelegate?
     
     private let spacingHorizontal: CGFloat = 8
-    
     private let lettersOfKeyboard: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç"]
     
     override init() {
@@ -106,9 +110,10 @@ class GallowsKeyboardView: ViewBuilder {
 //  MARK: - LAZY HINT
 
     lazy var hintButton: DefaultFloatViewButton = {
-        let btn = DefaultFloatViewButton(Theme.shared.currentTheme.tertiary, "Hint")
+        let btn = DefaultFloatViewButton(Theme.shared.currentTheme.tertiary, "More tip ...")
         btn.button.setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTintColor(Theme.shared.currentTheme.onPrimary)
+            .setTitleSize(14)
         return btn
     }()
     
@@ -172,8 +177,16 @@ class GallowsKeyboardView: ViewBuilder {
     private func createGallowsLetterView(_ text: String) -> GallowsLetterView {
         let letter = GallowsLetterView(text, Theme.shared.currentTheme.surfaceContainer)
         letter.gallowsLetter.button.setTitleSize(14)
+        letter.gallowsLetter.button.setActions { build in
+            build
+                .setTarget(self, #selector(letterTapped), .touchUpInside)
+        }
         return letter
     }
     
+    @objc private func letterTapped(_ sender: UIButton) {
+        delegate?.letterKeyboardTapped(sender.titleLabel?.text ?? "")
+    }
     
 }
+

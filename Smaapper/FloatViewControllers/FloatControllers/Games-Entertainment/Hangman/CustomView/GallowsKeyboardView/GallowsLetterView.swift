@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class GallowsLetterView: ViewBuilder {
     
     private let text: String

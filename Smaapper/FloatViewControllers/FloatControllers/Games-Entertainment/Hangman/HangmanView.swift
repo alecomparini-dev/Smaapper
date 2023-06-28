@@ -65,7 +65,7 @@ class HangmanView: ViewBuilder {
             }
         return view
     }()
-    
+
     lazy var gallowsView: GallowsView = {
         let img = GallowsView()
             .setConstraints { build in
@@ -73,6 +73,18 @@ class HangmanView: ViewBuilder {
                     .setTop.equalToSuperView(13)
                     .setBottom.equalToSuperView(-18)
                     .setLeading.setTrailing.equalToSuperView
+            }
+        return img
+    }()
+ 
+    lazy var tipDescriptionLabel: LabelBuilder = {
+        let img = LabelBuilder()
+            .setColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setTextAlignment(.center)
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(painelGallowsView.view, .bottom, 13)
+                    .setLeading.setTrailing.equalToSuperView(15)
             }
         return img
     }()
@@ -130,14 +142,15 @@ class HangmanView: ViewBuilder {
         titleView.add(insideTo: self.view)
         painelGallowsView.add(insideTo: self.view)
         gallowsView.add(insideTo: painelGallowsView.view)
+        tipDescriptionLabel.add(insideTo: self.view)
         gallowsWordView.add(insideTo: self.view)
         gallowsKeyboardView.add(insideTo: self.view)
-        
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         painelGallowsView.applyConstraint()
+        tipDescriptionLabel.applyConstraint()
         gallowsView.applyConstraint()
         gallowsWordView.applyConstraint()
         gallowsKeyboardView.applyConstraint()

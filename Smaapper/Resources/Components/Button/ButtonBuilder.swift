@@ -13,7 +13,7 @@ class ButtonBuilder: BaseBuilder {
     
     private var _config = UIButton.Configuration.plain()
     private var titleWeight: UIFont.Weight = .regular
-    private var actions: ButtonActions?
+    private(set) var actions: ButtonActions?
     
     private var button: Button
     var view: Button { self.button }

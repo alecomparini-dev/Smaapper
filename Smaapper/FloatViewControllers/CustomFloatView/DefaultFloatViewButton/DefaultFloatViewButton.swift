@@ -91,7 +91,6 @@ class DefaultFloatViewButton: ViewBuilder {
     }()
     
     
-    
 //  MARK: - PRIVATE Area
     private func addElements() {
         outlineView.add(insideTo: self.view)
