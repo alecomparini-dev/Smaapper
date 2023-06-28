@@ -1,5 +1,5 @@
 //
-//  GallowsLetterInWordView.swift
+//  HangmanLetterInWordView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 26/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GallowsLetterInWordView: ViewBuilder {
+class HangmanLetterInWordView: ViewBuilder {
     
     private let letter: String
     

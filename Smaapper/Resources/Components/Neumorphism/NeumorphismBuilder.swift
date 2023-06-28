@@ -30,6 +30,10 @@ class NeumorphismBuilder {
     }
     
     
+    private let darkShadowID = "darkShadowID"
+    private let lightShadowID = "lightShadowID"
+    private let shapeID = "shapeID"
+    
     private let lightShadeColorPercentage: CGFloat = 60
     private let darkShadeColorPercentage: CGFloat = -85
     private let lightShapeColorByColorReferencePercentage: CGFloat = 70
@@ -63,7 +67,6 @@ class NeumorphismBuilder {
    
     
 //  MARK: - SET Properties
-
     @discardableResult
     func setReferenceColor(_ color: UIColor) -> Self {
         self.referenceColor = color
@@ -182,9 +185,10 @@ class NeumorphismBuilder {
 //  MARK: - APPLY Neumorphis
     @discardableResult
     func apply() -> Self {
+        self.removeNeumorphism()
         self.calculateShadeColorByColorReference()
-            self.applyShadow()
-            self.applyShape()
+        self.applyShadow()
+        self.applyShape()
         return self
     }
     
@@ -194,6 +198,15 @@ class NeumorphismBuilder {
         self.applyLightShadow(offSetLightShadow)
         
     }
+    
+    
+//  MARK: - ACTION
+    func removeNeumorphism() {
+        self.component.removeShadowByID(darkShadowID)
+        self.component.removeShadowByID(lightShadowID)
+        self.component.removeGradientByID(shapeID)
+    }
+    
     
 //  MARK: - Private Function Area
     private func validatePercent(_ property: String , _ percent: CGFloat, _ defaultPercent: CGFloat ) -> Bool {
@@ -245,6 +258,7 @@ class NeumorphismBuilder {
                     .setOffset(offSetDarkShadow)
                     .setOpacity(self.darkShadowIntensity)
                     .setRadius(self.darkShadowBlur)
+                    .setID(darkShadowID)
                     .apply()
             }
     }
@@ -256,6 +270,7 @@ class NeumorphismBuilder {
                     .setOffset(offSetLightShadow)
                     .setOpacity(self.lightShadowIntensity)
                     .setRadius(self.lightShadowBlur)
+                    .setID(lightShadowID)
                     .apply()
             }
     }
@@ -311,6 +326,7 @@ class NeumorphismBuilder {
                 build
                     .setGradientColors(color)
                     .setAxialGradient(self.calculateGradientDirection())
+                    .setID(shapeID)
                     .apply()
             }
     }
@@ -327,7 +343,6 @@ class NeumorphismBuilder {
                 return .rightBottomToLeftTop
         }
     }
-    
     
     private func setShapeConcave() {
         let (dark,light) = getShapeColorByColorReference()

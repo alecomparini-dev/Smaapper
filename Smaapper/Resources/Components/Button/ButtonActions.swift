@@ -10,6 +10,7 @@ import UIKit
 
 class ButtonActions: BaseActions {
     
+    
     private let buttonBuilder: ButtonBuilder
     
     init(_ buttonBuilder: ButtonBuilder) {
@@ -25,5 +26,6 @@ class ButtonActions: BaseActions {
         self.buttonBuilder.view.addTarget(target, action: action, for: event )
         return self
     }
+    
     
 }

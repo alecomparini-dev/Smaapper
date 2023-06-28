@@ -17,6 +17,7 @@ class Button: UIButton {
             disableButton(isEnabled)
         }
     }
+
     
 //  MARK: - GET Properties
     var activateDisabledButton: Bool {

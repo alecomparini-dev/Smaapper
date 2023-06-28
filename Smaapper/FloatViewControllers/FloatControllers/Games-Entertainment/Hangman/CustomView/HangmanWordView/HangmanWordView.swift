@@ -1,5 +1,5 @@
 //
-//  GallowsWordView.swift
+//  HangmanWordView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 26/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GallowsWordView: ViewBuilder {
+class HangmanWordView: ViewBuilder {
     
     private let spacingHorizontal: CGFloat = 2
     private let spacingVertical: CGFloat = 0
@@ -61,15 +61,15 @@ class GallowsWordView: ViewBuilder {
     
 //  MARK: - SET PROPERTIES
     
-    func createWord(_ word: String) -> [GallowsLetterInWordView] {
-        var letters: [GallowsLetterInWordView] = []
+    func createWord(_ word: String) -> [HangmanLetterInWordView] {
+        var letters: [HangmanLetterInWordView] = []
         word.forEach { letter in
             letters.append(createLetter(String(letter)))
         }
         return letters
     }
     
-    func insertLetterInStack(_ letter: GallowsLetterInWordView, _ horizontalStack: StackBuilder) {
+    func insertLetterInStack(_ letter: HangmanLetterInWordView, _ horizontalStack: StackBuilder) {
         letter.add(insideTo: horizontalStack.view)
         letter.applyConstraint()
     }
@@ -80,7 +80,7 @@ class GallowsWordView: ViewBuilder {
         space.applyConstraint()
     }
 
-    func revealLetterInWord(_ letter: GallowsLetterInWordView) {
+    func revealLetterInWord(_ letter: HangmanLetterInWordView) {
         
     }
     
@@ -100,8 +100,8 @@ class GallowsWordView: ViewBuilder {
         verticalStack.applyConstraint()
     }
     
-    private func createLetter(_ text: String) -> GallowsLetterInWordView {
-        let letter = GallowsLetterInWordView(text)
+    private func createLetter(_ text: String) -> HangmanLetterInWordView {
+        let letter = HangmanLetterInWordView(text)
             .setConstraints { build in
                 build
                     .setWidth.equalToConstant(22)

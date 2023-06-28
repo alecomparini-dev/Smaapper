@@ -1,5 +1,5 @@
 //
-//  GallowsWordView.swift
+//  HangmanKeyboardLetterView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 26/06/23.
@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol HangmanKeyboardLetterViewDelegate: AnyObject {
+    func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView)
+}
 
-class GallowsLetterView: ViewBuilder {
+
+class HangmanKeyboardLetterView: ViewBuilder {
+    weak var delegate: HangmanKeyboardLetterViewDelegate?
     
-    private let text: String
     private let color: UIColor
+    private(set) var text: String
+    private(set) var buttonInteration: ButtonInteractionView?
     
     init(_ text: String, _ color: UIColor) {
         self.text = text
@@ -23,6 +29,7 @@ class GallowsLetterView: ViewBuilder {
     private func initialization() {
         addElements()
         configConstraints()
+        configButtonInteraction()
     }
     
     
@@ -34,10 +41,20 @@ class GallowsLetterView: ViewBuilder {
                 build
                     .setPin.equalToSuperView
             }
+        button.button.setActions { build in
+            build
+                .setTarget(self, #selector(letterTapped), .touchUpInside)
+        }
         return button
     }()
     
 
+//  MARK: - SET Properties
+    @objc private func letterTapped(_ sender: UIButton) {
+        delegate?.letterKeyboardTapped(self)
+    }
+    
+    
 //  MARK: - PRIVATE Area
     private func addElements() {
         gallowsLetter.add(insideTo: self.view)
@@ -45,6 +62,11 @@ class GallowsLetterView: ViewBuilder {
     
     private func configConstraints() {
         gallowsLetter.applyConstraint()
+    }
+    
+    private func configButtonInteraction() {
+        self.buttonInteration = ButtonInteractionView(self.gallowsLetter.outlineView.view)
+        
     }
     
 }

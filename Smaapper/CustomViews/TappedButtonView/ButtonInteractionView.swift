@@ -7,8 +7,8 @@
 
 import UIKit
 
-class TappedButtonView: UIView {
-    private let identifier =  String(describing: TappedButtonView.self)
+class ButtonInteractionView: UIView {
+    private let identifier =  String(describing: ButtonInteractionView.self)
     private let keyPath = "shadowOpacity"
     
     private var shadowTapped: ShadowBuilder?
@@ -17,6 +17,8 @@ class TappedButtonView: UIView {
     private let component: UIView
     
     private(set) var isPressed: Bool = false
+    private var colorInteraction: UIColor = Theme.shared.currentTheme.primary.adjustBrightness(20)
+    private var enabledInteraction: Bool = true
     
     init(_ component: UIView) {
         self.component = component
@@ -27,7 +29,25 @@ class TappedButtonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//  MARK: - SET Properties
+    @discardableResult
+    func setColor(_ color: UIColor ) -> Self {
+        self.colorInteraction = color
+        return self
+    }
+    
+    @discardableResult
+    func setEnabledInteraction(_ enabled: Bool) -> Self {
+        self.enabledInteraction = enabled
+        return self
+    }
+    
+    
+    
+//  MARK: - ACTIONS
+    
     var tapped: Void {
+        if !enabledInteraction {return}
         createShadowTapped()
         createAnimation()
         setDelegate()
@@ -36,12 +56,17 @@ class TappedButtonView: UIView {
     }
     
     var pressed: Void {
+        if !enabledInteraction {return}
+        if isPressed {return}
         isPressed = true
+        createShadowTapped()
         return
     }
     
     var unpressed: Void {
+        if !enabledInteraction {return}
         isPressed = false
+        removeShadowTapped()
         return
     }
     
@@ -53,7 +78,7 @@ class TappedButtonView: UIView {
     
     private func createShadowTapped() {
         shadowTapped = ShadowBuilder(self.component)
-                .setColor(Theme.shared.currentTheme.primary.adjustBrightness(20))
+                .setColor(colorInteraction)
                 .setOffset(width: 0, height: 0)
                 .setOpacity(1)
                 .setRadius(2)
@@ -89,7 +114,7 @@ class TappedButtonView: UIView {
 
 
 //  MARK: - EXTENSION CAAnimationDelegate
-extension TappedButtonView: CAAnimationDelegate {
+extension ButtonInteractionView: CAAnimationDelegate {
     
     func animationDidStart(_ anim: CAAnimation) {
         

@@ -9,7 +9,7 @@ import UIKit
 
 class GallowsView: ViewBuilder {
     
-    private let gallowColor: UIColor = Theme.shared.currentTheme.secondary
+    private let gallowColor: UIColor = Theme.shared.currentTheme.primary
     
     override init() {
         super.init()
