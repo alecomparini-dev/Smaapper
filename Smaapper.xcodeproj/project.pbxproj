@@ -73,16 +73,16 @@
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
-		025E84882A41D57A00C2D944 /* TappedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* TappedButtonView.swift */; };
+		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
 		026C147D2A3CF34900F8D3E6 /* CalculatorButtonPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147C2A3CF34900F8D3E6 /* CalculatorButtonPanelView.swift */; };
 		026C147F2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147E2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift */; };
-		026CF1682A49CBE1009CEE6E /* GallowsKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1672A49CBE1009CEE6E /* GallowsKeyboardView.swift */; };
-		026CF16A2A49D78E009CEE6E /* GallowsLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */; };
-		026CF16E2A4A140B009CEE6E /* GallowsWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */; };
-		026CF1722A4A4832009CEE6E /* GallowsLetterInWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */; };
+		026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1672A49CBE1009CEE6E /* HangmanKeyboardView.swift */; };
+		026CF16A2A49D78E009CEE6E /* HangmanKeyboardLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1692A49D78E009CEE6E /* HangmanKeyboardLetterView.swift */; };
+		026CF16E2A4A140B009CEE6E /* HangmanWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF16D2A4A140B009CEE6E /* HangmanWordView.swift */; };
+		026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1712A4A4832009CEE6E /* HangmanLetterInWordView.swift */; };
 		026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1742A4B16D7009CEE6E /* HangmanViewModel.swift */; };
 		026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF1772A4B172F009CEE6E /* HangmanService.swift */; };
 		026CF17B2A4B2229009CEE6E /* HangmanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF17A2A4B2229009CEE6E /* HangmanData.swift */; };
@@ -247,16 +247,16 @@
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
-		025E84872A41D57A00C2D944 /* TappedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappedButtonView.swift; sourceTree = "<group>"; };
+		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
 		026C147C2A3CF34900F8D3E6 /* CalculatorButtonPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButtonPanelView.swift; sourceTree = "<group>"; };
 		026C147E2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFloatViewButton.swift; sourceTree = "<group>"; };
-		026CF1672A49CBE1009CEE6E /* GallowsKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsKeyboardView.swift; sourceTree = "<group>"; };
-		026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterView.swift; sourceTree = "<group>"; };
-		026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsWordView.swift; sourceTree = "<group>"; };
-		026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsLetterInWordView.swift; sourceTree = "<group>"; };
+		026CF1672A49CBE1009CEE6E /* HangmanKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanKeyboardView.swift; sourceTree = "<group>"; };
+		026CF1692A49D78E009CEE6E /* HangmanKeyboardLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanKeyboardLetterView.swift; sourceTree = "<group>"; };
+		026CF16D2A4A140B009CEE6E /* HangmanWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanWordView.swift; sourceTree = "<group>"; };
+		026CF1712A4A4832009CEE6E /* HangmanLetterInWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanLetterInWordView.swift; sourceTree = "<group>"; };
 		026CF1742A4B16D7009CEE6E /* HangmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanViewModel.swift; sourceTree = "<group>"; };
 		026CF1772A4B172F009CEE6E /* HangmanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanService.swift; sourceTree = "<group>"; };
 		026CF17A2A4B2229009CEE6E /* HangmanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanData.swift; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 		025E84862A41D50300C2D944 /* TappedButtonView */ = {
 			isa = PBXGroup;
 			children = (
-				025E84872A41D57A00C2D944 /* TappedButtonView.swift */,
+				025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */,
 			);
 			path = TappedButtonView;
 			sourceTree = "<group>";
@@ -757,13 +757,13 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		026CF1662A49CBCB009CEE6E /* GallowsKeyboardView */ = {
+		026CF1662A49CBCB009CEE6E /* HangmanKeyboardView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF1692A49D78E009CEE6E /* GallowsLetterView.swift */,
-				026CF1672A49CBE1009CEE6E /* GallowsKeyboardView.swift */,
+				026CF1692A49D78E009CEE6E /* HangmanKeyboardLetterView.swift */,
+				026CF1672A49CBE1009CEE6E /* HangmanKeyboardView.swift */,
 			);
-			path = GallowsKeyboardView;
+			path = HangmanKeyboardView;
 			sourceTree = "<group>";
 		};
 		026CF16B2A49DBF0009CEE6E /* DefaultFloatViewButton */ = {
@@ -774,13 +774,13 @@
 			path = DefaultFloatViewButton;
 			sourceTree = "<group>";
 		};
-		026CF16C2A4A13BD009CEE6E /* GallowsWordView */ = {
+		026CF16C2A4A13BD009CEE6E /* HangmanWordView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF16D2A4A140B009CEE6E /* GallowsWordView.swift */,
-				026CF1712A4A4832009CEE6E /* GallowsLetterInWordView.swift */,
+				026CF16D2A4A140B009CEE6E /* HangmanWordView.swift */,
+				026CF1712A4A4832009CEE6E /* HangmanLetterInWordView.swift */,
 			);
-			path = GallowsWordView;
+			path = HangmanWordView;
 			sourceTree = "<group>";
 		};
 		026CF1732A4B15F7009CEE6E /* Hangman */ = {
@@ -1242,16 +1242,8 @@
 			children = (
 				02FB2C952A45C32800C7FC98 /* Hangman */,
 				02E9743F2A37D20600BF14EE /* Quiz */,
-				02E974372A379DA500BF14EE /* TicTacToe */,
 			);
 			path = "Games-Entertainment";
-			sourceTree = "<group>";
-		};
-		02E974372A379DA500BF14EE /* TicTacToe */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TicTacToe;
 			sourceTree = "<group>";
 		};
 		02E974382A379E0600BF14EE /* Informations */ = {
@@ -1352,10 +1344,10 @@
 		02FB2CA02A45D7D900C7FC98 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF16C2A4A13BD009CEE6E /* GallowsWordView */,
-				026CF1662A49CBCB009CEE6E /* GallowsKeyboardView */,
-				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
 				02FB2CA62A45E19D00C7FC98 /* GallowsView */,
+				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
+				026CF1662A49CBCB009CEE6E /* HangmanKeyboardView */,
+				026CF16C2A4A13BD009CEE6E /* HangmanWordView */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1546,7 +1538,7 @@
 				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
 				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				024957EC2A41F7130077C36D /* MultiplicationOperation.swift in Sources */,
-				025E84882A41D57A00C2D944 /* TappedButtonView.swift in Sources */,
+				025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
 				02E974492A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift in Sources */,
 				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,
@@ -1563,7 +1555,7 @@
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
-				026CF16E2A4A140B009CEE6E /* GallowsWordView.swift in Sources */,
+				026CF16E2A4A140B009CEE6E /* HangmanWordView.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
 				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
@@ -1611,12 +1603,12 @@
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
-				026CF1722A4A4832009CEE6E /* GallowsLetterInWordView.swift in Sources */,
+				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
-				026CF1682A49CBE1009CEE6E /* GallowsKeyboardView.swift in Sources */,
-				026CF16A2A49D78E009CEE6E /* GallowsLetterView.swift in Sources */,
+				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,
+				026CF16A2A49D78E009CEE6E /* HangmanKeyboardLetterView.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,

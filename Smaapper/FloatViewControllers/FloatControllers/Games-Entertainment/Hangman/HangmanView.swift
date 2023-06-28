@@ -89,8 +89,8 @@ class HangmanView: ViewBuilder {
         return img
     }()
     
-    lazy var gallowsWordView: GallowsWordView = {
-        let img = GallowsWordView()
+    lazy var gallowsWordView: HangmanWordView = {
+        let img = HangmanWordView()
             .setConstraints { build in
                 build
                     .setTop.equalTo(painelGallowsView.view, .bottom, 50)
@@ -100,8 +100,8 @@ class HangmanView: ViewBuilder {
         return img
     }()
     
-    lazy var gallowsKeyboardView: GallowsKeyboardView = {
-        let img = GallowsKeyboardView()
+    lazy var gallowsKeyboardView: HangmanKeyboardView = {
+        let img = HangmanKeyboardView()
             .setConstraints { build in
                 build
                     .setTop.equalTo(gallowsWordView.view, .bottom, 15)

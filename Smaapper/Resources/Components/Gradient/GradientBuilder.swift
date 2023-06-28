@@ -135,6 +135,7 @@ class GradientBuilder {
 
     private func configGradient() {
         guard let component else {return}
+        gradient.frame = component.bounds
         gradient.cornerRadius = component.layer.cornerRadius
         gradient.maskedCorners = component.layer.maskedCorners
     }
@@ -148,20 +149,18 @@ class GradientBuilder {
     
     private func applyGradient() {
         guard let component else {return}
+        self.setGradientOnComponent()
         self.configGradient()
-        self.gradient.frame = component.bounds
         if !self.gradient.isAxial && self.gradient.endPoint == CGPointZero {
             let endY = component.frame.size.width / component.frame.size.height / 2
             self.gradient.endPoint = CGPoint(x: 0, y: endY)
         }
-        self.setGradientOnComponent()
     }
     
     private func setGradientOnComponent() {
         let indexLayer = calculateIndexLayer()
         component?.layer.insertSublayer(gradient, at: indexLayer)
     }
-    
     
     private func setType(_ type: CAGradientLayerType) {
         self.gradient.type = type
@@ -180,7 +179,7 @@ class GradientBuilder {
 
 //  MARK: - EXTENSION UIView
 extension UIView {
-    func revemoGradientByID(_ id: String) {
+    func removeGradientByID(_ id: String) {
         if let gradientLayer = self.layer.sublayers?.first(where: { $0.name == id }) {
             gradientLayer.removeFromSuperlayer()
         }

@@ -1,5 +1,5 @@
 //
-//  GallowsKeyboardView.swift
+//  HangmanKeyboardView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 26/06/23.
@@ -7,15 +7,16 @@
 
 import UIKit
 
-protocol GallowsKeyboardViewDelegate: AnyObject {
-    func letterKeyboardTapped(_ letter: String)
+protocol HangmanKeyboardViewDelegate: AnyObject {
+    func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView)
 }
 
-class GallowsKeyboardView: ViewBuilder {
-    weak var delegate: GallowsKeyboardViewDelegate?
+class HangmanKeyboardView: ViewBuilder {
+    weak var delegate: HangmanKeyboardViewDelegate?
     
     private let spacingHorizontal: CGFloat = 8
-    private let lettersOfKeyboard: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","Ç"]
+    private let lettersOfKeyboard: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",""]
+    private var letterViewOfKeyboard: [HangmanKeyboardLetterView] = []
     
     override init() {
         super.init()
@@ -106,12 +107,16 @@ class GallowsKeyboardView: ViewBuilder {
         return stack
     }()
     
+    lazy var space: ViewBuilder = {
+        let btn = ViewBuilder()
+        return btn
+    }()
     
 //  MARK: - LAZY HINT
 
     lazy var hintButton: DefaultFloatViewButton = {
-        let btn = DefaultFloatViewButton(Theme.shared.currentTheme.tertiary, "More tip ...")
-        btn.button.setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
+        let btn = DefaultFloatViewButton(Theme.shared.currentTheme.secondary, "More tip ...")
+        btn.button.setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
             .setTintColor(Theme.shared.currentTheme.onPrimary)
             .setTitleSize(14)
         return btn
@@ -123,9 +128,14 @@ class GallowsKeyboardView: ViewBuilder {
     private func addElements() {
         addStackElements()
         addLetterToHorizontalStacks()
+        addSpaceToLeftHorizontalStack1()
         addHintToRightHorizontalStack1()
     }
     
+    private func addSpaceToLeftHorizontalStack1() {
+        space.add(insideTo: leftHorizontalStack1.view)
+    }
+
     private func addHintToRightHorizontalStack1() {
         hintButton.add(insideTo: rightHorizontalStack1.view)
     }
@@ -144,23 +154,23 @@ class GallowsKeyboardView: ViewBuilder {
     private func addLetterToHorizontalStacks() {
         lettersOfKeyboard.enumerated().forEach { index,letter in
             switch index {
-            case 0...5:
-                addLetterToHorizontalStack(letter, stack: horizontalStack5)
-            
-            case 6...11:
-                addLetterToHorizontalStack(letter, stack: horizontalStack4)
-                
-            case 12...17:
-                addLetterToHorizontalStack(letter, stack: horizontalStack3)
-                
-            case 18...23:
-                addLetterToHorizontalStack(letter, stack: horizontalStack2)
-                
-            case 24...26:
-                addLetterToHorizontalStack(letter, stack: leftHorizontalStack1)
-                
-            default:
-                break
+                case 0...5:
+                    addLetterToHorizontalStack(letter, stack: horizontalStack5)
+
+                case 6...11:
+                    addLetterToHorizontalStack(letter, stack: horizontalStack4)
+
+                case 12...17:
+                    addLetterToHorizontalStack(letter, stack: horizontalStack3)
+
+                case 18...23:
+                    addLetterToHorizontalStack(letter, stack: horizontalStack2)
+
+                case 24...25:
+                    addLetterToHorizontalStack(letter, stack: leftHorizontalStack1)
+                    
+                default:
+                    break
             }
         }
     }
@@ -168,25 +178,32 @@ class GallowsKeyboardView: ViewBuilder {
     private func addLetterToHorizontalStack(_ letter: String, stack: StackBuilder) {
         let letterView = createGallowsLetterView(letter)
         letterView.add(insideTo: stack.view)
+        letterView.delegate = self
+        self.letterViewOfKeyboard.append(letterView)
     }
     
     private func configConstraints() {
         verticalStack.applyConstraint()
     }
 
-    private func createGallowsLetterView(_ text: String) -> GallowsLetterView {
-        let letter = GallowsLetterView(text, Theme.shared.currentTheme.surfaceContainer)
+    private func createGallowsLetterView(_ text: String) -> HangmanKeyboardLetterView {
+        let letter = HangmanKeyboardLetterView(text, Theme.shared.currentTheme.surfaceContainer)
         letter.gallowsLetter.button.setTitleSize(14)
-        letter.gallowsLetter.button.setActions { build in
-            build
-                .setTarget(self, #selector(letterTapped), .touchUpInside)
-        }
         return letter
     }
+        
+}
+
+
+//  MARK: - EXTENSION HangmanKeyboardLetterViewDelegate
+
+extension HangmanKeyboardView: HangmanKeyboardLetterViewDelegate{
     
-    @objc private func letterTapped(_ sender: UIButton) {
-        delegate?.letterKeyboardTapped(sender.titleLabel?.text ?? "")
+    func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView) {
+        delegate?.letterKeyboardTapped(letter)
     }
     
+    
 }
+
 
