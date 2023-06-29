@@ -8,7 +8,6 @@
 import UIKit
 
 class DefaultDollView: ViewBuilder {
-    private let hide = false
     
     override init() {
         super.init()
@@ -18,7 +17,6 @@ class DefaultDollView: ViewBuilder {
     private func initialization() {
         addElements()
         configConstraints()
-//        setBackgroundColor(.red.withAlphaComponent(0.4))
     }
     
     
@@ -26,6 +24,7 @@ class DefaultDollView: ViewBuilder {
     lazy var doll: ImageViewBuilder = {
         let img = UIImage(systemName: "figure.mixed.cardio")
         let imgView = ImageViewBuilder(img)
+            .setHidden(true)
             .setContentMode(.scaleAspectFit)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setConstraints { build in
@@ -37,10 +36,8 @@ class DefaultDollView: ViewBuilder {
     
     lazy var torsoView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(true)
-//            .setHidden(hide)
+            .setHidden(false)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.yellow.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(21)
@@ -53,10 +50,8 @@ class DefaultDollView: ViewBuilder {
     
     lazy var rightArmView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(true)
-            .setHidden(hide)
+            .setHidden(false)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(5)
@@ -69,10 +64,8 @@ class DefaultDollView: ViewBuilder {
     
     lazy var leftArmView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(true)
-            .setHidden(hide)
+            .setHidden(false)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.systemPink.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(5)
@@ -85,10 +78,8 @@ class DefaultDollView: ViewBuilder {
     
     lazy var rightLegView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(true)
-            .setHidden(hide)
+            .setHidden(false)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalTo(torsoView.view, .bottom)
@@ -101,10 +92,8 @@ class DefaultDollView: ViewBuilder {
     
     lazy var leftLegView: ViewBuilder = {
         let view = ViewBuilder()
-            .setHidden(true)
-            .setHidden(hide)
+            .setHidden(false)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.cyan.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalTo(torsoView.view, .bottom)
@@ -140,32 +129,30 @@ class DefaultDollView: ViewBuilder {
 
 //  MARK: - EXTENSION GallowsDollProtocol
 extension DefaultDollView: DollProtocol {
+    
     func firstError() {
-        
+        doll.setHidden(false)
+        ShowBodyPartAnimation.show(doll.view, alpha: (start: 0, end: 1))
     }
     
     func secondError() {
-        
+        ShowBodyPartAnimation.show(torsoView.view)
     }
     
     func thirdError() {
-        
+        ShowBodyPartAnimation.show(leftArmView.view)
     }
     
     func fourthError() {
-        
+        ShowBodyPartAnimation.show(rightArmView.view)
     }
     
     func fifthError() {
-        
+        ShowBodyPartAnimation.show(leftLegView.view)
     }
     
     func sixthError() {
-        
+        ShowBodyPartAnimation.show(rightLegView.view)
     }
-    
-
-
-    
     
 }
