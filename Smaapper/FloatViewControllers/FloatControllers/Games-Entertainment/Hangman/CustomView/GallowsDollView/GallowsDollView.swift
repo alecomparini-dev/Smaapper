@@ -32,7 +32,6 @@ class GallowsDollView: ViewBuilder {
     }()
     
     
-    
 //  MARK: - PRIVATE Area
     private func addElements() {
         dollView.add(insideTo: self.view)
