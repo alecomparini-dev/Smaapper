@@ -14,9 +14,9 @@ class HangmanFloatViewController: FloatViewController {
     private let errorCountToEndGame = 6
     private var chosenLetterFromKeyboard: HangmanKeyboardLetterView?
     private var lettersInWord: [HangmanLetterInWordView] = []
-    private var indexMatchInWord: [Int] = []
+    private var indexMatchInWordFromChosenLetter: [Int] = []
     private var errorLetters: Int = 0
-    private var successLetterIndex: [Int] = []
+    private var successLetterIndex: Set<Int> = []
     private var isEndGame: Bool = false
     
     private var lastPlayedWord: String = "sagacidade"
@@ -162,9 +162,10 @@ class HangmanFloatViewController: FloatViewController {
     
     private func verifyMatchToGallowsWord(_ letter: String) {
         let currentWord = getCurrentWord().syllables.joined().folding(options: .diacriticInsensitive, locale: nil)
-        self.indexMatchInWord = currentWord.enumerated().compactMap { index,char in
+        self.indexMatchInWordFromChosenLetter = currentWord.enumerated().compactMap { index,char in
             return (char == Character(letter.lowercased())) ? index : nil
         }
+        incrementSuccessLetter(self.indexMatchInWordFromChosenLetter)
     }
     
     private func updateGame() {
@@ -172,8 +173,9 @@ class HangmanFloatViewController: FloatViewController {
         if chosenLetterFromKeyboard.buttonInteration?.isPressed ?? true {return}
         verifyMatchToGallowsWord(chosenLetterFromKeyboard.text)
         updateLetterOnKeyboard()
-        revealLetterInWordIfExists()
+        revealLetterInWord(self.indexMatchInWordFromChosenLetter, Theme.shared.currentTheme.primary, 1)
         revealGallowsDoll()
+        checkEndGame()
     }
     
     private func revealGallowsDoll() {
@@ -216,7 +218,7 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func isChoseCorrectly() -> Bool {
-        if indexMatchInWord.isEmpty {return false}
+        if indexMatchInWordFromChosenLetter.isEmpty {return false}
         return true
     }
     
@@ -236,31 +238,62 @@ class HangmanFloatViewController: FloatViewController {
     
     private func incrementErrorCount() {
         errorLetters += 1
-        setEndGame()
     }
     
-    private func incrementSuccessLetter(_ index: Int) {
-        successLetterIndex.append(index)
-        setEndGame()
+    private func incrementSuccessLetter(_ indices: [Int]) {
+        indices.forEach { index in
+            successLetterIndex.insert(index)
+        }
     }
     
-    private func setEndGame() {
-        if errorLetters == errorCountToEndGame {
+    private func checkEndGame() {
+        if isEndGameFailure() {
             configFailureEndGame()
-            return isEndGame = true
         }
-        if successLetterIndex.count == getCurrentWord().word.count {
+        
+        if isEndGameSuccess() {
             configSuccessEndGame()
-            return isEndGame = true
         }
+    }
+    
+    private func isEndGameFailure() -> Bool {
+        if errorLetters == errorCountToEndGame {
+            isEndGame = true
+            return true
+        }
+        return false
+    }
+    
+    private func isEndGameSuccess() -> Bool {
+        if successLetterIndex.count == getCurrentWord().word.count {
+            isEndGame = true
+            return true
+        }
+        return false
     }
     
     private func configFailureEndGame() {
         let colorError = Theme.shared.currentTheme.error
-        screen.gallowsView.setColorGallows(colorError)
-        screen.gallowsView.ropeGallows.neumorphism?.setReferenceColor(colorError).apply()
-        screen.gallowsView.ropeCircleGallows.setTintColor(colorError)
+        changeColorGallows(colorError)
+        changeDollFailure()
+        revealOtherLetterInWord()
+    }
+    
+    private func revealOtherLetterInWord() {
+        let setSuccessLetterIndex: Set<Int> = successLetterIndex
+        let setWordIndex: Set<Int> = Set(0...(lettersInWord.count - 1))
+        let indexToReveal = setWordIndex.subtracting(setSuccessLetterIndex).sorted()
+        revealLetterInWord(indexToReveal, Theme.shared.currentTheme.error)
+    }
+    
+    private func changeDollFailure() {
         screen.gallowsView.gallowsDollView.showDollFailure()
+    }
+    
+    private func changeColorGallows(_ color: UIColor) {
+        screen.gallowsView.setColorGallows(color)
+        screen.gallowsView.ropeGallows.neumorphism?.setReferenceColor(color).apply()
+        screen.gallowsView.ropeCircleGallows.setTintColor(color)
     }
     
     private func configSuccessEndGame() {
@@ -287,14 +320,13 @@ class HangmanFloatViewController: FloatViewController {
         chosenLetterFromKeyboard?.buttonInteration?.setColor(Theme.shared.currentTheme.error)
     }
     
-    private func revealLetterInWordIfExists() {
+    private func revealLetterInWord(_ indexLetter: [Int], _ color: UIColor, _ durationIncrement: Double = 0.5) {
         var duration = 0.5
-        self.indexMatchInWord.forEach { index in
-            incrementSuccessLetter(index)
+        indexLetter.forEach { index in
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) {
-                self.screen.gallowsWordView.revealLetterInWord(self.lettersInWord[index])
+                self.screen.gallowsWordView.revealLetterInWord(self.lettersInWord[index], color)
             }
-            duration += 1
+            duration += durationIncrement
         }
     }
 
