@@ -11,15 +11,18 @@ import UIKit
 class HangmanFloatViewController: FloatViewController {
     static let identifierApp = "hangman"
     
+    private let errorCountToEndGame = 6
     private var chosenLetterFromKeyboard: HangmanKeyboardLetterView?
     private var lettersInWord: [HangmanLetterInWordView] = []
     private var indexMatchInWord: [Int] = []
-    private var countError: Int = 0
+    private var errorLetters: Int = 0
+    private var successLetterIndex: [Int] = []
+    private var isEndGame: Bool = false
     
+    private var lastPlayedWord: String = "sagacidade"
     private let quantityLetterByLine = 10
     private let viewModel: HangmanViewModel = HangmanViewModel()
     private var hangmanWord: [HangmanWord] = []
-    private var lastPlayedWord: String = "paradigma"
     private var currentIndexPlayedWord: Int = -1
     
     lazy var screen: HangmanView = {
@@ -180,7 +183,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func revealBodyPart() {
         
-        switch countError {
+        switch errorLetters {
             case 1:
                 screen.gallowsView.gallowsDollView.firstError()
             
@@ -224,15 +227,46 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func updateLetterError() {
-        addCountError()
+        incrementErrorCount()
         removeNeumorphismLetter()
         setShadowColorError()
         configStyleButtonPressed(15, Theme.shared.currentTheme.surfaceContainer)
         pressedButtonLetter()
     }
     
-    private func addCountError() {
-        countError += 1
+    private func incrementErrorCount() {
+        errorLetters += 1
+        setEndGame()
+    }
+    
+    private func incrementSuccessLetter(_ index: Int) {
+        successLetterIndex.append(index)
+        setEndGame()
+    }
+    
+    private func setEndGame() {
+        if errorLetters == errorCountToEndGame {
+            configFailureEndGame()
+            return isEndGame = true
+        }
+        if successLetterIndex.count == getCurrentWord().word.count {
+            configSuccessEndGame()
+            return isEndGame = true
+        }
+    }
+    
+    private func configFailureEndGame() {
+        let colorError = Theme.shared.currentTheme.error
+        screen.gallowsView.setColorGallows(colorError)
+        screen.gallowsView.ropeGallows.neumorphism?.setReferenceColor(colorError).apply()
+        screen.gallowsView.ropeCircleGallows.setTintColor(colorError)
+        screen.gallowsView.gallowsDollView.showDollSuccess()
+    }
+    
+    private func configSuccessEndGame() {
+        screen.gallowsView.ropeGallows.setHidden(true)
+        screen.gallowsView.ropeCircleGallows.setHidden(true)
+        screen.gallowsView.gallowsDollView.showDollSuccess()
     }
     
     private func pressedButtonLetter() {
@@ -256,13 +290,14 @@ class HangmanFloatViewController: FloatViewController {
     private func revealLetterInWordIfExists() {
         var duration = 0.5
         self.indexMatchInWord.forEach { index in
+            incrementSuccessLetter(index)
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) {
                 self.screen.gallowsWordView.revealLetterInWord(self.lettersInWord[index])
             }
             duration += 1
         }
     }
-    
+
 }
 
 
@@ -284,6 +319,7 @@ extension HangmanFloatViewController: HangmanViewDelegate {
 extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
     
     func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView) {
+        if isEndGame {return}
         self.chosenLetterFromKeyboard = letter
         updateGame()
     }

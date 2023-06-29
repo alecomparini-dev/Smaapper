@@ -127,6 +127,15 @@ class FallDollView: ViewBuilder {
         leftLegView.applyConstraint()
     }
     
+    private func showAllBodyPart() {
+        doll.setHidden(false)
+        torsoView.setHidden(true)
+        leftArmView.setHidden(true)
+        leftLegView.setHidden(true)
+        rightLegView.setHidden(true)
+        rightArmView.setHidden(true)
+    }
+    
 }
 
 
@@ -135,29 +144,49 @@ extension FallDollView: DollProtocol {
 
     func firstError() {
         doll.setHidden(false)
-        ShowBodyPartAnimation.show(doll.view, alpha: (start: 0, end: 1))
+        UtilsDoll.showBodyPartAnimation(doll.view, alpha: (start: 0, end: 1))
     }
     
     func secondError() {
-        ShowBodyPartAnimation.show(torsoView.view)
+        UtilsDoll.showBodyPartAnimation(torsoView.view)
     }
     
     func thirdError() {
-        ShowBodyPartAnimation.show(leftArmView.view)
+        UtilsDoll.showBodyPartAnimation(leftArmView.view)
     }
     
     func fourthError() {
-        ShowBodyPartAnimation.show(rightArmView.view)
+        UtilsDoll.showBodyPartAnimation(rightArmView.view)
     }
     
     func fifthError() {
-        ShowBodyPartAnimation.show(leftLegView.view)
+        UtilsDoll.showBodyPartAnimation(leftLegView.view)
     }
     
     func sixthError() {
-        ShowBodyPartAnimation.show(rightLegView.view)
+        UtilsDoll.showBodyPartAnimation(rightLegView.view)
     }
     
+    func showDollSuccess() {
+        showAllBodyPart()
+        doll.view.frame.origin.x = doll.view.frame.origin.x - 23
+        doll.setImage(UIImage(systemName: "figure.wave"))
+        UtilsDoll.successAnimation(doll.view, doll.view.frame.origin.y + 25) { [weak self] in
+            guard let self else {return}
+            UtilsDoll.transitionImageAnimation(doll.view, "figure.walk")
+        }
+    }
+    
+    func showDollFailure() {
+        showAllBodyPart()
+        UtilsDoll.successAnimation(doll.view, doll.view.frame.origin.y + 25) { [weak self] in
+            guard let self else {return}
+            doll.view.frame.origin.x = doll.view.frame.origin.x - 15
+            doll.view.frame.origin.y = doll.view.frame.origin.y + 18
+            doll.view.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2.5)
+            UtilsDoll.transitionImageAnimation(doll.view, "figure.taichi")
+        }
+    }
     
 }
 
