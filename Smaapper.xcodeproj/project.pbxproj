@@ -777,8 +777,8 @@
 		026CF16C2A4A13BD009CEE6E /* HangmanWordView */ = {
 			isa = PBXGroup;
 			children = (
-				026CF16D2A4A140B009CEE6E /* HangmanWordView.swift */,
 				026CF1712A4A4832009CEE6E /* HangmanLetterInWordView.swift */,
+				026CF16D2A4A140B009CEE6E /* HangmanWordView.swift */,
 			);
 			path = HangmanWordView;
 			sourceTree = "<group>";

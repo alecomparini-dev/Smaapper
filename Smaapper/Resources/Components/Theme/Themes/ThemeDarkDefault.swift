@@ -44,4 +44,9 @@ struct ThemeDarkDefault: ThemeProtocol {
     var onSurfaceInverse: UIColor { UIColor.HEX("#050505") }
     var onSurfaceVariant: UIColor { onSurface.adjustBrightness(-40) }
 
+    
+    var error: UIColor { UIColor.HEX("#c81b1a") }
+    var onError: UIColor { UIColor.HEX("#d3d3d3") }
+    
+    
 }
