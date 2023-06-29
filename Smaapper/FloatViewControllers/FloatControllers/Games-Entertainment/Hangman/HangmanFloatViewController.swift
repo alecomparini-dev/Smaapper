@@ -260,7 +260,7 @@ class HangmanFloatViewController: FloatViewController {
         screen.gallowsView.setColorGallows(colorError)
         screen.gallowsView.ropeGallows.neumorphism?.setReferenceColor(colorError).apply()
         screen.gallowsView.ropeCircleGallows.setTintColor(colorError)
-        screen.gallowsView.gallowsDollView.showDollSuccess()
+        screen.gallowsView.gallowsDollView.showDollFailure()
     }
     
     private func configSuccessEndGame() {
