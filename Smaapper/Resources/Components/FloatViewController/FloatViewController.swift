@@ -9,10 +9,9 @@ import UIKit
 
 class FloatViewController: BaseBuilder {
     
-    private let hierarchy: CGFloat = 1000
+    private let _hierarchy: CGFloat = 1000
     private var _isShow = false
-    private var alreadyApplied = false
-    private var _superView: UIView?
+    private weak var _superView: UIView?
     
     private var sizeWindow: CGSize? = nil
     private var frameWindow: CGRect? = nil
@@ -24,8 +23,8 @@ class FloatViewController: BaseBuilder {
     private(set) var originalCenter: CGPoint = .zero
     private(set) var active: Bool = false
     
-    private var manager: FloatViewControllerManager = FloatViewControllerManager.instance
-    private var actions: FloatViewControllerActions?
+    private unowned var manager: FloatViewControllerManager = FloatViewControllerManager.instance
+    private var _actions: FloatViewControllerActions?
     
     private var _view: View = View()
     var view: View {
@@ -131,7 +130,7 @@ class FloatViewController: BaseBuilder {
     }
     
     
-//  MARK: - Dragging
+//  MARK: - DRAGGING
     func viewWillDrag() {
         manager.delegate?.viewWillDrag(self)
     }
@@ -252,11 +251,11 @@ class FloatViewController: BaseBuilder {
     
     @discardableResult
     func setActions(_ action: (_ build: FloatViewControllerActions) -> FloatViewControllerActions ) -> Self {
-        if let actions = self.actions {
-            self.actions = action(actions)
+        if let actions = self._actions {
+            self._actions = action(actions)
             return self
         }
-        self.actions = action(FloatViewControllerActions(self))
+        self._actions = action(FloatViewControllerActions(self))
         return self
     }
     
@@ -313,10 +312,12 @@ class FloatViewController: BaseBuilder {
     private func removeFloatView() {
         manager.removeWindowToManager(self)
         self.view.removeFromSuperview()
+        _actions = nil
+        _superView = nil
     }
         
     private func setHierarchyVisualization() {
-        self.view.layer.zPosition = hierarchy
+        self.view.layer.zPosition = _hierarchy
     }
     
     private func addFloatWindow() {

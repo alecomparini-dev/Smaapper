@@ -12,6 +12,7 @@ class GradientBuilder {
     
     private weak var component: UIView?
     private var gradient: Gradient
+    private let gradientID = "gradientID"
     
     
 //  MARK: - Initializers
@@ -29,7 +30,9 @@ class GradientBuilder {
     private func initialization() {
         self.setGradientDirection(Gradient.Direction.leftToRight)
         self.setType(.axial)
+        self.setID(gradientID)
     }
+    
     
 //  MARK: - Set Properties
     
@@ -80,12 +83,20 @@ class GradientBuilder {
         self.gradient.name = id
         return self
     }
+
     
+//  MARK: - ACTIONS
+    func removeGradient() {
+        if let gradientName = self.gradient.name {
+            self.component?.removeGradientByID(gradientName)
+        }
+    }
     
     
 //  MARK: - Apply Gradient
     @discardableResult
     func apply() -> Self {
+        removeGradient()
         DispatchQueue.main.async {
             self.applyGradient()
         }

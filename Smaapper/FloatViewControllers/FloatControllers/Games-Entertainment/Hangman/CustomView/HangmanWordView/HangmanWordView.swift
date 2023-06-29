@@ -81,10 +81,23 @@ class HangmanWordView: ViewBuilder {
     }
 
     func revealLetterInWord(_ letter: HangmanLetterInWordView) {
+        configLetterForAnimation(letter)
+        revealLetterInWordAnimation(letter)
+    }
+    
+    private func configLetterForAnimation(_ letter: HangmanLetterInWordView) {
         letter.label.setHidden(false)
-//        letter.underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
+        letter.label.setAlpha(0)
         letter.underlineLetter.gradient?.setReferenceColor(Theme.shared.currentTheme.primary, percentageGradient: -20)
             .apply()
+        letter.underlineLetter.setAlpha(0)
+    }
+    
+    private func revealLetterInWordAnimation(_ letter: HangmanLetterInWordView) {
+        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseInOut, animations: {
+            letter.label.view.alpha = 1
+            letter.underlineLetter.view.alpha = 1
+        })
     }
     
     

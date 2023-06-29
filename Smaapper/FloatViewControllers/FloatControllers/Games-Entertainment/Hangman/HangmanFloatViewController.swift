@@ -254,8 +254,12 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func revealLetterInWordIfExists() {
+        var duration = 0.5
         self.indexMatchInWord.forEach { index in
-            screen.gallowsWordView.revealLetterInWord(lettersInWord[index])
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) {
+                self.screen.gallowsWordView.revealLetterInWord(self.lettersInWord[index])
+            }
+            duration += 1
         }
     }
     

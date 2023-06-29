@@ -127,12 +127,7 @@ class WaveDollView: ViewBuilder {
     }
     
 //  MARK: - ANIMATION Area
-    private func showBodyPartAnimation(_ bodyPart: UIView, alpha: (start: CGFloat, end: CGFloat) = (1,0)) {
-        bodyPart.alpha = alpha.start
-        UIView.animate(withDuration: 0.5, delay: 0 , options: .curveEaseInOut, animations: {
-            bodyPart.alpha = alpha.end
-        })
-    }
+    
     
 }
 
@@ -141,28 +136,27 @@ class WaveDollView: ViewBuilder {
 extension WaveDollView: DollProtocol {
     func firstError() {
         doll.setHidden(false)
-        showBodyPartAnimation(doll.view, alpha: (start: 0, end: 1))
+        ShowBodyPartAnimation.show(doll.view, alpha: (start: 0, end: 1))
     }
     
     func secondError() {
-        torsoView.setAlpha(1)
-        showBodyPartAnimation(torsoView.view)
+        ShowBodyPartAnimation.show(torsoView.view)
     }
     
     func thirdError() {
-        showBodyPartAnimation(leftArmView.view)
+        ShowBodyPartAnimation.show(leftArmView.view)
     }
     
     func fourthError() {
-        showBodyPartAnimation(leftLegView.view)
+        ShowBodyPartAnimation.show(leftLegView.view)
     }
     
     func fifthError() {
-        showBodyPartAnimation(rightLegView.view)
+        ShowBodyPartAnimation.show(rightLegView.view)
     }
     
     func sixthError() {
-        showBodyPartAnimation(rightArmView.view)
+        ShowBodyPartAnimation.show(rightArmView.view)
     }
     
 }
