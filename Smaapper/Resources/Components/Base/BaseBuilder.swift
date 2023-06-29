@@ -95,6 +95,12 @@ class BaseBuilder {
         component.layer.opacity = opacity
         return self
     }
+    
+    @discardableResult
+    public func setAlpha(_ alpha: CGFloat) -> Self {
+        component.alpha = alpha
+        return self
+    }
    
     @discardableResult
     public func setHidden(_ hide: Bool) -> Self {

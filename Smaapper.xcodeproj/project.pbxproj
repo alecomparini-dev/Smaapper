@@ -1356,7 +1356,6 @@
 			isa = PBXGroup;
 			children = (
 				02FB2CA72A45E1BC00C7FC98 /* Doll */,
-				02FB2CAA2A45E59A00C7FC98 /* DollProtocol.swift */,
 				02FB2CA32A45E11300C7FC98 /* GallowsDollView.swift */,
 			);
 			path = GallowsDollView;
@@ -1373,6 +1372,7 @@
 		02FB2CA72A45E1BC00C7FC98 /* Doll */ = {
 			isa = PBXGroup;
 			children = (
+				02FB2CAA2A45E59A00C7FC98 /* DollProtocol.swift */,
 				02FB2CA82A45E26B00C7FC98 /* DefaultDollView.swift */,
 				02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */,
 				02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */,

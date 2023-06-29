@@ -11,13 +11,15 @@ import UIKit
 class HangmanFloatViewController: FloatViewController {
     static let identifierApp = "hangman"
     
-    private var chooseLetterOnKeyboard: HangmanKeyboardLetterView?
+    private var chosenLetterFromKeyboard: HangmanKeyboardLetterView?
     private var lettersInWord: [HangmanLetterInWordView] = []
+    private var indexMatchInWord: [Int] = []
+    private var countError: Int = 0
     
     private let quantityLetterByLine = 10
     private let viewModel: HangmanViewModel = HangmanViewModel()
     private var hangmanWord: [HangmanWord] = []
-    private var lastPlayedWord: String  = ""
+    private var lastPlayedWord: String = "paradigma"
     private var currentIndexPlayedWord: Int = -1
     
     lazy var screen: HangmanView = {
@@ -80,7 +82,6 @@ class HangmanFloatViewController: FloatViewController {
     
     private func getIndexOfLastPlayedWord() {
         // Implementar
-        self.lastPlayedWord = "inovacao"
         fetchWords()
     }
     
@@ -156,28 +157,64 @@ class HangmanFloatViewController: FloatViewController {
         return indexToBreakLine
     }
     
-    private func verifyMatchToGallowsWord(_ letter: String) -> [Int] {
+    private func verifyMatchToGallowsWord(_ letter: String) {
         let currentWord = getCurrentWord().syllables.joined().folding(options: .diacriticInsensitive, locale: nil)
-        let indices = currentWord.enumerated().compactMap { index,char in
+        self.indexMatchInWord = currentWord.enumerated().compactMap { index,char in
             return (char == Character(letter.lowercased())) ? index : nil
         }
-        return indices
     }
     
     private func updateGame() {
-        guard let chooseLetterOnKeyboard else {return}
-        if chooseLetterOnKeyboard.buttonInteration?.isPressed ?? true {return}
-        let indexMatch: [Int] = verifyMatchToGallowsWord(chooseLetterOnKeyboard.text)
-        updateLetterOnKeyboard(indexMatch)
-        revealLetterInWordIfExists(indexMatch)
+        guard let chosenLetterFromKeyboard else {return}
+        if chosenLetterFromKeyboard.buttonInteration?.isPressed ?? true {return}
+        verifyMatchToGallowsWord(chosenLetterFromKeyboard.text)
+        updateLetterOnKeyboard()
+        revealLetterInWordIfExists()
+        revealGallowsDoll()
     }
     
-    private func updateLetterOnKeyboard(_ indexMatch: [Int]) {
-        if indexMatch.isEmpty {
+    private func revealGallowsDoll() {
+        if isChoseCorrectly() {return}
+        revealBodyPart()
+    }
+    
+    private func revealBodyPart() {
+        
+        switch countError {
+            case 1:
+                screen.gallowsView.gallowsDollView.firstError()
+            
+            case 2:
+                screen.gallowsView.gallowsDollView.secondError()
+            
+            case 3:
+                screen.gallowsView.gallowsDollView.thirdError()
+            
+            case 4:
+                screen.gallowsView.gallowsDollView.fourthError()
+            
+            case 5:
+                screen.gallowsView.gallowsDollView.fifthError()
+            
+            case 6:
+                screen.gallowsView.gallowsDollView.sixthError()
+            
+            default:
+                break
+        }
+    }
+    
+    private func updateLetterOnKeyboard() {
+        if !isChoseCorrectly() {
             updateLetterError()
             return
         }
         updateLetterSuccess()
+    }
+    
+    private func isChoseCorrectly() -> Bool {
+        if indexMatchInWord.isEmpty {return false}
+        return true
     }
     
     private func updateLetterSuccess() {
@@ -187,32 +224,37 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func updateLetterError() {
+        addCountError()
         removeNeumorphismLetter()
         setShadowColorError()
         configStyleButtonPressed(15, Theme.shared.currentTheme.surfaceContainer)
         pressedButtonLetter()
     }
     
+    private func addCountError() {
+        countError += 1
+    }
+    
     private func pressedButtonLetter() {
-        chooseLetterOnKeyboard?.buttonInteration?.pressed
-        chooseLetterOnKeyboard?.buttonInteration?.setEnabledInteraction(true)
+        chosenLetterFromKeyboard?.buttonInteration?.pressed
+        chosenLetterFromKeyboard?.buttonInteration?.setEnabledInteraction(true)
     }
     
     private func configStyleButtonPressed(_ cornerRadius: CGFloat, _ color: UIColor) {
-        chooseLetterOnKeyboard?.gallowsLetter.outlineView.border?.setCornerRadius(cornerRadius)
-        chooseLetterOnKeyboard?.gallowsLetter.outlineView.setBackgroundColorLayer(color)
+        chosenLetterFromKeyboard?.gallowsLetter.outlineView.border?.setCornerRadius(cornerRadius)
+        chosenLetterFromKeyboard?.gallowsLetter.outlineView.setBackgroundColorLayer(color)
     }
     
     private func removeNeumorphismLetter() {
-        chooseLetterOnKeyboard?.gallowsLetter.outlineView.neumorphism?.removeNeumorphism()
+        chosenLetterFromKeyboard?.gallowsLetter.outlineView.neumorphism?.removeNeumorphism()
     }
     
     private func setShadowColorError() {
-        chooseLetterOnKeyboard?.buttonInteration?.setColor(Theme.shared.currentTheme.error)
+        chosenLetterFromKeyboard?.buttonInteration?.setColor(Theme.shared.currentTheme.error)
     }
     
-    private func revealLetterInWordIfExists(_ indexMatch: [Int]) {
-        indexMatch.forEach { index in
+    private func revealLetterInWordIfExists() {
+        self.indexMatchInWord.forEach { index in
             screen.gallowsWordView.revealLetterInWord(lettersInWord[index])
         }
     }
@@ -220,8 +262,7 @@ class HangmanFloatViewController: FloatViewController {
 }
 
 
-//  MARK: - EXTENSIONWeatherViewDelegate
-
+//  MARK: - EXTENSION HangmanViewDelegate
 extension HangmanFloatViewController: HangmanViewDelegate {
     
     func closeWindow() {
@@ -232,15 +273,14 @@ extension HangmanFloatViewController: HangmanViewDelegate {
         self.minimize
     }
 
-    
 }
 
 
-//  MARK: - EXTENSION GallowsKeyboardViewDelegate
+//  MARK: - EXTENSION HangmanKeyboardViewDelegate
 extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
     
     func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView) {
-        self.chooseLetterOnKeyboard = letter
+        self.chosenLetterFromKeyboard = letter
         updateGame()
     }
     

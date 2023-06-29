@@ -155,9 +155,7 @@ class GallowsView: ViewBuilder {
     }()
     
     lazy var gallowsDollView: GallowsDollView = {
-        let doll = GallowsDollView(ArmsDownDollView())
-            .setHidden(false)
-//            .setHidden(true)
+        let doll = GallowsDollView(WaveDollView())
             .setConstraints { build in
                 build
                     .setHorizontalAlignmentX.equalTo(ropeGallows.view)

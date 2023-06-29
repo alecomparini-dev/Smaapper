@@ -23,6 +23,7 @@ class WaveDollView: ViewBuilder {
 //  MARK: - LAZY Area
     lazy var doll: ImageViewBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "figure.wave"))
+            .setHidden(true)
             .setContentMode(.scaleAspectFit)
             .setTintColor(Theme.shared.currentTheme.onSurface)
             .setConstraints { build in
@@ -38,9 +39,7 @@ class WaveDollView: ViewBuilder {
     lazy var torsoView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(false)
-            .setHidden(true)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.yellow.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(22)
@@ -54,9 +53,7 @@ class WaveDollView: ViewBuilder {
     lazy var rightArmView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(false)
-            .setHidden(true)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView
@@ -70,9 +67,7 @@ class WaveDollView: ViewBuilder {
     lazy var leftArmView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(false)
-            .setHidden(true)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.systemPink.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalTo(torsoView.view, .top)
@@ -86,9 +81,7 @@ class WaveDollView: ViewBuilder {
     lazy var rightLegView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(false)
-            .setHidden(true)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.red.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalTo(torsoView.view, .bottom)
@@ -102,9 +95,7 @@ class WaveDollView: ViewBuilder {
     lazy var leftLegView: ViewBuilder = {
         let view = ViewBuilder()
             .setHidden(false)
-            .setHidden(true)
             .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-//            .setBackgroundColor(.cyan.withAlphaComponent(0.5))
             .setConstraints { build in
                 build
                     .setTop.equalTo(torsoView.view, .bottom)
@@ -135,37 +126,44 @@ class WaveDollView: ViewBuilder {
         leftLegView.applyConstraint()
     }
     
+//  MARK: - ANIMATION Area
+    private func showBodyPartAnimation(_ bodyPart: UIView, alpha: (start: CGFloat, end: CGFloat) = (1,0)) {
+        bodyPart.alpha = alpha.start
+        UIView.animate(withDuration: 0.5, delay: 0 , options: .curveEaseInOut, animations: {
+            bodyPart.alpha = alpha.end
+        })
+    }
+    
 }
 
 
 //  MARK: - EXTENSION GallowsDollProtocol
 extension WaveDollView: DollProtocol {
     func firstError() {
-            
+        doll.setHidden(false)
+        showBodyPartAnimation(doll.view, alpha: (start: 0, end: 1))
     }
     
     func secondError() {
-        
+        torsoView.setAlpha(1)
+        showBodyPartAnimation(torsoView.view)
     }
     
     func thirdError() {
-        
+        showBodyPartAnimation(leftArmView.view)
     }
     
     func fourthError() {
-        
+        showBodyPartAnimation(leftLegView.view)
     }
     
     func fifthError() {
-        
+        showBodyPartAnimation(rightLegView.view)
     }
     
     func sixthError() {
-        
+        showBodyPartAnimation(rightArmView.view)
     }
-    
-
-    
     
 }
 
