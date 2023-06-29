@@ -10,6 +10,7 @@ import UIKit
 class GallowsView: ViewBuilder {
     
     private let gallowColor: UIColor = Theme.shared.currentTheme.primary
+//    private let gallowColor: UIColor = Theme.shared.currentTheme.error
     
     override init() {
         super.init()
@@ -104,6 +105,7 @@ class GallowsView: ViewBuilder {
         return view
     }()
     
+
     lazy var rodGallows: ViewBuilder = {
        var view = ViewBuilder()
             .setNeumorphism({ build in
@@ -155,7 +157,7 @@ class GallowsView: ViewBuilder {
     }()
     
     lazy var gallowsDollView: GallowsDollView = {
-        let doll = GallowsDollView(WaveDollView())
+        let doll = GallowsDollView(FallDollView())
             .setConstraints { build in
                 build
                     .setHorizontalAlignmentX.equalTo(ropeGallows.view)
@@ -166,6 +168,15 @@ class GallowsView: ViewBuilder {
         return doll
     }()
 
+    
+//  MARK: - ACTIONS
+    
+    func setColorGallows(_ color: UIColor) {
+        topGallows.neumorphism?.setReferenceColor(color).apply()
+        supportGallows.setBackgroundColor(color)
+        rodGallows.neumorphism?.setReferenceColor(color).apply()
+    }
+    
     
 //  MARK: - PRIVATE Area
     

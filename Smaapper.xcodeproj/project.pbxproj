@@ -131,7 +131,7 @@
 		02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */; };
 		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
 		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
-		02DC8DB22A4DC51800561516 /* ShowBodyPartAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* ShowBodyPartAnimation.swift */; };
+		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -165,7 +165,6 @@
 		02FB2CAD2A45F18E00C7FC98 /* WaveDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */; };
 		02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */; };
 		02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB22A46037300C7FC98 /* FallDollView.swift */; };
-		02FB2CB52A46058900C7FC98 /* HighIntensityDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,7 +305,7 @@
 		02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTextFieldsInView.swift; sourceTree = "<group>"; };
 		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
-		02DC8DB12A4DC51800561516 /* ShowBodyPartAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBodyPartAnimation.swift; sourceTree = "<group>"; };
+		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -340,7 +339,6 @@
 		02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveDollView.swift; sourceTree = "<group>"; };
 		02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmsDownDollView.swift; sourceTree = "<group>"; };
 		02FB2CB22A46037300C7FC98 /* FallDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDollView.swift; sourceTree = "<group>"; };
-		02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighIntensityDollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1092,7 +1090,7 @@
 		02DC8DB02A4DC50300561516 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				02DC8DB12A4DC51800561516 /* ShowBodyPartAnimation.swift */,
+				02DC8DB12A4DC51800561516 /* UtilsDoll.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1365,7 +1363,6 @@
 		02FB2CA52A45E19300C7FC98 /* GallowsDollView */ = {
 			isa = PBXGroup;
 			children = (
-				02DC8DB02A4DC50300561516 /* Utils */,
 				02FB2CA72A45E1BC00C7FC98 /* Doll */,
 				02FB2CAA2A45E59A00C7FC98 /* DollProtocol.swift */,
 				02FB2CA32A45E11300C7FC98 /* GallowsDollView.swift */,
@@ -1384,11 +1381,11 @@
 		02FB2CA72A45E1BC00C7FC98 /* Doll */ = {
 			isa = PBXGroup;
 			children = (
+				02DC8DB02A4DC50300561516 /* Utils */,
 				02FB2CA82A45E26B00C7FC98 /* DefaultDollView.swift */,
 				02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */,
 				02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */,
 				02FB2CB22A46037300C7FC98 /* FallDollView.swift */,
-				02FB2CB42A46058900C7FC98 /* HighIntensityDollView.swift */,
 			);
 			path = Doll;
 			sourceTree = "<group>";
@@ -1506,7 +1503,6 @@
 				02FB2CA22A45D92200C7FC98 /* GallowsView.swift in Sources */,
 				026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */,
 				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
-				02FB2CB52A46058900C7FC98 /* HighIntensityDollView.swift in Sources */,
 				020D0E662A1ED628007F3992 /* TextField.swift in Sources */,
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				02E9744D2A37F2EA00BF14EE /* BMICalculatorView.swift in Sources */,
@@ -1609,7 +1605,7 @@
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
 				026C147F2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift in Sources */,
-				02DC8DB22A4DC51800561516 /* ShowBodyPartAnimation.swift in Sources */,
+				02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,

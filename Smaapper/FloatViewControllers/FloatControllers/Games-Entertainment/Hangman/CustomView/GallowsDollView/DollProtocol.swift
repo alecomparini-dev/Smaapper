@@ -14,4 +14,6 @@ protocol DollProtocol: ViewBuilder {
     func fourthError()
     func fifthError()
     func sixthError()
+    func showDollSuccess()
+    func showDollFailure()
 }
