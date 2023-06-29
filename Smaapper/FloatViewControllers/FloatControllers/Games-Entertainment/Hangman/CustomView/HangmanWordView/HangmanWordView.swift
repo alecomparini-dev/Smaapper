@@ -81,7 +81,10 @@ class HangmanWordView: ViewBuilder {
     }
 
     func revealLetterInWord(_ letter: HangmanLetterInWordView) {
-        
+        letter.label.setHidden(false)
+//        letter.underlineLetter.gradient?.setGradientColors(Theme.shared.currentTheme.primaryGradient)
+        letter.underlineLetter.gradient?.setReferenceColor(Theme.shared.currentTheme.primary, percentageGradient: -20)
+            .apply()
     }
     
     

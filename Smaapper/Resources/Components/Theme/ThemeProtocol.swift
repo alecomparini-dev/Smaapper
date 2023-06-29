@@ -39,4 +39,7 @@ protocol ThemeProtocol {
     var onSurfaceVariant: UIColor { get }
     var onSurfaceInverse: UIColor { get }
     
+    var error: UIColor { get }
+    var onError: UIColor { get }
+    
 }

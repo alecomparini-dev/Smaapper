@@ -11,7 +11,8 @@ import UIKit
 class HangmanFloatViewController: FloatViewController {
     static let identifierApp = "hangman"
     
-    private var chooseLetter: HangmanKeyboardLetterView?
+    private var chooseLetterOnKeyboard: HangmanKeyboardLetterView?
+    private var lettersInWord: [HangmanLetterInWordView] = []
     
     private let quantityLetterByLine = 10
     private let viewModel: HangmanViewModel = HangmanViewModel()
@@ -98,14 +99,18 @@ class HangmanFloatViewController: FloatViewController {
     private func createNextWord() {
         if isLastWordByIndex(currentIndexPlayedWord) {return}
         currentIndexPlayedWord += 1
-        let word = hangmanWord[currentIndexPlayedWord]
-        let letters: [HangmanLetterInWordView] = screen.gallowsWordView.createWord(word.syllables.joined().uppercased())
-        positionLetters(letters)
+        let word = getCurrentWord()
+        self.lettersInWord = screen.gallowsWordView.createWord(word.syllables.joined().uppercased())
+        positionLetters()
         setTipLabel()
     }
     
+    private func getCurrentWord() -> HangmanWord{
+        return hangmanWord[currentIndexPlayedWord]
+    }
+    
     private func setTipLabel() {
-        let tip = hangmanWord[currentIndexPlayedWord].subject
+        let tip = getCurrentWord().subject
         screen.tipDescriptionLabel.setText(tip)
     }
     
@@ -116,9 +121,9 @@ class HangmanFloatViewController: FloatViewController {
         return true
     }
     
-    private func positionLetters(_ letters: [HangmanLetterInWordView]) {
+    private func positionLetters() {
         let indexToBreakLine = calculateIndexToBreakLine()
-        letters.enumerated().forEach { index,letter in
+        self.lettersInWord.enumerated().forEach { index,letter in
             if index < indexToBreakLine {
                 addLetterStackHorizontal1(letter)
                 return
@@ -139,8 +144,8 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func calculateIndexToBreakLine() -> Int {
-        if hangmanWord[currentIndexPlayedWord].word.count <= quantityLetterByLine {return quantityLetterByLine}
-        let syllabesWord = hangmanWord[currentIndexPlayedWord].syllables
+        if getCurrentWord().word.count <= quantityLetterByLine {return quantityLetterByLine}
+        let syllabesWord = getCurrentWord().syllables
         let indexToBreakLine = syllabesWord.reduce(0) { partialResult, syllabe in
             let result = partialResult + syllabe.count
             guard result <= quantityLetterByLine else {
@@ -152,7 +157,7 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func verifyMatchToGallowsWord(_ letter: String) -> [Int] {
-        let currentWord = hangmanWord[currentIndexPlayedWord].syllables.joined().folding(options: .diacriticInsensitive, locale: nil)
+        let currentWord = getCurrentWord().syllables.joined().folding(options: .diacriticInsensitive, locale: nil)
         let indices = currentWord.enumerated().compactMap { index,char in
             return (char == Character(letter.lowercased())) ? index : nil
         }
@@ -160,11 +165,11 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func updateGame() {
-        guard let chooseLetter else {return}
-        if chooseLetter.buttonInteration?.isPressed ?? true {return}
-        let indexMatch: [Int] = verifyMatchToGallowsWord(chooseLetter.text)
+        guard let chooseLetterOnKeyboard else {return}
+        if chooseLetterOnKeyboard.buttonInteration?.isPressed ?? true {return}
+        let indexMatch: [Int] = verifyMatchToGallowsWord(chooseLetterOnKeyboard.text)
         updateLetterOnKeyboard(indexMatch)
-        revealLetterInWordIfExists()
+        revealLetterInWordIfExists(indexMatch)
     }
     
     private func updateLetterOnKeyboard(_ indexMatch: [Int]) {
@@ -189,29 +194,27 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func pressedButtonLetter() {
-        chooseLetter?.buttonInteration?.pressed
-        chooseLetter?.buttonInteration?.setEnabledInteraction(true)
+        chooseLetterOnKeyboard?.buttonInteration?.pressed
+        chooseLetterOnKeyboard?.buttonInteration?.setEnabledInteraction(true)
     }
     
     private func configStyleButtonPressed(_ cornerRadius: CGFloat, _ color: UIColor) {
-        chooseLetter?.gallowsLetter.outlineView.border?.setCornerRadius(cornerRadius)
-        chooseLetter?.gallowsLetter.outlineView.setBackgroundColorLayer(color)
+        chooseLetterOnKeyboard?.gallowsLetter.outlineView.border?.setCornerRadius(cornerRadius)
+        chooseLetterOnKeyboard?.gallowsLetter.outlineView.setBackgroundColorLayer(color)
     }
     
     private func removeNeumorphismLetter() {
-        chooseLetter?.gallowsLetter.outlineView.neumorphism?.removeNeumorphism()
+        chooseLetterOnKeyboard?.gallowsLetter.outlineView.neumorphism?.removeNeumorphism()
     }
     
     private func setShadowColorError() {
-        chooseLetter?.buttonInteration?.setColor(UIColor.HEX("#c81b1a"))
+        chooseLetterOnKeyboard?.buttonInteration?.setColor(Theme.shared.currentTheme.error)
     }
     
-    private func setShadowColorSuccess() {
-        chooseLetter?.buttonInteration?.setColor(Theme.shared.currentTheme.tertiary)
-    }
-    
-    private func revealLetterInWordIfExists() {
-        
+    private func revealLetterInWordIfExists(_ indexMatch: [Int]) {
+        indexMatch.forEach { index in
+            screen.gallowsWordView.revealLetterInWord(lettersInWord[index])
+        }
     }
     
 }
@@ -237,7 +240,7 @@ extension HangmanFloatViewController: HangmanViewDelegate {
 extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
     
     func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView) {
-        self.chooseLetter = letter
+        self.chooseLetterOnKeyboard = letter
         updateGame()
     }
     
