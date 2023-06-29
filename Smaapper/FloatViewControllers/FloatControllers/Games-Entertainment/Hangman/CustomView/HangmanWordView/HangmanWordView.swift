@@ -80,15 +80,15 @@ class HangmanWordView: ViewBuilder {
         space.applyConstraint()
     }
 
-    func revealLetterInWord(_ letter: HangmanLetterInWordView) {
-        configLetterForAnimation(letter)
+    func revealLetterInWord(_ letter: HangmanLetterInWordView, _ color: UIColor = Theme.shared.currentTheme.primary) {
+        configLetterForAnimation(letter, color)
         revealLetterInWordAnimation(letter)
     }
     
-    private func configLetterForAnimation(_ letter: HangmanLetterInWordView) {
+    private func configLetterForAnimation(_ letter: HangmanLetterInWordView, _ color: UIColor = Theme.shared.currentTheme.primary) {
         letter.label.setHidden(false)
         letter.label.setAlpha(0)
-        letter.underlineLetter.gradient?.setReferenceColor(Theme.shared.currentTheme.primary, percentageGradient: -20)
+        letter.underlineLetter.gradient?.setReferenceColor(color, percentageGradient: -20)
             .apply()
         letter.underlineLetter.setAlpha(0)
     }
