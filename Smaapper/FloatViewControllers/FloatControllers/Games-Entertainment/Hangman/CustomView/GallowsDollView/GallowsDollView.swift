@@ -9,11 +9,6 @@ import UIKit
 
 class GallowsDollView: ViewBuilder {
     
-    enum State {
-        case success
-        case failure
-    }
-    
     private let doll: DollProtocol
     
     init(_ doll: DollProtocol) {
@@ -36,7 +31,6 @@ class GallowsDollView: ViewBuilder {
         return view
     }()
     
-
     
 //  MARK: - PRIVATE Area
     private func addElements() {
@@ -46,7 +40,6 @@ class GallowsDollView: ViewBuilder {
     private func configConstraints() {
         dollView.applyConstraint()
     }
-    
 
 }
 

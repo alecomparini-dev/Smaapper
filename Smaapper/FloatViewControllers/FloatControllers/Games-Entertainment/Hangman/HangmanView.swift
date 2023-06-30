@@ -86,13 +86,7 @@ class HangmanView: ViewBuilder {
     }()
 
     lazy var gallowsView: GallowsView = {
-        let view = GallowsView()
-            .setConstraints { build in
-                build
-                    .setTop.equalToSuperView(13)
-                    .setBottom.equalToSuperView(-18)
-                    .setLeading.setTrailing.equalToSuperView
-            }
+        let view = createHangmanGallowsView()
         return view
     }()
  
@@ -125,12 +119,11 @@ class HangmanView: ViewBuilder {
     
     
 //  MARK: - ACTION
-    func resetGallowsWordView() {
-        gallowsWordView.view.removeFromSuperview()
-        gallowsWordView = createHangmanWordView()
-        gallowsWordView.add(insideTo: self.view)
-        gallowsWordView.applyConstraint()
+    func resetHangmanView() {
+        resetGallowsView()
+        resetGallowsWordView()
     }
+    
     
 //  MARK: - @OBJC Area
     @objc private func minimizeWindow() {
@@ -146,6 +139,17 @@ class HangmanView: ViewBuilder {
     }
     
 //  MARK: - PRIVATE Area
+    
+    private func createHangmanGallowsView() -> GallowsView{
+        let view = GallowsView()
+            .setConstraints { build in
+                build
+                    .setTop.equalToSuperView(13)
+                    .setBottom.equalToSuperView(-18)
+                    .setLeading.setTrailing.equalToSuperView
+            }
+        return view
+    }
     
     private func createHangmanWordView() -> HangmanWordView{
         let view = HangmanWordView()
@@ -177,23 +181,53 @@ class HangmanView: ViewBuilder {
     private func addElements() {
         titleView.add(insideTo: self.view)
         painelGallowsView.add(insideTo: self.view)
-        gallowsView.add(insideTo: painelGallowsView.view)
+        addGallowsView()
         nextWordButton.add(insideTo: self.view)
         tipDescriptionLabel.add(insideTo: self.view)
-        gallowsWordView.add(insideTo: self.view)
+        addGallowsWordView()
         gallowsKeyboardView.add(insideTo: self.view)
+    }
+    
+    private func addGallowsView() {
+        gallowsView.add(insideTo: painelGallowsView.view)
+    }
+    
+    private func addGallowsWordView() {
+        gallowsWordView.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         painelGallowsView.applyConstraint()
-        gallowsView.applyConstraint()
+        configGallowsViewContraints()
         nextWordButton.applyConstraint()
         tipDescriptionLabel.applyConstraint()
-        gallowsWordView.applyConstraint()
+        configGallowsWordViewContraints()
         gallowsKeyboardView.applyConstraint()
     }
     
+    private func configGallowsViewContraints() {
+        gallowsView.applyConstraint()
+    }
+    
+    private func configGallowsWordViewContraints() {
+        gallowsWordView.applyConstraint()
+    }
+    
+    
+    private func resetGallowsView() {
+        gallowsView.view.removeFromSuperview()
+        gallowsView = createHangmanGallowsView()
+        addGallowsView()
+        configGallowsViewContraints()
+    }
+    
+    private func resetGallowsWordView() {
+        gallowsWordView.view.removeFromSuperview()
+        gallowsWordView = createHangmanWordView()
+        addGallowsWordView()
+        configGallowsWordViewContraints()
+    }
     
 
 }
