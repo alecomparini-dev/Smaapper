@@ -19,10 +19,10 @@ class HangmanFloatViewController: FloatViewController {
     private var successLetterIndex: Set<Int> = []
     private var isEndGame: Bool = false
     
-    private var lastPlayedWord: String = "sagacidade"
+    private var lastPlayedWord: String = "arbitrio"
     private let quantityLetterByLine = 10
     private let viewModel: HangmanViewModel = HangmanViewModel()
-    private var hangmanWord: [HangmanWord] = []
+    private var hangmanWords: [HangmanWord] = []
     private var currentIndexPlayedWord: Int = -1
     
     lazy var screen: HangmanView = {
@@ -95,13 +95,13 @@ class HangmanFloatViewController: FloatViewController {
                 print(#function, #file, error?.localizedDescription ?? "")
                 return
             }
-            hangmanWord = result
+            hangmanWords = result
             createNextWord()
         }
     }
     
     private func createNextWord() {
-        if isLastWordByIndex(currentIndexPlayedWord) {return}
+        if isLastWord() { return }
         currentIndexPlayedWord += 1
         let word = getCurrentWord()
         self.lettersInWord = screen.gallowsWordView.createWord(word.syllables.joined().uppercased())
@@ -110,7 +110,7 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func getCurrentWord() -> HangmanWord{
-        return hangmanWord[currentIndexPlayedWord]
+        return hangmanWords[currentIndexPlayedWord]
     }
     
     private func setTipLabel() {
@@ -118,10 +118,11 @@ class HangmanFloatViewController: FloatViewController {
         screen.tipDescriptionLabel.setText(tip)
     }
     
-    private func isLastWordByIndex(_ index: Int) -> Bool {
-        if currentIndexPlayedWord < hangmanWord.count {
+    private func isLastWord() -> Bool {
+        if currentIndexPlayedWord < (hangmanWords.count-1) {
             return false
         }
+        print("end word - end game")
         return true
     }
     
@@ -277,6 +278,18 @@ class HangmanFloatViewController: FloatViewController {
         changeColorGallows(colorError)
         changeDollFailure()
         revealOtherLetterInWord()
+        saveLastPlayedWord()
+    }
+    
+    private func configSuccessEndGame() {
+        screen.gallowsView.ropeGallows.setHidden(true)
+        screen.gallowsView.ropeCircleGallows.setHidden(true)
+        screen.gallowsView.gallowsDollView.showDollSuccess()
+        saveLastPlayedWord()
+    }
+
+    private func saveLastPlayedWord() {
+        //TODO: - SAVE LOCAL REALM
     }
     
     private func revealOtherLetterInWord() {
@@ -286,7 +299,6 @@ class HangmanFloatViewController: FloatViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.revealLetterInWord(indexToReveal, Theme.shared.currentTheme.error)
         }
-        
     }
     
     private func changeDollFailure() {
@@ -297,12 +309,6 @@ class HangmanFloatViewController: FloatViewController {
         screen.gallowsView.setColorGallows(color)
         screen.gallowsView.ropeGallows.neumorphism?.setReferenceColor(color).apply()
         screen.gallowsView.ropeCircleGallows.setTintColor(color)
-    }
-    
-    private func configSuccessEndGame() {
-        screen.gallowsView.ropeGallows.setHidden(true)
-        screen.gallowsView.ropeCircleGallows.setHidden(true)
-        screen.gallowsView.gallowsDollView.showDollSuccess()
     }
     
     private func pressedButtonLetter() {
@@ -333,6 +339,14 @@ class HangmanFloatViewController: FloatViewController {
             duration += durationIncrement
         }
     }
+    
+    private func resetControls() {
+        successLetterIndex = []
+        errorLetters = 0
+        isEndGame = false
+        indexMatchInWordFromChosenLetter = []
+        chosenLetterFromKeyboard = nil
+    }
 
 }
 
@@ -346,6 +360,16 @@ extension HangmanFloatViewController: HangmanViewDelegate {
     
     func minimizeWindow() {
         self.minimize
+    }
+    
+    func nextWord() {
+        
+        if isLastWord() { return  }
+        resetControls()
+        screen.gallowsKeyboardView.resetKeyboard()
+        screen.resetGallowsWordView()
+        createNextWord()
+        
     }
 
 }

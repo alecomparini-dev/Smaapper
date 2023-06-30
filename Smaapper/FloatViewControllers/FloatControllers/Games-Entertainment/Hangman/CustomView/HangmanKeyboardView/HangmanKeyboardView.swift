@@ -14,6 +14,7 @@ protocol HangmanKeyboardViewDelegate: AnyObject {
 class HangmanKeyboardView: ViewBuilder {
     weak var delegate: HangmanKeyboardViewDelegate?
     
+    private let sizeLetter: CGFloat = 14
     private let spacingHorizontal: CGFloat = 8
     private let lettersOfKeyboard: [String] = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",""]
     private var letterViewOfKeyboard: [HangmanKeyboardLetterView] = []
@@ -112,6 +113,7 @@ class HangmanKeyboardView: ViewBuilder {
         return btn
     }()
     
+    
 //  MARK: - LAZY HINT
 
     lazy var hintButton: DefaultFloatViewButton = {
@@ -122,6 +124,13 @@ class HangmanKeyboardView: ViewBuilder {
         return btn
     }()
     
+//  MARK: - ACTIONS
+    func resetKeyboard() {
+        letterViewOfKeyboard.forEach { letter in
+            letter.resetKeyboardLetterView()
+            letter.gallowsLetter.button.setTitleSize(sizeLetter)
+        }
+    }
     
 //  MARK: - PRIVATE Area
     
@@ -188,7 +197,7 @@ class HangmanKeyboardView: ViewBuilder {
 
     private func createGallowsLetterView(_ text: String) -> HangmanKeyboardLetterView {
         let letter = HangmanKeyboardLetterView(text, Theme.shared.currentTheme.surfaceContainer)
-        letter.gallowsLetter.button.setTitleSize(14)
+        letter.gallowsLetter.button.setTitleSize(sizeLetter)
         return letter
     }
         
