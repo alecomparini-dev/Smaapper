@@ -283,7 +283,10 @@ class HangmanFloatViewController: FloatViewController {
         let setSuccessLetterIndex: Set<Int> = successLetterIndex
         let setWordIndex: Set<Int> = Set(0...(lettersInWord.count - 1))
         let indexToReveal = setWordIndex.subtracting(setSuccessLetterIndex).sorted()
-        revealLetterInWord(indexToReveal, Theme.shared.currentTheme.error)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.revealLetterInWord(indexToReveal, Theme.shared.currentTheme.error)
+        }
+        
     }
     
     private func changeDollFailure() {
@@ -323,8 +326,9 @@ class HangmanFloatViewController: FloatViewController {
     private func revealLetterInWord(_ indexLetter: [Int], _ color: UIColor, _ durationIncrement: Double = 0.5) {
         var duration = 0.5
         indexLetter.forEach { index in
-            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) {
-                self.screen.gallowsWordView.revealLetterInWord(self.lettersInWord[index], color)
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) { [weak self] in
+                guard let self else {return}
+                screen.gallowsWordView.revealLetterInWord(lettersInWord[index], color)
             }
             duration += durationIncrement
         }

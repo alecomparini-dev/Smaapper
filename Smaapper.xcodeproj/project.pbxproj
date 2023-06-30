@@ -132,6 +132,8 @@
 		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
 		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
 		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
+		02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */; };
+		02DC8DB72A4F044A00561516 /* HangmanMoreTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB62A4F044A00561516 /* HangmanMoreTipViewController.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -306,6 +308,8 @@
 		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
 		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
+		02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipView.swift; sourceTree = "<group>"; };
+		02DC8DB62A4F044A00561516 /* HangmanMoreTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipViewController.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -1095,6 +1099,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		02DC8DB32A4F041300561516 /* HangmanMoreTip */ = {
+			isa = PBXGroup;
+			children = (
+				02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */,
+				02DC8DB62A4F044A00561516 /* HangmanMoreTipViewController.swift */,
+			);
+			path = HangmanMoreTip;
+			sourceTree = "<group>";
+		};
 		02E9740F2A336A2600BF14EE /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1352,6 +1365,7 @@
 		02FB2CA02A45D7D900C7FC98 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				02DC8DB32A4F041300561516 /* HangmanMoreTip */,
 				02FB2CA62A45E19D00C7FC98 /* GallowsView */,
 				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
 				026CF1662A49CBCB009CEE6E /* HangmanKeyboardView */,
@@ -1554,6 +1568,7 @@
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
 				02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */,
 				02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */,
+				02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */,
 				02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				02FB2C972A45C33900C7FC98 /* HangmanView.swift in Sources */,
@@ -1644,6 +1659,7 @@
 				0234A92229F9FD3A008392EC /* ShadowBuilder.swift in Sources */,
 				020D0E4B2A1E5A6F007F3992 /* DropdownMenu.swift in Sources */,
 				02E974472A37EF9200BF14EE /* UpcomingHolidaysView.swift in Sources */,
+				02DC8DB72A4F044A00561516 /* HangmanMoreTipViewController.swift in Sources */,
 				020D0E632A1ECE02007F3992 /* ViewBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
