@@ -109,8 +109,7 @@ class ListBuilder: BaseBuilder {
     }
     
     
-//  MARK: - Populate List
-    
+//  MARK: - POPULATE LIST
     func setSectionInList(_ section: Section) {
         list.sections.append(section)
     }
@@ -125,9 +124,7 @@ class ListBuilder: BaseBuilder {
     }
     
     
-    
-//  MARK: - Show List
-    
+//  MARK: - SHOW List
     var isShow: Bool {
         get { return self._isShow }
         set {
@@ -138,7 +135,7 @@ class ListBuilder: BaseBuilder {
     }
     
     
-//  MARK: - Private Area
+//  MARK: - PRIVATE Area
     private func applyOnceConfig() {
         if self._isShow && !alreadyApplied {
             registerCell()
