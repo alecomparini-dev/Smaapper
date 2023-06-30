@@ -176,8 +176,8 @@ extension DefaultDollView: DollProtocol {
         showAllBodyPart()
         UtilsDoll.successAnimation(doll.view, doll.view.frame.origin.y + 18) { [weak self] in
             guard let self else {return}
-            doll.view.frame.origin.x = doll.view.frame.origin.x - 15
-            doll.view.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/4)
+            doll.view.frame.origin.y = doll.view.frame.origin.y + 15
+            doll.view.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2.5)
             UtilsDoll.transitionImageAnimation(doll.view, "figure.taichi")
         }
     }

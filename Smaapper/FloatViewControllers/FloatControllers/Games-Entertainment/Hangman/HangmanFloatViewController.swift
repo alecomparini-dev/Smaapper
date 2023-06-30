@@ -363,13 +363,11 @@ extension HangmanFloatViewController: HangmanViewDelegate {
     }
     
     func nextWord() {
-        
         if isLastWord() { return  }
         resetControls()
+        screen.resetHangmanView()
         screen.gallowsKeyboardView.resetKeyboard()
-        screen.resetGallowsWordView()
         createNextWord()
-        
     }
 
 }
