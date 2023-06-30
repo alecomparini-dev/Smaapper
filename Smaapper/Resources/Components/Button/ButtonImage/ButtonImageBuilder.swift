@@ -52,6 +52,7 @@ class ButtonImageBuilder: ButtonBuilder {
             super.view.configuration?.image = image
         }
         super.view.setImage(image, for: state)
+        super.view.imageView?.contentMode = .scaleAspectFill
         return self
     }
     
@@ -60,7 +61,7 @@ class ButtonImageBuilder: ButtonBuilder {
         super.view.configuration?.imagePlacement = alignment
         return self
     }
-    
+        
     @discardableResult
     func setImageColor(_ color: UIColor) -> Self {
         super.view.configuration?.baseForegroundColor = color

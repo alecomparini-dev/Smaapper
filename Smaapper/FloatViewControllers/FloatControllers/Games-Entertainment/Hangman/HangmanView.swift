@@ -10,6 +10,7 @@ import UIKit
 protocol HangmanViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
+    func nextWord()
 }
 
 class HangmanView: ViewBuilder {
@@ -53,7 +54,7 @@ class HangmanView: ViewBuilder {
                     .setIntensity(to: .light, percent: 80)
                     .setBlur(to: .light, percent: 3)
                     .setBlur(to: .dark, percent: 5)
-                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .light, percent: 5)
                     .apply()
             }
             .setConstraints { build in
@@ -65,20 +66,38 @@ class HangmanView: ViewBuilder {
             }
         return view
     }()
+    
+    lazy var nextWordButton: ButtonImageBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "chevron.right.circle.fill"))
+            .setContentMode(.scaleAspectFill)
+        let btn = ButtonImageBuilder(img.view)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
+            .setConstraints { build in
+                build
+                    .setVerticalAlignmentY.equalTo(painelGallowsView.view)
+                    .setTrailing.equalTo(painelGallowsView.view, .trailing , -10)
+                    .setSize.equalToConstant(30)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(nextWord), .touchUpInside)
+            }
+        return btn
+    }()
 
     lazy var gallowsView: GallowsView = {
-        let img = GallowsView()
+        let view = GallowsView()
             .setConstraints { build in
                 build
                     .setTop.equalToSuperView(13)
                     .setBottom.equalToSuperView(-18)
                     .setLeading.setTrailing.equalToSuperView
             }
-        return img
+        return view
     }()
  
     lazy var tipDescriptionLabel: LabelBuilder = {
-        let img = LabelBuilder()
+        let label = LabelBuilder()
             .setColor(Theme.shared.currentTheme.onSurfaceVariant)
             .setTextAlignment(.center)
             .setConstraints { build in
@@ -86,18 +105,12 @@ class HangmanView: ViewBuilder {
                     .setTop.equalTo(painelGallowsView.view, .bottom, 13)
                     .setLeading.setTrailing.equalToSuperView(15)
             }
-        return img
+        return label
     }()
     
     lazy var gallowsWordView: HangmanWordView = {
-        let img = HangmanWordView()
-            .setConstraints { build in
-                build
-                    .setTop.equalTo(painelGallowsView.view, .bottom, 50)
-                    .setLeading.setTrailing.equalToSuperView(15)
-                    .setHeight.equalToConstant(65)
-            }
-        return img
+        let view = createHangmanWordView()
+        return view
     }()
     
     lazy var gallowsKeyboardView: HangmanKeyboardView = {
@@ -111,6 +124,14 @@ class HangmanView: ViewBuilder {
     }()
     
     
+//  MARK: - ACTION
+    func resetGallowsWordView() {
+        gallowsWordView.view.removeFromSuperview()
+        gallowsWordView = createHangmanWordView()
+        gallowsWordView.add(insideTo: self.view)
+        gallowsWordView.applyConstraint()
+    }
+    
 //  MARK: - @OBJC Area
     @objc private func minimizeWindow() {
         delegate?.minimizeWindow()
@@ -120,7 +141,22 @@ class HangmanView: ViewBuilder {
         delegate?.closeWindow()
     }
     
+    @objc private func nextWord() {
+        delegate?.nextWord()
+    }
+    
 //  MARK: - PRIVATE Area
+    
+    private func createHangmanWordView() -> HangmanWordView{
+        let view = HangmanWordView()
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(painelGallowsView.view, .bottom, 50)
+                    .setLeading.setTrailing.equalToSuperView(15)
+                    .setHeight.equalToConstant(65)
+            }
+        return view
+    }
     
     private func configStyles() {
         configBorder()
@@ -142,6 +178,7 @@ class HangmanView: ViewBuilder {
         titleView.add(insideTo: self.view)
         painelGallowsView.add(insideTo: self.view)
         gallowsView.add(insideTo: painelGallowsView.view)
+        nextWordButton.add(insideTo: self.view)
         tipDescriptionLabel.add(insideTo: self.view)
         gallowsWordView.add(insideTo: self.view)
         gallowsKeyboardView.add(insideTo: self.view)
@@ -150,8 +187,9 @@ class HangmanView: ViewBuilder {
     private func configConstraints() {
         titleView.applyConstraint()
         painelGallowsView.applyConstraint()
-        tipDescriptionLabel.applyConstraint()
         gallowsView.applyConstraint()
+        nextWordButton.applyConstraint()
+        tipDescriptionLabel.applyConstraint()
         gallowsWordView.applyConstraint()
         gallowsKeyboardView.applyConstraint()
     }

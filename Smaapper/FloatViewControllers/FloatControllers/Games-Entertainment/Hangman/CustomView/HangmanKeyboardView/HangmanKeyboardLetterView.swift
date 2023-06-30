@@ -36,17 +36,17 @@ class HangmanKeyboardLetterView: ViewBuilder {
 //  MARK: - LAZY Area
     
     lazy var gallowsLetter: DefaultFloatViewButton = {
-        let button = DefaultFloatViewButton(self.color, self.text)
-            .setConstraints { build in
-                build
-                    .setPin.equalToSuperView
-            }
-        button.button.setActions { build in
-            build
-                .setTarget(self, #selector(letterTapped), .touchUpInside)
-        }
+        let button = createLetter()
         return button
     }()
+    
+    
+//  MARK: - ACTION
+    func resetKeyboardLetterView() {
+        gallowsLetter.view.removeFromSuperview()
+        gallowsLetter = createLetter()
+        initialization()
+    }
     
 
 //  MARK: - SET Properties
@@ -67,6 +67,19 @@ class HangmanKeyboardLetterView: ViewBuilder {
     private func configButtonInteraction() {
         self.buttonInteration = ButtonInteractionView(self.gallowsLetter.outlineView.view)
         
+    }
+    
+    private func createLetter() -> DefaultFloatViewButton{
+        let button = DefaultFloatViewButton(self.color, self.text)
+            .setConstraints { build in
+                build
+                    .setPin.equalToSuperView
+            }
+        button.button.setActions { build in
+            build
+                .setTarget(self, #selector(letterTapped), .touchUpInside)
+        }
+        return button
     }
     
 }
