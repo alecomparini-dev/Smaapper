@@ -347,7 +347,41 @@ class HangmanFloatViewController: FloatViewController {
         indexMatchInWordFromChosenLetter = []
         chosenLetterFromKeyboard = nil
     }
-
+    
+    private func configMoreTipView() {
+        if isEndGame {return}
+        screen.moreTipView.setHidden(false)
+        showMoreTipViewAnimation()
+        
+    }
+    
+    
+//  MARK: - ANIMATION Area
+    
+    private func showMoreTipViewAnimation() {
+        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x, y: screen.gallowsKeyboardView.view.frame.maxY, width: screen.gallowsKeyboardView.view.bounds.width, height: 0)
+        screen.moreTipView.setHidden(false)
+        UIView.animate(withDuration: 0.5, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width, height: screen.gallowsKeyboardView.view.bounds.height)
+            screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.origin.y
+        })
+    }
+    
+    private func hideMoreTipViewAnimation() {
+        if screen.moreTipView.view.isHidden {return}
+        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+            guard let self else {return}
+            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width, height: 0)
+            screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.maxY
+            
+        }, completion: {[weak self] _ in
+            guard let self else {return}
+            screen.moreTipView.setHidden(true)
+        })
+        
+    }
+    
 }
 
 
@@ -363,6 +397,7 @@ extension HangmanFloatViewController: HangmanViewDelegate {
     }
     
     func nextWord() {
+        hideMoreTipViewAnimation()
         if isLastWord() { return  }
         resetControls()
         screen.resetHangmanView()
@@ -375,12 +410,16 @@ extension HangmanFloatViewController: HangmanViewDelegate {
 
 //  MARK: - EXTENSION HangmanKeyboardViewDelegate
 extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
-    
     func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView) {
         if isEndGame {return}
         self.chosenLetterFromKeyboard = letter
         updateGame()
     }
+    
+    func moreTipTapped() {
+        configMoreTipView()
+    }
+    
     
     
 }

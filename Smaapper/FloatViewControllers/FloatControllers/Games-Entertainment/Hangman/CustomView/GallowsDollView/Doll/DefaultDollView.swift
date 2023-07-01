@@ -146,6 +146,8 @@ extension DefaultDollView: DollProtocol {
     
     func secondError() {
         UtilsDoll.showBodyPartAnimation(torsoView.view)
+        leftArmView.view.frame.origin.x += 2
+        rightArmView.view.frame.origin.x -= 2
     }
     
     func thirdError() {
