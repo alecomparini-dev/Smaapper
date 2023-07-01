@@ -134,6 +134,7 @@
 		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
 		02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */; };
 		02DC8DB72A4F044A00561516 /* HangmanMoreTipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB62A4F044A00561516 /* HangmanMoreTipViewController.swift */; };
+		02DC8DB92A50709200561516 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB82A50709200561516 /* Constants.swift */; };
 		02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974112A3394C700BF14EE /* FloatNavigationController.swift */; };
 		02E974142A3398F000BF14EE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974132A3398F000BF14EE /* Coordinator.swift */; };
 		02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974152A3399B100BF14EE /* HomeCoordinator.swift */; };
@@ -310,6 +311,7 @@
 		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
 		02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipView.swift; sourceTree = "<group>"; };
 		02DC8DB62A4F044A00561516 /* HangmanMoreTipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipViewController.swift; sourceTree = "<group>"; };
+		02DC8DB82A50709200561516 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		02E974112A3394C700BF14EE /* FloatNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatNavigationController.swift; sourceTree = "<group>"; };
 		02E974132A3398F000BF14EE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		02E974152A3399B100BF14EE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -930,6 +932,7 @@
 				0234A5F029F9F30F008392EC /* AppDelegate.swift */,
 				0234A5FB29F9F310008392EC /* LaunchScreen.storyboard */,
 				0234A5F229F9F30F008392EC /* SceneDelegate.swift */,
+				02DC8DB82A50709200561516 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1547,6 +1550,7 @@
 				026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */,
+				02DC8DB92A50709200561516 /* Constants.swift in Sources */,
 				02E974412A37D25600BF14EE /* QuizView.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,

@@ -27,17 +27,17 @@ class HangmanMoreTipView: View {
     private func initialization() {
         addElements()
         configConstraints()
-        setBackgroundColor(.red)
     }
     
 //  MARK: - LAZY Area
     
     lazy var tipList: ListBuilder = {
-        let list = ListBuilder(.insetGrouped)
+        let list = ListBuilder(.grouped)
             .setSeparatorStyle(.none)
-            .setRowHeight(50)
-            .setShowsVerticalScrollIndicator(false)
+            .setRowHeight(40)
+            .setSectionHeaderHeight(50)
             .setWidthLeftColumnCell(10)
+            .setShowsVerticalScrollIndicator(false)
             .setActions({ build in
                 build
                     .setDidSelectRow { [weak self] section, row in

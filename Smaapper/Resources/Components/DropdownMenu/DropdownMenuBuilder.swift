@@ -116,11 +116,11 @@ class DropdownMenuBuilder: BaseBuilder {
     //  MARK: - SET Data In List
     
     func setSectionInDropdown(_ section: Section) {
-        dropdown.list.setSectionInList(section)
+        dropdown.list.populateSection(section)
     }
     
     func setRowInSection(_ section: Section, _ row: Row) {
-        dropdown.list.setRowInSection(section, row)
+        dropdown.list.populateRowInSection(section, row)
     }
     
     func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {

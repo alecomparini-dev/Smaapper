@@ -67,7 +67,7 @@ class CategoriesViewController: UIViewController {
     private func populateSection(_ sectionText: String? ) -> Section {
         let middleSectionView = screen.createMiddleSectionView(sectionText ?? "")
         let section = Section(leftView: nil, middleView: middleSectionView)
-        screen.list.setSectionInList(section)
+        screen.list.populateSection(section)
         return section
     }
     
@@ -76,7 +76,7 @@ class CategoriesViewController: UIViewController {
             self.indexRow = index
             let row: Row = self.createRowView(row)
             setCornerRadiusSection(row)
-            screen.list.setRowInSection(section, row)
+            screen.list.populateRowInSection(section, row)
         }
     }
     

@@ -67,16 +67,19 @@ class HangmanView: ViewBuilder {
         return view
     }()
     
-    lazy var nextWordButton: ButtonImageBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "chevron.right.circle.fill"))
-            .setContentMode(.scaleAspectFill)
-        let btn = ButtonImageBuilder(img.view)
+    lazy var nextWordButton: IconButtonBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: K.Hangman.Images.nextWordButton))
+        let btn = IconButtonBuilder(img.view)
             .setImageColor(Theme.shared.currentTheme.onSurface)
+            .setImageSize(20)
+            .setTitleSize(13)
+            .setImagePadding(3)
             .setConstraints { build in
                 build
                     .setVerticalAlignmentY.equalTo(painelGallowsView.view)
-                    .setTrailing.equalTo(painelGallowsView.view, .trailing , -10)
-                    .setSize.equalToConstant(30)
+                    .setTrailing.equalTo(painelGallowsView.view, .trailing, -3)
+                    .setWidth.equalToConstant(50)
+                    .setHeight.equalToConstant(35)
             }
             .setActions { build in
                 build
@@ -119,13 +122,12 @@ class HangmanView: ViewBuilder {
     
     lazy var moreTipView: ViewBuilder = {
         let view = ViewBuilder()
+            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainerHigh)
             .setBorder({ build in
                 build
-                    .setCornerRadius(10)
+                    .setCornerRadius(15)
             })
             .setHidden(true)
-            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
-
         return view
     }()
     

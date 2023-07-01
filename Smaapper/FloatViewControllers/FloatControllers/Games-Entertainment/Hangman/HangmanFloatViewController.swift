@@ -9,21 +9,22 @@ import UIKit
 
 
 class HangmanFloatViewController: FloatViewController {
-    static let identifierApp = "hangman"
+    static let identifierApp = K.Hangman.identifierApp
     
-    private let errorCountToEndGame = 6
-    private var chosenLetterFromKeyboard: HangmanKeyboardLetterView?
+    private let viewModel: HangmanViewModel = HangmanViewModel()
+    
+    private let errorCountToEndGame: Int8 = K.Hangman.errorCountToEndGame
+    private let quantityLetterByLine = K.Hangman.quantityLetterByLine
+    
+    private var errorLetters: Int8 = 0
+    private var successLetterIndex: Set<Int> = []
+    private var lastPlayedWord: String = "arbitrio"
     private var lettersInWord: [HangmanLetterInWordView] = []
     private var indexMatchInWordFromChosenLetter: [Int] = []
-    private var errorLetters: Int = 0
-    private var successLetterIndex: Set<Int> = []
     private var isEndGame: Bool = false
-    
-    private var lastPlayedWord: String = "arbitrio"
-    private let quantityLetterByLine = 10
-    private let viewModel: HangmanViewModel = HangmanViewModel()
     private var hangmanWords: [HangmanWord] = []
     private var currentIndexPlayedWord: Int = -1
+    private var chosenLetterFromKeyboard: HangmanKeyboardLetterView?
     
     lazy var screen: HangmanView = {
         let view = HangmanView()
@@ -69,14 +70,17 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func calculatePositionFloatView() {
-        var y: CGFloat = 30
+        var y: CGFloat = K.Hangman.FloatView.positionY
         if #available(iOS 11.0, *) {
             let window = Utils.currentWindow
             if let topSafeAreaInset = window?.safeAreaInsets.top {
                 y = topSafeAreaInset
             }
         }
-        setFrameWindow(CGRect(x: 30, y: y, width: 290, height: 550))
+        setFrameWindow(CGRect(x: K.Hangman.FloatView.positionX,
+                              y: y,
+                              width: K.Hangman.FloatView.width,
+                              height: K.Hangman.FloatView.height))
     }
     
     private func configInitialWord() {
@@ -174,7 +178,7 @@ class HangmanFloatViewController: FloatViewController {
         if chosenLetterFromKeyboard.buttonInteration?.isPressed ?? true {return}
         verifyMatchToGallowsWord(chosenLetterFromKeyboard.text)
         updateLetterOnKeyboard()
-        revealLetterInWord(self.indexMatchInWordFromChosenLetter, Theme.shared.currentTheme.primary, 1)
+        revealLetterInWord(self.indexMatchInWordFromChosenLetter, Theme.shared.currentTheme.primary, K.Hangman.Animation.Duration.revealLetter)
         revealGallowsDoll()
         checkEndGame()
     }
@@ -185,24 +189,23 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func revealBodyPart() {
-        
         switch errorLetters {
-            case 1:
+            case K.Hangman.ErrorLetters.firstError:
                 screen.gallowsView.gallowsDollView.firstError()
             
-            case 2:
+            case K.Hangman.ErrorLetters.secondError:
                 screen.gallowsView.gallowsDollView.secondError()
             
-            case 3:
+            case K.Hangman.ErrorLetters.thirdError:
                 screen.gallowsView.gallowsDollView.thirdError()
             
-            case 4:
+            case K.Hangman.ErrorLetters.fourthError:
                 screen.gallowsView.gallowsDollView.fourthError()
             
-            case 5:
+            case K.Hangman.ErrorLetters.fifthError:
                 screen.gallowsView.gallowsDollView.fifthError()
             
-            case 6:
+            case K.Hangman.ErrorLetters.sixthError:
                 screen.gallowsView.gallowsDollView.sixthError()
             
             default:
@@ -225,7 +228,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func updateLetterSuccess() {
         removeNeumorphismLetter()
-        configStyleButtonPressed(15, Theme.shared.currentTheme.surfaceContainerHighest)
+        configStyleButtonPressed(K.Hangman.cornerRadius, Theme.shared.currentTheme.surfaceContainerHighest)
         pressedButtonLetter()
     }
     
@@ -233,7 +236,7 @@ class HangmanFloatViewController: FloatViewController {
         incrementErrorCount()
         removeNeumorphismLetter()
         setShadowColorError()
-        configStyleButtonPressed(15, Theme.shared.currentTheme.surfaceContainer)
+        configStyleButtonPressed(K.Hangman.cornerRadius, Theme.shared.currentTheme.surfaceContainer)
         pressedButtonLetter()
     }
     
@@ -329,8 +332,8 @@ class HangmanFloatViewController: FloatViewController {
         chosenLetterFromKeyboard?.buttonInteration?.setColor(Theme.shared.currentTheme.error)
     }
     
-    private func revealLetterInWord(_ indexLetter: [Int], _ color: UIColor, _ durationIncrement: Double = 0.5) {
-        var duration = 0.5
+    private func revealLetterInWord(_ indexLetter: [Int], _ color: UIColor, _ durationIncrement: Double = K.Hangman.Animation.Duration.standard) {
+        var duration = K.Hangman.Animation.Duration.standard
         indexLetter.forEach { index in
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(duration)) { [weak self] in
                 guard let self else {return}
@@ -352,25 +355,41 @@ class HangmanFloatViewController: FloatViewController {
         if isEndGame {return}
         screen.moreTipView.setHidden(false)
         showMoreTipViewAnimation()
+        
+        let hangMoreTip = HangmanMoreTipViewController(["tomar no cu"])
+            .setConstraints { build in
+                build.setPin.equalToSuperView
+            }
+        hangMoreTip.add(insideTo: screen.moreTipView.view)
+        hangMoreTip.applyConstraint()
+        
     }
     
     
 //  MARK: - ANIMATION Area
     
     private func showMoreTipViewAnimation() {
-
-        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x - 5, y: screen.gallowsKeyboardView.view.frame.maxY, width: screen.gallowsKeyboardView.view.bounds.width + 12, height: 0)
+        positionMoreTip()
         screen.moreTipView.setHidden(false)
-        UIView.animate(withDuration: 0.5, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+        UIView.animate(withDuration: K.Hangman.Animation.Duration.standard, delay: K.Hangman.Animation.Delay.standard , options: .curveEaseInOut, animations: { [weak self] in
             guard let self else {return}
-            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width + 12, height: screen.gallowsKeyboardView.view.bounds.height + 10)
-            screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.origin.y - 4
+            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width + K.Hangman.MoreTip.margin,
+                                                        height: screen.gallowsKeyboardView.view.bounds.height + K.Hangman.MoreTip.margin)
+            screen.moreTipView.view.frame.origin = CGPoint(x:screen.gallowsKeyboardView.view.frame.origin.x - K.Hangman.MoreTip.positionX,
+                                                           y:screen.gallowsKeyboardView.view.frame.origin.y - K.Hangman.MoreTip.positionY)
         })
+    }
+    
+    private func positionMoreTip() {
+        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x,
+                                               y: screen.gallowsKeyboardView.view.frame.maxY,
+                                               width: screen.gallowsKeyboardView.view.bounds.width,
+                                               height: 0)
     }
     
     private func hideMoreTipViewAnimation() {
         if screen.moreTipView.view.isHidden {return}
-        UIView.animate(withDuration: 0.3, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
+        UIView.animate(withDuration: K.Hangman.Animation.Duration.hide, delay: K.Hangman.Animation.Delay.standard , options: .curveEaseInOut, animations: { [weak self] in
             guard let self else {return}
             screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width, height: 0)
             screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.maxY
