@@ -9,6 +9,7 @@ import UIKit
 
 protocol HangmanKeyboardViewDelegate: AnyObject {
     func letterKeyboardTapped(_ letter: HangmanKeyboardLetterView)
+    func moreTipTapped()
 }
 
 class HangmanKeyboardView: ViewBuilder {
@@ -116,13 +117,23 @@ class HangmanKeyboardView: ViewBuilder {
     
 //  MARK: - LAZY HINT
 
-    lazy var hintButton: DefaultFloatViewButton = {
+    lazy var moreTipButton: DefaultFloatViewButton = {
         let btn = DefaultFloatViewButton(Theme.shared.currentTheme.secondary, "More tip ...")
         btn.button.setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
             .setTintColor(Theme.shared.currentTheme.onPrimary)
             .setTitleSize(14)
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(moreTipTapped), .touchUpInside)
+            }
         return btn
     }()
+    
+    
+//  MARK: - SET Properties
+    @objc private func moreTipTapped() {
+        delegate?.moreTipTapped()
+    }
     
 //  MARK: - ACTIONS
     func resetKeyboard() {
@@ -146,7 +157,7 @@ class HangmanKeyboardView: ViewBuilder {
     }
 
     private func addHintToRightHorizontalStack1() {
-        hintButton.add(insideTo: rightHorizontalStack1.view)
+        moreTipButton.add(insideTo: rightHorizontalStack1.view)
     }
     
     private func addStackElements() {

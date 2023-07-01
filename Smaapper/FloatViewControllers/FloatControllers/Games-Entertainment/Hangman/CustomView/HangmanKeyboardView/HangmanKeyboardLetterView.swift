@@ -48,12 +48,6 @@ class HangmanKeyboardLetterView: ViewBuilder {
         initialization()
     }
     
-
-//  MARK: - SET Properties
-    @objc private func letterTapped(_ sender: UIButton) {
-        delegate?.letterKeyboardTapped(self)
-    }
-    
     
 //  MARK: - PRIVATE Area
     private func addElements() {
@@ -80,6 +74,12 @@ class HangmanKeyboardLetterView: ViewBuilder {
                 .setTarget(self, #selector(letterTapped), .touchUpInside)
         }
         return button
+    }
+    
+    
+//  MARK: - @OBJC Area
+    @objc private func letterTapped(_ sender: UIButton) {
+        delegate?.letterKeyboardTapped(self)
     }
     
 }

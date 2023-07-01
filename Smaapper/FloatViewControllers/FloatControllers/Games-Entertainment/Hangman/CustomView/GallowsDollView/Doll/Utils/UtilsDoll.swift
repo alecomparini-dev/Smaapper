@@ -11,7 +11,7 @@ class UtilsDoll {
 
     static func showBodyPartAnimation(_ bodyPart: UIView, alpha: (start: CGFloat, end: CGFloat) = (1,0), completion: (()->Void)? = nil) {
         bodyPart.alpha = alpha.start
-        UIView.animate(withDuration: 1, delay: 0.5 , options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.6, delay: 0.3 , options: .curveEaseInOut, animations: {
             bodyPart.alpha = alpha.end
         }, completion: { _ in
             completion?()

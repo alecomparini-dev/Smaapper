@@ -11,7 +11,7 @@ protocol HangmanMoreTipViewDelegate: AnyObject {
     func didSelectRow(_ section: Int, _ row: Int )
 }
 
-class HangmanMoreTipView: ViewBuilder {
+class HangmanMoreTipView: View {
     
     weak var delegate: HangmanMoreTipViewDelegate?
     
@@ -20,9 +20,14 @@ class HangmanMoreTipView: ViewBuilder {
         initialization()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func initialization() {
         addElements()
         configConstraints()
+        setBackgroundColor(.red)
     }
     
 //  MARK: - LAZY Area
@@ -50,7 +55,7 @@ class HangmanMoreTipView: ViewBuilder {
     
 //  MARK: - PRIVATE Area
     private func addElements() {
-        tipList.add(insideTo: self.view)
+        tipList.add(insideTo: self)
     }
     
     private func configConstraints() {

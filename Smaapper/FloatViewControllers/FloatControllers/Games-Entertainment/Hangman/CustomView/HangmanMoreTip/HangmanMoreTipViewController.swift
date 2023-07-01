@@ -8,22 +8,30 @@
 import UIKit
 
 
-class HangmanMoreTipViewController: HangmanMoreTipView {
+class HangmanMoreTipViewController: ViewBuilder {
     
-    private let tip: [String]
+    private var tip: [String] = []
+
+    lazy var customView: HangmanMoreTipView = {
+        let view = HangmanMoreTipView()
+        return view
+    }()
     
-    init(_ tip: [String]) {
-        self.tip = tip
+    override init() {
         super.init()
-        initialization()
+        loadCustomView()
     }
-        
-    private func initialization() {
-        configListTip()
-    }
+    
+    
+//  MARK: - SET Properties
+    
     
     
 //  MARK: - PRIVATE Area
+    private func loadCustomView() {
+        self.view = customView
+    }
+    
     private func configListTip() {
         
     }
