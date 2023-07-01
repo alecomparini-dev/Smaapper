@@ -16,6 +16,7 @@ protocol HangmanViewDelegate: AnyObject {
 class HangmanView: ViewBuilder {
     
     weak var delegate: HangmanViewDelegate?
+    private(set) var hangmanMoreTipViewController: HangmanMoreTipViewController?
     
     override init() {
         super.init()
@@ -70,6 +71,7 @@ class HangmanView: ViewBuilder {
     lazy var nextWordButton: IconButtonBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: K.Hangman.Images.nextWordButton))
         let btn = IconButtonBuilder(img.view)
+            .setHidden(true)
             .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageSize(20)
             .setTitleSize(13)
@@ -133,9 +135,33 @@ class HangmanView: ViewBuilder {
     
 
 //  MARK: - ACTION
-    func resetHangmanView() {
-        resetGallowsView()
-        resetGallowsWordView()
+    
+    func createHangmanMoreTipViewController(_ tips: [String]) {
+        hangmanMoreTipViewController = HangmanMoreTipViewController(tips)
+            .setConstraints { build in
+                build.setPin.equalToSuperView
+            }
+        hangmanMoreTipViewController?.add(insideTo: moreTipView.view)
+        hangmanMoreTipViewController?.applyConstraint()
+    }
+    
+    func resetGallowsView() {
+        gallowsView.view.removeFromSuperview()
+        gallowsView = createHangmanGallowsView()
+        addGallowsView()
+        configGallowsViewContraints()
+    }
+    
+    func resetGallowsWordView() {
+        gallowsWordView.view.removeFromSuperview()
+        gallowsWordView = createHangmanWordView()
+        addGallowsWordView()
+        configGallowsWordViewContraints()
+    }
+    
+    func resetHangmanMoreTipViewController() {
+        hangmanMoreTipViewController?.view.removeFromSuperview()
+        hangmanMoreTipViewController = nil
     }
     
     
@@ -154,6 +180,8 @@ class HangmanView: ViewBuilder {
     
     
 //  MARK: - PRIVATE Area
+    
+    
     private func createHangmanGallowsView() -> GallowsView{
         let view = GallowsView()
             .setConstraints { build in
@@ -219,7 +247,6 @@ class HangmanView: ViewBuilder {
         tipDescriptionLabel.applyConstraint()
         configGallowsWordViewContraints()
         gallowsKeyboardView.applyConstraint()
-//        moreTipView.applyConstraint()
     }
     
     private func configGallowsViewContraints() {
@@ -230,19 +257,7 @@ class HangmanView: ViewBuilder {
         gallowsWordView.applyConstraint()
     }
     
-    private func resetGallowsView() {
-        gallowsView.view.removeFromSuperview()
-        gallowsView = createHangmanGallowsView()
-        addGallowsView()
-        configGallowsViewContraints()
-    }
-    
-    private func resetGallowsWordView() {
-        gallowsWordView.view.removeFromSuperview()
-        gallowsWordView = createHangmanWordView()
-        addGallowsWordView()
-        configGallowsWordViewContraints()
-    }
+
     
 
 }

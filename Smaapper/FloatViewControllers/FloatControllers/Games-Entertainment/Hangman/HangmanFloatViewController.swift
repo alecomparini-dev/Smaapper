@@ -16,6 +16,7 @@ class HangmanFloatViewController: FloatViewController {
     private let errorCountToEndGame: Int8 = K.Hangman.errorCountToEndGame
     private let quantityLetterByLine = K.Hangman.quantityLetterByLine
     
+    private var indicesToReveal: [Int] = []
     private var errorLetters: Int8 = 0
     private var successLetterIndex: Set<Int> = []
     private var lastPlayedWord: String = "arbitrio"
@@ -280,8 +281,19 @@ class HangmanFloatViewController: FloatViewController {
         let colorError = Theme.shared.currentTheme.error
         changeColorGallows(colorError)
         changeDollFailure()
-        revealOtherLetterInWord()
+        revealErrorLetterInWord()
         saveLastPlayedWord()
+        showNextWord(wait: calculateWait())
+    }
+    
+    private func calculateWait() -> Double {
+        return (Double(indicesToReveal.count) * 0.5) + 1
+    }
+    
+    private func showNextWord(wait: Double)  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + wait) { [weak self] in
+            self?.screen.nextWordButton.setHidden(false)
+        }
     }
     
     private func configSuccessEndGame() {
@@ -289,18 +301,20 @@ class HangmanFloatViewController: FloatViewController {
         screen.gallowsView.ropeCircleGallows.setHidden(true)
         screen.gallowsView.gallowsDollView.showDollSuccess()
         saveLastPlayedWord()
+        showNextWord(wait: 2)
     }
 
     private func saveLastPlayedWord() {
         //TODO: - SAVE LOCAL REALM
     }
     
-    private func revealOtherLetterInWord() {
+    private func revealErrorLetterInWord() {
         let setSuccessLetterIndex: Set<Int> = successLetterIndex
         let setWordIndex: Set<Int> = Set(0...(lettersInWord.count - 1))
-        let indexToReveal = setWordIndex.subtracting(setSuccessLetterIndex).sorted()
+        indicesToReveal = setWordIndex.subtracting(setSuccessLetterIndex).sorted()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.revealLetterInWord(indexToReveal, Theme.shared.currentTheme.error)
+            guard let self else {return}
+            revealLetterInWord(indicesToReveal, Theme.shared.currentTheme.error)
         }
     }
     
@@ -352,17 +366,28 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func configMoreTipView() {
-        if isEndGame {return}
         screen.moreTipView.setHidden(false)
         showMoreTipViewAnimation()
-        
-        let hangMoreTip = HangmanMoreTipViewController(["tomar no cu"])
-            .setConstraints { build in
-                build.setPin.equalToSuperView
-            }
-        hangMoreTip.add(insideTo: screen.moreTipView.view)
-        hangMoreTip.applyConstraint()
-        
+    }
+    
+    private func showMoreTipsView() {
+        screen.createHangmanMoreTipViewController(getCurrentWord().tips)
+        screen.hangmanMoreTipViewController?.delegate = self
+    }
+    
+    private func positionMoreTip() {
+        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x,
+                                               y: screen.gallowsKeyboardView.view.frame.maxY,
+                                               width: screen.gallowsKeyboardView.view.bounds.width,
+                                               height: 0)
+    }
+    
+    private func resetElements() {
+        resetControls()
+        screen.resetGallowsView()
+        screen.resetGallowsWordView()
+        screen.resetHangmanMoreTipViewController()
+        screen.gallowsKeyboardView.resetKeyboard()
     }
     
     
@@ -377,14 +402,10 @@ class HangmanFloatViewController: FloatViewController {
                                                         height: screen.gallowsKeyboardView.view.bounds.height + K.Hangman.MoreTip.margin)
             screen.moreTipView.view.frame.origin = CGPoint(x:screen.gallowsKeyboardView.view.frame.origin.x - K.Hangman.MoreTip.positionX,
                                                            y:screen.gallowsKeyboardView.view.frame.origin.y - K.Hangman.MoreTip.positionY)
+        }, completion: { [weak self] _ in
+            guard let self else {return}
+            showMoreTipsView()
         })
-    }
-    
-    private func positionMoreTip() {
-        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x,
-                                               y: screen.gallowsKeyboardView.view.frame.maxY,
-                                               width: screen.gallowsKeyboardView.view.bounds.width,
-                                               height: 0)
     }
     
     private func hideMoreTipViewAnimation() {
@@ -398,7 +419,6 @@ class HangmanFloatViewController: FloatViewController {
             guard let self else {return}
             screen.moreTipView.setHidden(true)
         })
-        
     }
     
 }
@@ -418,9 +438,8 @@ extension HangmanFloatViewController: HangmanViewDelegate {
     func nextWord() {
         hideMoreTipViewAnimation()
         if isLastWord() { return  }
-        resetControls()
-        screen.resetHangmanView()
-        screen.gallowsKeyboardView.resetKeyboard()
+        resetElements()
+        screen.nextWordButton.setHidden(true)
         createNextWord()
     }
 
@@ -439,7 +458,21 @@ extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
         configMoreTipView()
     }
     
+}
+
+
+//  MARK: - EXTENSION HangmanKeyboardViewDelegate
+extension HangmanFloatViewController: HangmanMoreTipViewControllerDelegate {
+    func didSelectRow(_ section: Int, _ row: Int) {
+        
+    }
+    
+    func closeMoreTipTapped() {
+        screen.resetHangmanMoreTipViewController()
+        hideMoreTipViewAnimation()
+    }
     
     
 }
+
 
