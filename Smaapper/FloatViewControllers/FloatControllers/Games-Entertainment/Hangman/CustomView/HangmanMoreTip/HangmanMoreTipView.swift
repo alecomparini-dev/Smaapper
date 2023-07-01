@@ -9,6 +9,7 @@ import UIKit
 
 protocol HangmanMoreTipViewDelegate: AnyObject {
     func didSelectRow(_ section: Int, _ row: Int )
+    func closeMoreTipTapped()
 }
 
 class HangmanMoreTipView: View {
@@ -33,9 +34,10 @@ class HangmanMoreTipView: View {
     
     lazy var tipList: ListBuilder = {
         let list = ListBuilder(.grouped)
-            .setSeparatorStyle(.none)
-            .setRowHeight(40)
-            .setSectionHeaderHeight(50)
+            .setSeparatorStyle(.singleLine)
+            .setRowHeight(45)
+            .setSectionHeaderHeight(40)
+            .setSectionFooterHeight(0)
             .setWidthLeftColumnCell(10)
             .setShowsVerticalScrollIndicator(false)
             .setActions({ build in
@@ -46,25 +48,43 @@ class HangmanMoreTipView: View {
             })
             .setConstraints { build in
                 build
-                    .setPin.equalToSuperView
+                    .setTop.equalToSuperView(15)
+                    .setPinBottom.equalToSuperView(10)
             }
         return list
     }()
     
-//    lazy var closeMoreTipButton: ButtonImageBuilder = {
-//        <#statements#>
-//        return <#value#>
-//    }()
+    lazy var closeMoreTipButton: ButtonImageBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "xmark"))
+        let btn = ButtonImageBuilder(img.view)
+            .setImageSize(15)
+            .setImageColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setConstraints { build in
+                build
+                    .setTop.setTrailing.equalToSuperView(10)
+                    .setSize.equalToConstant(30)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(closeMoreTipTapped), .touchUpInside)
+            }
+        return btn
+    }()
     
-    
+//  MARK: - @OBJC Area
+    @objc private func closeMoreTipTapped() {
+        delegate?.closeMoreTipTapped()
+    }
     
 //  MARK: - PRIVATE Area
     private func addElements() {
         tipList.add(insideTo: self)
+        closeMoreTipButton.add(insideTo: self)
     }
     
     private func configConstraints() {
         tipList.applyConstraint()
+        closeMoreTipButton.applyConstraint()
     }
     
     

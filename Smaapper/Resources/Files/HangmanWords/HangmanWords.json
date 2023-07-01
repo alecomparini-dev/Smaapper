@@ -11,7 +11,7 @@
                 "a"
             ],
             "subject": "Psicologia",
-            "tip": [
+            "tips": [
                 "Capacidade de se adaptar e se recuperar diante de adversidades",
                 "Força emocional e mental",
                 "Enfrentar e superar desafios",
@@ -29,7 +29,7 @@
                 "a"
             ],
             "subject": "Astronomia",
-            "tip": [
+            "tips": [
                 "Investiga a formação de estrelas, planetas e galáxias",
                 "Explora a expansão do universo",
                 "Estudo da origem, estrutura e evolução do universo",
@@ -47,7 +47,7 @@
                 "o"
             ],
             "subject": "Física",
-            "tip": [
+            "tips": [
                 "Estado em que as forças se compensam",
                 "Ponto de estabilidade",
                 "Distribuição uniforme de peso",
@@ -65,7 +65,7 @@
                 "ção"
             ],
             "subject": "Sociologia",
-            "tip": [
+            "tips": [
                 "Processo de conquista de autonomia e liberdade",
                 "Libertação de restrições e opressões",
                 "Luta por direitos e igualdade",
@@ -83,7 +83,7 @@
                 "a"
             ],
             "subject": "Filosofia",
-            "tip": [
+            "tips": [
                 "Percepção e conhecimento de si mesmo e do mundo",
                 "Estado de estar desperto e alerta",
                 "Capacidade de pensar, raciocinar e refletir",
@@ -100,7 +100,7 @@
                 "a"
             ],
             "subject": "Música",
-            "tip": [
+            "tips": [
                 "Combinação agradável de sons",
                 "Equilíbrio e proporção entre notas",
                 "Consonância e coerência musical",
@@ -118,7 +118,7 @@
                 "a"
             ],
             "subject": "Economia",
-            "tip": [
+            "tips": [
                 "Grande quantidade ou riqueza de recursos",
                 "Prosperidade e fartura",
                 "Disponibilidade suficiente de bens e serviços",
@@ -135,7 +135,7 @@
                 "ção"
             ],
             "subject": "Tecnologia",
-            "tip": [
+            "tips": [
                 "Introdução de novas ideias, métodos ou tecnologias",
                 "Renovação e melhoria de processos",
                 "Criatividade e originalidade",
@@ -153,7 +153,7 @@
                 "a"
             ],
             "subject": "Engenharia",
-            "tip": [
+            "tips": [
                 "Capacidade de um material suportar forças e pressões",
                 "Propriedade de não se deformar ou romper facilmente",
                 "Resistência à tração, compressão ou torção",
@@ -171,7 +171,7 @@
                 "ção"
             ],
             "subject": "Economia",
-            "tip": [
+            "tips": [
                 "Integração e interconexão mundial",
                 "Interdependência econômica e cultural entre países",
                 "Expansão de mercados e trocas comerciais",
@@ -187,7 +187,7 @@
                 "ra"
             ],
             "subject": "Mitologia",
-            "tip": [
+            "tips": [
                 "Criatura mítica com partes de diferentes animais",
                 "Representação de ilusão ou fantasia",
                 "Símbolo de algo impossível ou irreal",
@@ -204,7 +204,7 @@
                 "ro"
             ],
             "subject": "Tempo",
-            "tip": [
+            "tips": [
                 "De curta duração ou passageiro",
                 "Que dura apenas por um breve período",
                 "Transitório e fugaz",
@@ -221,7 +221,7 @@
                 "o"
             ],
             "subject": "Filosofia",
-            "tip": [
+            "tips": [
                 "Liberdade de agir e decidir por si mesmo",
                 "Autonomia e livre vontade",
                 "Capacidade de fazer escolhas conscientes",
@@ -240,7 +240,7 @@
                 "na"
             ],
             "subject": "Linguística",
-            "tip": [
+            "tips": [
                 "Palavra com acento tônico na antepenúltima sílaba",
                 "Regra de acentuação gráfica",
                 "Exemplos: ótimo, médico, câmera",
@@ -258,7 +258,7 @@
                 "mo"
             ],
             "subject": "História",
-            "tip": [
+            "tips": [
                 "Erro de colocar algo fora de seu contexto temporal",
                 "Inadequação temporal",
                 "Presença de elementos fora de sua época",
@@ -276,7 +276,7 @@
                 "a"
             ],
             "subject": "Política",
-            "tip": [
+            "tips": [
                 "Domínio ou supremacia de um grupo sobre outros",
                 "Controle político, econômico ou cultural",
                 "Influência e liderança exercidas por uma nação ou instituição",
@@ -293,7 +293,7 @@
                 "ma"
             ],
             "subject": "Ciência",
-            "tip": [
+            "tips": [
                 "Modelo, padrão ou exemplo a ser seguido",
                 "Conceito fundamental de uma teoria científica",
                 "Estrutura de pensamento e visão de mundo",
@@ -311,7 +311,7 @@
                 "ta"
             ],
             "subject": "Literatura",
-            "tip": [
+            "tips": [
                 "Aquele que caminha nas nuvens",
                 "Sonhador, idealista",
                 "Indivíduo que vive com a cabeça nas nuvens",
@@ -329,7 +329,7 @@
                 "de"
             ],
             "subject": "Inteligência",
-            "tip": [
+            "tips": [
                 "Agudeza mental e perspicácia",
                 "Capacidade de raciocínio rápido e astuto",
                 "Inteligência aguçada e observadora",
@@ -345,7 +345,7 @@
                 "ção"
             ],
             "subject": "Psicologia",
-            "tip": [
+            "tips": [
                 "Certeza profunda e firmeza de pensamento",
                 "Crença forte e inabalável",
                 "Estado de convencimento e confiança",

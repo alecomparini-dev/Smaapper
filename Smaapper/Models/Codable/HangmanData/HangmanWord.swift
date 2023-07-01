@@ -11,5 +11,5 @@ struct HangmanWord: Codable {
     let word: String
     let syllables: [String]
     let subject: String
-    let tip: [String]
+    let tips: [String]
 }

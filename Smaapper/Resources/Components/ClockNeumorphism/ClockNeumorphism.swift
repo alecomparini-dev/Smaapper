@@ -63,7 +63,7 @@ class ClockNeumorphism: ViewBuilder {
     
     lazy var day: LabelBuilder = {
         let label = LabelBuilder()
-            .setText("08-06")
+            .setText("01-07")
             .setFont(UIFont.systemFont(ofSize: 14, weight: .thin))
             .setColor(Theme.shared.currentTheme.primary)
             .setTextAlignment(.right)

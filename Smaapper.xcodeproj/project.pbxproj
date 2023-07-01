@@ -989,13 +989,13 @@
 			path = HomeService;
 			sourceTree = "<group>";
 		};
-		02C5F44B2A0C1C9300D75D9F /* Json */ = {
+		02C5F44B2A0C1C9300D75D9F /* DropdownMenu */ = {
 			isa = PBXGroup;
 			children = (
 				02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */,
 				024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */,
 			);
-			path = Json;
+			path = DropdownMenu;
 			sourceTree = "<group>";
 		};
 		02C5F4542A0C557300D75D9F /* DropdownMenuFooter */ = {
@@ -1352,7 +1352,7 @@
 			isa = PBXGroup;
 			children = (
 				02FB2C9B2A45C7E800C7FC98 /* HangmanWords */,
-				02C5F44B2A0C1C9300D75D9F /* Json */,
+				02C5F44B2A0C1C9300D75D9F /* DropdownMenu */,
 			);
 			path = Files;
 			sourceTree = "<group>";
