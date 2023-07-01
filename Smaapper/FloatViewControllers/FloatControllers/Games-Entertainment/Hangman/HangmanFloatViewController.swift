@@ -352,19 +352,19 @@ class HangmanFloatViewController: FloatViewController {
         if isEndGame {return}
         screen.moreTipView.setHidden(false)
         showMoreTipViewAnimation()
-        
     }
     
     
 //  MARK: - ANIMATION Area
     
     private func showMoreTipViewAnimation() {
-        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x, y: screen.gallowsKeyboardView.view.frame.maxY, width: screen.gallowsKeyboardView.view.bounds.width, height: 0)
+
+        screen.moreTipView.view.frame = CGRect(x: screen.gallowsKeyboardView.view.frame.origin.x - 5, y: screen.gallowsKeyboardView.view.frame.maxY, width: screen.gallowsKeyboardView.view.bounds.width + 12, height: 0)
         screen.moreTipView.setHidden(false)
         UIView.animate(withDuration: 0.5, delay: 0 , options: .curveEaseInOut, animations: { [weak self] in
             guard let self else {return}
-            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width, height: screen.gallowsKeyboardView.view.bounds.height)
-            screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.origin.y
+            screen.moreTipView.view.frame.size = CGSize(width: screen.gallowsKeyboardView.view.bounds.width + 12, height: screen.gallowsKeyboardView.view.bounds.height + 10)
+            screen.moreTipView.view.frame.origin.y = screen.gallowsKeyboardView.view.frame.origin.y - 4
         })
     }
     

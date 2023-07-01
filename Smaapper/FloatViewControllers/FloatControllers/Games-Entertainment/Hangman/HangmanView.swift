@@ -119,10 +119,13 @@ class HangmanView: ViewBuilder {
     
     lazy var moreTipView: ViewBuilder = {
         let view = ViewBuilder()
+            .setBorder({ build in
+                build
+                    .setCornerRadius(10)
+            })
             .setHidden(true)
-            .setBackgroundColor(.red.withAlphaComponent(0.4))
-        
-        view.view.isHidden = true
+            .setBackgroundColor(Theme.shared.currentTheme.surfaceContainer)
+
         return view
     }()
     
@@ -214,6 +217,7 @@ class HangmanView: ViewBuilder {
         tipDescriptionLabel.applyConstraint()
         configGallowsWordViewContraints()
         gallowsKeyboardView.applyConstraint()
+//        moreTipView.applyConstraint()
     }
     
     private func configGallowsViewContraints() {
