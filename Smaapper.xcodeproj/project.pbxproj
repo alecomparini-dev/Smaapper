@@ -1365,9 +1365,9 @@
 		02FB2CA02A45D7D900C7FC98 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				02DC8DB32A4F041300561516 /* HangmanMoreTip */,
 				02FB2CA62A45E19D00C7FC98 /* GallowsView */,
 				02FB2CA52A45E19300C7FC98 /* GallowsDollView */,
+				02DC8DB32A4F041300561516 /* HangmanMoreTip */,
 				026CF1662A49CBCB009CEE6E /* HangmanKeyboardView */,
 				026CF16C2A4A13BD009CEE6E /* HangmanWordView */,
 			);

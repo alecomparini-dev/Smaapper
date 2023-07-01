@@ -51,6 +51,11 @@ class HangmanMoreTipView: View {
         return list
     }()
     
+//    lazy var closeMoreTipButton: ButtonImageBuilder = {
+//        <#statements#>
+//        return <#value#>
+//    }()
+    
     
     
 //  MARK: - PRIVATE Area
