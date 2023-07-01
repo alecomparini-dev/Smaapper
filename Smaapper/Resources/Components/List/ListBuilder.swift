@@ -20,6 +20,12 @@ class ListBuilder: BaseBuilder {
     init(_ style: UITableView.Style) {
         self.list = List(style)
         super.init(self.list)
+        initialization()
+    }
+    
+    private func initialization() {
+        self.setBackgroundColorCell(.clear)
+            .setBackgroundColor(.clear)
     }
     
     
@@ -110,16 +116,16 @@ class ListBuilder: BaseBuilder {
     
     
 //  MARK: - POPULATE LIST
-    func setSectionInList(_ section: Section) {
+    func populateSection(_ section: Section) {
         list.sections.append(section)
     }
     
-    func setRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
+    func populateRowInSection(section: Section, leftView: UIView?, middleView: UIView, rightView: UIView?) {
         let row = Row(leftView: leftView, middleView: middleView, rightView: rightView)
         section.rows.append(row)
     }
     
-    func setRowInSection(_ section: Section, _ row: Row) {
+    func populateRowInSection(_ section: Section, _ row: Row) {
         section.rows.append(row)
     }
     

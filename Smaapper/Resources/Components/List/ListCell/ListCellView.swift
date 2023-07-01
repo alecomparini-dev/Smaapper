@@ -13,8 +13,8 @@ internal class ListCellView: ViewBuilder {
     private var middleViewCell: UIView?
     private var rightViewCell: UIView?
     
-    private var widthLeftColumnCell: CGFloat = 35
-    private var widthRightColumnCell: CGFloat = 35
+    private var widthLeftColumnCell: CGFloat = 0
+    private var widthRightColumnCell: CGFloat = 0
     
     override init() {
         super.init()
@@ -25,6 +25,7 @@ internal class ListCellView: ViewBuilder {
     }
     
 //  TODO: - REFACTOR: REMOVE THIS FUNCTION, IT SHOULD BE IN LISTCELL
+    
 //  MARK: - SET Properties
     @discardableResult
     internal func setWidthLeftColumnCell(_ width: CGFloat) -> Self {
