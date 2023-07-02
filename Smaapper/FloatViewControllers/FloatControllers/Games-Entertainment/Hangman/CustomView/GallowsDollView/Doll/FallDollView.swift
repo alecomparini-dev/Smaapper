@@ -183,7 +183,7 @@ extension FallDollView: DollProtocol {
             guard let self else {return}
             doll.view.frame.origin.x = doll.view.frame.origin.x - 15
             doll.view.frame.origin.y = doll.view.frame.origin.y + 18
-            doll.view.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2.5)
+            doll.view.transform = CGAffineTransform(rotationAngle: -K.Hangman.angleDollFailure.angletoPI)
             UtilsDoll.transitionImageAnimation(doll.view, "figure.taichi")
         }
     }

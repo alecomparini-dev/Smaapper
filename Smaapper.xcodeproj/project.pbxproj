@@ -35,7 +35,6 @@
 		0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */; };
 		0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */; };
 		0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */; };
-		0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8A029F9FD3A008392EC /* Int+Extension+Component.swift */; };
 		0234A91129F9FD3A008392EC /* ConstraintsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8A329F9FD3A008392EC /* ConstraintsViewModel.swift */; };
 		0234A91229F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8A529F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift */; };
 		0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0234A8A629F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift */; };
@@ -73,6 +72,8 @@
 		024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */; };
 		024F18AC2A11258A00A39584 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 024F18AB2A11258A00A39584 /* Stack.swift */; };
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
+		02527C632A51B35200F868AE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C622A51B35200F868AE /* Double+Extension.swift */; };
+		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
@@ -212,7 +213,6 @@
 		0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fload+Extension+Component.swift"; sourceTree = "<group>"; };
 		0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension+Component.swift"; sourceTree = "<group>"; };
 		0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension+Component.swift"; sourceTree = "<group>"; };
-		0234A8A029F9FD3A008392EC /* Int+Extension+Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Extension+Component.swift"; sourceTree = "<group>"; };
 		0234A8A329F9FD3A008392EC /* ConstraintsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintsViewModel.swift; sourceTree = "<group>"; };
 		0234A8A529F9FD3A008392EC /* EndOfConstraintsSizeFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfConstraintsSizeFlow.swift; sourceTree = "<group>"; };
 		0234A8A629F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndOfConstraintsAlignmentFlow.swift; sourceTree = "<group>"; };
@@ -250,6 +250,8 @@
 		024F18A82A0FDB4F00A39584 /* CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		024F18AB2A11258A00A39584 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
+		02527C622A51B35200F868AE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				02C5F43E2A0BF39C00D75D9F /* ViewModels */,
 				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F4452A0C1A7200D75D9F /* Service */,
+				02527C612A51B32F00F868AE /* Extensions */,
 				02C5F43F2A0BF3AF00D75D9F /* Resources */,
 				0234A5FE29F9F310008392EC /* Info.plist */,
 			);
@@ -510,7 +513,6 @@
 			isa = PBXGroup;
 			children = (
 				0234A89D29F9FD3A008392EC /* Fload+Extension+Component.swift */,
-				0234A8A029F9FD3A008392EC /* Int+Extension+Component.swift */,
 				0234A89E29F9FD3A008392EC /* UIColor+Extension+Component.swift */,
 				02D581582A213C2400150AF9 /* CACornerMask+Extension+Component.swift */,
 				0234A89F29F9FD3A008392EC /* UIView+Extension+Component.swift */,
@@ -745,6 +747,15 @@
 				02D581462A1FD86900150AF9 /* StackBuilder.swift */,
 			);
 			path = Stack;
+			sourceTree = "<group>";
+		};
+		02527C612A51B32F00F868AE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				02527C622A51B35200F868AE /* Double+Extension.swift */,
+				02527C642A51B49800F868AE /* Int+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		025E84862A41D50300C2D944 /* TappedButtonView */ = {
@@ -1536,6 +1547,7 @@
 				02D581592A213C2400150AF9 /* CACornerMask+Extension+Component.swift in Sources */,
 				0234A90529F9FD3A008392EC /* ImageView.swift in Sources */,
 				0234A94529F9FD3A008392EC /* HomeView.swift in Sources */,
+				02527C652A51B49800F868AE /* Int+Extension.swift in Sources */,
 				0234A5F129F9F30F008392EC /* AppDelegate.swift in Sources */,
 				02FB2CAD2A45F18E00C7FC98 /* WaveDollView.swift in Sources */,
 				02E974142A3398F000BF14EE /* Coordinator.swift in Sources */,
@@ -1561,7 +1573,6 @@
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				02FB2C9F2A45D1BB00C7FC98 /* HangmanCoordinator.swift in Sources */,
 				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
-				0234A91029F9FD3A008392EC /* Int+Extension+Component.swift in Sources */,
 				024957EC2A41F7130077C36D /* MultiplicationOperation.swift in Sources */,
 				025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* Blur.swift in Sources */,
@@ -1614,6 +1625,7 @@
 				02E974512A37F3DF00BF14EE /* BMICalculatorCoordinator.swift in Sources */,
 				021848B72A262664007E68A4 /* WeatherView.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
+				02527C632A51B35200F868AE /* Double+Extension.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				024957F02A41F84F0077C36D /* PercentageOperation.swift in Sources */,

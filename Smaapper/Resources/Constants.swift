@@ -15,6 +15,7 @@ struct K {
         static let errorCountToEndGame: Int8 = 6
         static let quantityLetterByLine: Int = 10
         static let identifierApp = "hangman"
+        static let angleDollFailure: Double = 75
         struct FloatView {
             static let positionX: CGFloat = 30
             static let positionY: CGFloat = 30
