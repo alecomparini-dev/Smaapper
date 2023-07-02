@@ -38,6 +38,7 @@ class TapeMeasureView: ViewBuilder {
         return view
     }()
     
+    
 //  MARK: - OBJCT Area
     
     @objc private func minimizeWindow() {
