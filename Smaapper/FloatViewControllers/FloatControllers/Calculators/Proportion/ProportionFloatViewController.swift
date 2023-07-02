@@ -125,7 +125,7 @@ class ProportionFloatViewController: FloatViewController {
 }
 
 
-//  MARK: - EXTENSIONWeatherViewDelegate
+//  MARK: - EXTENSION ProportionViewDelegate
 
 extension ProportionFloatViewController: ProportionViewDelegate {
 
