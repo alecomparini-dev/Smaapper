@@ -76,6 +76,7 @@
 		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
 		02527C6D2A5213FF00F868AE /* TapeMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */; };
 		02527C6F2A52140C00F868AE /* TapeMeasureFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */; };
+		02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */; };
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
@@ -256,6 +257,7 @@
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureView.swift; path = Smaapper/Coordinator/TapeMeasureView.swift; sourceTree = SOURCE_ROOT; };
 		02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureFloatViewController.swift; path = Smaapper/Coordinator/TapeMeasureFloatViewController.swift; sourceTree = SOURCE_ROOT; };
+		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
@@ -1138,6 +1140,7 @@
 				02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */,
 				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 				02FB2C9E2A45D1BB00C7FC98 /* HangmanCoordinator.swift */,
+				02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1599,6 +1602,7 @@
 				026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
+				02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
 				026CF16E2A4A140B009CEE6E /* HangmanWordView.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
