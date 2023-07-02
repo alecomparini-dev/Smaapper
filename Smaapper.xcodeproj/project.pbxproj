@@ -255,8 +255,8 @@
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
 		02527C622A51B35200F868AE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
-		02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureView.swift; path = Smaapper/Coordinator/TapeMeasureView.swift; sourceTree = SOURCE_ROOT; };
-		02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureFloatViewController.swift; path = Smaapper/Coordinator/TapeMeasureFloatViewController.swift; sourceTree = SOURCE_ROOT; };
+		02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureView.swift; path = "Smaapper/FloatViewControllers/FloatControllers/AR - Augmented Reality/TapeMeasure/TapeMeasureView.swift"; sourceTree = SOURCE_ROOT; };
+		02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureFloatViewController.swift; path = "Smaapper/FloatViewControllers/FloatControllers/AR - Augmented Reality/TapeMeasure/TapeMeasureFloatViewController.swift"; sourceTree = SOURCE_ROOT; };
 		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
@@ -764,6 +764,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		02527C732A5216A300F868AE /* TapeMeasure */ = {
+			isa = PBXGroup;
+			children = (
+				02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */,
+				02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */,
+			);
+			path = TapeMeasure;
+			sourceTree = "<group>";
+		};
 		025E84862A41D50300C2D944 /* TappedButtonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1198,15 +1207,6 @@
 			path = BMICalculator;
 			sourceTree = "<group>";
 		};
-		02E9742A2A379BC300BF14EE /* TapeMeasure */ = {
-			isa = PBXGroup;
-			children = (
-				02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */,
-				02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */,
-			);
-			path = TapeMeasure;
-			sourceTree = "<group>";
-		};
 		02E9742B2A379BD500BF14EE /* WhatFlower */ = {
 			isa = PBXGroup;
 			children = (
@@ -1266,9 +1266,9 @@
 		02E974342A379D0700BF14EE /* AR - Augmented Reality */ = {
 			isa = PBXGroup;
 			children = (
+				02527C732A5216A300F868AE /* TapeMeasure */,
 				02E974352A379D2B00BF14EE /* InvisibleDevice */,
 				02E9742B2A379BD500BF14EE /* WhatFlower */,
-				02E9742A2A379BC300BF14EE /* TapeMeasure */,
 				02E9742C2A379BF100BF14EE /* ARDice */,
 			);
 			path = "AR - Augmented Reality";
