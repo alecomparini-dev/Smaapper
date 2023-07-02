@@ -57,6 +57,10 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
                 let coodinator = HangmanCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
+            case TapeMeasureFloatViewController.identifierApp:
+                let coodinator = TapeMeasureCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

@@ -74,6 +74,9 @@
 		024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */ = {isa = PBXBuildFile; fileRef = 024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */; };
 		02527C632A51B35200F868AE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C622A51B35200F868AE /* Double+Extension.swift */; };
 		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
+		02527C6D2A5213FF00F868AE /* TapeMeasureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */; };
+		02527C6F2A52140C00F868AE /* TapeMeasureFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */; };
+		02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */; };
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
@@ -252,6 +255,9 @@
 		024F18AD2A11527000A39584 /* DropdownMenuData-Orig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "DropdownMenuData-Orig.json"; sourceTree = "<group>"; };
 		02527C622A51B35200F868AE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureView.swift; path = Smaapper/Coordinator/TapeMeasureView.swift; sourceTree = SOURCE_ROOT; };
+		02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TapeMeasureFloatViewController.swift; path = Smaapper/Coordinator/TapeMeasureFloatViewController.swift; sourceTree = SOURCE_ROOT; };
+		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
@@ -1134,6 +1140,7 @@
 				02E9744A2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift */,
 				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 				02FB2C9E2A45D1BB00C7FC98 /* HangmanCoordinator.swift */,
+				02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1194,6 +1201,8 @@
 		02E9742A2A379BC300BF14EE /* TapeMeasure */ = {
 			isa = PBXGroup;
 			children = (
+				02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */,
+				02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */,
 			);
 			path = TapeMeasure;
 			sourceTree = "<group>";
@@ -1523,6 +1532,7 @@
 			files = (
 				0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */,
 				02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */,
+				02527C6D2A5213FF00F868AE /* TapeMeasureView.swift in Sources */,
 				02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
 				02E9741F2A37887B00BF14EE /* ProportionView.swift in Sources */,
@@ -1560,6 +1570,7 @@
 				02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
 				026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */,
+				02527C6F2A52140C00F868AE /* TapeMeasureFloatViewController.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */,
 				02DC8DB92A50709200561516 /* Constants.swift in Sources */,
@@ -1591,6 +1602,7 @@
 				026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
+				02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
 				026CF16E2A4A140B009CEE6E /* HangmanWordView.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
