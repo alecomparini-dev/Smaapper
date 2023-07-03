@@ -40,8 +40,8 @@ class TapeMeasureView: ViewBuilder {
         return view
     }()
     
-    lazy var arKitView: TapeMeasureARKitView = {
-        let arKit = TapeMeasureARKitView()
+    lazy var arKitView: CameraARKitView = {
+        let arKit = CameraARKitView()
         return arKit
     }()
     

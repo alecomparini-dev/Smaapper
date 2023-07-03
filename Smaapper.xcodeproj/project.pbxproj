@@ -92,6 +92,7 @@
 		026CF17B2A4B2229009CEE6E /* HangmanData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF17A2A4B2229009CEE6E /* HangmanData.swift */; };
 		026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026CF17C2A4B2238009CEE6E /* HangmanWord.swift */; };
 		026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */; };
+		0272FB962A534C1E00EF4AE5 /* StickyNoteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0272FB952A534C1E00EF4AE5 /* StickyNoteCoordinator.swift */; };
 		0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAD52A1409CD00E44F04 /* DockCell.swift */; };
 		0281DADE2A16683A00E44F04 /* Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DADD2A16683A00E44F04 /* Blur.swift */; };
 		0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatViewController.swift */; };
@@ -100,7 +101,9 @@
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
-		02B4313E2A52269D00A1D7EC /* TapeMeasureARKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */; };
+		02B4313E2A52269D00A1D7EC /* CameraARKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4313D2A52269D00A1D7EC /* CameraARKitView.swift */; };
+		02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431402A534AAE00A1D7EC /* StickyNoteView.swift */; };
+		02B431432A534ABB00A1D7EC /* StickyNoteFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431422A534ABB00A1D7EC /* StickyNoteFloatViewController.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
@@ -274,6 +277,7 @@
 		026CF17A2A4B2229009CEE6E /* HangmanData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanData.swift; sourceTree = "<group>"; };
 		026CF17C2A4B2238009CEE6E /* HangmanWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanWord.swift; sourceTree = "<group>"; };
 		026F797C2A0172D0003947A6 /* NeumorphismBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeumorphismBuilder.swift; sourceTree = "<group>"; };
+		0272FB952A534C1E00EF4AE5 /* StickyNoteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteCoordinator.swift; sourceTree = "<group>"; };
 		0281DAD52A1409CD00E44F04 /* DockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockCell.swift; sourceTree = "<group>"; };
 		0281DADD2A16683A00E44F04 /* Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blur.swift; sourceTree = "<group>"; };
 		0281DAE02A18089800E44F04 /* FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewController.swift; sourceTree = "<group>"; };
@@ -282,7 +286,9 @@
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
-		02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureARKitView.swift; sourceTree = "<group>"; };
+		02B4313D2A52269D00A1D7EC /* CameraARKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraARKitView.swift; sourceTree = "<group>"; };
+		02B431402A534AAE00A1D7EC /* StickyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteView.swift; sourceTree = "<group>"; };
+		02B431422A534ABB00A1D7EC /* StickyNoteFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteFloatViewController.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
@@ -468,6 +474,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0272FB972A5351B900EF4AE5 /* ARCamera */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
@@ -769,7 +776,6 @@
 		02527C732A5216A300F868AE /* TapeMeasure */ = {
 			isa = PBXGroup;
 			children = (
-				02B4313C2A52267C00A1D7EC /* CustomView */,
 				02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */,
 				02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */,
 			);
@@ -871,6 +877,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		0272FB972A5351B900EF4AE5 /* ARCamera */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ARCamera;
+			sourceTree = "<group>";
+		};
 		0281DAD42A14071B00E44F04 /* DockCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -930,9 +943,18 @@
 		02B4313C2A52267C00A1D7EC /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */,
+				02B4313D2A52269D00A1D7EC /* CameraARKitView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		02B4313F2A534A8500A1D7EC /* StickyNote */ = {
+			isa = PBXGroup;
+			children = (
+				02B431402A534AAE00A1D7EC /* StickyNoteView.swift */,
+				02B431422A534ABB00A1D7EC /* StickyNoteFloatViewController.swift */,
+			);
+			path = StickyNote;
 			sourceTree = "<group>";
 		};
 		02B792652A1EE409006CEE8E /* TextFieldImage */ = {
@@ -1161,6 +1183,7 @@
 				02E974172A339B3E00BF14EE /* WeatherCoordinator.swift */,
 				02FB2C9E2A45D1BB00C7FC98 /* HangmanCoordinator.swift */,
 				02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */,
+				0272FB952A534C1E00EF4AE5 /* StickyNoteCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1277,6 +1300,8 @@
 		02E974342A379D0700BF14EE /* AR - Augmented Reality */ = {
 			isa = PBXGroup;
 			children = (
+				02B4313C2A52267C00A1D7EC /* CustomView */,
+				02B4313F2A534A8500A1D7EC /* StickyNote */,
 				02527C732A5216A300F868AE /* TapeMeasure */,
 				02E974352A379D2B00BF14EE /* InvisibleDevice */,
 				02E9742B2A379BD500BF14EE /* WhatFlower */,
@@ -1561,6 +1586,7 @@
 				020D0E5F2A1ECD0A007F3992 /* DropdownMenuActions.swift in Sources */,
 				026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
+				0272FB962A534C1E00EF4AE5 /* StickyNoteCoordinator.swift in Sources */,
 				02FB2CA42A45E11300C7FC98 /* GallowsDollView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
 				02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */,
@@ -1580,7 +1606,7 @@
 				026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */,
 				02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
-				02B4313E2A52269D00A1D7EC /* TapeMeasureARKitView.swift in Sources */,
+				02B4313E2A52269D00A1D7EC /* CameraARKitView.swift in Sources */,
 				026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */,
 				02527C6F2A52140C00F868AE /* TapeMeasureFloatViewController.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
@@ -1649,6 +1675,7 @@
 				02E974512A37F3DF00BF14EE /* BMICalculatorCoordinator.swift in Sources */,
 				021848B72A262664007E68A4 /* WeatherView.swift in Sources */,
 				0234A5F329F9F30F008392EC /* SceneDelegate.swift in Sources */,
+				02B431432A534ABB00A1D7EC /* StickyNoteFloatViewController.swift in Sources */,
 				02527C632A51B35200F868AE /* Double+Extension.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
@@ -1676,6 +1703,7 @@
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
+				02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
 				024957F22A420F260077C36D /* Calculation.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,

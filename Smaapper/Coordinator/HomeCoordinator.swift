@@ -61,6 +61,10 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
                 let coodinator = TapeMeasureCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
+            case StickyNoteFloatViewController.identifierApp:
+                let coodinator = StickyNoteCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

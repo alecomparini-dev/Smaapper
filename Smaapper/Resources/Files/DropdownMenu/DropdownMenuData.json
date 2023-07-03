@@ -101,6 +101,12 @@
                         "rightImage": "AR",
                         "items": [
                             {
+                                "id": "sticky_note",
+                                "title": "Sticky Note",
+                                "leftImage": "note.text",
+                                "rightImage": "chevron.forward"
+                            },
+                            {
                                 "id": "tape_measure",
                                 "title": "Tape Measure",
                                 "leftImage": "ruler.fill",

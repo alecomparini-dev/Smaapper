@@ -79,6 +79,12 @@ class DraggableBuilder  {
         self._draggableCancelled = closure
         return self
     }
+    
+    @discardableResult
+    func setEnabledDraggable(_ enabled: Bool) -> Self {
+        self.draggable.isEnabled = enabled
+        return self
+    }
 
     
 //  MARK: - PRIVATE Area
