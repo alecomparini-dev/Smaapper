@@ -8,7 +8,7 @@
 import UIKit
 import ARKit
 
-class TapeMeasureARKitView: UIView {
+class CameraARKitView: UIView {
     
     private var dotNodes: [SCNNode] = []
     
@@ -33,7 +33,6 @@ class TapeMeasureARKitView: UIView {
         configCornerRadius()
         runSceneView()
         configDelegate()
-//        configDebug()
     }
     
 
@@ -47,6 +46,10 @@ class TapeMeasureARKitView: UIView {
                 build
                     .setVerticalAlignmentY.equalToSuperView(-100)
                     .setHorizontalAlignmentX.equalToSuperView
+            }
+            .setActions { build in
+                build
+                    .setDraggable()
             }
         return img
     }()
@@ -62,11 +65,33 @@ class TapeMeasureARKitView: UIView {
             }
         return img
     }()
+   
     
-    
-    private func configDebug() {
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+//  MARK: - SET Properties
+    @discardableResult
+    func setDebug(_ debugOptions: ARSCNDebugOptions) -> Self {
+        sceneView.debugOptions = debugOptions
+        return self
     }
+    
+    @discardableResult
+    func setEnabledTarget(_ enabled: Bool) -> Self {
+        self.targetImage.setHidden(!enabled)
+        return self
+    }
+    
+    @discardableResult
+    func setEnabledTargetDraggable(_ enabled: Bool) -> Self {
+        self.targetImage.actions?.draggable?.setEnabledDraggable(enabled)
+        return self
+    }
+    
+    @discardableResult
+    func setChildNode(_ node: SCNNode) -> Self {
+        sceneView.scene.rootNode.addChildNode(node)
+        return self
+    }
+    
     
     
 //  MARK: - ACTIONS
@@ -84,14 +109,18 @@ class TapeMeasureARKitView: UIView {
     }
     
     private func configSceneView() {
+        setConfiguration()
+        setEnabledTarget(true)
+        setEnabledTargetDraggable(true)
+    }
+    
+    private func setConfiguration() {
         configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = [.horizontal, .vertical]
     }
     
     private func configDelegate() {
-        DispatchQueue.main.async { [weak self] in
-            self?.sceneView.delegate = self
-        }
+        sceneView.delegate = self
     }
     
     private func configCornerRadius() {
@@ -123,50 +152,55 @@ class TapeMeasureARKitView: UIView {
         targetBallImage.applyConstraint()
     }
     
-}
-
-
-//  MARK: - EXTENSION DELEGATE ARSCNViewDelegate
-extension TapeMeasureARKitView: ARSCNViewDelegate {
-    
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print("detectou")
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-       
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            
-        let positionTarget = targetImage.view.convert(targetBallImage.view.center, to: self)
-        
-        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .any) {
-            if let hitResult = sceneView.session.raycast(raycastQuery).first {
-                addDot(at: hitResult)
+    private func getPositionTarget(_ touches: Set<UITouch>) -> CGPoint{
+        if targetImage.view.isHidden {
+            if let touchLocation = touches.first?.location(in: sceneView) {
+                return touchLocation
             }
         }
-        
-//        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .vertical) {
-//            if let hitResult = sceneView.session.raycast(raycastQuery).first {
-//                addDot(at: hitResult)
-//            }
-//        }
-    
+        return targetImage.view.convert(targetBallImage.view.center, to: self)
     }
     
     private func addDot(at hitResult: ARRaycastResult) {
         let dotGeometry = SCNSphere(radius: 0.005)
         let material = SCNMaterial()
         material.diffuse.contents = Theme.shared.currentTheme.tertiary
-        
         dotGeometry.materials = [material]
-        
         let dotNode = SCNNode(geometry: dotGeometry)
-        
         dotNode.simdTransform = hitResult.worldTransform
         
-        sceneView.scene.rootNode.addChildNode(dotNode)
+        setChildNode(dotNode)
     }
+
+    
+}
+
+
+//  MARK: - EXTENSION DELEGATE ARSCNViewDelegate
+extension CameraARKitView: ARSCNViewDelegate {
+    
+    
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            
+        let positionTarget: CGPoint = getPositionTarget(touches)
+        
+        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .horizontal) {
+            if let hitResult = sceneView.session.raycast(raycastQuery).first {
+                addDot(at: hitResult)
+            }
+        }
+        
+        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .vertical) {
+            if let hitResult = sceneView.session.raycast(raycastQuery).first {
+                addDot(at: hitResult)
+            }
+        }
+    
+    }
+    
     
 }

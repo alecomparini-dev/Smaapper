@@ -10,11 +10,19 @@ import UIKit
 struct K {
     static let appName = "Smaapper"
     
+    struct Sticky {
+        static let identifierApp = "sticky_note"
+        static let title = "Sticky Note"
+        struct Images {
+            static let logo = "note.text"
+        }
+    }
+    
     struct Hangman {
+        static let identifierApp = "hangman"
         static let cornerRadius: CGFloat = 15
         static let errorCountToEndGame: Int8 = 6
         static let quantityLetterByLine: Int = 10
-        static let identifierApp = "hangman"
         static let angleDollFailure: Double = 75
         struct FloatView {
             static let positionX: CGFloat = 30
