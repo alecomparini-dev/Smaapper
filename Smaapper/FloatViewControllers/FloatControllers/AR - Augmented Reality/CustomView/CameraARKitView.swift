@@ -116,7 +116,7 @@ class CameraARKitView: UIView {
     
     private func setConfiguration() {
         configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = [.horizontal, .vertical]
+         configuration.planeDetection = [.horizontal, .vertical]
     }
     
     private func configDelegate() {
@@ -193,7 +193,7 @@ extension CameraARKitView: ARSCNViewDelegate {
             }
         }
         
-        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .vertical) {
+        if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .estimatedPlane, alignment: .vertical) {
             if let castResult = sceneView.session.raycast(raycastQuery).first {
                 addDot(at: castResult)
             }
