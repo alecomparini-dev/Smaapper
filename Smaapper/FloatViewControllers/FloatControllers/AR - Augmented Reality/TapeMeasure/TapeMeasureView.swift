@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ARKit
 
 protocol TapeMeasureViewDelegate: AnyObject {
     func closeWindow()
@@ -38,6 +39,11 @@ class TapeMeasureView: ViewBuilder {
         return view
     }()
     
+    lazy var arKitView: TapeMeasureARKitView = {
+        let arKit = TapeMeasureARKitView()
+        return arKit
+    }()
+    
     
 //  MARK: - OBJCT Area
     
@@ -68,9 +74,16 @@ class TapeMeasureView: ViewBuilder {
     
     private func addElements() {
         titleView.add(insideTo: self.view)
+        arKitView.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
+        
+        StartOfConstraintsFlow(arKitView)
+            .setTop.equalTo(titleView.view, .bottom,5)
+            .setLeading.setTrailing.equalToSuperView(20)
+            .setBottom.equalToSuperView(-100)
+            .apply()
     }
 }
