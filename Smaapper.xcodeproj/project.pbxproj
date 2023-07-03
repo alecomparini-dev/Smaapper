@@ -100,6 +100,7 @@
 		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
+		02B4313E2A52269D00A1D7EC /* TapeMeasureARKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
@@ -281,6 +282,7 @@
 		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
+		02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureARKitView.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
@@ -767,6 +769,7 @@
 		02527C732A5216A300F868AE /* TapeMeasure */ = {
 			isa = PBXGroup;
 			children = (
+				02B4313C2A52267C00A1D7EC /* CustomView */,
 				02527C6C2A5213FF00F868AE /* TapeMeasureView.swift */,
 				02527C6E2A52140C00F868AE /* TapeMeasureFloatViewController.swift */,
 			);
@@ -922,6 +925,14 @@
 				02D71C332A3BB9D100DCA291 /* Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		02B4313C2A52267C00A1D7EC /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				02B4313D2A52269D00A1D7EC /* TapeMeasureARKitView.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		02B792652A1EE409006CEE8E /* TextFieldImage */ = {
@@ -1569,6 +1580,7 @@
 				026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */,
 				02D581472A1FD86900150AF9 /* StackBuilder.swift in Sources */,
 				024F18AC2A11258A00A39584 /* Stack.swift in Sources */,
+				02B4313E2A52269D00A1D7EC /* TapeMeasureARKitView.swift in Sources */,
 				026CF1752A4B16D7009CEE6E /* HangmanViewModel.swift in Sources */,
 				02527C6F2A52140C00F868AE /* TapeMeasureFloatViewController.swift in Sources */,
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
