@@ -9,6 +9,7 @@ import UIKit
 
 class Utils {
     
+    
     static var decimalSeparator: String {
         if let decimalSeparator = Locale.current.decimalSeparator {
             return decimalSeparator
