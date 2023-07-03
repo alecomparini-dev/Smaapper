@@ -39,7 +39,6 @@ class HomeView: ViewBuilder {
     
     lazy var viewFloatWindow: ViewBuilder = {
         let view = ViewBuilder()
-//            .setBackgroundColor(.red)
             .setConstraints { build in
                 build
                     .setPin.equalToSuperView
@@ -225,6 +224,9 @@ class HomeView: ViewBuilder {
                     .setBlur(to: .light, percent: 5)
                     .apply()
             }
+//            .setBorder({ build in
+//                build.setCornerRadius(14)
+//            })
             .setConstraints { build in
                 build
                     .setBottom.equalToSafeArea(-10)
@@ -235,7 +237,6 @@ class HomeView: ViewBuilder {
                 build
                     .setTarget(self, #selector(menuButtonTapped), .touchUpInside)
             }
-            
     }()
     
     @objc

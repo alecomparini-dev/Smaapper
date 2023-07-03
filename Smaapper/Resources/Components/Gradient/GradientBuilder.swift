@@ -28,13 +28,14 @@ class GradientBuilder {
     }
     
     private func initialization() {
+        configInitial()
         self.setGradientDirection(Gradient.Direction.leftToRight)
         self.setType(.axial)
         self.setID(gradientID)
     }
     
-    
-//  MARK: - Set Properties
+
+    //  MARK: - Set Properties
     
     @discardableResult
     func setGradientColors(_ colors: [UIColor]) -> Self {
@@ -105,9 +106,14 @@ class GradientBuilder {
     
         
 //  MARK: - Component Private Functions
+    private func configInitial() {
+//        component?.layer.masksToBounds = false
+        self.gradient.shouldRasterize = true
+        self.gradient.rasterizationScale = UIScreen.main.scale
+        self.gradient.backgroundColor = .none
+    }
     
     private func setGradientDirection(_ direction: Gradient.Direction) {
-        
         switch direction {
             case .leftToRight:
                 setStartPoint(0.0, 0.5)

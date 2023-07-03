@@ -153,8 +153,9 @@ class ShadowBuilder {
     
     private func shadowInitializers() {
         setDefault()
+        component.layer.masksToBounds = false
         shadow.shouldRasterize = true
-        shadow.rasterizationScale = UIScreen.main.scale   
+        shadow.rasterizationScale = UIScreen.main.scale
     }
     
     private func setDefault(){
@@ -173,4 +174,12 @@ extension UIView {
             layerToRemove.removeFromSuperlayer()
         }
     }
+    
+    func hasShadow() -> Bool {
+        if (self.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0) > 0 {
+            return true
+        }
+        return false
+    }
+    
 }
