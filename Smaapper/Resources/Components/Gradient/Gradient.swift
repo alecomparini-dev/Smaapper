@@ -25,7 +25,6 @@ class Gradient: CAGradientLayer {
     
     override init() {
         super.init()
-        self.initialization()
     }
 
     override init(layer: Any) {
@@ -48,16 +47,5 @@ class Gradient: CAGradientLayer {
         set { self._endPoint = newValue }
     }
 
-    
-    
-//  MARK: - Initializers
-    
-    private func initialization() {
-        self.shouldRasterize = true
-        self.rasterizationScale = UIScreen.main.scale
-        self.backgroundColor = .none
-    }
-    
-    
 }
 
