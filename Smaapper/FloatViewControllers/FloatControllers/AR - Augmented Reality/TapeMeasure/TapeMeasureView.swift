@@ -45,8 +45,6 @@ class TapeMeasureView: ViewBuilder {
         return arKit
     }()
     
-
-
     lazy var startButtonImage: IconButtonBuilder = {
         let img = ImageViewBuilder(UIImage(systemName: "ruler"))
         let btn = IconButtonBuilder(img.view, "start")

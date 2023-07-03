@@ -161,13 +161,13 @@ class CameraARKitView: UIView {
         return targetImage.view.convert(targetBallImage.view.center, to: self)
     }
     
-    private func addDot(at hitResult: ARRaycastResult) {
+    private func addDot(at castResult: ARRaycastResult) {
         let dotGeometry = SCNSphere(radius: 0.005)
         let material = SCNMaterial()
         material.diffuse.contents = Theme.shared.currentTheme.tertiary
         dotGeometry.materials = [material]
         let dotNode = SCNNode(geometry: dotGeometry)
-        dotNode.simdTransform = hitResult.worldTransform
+        dotNode.simdTransform = castResult.worldTransform
         
         setChildNode(dotNode)
     }
@@ -185,18 +185,17 @@ extension CameraARKitView: ARSCNViewDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            
         let positionTarget: CGPoint = getPositionTarget(touches)
         
         if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .horizontal) {
-            if let hitResult = sceneView.session.raycast(raycastQuery).first {
-                addDot(at: hitResult)
+            if let castResult = sceneView.session.raycast(raycastQuery).first {
+                addDot(at: castResult)
             }
         }
         
         if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .vertical) {
-            if let hitResult = sceneView.session.raycast(raycastQuery).first {
-                addDot(at: hitResult)
+            if let castResult = sceneView.session.raycast(raycastQuery).first {
+                addDot(at: castResult)
             }
         }
     
