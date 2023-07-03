@@ -21,21 +21,21 @@ class TapeMeasureFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 400, width: 290, height: 350))
         setEnabledDraggable(true)
+        setFrameWindow(CGRect(x: 10, y: 50, width: (Utils.currentWindow?.screen.bounds.width ?? 300)-20 , height: 500))
         configDelegate()
     }
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.arKitView.runSceneView
+        screen.arKitView.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
         UtilsFloatView.removeShadowActiveFloatView(screen)
-        screen.arKitView.pauseSceneView
+        screen.arKitView.pauseSceneView()
     }
     
 

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ARKit
 
 protocol TapeMeasureViewDelegate: AnyObject {
     func closeWindow()
@@ -29,6 +28,8 @@ class TapeMeasureView: ViewBuilder {
         configConstraints()
     }
     
+    
+//  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: "ruler.fill", title: "Tape Measure", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
@@ -44,9 +45,42 @@ class TapeMeasureView: ViewBuilder {
         return arKit
     }()
     
+
+
+    lazy var startButtonImage: IconButtonBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "ruler"))
+        let btn = IconButtonBuilder(img.view, "start")
+            .setTintColor(Theme.shared.currentTheme.onSurface)
+            .setImageWeight(.thin)
+            .setImageSize(22)
+            .setTitleSize(14)
+            .setImagePadding(0)
+            .setBorder({ build in
+                build
+                    .setCornerRadius(10)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.secondary)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 80)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setBottom.setTrailing.equalToSuperView(15)
+                    .setWidth.equalToConstant(60)
+                    .setHeight.equalToConstant(50)
+            }
+        return btn
+    }()
+    
     
 //  MARK: - OBJCT Area
-    
     @objc private func minimizeWindow() {
         delegate?.minimizeWindow()
     }
@@ -54,6 +88,7 @@ class TapeMeasureView: ViewBuilder {
     @objc private func closeWindow() {
         delegate?.closeWindow()
     }
+    
     
 //  MARK: - PRIVATE Area
     private func configStyles() {
@@ -75,15 +110,20 @@ class TapeMeasureView: ViewBuilder {
     private func addElements() {
         titleView.add(insideTo: self.view)
         arKitView.add(insideTo: self.view)
+        startButtonImage.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
-        
+        configARKitViewConstraints()
+        startButtonImage.applyConstraint()
+    }
+    
+    private func configARKitViewConstraints() {
         StartOfConstraintsFlow(arKitView)
-            .setTop.equalTo(titleView.view, .bottom,5)
-            .setLeading.setTrailing.equalToSuperView(20)
-            .setBottom.equalToSuperView(-100)
+            .setTop.equalTo(titleView.view, .bottom, 10)
+            .setLeading.setTrailing.equalToSuperView(10)
+            .setBottom.equalToSuperView(-10)
             .apply()
     }
 }
