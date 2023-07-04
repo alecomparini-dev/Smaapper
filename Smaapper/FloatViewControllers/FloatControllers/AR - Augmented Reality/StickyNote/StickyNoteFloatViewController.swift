@@ -29,11 +29,13 @@ class StickyNoteFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
+        screen.cameraARKit.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
         UtilsFloatView.removeShadowActiveFloatView(screen)
+        screen.cameraARKit.pauseSceneView()
     }
     
 

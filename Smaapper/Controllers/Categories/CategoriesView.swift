@@ -202,12 +202,13 @@ class CategoriesView: UIView {
             .setContentMode(.center)
             .setSize(20)
             .setTintColor(Theme.shared.currentTheme.onSurface)
-            .view
+            .setConstraints({ build in
+                build
+                    .setPin.equalToSuperView
+            })
         
         img.add(insideTo: view.view)
-        img.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
+        img.applyConstraint()
         
         return view.view
     }
@@ -231,12 +232,13 @@ class CategoriesView: UIView {
             .setSize(12)
             .setTintColor(color)
             .setWeight(.regular)
-            .view
+            .setConstraints({ build in
+                build
+                    .setPin.equalToSuperView
+            })
             
         img.add(insideTo: view.view)
-        img.makeConstraints { make in
-            make.setPin.equalToSuperView
-        }
+        img.applyConstraint()
         
         return view.view
     }

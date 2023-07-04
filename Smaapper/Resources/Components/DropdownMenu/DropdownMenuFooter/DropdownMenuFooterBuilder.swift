@@ -81,6 +81,7 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
             make.setTop.equalToSuperView(5)
                 .setBottom.equalToSuperView
                 .setLeading.setTrailing.equalToSuperView
+                .apply()
         }
     }
     

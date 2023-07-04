@@ -8,7 +8,7 @@
 import UIKit
 
 class TapeMeasureFloatViewController: FloatViewController {
-    static let identifierApp = "tape_measure"
+    static let identifierApp = K.TapeMeasure.identifierApp
     
     lazy var screen: TapeMeasureView = {
         let view = TapeMeasureView()
@@ -22,20 +22,23 @@ class TapeMeasureFloatViewController: FloatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setEnabledDraggable(true)
-        setFrameWindow(CGRect(x: 10, y: 50, width: (Utils.currentWindow?.screen.bounds.width ?? 300)-20 , height: 500))
+        setFrameWindow(CGRect(x: K.TapeMeasure.FloatView.positionX,
+                              y: K.TapeMeasure.FloatView.positionY,
+                              width: K.TapeMeasure.FloatView.width ,
+                              height: K.TapeMeasure.FloatView.height))
         configDelegate()
     }
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.arKitView.runSceneView()
+        screen.cameraARKitView.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
         UtilsFloatView.removeShadowActiveFloatView(screen)
-        screen.arKitView.pauseSceneView()
+        screen.cameraARKitView.pauseSceneView()
     }
     
 

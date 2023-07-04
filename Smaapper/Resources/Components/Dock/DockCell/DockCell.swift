@@ -25,7 +25,9 @@ internal class DockCell: UICollectionViewCell {
         removeSubViews(contentView)
         view.add(insideTo: self.contentView)
         view.makeConstraints { make in
-            make.setPin.equalToSuperView
+            make
+                .setPin.equalToSuperView
+                .apply()
         }
     }
     

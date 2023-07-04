@@ -40,10 +40,19 @@ class StickyNoteView: ViewBuilder {
     }()
     
     lazy var cameraARKit: CameraARKitView = {
+        let imgTarget = ImageViewBuilder(UIImage(systemName: K.Sticky.Images.imageTarget))
+            .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setWeight(.thin)
+        
         let arKit = CameraARKitView()
+            .setImageTarget(imgTarget)
+            .setAlignmentTarget(.middle, -35)
+            .makeBorder { make in
+                make
+                    .setCornerRadius(20)
+            }            
         return arKit
     }()
-    
     
     lazy var overlay: ViewBuilder = {
         let view = ViewBuilder()
@@ -52,10 +61,15 @@ class StickyNoteView: ViewBuilder {
                     .setCornerRadius(20)
                     .setWhichCornersWillBeRounded([.bottom])
             })
+            .setBlur { build in
+                build
+                    .setStyle(.dark)
+                    .apply()
+            }
             .setConstraints { build in
                 build
                     .setPinBottom.equalTo(cameraARKit)
-                    .setHeight.equalToConstant(60)
+                    .setHeight.equalToConstant(90)
             }
         return view
     }()
@@ -66,12 +80,60 @@ class StickyNoteView: ViewBuilder {
     }()
     
     lazy var inputTextField: TextFieldBuilder = {
-        let tf = TextFieldBuilder()
+        let tf = TextFieldBuilder("Enter your note")
+            .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
+            .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setTextColor(Theme.shared.currentTheme.onSurface)
+            .setPadding(10, .left)
+            .setBorder({ build in
+                build
+                    .setCornerRadius(8)
+            })
+            .setNeumorphism({ build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerHighest)
+                    .setShape(.concave)
+                    .setIntensity(to: .light, percent: 80)
+                    .setBlur(to: .light, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .apply()
+            })
+            .setConstraints { build in
+                build
+                    .setLeading.equalToSuperView(15)
+                    .setVerticalAlignmentY.equalToSuperView
+                    .setTrailing.equalTo(addButton.view, .leading, -15)
+                    .setHeight.equalToConstant(45)
+            }
         return tf
     }()
     
-    lazy var addButton: TextFieldBuilder = {
-        let tf = TextFieldBuilder()
+    lazy var addButton: IconButtonBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "plus"))
+        let tf = IconButtonBuilder(img.view)
+            .setImageSize(18)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
+            .setTitleSize(12)
+            .setImagePadding(5)
+            .setBorder({ build in
+                build
+                    .setCornerRadius(20)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.secondary)
+                    .setShape(.concave)
+                    .setIntensity(to: .light, percent: 70)
+                    .setBlur(to: .light, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setVerticalAlignmentY.equalToSuperView
+                    .setTrailing.equalToSuperView(-15)
+                    .setWidth.setHeight.equalToConstant(40)
+            }
         return tf
     }()
     
@@ -106,28 +168,23 @@ class StickyNoteView: ViewBuilder {
         titleView.add(insideTo: self.view)
         cameraARKit.add(insideTo: self.view)
         overlay.add(insideTo: self.view)
+        addButton.add(insideTo: overlay.view)
+        inputTextField.add(insideTo: overlay.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         configCameraARKitConstraints()
         overlay.applyConstraint()
-        
-        
-        overlay.setBlur { build in
-            build
-                .setStyle(.dark)
-                .setOpacity(0.7)
-                .apply()
-        }
+        addButton.applyConstraint()
+        inputTextField.applyConstraint()
     }
     
     private func configCameraARKitConstraints() {
         cameraARKit.makeConstraints { make in
             make
-                .setTop.equalTo(titleView.view, .bottom, 10)
-                .setLeading.setTrailing.equalToSuperView(10)
-                .setBottom.equalToSuperView(-10)
+                .setTop.equalTo(titleView.view, .bottom, 5)
+                .setPinBottom.equalToSuperView
                 .apply()
         }
     }
