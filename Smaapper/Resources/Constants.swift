@@ -25,6 +25,7 @@ struct K {
     struct Sticky {
         static let identifierApp = "sticky_note"
         static let title = "Sticky Note"
+        static let corSticky: UIColor = UIColor.HEX("#FEE88A")
         struct Images {
             static let logo = "note"
             static let imageTarget = "note"
