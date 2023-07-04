@@ -36,7 +36,6 @@ class CameraARKitView: UIView {
         configSceneView()
         addElements()
         configConstraints()
-        configCornerRadius()
         runSceneView()
         configDelegate()
     }
@@ -156,16 +155,6 @@ class CameraARKitView: UIView {
         sceneView.delegate = self
     }
     
-    private func configCornerRadius() {
-//        setCornerRadiusSelf()
-    }
-    
-    private func setCornerRadiusSelf() {
-        self.layer.cornerRadius = 20
-        self.clipsToBounds = true
-    }
-    
-    
     private func addElements() {
         sceneView.add(insideTo: self)
         targetImage.add(insideTo: self)
@@ -173,11 +162,17 @@ class CameraARKitView: UIView {
     }
     
     private func configConstraints() {
-        StartOfConstraintsFlow(sceneView)
-            .setPin.equalToSuperView
-            .apply()
+        configSceneViewConstraints()
         targetImage.applyConstraint()
         targetBallImage.applyConstraint()
+    }
+    
+    private func configSceneViewConstraints() {
+        sceneView.makeConstraints { make in
+            make
+                .setPin.equalToSuperView
+                .apply()
+        }
     }
     
     private func getPositionTarget(_ touches: Set<UITouch>) -> CGPoint{
@@ -196,9 +191,69 @@ class CameraARKitView: UIView {
         dotGeometry.materials = [material]
         let dotNode = SCNNode(geometry: dotGeometry)
         dotNode.simdTransform = castResult.worldTransform
-        
         setChildNode(dotNode)
     }
+    
+    private func addStickyNote(at castResult: ARRaycastResult) {
+        
+        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        customView.backgroundColor = .red
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.text = "CARALHO DA PORRA"
+        customView.addSubview(label)
+
+
+        UIGraphicsBeginImageContextWithOptions(customView.bounds.size, false, 0.0)
+        customView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+
+        let material = SCNMaterial()
+        material.diffuse.contents = image
+
+
+        let planeSize = CGSize(width: 0.1, height: 0.1) // Size of the SCNPlane
+        let planeGeometry = SCNPlane(width: planeSize.width, height: planeSize.height)
+        planeGeometry.materials = [material]
+
+        
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01) // Set the scale of the SCNPlane
+
+
+        planeNode.simdTransform = castResult.worldTransform
+        let billboardConstraint = SCNBillboardConstraint()
+        planeNode.constraints = [billboardConstraint]
+        
+        sceneView.scene.rootNode.addChildNode(planeNode)
+    }
+    
+    
+    private func addStickyNote_old(at castResult: ARRaycastResult) {
+        
+        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
+        view.backgroundColor = .red
+        
+        let plane = SCNPlane(width: 0.1, height: 0.1)
+        plane.firstMaterial?.diffuse.contents = view
+        
+        // Criar um nó SCNNode com a geometria do plano
+        let stickyNoteNode = SCNNode(geometry: plane)
+        stickyNoteNode.simdTransform = castResult.worldTransform
+        
+        let billboardConstraint = SCNBillboardConstraint()
+        stickyNoteNode.constraints = [billboardConstraint]
+        
+        sceneView.scene.rootNode.addChildNode(stickyNoteNode)
+    }
+    
+        
+    
 
     
 }
@@ -209,7 +264,10 @@ extension CameraARKitView: ARSCNViewDelegate {
     
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+
         
+        
+            
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -218,12 +276,14 @@ extension CameraARKitView: ARSCNViewDelegate {
         if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .horizontal) {
             if let castResult = sceneView.session.raycast(raycastQuery).first {
                 addDot(at: castResult)
+                addStickyNote(at: castResult)
             }
         }
         
         if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .estimatedPlane, alignment: .vertical) {
             if let castResult = sceneView.session.raycast(raycastQuery).first {
                 addDot(at: castResult)
+                addStickyNote(at: castResult)
             }
         }
     

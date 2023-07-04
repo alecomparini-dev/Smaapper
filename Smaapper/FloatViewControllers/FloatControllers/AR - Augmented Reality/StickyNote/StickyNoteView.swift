@@ -12,7 +12,6 @@ protocol StickyNoteViewDelegate: AnyObject {
     func minimizeWindow()
 }
 
-
 class StickyNoteView: ViewBuilder {
     
     weak var delegate: StickyNoteViewDelegate?
