@@ -258,6 +258,7 @@ class DockBuilder: BaseBuilder {
                 .setTop.equalTo(dock, .top)
                 .setHorizontalAlignmentX.equalTo(dock)
                 .setHeight.equalTo(dock)
+                .apply()
         }
     }
     
@@ -266,6 +267,7 @@ class DockBuilder: BaseBuilder {
             make
                 .setTop.setBottom.equalToSuperView
                 .setLeading.setTrailing.equalToSuperView(dock.marginContainer)
+                .apply()
         }
     }
     

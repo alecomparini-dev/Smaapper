@@ -90,7 +90,9 @@ class Blur {
     private func configConstraintsBlurView() {
         guard let component else {return}
         self.blurView?.makeConstraints({ make in
-            make.setPin.equalTo(component)
+            make
+                .setPin.equalTo(component)
+                .apply()
         })
     }
     
@@ -121,6 +123,7 @@ class Blur {
         vibrancyView.makeConstraints { make in
             make
                 .setPin.equalTo(blurView)
+                .apply()
         }
         
         

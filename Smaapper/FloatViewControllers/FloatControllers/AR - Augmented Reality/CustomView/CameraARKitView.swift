@@ -10,6 +10,12 @@ import ARKit
 
 class CameraARKitView: UIView {
     
+    enum Alignment {
+        case top
+        case middle
+        case bottom
+    }
+    
     private var dotNodes: [SCNNode] = []
     
     private var configuration: ARWorldTrackingConfiguration!
@@ -38,9 +44,9 @@ class CameraARKitView: UIView {
 
 //  MARK: - LAZY Area
     lazy var targetImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "viewfinder"))
+        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageTarget))
             .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setSize(50)
+            .setSize(K.CameraARKit.sizeTarget)
             .setWeight(.thin)
             .setConstraints { build in
                 build
@@ -55,7 +61,7 @@ class CameraARKitView: UIView {
     }()
     
     lazy var targetBallImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "circle.fill"))
+        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageBallTarget))
             .setTintColor(Theme.shared.currentTheme.onSurface.withAlphaComponent(0.8))
             .setSize(6)
             .setWeight(.thin)
@@ -92,6 +98,21 @@ class CameraARKitView: UIView {
         return self
     }
     
+    @discardableResult
+    func setAlignmentTarget(_ alignment: Alignment, _ padding: CGFloat = 0) -> Self {
+        DispatchQueue.main.async { [weak self] in
+            self?.setAligment(alignment, padding)
+        }
+        return self
+    }
+
+    @discardableResult
+    func setImageTarget(_ img: ImageViewBuilder, _ size: CGFloat = K.CameraARKit.sizeTarget) -> Self {
+        self.targetImage.setImage(img.view.image)
+        self.targetBallImage.setHidden(true)
+        targetImage.setSize(size)
+        return self
+    }
     
     
 //  MARK: - ACTIONS
@@ -103,7 +124,19 @@ class CameraARKitView: UIView {
         sceneView.session.pause()
     }
     
+    
 //  MARK: - PRIVATE Area
+    private func setAligment(_ alignment: Alignment, _ padding: CGFloat) {
+        switch alignment {
+            case .top:
+                self.targetImage.view.frame.origin.y = self.bounds.minY + padding
+            case .middle:
+                self.targetImage.view.center.y = (self.bounds.midY) + padding
+            case .bottom:
+                self.targetImage.view.frame.origin.y = (self.bounds.maxY - self.targetImage.view.bounds.height) - padding
+        }
+    }
+    
     private func createSceneView() {
         sceneView = ARSCNView(frame: self.bounds)
     }
@@ -124,8 +157,7 @@ class CameraARKitView: UIView {
     }
     
     private func configCornerRadius() {
-        setCornerRadiusSelf()
-        setCornerRadiusSceneView()
+//        setCornerRadiusSelf()
     }
     
     private func setCornerRadiusSelf() {
@@ -133,10 +165,6 @@ class CameraARKitView: UIView {
         self.clipsToBounds = true
     }
     
-    private func setCornerRadiusSceneView() {
-        sceneView.layer.cornerRadius = 20
-        sceneView.clipsToBounds = true
-    }
     
     private func addElements() {
         sceneView.add(insideTo: self)

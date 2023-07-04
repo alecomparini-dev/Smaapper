@@ -10,14 +10,46 @@ import UIKit
 struct K {
     static let appName = "Smaapper"
     
+    
+//  MARK: - CAMERA ARKIT
+    struct CameraARKit {
+        static let sizeTarget: CGFloat = 50
+        struct Images {
+            static let imageTarget = "viewfinder"
+            static let imageBallTarget = "circle.fill"
+        }
+    }
+    
+    
+//  MARK: - STICKY
     struct Sticky {
         static let identifierApp = "sticky_note"
         static let title = "Sticky Note"
         struct Images {
-            static let logo = "note.text"
+            static let logo = "note"
+            static let imageTarget = "note"
+        }
+    }
+
+    
+//  MARK: - TAPE MEASURE
+    struct TapeMeasure {
+        static let identifierApp = "tape_measure"
+        static let title = "Tape Measure"
+        struct FloatView {
+            static let positionX: CGFloat = 10
+            static let positionY: CGFloat = 50
+            static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
+            static let height: CGFloat = 500
+        }
+        struct Images {
+            static let logo = "ruler.fill"
+            static let imageTarget = "note"
         }
     }
     
+    
+//  MARK: - HANGMAN
     struct Hangman {
         static let identifierApp = "hangman"
         static let cornerRadius: CGFloat = 15

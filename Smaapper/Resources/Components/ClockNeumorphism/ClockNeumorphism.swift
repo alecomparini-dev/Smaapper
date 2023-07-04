@@ -86,7 +86,9 @@ class ClockNeumorphism: ViewBuilder {
     
         stack.add(insideTo: view.view)
         stack.makeConstraints { make in
-            make.setPin.equalToSuperView
+            make
+                .setPin.equalToSuperView
+                .apply()
         }
         let topView = ViewBuilder()
         let middleView = ViewBuilder()
@@ -100,7 +102,9 @@ class ClockNeumorphism: ViewBuilder {
             let points = self.createTwoPoints(middleView.view.frame.height)
             points.add(insideTo: middleView.view)
             points.makeConstraints { make in
-                make.setPin.equalToSuperView
+                make
+                    .setPin.equalToSuperView
+                    .apply()
             }
         }
         return view

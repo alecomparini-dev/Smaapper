@@ -103,7 +103,7 @@
                             {
                                 "id": "sticky_note",
                                 "title": "Sticky Note",
-                                "leftImage": "note.text",
+                                "leftImage": "note",
                                 "rightImage": "chevron.forward"
                             },
                             {

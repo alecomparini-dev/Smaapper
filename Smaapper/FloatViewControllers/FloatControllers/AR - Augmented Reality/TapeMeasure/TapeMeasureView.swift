@@ -31,7 +31,7 @@ class TapeMeasureView: ViewBuilder {
     
 //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: "ruler.fill", title: "Tape Measure", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: K.TapeMeasure.Images.logo, title: K.TapeMeasure.title, target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -40,8 +40,14 @@ class TapeMeasureView: ViewBuilder {
         return view
     }()
     
-    lazy var arKitView: CameraARKitView = {
+    lazy var cameraARKitView: CameraARKitView = {
         let arKit = CameraARKitView()
+            .setAlignmentTarget(.top, 100)
+            .makeBorder { make in
+                make
+                    .setCornerRadius(20)
+            }
+
         return arKit
     }()
     
@@ -107,7 +113,7 @@ class TapeMeasureView: ViewBuilder {
     
     private func addElements() {
         titleView.add(insideTo: self.view)
-        arKitView.add(insideTo: self.view)
+        cameraARKitView.add(insideTo: self.view)
         startButtonImage.add(insideTo: self.view)
     }
     
@@ -118,10 +124,11 @@ class TapeMeasureView: ViewBuilder {
     }
     
     private func configARKitViewConstraints() {
-        StartOfConstraintsFlow(arKitView)
-            .setTop.equalTo(titleView.view, .bottom, 10)
-            .setLeading.setTrailing.equalToSuperView(10)
-            .setBottom.equalToSuperView(-10)
-            .apply()
+        cameraARKitView.makeConstraints { make in
+            make
+                .setTop.equalTo(titleView.view, .bottom, 5)
+                .setPinBottom.equalToSuperView
+                .apply()
+        }
     }
 }

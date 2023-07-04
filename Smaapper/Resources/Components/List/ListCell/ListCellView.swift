@@ -72,6 +72,7 @@ internal class ListCellView: ViewBuilder {
                 .setBottom
                 .setLeading.equalToSuperView
                 .setWidth.equalToConstant(self.widthLeftColumnCell)
+                .apply()
         }
     }
     
@@ -85,6 +86,7 @@ internal class ListCellView: ViewBuilder {
                 .setTop.setBottom.equalToSuperView
                 .setLeading.equalTo(self.leftViewCell!, .trailing)
                 .setTrailing.equalTo(self.rightViewCell!, .leading)
+                .apply()
         }
     }
     
@@ -101,9 +103,8 @@ internal class ListCellView: ViewBuilder {
                 .setBottom.equalToSafeArea
                 .setTrailing.equalToSuperView
                 .setWidth.equalToConstant(self.widthRightColumnCell)
+                .apply()
         }
-        
-
     }
     
     private func removeSubViews(_ view: UIView) {
