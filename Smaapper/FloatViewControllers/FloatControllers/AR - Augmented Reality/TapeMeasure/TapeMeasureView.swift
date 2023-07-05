@@ -40,14 +40,19 @@ class TapeMeasureView: ViewBuilder {
         return view
     }()
     
-    lazy var cameraARKitView: CameraARKitView = {
-        let arKit = CameraARKitView()
+    lazy var cameraARKit: ARSceneViewBuilder = {
+        let arKit = ARSceneViewBuilder()
             .setAlignmentTarget(.top, 100)
-            .makeBorder { make in
-                make
+            .setPlaneDetection([.vertical, .horizontal])
+            .setBorder { build in
+                build
                     .setCornerRadius(20)
             }
-
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(titleView.view, .bottom, 5)
+                    .setPinBottom.equalToSuperView
+            }
         return arKit
     }()
     
@@ -113,22 +118,14 @@ class TapeMeasureView: ViewBuilder {
     
     private func addElements() {
         titleView.add(insideTo: self.view)
-        cameraARKitView.add(insideTo: self.view)
+        cameraARKit.add(insideTo: self.view)
         startButtonImage.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
-        configARKitViewConstraints()
+        cameraARKit.applyConstraint()
         startButtonImage.applyConstraint()
     }
     
-    private func configARKitViewConstraints() {
-        cameraARKitView.makeConstraints { make in
-            make
-                .setTop.equalTo(titleView.view, .bottom, 5)
-                .setPinBottom.equalToSuperView
-                .apply()
-        }
-    }
 }
