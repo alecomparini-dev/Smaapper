@@ -43,40 +43,39 @@ class CameraARKitView: UIView {
         configSceneView()
         addElements()
         configConstraints()
-        runSceneView()
         configDelegate()
     }
     
 
-//  MARK: - LAZY Area
-    lazy var targetImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageTarget))
-            .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setSize(K.CameraARKit.sizeTarget)
-            .setWeight(.thin)
-            .setConstraints { build in
-                build
-                    .setVerticalAlignmentY.equalToSuperView(-100)
-                    .setHorizontalAlignmentX.equalToSuperView
-            }
-            .setActions { build in
-                build
-                    .setDraggable()
-            }
-        return img
-    }()
-    
-    lazy var targetBallImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageBallTarget))
-            .setTintColor(Theme.shared.currentTheme.onSurface.withAlphaComponent(0.8))
-            .setSize(6)
-            .setWeight(.thin)
-            .setConstraints { build in
-                build
-                    .setAlignmentCenterXY.equalToSuperView
-            }
-        return img
-    }()
+    //  MARK: - LAZY Area
+        lazy var targetImage: ImageViewBuilder = {
+            let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageTarget))
+                .setTintColor(Theme.shared.currentTheme.onSurface)
+                .setSize(K.CameraARKit.sizeTarget)
+                .setWeight(.thin)
+                .setConstraints { build in
+                    build
+                        .setVerticalAlignmentY.equalToSuperView(-100)
+                        .setHorizontalAlignmentX.equalToSuperView
+                }
+                .setActions { build in
+                    build
+                        .setDraggable()
+                }
+            return img
+        }()
+        
+        lazy var targetBallImage: ImageViewBuilder = {
+            let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageBallTarget))
+                .setTintColor(Theme.shared.currentTheme.onSurface.withAlphaComponent(0.8))
+                .setSize(6)
+                .setWeight(.thin)
+                .setConstraints { build in
+                    build
+                        .setAlignmentCenterXY.equalToSuperView
+                }
+            return img
+        }()
    
     
 //  MARK: - GET AREA
@@ -131,7 +130,6 @@ class CameraARKitView: UIView {
         return self
     }
 
-    
     func runSceneView(){
         sceneView.session.run(configuration)
     }

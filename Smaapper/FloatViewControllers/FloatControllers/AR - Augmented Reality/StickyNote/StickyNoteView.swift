@@ -28,6 +28,7 @@ class StickyNoteView: ViewBuilder {
         configConstraints()
     }
     
+    
 //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: K.Sticky.Images.logo,
@@ -43,14 +44,20 @@ class StickyNoteView: ViewBuilder {
         return view
     }()
     
-    lazy var cameraARKit: CameraARKitView = {
-        let arKit = CameraARKitView()
+    lazy var cameraARKit: ARSceneViewBuilder = {
+        let arKit = ARSceneViewBuilder()
             .setImageTarget(createImageTarget())
             .setAlignmentTarget(.middle, -35)
-            .makeBorder { make in
-                make
+            .setPlaneDetection([.vertical, .horizontal])
+            .setBorder { build in
+                build
                     .setCornerRadius(20)
-            }            
+            }
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(titleView.view, .bottom, 5)
+                    .setPinBottom.equalToSuperView
+            }
         return arKit
     }()
     
@@ -68,7 +75,7 @@ class StickyNoteView: ViewBuilder {
             }
             .setConstraints { build in
                 build
-                    .setPinBottom.equalTo(cameraARKit)
+                    .setPinBottom.equalTo(cameraARKit.view)
                     .setHeight.equalToConstant(90)
             }
         return view
@@ -79,11 +86,13 @@ class StickyNoteView: ViewBuilder {
         return label
     }()
     
-    lazy var noteTextField: TextFieldBuilder = {
-        let tf = TextFieldBuilder("Enter your note")
+    lazy var noteTextField: TextFieldClearableBuilder = {
+        let tf = TextFieldClearableBuilder("Enter your note")
             .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
-            .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setTintColor(Theme.shared.currentTheme.onSurface)
+            .setImageColor(Theme.shared.currentTheme.onSurface)
             .setTextColor(Theme.shared.currentTheme.onSurface)
+            .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant)
             .setPadding(10, .left)
             .setBorder({ build in
                 build
@@ -189,21 +198,12 @@ class StickyNoteView: ViewBuilder {
     
     private func configConstraints() {
         titleView.applyConstraint()
-        configCameraARKitConstraints()
+        cameraARKit.applyConstraint()
         overlay.applyConstraint()
         addButton.applyConstraint()
         noteTextField.applyConstraint()
     }
-    
-    private func configCameraARKitConstraints() {
-        cameraARKit.makeConstraints { make in
-            make
-                .setTop.equalTo(titleView.view, .bottom, 5)
-                .setPinBottom.equalToSuperView
-                .apply()
-        }
-    }
-    
+        
     private func createImageTarget() -> ImageViewBuilder {
         return ImageViewBuilder(UIImage(systemName: K.Sticky.Images.imageTarget))
             .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)

@@ -56,6 +56,12 @@ class TextFieldImageBuilder: TextFieldBuilder {
         return self
     }
     
+    @discardableResult
+    func setImageColor(_ color: UIColor) -> Self {
+        self.imageView.tintColor = color
+        return self
+    }
+    
     override func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
         if isImagePositionMatch(position) {
             return self
