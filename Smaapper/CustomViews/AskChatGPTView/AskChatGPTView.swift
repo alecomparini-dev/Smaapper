@@ -21,7 +21,6 @@ class AskChatGPTView: ViewBuilder {
         configConstraints()
     }
     
-    
     lazy var askChatGPTLabel: LabelBuilder = {
         return LabelBuilder("Ask ChatGPT")
             .setColor(Theme.shared.currentTheme.onSurface)
@@ -32,7 +31,6 @@ class AskChatGPTView: ViewBuilder {
                     .setLeading.equalToSuperView(23)
             }
     }()
-    
     
     lazy var underLineView: ViewBuilder = {
         return ViewBuilder()
@@ -61,9 +59,9 @@ class AskChatGPTView: ViewBuilder {
                     .setWidth.equalToConstant(65)
             }
     }()
-    
-    lazy var chatGPTTextField: TextFieldBuilder = {
-        return TextFieldBuilder("type here...")
+        
+    lazy var chatGPTTextField: TextFieldClearableBuilder = {
+        return TextFieldClearableBuilder("type here...")
             .setPadding(15)
             .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant.withAlphaComponent(0.5))
             .setTintColor(Theme.shared.currentTheme.onSurface)

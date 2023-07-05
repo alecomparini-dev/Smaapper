@@ -36,7 +36,6 @@ extension UIView {
     }
    
     func replicateFormat( width: CGFloat? = nil, height: CGFloat? = nil, cornerRadius: CGFloat? = nil ) -> UIBezierPath {
-        
         let replicateWidth = width ?? self.frame.width
         let replicateHeight = height ?? self.frame.height
         let replicateCornerRadius = cornerRadius ?? self.layer.cornerRadius
@@ -84,6 +83,12 @@ extension UIView {
     @discardableResult
     func makeBlur(_ blur: (_ make: Blur) -> Blur) -> Self {
         _ = blur(Blur(self))
+        return self
+    }
+    
+    @discardableResult
+    func makeTapGesture(_ tapGesture: (_ make: TapGestureBuilder) -> TapGestureBuilder) -> Self {
+        _ = tapGesture(TapGestureBuilder(self))
         return self
     }
     

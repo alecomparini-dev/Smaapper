@@ -20,6 +20,7 @@ protocol TextFieldDelegate: AnyObject {
 }
 
 class TextField: UITextField {
+    weak var delegateTextField: TextFieldDelegate?
     
     enum Position {
          case left
@@ -34,8 +35,6 @@ class TextField: UITextField {
         CurrentWindow.rootView?.hideKeyboardWhenViewTapped()
         currentMainWindow = mainWindow
     }
-    
-    weak var delegateTextField: TextFieldDelegate?
     
     init() {
         super.init(frame: .zero)
@@ -82,6 +81,7 @@ class TextField: UITextField {
 //  MARK: - EXTENSION UITextFieldDelegate
 
 extension TextField: UITextFieldDelegate {
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let delegate = delegateTextField {
             if !delegate.textField(self, shouldChangeCharactersIn: range, replacementString: string) {
@@ -94,12 +94,9 @@ extension TextField: UITextFieldDelegate {
         return true
     }
     
-    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let delegate = delegateTextField {
-            if !delegate.textFieldShouldBeginEditing(self) {
-                return false
-            }
+            if !delegate.textFieldShouldBeginEditing(self) { return false }
         }
         return true
     }
@@ -110,9 +107,7 @@ extension TextField: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if let delegate = delegateTextField {
-            if !delegate.textFieldShouldEndEditing(self) {
-                return false
-            }
+            if !delegate.textFieldShouldEndEditing(self) { return false }
         }
         return true
     }
@@ -121,25 +116,20 @@ extension TextField: UITextFieldDelegate {
         delegateTextField?.textFieldDidEndEditing(self, reason: reason)
     }
     
-
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegateTextField?.textFieldDidChangeSelection(self)
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         if let delegate = delegateTextField {
-            if !delegate.textFieldShouldClear(self) {
-                return false
-            }
+            if !delegate.textFieldShouldClear(self) { return false }
         }
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let delegate = delegateTextField {
-            if !delegate.textFieldShouldReturn(self) {
-                return false
-            }
+            if !delegate.textFieldShouldReturn(self) { return false }
         }
         return true
     }
@@ -147,6 +137,7 @@ extension TextField: UITextFieldDelegate {
 }
 
 
+//  MARK: - EXTENSION
 extension TextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: TextField) -> Bool {return true}
     func textFieldDidBeginEditing(_ textField: TextField) {}

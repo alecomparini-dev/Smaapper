@@ -11,14 +11,15 @@ class TextFieldImageBuilder: TextFieldBuilder {
     
     typealias onTapImageClosureAlias = (_ imageView: UIImageView) -> Void
     
+    
 //  MARK: - Properties
-    private var paddingView = UIView(frame: .zero)
-    private let imageView: UIImageView
+    private(set) var paddingView = UIView(frame: .zero)
+    private(set) var imageView: UIImageView
     private let imagePosition: TextField.Position
     private let margin: CGFloat
     
     
-//  MARK: - Actions Properties
+//  MARK: - ACTIONS Properties
     private var onTapAction: onTapImageClosureAlias?
     
     
@@ -41,7 +42,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
     }
     
     
-//  MARK: - Set Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setImageSize(_ size: CGFloat, _ weight: UIImage.SymbolWeight? = nil) -> Self {
@@ -49,28 +50,20 @@ class TextFieldImageBuilder: TextFieldBuilder {
         return self
     }
     
-    override func setPadding(_ padding: CGFloat, _ position: TextField.Position?) -> Self {
-        if imagePosition == position {
+    @discardableResult
+    func setHideImage(_ hide: Bool) -> Self {
+        self.imageView.isHidden = hide
+        return self
+    }
+    
+    override func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
+        if isImagePositionMatch(position) {
             return self
         }
+        let position: TextField.Position = calculatePaddingPosition(position)
         super.setPadding(padding, position)
         return self
     }
-    
-    
-//  MARK: - Set Actions
-    
-    @discardableResult
-    func setOnTapImage(completion: @escaping onTapImageClosureAlias) -> Self {
-        self.onTapAction = completion
-        _ = TapGestureBuilder(self.paddingView)
-            .setTouchEnded({ [weak self] tapGesture in
-                guard let self else {return}
-                self.onTapAction?(self.imageView)
-            })
-        return self
-    }
-
     
     @discardableResult
     func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: CGFloat) -> Self {
@@ -78,23 +71,58 @@ class TextFieldImageBuilder: TextFieldBuilder {
         self.setFrameImage(image)
         self.addImageInsidePaddingView(image, paddingView)
         self.setImageAlignmentInPaddingView(image, paddingView, position)
-        self.setPadding(paddingView, position)
+        super.setPadding(paddingView, position)
         setTintColor(self.textField.textColor ?? .black)
         return self
     }
+
+    
+//  MARK: - Set Actions
+    
+    @discardableResult
+    func setActions(_ action: (_ build: TextFieldImageActions) -> TextFieldImageActions) -> Self {
+        if let actions = self.actions {
+            super.actions = action(actions as! TextFieldImageActions)
+            return self
+        }
+        super.actions = action(TextFieldImageActions(self))
+        return self
+    }
+    
     
 //  MARK: - Private Area
+    private func calculatePaddingPosition(_ position: TextField.Position? = nil) -> TextField.Position {
+        if position == nil {
+            return oppositeImagePosition()
+        }
+        return position!
+    }
     
+    private func oppositeImagePosition() -> TextField.Position {
+        switch self.imagePosition {
+            case .left:
+                return .right
+            case .right:
+                return .left
+        }
+    }
+    
+    private func isImagePositionMatch(_ position: TextField.Position? = nil) -> Bool {
+        return imagePosition == position
+    }
     
     private func createPaddingView(_ image: UIImageView, _ margin: CGFloat) -> UIView {
-        return UIView(frame: CGRect(x: 0,
-                                    y: 0,
-                                    width: (image.image?.size.width ?? 0.0) + self.margin,
+        return UIView(frame: CGRect(x: .zero,
+                                    y: .zero,
+                                    width: (image.image?.size.width ?? .zero) + self.margin,
                                     height: self.textField.frame.height))
     }
     
     private func setFrameImage(_ image: UIImageView) {
-        image.frame = CGRect(x: 0, y: 0, width: Int(image.image?.size.width ?? 0) , height: Int(image.image?.size.height ?? 0))
+        image.frame = CGRect(x: .zero,
+                             y: .zero,
+                             width: image.image?.size.width ?? .zero,
+                             height: image.image?.size.height ?? .zero)
     }
     
     private func addImageInsidePaddingView(_ image: UIImageView, _ paddingImgView: UIView) {

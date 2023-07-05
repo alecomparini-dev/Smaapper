@@ -123,6 +123,10 @@
 		02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */; };
 		02D06E6F2A55931D0020A10B /* ConstantsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */; };
 		02D06E712A55AAE10020A10B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E702A55AAE10020A10B /* UIView+Extension.swift */; };
+		02D06E772A55C9830020A10B /* SceneViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E762A55C9830020A10B /* SceneViewBuilder.swift */; };
+		02D06E792A55CAFD0020A10B /* SceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E782A55CAFD0020A10B /* SceneView.swift */; };
+		02D06E7B2A55D9AC0020A10B /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E7A2A55D9AC0020A10B /* TextFieldActions.swift */; };
+		02D06E7D2A55DB5D0020A10B /* TextFieldImageActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E7C2A55DB5D0020A10B /* TextFieldImageActions.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -314,6 +318,10 @@
 		02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearableBuilder.swift; sourceTree = "<group>"; };
 		02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsComponent.swift; sourceTree = "<group>"; };
 		02D06E702A55AAE10020A10B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		02D06E762A55C9830020A10B /* SceneViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneViewBuilder.swift; sourceTree = "<group>"; };
+		02D06E782A55CAFD0020A10B /* SceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneView.swift; sourceTree = "<group>"; };
+		02D06E7A2A55D9AC0020A10B /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
+		02D06E7C2A55DB5D0020A10B /* TextFieldImageActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageActions.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -489,7 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A8B729F9FD3A008392EC /* Alert */,
-				0272FB972A5351B900EF4AE5 /* ARCamera */,
+				0272FB972A5351B900EF4AE5 /* AR */,
 				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
 				0234A88A29F9FD3A008392EC /* Border */,
@@ -677,6 +685,7 @@
 				02D06E6A2A55905C0020A10B /* TextFieldClearable */,
 				02B792682A1EE56E006CEE8E /* TextFieldPassword */,
 				02B792652A1EE409006CEE8E /* TextFieldImage */,
+				02D06E7A2A55D9AC0020A10B /* TextFieldActions.swift */,
 				020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */,
 				020D0E652A1ED628007F3992 /* TextField.swift */,
 			);
@@ -894,11 +903,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		0272FB972A5351B900EF4AE5 /* ARCamera */ = {
+		0272FB972A5351B900EF4AE5 /* AR */ = {
 			isa = PBXGroup;
 			children = (
+				02D06E722A55C90C0020A10B /* Scene */,
+				02D06E752A55C9300020A10B /* Node */,
+				02D06E742A55C9280020A10B /* Geometry */,
+				02D06E732A55C9180020A10B /* Material */,
 			);
-			path = ARCamera;
+			path = AR;
 			sourceTree = "<group>";
 		};
 		0281DAD42A14071B00E44F04 /* DockCell */ = {
@@ -976,6 +989,7 @@
 		02B792652A1EE409006CEE8E /* TextFieldImage */ = {
 			isa = PBXGroup;
 			children = (
+				02D06E7C2A55DB5D0020A10B /* TextFieldImageActions.swift */,
 				02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */,
 			);
 			path = TextFieldImage;
@@ -1123,6 +1137,36 @@
 				02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */,
 			);
 			path = TextFieldClearable;
+			sourceTree = "<group>";
+		};
+		02D06E722A55C90C0020A10B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				02D06E762A55C9830020A10B /* SceneViewBuilder.swift */,
+				02D06E782A55CAFD0020A10B /* SceneView.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		02D06E732A55C9180020A10B /* Material */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Material;
+			sourceTree = "<group>";
+		};
+		02D06E742A55C9280020A10B /* Geometry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Geometry;
+			sourceTree = "<group>";
+		};
+		02D06E752A55C9300020A10B /* Node */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Node;
 			sourceTree = "<group>";
 		};
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
@@ -1609,6 +1653,7 @@
 				02E9741F2A37887B00BF14EE /* ProportionView.swift in Sources */,
 				02FB2CA92A45E26B00C7FC98 /* DefaultDollView.swift in Sources */,
 				02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */,
+				02D06E7B2A55D9AC0020A10B /* TextFieldActions.swift in Sources */,
 				02FB2CA22A45D92200C7FC98 /* GallowsView.swift in Sources */,
 				026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */,
 				02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */,
@@ -1622,6 +1667,8 @@
 				026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0272FB962A534C1E00EF4AE5 /* StickyNoteCoordinator.swift in Sources */,
+				02D06E792A55CAFD0020A10B /* SceneView.swift in Sources */,
+				02D06E7D2A55DB5D0020A10B /* TextFieldImageActions.swift in Sources */,
 				02FB2CA42A45E11300C7FC98 /* GallowsDollView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
 				02D5814F2A20058500150AF9 /* TapGestureBuilder.swift in Sources */,
@@ -1692,6 +1739,7 @@
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
+				02D06E772A55C9830020A10B /* SceneViewBuilder.swift in Sources */,
 				020D0E5B2A1EADB6007F3992 /* Dock.swift in Sources */,
 				02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */,
 				02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */,
