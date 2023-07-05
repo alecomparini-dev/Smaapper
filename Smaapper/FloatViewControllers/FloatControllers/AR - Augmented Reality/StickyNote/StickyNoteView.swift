@@ -28,7 +28,7 @@ class StickyNoteView: ViewBuilder {
         configConstraints()
     }
     
-    //  MARK: - LAZY Area
+//  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: K.Sticky.Images.logo,
                                   title: K.Sticky.title,
@@ -79,7 +79,7 @@ class StickyNoteView: ViewBuilder {
         return label
     }()
     
-    lazy var inputTextField: TextFieldBuilder = {
+    lazy var noteTextField: TextFieldBuilder = {
         let tf = TextFieldBuilder("Enter your note")
             .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
             .setPlaceHolderColor(Theme.shared.currentTheme.onSurfaceVariant)
@@ -155,6 +155,13 @@ class StickyNoteView: ViewBuilder {
         delegate?.addButtonTapped()
     }
     
+    
+//  MARK: - GET Area
+    func getStickyAR() -> UIView {
+        return createStickyToAR()
+    }
+    
+    
 //  MARK: - PRIVATE Area
     private func configStyles() {
         configBorder()
@@ -177,7 +184,7 @@ class StickyNoteView: ViewBuilder {
         cameraARKit.add(insideTo: self.view)
         overlay.add(insideTo: self.view)
         addButton.add(insideTo: overlay.view)
-        inputTextField.add(insideTo: overlay.view)
+        noteTextField.add(insideTo: overlay.view)
     }
     
     private func configConstraints() {
@@ -185,7 +192,7 @@ class StickyNoteView: ViewBuilder {
         configCameraARKitConstraints()
         overlay.applyConstraint()
         addButton.applyConstraint()
-        inputTextField.applyConstraint()
+        noteTextField.applyConstraint()
     }
     
     private func configCameraARKitConstraints() {
@@ -201,6 +208,51 @@ class StickyNoteView: ViewBuilder {
         return ImageViewBuilder(UIImage(systemName: K.Sticky.Images.imageTarget))
             .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)
             .setWeight(.thin)
+    }
+    
+
+    
+//  MARK: - STICKY AR Area
+    private func createStickyToAR() -> UIView {
+        let view = createSticky()
+        let top = createTopSticky()
+        let note = createLabel()
+        top.add(insideTo: view.view)
+        note.add(insideTo: view.view)
+        return view.view
+    }
+    
+    private func createLabel() -> LabelBuilder {
+        return LabelBuilder(frame: CGRect(x: K.Sticky.AR.Frame.Note.x,
+                                          y: K.Sticky.AR.Frame.Note.y,
+                                          width: K.Sticky.AR.Frame.Note.width,
+                                          height: K.Sticky.AR.Frame.Note.height))
+        
+        .setTextAlignment(.natural)
+        .setFont(UIFont.systemFont(ofSize: K.Sticky.AR.fontSizeNote, weight: .regular))
+        .setColor(Theme.shared.currentTheme.onPrimary)
+        .setNumberOfLines(0)
+        .setText(noteTextField.getText)
+    }
+    
+    private func createSticky() -> ViewBuilder {
+        return ViewBuilder(frame: CGRect(x: K.Sticky.AR.Frame.Default.x,
+                                         y: K.Sticky.AR.Frame.Default.y,
+                                         width: K.Sticky.AR.Frame.Default.width,
+                                         height: K.Sticky.AR.Frame.Default.height))
+            .setBackgroundColor(K.Sticky.corSticky)
+            .setBorder { build in
+                build
+                    .setCornerRadius(K.Sticky.AR.Frame.cornerRadius)
+            }
+    }
+    
+    private func createTopSticky() -> ViewBuilder {
+        return ViewBuilder(frame: CGRect(x: K.Sticky.AR.Frame.Top.x,
+                                         y: K.Sticky.AR.Frame.Top.y,
+                                         width: K.Sticky.AR.Frame.Top.width,
+                                         height: K.Sticky.AR.Frame.Top.height))
+            .setBackgroundColor(K.Sticky.corSticky.adjustBrightness(-20))
     }
     
 

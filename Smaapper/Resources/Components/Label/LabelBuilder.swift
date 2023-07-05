@@ -12,11 +12,15 @@ class LabelBuilder: BaseBuilder {
     private var label: Label
     var view: Label { self.label }
     
-    private var actions: LabelActions?
+    private(set) var actions: LabelActions?
     
-    init() {
-        self.label = Label()
+    init(frame: CGRect) {
+        self.label = Label(frame: frame)
         super.init(self.label)
+    }
+    
+    convenience init() {
+        self.init(frame: .zero)
     }
     
     convenience init(_ text: String) {
@@ -26,12 +30,12 @@ class LabelBuilder: BaseBuilder {
     
     convenience init(_ text: String, _ color: UIColor) {
         self.init(text)
-        let _ = self.setColor(color)
+        self.setColor(color)
     }
     
     convenience init(_ text: String, _ color: UIColor, _ aligment: NSTextAlignment) {
         self.init(text, color)
-        let _ = self.setTextAlignment(aligment)
+        self.setTextAlignment(aligment)
     }
     
 //  MARK: - GET Properties

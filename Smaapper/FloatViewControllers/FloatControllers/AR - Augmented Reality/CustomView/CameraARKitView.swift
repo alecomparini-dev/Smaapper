@@ -8,7 +8,13 @@
 import UIKit
 import ARKit
 
+protocol CameraARKitViewDelegate: AnyObject {
+    func positionTouch(_ position: CGPoint)
+}
+
 class CameraARKitView: UIView {
+    
+    weak var delegate: CameraARKitViewDelegate?
     
     enum Alignment {
         case top
@@ -16,7 +22,8 @@ class CameraARKitView: UIView {
         case bottom
     }
     
-    private var dotNodes: [SCNNode] = []
+    private var enabledTouch: Bool = true
+    private var positionTarget: CGPoint = .zero
     
     private var configuration: ARWorldTrackingConfiguration!
     private(set) var sceneView: ARSCNView!
@@ -72,6 +79,15 @@ class CameraARKitView: UIView {
     }()
    
     
+//  MARK: - GET AREA
+    
+    func getPositionTarget() -> CGPoint? {
+        if targetImage.view.isHidden { return nil }
+        return targetImage.view.convert(targetBallImage.view.center, to: self)
+    }
+
+    
+    
 //  MARK: - SET Properties
     @discardableResult
     func setDebug(_ debugOptions: ARSCNDebugOptions) -> Self {
@@ -88,12 +104,6 @@ class CameraARKitView: UIView {
     @discardableResult
     func setEnabledTargetDraggable(_ enabled: Bool) -> Self {
         self.targetImage.actions?.draggable?.setEnabledDraggable(enabled)
-        return self
-    }
-    
-    @discardableResult
-    func setChildNode(_ node: SCNNode) -> Self {
-        sceneView.scene.rootNode.addChildNode(node)
         return self
     }
     
@@ -115,6 +125,13 @@ class CameraARKitView: UIView {
     
     
 //  MARK: - ACTIONS
+    
+    func add(_ node: SCNNode) -> Self {
+        sceneView.scene.rootNode.addChildNode(node)
+        return self
+    }
+
+    
     func runSceneView(){
         sceneView.session.run(configuration)
     }
@@ -175,15 +192,6 @@ class CameraARKitView: UIView {
         }
     }
     
-    private func getPositionTarget(_ touches: Set<UITouch>) -> CGPoint{
-        if targetImage.view.isHidden {
-            if let touchLocation = touches.first?.location(in: sceneView) {
-                return touchLocation
-            }
-        }
-        return targetImage.view.convert(targetBallImage.view.center, to: self)
-    }
-    
     private func addDot(at castResult: ARRaycastResult) {
         let dotGeometry = SCNSphere(radius: 0.005)
         let material = SCNMaterial()
@@ -191,39 +199,25 @@ class CameraARKitView: UIView {
         dotGeometry.materials = [material]
         let dotNode = SCNNode(geometry: dotGeometry)
         dotNode.simdTransform = castResult.worldTransform
-        setChildNode(dotNode)
+//        setChildNode(dotNode)
     }
     
+    
+    
     private func addStickyNote(at castResult: ARRaycastResult) {
-        
-        let customView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        customView.backgroundColor = .red
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.text = "CARALHO DA PORRA"
-        customView.addSubview(label)
-
-
-        UIGraphicsBeginImageContextWithOptions(customView.bounds.size, false, 0.0)
-        customView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
+        let customView = UIView()
 
         let material = SCNMaterial()
-        material.diffuse.contents = image
+        material.diffuse.contents = customView.convertToImage
 
-
-        let planeSize = CGSize(width: 0.1, height: 0.1) // Size of the SCNPlane
-        let planeGeometry = SCNPlane(width: planeSize.width, height: planeSize.height)
+        
+        let planeGeometry = SCNPlane(width: 0.1, height: 0.1)
         planeGeometry.materials = [material]
 
         
         let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01) // Set the scale of the SCNPlane
+
+//        planeNode.scale = SCNVector3(x: 0.01, y: 0.01, z: 0.01) // Set the scale of the SCNPlane
 
 
         planeNode.simdTransform = castResult.worldTransform
@@ -234,45 +228,31 @@ class CameraARKitView: UIView {
     }
     
     
-    private func addStickyNote_old(at castResult: ARRaycastResult) {
         
-        let view = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
-        view.backgroundColor = .red
-        
-        let plane = SCNPlane(width: 0.1, height: 0.1)
-        plane.firstMaterial?.diffuse.contents = view
-        
-        // Criar um nó SCNNode com a geometria do plano
-        let stickyNoteNode = SCNNode(geometry: plane)
-        stickyNoteNode.simdTransform = castResult.worldTransform
-        
-        let billboardConstraint = SCNBillboardConstraint()
-        stickyNoteNode.constraints = [billboardConstraint]
-        
-        sceneView.scene.rootNode.addChildNode(stickyNoteNode)
+    private func getPositionTouch(_ touches: Set<UITouch>) -> CGPoint {
+        if let touchLocation = touches.first?.location(in: sceneView) {
+            return touchLocation
+        }
+        return .zero
     }
     
-        
-    
-
     
 }
+
 
 
 //  MARK: - EXTENSION DELEGATE ARSCNViewDelegate
 extension CameraARKitView: ARSCNViewDelegate {
     
-    
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-
-        
-        
-            
+        //TODO: - IMPLEMENT DETECT PLANE
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let positionTarget: CGPoint = getPositionTarget(touches)
+        delegate?.positionTouch(getPositionTouch(touches))
         
+        
+
         if let raycastQuery = sceneView.raycastQuery(from: positionTarget, allowing: .existingPlaneGeometry, alignment: .horizontal) {
             if let castResult = sceneView.session.raycast(raycastQuery).first {
                 addDot(at: castResult)
@@ -286,7 +266,7 @@ extension CameraARKitView: ARSCNViewDelegate {
                 addStickyNote(at: castResult)
             }
         }
-    
+        
     }
     
     

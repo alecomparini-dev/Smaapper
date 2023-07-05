@@ -77,7 +77,41 @@ struct K {
     struct Sticky {
         static let identifierApp = "sticky_note"
         static let title = "Sticky Note"
-        static let corSticky: UIColor = UIColor.HEX("#FEE88A")
+        static let corSticky: UIColor = Theme.shared.currentTheme.primary
+        static let maxLetterNote: Int = 50
+        
+        struct AR {
+            static let fontSizeNote: CGFloat = 10
+            struct Frame {
+                static let cornerRadius: CGFloat = 3
+                struct Default {
+                    static let x: CGFloat = 0
+                    static let y: CGFloat = 0
+                    static let width: CGFloat = 100
+                    static let height: CGFloat = 80
+                }
+                struct Top {
+                    static let x: CGFloat = 0
+                    static let y: CGFloat = 0
+                    static let width: CGFloat = 100
+                    static let height: CGFloat = 15
+                }
+                struct Note {
+                    private static let margin: CGFloat = 5
+                    static let x: CGFloat = 5
+                    static let y: CGFloat = Top.height
+                    static let width: CGFloat = Default.width - Note.x - Note.margin
+                    static let height: CGFloat = Default.height - Note.y - Note.margin
+                }
+            }
+        }
+        
+        struct FloatView {
+            static let x: CGFloat = 10
+            static let y: CGFloat = 50
+            static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
+            static let height: CGFloat = 500
+        }
         
         struct Images {
             static let logo = "note"

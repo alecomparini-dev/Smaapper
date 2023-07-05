@@ -52,6 +52,9 @@ class TextFieldBuilder: BaseBuilder {
     }
     
 //  MARK: - GET Properties
+    
+    var getText: String { self.view.text ?? "" }
+        
     var getNumber: NSNumber {
         let numberFormatter = NumberFormatterBuilder().setMaximumFractionDigits(10).removeGroupingSeparator()
         return numberFormatter.getNumber(self.textField.text ?? K.String.zeroDouble) ?? nsNumberZero

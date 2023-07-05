@@ -21,8 +21,15 @@ class StickyNoteFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialization()
+    }
+    
+    private func initialization() {
         setEnabledDraggable(true)
-        setFrameWindow(CGRect(x: 20, y: 50, width: (Utils.currentWindow?.screen.bounds.width ?? 300)-40 , height: 500))
+        setFrameWindow(CGRect(x: K.Sticky.FloatView.x,
+                              y: K.Sticky.FloatView.y,
+                              width: K.Sticky.FloatView.width ,
+                              height: K.Sticky.FloatView.height))
         configDelegate()
     }
     
@@ -43,6 +50,7 @@ class StickyNoteFloatViewController: FloatViewController {
     
     private func configDelegate() {
         screen.delegate = self
+        screen.cameraARKit.delegate = self
     }
     
 }
@@ -61,8 +69,24 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
     }
     
     func addButtonTapped() {
-        print("clicou na porra do button pra adicionar o ponto")
+        addStickyOnAR()
+    }
+    
+    private func addStickyOnAR() {
+        let stickyAR = screen.getStickyAR()
+        
+    }
+    
+}
+
+
+//  MARK: - EXTENSION TapeMeasureViewDelegate
+
+extension StickyNoteFloatViewController: CameraARKitViewDelegate {
+    func positionTouch(_ position: CGPoint) {
+        
     }
     
     
 }
+
