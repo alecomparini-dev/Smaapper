@@ -57,7 +57,7 @@ class TextField: UITextField {
     
     private func validateKeyboardDecimal(_ character: String) -> Bool {
         guard let text = self.text else { return true}
-        let separators: [String] = [".", ","]
+        let separators: [String] = [K.String.dot, K.String.comma]
         if separators.contains(character) {
             return !separators.contains { separator in
                 return text.contains(separator)

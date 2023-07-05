@@ -43,7 +43,7 @@ class NumberFormatterBuilder: NumberFormatter {
     }
     
     private func sanitizationNumber(_ value: String) -> String {
-        return value.replacingOccurrences(of: ".", with: decimalSeparator).replacingOccurrences(of: ",", with: decimalSeparator)
+        return value.replacingOccurrences(of: K.String.dot, with: decimalSeparator).replacingOccurrences(of: K.String.comma, with: decimalSeparator)
     }
     
 

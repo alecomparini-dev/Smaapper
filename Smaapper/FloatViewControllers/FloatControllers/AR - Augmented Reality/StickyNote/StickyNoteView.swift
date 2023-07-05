@@ -10,6 +10,7 @@ import UIKit
 protocol StickyNoteViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
+    func addButtonTapped()
 }
 
 class StickyNoteView: ViewBuilder {
@@ -29,7 +30,11 @@ class StickyNoteView: ViewBuilder {
     
     //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: K.Sticky.Images.logo, title: K.Sticky.title, target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: K.Sticky.Images.logo,
+                                  title: K.Sticky.title,
+                                  target: self,
+                                  closeClosure: #selector(closeWindow),
+                                  minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -39,12 +44,8 @@ class StickyNoteView: ViewBuilder {
     }()
     
     lazy var cameraARKit: CameraARKitView = {
-        let imgTarget = ImageViewBuilder(UIImage(systemName: K.Sticky.Images.imageTarget))
-            .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)
-            .setWeight(.thin)
-        
         let arKit = CameraARKitView()
-            .setImageTarget(imgTarget)
+            .setImageTarget(createImageTarget())
             .setAlignmentTarget(.middle, -35)
             .makeBorder { make in
                 make
@@ -133,6 +134,10 @@ class StickyNoteView: ViewBuilder {
                     .setTrailing.equalToSuperView(-15)
                     .setWidth.setHeight.equalToConstant(40)
             }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(addButtonTapped), .touchUpInside)
+            }
         return tf
     }()
     
@@ -144,6 +149,10 @@ class StickyNoteView: ViewBuilder {
     
     @objc private func closeWindow() {
         delegate?.closeWindow()
+    }
+    
+    @objc private func addButtonTapped() {
+        delegate?.addButtonTapped()
     }
     
 //  MARK: - PRIVATE Area
@@ -186,6 +195,12 @@ class StickyNoteView: ViewBuilder {
                 .setPinBottom.equalToSuperView
                 .apply()
         }
+    }
+    
+    private func createImageTarget() -> ImageViewBuilder {
+        return ImageViewBuilder(UIImage(systemName: K.Sticky.Images.imageTarget))
+            .setTintColor(Theme.shared.currentTheme.onSurfaceVariant)
+            .setWeight(.thin)
     }
     
 

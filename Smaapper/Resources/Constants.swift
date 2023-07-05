@@ -9,8 +9,24 @@ import UIKit
 
 struct K {
     static let appName = "Smaapper"
-    static let dot = "."
-    static let stringEmpty = ""
+    
+    struct String {
+        static let dot = "."
+        static let comma = ","
+        static let zeroDouble = "0.0"
+        static let zero = "0"
+        static let empty = ""
+        static let one = "1"
+        static let two = "2"
+        static let three = "3"
+        static let four = "4"
+        static let five = "5"
+        static let six = "6"
+        static let seven = "7"
+        static let eight = "8"
+        static let nine = "9"
+    }
+    
     
     
 //  MARK: - CAMERA ARKIT
@@ -27,8 +43,7 @@ struct K {
     struct Proportion {
         static let identifierApp = "proportion"
         static let title = "Proportion"
-        static let labelOkButton = "Proportion"
-        static let displayZero = "0.0"
+        static let labelOkButton = "Ok"
         static let maxDigits: Int = 4
         
         struct FloatView {

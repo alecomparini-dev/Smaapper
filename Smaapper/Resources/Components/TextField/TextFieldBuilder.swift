@@ -9,6 +9,8 @@ import UIKit
 
 class TextFieldBuilder: BaseBuilder {
     
+    private let nsNumberZero: NSNumber = 0.0
+    
     enum NavigationTextField {
         case next
         case previous
@@ -52,22 +54,22 @@ class TextFieldBuilder: BaseBuilder {
 //  MARK: - GET Properties
     var getNumber: NSNumber {
         let numberFormatter = NumberFormatterBuilder().setMaximumFractionDigits(10).removeGroupingSeparator()
-        return numberFormatter.getNumber(self.textField.text ?? "0.0") ?? 0.0
+        return numberFormatter.getNumber(self.textField.text ?? K.String.zeroDouble) ?? nsNumberZero
     }
     
     func getNumber(_ buildFormatter: ((_ build: NumberFormatterBuilder) -> NumberFormatterBuilder)) -> NSNumber {
         let numberFormatter = buildFormatter(NumberFormatterBuilder())
-        return numberFormatter.getNumber(self.textField.text ?? "0.0") ?? 0.0
+        return numberFormatter.getNumber(self.textField.text ?? K.String.zeroDouble) ?? nsNumberZero
     }
     
     private func getDoubleValueOfTextField(_ text: String?) -> Double {
         if var textResult = text {
-            if NumberFormatterBuilder.get.decimalSeparator != "." {
-                textResult = textResult.replacingOccurrences(of: ".", with: "")
+            if NumberFormatterBuilder.get.decimalSeparator != K.String.dot {
+                textResult = textResult.replacingOccurrences(of: K.String.dot, with: K.String.empty)
             }
-            return Double(textResult.replacingOccurrences(of: NumberFormatterBuilder.get.decimalSeparator, with: ".")) ?? 0.0
+            return Double(textResult.replacingOccurrences(of: NumberFormatterBuilder.get.decimalSeparator, with: K.String.dot)) ?? .zero
         }
-        return 0.0
+        return .zero
     }
     
     
@@ -84,7 +86,7 @@ class TextFieldBuilder: BaseBuilder {
     func setPlaceHolderColor(_ placeHolderColor: UIColor) -> Self {
         self.attributesPlaceholder.updateValue(placeHolderColor, forKey: .foregroundColor)
         _textField.attributedPlaceholder = NSAttributedString (
-            string: _textField.placeholder ?? "" ,
+            string: _textField.placeholder ?? K.String.empty ,
             attributes: self.attributesPlaceholder)
         return self
     }
@@ -93,7 +95,7 @@ class TextFieldBuilder: BaseBuilder {
     func setPlaceHolderSize(_ size: CGFloat) -> Self {
         self.attributesPlaceholder.updateValue(UIFont.systemFont(ofSize: size), forKey: .font)
         _textField.attributedPlaceholder = NSAttributedString (
-            string: _textField.placeholder ?? "" ,
+            string: _textField.placeholder ?? K.String.empty ,
             attributes: self.attributesPlaceholder)
         return self
     }
@@ -122,7 +124,7 @@ class TextFieldBuilder: BaseBuilder {
         if let numberFormatted = numberFormatter.getString(number) {
             setText(numberFormatted)
         }
-        setText("0.0")
+        setText(K.String.zeroDouble)
         return self
     }
     
@@ -164,7 +166,7 @@ class TextFieldBuilder: BaseBuilder {
     
     @discardableResult
     func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 0))
+        let paddingView = UIView(frame: CGRect(x: .zero, y: .zero, width: padding, height: .zero))
         setPadding(paddingView, position)
         return self
     }

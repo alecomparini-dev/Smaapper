@@ -47,6 +47,7 @@ class StickyNoteFloatViewController: FloatViewController {
     
 }
 
+
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: StickyNoteViewDelegate {
@@ -58,5 +59,10 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
     func minimizeWindow() {
         self.minimize
     }
+    
+    func addButtonTapped() {
+        print("clicou na porra do button pra adicionar o ponto")
+    }
+    
     
 }

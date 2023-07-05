@@ -120,6 +120,8 @@
 		02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */; };
 		02D06E662A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */; };
 		02D06E692A54DB680020A10B /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D06E682A54DB680020A10B /* Speech.framework */; };
+		02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */; };
+		02D06E6F2A55931D0020A10B /* ConstantsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -140,7 +142,6 @@
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
-		02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */; };
 		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
 		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
 		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
@@ -309,6 +310,8 @@
 		02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineFloatViewController.swift; sourceTree = "<group>"; };
 		02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineCoordinator.swift; sourceTree = "<group>"; };
 		02D06E682A54DB680020A10B /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
+		02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearableBuilder.swift; sourceTree = "<group>"; };
+		02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsComponent.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -329,7 +332,6 @@
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
-		02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTextFieldsInView.swift; sourceTree = "<group>"; };
 		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
 		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 				02D5815C2A229F0300150AF9 /* Theme */,
 				0284368A2A1D296700B596DA /* Utils */,
 				0234A95B29FB3E39008392EC /* View */,
+				02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 			isa = PBXGroup;
 			children = (
 				02D71C2C2A3A187600DCA291 /* TextFieldConfigKeyboard */,
+				02D06E6A2A55905C0020A10B /* TextFieldClearable */,
 				02B792682A1EE56E006CEE8E /* TextFieldPassword */,
 				02B792652A1EE409006CEE8E /* TextFieldImage */,
 				020D0E672A1ED645007F3992 /* TextFieldBuilder.swift */,
@@ -944,7 +948,6 @@
 				02D71C372A3C86A500DCA291 /* NumberFormatter */,
 				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
 				02D581682A23A2DC00150AF9 /* ValidatePercent.swift */,
-				02D71C312A3B362800DCA291 /* AllTextFieldsInView.swift */,
 				02D71C332A3BB9D100DCA291 /* Utils.swift */,
 			);
 			path = Utils;
@@ -1109,6 +1112,14 @@
 				02D06E682A54DB680020A10B /* Speech.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02D06E6A2A55905C0020A10B /* TextFieldClearable */ = {
+			isa = PBXGroup;
+			children = (
+				02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */,
+			);
+			path = TextFieldClearable;
 			sourceTree = "<group>";
 		};
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
@@ -1652,7 +1663,6 @@
 				0234A90D29F9FD3A008392EC /* Fload+Extension+Component.swift in Sources */,
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
 				02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */,
-				02D71C322A3B362800DCA291 /* AllTextFieldsInView.swift in Sources */,
 				02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */,
 				02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
@@ -1682,6 +1692,7 @@
 				020D0E5B2A1EADB6007F3992 /* Dock.swift in Sources */,
 				02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */,
 				02E974162A3399B100BF14EE /* HomeCoordinator.swift in Sources */,
+				02D06E6F2A55931D0020A10B /* ConstantsComponent.swift in Sources */,
 				02E974432A37D27400BF14EE /* QuizFloatViewController.swift in Sources */,
 				0234A91629F9FD3A008392EC /* ConstraintsConstants.swift in Sources */,
 				02D581432A1FACBF00150AF9 /* ImageViewActions.swift in Sources */,
@@ -1721,6 +1732,7 @@
 				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,
+				02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */,
 				026CF16A2A49D78E009CEE6E /* HangmanKeyboardLetterView.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
