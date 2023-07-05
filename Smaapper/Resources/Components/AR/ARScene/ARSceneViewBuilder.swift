@@ -143,7 +143,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func createSceneView() {
-        arSceneView = ARSceneView(frame: self.view.bounds)
+        self.arSceneView = ARSceneView(frame: self.view.bounds)
     }
     
     private func configSceneView() {
