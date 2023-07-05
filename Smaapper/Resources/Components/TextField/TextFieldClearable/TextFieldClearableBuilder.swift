@@ -10,9 +10,10 @@ import UIKit
 class TextFieldClearableBuilder: TextFieldImageBuilder {
     
     init(paddingRightImage: CGFloat = C.TextFieldPassword.paddingRight) {
-        super.init(image: ImageViewBuilder(UIImage(systemName: "eye.slash")).view, position: .right, margin: paddingRightImage)
-        self.setIsSecureText(true)
-            .setOnTapImage(completion: openCloseEyes(_:))
+        super.init(image: ImageViewBuilder(UIImage(systemName: "eye.slash")).view,
+                   position: .right,
+                   margin: paddingRightImage)
+//            .setOnTapImage(completion: openCloseEyes(_:))
     }
     
     convenience init(_ placeHolder: String) {
@@ -28,12 +29,7 @@ class TextFieldClearableBuilder: TextFieldImageBuilder {
 //  MARK: - ACTIONS THIS COMPONENT
 
     private func openCloseEyes(_ imageView: UIImageView) {
-        if self.textField.isSecureTextEntry {
-            imageView.image = UIImage(systemName: "eye")
-        } else {
-            imageView.image = UIImage(systemName: "eye.slash")
-        }
-        let _ = self.setIsSecureText(!self.textField.isSecureTextEntry)
+        
     }
     
 }

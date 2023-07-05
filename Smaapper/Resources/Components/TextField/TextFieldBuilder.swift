@@ -16,6 +16,8 @@ class TextFieldBuilder: BaseBuilder {
         case previous
     }
     
+    var actions: TextFieldActions?
+    
     private var textFieldConfigKeyboard: TextFieldConfigKeyboard?
     private let _textField: TextField
     
@@ -168,8 +170,8 @@ class TextFieldBuilder: BaseBuilder {
     }
     
     @discardableResult
-    func setPadding(_ padding: CGFloat, _ position: TextField.Position? = nil) -> Self {
-        let paddingView = UIView(frame: CGRect(x: .zero, y: .zero, width: padding, height: .zero))
+    func setPadding(_ padding: CGFloat, _ position: TextField.Position?) -> Self {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: 0))
         setPadding(paddingView, position)
         return self
     }
@@ -197,6 +199,17 @@ class TextFieldBuilder: BaseBuilder {
         return self
     }
     
+    
+//  MARK: - SET Actions
+    @discardableResult
+    func setActions(_ action: (_ build: TextFieldActions) -> TextFieldActions) -> Self {
+        if let actions = self.actions {
+            self.actions = action(actions)
+            return self
+        }
+        self.actions = action(TextFieldActions(self))
+        return self
+    }
     
     
 //  MARK: - DELEGATE TextField

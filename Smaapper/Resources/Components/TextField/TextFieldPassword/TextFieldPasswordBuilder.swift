@@ -15,7 +15,12 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
     init(paddingRightImage: CGFloat = C.TextFieldPassword.paddingRight) {
         super.init(image: ImageViewBuilder(UIImage(systemName: C.TextFieldPassword.Images.eyeSlash)).view, position: .right, margin: paddingRightImage)
         self.setIsSecureText(true)
-            .setOnTapImage(completion: openCloseEyes(_:))
+            .setActions { build in
+                build.setTouchImage { [weak self] component, tapGesture in
+                    guard let self else {return}
+                    openCloseEyes(component as? UIImageView ?? UIImageView())
+                }
+            }
     }
     
     convenience init(_ placeHolder: String) {

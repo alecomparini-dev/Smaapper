@@ -5,4 +5,18 @@
 //  Created by Alessandro Comparini on 05/07/23.
 //
 
-import Foundation
+import UIKit
+
+
+class TextFieldActions: BaseActions {
+    
+    private let textFieldBuilder: TextFieldBuilder
+    
+    init(_ textFieldBuilder: TextFieldBuilder) {
+        self.textFieldBuilder = textFieldBuilder
+        super.init(self.textFieldBuilder)
+    }
+    
+    
+    
+}

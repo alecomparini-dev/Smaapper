@@ -165,7 +165,7 @@ class CameraARKitView: UIView {
     
     private func setConfiguration() {
         configuration = ARWorldTrackingConfiguration()
-         configuration.planeDetection = [.horizontal, .vertical]
+        configuration.planeDetection = [.horizontal, .vertical]
     }
     
     private func configDelegate() {
