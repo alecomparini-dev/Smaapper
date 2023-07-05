@@ -32,13 +32,13 @@ class TapeMeasureFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.cameraARKitView.runSceneView()
+        screen.cameraARKit.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
         UtilsFloatView.removeShadowActiveFloatView(screen)
-        screen.cameraARKitView.pauseSceneView()
+        screen.cameraARKit.pauseSceneView()
     }
     
 
