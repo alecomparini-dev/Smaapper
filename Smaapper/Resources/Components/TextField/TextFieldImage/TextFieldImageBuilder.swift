@@ -19,7 +19,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
     private let margin: CGFloat
     
     
-//  MARK: - Actions Properties
+//  MARK: - ACTIONS Properties
     private var onTapAction: onTapImageClosureAlias?
     
     
@@ -42,11 +42,17 @@ class TextFieldImageBuilder: TextFieldBuilder {
     }
     
     
-//  MARK: - Set Properties
+//  MARK: - SET Properties
     
     @discardableResult
     func setImageSize(_ size: CGFloat, _ weight: UIImage.SymbolWeight? = nil) -> Self {
         imageView.image = imageView.image?.withConfiguration(UIImage.SymbolConfiguration(pointSize: size , weight: weight ?? .regular))
+        return self
+    }
+    
+    @discardableResult
+    func setHideImage(_ hide: Bool) -> Self {
+        self.imageView.isHidden = hide
         return self
     }
     
@@ -57,26 +63,6 @@ class TextFieldImageBuilder: TextFieldBuilder {
         let position: TextField.Position = calculatePaddingPosition(position)
         super.setPadding(padding, position)
         return self
-    }
-    
-    private func calculatePaddingPosition(_ position: TextField.Position? = nil) -> TextField.Position {
-        if position == nil {
-            return oppositePositionImage()
-        }
-        return position!
-    }
-    
-    private func oppositePositionImage() -> TextField.Position {
-        switch self.imagePosition {
-            case .left:
-                return .right
-            case .right:
-                return .left
-        }
-    }
-    
-    private func isImagePositionMatch(_ position: TextField.Position? = nil) -> Bool {
-        return imagePosition == position
     }
     
     @discardableResult
@@ -90,7 +76,6 @@ class TextFieldImageBuilder: TextFieldBuilder {
         return self
     }
 
-    
     
 //  MARK: - Set Actions
     
@@ -106,6 +91,26 @@ class TextFieldImageBuilder: TextFieldBuilder {
     
     
 //  MARK: - Private Area
+    private func calculatePaddingPosition(_ position: TextField.Position? = nil) -> TextField.Position {
+        if position == nil {
+            return oppositeImagePosition()
+        }
+        return position!
+    }
+    
+    private func oppositeImagePosition() -> TextField.Position {
+        switch self.imagePosition {
+            case .left:
+                return .right
+            case .right:
+                return .left
+        }
+    }
+    
+    private func isImagePositionMatch(_ position: TextField.Position? = nil) -> Bool {
+        return imagePosition == position
+    }
+    
     private func createPaddingView(_ image: UIImageView, _ margin: CGFloat) -> UIView {
         return UIView(frame: CGRect(x: .zero,
                                     y: .zero,
@@ -114,7 +119,10 @@ class TextFieldImageBuilder: TextFieldBuilder {
     }
     
     private func setFrameImage(_ image: UIImageView) {
-        image.frame = CGRect(x: .zero, y: .zero, width: Int(image.image?.size.width ?? .zero) , height: Int(image.image?.size.height ?? .zero))
+        image.frame = CGRect(x: .zero,
+                             y: .zero,
+                             width: image.image?.size.width ?? .zero,
+                             height: image.image?.size.height ?? .zero)
     }
     
     private func addImageInsidePaddingView(_ image: UIImageView, _ paddingImgView: UIView) {

@@ -12,8 +12,10 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
     
 //  MARK: - Initializers
 
-    init(paddingRightImage: CGFloat = C.TextFieldPassword.paddingRight) {
-        super.init(image: ImageViewBuilder(UIImage(systemName: C.TextFieldPassword.Images.eyeSlash)).view, position: .right, margin: paddingRightImage)
+    init(paddingRightImage: CGFloat = C.TextField.Password.paddingRight) {
+        super.init(image: ImageViewBuilder(UIImage(systemName: C.TextField.Password.Images.eyeSlash)).view,
+                   position: .right,
+                   margin: paddingRightImage)
         self.setIsSecureText(true)
             .setActions { build in
                 build.setTouchImage { [weak self] component, tapGesture in
@@ -37,9 +39,9 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
 
     private func openCloseEyes(_ imageView: UIImageView) {
         if self.textField.isSecureTextEntry {
-            imageView.image = UIImage(systemName: C.TextFieldPassword.Images.eyeOpen)
+            imageView.image = UIImage(systemName: C.TextField.Password.Images.eyeOpen)
         } else {
-            imageView.image = UIImage(systemName: C.TextFieldPassword.Images.eyeSlash)
+            imageView.image = UIImage(systemName: C.TextField.Password.Images.eyeSlash)
         }
         self.setIsSecureText(!self.textField.isSecureTextEntry)
     }
