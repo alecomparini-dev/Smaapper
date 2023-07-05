@@ -116,6 +116,10 @@
 		02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */ = {isa = PBXBuildFile; fileRef = 02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */; };
 		02C9C9E22A05392400AA1370 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E12A05392400AA1370 /* Section.swift */; };
 		02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C9C9E52A058FB700AA1370 /* ListCellView.swift */; };
+		02D06E622A54CD9D0020A10B /* AlcoholOrGasolineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E612A54CD9C0020A10B /* AlcoholOrGasolineView.swift */; };
+		02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */; };
+		02D06E662A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */; };
+		02D06E692A54DB680020A10B /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D06E682A54DB680020A10B /* Speech.framework */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -301,6 +305,10 @@
 		02C5F44C2A0C1CAA00D75D9F /* DropdownMenuData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DropdownMenuData.json; sourceTree = "<group>"; };
 		02C9C9E12A05392400AA1370 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		02C9C9E52A058FB700AA1370 /* ListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellView.swift; sourceTree = "<group>"; };
+		02D06E612A54CD9C0020A10B /* AlcoholOrGasolineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineView.swift; sourceTree = "<group>"; };
+		02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineFloatViewController.swift; sourceTree = "<group>"; };
+		02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineCoordinator.swift; sourceTree = "<group>"; };
+		02D06E682A54DB680020A10B /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -368,6 +376,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D06E692A54DB680020A10B /* Speech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +443,7 @@
 				0234A5EF29F9F30F008392EC /* Smaapper */,
 				0234A60629F9F310008392EC /* SmaapperTests */,
 				0234A5EE29F9F30F008392EC /* Products */,
+				02D06E672A54DB680020A10B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1093,6 +1103,14 @@
 			path = TapGesture;
 			sourceTree = "<group>";
 		};
+		02D06E672A54DB680020A10B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02D06E682A54DB680020A10B /* Speech.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		02D581542A211F7D00150AF9 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1174,6 +1192,7 @@
 			isa = PBXGroup;
 			children = (
 				02E974132A3398F000BF14EE /* Coordinator.swift */,
+				02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */,
 				02E974152A3399B100BF14EE /* HomeCoordinator.swift */,
 				02E974502A37F3DF00BF14EE /* BMICalculatorCoordinator.swift */,
 				026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */,
@@ -1217,6 +1236,8 @@
 		02E974272A379B7D00BF14EE /* AlcoholOrGasoline */ = {
 			isa = PBXGroup;
 			children = (
+				02D06E612A54CD9C0020A10B /* AlcoholOrGasolineView.swift */,
+				02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */,
 			);
 			path = AlcoholOrGasoline;
 			sourceTree = "<group>";
@@ -1652,6 +1673,7 @@
 				02D581532A20CD8A00150AF9 /* ButtonActions.swift in Sources */,
 				02C9C9E62A058FB700AA1370 /* ListCellView.swift in Sources */,
 				024957EE2A41F73A0077C36D /* DivisionOperation.swift in Sources */,
+				02D06E622A54CD9D0020A10B /* AlcoholOrGasolineView.swift in Sources */,
 				02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */,
 				026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
@@ -1669,6 +1691,7 @@
 				02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */,
 				0234A96629FC0820008392EC /* ButtonImageBuilder.swift in Sources */,
 				024957E82A41F6A80077C36D /* AdditionOperation.swift in Sources */,
+				02D06E662A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift in Sources */,
 				02F45AFD2A046F910096A75A /* ListCell.swift in Sources */,
 				02D581452A1FCC2B00150AF9 /* BaseActions.swift in Sources */,
 				02E9744F2A37F2FB00BF14EE /* BMICalculatorFloatViewController.swift in Sources */,
@@ -1702,6 +1725,7 @@
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
+				02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */,
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,

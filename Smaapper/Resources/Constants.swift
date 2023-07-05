@@ -9,6 +9,8 @@ import UIKit
 
 struct K {
     static let appName = "Smaapper"
+    static let dot = "."
+    static let stringEmpty = ""
     
     
 //  MARK: - CAMERA ARKIT
@@ -21,11 +23,47 @@ struct K {
     }
     
     
+//  MARK: - CAMERA ARKIT
+    struct Proportion {
+        static let identifierApp = "proportion"
+        static let title = "Proportion"
+        static let labelOkButton = "Proportion"
+        static let displayZero = "0.0"
+        static let maxDigits: Int = 4
+        
+        struct FloatView {
+            static let x: CGFloat = 50
+            static let y: CGFloat = 150
+            static let width: CGFloat = 290
+            static let height: CGFloat = 180
+        }
+        
+        struct Images {
+            static let logo = "3.square.fill"
+            static let refresh = "arrow.counterclockwise"
+            static let copy = "arrow.counterclockwise"
+            static let history = "ellipsis"
+        }
+    }
+    
+    
+//  MARK: - ALCOHOL
+    struct Alcohol {
+        static let identifierApp = "alcohol_gasoline"
+        static let title = "Alcohol x Gasoline"
+        
+        struct Images {
+            static let logo = "fuelpump.fill"
+        }
+    }
+    
+    
 //  MARK: - STICKY
     struct Sticky {
         static let identifierApp = "sticky_note"
         static let title = "Sticky Note"
         static let corSticky: UIColor = UIColor.HEX("#FEE88A")
+        
         struct Images {
             static let logo = "note"
             static let imageTarget = "note"
@@ -37,12 +75,14 @@ struct K {
     struct TapeMeasure {
         static let identifierApp = "tape_measure"
         static let title = "Tape Measure"
+        
         struct FloatView {
-            static let positionX: CGFloat = 10
-            static let positionY: CGFloat = 50
+            static let x: CGFloat = 10
+            static let y: CGFloat = 50
             static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
             static let height: CGFloat = 500
         }
+        
         struct Images {
             static let logo = "ruler.fill"
             static let imageTarget = "note"
@@ -57,15 +97,18 @@ struct K {
         static let errorCountToEndGame: Int8 = 6
         static let quantityLetterByLine: Int = 10
         static let angleDollFailure: Double = 75
+        
         struct FloatView {
-            static let positionX: CGFloat = 30
-            static let positionY: CGFloat = 30
+            static let x: CGFloat = 30
+            static let y: CGFloat = 30
             static let width: CGFloat = 290
             static let height: CGFloat = 550
         }
+        
         struct Images {
             static let nextWordButton = "chevron.forward"
         }
+        
         struct ErrorLetters {
             static let firstError: Int8 = 1
             static let secondError: Int8 = 2
@@ -74,11 +117,13 @@ struct K {
             static let fifthError: Int8 = 5
             static let sixthError: Int8 = 6
         }
+        
         struct MoreTip {
             static let margin: CGFloat = 13
             static let positionX: CGFloat = 6
             static let positionY: CGFloat = 4
         }
+        
         struct Animation {
             struct Delay {
                 static let standard : Double = 0

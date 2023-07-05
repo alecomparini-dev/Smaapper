@@ -31,7 +31,7 @@ class ProportionView: ViewBuilder {
     }
     
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: "3.square.fill", title: "Proportion", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: K.Proportion.Images.logo, title: K.Proportion.title, target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -69,7 +69,7 @@ class ProportionView: ViewBuilder {
     }()
     
     lazy var refreshButton: ButtonImageBuilder = {
-        let btn = self.defaultButtonImage("arrow.counterclockwise")
+        let btn = self.defaultButtonImage(K.Proportion.Images.refresh)
             .setActions { build in
                 build
                     .setTarget(self, #selector(refreshButtonTapped), .touchUpInside)
@@ -79,7 +79,7 @@ class ProportionView: ViewBuilder {
     }()
 
     lazy var copyButton: ButtonImageBuilder = {
-        let btn = self.defaultButtonImage("doc.on.doc")
+        let btn = self.defaultButtonImage(K.Proportion.Images.copy)
             .setTintColor(Theme.shared.currentTheme.primary)
             .setActions { build in
                 build
@@ -90,7 +90,7 @@ class ProportionView: ViewBuilder {
     }()
     
     lazy var okButton: ButtonBuilder = {
-        let btn = ButtonBuilder("Ok")
+        let btn = ButtonBuilder(K.Proportion.labelOkButton)
             .setHidden(false)
             .setFont(UIFont.systemFont(ofSize: 12, weight: .semibold))
             .setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
@@ -117,7 +117,7 @@ class ProportionView: ViewBuilder {
     }()
 
     lazy var historyButton: ButtonImageBuilder = {
-        let img = UIImageView(image: UIImage(systemName: "ellipsis"))
+        let img = UIImageView(image: UIImage(systemName: K.Proportion.Images.history))
         let btn = ButtonImageBuilder(img)
             .setImageColor(Theme.shared.currentTheme.onSurface)
             .setImageSize(12)

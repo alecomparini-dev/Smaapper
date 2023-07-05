@@ -65,6 +65,10 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
                 let coodinator = StickyNoteCoordinator(floatNavigationController)
                 coodinator.start(where: component)
             
+            case AlcoholOrGasolineFloatViewController.identifierApp:
+                let coodinator = AlcoholOrGasolineCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+            
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

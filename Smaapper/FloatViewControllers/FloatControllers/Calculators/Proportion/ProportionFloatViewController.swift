@@ -8,12 +8,12 @@
 import UIKit
 
 class ProportionFloatViewController: FloatViewController {
-    static let identifierApp = "proportion"
+    static let identifierApp = K.Proportion.identifierApp
     
-    private var proportionA: Double = 0.0
-    private var proportionB: Double = 0.0
-    private var proportionC: Double = 0.0
-    private var resultProportion: Double = 0.0
+    private var proportionA: Double = .zero
+    private var proportionB: Double = .zero
+    private var proportionC: Double = .zero
+    private var resultProportion: Double = .zero
     
     lazy var screen: ProportionView = {
         let view = ProportionView()
@@ -26,7 +26,10 @@ class ProportionFloatViewController: FloatViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setFrameWindow(CGRect(x: 50, y: 150, width: 290, height: 180))
+        setFrameWindow(CGRect(x: K.Proportion.FloatView.x,
+                              y: K.Proportion.FloatView.y,
+                              width: K.Proportion.FloatView.width,
+                              height: K.Proportion.FloatView.height))
         setEnabledDraggable(true)
         configDelegate()
     }
@@ -53,7 +56,7 @@ class ProportionFloatViewController: FloatViewController {
     private func calculateResult() {
         getNumbersForCalculate()
         if !isValidFields() {
-            presentResult(0)
+            presentResult(.zero)
             return
         }
         let result = (proportionC * proportionB) / proportionA
@@ -66,8 +69,8 @@ class ProportionFloatViewController: FloatViewController {
             restartResult()
             return
         }
-        let formattedResult = NumberFormatterBuilder().setMaximumFractionDigits(4).getString(result)
-        screen.painel.resultLabel.setText(formattedResult ?? "0.0")
+        let formattedResult = NumberFormatterBuilder().setMaximumFractionDigits(K.Proportion.maxDigits).getString(result)
+        screen.painel.resultLabel.setText(formattedResult ?? K.Proportion.displayZero)
     }
     
     private func isValidFields() -> Bool {
@@ -76,7 +79,6 @@ class ProportionFloatViewController: FloatViewController {
         }
         return true
     }
-    
     
     private func isFieldsEmpty() -> Bool {
         if let textFieldEmpty = screen.painel.listTextFields.first(where: { ($0.text?.isEmpty) ?? false }) {
@@ -94,12 +96,12 @@ class ProportionFloatViewController: FloatViewController {
     
     private func getDoubleValueOfTextField(_ text: String?) -> Double {
         if var textResult = text {
-            if Utils.decimalSeparator != "." {
-                textResult = textResult.replacingOccurrences(of: ".", with: "")
+            if Utils.decimalSeparator != K.dot {
+                textResult = textResult.replacingOccurrences(of: K.dot, with: K.stringEmpty)
             }
-            return Double(textResult.replacingOccurrences(of: Utils.decimalSeparator, with: ".")) ?? 0.0
+            return Double(textResult.replacingOccurrences(of: Utils.decimalSeparator, with: K.dot)) ?? .zero
         }
-        return 0.0
+        return .zero
     }
     
     private func showStackButtons() {
@@ -114,12 +116,12 @@ class ProportionFloatViewController: FloatViewController {
     
     private func clearTextFields() {
         screen.painel.listTextFields.forEach { textField in
-            textField.text = ""
+            textField.text = K.stringEmpty
         }
     }
     
     private func restartResult() {
-        screen.painel.resultLabel.setText("0.0")
+        screen.painel.resultLabel.setText(K.Proportion.displayZero)
     }
     
 }
