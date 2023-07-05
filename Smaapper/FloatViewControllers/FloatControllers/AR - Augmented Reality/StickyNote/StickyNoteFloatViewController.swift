@@ -50,7 +50,12 @@ class StickyNoteFloatViewController: FloatViewController {
     
     private func configDelegate() {
         screen.delegate = self
-        screen.cameraARKit.delegate = self
+        screen.cameraARKit.setDelegate(self)
+    }
+    
+    private func addStickyOnAR() {
+        let stickyAR = screen.getStickyAR()
+        print(stickyAR)
     }
     
 }
@@ -72,19 +77,15 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
         addStickyOnAR()
     }
     
-    private func addStickyOnAR() {
-        let stickyAR = screen.getStickyAR()
-        
-    }
     
 }
 
 
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
-extension StickyNoteFloatViewController: CameraARKitViewDelegate {
+extension StickyNoteFloatViewController: ARSceneViewDelegate {
     func positionTouch(_ position: CGPoint) {
-        
+        print("POSITION:", position)
     }
     
     
