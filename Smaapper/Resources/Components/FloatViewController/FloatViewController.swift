@@ -100,20 +100,6 @@ class FloatViewController: BaseBuilder {
         manager.delegate?.viewWillAppear(self)
     }
     
-    
-//--------------------------------------------------------------------------------------------------------------------------------
-    
-    private func configRepositionFloatViewWhenShowKeyboard() {
-        self.textFields = AllTextFieldsInView.get(self.view)
-        if textFields.count > 0 {
-            registerKeyboardNotifications()
-        }
-    }
-    
-    private func registerKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
 
     func viewWillLayoutSubviews() {
         manager.delegate?.viewWillLayoutSubviews(self)
@@ -397,13 +383,29 @@ class FloatViewController: BaseBuilder {
         return self.textFields.first { $0.isFirstResponder }
     }
     
+    private func repositionFloatViewHideKeyboard() {
+        view.center = originalCenter
+    }
+    
+    
+//  MARK: - KEYBOARD
+    private func configRepositionFloatViewWhenShowKeyboard() {
+        self.textFields = Utils.allTextFieldsInView(self.view)
+        if textFields.count > 0 {
+            registerKeyboardNotifications()
+        }
+    }
+    
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func unregisterKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self)
     }
     
-    private func repositionFloatViewHideKeyboard() {
-        view.center = originalCenter
-    }
+
     
     
 //  MARK: - OBJC Area

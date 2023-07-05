@@ -87,7 +87,7 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func sanitizeDouble(_ number: String) -> Double? {
-        return Double(number.replacingOccurrences(of: ",", with: "."))
+        return Double(number.replacingOccurrences(of: K.String.comma, with: K.String.dot))
     }
     
     private func configPercentage() {
@@ -142,7 +142,7 @@ class CalculatorFloatViewController: FloatViewController {
         if let display = screen.display.getText {
             return display
         }
-        return "0"
+        return K.String.zero
     }
     
     private func calculate() -> Double? {
@@ -179,7 +179,7 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func clearDisplay() {
-        screen.display.setText("0")
+        screen.display.setText(K.String.zero)
     }
     
     private func setDecimalSeparator() {
@@ -190,14 +190,14 @@ class CalculatorFloatViewController: FloatViewController {
        
     private func isDisplayZero() -> Bool {
         let display = getDisplayValue()
-        if Double(display) == 0.0 {
+        if Double(display) == .zero {
             return true
         }
         return false
     }
     
     private func configDisplayWhenZero(_ value: String) {
-        guard let display = Double(screen.display.getText ?? "") else { return }
+        guard let display = Double(screen.display.getText ?? K.String.empty) else { return }
         
         if display.sign == .minus {
             screen.display.setText("-" + value)
@@ -226,7 +226,7 @@ class CalculatorFloatViewController: FloatViewController {
     private func setDecimalSeparatorOnDisplay() -> String {
         isFinishedTypingNumber = false
         let display = getDisplayValue()
-        if display.contains(NumberFormatterBuilder.get.decimalSeparator) { return "" }
+        if display.contains(NumberFormatterBuilder.get.decimalSeparator) { return K.String.empty }
         return NumberFormatterBuilder.get.decimalSeparator
     }
     
@@ -290,34 +290,34 @@ extension CalculatorFloatViewController: CalculatorButtonPanelViewDelegate {
         
         switch button {
             case .one:
-                setNumber("1")
+                setNumber(K.String.one)
 
             case .two:
-                setNumber("2")
+                setNumber(K.String.two)
 
             case .three:
-                setNumber("3")
+                setNumber(K.String.three)
 
             case .four:
-                setNumber("4")
+                setNumber(K.String.four)
 
             case .five:
-                setNumber("5")
+                setNumber(K.String.five)
 
             case .six:
-                setNumber("6")
+                setNumber(K.String.six)
 
             case .seven:
-                setNumber("7")
+                setNumber(K.String.seven)
 
             case .eight:
-                setNumber("8")
+                setNumber(K.String.eight)
 
             case .nine:
-                setNumber("9")
+                setNumber(K.String.nine)
 
             case .zero:
-                setNumber("0")
+                setNumber(K.String.zero)
             
             case .decimalSeparator:
                 setDecimalSeparator()

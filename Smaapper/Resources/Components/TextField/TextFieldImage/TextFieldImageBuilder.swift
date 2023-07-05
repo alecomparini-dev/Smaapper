@@ -15,7 +15,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
     private var paddingView = UIView(frame: .zero)
     private let imageView: UIImageView
     private let imagePosition: TextField.Position
-    private let margin: Int
+    private let margin: CGFloat
     
     
 //  MARK: - Actions Properties
@@ -24,7 +24,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
     
 //  MARK: - Initializers
     
-    init(image: ImageView, position: TextField.Position, margin: Int = 10) {
+    init(image: ImageView, position: TextField.Position, margin: CGFloat = 10) {
         self.imageView =  image
         self.imagePosition = position
         self.margin = margin
@@ -73,7 +73,7 @@ class TextFieldImageBuilder: TextFieldBuilder {
 
     
     @discardableResult
-    func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: Int) -> Self {
+    func setImage(_ image: UIImageView, _ position: TextField.Position, _ margin: CGFloat) -> Self {
         paddingView = self.createPaddingView(image, margin)
         self.setFrameImage(image)
         self.addImageInsidePaddingView(image, paddingView)
@@ -86,8 +86,11 @@ class TextFieldImageBuilder: TextFieldBuilder {
 //  MARK: - Private Area
     
     
-    private func createPaddingView(_ image: UIImageView, _ margin: Int) -> UIView {
-        return UIView(frame: CGRect(x: 0, y: 0, width: Int(image.image?.size.width ?? 0) + self.margin, height: Int(self.textField.frame.height)))
+    private func createPaddingView(_ image: UIImageView, _ margin: CGFloat) -> UIView {
+        return UIView(frame: CGRect(x: 0,
+                                    y: 0,
+                                    width: (image.image?.size.width ?? 0.0) + self.margin,
+                                    height: self.textField.frame.height))
     }
     
     private func setFrameImage(_ image: UIImageView) {

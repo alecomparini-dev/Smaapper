@@ -1,19 +1,16 @@
 //
-//  TextFieldPassword.swift
-//  BackFront-ChatALPC
+//  TextFieldClearableBuilder.swift
+//  Smaapper
 //
-//  Created by Alessandro Comparini on 12/04/23.
+//  Created by Alessandro Comparini on 05/07/23.
 //
 
 import UIKit
 
-class TextFieldPasswordBuilder: TextFieldImageBuilder {
+class TextFieldClearableBuilder: TextFieldImageBuilder {
     
-    
-//  MARK: - Initializers
-
     init(paddingRightImage: CGFloat = C.TextFieldPassword.paddingRight) {
-        super.init(image: ImageViewBuilder(UIImage(systemName: C.TextFieldPassword.Images.eyeSlash)).view, position: .right, margin: paddingRightImage)
+        super.init(image: ImageViewBuilder(UIImage(systemName: "eye.slash")).view, position: .right, margin: paddingRightImage)
         self.setIsSecureText(true)
             .setOnTapImage(completion: openCloseEyes(_:))
     }
@@ -32,11 +29,11 @@ class TextFieldPasswordBuilder: TextFieldImageBuilder {
 
     private func openCloseEyes(_ imageView: UIImageView) {
         if self.textField.isSecureTextEntry {
-            imageView.image = UIImage(systemName: C.TextFieldPassword.Images.eyeOpen)
+            imageView.image = UIImage(systemName: "eye")
         } else {
-            imageView.image = UIImage(systemName: C.TextFieldPassword.Images.eyeSlash)
+            imageView.image = UIImage(systemName: "eye.slash")
         }
-        self.setIsSecureText(!self.textField.isSecureTextEntry)
+        let _ = self.setIsSecureText(!self.textField.isSecureTextEntry)
     }
     
 }

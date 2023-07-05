@@ -9,8 +9,24 @@ import UIKit
 
 struct K {
     static let appName = "Smaapper"
-    static let dot = "."
-    static let stringEmpty = ""
+    
+    struct String {
+        static let dot = "."
+        static let comma = ","
+        static let zeroDouble = "0.0"
+        static let zero = "0"
+        static let empty = ""
+        static let one = "1"
+        static let two = "2"
+        static let three = "3"
+        static let four = "4"
+        static let five = "5"
+        static let six = "6"
+        static let seven = "7"
+        static let eight = "8"
+        static let nine = "9"
+    }
+    
     
     
 //  MARK: - CAMERA ARKIT
@@ -27,8 +43,7 @@ struct K {
     struct Proportion {
         static let identifierApp = "proportion"
         static let title = "Proportion"
-        static let labelOkButton = "Proportion"
-        static let displayZero = "0.0"
+        static let labelOkButton = "Ok"
         static let maxDigits: Int = 4
         
         struct FloatView {
@@ -62,7 +77,41 @@ struct K {
     struct Sticky {
         static let identifierApp = "sticky_note"
         static let title = "Sticky Note"
-        static let corSticky: UIColor = UIColor.HEX("#FEE88A")
+        static let corSticky: UIColor = Theme.shared.currentTheme.primary
+        static let maxLetterNote: Int = 50
+        
+        struct AR {
+            static let fontSizeNote: CGFloat = 10
+            struct Frame {
+                static let cornerRadius: CGFloat = 3
+                struct Default {
+                    static let x: CGFloat = 0
+                    static let y: CGFloat = 0
+                    static let width: CGFloat = 100
+                    static let height: CGFloat = 80
+                }
+                struct Top {
+                    static let x: CGFloat = 0
+                    static let y: CGFloat = 0
+                    static let width: CGFloat = 100
+                    static let height: CGFloat = 15
+                }
+                struct Note {
+                    private static let margin: CGFloat = 5
+                    static let x: CGFloat = 5
+                    static let y: CGFloat = Top.height
+                    static let width: CGFloat = Default.width - Note.x - Note.margin
+                    static let height: CGFloat = Default.height - Note.y - Note.margin
+                }
+            }
+        }
+        
+        struct FloatView {
+            static let x: CGFloat = 10
+            static let y: CGFloat = 50
+            static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
+            static let height: CGFloat = 500
+        }
         
         struct Images {
             static let logo = "note"
