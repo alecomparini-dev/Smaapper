@@ -86,8 +86,9 @@ class ARSceneViewBuilder: ViewBuilder {
         if let cameraTransform = arSceneView.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
-            return cameraTransform * translation
+            return matrix_multiply(cameraTransform, translation)
         }
+        
         return nil
     }
     
