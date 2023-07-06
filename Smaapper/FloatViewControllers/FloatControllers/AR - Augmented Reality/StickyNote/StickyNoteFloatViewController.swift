@@ -33,6 +33,7 @@ class StickyNoteFloatViewController: FloatViewController {
         configDelegate()
     }
     
+
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
