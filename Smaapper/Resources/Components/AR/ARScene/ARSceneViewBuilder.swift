@@ -7,11 +7,14 @@
 
 import UIKit
 import ARKit
+import SceneKit
 
 
 class ARSceneViewBuilder: ViewBuilder {
     
     private var arSceneView: ARSceneView!
+    
+    
     
     enum Alignment {
         case top
@@ -65,7 +68,7 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - GET Area
     
-    func getRealWordPosition(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
+    func getPositionOnPlaneByTouch(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
         if let raycastQuery = arSceneView.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
             if let castResult = arSceneView.session.raycast(raycastQuery).first {
                 return castResult
@@ -74,10 +77,20 @@ class ARSceneViewBuilder: ViewBuilder {
         return nil
     }
     
-    func getRealWordPositionByTarget(_ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
+    func getPositionOnPlaneByTarget(_ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
         let positionTarget: CGPoint = targetImage.view.convert(targetBallImage.view.center, to: arSceneView)
-        return getRealWordPosition(positionTouch: positionTarget, alignment)
+        return getPositionOnPlaneByTouch(positionTouch: positionTarget, alignment)
     }
+    
+    func getPositionByCam(centimetersAhead: Float? = 0) -> simd_float4x4? {
+        if let cameraTransform = arSceneView.session.currentFrame?.camera.transform {
+            var translation = matrix_identity_float4x4
+            translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
+            return cameraTransform * translation
+        }
+        return nil
+    }
+    
 
     
 //  MARK: - SET Properties
