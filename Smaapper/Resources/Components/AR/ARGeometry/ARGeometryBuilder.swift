@@ -32,11 +32,9 @@ class ARGeometryBuilder {
     }
     
     @discardableResult
-    func setMaterial(_ material: ARMaterialBuilder) -> Self {
+    func setMaterial(_ material: ARMaterialBuilder, _ at: Int = 0) -> Self {
         if let _geometry {
-            _geometry.materials.insert(material, at: 0)
-//            _geometry.materials.append(material)
-//            _geometry.materials = [material]
+            _geometry.materials.insert(material, at: at)
         }
         return self
     }
