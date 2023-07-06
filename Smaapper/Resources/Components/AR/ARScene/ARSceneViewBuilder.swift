@@ -14,8 +14,6 @@ class ARSceneViewBuilder: ViewBuilder {
     
     private var arSceneView: ARSceneView!
     
-    
-    
     enum Alignment {
         case top
         case middle
@@ -86,9 +84,16 @@ class ARSceneViewBuilder: ViewBuilder {
         if let cameraTransform = arSceneView.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
-            return matrix_multiply(cameraTransform, translation)
+            
+            
+            let position = simd_float4x4([[-0.03830204, -0.38202292, 0.923359, 0.0], [0.9911677, -0.1319296, -0.013468637, 0.0], [0.12696368, 0.9146876, 0.3837019, 0.0], [-0.018386595, -0.1170946, -0.09306641, 1.0]])
+            
+//            arSceneView.session.setWorldOrigin(relativeTransform: position)
+            
+            print(matrix_multiply(cameraTransform, translation))
+//            return matrix_multiply(cameraTransform, translation)
+            return position
         }
-        
         return nil
     }
     
