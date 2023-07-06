@@ -15,6 +15,7 @@ protocol ARSceneViewDelegate: AnyObject {
 class ARSceneView: ARSCNView {
     weak var delegateARScene: ARSceneViewDelegate?
     
+    
     var positionOfCamera: SCNVector3?
     var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
     
@@ -25,6 +26,8 @@ class ARSceneView: ARSCNView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }
 
@@ -39,6 +42,7 @@ extension ARSceneView: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         //TODO: - IMPLEMENT DETECT PLANE
+        print(anchor)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
