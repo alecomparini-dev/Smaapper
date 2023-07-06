@@ -56,7 +56,7 @@ struct K {
         struct Images {
             static let logo = "3.square.fill"
             static let refresh = "arrow.counterclockwise"
-            static let copy = "arrow.counterclockwise"
+            static let copy = "doc.on.doc"
             static let history = "ellipsis"
         }
     }
