@@ -54,8 +54,28 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func addStickyOnAR() {
-        let stickyAR = screen.getStickyAR()
-        print(stickyAR)
+        let stickyAR = screen.getStickyAR().convertToImage ?? UIImage()
+        
+        let material = ARMaterialBuilder()
+            .setDiffuseTexture(stickyAR)
+        
+        //TODO RETIRAR O SETPLANE ETC .. E PASSAR PARA O INIT, DEIXAR SÓ O SETMATERIAL NO GEOMETRY!!!!!!!!!!!!!!!!!!!!!!!
+        let geometryPlane = ARGeometryBuilder()
+            .setPlane { build in
+                build
+                    .setSize(0.1, 0.1)
+            }
+            .setMaterial(material)
+        
+        let getWorldPosition = screen.cameraARKit.getRealWordPositionByTarget(.any)
+        
+        let node = ARNodeBuilder()
+            .setGeometry(geometryPlane)
+            .setPosition(getWorldPosition?.worldTransform)
+            .setAutoFollowCamera()
+        
+        screen.cameraARKit.addNode(node)
+        
     }
     
 }
@@ -84,8 +104,9 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewDelegate {
+    
     func positionTouch(_ position: CGPoint) {
-        print("POSITION:", position)
+        
     }
     
     

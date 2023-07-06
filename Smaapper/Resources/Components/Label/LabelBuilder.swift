@@ -9,13 +9,13 @@ import UIKit
 
 class LabelBuilder: BaseBuilder {
     
-    private var label: Label
-    var view: Label { self.label }
+    private var label: UILabel
+    var view: UILabel { self.label }
     
     private(set) var actions: LabelActions?
     
     init(frame: CGRect) {
-        self.label = Label(frame: frame)
+        self.label = UILabel(frame: frame)
         super.init(self.label)
     }
     
@@ -38,8 +38,10 @@ class LabelBuilder: BaseBuilder {
         self.setTextAlignment(aligment)
     }
     
+    
 //  MARK: - GET Properties
     var getText: String? { return label.text }
+    
     
 //  MARK: - SET Properties
     

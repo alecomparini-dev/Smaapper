@@ -1,5 +1,5 @@
 //
-//  Blur.swift
+//  BlurBuilder.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 18/05/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Blur {
+class BlurBuilder {
     
     private var blurView: UIVisualEffectView?
     private var blurEffect: UIBlurEffect?
