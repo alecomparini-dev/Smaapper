@@ -10,6 +10,8 @@ import UIKit
 class StickyNoteFloatViewController: FloatViewController {
     static let identifierApp = K.Sticky.identifierApp
     
+    private var stickyNodes: [ARNodeBuilder] = []
+    
     lazy var screen: StickyNoteView = {
         let view = StickyNoteView()
         return view
@@ -54,42 +56,58 @@ class StickyNoteFloatViewController: FloatViewController {
         screen.cameraARKit.setDelegate(self)
     }
     
-    private func addStickyOnAR() {
-        
-        
-        let position = screen.cameraARKit.getPositionByCam(centimetersAhead: 5)
-        
-        guard let position else {return}
-        
-        let stickyAR = screen.getStickyAR().convertToImage ?? UIImage()
-        
-        let material = ARMaterialBuilder()
-            .setDiffuseTexture(stickyAR)
-            .setDiffuseTexture(UIColor.red)
-        
-        //TODO RETIRAR O SETPLANE ETC .. E PASSAR PARA O INIT, DEIXAR SÓ O SETMATERIAL NO GEOMETRY!!!!!!!!!!!!!!!!!!!!!!!
-        let geometryPlane = ARGeometryBuilder()
+    private func convertViewStickyARToImage() -> UIImage {
+        return screen.getStickyAR().convertToImage ?? UIImage()
+    }
+    
+    private func createARPlane() -> ARGeometryBuilder {
+        return ARGeometryBuilder()
             .setPlane { build in
                 build
-                    .setSize(0.1, 0.1)
+                    .setSize(0.08, 0.08)
             }
-            .setSphere({ build in
-                build
-                    .setRadius(0.005)
-            })
-            .setMaterial(material)
-        
-        let getWorldPosition = screen.cameraARKit.getPositionOnPlaneByTarget(.any)
-        
-        let node = ARNodeBuilder()
-            .setGeometry(geometryPlane)
-            .setPosition(position)
+    }
+    
+    private func createARNode(_ geometry: ARGeometryBuilder) -> ARNodeBuilder {
+        return ARNodeBuilder()
+            .setGeometry(geometry)
             .setAutoFollowCamera()
-        
-//        node.position = position
-        
+    }
+    
+    private func settingsForAddingStickyNote() {
+        let stickyAR = convertViewStickyARToImage()
+        let material = ARMaterialBuilder()
+            .setDiffuseTexture(stickyAR)
+        let geometryPlane = createARPlane()
+            .setMaterial(material)
+        guard let position = screen.cameraARKit.getPositionByCam(centimetersAhead: 8) else {return}
+        let nodeSticky = createARNode(geometryPlane).setPosition(position)
+        addNodeArSceneView(nodeSticky)
+        enabledOrDisableRedoButton()
+    }
+    
+    private func addNodeArSceneView(_ node: ARNodeBuilder) {
         screen.cameraARKit.addNode(node)
-        
+        self.stickyNodes.append(node)
+    }
+    
+    private func settingsForStickyNoteRemoval() {
+        if stickyNodes.isEmpty {return}
+        removeStickNoteAR()
+        enabledOrDisableRedoButton()
+    }
+    
+    private func removeStickNoteAR() {
+        let popSticky = self.stickyNodes.popLast()
+        popSticky?.removeFromParentNode()
+    }
+    
+    private func enabledOrDisableRedoButton() {
+        if stickyNodes.isEmpty {
+            screen.redoButtonStickyAR.setHidden(true)
+            return
+        }
+        screen.redoButtonStickyAR.setHidden(false)
     }
     
 }
@@ -108,9 +126,12 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
     }
     
     func addButtonTapped() {
-        addStickyOnAR()
+        settingsForAddingStickyNote()
     }
     
+    func redoButtonTapped() {
+        settingsForStickyNoteRemoval()
+    }
     
 }
 
