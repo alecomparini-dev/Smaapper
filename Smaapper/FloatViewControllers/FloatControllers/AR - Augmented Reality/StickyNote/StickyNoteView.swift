@@ -11,6 +11,7 @@ protocol StickyNoteViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
     func addButtonTapped()
+    func redoButtonTapped()
 }
 
 class StickyNoteView: ViewBuilder {
@@ -46,9 +47,10 @@ class StickyNoteView: ViewBuilder {
     
     lazy var cameraARKit: ARSceneViewBuilder = {
         let arKit = ARSceneViewBuilder()
-            .setDebug([.showWorldOrigin,])
+//            .setDebug([.showWorldOrigin,])
             .setImageTarget(createImageTarget())
-            .setAlignmentTarget(.middle, -35)
+            .setEnabledTargetDraggable(false)
+            .setAlignmentTarget(.middle, -30)
             .setPlaneDetection([.vertical, .horizontal])
             .setBorder { build in
                 build
@@ -151,6 +153,24 @@ class StickyNoteView: ViewBuilder {
         return tf
     }()
     
+    lazy var redoButtonStickyAR: IconButtonBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: "arrowshape.turn.up.backward.fill"))
+        let tf = IconButtonBuilder(img.view)
+            .setHidden(true)
+            .setImageSize(25)
+            .setImageColor(Theme.shared.currentTheme.onSurface.adjustBrightness(10))
+            .setConstraints { build in
+                build
+                    .setTop.setLeading.equalToSuperView(10)
+                    .setWidth.setHeight.equalToConstant(40)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(redoButtonTapped), .touchUpInside)
+            }
+        return tf
+    }()
+    
     
 //  MARK: - OBJCT Area
     @objc private func minimizeWindow() {
@@ -163,6 +183,10 @@ class StickyNoteView: ViewBuilder {
     
     @objc private func addButtonTapped() {
         delegate?.addButtonTapped()
+    }
+    
+    @objc private func redoButtonTapped() {
+        delegate?.redoButtonTapped()
     }
     
     
@@ -195,6 +219,7 @@ class StickyNoteView: ViewBuilder {
         overlay.add(insideTo: self.view)
         addButton.add(insideTo: overlay.view)
         noteTextField.add(insideTo: overlay.view)
+        redoButtonStickyAR.add(insideTo: self.cameraARKit.view)
     }
     
     private func configConstraints() {
@@ -203,6 +228,7 @@ class StickyNoteView: ViewBuilder {
         overlay.applyConstraint()
         addButton.applyConstraint()
         noteTextField.applyConstraint()
+        redoButtonStickyAR.applyConstraint()
     }
         
     private func createImageTarget() -> ImageViewBuilder {
