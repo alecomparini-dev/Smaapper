@@ -55,10 +55,17 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func addStickyOnAR() {
+        
+        
+        let position = screen.cameraARKit.getPositionByCam(centimetersAhead: 5)
+        
+        guard let position else {return}
+        
         let stickyAR = screen.getStickyAR().convertToImage ?? UIImage()
         
         let material = ARMaterialBuilder()
             .setDiffuseTexture(stickyAR)
+            .setDiffuseTexture(UIColor.red)
         
         //TODO RETIRAR O SETPLANE ETC .. E PASSAR PARA O INIT, DEIXAR SÓ O SETMATERIAL NO GEOMETRY!!!!!!!!!!!!!!!!!!!!!!!
         let geometryPlane = ARGeometryBuilder()
@@ -66,14 +73,20 @@ class StickyNoteFloatViewController: FloatViewController {
                 build
                     .setSize(0.1, 0.1)
             }
+            .setSphere({ build in
+                build
+                    .setRadius(0.005)
+            })
             .setMaterial(material)
         
-        let getWorldPosition = screen.cameraARKit.getRealWordPositionByTarget(.any)
+        let getWorldPosition = screen.cameraARKit.getPositionOnPlaneByTarget(.any)
         
         let node = ARNodeBuilder()
             .setGeometry(geometryPlane)
-            .setPosition(getWorldPosition?.worldTransform)
+            .setPosition(position)
             .setAutoFollowCamera()
+        
+//        node.position = position
         
         screen.cameraARKit.addNode(node)
         

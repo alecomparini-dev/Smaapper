@@ -15,6 +15,7 @@ protocol ARSceneViewDelegate: AnyObject {
 class ARSceneView: ARSCNView {
     weak var delegateARScene: ARSceneViewDelegate?
     
+    var positionOfCamera: SCNVector3?
     var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
     
     override init(frame: CGRect, options: [String : Any]? = nil) {
@@ -29,6 +30,10 @@ class ARSceneView: ARSCNView {
 
 
 //  MARK: - EXTENSION DELEGATE ARSCNViewDelegate
+
+extension ARSceneView: ARSessionDelegate {
+    func session(_ session: ARSession, didUpdate frame: ARFrame) { }
+}
 
 extension ARSceneView: ARSCNViewDelegate {
     

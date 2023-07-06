@@ -46,6 +46,7 @@ class StickyNoteView: ViewBuilder {
     
     lazy var cameraARKit: ARSceneViewBuilder = {
         let arKit = ARSceneViewBuilder()
+            .setDebug([.showWorldOrigin,])
             .setImageTarget(createImageTarget())
             .setAlignmentTarget(.middle, -35)
             .setPlaneDetection([.vertical, .horizontal])
