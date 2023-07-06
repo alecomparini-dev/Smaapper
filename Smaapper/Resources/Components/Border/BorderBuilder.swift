@@ -31,9 +31,9 @@ class BorderBuilder {
     init(_ component: UIView) {
         self.component = component
     }
-
-//  MARK: - Set Properties
     
+
+//  MARK: - SET Properties
     @discardableResult
     func setWidth(_ width: CGFloat) -> Self {
         component.layer.borderWidth = width
@@ -63,7 +63,7 @@ class BorderBuilder {
     }
     
     
-//  MARK: - Component Private Functions
+//  MARK: -      Area
     
     private func selectCorners(_ cornes: [BorderBuilder.Corner]) -> CACornerMask {
         var selection: CACornerMask = []

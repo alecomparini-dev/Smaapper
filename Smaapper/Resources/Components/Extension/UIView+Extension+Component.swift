@@ -81,8 +81,8 @@ extension UIView {
     }
     
     @discardableResult
-    func makeBlur(_ blur: (_ make: Blur) -> Blur) -> Self {
-        _ = blur(Blur(self))
+    func makeBlur(_ blur: (_ make: BlurBuilder) -> BlurBuilder) -> Self {
+        _ = blur(BlurBuilder(self))
         return self
     }
     

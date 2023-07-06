@@ -11,13 +11,12 @@ import UIKit
 
 class BaseBuilder {
     
-    
     private(set) var constraintsFlow: StartOfConstraintsFlow?
     private(set) var border: BorderBuilder?
     private(set) var shadow: ShadowBuilder?
     private(set) var neumorphism: NeumorphismBuilder?
     private(set) var gradient: GradientBuilder?
-    private(set) var blur: Blur?
+    private(set) var blur: BlurBuilder?
     
     private weak var _component: UIView?
     
@@ -60,8 +59,8 @@ class BaseBuilder {
     }
 
     @discardableResult
-    func setBlur(_ build: (_ build: Blur) -> Blur) -> Self {
-        self.blur = build(Blur(component))
+    func setBlur(_ build: (_ build: BlurBuilder) -> BlurBuilder) -> Self {
+        self.blur = build(BlurBuilder(component))
         return self
     }
 
@@ -111,6 +110,7 @@ class BaseBuilder {
     
     
 //  MARK: - CONSTRAINTS AREA
+    
     @discardableResult
     func setConstraints(_ builderConstraint: (_ build: StartOfConstraintsFlow) -> StartOfConstraintsFlow) -> Self {
         self.constraintsFlow = builderConstraint(StartOfConstraintsFlow(component))
@@ -133,7 +133,6 @@ class BaseBuilder {
     }
 
     
-
 //  MARK: - Private Area
     private func countShadows() -> Int {
         return component.layer.sublayers?.filter({ $0.shadowOpacity > 0 }).count ?? 0

@@ -11,7 +11,7 @@ import ARKit
 
 class ARSceneViewBuilder: ViewBuilder {
     
-    private weak var arSceneView: ARSceneView!
+    private var arSceneView: ARSceneView!
     
     enum Alignment {
         case top
@@ -62,7 +62,24 @@ class ARSceneViewBuilder: ViewBuilder {
         return img
     }()
     
+    
+//  MARK: - GET Area
+    
+    func getRealWordPosition(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
+        if let raycastQuery = arSceneView.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
+            if let castResult = arSceneView.session.raycast(raycastQuery).first {
+                return castResult
+            }
+        }
+        return nil
+    }
+    
+    func getRealWordPositionByTarget(_ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
+        let positionTarget: CGPoint = targetImage.view.convert(targetBallImage.view.center, to: arSceneView)
+        return getRealWordPosition(positionTouch: positionTarget, alignment)
+    }
 
+    
 //  MARK: - SET Properties
     
     @discardableResult
@@ -114,10 +131,9 @@ class ARSceneViewBuilder: ViewBuilder {
     }
 
     
-    //  MARK: - ACTIONS
-    func add(_ node: SCNNode) -> Self {
+//  MARK: - ACTIONS
+    func addNode(_ node: SCNNode) {
         arSceneView.scene.rootNode.addChildNode(node)
-        return self
     }
     
     func runSceneView(){
