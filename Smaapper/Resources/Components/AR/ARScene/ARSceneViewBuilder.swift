@@ -84,20 +84,11 @@ class ARSceneViewBuilder: ViewBuilder {
         if let cameraTransform = arSceneView.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
-            
-            
-            let position = simd_float4x4([[-0.03830204, -0.38202292, 0.923359, 0.0], [0.9911677, -0.1319296, -0.013468637, 0.0], [0.12696368, 0.9146876, 0.3837019, 0.0], [-0.018386595, -0.1170946, -0.09306641, 1.0]])
-            
-//            arSceneView.session.setWorldOrigin(relativeTransform: position)
-            
-            print(matrix_multiply(cameraTransform, translation))
-//            return matrix_multiply(cameraTransform, translation)
-            return position
+            return matrix_multiply(cameraTransform, translation)
         }
         return nil
     }
     
-
     
 //  MARK: - SET Properties
     
@@ -106,7 +97,7 @@ class ARSceneViewBuilder: ViewBuilder {
         arSceneView.configuration.planeDetection = planeDetection
         return self
     }
-    
+
     @discardableResult
     func setDebug(_ debugOptions: ARSCNDebugOptions) -> Self {
         arSceneView.debugOptions = debugOptions
@@ -155,12 +146,34 @@ class ARSceneViewBuilder: ViewBuilder {
         arSceneView.scene.rootNode.addChildNode(node)
     }
     
-    func runSceneView(){
-        arSceneView.session.run(arSceneView.configuration)
+    func pauseSceneView() {
+        arSceneView.saveWorldMap()
+        arSceneView.session.pause()
     }
     
-    func pauseSceneView() {
-        arSceneView.session.pause()
+    func runSceneView(_ options: ARSession.RunOptions = [] ) {
+        arSceneView.session.run(arSceneView.configuration, options: options)
+    }
+    
+    func runSceneView(_ worldMapData: Data) {
+        arSceneView.worldMap = convertToWorldMap(worldMapData: worldMapData)
+        var options: ARSession.RunOptions = []
+        if let worldMap = arSceneView.worldMap {
+            arSceneView.configuration.initialWorldMap = worldMap
+            options = [.resetTracking, .removeExistingAnchors]
+        }
+        runSceneView(options)
+    }
+    
+    func convertToWorldMap(worldMapData: Data) -> ARWorldMap? {
+        do {
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
+                return worldMap
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        return nil
     }
     
     

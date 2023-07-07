@@ -10,13 +10,13 @@ import ARKit
 
 protocol ARSceneViewDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
+    func saveWorldMap(_ worldMap: Data?, _ error: Error?)
 }
 
 class ARSceneView: ARSCNView {
     weak var delegateARScene: ARSceneViewDelegate?
     
-    
-    var positionOfCamera: SCNVector3?
+    var worldMap: ARWorldMap?
     var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
     
     override init(frame: CGRect, options: [String : Any]? = nil) {
@@ -27,7 +27,26 @@ class ARSceneView: ARSCNView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    func saveWorldMap(_ session: ARSession? = nil) {
+        let currentSession = (session == nil) ? self.session : session
+        
+        if let currentSession {
+            currentSession.getCurrentWorldMap { [weak self] worldMap, error in
+                guard let self else {return}
+                if error != nil {
+                    delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap, error: error!.localizedDescription))
+                    return
+                }
+                guard let worldMap else {return}
+                do {
+                    let worldMapData = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+                    delegateARScene?.saveWorldMap(worldMapData, nil)
+                } catch {
+                    delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: error.localizedDescription))
+                }
+            }
+        }
+    }
     
 }
 
@@ -36,13 +55,17 @@ class ARSceneView: ARSCNView {
 
 extension ARSceneView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) { }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        saveWorldMap(session)
+    }
 }
 
 extension ARSceneView: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         //TODO: - IMPLEMENT DETECT PLANE
-        print(anchor)
+    
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -52,4 +75,3 @@ extension ARSceneView: ARSCNViewDelegate {
     }
     
 }
-

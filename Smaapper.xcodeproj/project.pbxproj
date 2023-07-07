@@ -130,6 +130,7 @@
 		02D06E862A5626ED0020A10B /* ARSphereBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */; };
 		02D06E882A5627610020A10B /* ARGeometryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E872A5627610020A10B /* ARGeometryBuilder.swift */; };
 		02D06E8A2A563B2C0020A10B /* ARNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */; };
+		02D06E8C2A577A870020A10B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E8B2A577A870020A10B /* Errors.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -328,6 +329,7 @@
 		02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSphereBuilder.swift; sourceTree = "<group>"; };
 		02D06E872A5627610020A10B /* ARGeometryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGeometryBuilder.swift; sourceTree = "<group>"; };
 		02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNodeBuilder.swift; sourceTree = "<group>"; };
+		02D06E8B2A577A870020A10B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -1297,6 +1299,7 @@
 			isa = PBXGroup;
 			children = (
 				02E974232A37892900BF14EE /* UtilsFloatView.swift */,
+				02D06E8B2A577A870020A10B /* Errors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1738,6 +1741,7 @@
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
 				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
+				02D06E8C2A577A870020A10B /* Errors.swift in Sources */,
 				02FB2C992A45C35E00C7FC98 /* HangmanFloatViewController.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
