@@ -111,6 +111,12 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     @discardableResult
+    func setOptions(_ options: ARSession.RunOptions) -> Self {
+        arSceneView.options.insert(options)
+        return self
+    }
+    
+    @discardableResult
     func setEnabledTargetDraggable(_ enabled: Bool) -> Self {
         targetImage.actions?.draggable?.setEnabledDraggable(enabled)
         return self
@@ -142,8 +148,19 @@ class ARSceneViewBuilder: ViewBuilder {
 
     
 //  MARK: - ACTIONS
-    func addNode(_ node: SCNNode) {
+    func addNode(_ node: ARNodeBuilder) {
+        let anchor = ARAnchor(name: node.name ?? "", transform: node.simdTransform)
+        arSceneView.session.add(anchor: anchor)
+        node.setAnchor(anchor)
         arSceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    func removeNode(_ node: ARNodeBuilder?) {
+        guard let node else {return}
+        node.removeFromParentNode()
+        if let anchor = node.anchor {
+            arSceneView.session.remove(anchor: anchor)
+        }
     }
     
     func pauseSceneView() {
@@ -151,27 +168,24 @@ class ARSceneViewBuilder: ViewBuilder {
         arSceneView.session.pause()
     }
     
-    func runSceneView(_ options: ARSession.RunOptions = [] ) {
-        arSceneView.session.run(arSceneView.configuration, options: options)
-    }
-    
-    func runSceneView(_ worldMapData: Data) {
-        arSceneView.worldMap = convertToWorldMap(worldMapData: worldMapData)
-        var options: ARSession.RunOptions = []
-        if let worldMap = arSceneView.worldMap {
-            arSceneView.configuration.initialWorldMap = worldMap
-            options = [.resetTracking, .removeExistingAnchors]
+    func runSceneView(_ worldMapData: Data? = nil) {
+        if let worldMapData {
+            if let worldMap = tryConvertDataToWorldMap(worldMapData) {
+                sendAnchorsOnWorldMap(worldMap)
+                arSceneView.configuration.initialWorldMap = worldMap
+                setOptions([.resetTracking, .removeExistingAnchors])
+            }
         }
-        runSceneView(options)
+        arSceneView.session.run(arSceneView.configuration, options: arSceneView.options)
     }
     
-    func convertToWorldMap(worldMapData: Data) -> ARWorldMap? {
+    func dataToWorldMap(worldMapData: Data) throws -> ARWorldMap? {
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
                 return worldMap
             }
         } catch {
-            print(error.localizedDescription)
+            throw Error.worldMap(typeError: .convertToWorldMap, error: "Invalid worldMap \(error.localizedDescription)")
         }
         return nil
     }
@@ -217,6 +231,20 @@ class ARSceneViewBuilder: ViewBuilder {
                 .setPin.equalToSuperView
                 .apply()
         }
+    }
+    
+    private func tryConvertDataToWorldMap(_ worldMapData: Data) -> ARWorldMap? {
+        do {
+            let worldMap = try dataToWorldMap(worldMapData: worldMapData)
+            return worldMap
+        } catch { }
+        return nil
+    }
+    
+    private func sendAnchorsOnWorldMap(_ worldMap: ARWorldMap?) {
+        guard let worldMap else {return}
+        let anchors = worldMap.anchors
+        arSceneView.delegateARScene?.anchorsWorldMap(anchors)
     }
     
 }

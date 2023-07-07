@@ -10,6 +10,8 @@ import ARKit
 
 class ARNodeBuilder: SCNNode {
     
+    private(set) var anchor: ARAnchor?
+    
     override init() {
         super.init()
     }
@@ -19,6 +21,12 @@ class ARNodeBuilder: SCNNode {
     }
     
 //  MARK: - SET Properties
+    
+    @discardableResult
+    func setIdentifier(_ id: String) -> Self {
+        self.name = id
+        return self
+    }
     
     @discardableResult
     func setGeometry(_ geometry: ARGeometryBuilder) -> Self {
@@ -38,6 +46,12 @@ class ARNodeBuilder: SCNNode {
     func setAutoFollowCamera() -> Self {
         let billboardConstraint = SCNBillboardConstraint()
         self.constraints = [billboardConstraint]
+        return self
+    }
+    
+    @discardableResult
+    func setAnchor(_ anchor: ARAnchor) -> Self {
+        self.anchor = anchor
         return self
     }
     

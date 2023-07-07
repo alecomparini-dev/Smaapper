@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import ARKit
+
 
 class StickyNoteFloatViewController: FloatViewController {
     static let identifierApp = K.Sticky.identifierApp
     
     private var stickyNodes: [ARNodeBuilder] = []
+    private var wordMap: Data?
     
     lazy var screen: StickyNoteView = {
         let view = StickyNoteView()
@@ -39,7 +42,7 @@ class StickyNoteFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.cameraARKit.runSceneView()
+        screen.cameraARKit.runSceneView(wordMap)
     }
     
     override func viewDidDeselectFloatView() {
@@ -82,6 +85,7 @@ class StickyNoteFloatViewController: FloatViewController {
             .setMaterial(material)
         guard let position = screen.cameraARKit.getPositionByCam(centimetersAhead: 8) else {return}
         let nodeSticky = createARNode(geometryPlane).setPosition(position)
+        nodeSticky.setIdentifier(screen.noteTextField.getText)
         addNodeArSceneView(nodeSticky)
         enabledOrDisableRedoButton()
     }
@@ -98,8 +102,8 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func removeStickNoteAR() {
-        let popSticky = self.stickyNodes.popLast()
-        popSticky?.removeFromParentNode()
+        let nodeSticky: ARNodeBuilder? = self.stickyNodes.popLast()
+        screen.cameraARKit.removeNode(nodeSticky)
     }
     
     private func enabledOrDisableRedoButton() {
@@ -139,16 +143,24 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewDelegate {
-    func saveWorldMap(_ worldMap: Data?, _ error: Error?) {
-        
-    }
     
-
+    func saveWorldMap(_ worldMap: Data?, _ error: Error?) {
+        self.wordMap = worldMap
+    }
     
     func positionTouch(_ position: CGPoint) {
         
     }
+
+    func anchorsWorldMap(_ anchors: [ARAnchor]) {
+        recreatedNodes(anchors)
+    }
     
     
+    private func recreatedNodes(_ anchors: [ARAnchor]) {
+        anchors.forEach { anchor in
+            print(anchor.name ?? "" )
+        }
+    }
 }
 
