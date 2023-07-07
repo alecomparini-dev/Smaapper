@@ -10,6 +10,7 @@ import Foundation
 enum TypeErrorWorldMap {
     case getWordlMap
     case convertToData
+    case convertToWorldMap
 }
 
 enum Error: Swift.Error {
