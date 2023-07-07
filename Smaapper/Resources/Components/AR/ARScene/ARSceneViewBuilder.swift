@@ -65,6 +65,10 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - GET Area
+    var nodes: [ARNodeBuilder] {
+        get { arSceneView.nodes }
+        set { arSceneView.nodes = newValue}
+    }
     
     func getPositionOnPlaneByTouch(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
         if let raycastQuery = arSceneView.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
@@ -91,7 +95,7 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - SET Properties
-    
+
     @discardableResult
     func setPlaneDetection(_ planeDetection: ARWorldTrackingConfiguration.PlaneDetection) -> Self {
         arSceneView.configuration.planeDetection = planeDetection
@@ -125,7 +129,7 @@ class ARSceneViewBuilder: ViewBuilder {
     @discardableResult
     func setAlignmentTarget(_ alignment: Alignment, _ padding: CGFloat = 0) -> Self {
         DispatchQueue.main.async { [weak self] in
-            self?.setAligment(alignment, padding)
+            self?.setAlignment(alignment, padding)
         }
         return self
     }
@@ -140,6 +144,7 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - DELEGATE
+    
     @discardableResult
     func setDelegate(_ delegate: ARSceneViewDelegate) -> Self {
         arSceneView.delegateARScene = delegate
@@ -148,38 +153,65 @@ class ARSceneViewBuilder: ViewBuilder {
 
     
 //  MARK: - ACTIONS
-    func addNode(_ node: ARNodeBuilder) {
-        let anchor = ARAnchor(name: node.name ?? "", transform: node.simdTransform)
-        arSceneView.session.add(anchor: anchor)
-        node.setAnchor(anchor)
-        arSceneView.scene.rootNode.addChildNode(node)
-    }
-    
-    func removeNode(_ node: ARNodeBuilder?) {
-        guard let node else {return}
-        node.removeFromParentNode()
-        if let anchor = node.anchor {
-            arSceneView.session.remove(anchor: anchor)
-        }
-    }
-    
-    func pauseSceneView() {
-        arSceneView.saveWorldMap()
-        arSceneView.session.pause()
-    }
     
     func runSceneView(_ worldMapData: Data? = nil) {
         if let worldMapData {
             if let worldMap = tryConvertDataToWorldMap(worldMapData) {
-                sendAnchorsOnWorldMap(worldMap)
+                let newWorldMap = worldMap
                 arSceneView.configuration.initialWorldMap = worldMap
-                setOptions([.resetTracking, .removeExistingAnchors])
+                arSceneView.session.run(arSceneView.configuration, options: [.resetTracking, .removeExistingAnchors])
+                resetAnchorsInWorldMap(worldMap)
+                sendAnchorsOnWorldMap(newWorldMap)
+                return
             }
         }
         arSceneView.session.run(arSceneView.configuration, options: arSceneView.options)
     }
+
+    func pauseSceneView() {
+        arSceneView.currentSession = arSceneView.session
+        arSceneView.saveWorldMap() { [weak self] in
+            guard let self else {return}
+            resetNodes()
+            return
+        }
+        arSceneView.session.pause()
+    }
     
-    func dataToWorldMap(worldMapData: Data) throws -> ARWorldMap? {
+    private func resetNodes() {
+        arSceneView.nodes.forEach({ node in
+            removeNode(node)
+        })
+        arSceneView.nodes = []
+    }
+
+    private func resetAnchorsInWorldMap( _ worldMap: ARWorldMap) {
+        print("DELETANDO OS ANCHORS QUE EXISTE", worldMap.anchors.count)
+        worldMap.anchors.forEach { anchor in
+            self.arSceneView.session.remove(anchor: anchor)
+        }
+    }
+    
+    
+    func addNode(_ node: ARNodeBuilder) {
+        let anchor = ARAnchor(name: node.name ?? K.String.empty, transform: node.simdTransform)
+        node.setAnchor(anchor)
+        arSceneView.scene.rootNode.addChildNode(node)
+        arSceneView.session.add(anchor: anchor)
+        arSceneView.nodes.append(node)
+    }
+    
+    func removeNode(_ node: ARNodeBuilder?) {
+        guard let node else {return}
+        if let anchor = node.anchor {
+            arSceneView.session.remove(anchor: anchor)
+        }
+        node.removeFromParentNode()
+    }
+    
+    
+//  MARK: - PRIVATE Area
+    private func dataToWorldMap(worldMapData: Data) throws -> ARWorldMap? {
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
                 return worldMap
@@ -189,11 +221,8 @@ class ARSceneViewBuilder: ViewBuilder {
         }
         return nil
     }
-    
-    
-//  MARK: - PRIVATE Area
-    
-    private func setAligment(_ alignment: Alignment, _ padding: CGFloat) {
+
+    private func setAlignment(_ alignment: Alignment, _ padding: CGFloat) {
         switch alignment {
             case .top:
                 targetImage.view.frame.origin.y = self.view.bounds.minY + padding

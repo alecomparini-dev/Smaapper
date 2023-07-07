@@ -12,8 +12,7 @@ import ARKit
 class StickyNoteFloatViewController: FloatViewController {
     static let identifierApp = K.Sticky.identifierApp
     
-    private var stickyNodes: [ARNodeBuilder] = []
-    private var wordMap: Data?
+    private var worldMap: Data?
     
     lazy var screen: StickyNoteView = {
         let view = StickyNoteView()
@@ -38,11 +37,10 @@ class StickyNoteFloatViewController: FloatViewController {
         configDelegate()
     }
     
-
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.cameraARKit.runSceneView(wordMap)
+            screen.cameraARKit.runSceneView(worldMap)
     }
     
     override func viewDidDeselectFloatView() {
@@ -59,9 +57,6 @@ class StickyNoteFloatViewController: FloatViewController {
         screen.cameraARKit.setDelegate(self)
     }
     
-    private func convertViewStickyARToImage() -> UIImage {
-        return screen.getStickyAR().convertToImage ?? UIImage()
-    }
     
     private func createARPlane() -> ARGeometryBuilder {
         return ARGeometryBuilder()
@@ -77,37 +72,73 @@ class StickyNoteFloatViewController: FloatViewController {
             .setAutoFollowCamera()
     }
     
-    private func settingsForAddingStickyNote() {
-        let stickyAR = convertViewStickyARToImage()
-        let material = ARMaterialBuilder()
-            .setDiffuseTexture(stickyAR)
-        let geometryPlane = createARPlane()
-            .setMaterial(material)
-        guard let position = screen.cameraARKit.getPositionByCam(centimetersAhead: 8) else {return}
-        let nodeSticky = createARNode(geometryPlane).setPosition(position)
-        nodeSticky.setIdentifier(screen.noteTextField.getText)
-        addNodeArSceneView(nodeSticky)
+    private func addStickyNote() {
+        let stickyView = screen.getStickyNote()
+        configStickyNoteToAR(stickyView)
+        hideKeyboard()
+    }
+    
+    private func hideKeyboard() {
+        screen.noteTextField.setText(K.String.empty)
+            .setKeyboard { buid in
+                buid
+                    .setHideKeyboard(true)
+            }
+    }
+    
+    private func configStickyNoteToAR(_ stickyNote: UIView, _ position: simd_float4x4? = nil) {
+        let stickyNoteMaterial = createStickyNoteMaterial(stickyNote)
+        let stickyNoteARNode = configObjectAR(stickyNoteMaterial, position)
+        addNodeArSceneView(stickyNoteARNode)
         enabledOrDisableRedoButton()
     }
     
-    private func addNodeArSceneView(_ node: ARNodeBuilder) {
-        screen.cameraARKit.addNode(node)
-        self.stickyNodes.append(node)
+    private func createStickyNoteMaterial(_ stickyNote: UIView) -> UIImage {
+        return stickyNote.convertToImage ?? UIImage()
     }
     
-    private func settingsForStickyNoteRemoval() {
-        if stickyNodes.isEmpty {return}
+    private func configObjectAR(_ stickyNoteMaterial: UIImage, _ position: simd_float4x4? = nil) -> ARNodeBuilder {
+        let material = ARMaterialBuilder()
+            .setDiffuseTexture(stickyNoteMaterial)
+        
+        let geometryPlane = createARPlane()
+            .setMaterial(material)
+        
+        if let position = getPosition(position) {
+            let stickyNoteARNode = createARNode(geometryPlane).setPosition(position)
+            stickyNoteARNode.setIdentifier(screen.noteTextField.getText)
+            return stickyNoteARNode
+        }
+        
+        return ARNodeBuilder()
+    }
+    
+    private func getPosition(_ position: simd_float4x4?) -> simd_float4x4? {
+        if let position { return position }
+        return screen.cameraARKit.getPositionByCam(centimetersAhead: 8)
+    }
+    
+    
+    private func addNodeArSceneView(_ node: ARNodeBuilder) {
+        screen.cameraARKit.addNode(node)
+    }
+    
+    private func revemoStickNote() {
+        if screen.cameraARKit.nodes.isEmpty {
+            enabledOrDisableRedoButton()
+            return
+        }
         removeStickNoteAR()
         enabledOrDisableRedoButton()
     }
     
     private func removeStickNoteAR() {
-        let nodeSticky: ARNodeBuilder? = self.stickyNodes.popLast()
+        let nodeSticky: ARNodeBuilder? = screen.cameraARKit.nodes.popLast()
         screen.cameraARKit.removeNode(nodeSticky)
     }
     
     private func enabledOrDisableRedoButton() {
-        if stickyNodes.isEmpty {
+        if screen.cameraARKit.nodes.isEmpty {
             screen.redoButtonStickyAR.setHidden(true)
             return
         }
@@ -130,11 +161,11 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
     }
     
     func addButtonTapped() {
-        settingsForAddingStickyNote()
+        addStickyNote()
     }
     
     func redoButtonTapped() {
-        settingsForStickyNoteRemoval()
+        revemoStickNote()
     }
     
 }
@@ -145,7 +176,11 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 extension StickyNoteFloatViewController: ARSceneViewDelegate {
     
     func saveWorldMap(_ worldMap: Data?, _ error: Error?) {
-        self.wordMap = worldMap
+        if error != nil {
+            print("ERRO", error?.localizedDescription ?? "" )
+            return
+        }
+        self.worldMap = worldMap
     }
     
     func positionTouch(_ position: CGPoint) {
@@ -153,13 +188,14 @@ extension StickyNoteFloatViewController: ARSceneViewDelegate {
     }
 
     func anchorsWorldMap(_ anchors: [ARAnchor]) {
-        recreatedNodes(anchors)
+        recreatingStickyNoteOnWorldMap(anchors)
     }
     
     
-    private func recreatedNodes(_ anchors: [ARAnchor]) {
-        anchors.forEach { anchor in
-            print(anchor.name ?? "" )
+    private func recreatingStickyNoteOnWorldMap(_ anchors: [ARAnchor]) {
+        anchors.enumerated().forEach { index,anchor in
+            let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
+            configStickyNoteToAR(stickyView, anchor.transform)
         }
     }
 }
