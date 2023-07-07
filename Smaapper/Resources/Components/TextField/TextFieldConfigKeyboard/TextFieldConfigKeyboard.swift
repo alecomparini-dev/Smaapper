@@ -80,6 +80,16 @@ class TextFieldConfigKeyboard {
         return self
     }
     
+    @discardableResult
+    func setHideKeyboard(_ hide: Bool) -> Self {
+        if hide {
+            textField?.resignFirstResponder()
+        } else {
+            textField?.becomeFirstResponder()
+        }
+        return self
+    }
+    
     
 //  MARK: - PRIVATE Area
     

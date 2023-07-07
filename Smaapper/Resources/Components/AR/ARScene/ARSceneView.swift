@@ -19,7 +19,8 @@ class ARSceneView: ARSCNView {
     
     var options: ARSession.RunOptions = []
     var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
-    var nodes: [ARNodeBuilder]?
+    var nodes: [ARNodeBuilder] = []
+    var currentSession: ARSession?
     
     override init(frame: CGRect, options: [String : Any]? = nil) {
         super.init(frame: frame, options: nil)
@@ -31,21 +32,18 @@ class ARSceneView: ARSCNView {
     
     
 //  MARK: - SALVE WORLD MAP
-    func saveWorldMap(_ session: ARSession? = nil) {
-        if let currentSession = getCurrentSession() {
+    func saveWorldMap(completion: (() -> Void)? = nil) {
+        if let currentSession {
             getCurrentWorldMap(currentSession) { [weak self] worldMap in
                 guard let self else {return}
                 convertWorldMapToData(worldMap)
+                completion?()
             }
         }
     }
     
 
 //  MARK: - PRIVATE Area
-    
-    private func getCurrentSession(_ session: ARSession? = nil) -> ARSession? {
-        return (session == nil) ? self.session : session
-    }
     
     private func getCurrentWorldMap(_ currentSession: ARSession, completion: @escaping (_ worldMap: ARWorldMap) -> Void) {
         currentSession.getCurrentWorldMap { [weak self] worldMap, error in
@@ -55,9 +53,14 @@ class ARSceneView: ARSCNView {
                 return
             }
             if let worldMap {
+                print("SALVANDO OS STICKYS:", worldMap.anchors.count)
                 completion(worldMap)
             }
         }
+    }
+
+    private func getCurrentSession(_ session: ARSession? = nil) -> ARSession? {
+        return (session == nil) ? self.session : session
     }
     
     private func convertWorldMapToData(_ worldMap: ARWorldMap) {
@@ -77,7 +80,8 @@ extension ARSceneView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) { }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        saveWorldMap(session)
+        currentSession = session
+        saveWorldMap()
     }
 }
 

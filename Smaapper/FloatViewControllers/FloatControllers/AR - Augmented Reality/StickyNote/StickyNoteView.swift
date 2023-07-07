@@ -189,8 +189,12 @@ class StickyNoteView: ViewBuilder {
     
     
 //  MARK: - GET Area
-    func getStickyAR() -> UIView {
-        return createStickyToAR()
+    func getStickyNote() -> UIView {
+        return createStickyNoteView(noteTextField.getText)
+    }
+    
+    func recreateStickyNote(_ note: String) -> UIView {
+        return createStickyNoteView(note)
     }
     
     
@@ -238,16 +242,16 @@ class StickyNoteView: ViewBuilder {
 
     
 //  MARK: - STICKY AR Area
-    private func createStickyToAR() -> UIView {
+    private func createStickyNoteView(_ note: String) -> UIView {
         let view = createSticky()
         let top = createTopSticky()
-        let note = createLabel()
+        let note = createLabel(note)
         top.add(insideTo: view.view)
         note.add(insideTo: view.view)
         return view.view
     }
     
-    private func createLabel() -> LabelBuilder {
+    private func createLabel(_ note: String) -> LabelBuilder {
         return LabelBuilder(frame: CGRect(x: K.Sticky.AR.Frame.Note.x,
                                           y: K.Sticky.AR.Frame.Note.y,
                                           width: K.Sticky.AR.Frame.Note.width,
@@ -257,7 +261,7 @@ class StickyNoteView: ViewBuilder {
         .setFont(UIFont.systemFont(ofSize: K.Sticky.AR.fontSizeNote, weight: .regular))
         .setColor(Theme.shared.currentTheme.onPrimary)
         .setNumberOfLines(0)
-        .setText(noteTextField.getText)
+        .setText(note)
     }
     
     private func createSticky() -> ViewBuilder {
