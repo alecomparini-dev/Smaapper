@@ -25,10 +25,10 @@ class HangmanService: GenericService {
                 }
                 completion(hangmanWord, nil)
             } catch {
-                completion([], Error.fileDecodingFailed(name: fileNameJson , error))
+                completion([], Error.fileDecodingFailed(error: fileNameJson , error))
             }
         } else {
-            completion([], Error.fileNotFound(name: fileNameJson))
+            completion([], Error.fileNotFound(error: fileNameJson))
         }
     }
     

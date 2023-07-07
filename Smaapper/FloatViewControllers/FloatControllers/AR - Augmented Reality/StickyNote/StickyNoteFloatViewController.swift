@@ -139,6 +139,11 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewDelegate {
+    func saveWorldMap(_ worldMap: Data?, _ error: Error?) {
+        
+    }
+    
+
     
     func positionTouch(_ position: CGPoint) {
         
