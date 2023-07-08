@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-class BaseBuilder {
+class BaseBuilder: NSObject {
     
     private(set) var constraintsFlow: StartOfConstraintsFlow?
     private(set) var border: BorderBuilder?

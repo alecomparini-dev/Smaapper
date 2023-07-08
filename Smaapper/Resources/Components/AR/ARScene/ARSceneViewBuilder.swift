@@ -10,26 +10,72 @@ import ARKit
 import SceneKit
 
 
+protocol ARSceneViewBuilderDelegate: AnyObject {
+    func positionTouch(_ position: CGPoint)
+    func saveWorldMap(_ worldMap: Data?, _ error: Error?)
+    func anchorsWorldMap(_ anchors: [ARAnchor])
+}
+
+
 class ARSceneViewBuilder: ViewBuilder {
-    
-    private weak var arSceneView: ARSceneView?
+    weak var delegate: ARSceneViewBuilderDelegate?
     
     enum Alignment {
         case top
         case middle
         case bottom
     }
-    
+
+    private var imageView: UIImageView = UIImageView()
+    private var positionTarget: ( aligment: Alignment, padding: CGFloat)?
+    private var arSceneView: ARSCNView?
+    private var options: ARSession.RunOptions = []
+    private var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
+
     override init() {
         super.init()
         initialization()
     }
     
     private func initialization() {
-        createSceneView()
-        configSceneView()
+//        createSceneView()
+//        configSceneView()
         addElements()
         configConstraints()
+//        configDelegate()
+    }
+    
+    private func restart() {
+        imageView.removeFromSuperview()
+        
+        
+        createSceneView()
+        configuration = ARWorldTrackingConfiguration()
+        arSceneView?.add(insideTo: self.view)
+        configArSceneViewConstraints()
+        
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            if let positionTarget {
+                setAlignment(positionTarget.aligment, positionTarget.padding)
+                targetImage.setHidden(false)
+            }
+        }
+        
+        
+        if let arSceneView {
+            self.view.sendSubviewToBack(targetImage.view)
+            targetImage.view.sendSubviewToBack(arSceneView)
+            self.view.sendSubviewToBack(arSceneView)
+        }
+        configDelegate()
+    }
+
+    
+    private func configDelegate() {
+        arSceneView?.delegate = self
+        arSceneView?.session.delegate = self
     }
     
     
@@ -65,10 +111,6 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - GET Area
-    var nodes: [ARNodeBuilder] {
-        get { arSceneView?.nodes ?? [] }
-        set { arSceneView?.nodes = newValue}
-    }
     
     func getPositionOnPlaneByTouch(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
         if let raycastQuery = arSceneView?.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
@@ -98,7 +140,7 @@ class ARSceneViewBuilder: ViewBuilder {
 
     @discardableResult
     func setPlaneDetection(_ planeDetection: ARWorldTrackingConfiguration.PlaneDetection) -> Self {
-        arSceneView?.configuration.planeDetection = planeDetection
+        self.configuration.planeDetection = planeDetection
         return self
     }
 
@@ -116,7 +158,7 @@ class ARSceneViewBuilder: ViewBuilder {
     
     @discardableResult
     func setOptions(_ options: ARSession.RunOptions) -> Self {
-        arSceneView?.options.insert(options)
+        self.options.insert(options)
         return self
     }
     
@@ -130,10 +172,11 @@ class ARSceneViewBuilder: ViewBuilder {
     func setAlignmentTarget(_ alignment: Alignment, _ padding: CGFloat = 0) -> Self {
         DispatchQueue.main.async { [weak self] in
             self?.setAlignment(alignment, padding)
+            self?.positionTarget = (alignment,padding)
         }
         return self
     }
-
+    
     @discardableResult
     func setImageTarget(_ img: ImageViewBuilder, _ size: CGFloat = K.CameraARKit.sizeTarget) -> Self {
         self.targetImage.setImage(img.view.image)
@@ -144,10 +187,15 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - DELEGATE
+    @discardableResult
+    func setDelegateARSceneView(_ delegate: ARSCNViewDelegate) -> Self {
+        arSceneView?.delegate = delegate
+        return self
+    }
     
     @discardableResult
-    func setDelegate(_ delegate: ARSceneViewDelegate) -> Self {
-        arSceneView?.delegateARScene = delegate
+    func setDelegateARSession(_ delegate: ARSessionDelegate) -> Self {
+        arSceneView?.session.delegate = delegate
         return self
     }
 
@@ -155,53 +203,69 @@ class ARSceneViewBuilder: ViewBuilder {
 //  MARK: - ACTIONS
     
     func runSceneView() {
+        restart()
         if !K.worldMapData.isEmpty {
             do {
                 if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: K.worldMapData) {
                     print(worldMap.anchors.count)
-                    resetNodes()
-                    arSceneView?.configuration = ARWorldTrackingConfiguration()
-                    arSceneView?.configuration.initialWorldMap = worldMap
-                    arSceneView?.session.run(arSceneView?.configuration ?? ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
+                    if !worldMap.anchors.isEmpty {
+                        self.configuration.initialWorldMap = worldMap
+                    }
+                    self.arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
                     return
                 }
             } catch {
                 print("Invalid worldMap \(error.localizedDescription)")
             }
         }
-        print("iniciou por aqui")
-        arSceneView?.session.run(arSceneView?.configuration ?? ARWorldTrackingConfiguration(), options: [])
+        arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 
     func pauseSceneView() {
-        arSceneView?.saveWorldMap() { [weak self] in
+        self.saveWorldMap() { [weak self] in
             guard let self else {return}
+            
+            guard let snapshot = arSceneView?.snapshot() else { return }
+            imageView = UIImageView(image: snapshot)
+            imageView.frame = arSceneView?.bounds ?? self.view.bounds
+            view.addSubview(imageView)
+            view.sendSubviewToBack(imageView)
+
             arSceneView?.session.pause()
+            arSceneView?.removeFromSuperview()
             arSceneView = nil
+            
+            targetImage.setHidden(true)
+            
             return
         }
+        
     }
     
-    private func resetNodes() {
-        arSceneView?.scene.rootNode.enumerateChildNodes { (node, _) in
-            node.removeFromParentNode()
-        }
-    }
-   
     func addNode(_ node: ARNodeBuilder) {
         let anchor = ARAnchor(name: node.name ?? K.String.empty, transform: node.simdTransform)
         node.setAnchor(anchor)
         arSceneView?.session.add(anchor: anchor)
         arSceneView?.scene.rootNode.addChildNode(node)
-        arSceneView?.nodes.append(node)
     }
     
-    func removeNode(_ node: ARNodeBuilder?) {
-        guard let node else {return}
-        if let anchor = node.anchor {
-            arSceneView?.session.remove(anchor: anchor)
+    
+//  MARK: - SALVE WORLD MAP
+    func saveWorldMap(completion: (() -> Void)? = nil) {
+        arSceneView?.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+            else { self.delegate?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap , error: "Nao tem worldMap\(error!.localizedDescription)"))
+                completion?()
+                return }
+
+            do {
+                let worldMapData = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                self.delegate?.saveWorldMap(worldMapData, nil)
+            } catch {
+                self.delegate?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: "Nao converteu para Data\(error.localizedDescription)"))
+            }
+            completion?()
         }
-        node.removeFromParentNode()
     }
     
     
@@ -219,7 +283,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func createSceneView() {
-        self.arSceneView = ARSceneView(frame: self.view.bounds)
+        self.arSceneView = ARSCNView(frame: self.view.bounds)
     }
     
     private func configSceneView() {
@@ -228,13 +292,11 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func addElements() {
-        arSceneView?.add(insideTo: self.view)
         targetImage.add(insideTo: self.view)
         targetBallImage.add(insideTo: targetImage.view)
     }
     
     private func configConstraints() {
-        configArSceneViewConstraints()
         targetImage.applyConstraint()
         targetBallImage.applyConstraint()
     }
@@ -246,12 +308,40 @@ class ARSceneViewBuilder: ViewBuilder {
                 .apply()
         }
     }
+        
+}
+
+
+//  MARK: - EXTENSION DELEGATE ARSessionDelegate
+
+extension ARSceneViewBuilder: ARSessionDelegate {
     
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        
+    }
     
-    private func sendAnchorsOnWorldMap(_ worldMap: ARWorldMap?) {
-        guard let worldMap else {return}
-        let anchors = worldMap.anchors
-        arSceneView?.delegateARScene?.anchorsWorldMap(anchors)
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        print("session.identifier:", session.identifier)
+        print("camera.trackingState:", camera.trackingState)
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        saveWorldMap()
+    }
+}
+
+
+//  MARK: - EXTENSION DELEGATE ARSCNViewDelegate
+
+extension ARSceneViewBuilder: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        print(anchor.identifier)
+    }
+    
+    func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touchLocation = touches.first?.location(in: self.arSceneView) {
+            delegate?.positionTouch(touchLocation)
+        }
     }
     
 }
