@@ -13,7 +13,7 @@ import SceneKit
 protocol ARSceneViewBuilderDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
     func saveWorldMap(_ worldMap: Data?, _ error: Error?)
-    func anchorsWorldMap(_ anchors: [ARAnchor])
+    func loadAnchorWorldMap(_ anchor: ARAnchor)
 }
 
 
@@ -25,12 +25,16 @@ class ARSceneViewBuilder: ViewBuilder {
         case middle
         case bottom
     }
-
-    private var imageView: UIImageView = UIImageView()
-    private var positionTarget: ( aligment: Alignment, padding: CGFloat)?
+    
     private var arSceneView: ARSCNView?
-    private var options: ARSession.RunOptions = []
     private var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
+    
+    private var snapshotARSceneView: UIImageView = UIImageView()
+    private var positionTarget: ( aligment: Alignment, padding: CGFloat)?
+    private var options: ARSession.RunOptions = []
+    
+    private var anchorsLoadWorldMap: [ARAnchor] = []
+    
 
     override init() {
         super.init()
@@ -38,40 +42,24 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func initialization() {
-//        createSceneView()
-//        configSceneView()
         addElements()
         configConstraints()
-//        configDelegate()
+        setPreferredFramesPerSecond(15)
     }
     
     private func restart() {
-        imageView.removeFromSuperview()
-        
-        
+        snapshotARSceneView.removeFromSuperview()
         createSceneView()
         configuration = ARWorldTrackingConfiguration()
         arSceneView?.add(insideTo: self.view)
         configArSceneViewConstraints()
         
+        repositionTarget()
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self else {return}
-            if let positionTarget {
-                setAlignment(positionTarget.aligment, positionTarget.padding)
-                targetImage.setHidden(false)
-            }
-        }
-        
-        
-        if let arSceneView {
-            self.view.sendSubviewToBack(targetImage.view)
-            targetImage.view.sendSubviewToBack(arSceneView)
-            self.view.sendSubviewToBack(arSceneView)
-        }
         configDelegate()
     }
 
+    
     
     private func configDelegate() {
         arSceneView?.delegate = self
@@ -185,6 +173,13 @@ class ARSceneViewBuilder: ViewBuilder {
         return self
     }
     
+    @discardableResult
+    func setPreferredFramesPerSecond(_ framesPerSecond: Int) -> Self {
+        self.arSceneView?.preferredFramesPerSecond = framesPerSecond
+        return self
+    }
+    
+    
     
 //  MARK: - DELEGATE
     @discardableResult
@@ -207,7 +202,6 @@ class ARSceneViewBuilder: ViewBuilder {
         if !K.worldMapData.isEmpty {
             do {
                 if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: K.worldMapData) {
-                    print(worldMap.anchors.count)
                     if !worldMap.anchors.isEmpty {
                         self.configuration.initialWorldMap = worldMap
                     }
@@ -224,22 +218,10 @@ class ARSceneViewBuilder: ViewBuilder {
     func pauseSceneView() {
         self.saveWorldMap() { [weak self] in
             guard let self else {return}
-            
-            guard let snapshot = arSceneView?.snapshot() else { return }
-            imageView = UIImageView(image: snapshot)
-            imageView.frame = arSceneView?.bounds ?? self.view.bounds
-            view.addSubview(imageView)
-            view.sendSubviewToBack(imageView)
-
+            addSnapShotToPauseAR()
             arSceneView?.session.pause()
-            arSceneView?.removeFromSuperview()
-            arSceneView = nil
-            
-            targetImage.setHidden(true)
-            
-            return
+            removeARSceneView()
         }
-        
     }
     
     func addNode(_ node: ARNodeBuilder) {
@@ -271,6 +253,34 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - PRIVATE Area
 
+    private func removeARSceneView() {
+        arSceneView?.removeFromSuperview()
+        arSceneView = nil
+    }
+    
+    private func addSnapShotToPauseAR() {
+        guard let snapshot = arSceneView?.snapshot() else { return }
+        snapshotARSceneView = UIImageView(image: snapshot)
+        snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
+        view.addSubview(snapshotARSceneView)
+    }
+    
+    private func repositionTarget() {
+        targetImage.setHidden(true)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            if let positionTarget {
+                setAlignment(positionTarget.aligment, positionTarget.padding)
+                targetImage.setHidden(false)
+            }
+        }
+        sendARSceneViewToBack()
+    }
+    
+    private func sendARSceneViewToBack() {
+        view.bringSubviewToFront(targetImage.view)
+    }
+    
     private func setAlignment(_ alignment: Alignment, _ padding: CGFloat) {
         switch alignment {
             case .top:

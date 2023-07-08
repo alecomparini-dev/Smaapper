@@ -180,17 +180,14 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
         
     }
 
-    func anchorsWorldMap(_ anchors: [ARAnchor]) {
-        print("NAOOOOOOOOOOOOOO POODDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEE CHAAAAAAAAAAAAAMAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-        recreatingStickyNoteOnWorldMap(anchors)
+    func loadAnchorWorldMap(_ anchor: ARAnchor) {
+        recreatingStickyNoteOnWorldMap(anchor)
     }
     
     
-    private func recreatingStickyNoteOnWorldMap(_ anchors: [ARAnchor]) {
-        anchors.enumerated().forEach { index,anchor in
-            let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
-            configStickyNoteToAR(stickyView, anchor.transform)
-        }
+    private func recreatingStickyNoteOnWorldMap(_ anchor: ARAnchor) {
+        let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
+        configStickyNoteToAR(stickyView, anchor.transform)
     }
 }
 
