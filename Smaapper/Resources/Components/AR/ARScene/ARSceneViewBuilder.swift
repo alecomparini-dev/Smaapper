@@ -12,7 +12,7 @@ import SceneKit
 
 class ARSceneViewBuilder: ViewBuilder {
     
-    private var arSceneView: ARSceneView!
+    private weak var arSceneView: ARSceneView?
     
     enum Alignment {
         case top
@@ -66,13 +66,13 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - GET Area
     var nodes: [ARNodeBuilder] {
-        get { arSceneView.nodes }
-        set { arSceneView.nodes = newValue}
+        get { arSceneView?.nodes ?? [] }
+        set { arSceneView?.nodes = newValue}
     }
     
     func getPositionOnPlaneByTouch(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> ARRaycastResult? {
-        if let raycastQuery = arSceneView.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
-            if let castResult = arSceneView.session.raycast(raycastQuery).first {
+        if let raycastQuery = arSceneView?.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
+            if let castResult = arSceneView?.session.raycast(raycastQuery).first {
                 return castResult
             }
         }
@@ -85,7 +85,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     func getPositionByCam(centimetersAhead: Float? = 0) -> simd_float4x4? {
-        if let cameraTransform = arSceneView.session.currentFrame?.camera.transform {
+        if let cameraTransform = arSceneView?.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
             return matrix_multiply(cameraTransform, translation)
@@ -98,13 +98,13 @@ class ARSceneViewBuilder: ViewBuilder {
 
     @discardableResult
     func setPlaneDetection(_ planeDetection: ARWorldTrackingConfiguration.PlaneDetection) -> Self {
-        arSceneView.configuration.planeDetection = planeDetection
+        arSceneView?.configuration.planeDetection = planeDetection
         return self
     }
 
     @discardableResult
     func setDebug(_ debugOptions: ARSCNDebugOptions) -> Self {
-        arSceneView.debugOptions = debugOptions
+        arSceneView?.debugOptions = debugOptions
         return self
     }
     
@@ -116,7 +116,7 @@ class ARSceneViewBuilder: ViewBuilder {
     
     @discardableResult
     func setOptions(_ options: ARSession.RunOptions) -> Self {
-        arSceneView.options.insert(options)
+        arSceneView?.options.insert(options)
         return self
     }
     
@@ -147,80 +147,65 @@ class ARSceneViewBuilder: ViewBuilder {
     
     @discardableResult
     func setDelegate(_ delegate: ARSceneViewDelegate) -> Self {
-        arSceneView.delegateARScene = delegate
+        arSceneView?.delegateARScene = delegate
         return self
     }
 
     
 //  MARK: - ACTIONS
     
-    func runSceneView(_ worldMapData: Data? = nil) {
-        if let worldMapData {
-            if let worldMap = tryConvertDataToWorldMap(worldMapData) {
-                let newWorldMap = worldMap
-                arSceneView.configuration.initialWorldMap = worldMap
-                arSceneView.session.run(arSceneView.configuration, options: [.resetTracking, .removeExistingAnchors])
-                resetAnchorsInWorldMap(worldMap)
-                sendAnchorsOnWorldMap(newWorldMap)
-                return
+    func runSceneView() {
+        if !K.worldMapData.isEmpty {
+            do {
+                if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: K.worldMapData) {
+                    print(worldMap.anchors.count)
+                    resetNodes()
+                    arSceneView?.configuration = ARWorldTrackingConfiguration()
+                    arSceneView?.configuration.initialWorldMap = worldMap
+                    arSceneView?.session.run(arSceneView?.configuration ?? ARWorldTrackingConfiguration(), options: [.resetTracking, .removeExistingAnchors])
+                    return
+                }
+            } catch {
+                print("Invalid worldMap \(error.localizedDescription)")
             }
         }
-        arSceneView.session.run(arSceneView.configuration, options: arSceneView.options)
+        print("iniciou por aqui")
+        arSceneView?.session.run(arSceneView?.configuration ?? ARWorldTrackingConfiguration(), options: [])
     }
 
     func pauseSceneView() {
-        arSceneView.currentSession = arSceneView.session
-        arSceneView.saveWorldMap() { [weak self] in
+        arSceneView?.saveWorldMap() { [weak self] in
             guard let self else {return}
-            resetNodes()
+            arSceneView?.session.pause()
+            arSceneView = nil
             return
         }
-        arSceneView.session.pause()
     }
     
     private func resetNodes() {
-        arSceneView.nodes.forEach({ node in
-            removeNode(node)
-        })
-        arSceneView.nodes = []
-    }
-
-    private func resetAnchorsInWorldMap( _ worldMap: ARWorldMap) {
-        print("DELETANDO OS ANCHORS QUE EXISTE", worldMap.anchors.count)
-        worldMap.anchors.forEach { anchor in
-            self.arSceneView.session.remove(anchor: anchor)
+        arSceneView?.scene.rootNode.enumerateChildNodes { (node, _) in
+            node.removeFromParentNode()
         }
     }
-    
-    
+   
     func addNode(_ node: ARNodeBuilder) {
         let anchor = ARAnchor(name: node.name ?? K.String.empty, transform: node.simdTransform)
         node.setAnchor(anchor)
-        arSceneView.scene.rootNode.addChildNode(node)
-        arSceneView.session.add(anchor: anchor)
-        arSceneView.nodes.append(node)
+        arSceneView?.session.add(anchor: anchor)
+        arSceneView?.scene.rootNode.addChildNode(node)
+        arSceneView?.nodes.append(node)
     }
     
     func removeNode(_ node: ARNodeBuilder?) {
         guard let node else {return}
         if let anchor = node.anchor {
-            arSceneView.session.remove(anchor: anchor)
+            arSceneView?.session.remove(anchor: anchor)
         }
         node.removeFromParentNode()
     }
     
     
 //  MARK: - PRIVATE Area
-    private func dataToWorldMap(worldMapData: Data) throws -> ARWorldMap? {
-        do {
-            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
-                return worldMap
-            }
-        } catch {
-            throw Error.worldMap(typeError: .convertToWorldMap, error: "Invalid worldMap \(error.localizedDescription)")
-        }
-        return nil
-    }
 
     private func setAlignment(_ alignment: Alignment, _ padding: CGFloat) {
         switch alignment {
@@ -243,7 +228,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func addElements() {
-        arSceneView.add(insideTo: self.view)
+        arSceneView?.add(insideTo: self.view)
         targetImage.add(insideTo: self.view)
         targetBallImage.add(insideTo: targetImage.view)
     }
@@ -255,25 +240,18 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func configArSceneViewConstraints() {
-        arSceneView.makeConstraints { make in
+        arSceneView?.makeConstraints { make in
             make
                 .setPin.equalToSuperView
                 .apply()
         }
     }
     
-    private func tryConvertDataToWorldMap(_ worldMapData: Data) -> ARWorldMap? {
-        do {
-            let worldMap = try dataToWorldMap(worldMapData: worldMapData)
-            return worldMap
-        } catch { }
-        return nil
-    }
     
     private func sendAnchorsOnWorldMap(_ worldMap: ARWorldMap?) {
         guard let worldMap else {return}
         let anchors = worldMap.anchors
-        arSceneView.delegateARScene?.anchorsWorldMap(anchors)
+        arSceneView?.delegateARScene?.anchorsWorldMap(anchors)
     }
     
 }
