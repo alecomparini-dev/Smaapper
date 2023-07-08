@@ -9,7 +9,7 @@ import UIKit
 
 struct K {
     static let appName = "Smaapper"
-    static let saveData: Data = Data()
+    static var worldMapData: Data = Data()
     
     struct String {
         static let dot = "."

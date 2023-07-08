@@ -8,6 +8,7 @@
 import UIKit
 import ARKit
 
+
 protocol ARSceneViewDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
     func saveWorldMap(_ worldMap: Data?, _ error: Error?)
@@ -20,10 +21,10 @@ class ARSceneView: ARSCNView {
     var options: ARSession.RunOptions = []
     var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
     var nodes: [ARNodeBuilder] = []
-    var currentSession: ARSession?
     
     override init(frame: CGRect, options: [String : Any]? = nil) {
         super.init(frame: frame, options: nil)
+        delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -33,12 +34,19 @@ class ARSceneView: ARSCNView {
     
 //  MARK: - SALVE WORLD MAP
     func saveWorldMap(completion: (() -> Void)? = nil) {
-        if let currentSession {
-            getCurrentWorldMap(currentSession) { [weak self] worldMap in
-                guard let self else {return}
-                convertWorldMapToData(worldMap)
+        self.session.getCurrentWorldMap { worldMap, error in
+            guard let map = worldMap
+            else { self.delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap , error: "Nao tem worldMap\(error!.localizedDescription)"))
                 completion?()
+                return }
+
+            do {
+                let worldMapData = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                self.delegateARScene?.saveWorldMap(worldMapData, nil)
+            } catch {
+                self.delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: "Nao converteu para Data\(error.localizedDescription)"))
             }
+            completion?()
         }
     }
     
@@ -46,41 +54,28 @@ class ARSceneView: ARSCNView {
 //  MARK: - PRIVATE Area
     
     private func getCurrentWorldMap(_ currentSession: ARSession, completion: @escaping (_ worldMap: ARWorldMap) -> Void) {
-        currentSession.getCurrentWorldMap { [weak self] worldMap, error in
-            guard let self else {return}
-            if error != nil {
-                delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap , error: error!.localizedDescription))
-                return
-            }
-            if let worldMap {
-                print("SALVANDO OS STICKYS:", worldMap.anchors.count)
-                completion(worldMap)
-            }
-        }
+        
     }
 
     private func getCurrentSession(_ session: ARSession? = nil) -> ARSession? {
         return (session == nil) ? self.session : session
     }
     
-    private func convertWorldMapToData(_ worldMap: ARWorldMap) {
-        do {
-            let worldMapData = try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
-            delegateARScene?.saveWorldMap(worldMapData, nil)
-        } catch {
-            delegateARScene?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: error.localizedDescription))
-        }
-    }
-    
+
 }
 
 //  MARK: - EXTENSION DELEGATE ARSessionDelegate
 
 extension ARSceneView: ARSessionDelegate {
-    func session(_ session: ARSession, didUpdate frame: ARFrame) { }
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        print("session.identifier:", session.identifier)
+        print("camera.trackingState:", camera.trackingState)
+    }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        currentSession = session
         saveWorldMap()
     }
 }
@@ -90,7 +85,7 @@ extension ARSceneView: ARSessionDelegate {
 
 extension ARSceneView: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        print(node)
+        print(anchor.identifier)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

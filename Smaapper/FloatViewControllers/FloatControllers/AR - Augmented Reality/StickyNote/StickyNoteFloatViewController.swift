@@ -12,8 +12,6 @@ import ARKit
 class StickyNoteFloatViewController: FloatViewController {
     static let identifierApp = K.Sticky.identifierApp
     
-    private var worldMap: Data?
-    
     lazy var screen: StickyNoteView = {
         let view = StickyNoteView()
         return view
@@ -40,7 +38,7 @@ class StickyNoteFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-            screen.cameraARKit.runSceneView(worldMap)
+        screen.cameraARKit.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
@@ -118,7 +116,6 @@ class StickyNoteFloatViewController: FloatViewController {
         return screen.cameraARKit.getPositionByCam(centimetersAhead: 8)
     }
     
-    
     private func addNodeArSceneView(_ node: ARNodeBuilder) {
         screen.cameraARKit.addNode(node)
     }
@@ -175,12 +172,15 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 
 extension StickyNoteFloatViewController: ARSceneViewDelegate {
     
-    func saveWorldMap(_ worldMap: Data?, _ error: Error?) {
+    func saveWorldMap(_ worldMapData: Data?, _ error: Error?) {
         if error != nil {
-            print("ERRO", error?.localizedDescription ?? "" )
+            print("ERRO:", error?.localizedDescription ?? "" )
             return
         }
-        self.worldMap = worldMap
+        if let worldMapData = worldMapData {
+            K.worldMapData = worldMapData
+        }
+        
     }
     
     func positionTouch(_ position: CGPoint) {
@@ -188,6 +188,7 @@ extension StickyNoteFloatViewController: ARSceneViewDelegate {
     }
 
     func anchorsWorldMap(_ anchors: [ARAnchor]) {
+        print("NAOOOOOOOOOOOOOO POODDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEE CHAAAAAAAAAAAAAMAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
         recreatingStickyNoteOnWorldMap(anchors)
     }
     
