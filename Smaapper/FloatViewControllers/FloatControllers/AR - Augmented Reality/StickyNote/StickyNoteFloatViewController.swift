@@ -52,9 +52,8 @@ class StickyNoteFloatViewController: FloatViewController {
     
     private func configDelegate() {
         screen.delegate = self
-        screen.cameraARKit.setDelegate(self)
+        screen.cameraARKit.delegate = self
     }
-    
     
     private func createARPlane() -> ARGeometryBuilder {
         return ARGeometryBuilder()
@@ -121,24 +120,16 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func revemoStickNote() {
-        if screen.cameraARKit.nodes.isEmpty {
-            enabledOrDisableRedoButton()
-            return
-        }
         removeStickNoteAR()
         enabledOrDisableRedoButton()
     }
     
     private func removeStickNoteAR() {
-        let nodeSticky: ARNodeBuilder? = screen.cameraARKit.nodes.popLast()
-        screen.cameraARKit.removeNode(nodeSticky)
+
     }
     
     private func enabledOrDisableRedoButton() {
-        if screen.cameraARKit.nodes.isEmpty {
-            screen.redoButtonStickyAR.setHidden(true)
-            return
-        }
+        
         screen.redoButtonStickyAR.setHidden(false)
     }
     
@@ -170,15 +161,17 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
-extension StickyNoteFloatViewController: ARSceneViewDelegate {
+extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     
     func saveWorldMap(_ worldMapData: Data?, _ error: Error?) {
+        print("chamouuuu")
         if error != nil {
             print("ERRO:", error?.localizedDescription ?? "" )
             return
         }
-        if let worldMapData = worldMapData {
+        if let worldMapData {
             K.worldMapData = worldMapData
+            print(worldMapData.count)
         }
         
     }
@@ -187,17 +180,14 @@ extension StickyNoteFloatViewController: ARSceneViewDelegate {
         
     }
 
-    func anchorsWorldMap(_ anchors: [ARAnchor]) {
-        print("NAOOOOOOOOOOOOOO POODDDDDDDDDDDDDEEEEEEEEEEEEEEEEEEEEEEEE CHAAAAAAAAAAAAAMAAAAAAAAAAAARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
-        recreatingStickyNoteOnWorldMap(anchors)
+    func loadAnchorWorldMap(_ anchor: ARAnchor) {
+        recreatingStickyNoteOnWorldMap(anchor)
     }
     
     
-    private func recreatingStickyNoteOnWorldMap(_ anchors: [ARAnchor]) {
-        anchors.enumerated().forEach { index,anchor in
-            let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
-            configStickyNoteToAR(stickyView, anchor.transform)
-        }
+    private func recreatingStickyNoteOnWorldMap(_ anchor: ARAnchor) {
+        let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
+        configStickyNoteToAR(stickyView, anchor.transform)
     }
 }
 

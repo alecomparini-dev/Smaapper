@@ -123,7 +123,6 @@
 		02D06E6F2A55931D0020A10B /* ConstantsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */; };
 		02D06E712A55AAE10020A10B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E702A55AAE10020A10B /* UIView+Extension.swift */; };
 		02D06E772A55C9830020A10B /* ARSceneViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E762A55C9830020A10B /* ARSceneViewBuilder.swift */; };
-		02D06E792A55CAFD0020A10B /* ARSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E782A55CAFD0020A10B /* ARSceneView.swift */; };
 		02D06E7B2A55D9AC0020A10B /* TextFieldActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E7A2A55D9AC0020A10B /* TextFieldActions.swift */; };
 		02D06E7D2A55DB5D0020A10B /* TextFieldImageActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E7C2A55DB5D0020A10B /* TextFieldImageActions.swift */; };
 		02D06E7F2A561F280020A10B /* ARMaterialBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E7E2A561F280020A10B /* ARMaterialBuilder.swift */; };
@@ -323,7 +322,6 @@
 		02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsComponent.swift; sourceTree = "<group>"; };
 		02D06E702A55AAE10020A10B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		02D06E762A55C9830020A10B /* ARSceneViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewBuilder.swift; sourceTree = "<group>"; };
-		02D06E782A55CAFD0020A10B /* ARSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneView.swift; sourceTree = "<group>"; };
 		02D06E7A2A55D9AC0020A10B /* TextFieldActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldActions.swift; sourceTree = "<group>"; };
 		02D06E7C2A55DB5D0020A10B /* TextFieldImageActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageActions.swift; sourceTree = "<group>"; };
 		02D06E7E2A561F280020A10B /* ARMaterialBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARMaterialBuilder.swift; sourceTree = "<group>"; };
@@ -1146,7 +1144,6 @@
 			isa = PBXGroup;
 			children = (
 				02D06E762A55C9830020A10B /* ARSceneViewBuilder.swift */,
-				02D06E782A55CAFD0020A10B /* ARSceneView.swift */,
 			);
 			path = ARScene;
 			sourceTree = "<group>";
@@ -1683,7 +1680,6 @@
 				026CF1782A4B172F009CEE6E /* HangmanService.swift in Sources */,
 				024F18A72A0FDB3C00A39584 /* CategoriesView.swift in Sources */,
 				0272FB962A534C1E00EF4AE5 /* StickyNoteCoordinator.swift in Sources */,
-				02D06E792A55CAFD0020A10B /* ARSceneView.swift in Sources */,
 				02D06E7D2A55DB5D0020A10B /* TextFieldImageActions.swift in Sources */,
 				02FB2CA42A45E11300C7FC98 /* GallowsDollView.swift in Sources */,
 				0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */,
