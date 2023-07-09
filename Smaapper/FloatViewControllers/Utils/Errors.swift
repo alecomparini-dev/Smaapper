@@ -12,6 +12,7 @@ enum TypeErrorWorldMap {
     case worldMapEmptyOrNil
     case convertToData
     case convertToWorldMap
+    case invalidWorldMap
 }
 
 enum Error: Swift.Error {

@@ -38,7 +38,13 @@ class StickyNoteFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.cameraARKit.runSceneView(loadWorldMapData: K.worldMapData)
+        do {
+            try screen.cameraARKit.runSceneView(loadWorldMapData: K.worldMapData)
+        } catch let Error.worldMap(typeError, error) {
+            print(typeError, error)
+        } catch {
+            
+        }
     }
     
     override func viewDidDeselectFloatView() {
@@ -162,10 +168,31 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
+    func requestCameraElevation(isElevation: Bool) {
+        if isElevation {
+            print("tirar a mensagem de posicionar a camera pra cima")
+            return
+        }
+        
+        print("coloca a porra da camera pra cima")
+        
+    }
+    
+    func stateARSceneview(_ state: ARSceneState) {
+        switch state {
+        case .waitingWorldMapRecognition:
+        print("RECONHECENDO O MUNNNNNNNNNNNNNNNNNNNNNDOOOOOOOOOOOOOOOOOOOOOOO")
+        case .excessiveMotion:
+            print("FICA QUIETOOOOO")
+        case .done:
+            print("PRONNNNTOOOOO LIBERA A PORRA DO APP PRA COLOCAR ON NODES !!!! ")
+        }
+    }
+    
     
     func saveWorldMap(_ worldMapData: Data?, _ error: Error?) {
         if error != nil {
-            print("ERRO:", error?.localizedDescription ?? "" )
+            print("ERRO:", error ?? "")
             return
         }
         if let worldMapData {

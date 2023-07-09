@@ -8,5 +8,7 @@
 import Foundation
 
 extension Double {
-    var angletoPI: Double { self * (Double.pi/180) }
+    var degreesToPI: Double { self * (Double.pi/180) }
+    
+    var piToDegrees: Double { self * (180/Double.pi) }
 }
