@@ -47,7 +47,7 @@ class ARSceneViewBuilder: ViewBuilder {
         setPreferredFramesPerSecond(15)
     }
     
-    private func restart() {
+    private func start() {
         snapshotARSceneView.removeFromSuperview()
         createSceneView()
         configuration = ARWorldTrackingConfiguration()
@@ -197,11 +197,11 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - ACTIONS
     
-    func runSceneView() {
-        restart()
-        if !K.worldMapData.isEmpty {
+    func runSceneView(loadWorldMapData worldMapData: Data? = nil) {
+        start()
+        if let worldMapData {
             do {
-                if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: K.worldMapData) {
+                if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
                     if !worldMap.anchors.isEmpty {
                         self.configuration.initialWorldMap = worldMap
                     }
@@ -215,11 +215,11 @@ class ARSceneViewBuilder: ViewBuilder {
         arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
     }
 
-    func pauseSceneView() {
-        self.saveWorldMap() { [weak self] in
-            guard let self else {return}
+    func pauseSceneView()  {
+        Task {
+            await invokeSaveWorldMap()
             addSnapShotToPauseAR()
-            arSceneView?.session.pause()
+            await arSceneView?.session.pause()
             removeARSceneView()
         }
     }
@@ -232,37 +232,84 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     
-//  MARK: - SALVE WORLD MAP
-    func saveWorldMap(completion: (() -> Void)? = nil) {
-        arSceneView?.session.getCurrentWorldMap { worldMap, error in
-            guard let map = worldMap
-            else { self.delegate?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap , error: "Nao tem worldMap\(error!.localizedDescription)"))
-                completion?()
-                return }
-
-            do {
-                let worldMapData = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
-                self.delegate?.saveWorldMap(worldMapData, nil)
-            } catch {
-                self.delegate?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: "Nao converteu para Data\(error.localizedDescription)"))
+    private func getCurrentWorldMap() async throws -> ARWorldMap? {
+        do {
+            if let worldMap = try await arSceneView?.session.currentWorldMap() {
+                return worldMap
             }
-            completion?()
+            throw Error.worldMap(typeError: .worldMapEmptyOrNil, error: "WorldMap is nil")
+        } catch let error {
+            throw Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription)
         }
+    }
+    
+    private func convertWorldMapToData(_ worldMap: ARWorldMap) throws -> Data {
+        do {
+            return try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        } catch {
+            throw Error.worldMap(typeError: .convertToData, error: error.localizedDescription)
+        }
+    }
+    
+    
+//  MARK: - SALVE WORLD MAP
+    func invokeSaveWorldMap() async {
+        typealias GetCurrentWorldMap = CheckedContinuation
+        return await withCheckedContinuation( { [weak self] (continuation: GetCurrentWorldMap) in
+            guard let self else {return}
+            getCurrentWorldMap() { [weak self] worldMap,error in
+                guard let self else {return}
+                if let error {
+                    delegate?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription))
+                    return
+                }
+                
+                if let worldMap {
+                    do {
+                        let worldMapData = try convertWorldMapToData(worldMap)
+                        self.delegate?.saveWorldMap(worldMapData, nil)
+                    } catch let error {
+                        delegate?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: error.localizedDescription))
+                    }
+                    return
+                }
+            }
+            continuation.resume()
+        })
+    }
+
+    private func getCurrentWorldMap(completion: @escaping (_ worldMap: ARWorldMap?, _ error: Error? ) -> Void) {
+        Task {
+            do {
+                let worldMap = try await getCurrentWorldMap()
+                completion(worldMap, nil)
+            } catch let error {
+                completion(nil, error as? Error)
+            }
+        }
+        
     }
     
     
 //  MARK: - PRIVATE Area
 
     private func removeARSceneView() {
-        arSceneView?.removeFromSuperview()
-        arSceneView = nil
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            arSceneView?.removeFromSuperview()
+            arSceneView = nil
+        }
     }
     
     private func addSnapShotToPauseAR() {
-        guard let snapshot = arSceneView?.snapshot() else { return }
-        snapshotARSceneView = UIImageView(image: snapshot)
-        snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
-        view.addSubview(snapshotARSceneView)
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            guard let snapshot = arSceneView?.snapshot() else { return }
+            snapshotARSceneView = UIImageView(image: snapshot)
+            snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
+            view.addSubview(snapshotARSceneView)
+        }
+        
     }
     
     private func repositionTarget() {
@@ -336,7 +383,10 @@ extension ARSceneViewBuilder: ARSessionDelegate {
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        saveWorldMap()
+        Task {
+            await invokeSaveWorldMap()
+        }
+        
     }
 }
 

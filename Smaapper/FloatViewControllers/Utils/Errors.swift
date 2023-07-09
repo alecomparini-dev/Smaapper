@@ -9,6 +9,7 @@ import Foundation
 
 enum TypeErrorWorldMap {
     case getWordlMap
+    case worldMapEmptyOrNil
     case convertToData
     case convertToWorldMap
 }

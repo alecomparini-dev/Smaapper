@@ -38,7 +38,7 @@ class StickyNoteFloatViewController: FloatViewController {
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
         UtilsFloatView.setShadowActiveFloatView(screen)
-        screen.cameraARKit.runSceneView()
+        screen.cameraARKit.runSceneView(loadWorldMapData: K.worldMapData)
     }
     
     override func viewDidDeselectFloatView() {
@@ -164,14 +164,13 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     
     func saveWorldMap(_ worldMapData: Data?, _ error: Error?) {
-        print("chamouuuu")
         if error != nil {
             print("ERRO:", error?.localizedDescription ?? "" )
             return
         }
         if let worldMapData {
             K.worldMapData = worldMapData
-            print(worldMapData.count)
+            print("salvou:", worldMapData.count)
         }
         
     }
