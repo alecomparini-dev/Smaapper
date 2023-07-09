@@ -10,10 +10,19 @@ import ARKit
 import SceneKit
 
 
+enum ARSceneState {
+    case waitingWorldMapRecognition
+    case excessiveMotion
+    case done
+    
+}
+
 protocol ARSceneViewBuilderDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
     func saveWorldMap(_ worldMap: Data?, _ error: Error?)
     func loadAnchorWorldMap(_ anchor: ARAnchor)
+    func requestCameraElevation(isElevation: Bool)
+    func stateARSceneview(_ state: ARSceneState)
 }
 
 
@@ -25,6 +34,8 @@ class ARSceneViewBuilder: ViewBuilder {
         case middle
         case bottom
     }
+    
+    private var monitoringWorldMap = false
     
     private var arSceneView: ARSCNView?
     private var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
@@ -45,21 +56,30 @@ class ARSceneViewBuilder: ViewBuilder {
         addElements()
         configConstraints()
         setPreferredFramesPerSecond(15)
+        start()
     }
     
     private func start() {
         snapshotARSceneView.removeFromSuperview()
         createSceneView()
-        configuration = ARWorldTrackingConfiguration()
-        arSceneView?.add(insideTo: self.view)
+        createConfiguration()
+        addArSceneView()
         configArSceneViewConstraints()
-        
         repositionTarget()
-        
         configDelegate()
     }
 
+    private func addArSceneView() {
+        arSceneView?.add(insideTo: self.view)
+    }
     
+    private func createConfiguration() {
+        configuration = ARWorldTrackingConfiguration()
+        configuration.isCollaborationEnabled = true
+        if configuration.planeDetection.isEmpty {
+            configuration.planeDetection = [.vertical, .horizontal]
+        }
+    }
     
     private func configDelegate() {
         arSceneView?.delegate = self
@@ -180,7 +200,6 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     
-    
 //  MARK: - DELEGATE
     @discardableResult
     func setDelegateARSceneView(_ delegate: ARSCNViewDelegate) -> Self {
@@ -197,24 +216,20 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - ACTIONS
     
-    func runSceneView(loadWorldMapData worldMapData: Data? = nil) {
+    func runSceneView() {
         start()
-        if let worldMapData {
-            do {
-                if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
-                    if !worldMap.anchors.isEmpty {
-                        self.configuration.initialWorldMap = worldMap
-                    }
-                    self.arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
-                    return
-                }
-            } catch {
-                print("Invalid worldMap \(error.localizedDescription)")
-            }
-        }
-        arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
+        arSceneView?.session.run(self.configuration, options: self.options)
     }
-
+    
+    func runSceneView(loadWorldMapData worldMapData: Data) throws {
+        if worldMapData.isEmpty {
+            runSceneView()
+            return
+        }
+        start()
+        return try runSceneWithWorldMap(worldMapData)
+    }
+    
     func pauseSceneView()  {
         Task {
             await invokeSaveWorldMap()
@@ -229,35 +244,34 @@ class ARSceneViewBuilder: ViewBuilder {
         node.setAnchor(anchor)
         arSceneView?.session.add(anchor: anchor)
         arSceneView?.scene.rootNode.addChildNode(node)
+        Task {
+            await invokeSaveWorldMap()
+        }
     }
     
+    func forceSaveWorldMap() {
+        Task { await invokeSaveWorldMap() }
+    }
     
-    private func getCurrentWorldMap() async throws -> ARWorldMap? {
+ 
+//  MARK: - INVOKE SAVE WORLD MAP
+    
+    private func runSceneWithWorldMap(_ worldMapData: Data) throws {
         do {
-            if let worldMap = try await arSceneView?.session.currentWorldMap() {
-                return worldMap
+            if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
+                if !worldMap.anchors.isEmpty {
+                    self.configuration.initialWorldMap = worldMap
+                }
+                self.arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
             }
-            throw Error.worldMap(typeError: .worldMapEmptyOrNil, error: "WorldMap is nil")
-        } catch let error {
-            throw Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription)
-        }
-    }
-    
-    private func convertWorldMapToData(_ worldMap: ARWorldMap) throws -> Data {
-        do {
-            return try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
         } catch {
-            throw Error.worldMap(typeError: .convertToData, error: error.localizedDescription)
+            throw Error.worldMap(typeError: .invalidWorldMap , error: "Invalid worldMap \(error.localizedDescription)" )
         }
     }
     
-    
-//  MARK: - SALVE WORLD MAP
-    func invokeSaveWorldMap() async {
-        typealias GetCurrentWorldMap = CheckedContinuation
-        return await withCheckedContinuation( { [weak self] (continuation: GetCurrentWorldMap) in
-            guard let self else {return}
-            getCurrentWorldMap() { [weak self] worldMap,error in
+    private func invokeSaveWorldMap() async {
+        return await withCheckedContinuation( { [weak self] (continuation: CheckedContinuation) in
+            self?.getCurrentWorldMap() { [weak self] worldMap,error in
                 guard let self else {return}
                 if let error {
                     delegate?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription))
@@ -277,7 +291,29 @@ class ARSceneViewBuilder: ViewBuilder {
             continuation.resume()
         })
     }
+    
+    
+//  MARK: - PRIVATE Area
 
+    private func getCurrentWorldMap() async throws -> ARWorldMap {
+        do {
+            if let worldMap = try await arSceneView?.session.currentWorldMap() {
+                return worldMap
+            }
+            throw Error.worldMap(typeError: .worldMapEmptyOrNil, error: "WorldMap is nil")
+        } catch let error {
+            throw Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription)
+        }
+    }
+    
+    private func convertWorldMapToData(_ worldMap: ARWorldMap) throws -> Data {
+        do {
+            return try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
+        } catch {
+            throw Error.worldMap(typeError: .convertToData, error: error.localizedDescription)
+        }
+    }
+    
     private func getCurrentWorldMap(completion: @escaping (_ worldMap: ARWorldMap?, _ error: Error? ) -> Void) {
         Task {
             do {
@@ -287,12 +323,8 @@ class ARSceneViewBuilder: ViewBuilder {
                 completion(nil, error as? Error)
             }
         }
-        
     }
     
-    
-//  MARK: - PRIVATE Area
-
     private func removeARSceneView() {
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
@@ -309,7 +341,6 @@ class ARSceneViewBuilder: ViewBuilder {
             snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
             view.addSubview(snapshotARSceneView)
         }
-        
     }
     
     private func repositionTarget() {
@@ -365,6 +396,15 @@ class ARSceneViewBuilder: ViewBuilder {
                 .apply()
         }
     }
+    
+    private func isCameraInVerticalPosition(_ camera: ARCamera) -> Bool {
+        let pitch = camera.eulerAngles.x
+        let degreesVerticalPosition = -25.0...10.0
+        if degreesVerticalPosition.contains(Double(pitch).piToDegrees) {
+            return true
+        }
+        return false
+    }
         
 }
 
@@ -378,15 +418,44 @@ extension ARSceneViewBuilder: ARSessionDelegate {
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        print("session.identifier:", session.identifier)
-        print("camera.trackingState:", camera.trackingState)
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        Task {
-            await invokeSaveWorldMap()
-        }
         
+        switch camera.trackingState {
+        case .notAvailable:
+            break
+        
+        case .limited( let reason ):
+            switch reason {
+                case .excessiveMotion:
+                    print("excessiveMotion")
+                    delegate?.stateARSceneview(.excessiveMotion)
+                    break
+                
+                case .insufficientFeatures:
+                    print("insufficientFeatures")
+                    if !isCameraInVerticalPosition(camera) {
+                        delegate?.requestCameraElevation(isElevation: false)
+                        return
+                    }
+
+                case .relocalizing:
+                    print("relocalizing")
+                    delegate?.stateARSceneview(.waitingWorldMapRecognition)
+                    if !isCameraInVerticalPosition(camera) {
+                        delegate?.requestCameraElevation(isElevation: false)
+                        return
+                    }
+                default:
+                    break
+                }
+            
+        case .normal:
+            delegate?.stateARSceneview(.done)
+            break
+        }
+    }
+        
+    func sessionWasInterrupted(_ session: ARSession) {
+        Task { await invokeSaveWorldMap() }
     }
 }
 
@@ -395,6 +464,10 @@ extension ARSceneViewBuilder: ARSessionDelegate {
 
 extension ARSceneViewBuilder: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if anchor is ARPlaneAnchor {
+            print("PLANO:")
+            return
+        }
         print(anchor.identifier)
     }
     

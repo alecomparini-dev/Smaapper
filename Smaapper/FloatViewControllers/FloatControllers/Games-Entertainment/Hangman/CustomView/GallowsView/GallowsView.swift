@@ -59,7 +59,7 @@ class GallowsView: ViewBuilder {
                     .setHeight.equalToConstant(65)
                     .setWidth.equalToConstant(8)
             }
-        view.view.transform = CGAffineTransform(rotationAngle: 50.angletoPI )
+        view.view.transform = CGAffineTransform(rotationAngle: 50.degreesToPI )
         return view
     }()
     
