@@ -35,7 +35,11 @@ class ARSceneViewBuilder: ViewBuilder {
         case bottom
     }
     
-    private var isCameraElevationControl = true
+    struct Control {
+        static var isCameraElevationControl = true
+        static var isReadyToSalveWorldMap = false
+    }
+    
     
     private var arSceneView: ARSCNView?
     private var configuration: ARWorldTrackingConfiguration?
@@ -50,13 +54,9 @@ class ARSceneViewBuilder: ViewBuilder {
         initialization()
     }
     
-    deinit {
-        print("chamou essa DESGRAÇAAAAAAAAAAAAAAAAAAAAAA")
-    }
-    
     private func freeMemory() {
         configuration = nil
-        delegate = nil
+//        delegate = nil
         anchorsLoadWorldMap = nil
         arSceneView?.delegate = nil
         arSceneView?.session.delegate = nil
@@ -228,24 +228,6 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - ACTIONS
 
-    func show() {
-        
-    }
-    
-    func close() {
-        
-    }
-    
-    func pause() {
-        
-    }
-    
-    func resume() {
-        
-    }
-    
-    
-    
     func runSceneView() {
         start()
         runSession()
@@ -302,13 +284,14 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func runSession() {
-        print(self.configuration!.initialWorldMap?.anchors.count ?? "" )
+        print(self.configuration?.initialWorldMap?.anchors.count ?? "" )
         if let configuration {
             self.arSceneView?.session.run(configuration, options: self.options)
         }
     }
     
     private func invokeSaveWorldMap() async {
+        if !Control.isReadyToSalveWorldMap { return }
         return await withCheckedContinuation( { [weak self] (continuation: CheckedContinuation) in
             self?.getCurrentWorldMap() { [weak self] worldMap,error in
                 guard let self else {return}
@@ -474,24 +457,12 @@ class ARSceneViewBuilder: ViewBuilder {
 extension ARSceneViewBuilder: ARSessionDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        if isCameraElevationControl {return}
+        if Control.isCameraElevationControl {return}
         if isCameraInVerticalPosition(frame.camera) {
             delegate?.requestCameraElevation(isElevation: true)
-            isCameraElevationControl = true
+            Control.isCameraElevationControl = true
             return
         }
-        
-    }
-    
-    private func retryRelocalizing(_ session: ARSession) {
-        if #available(iOS 16.0, *) {
-            if session.currentFrame?.camera.trackingState == .limited(.relocalizing) {
-                setOptions([.resetTracking, .removeExistingAnchors])
-                runSession()
-            }
-            return
-        }
-        
     }
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
@@ -511,23 +482,20 @@ extension ARSceneViewBuilder: ARSessionDelegate {
                     break
                 
                 case .insufficientFeatures:
+                    Control.isReadyToSalveWorldMap = false
                     if !isCameraInVerticalPosition(camera) {
-                        isCameraElevationControl = false
+                        Control.isCameraElevationControl = false
                         delegate?.requestCameraElevation(isElevation: false)
                         return
                     }
 
                 case .relocalizing:
+                    Control.isReadyToSalveWorldMap = false
                     delegate?.stateARSceneview(.waitingWorldMapRecognition)
                     if !isCameraInVerticalPosition(camera) {
-                        isCameraElevationControl = false
+                        Control.isCameraElevationControl = false
                         delegate?.requestCameraElevation(isElevation: false)
                     }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                    self.retryRelocalizing(session)
-                }
-                
-                
                     
                 default:
                     break
@@ -535,6 +503,7 @@ extension ARSceneViewBuilder: ARSessionDelegate {
             
         case .normal:
             delegate?.stateARSceneview(.done)
+            Control.isReadyToSalveWorldMap = true
             break
         }
     }
@@ -550,7 +519,7 @@ extension ARSceneViewBuilder: ARSessionDelegate {
 extension ARSceneViewBuilder: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if anchor is ARPlaneAnchor {
-            print("plano")
+//            print("plano")
             return
         }
         print(anchor.identifier)

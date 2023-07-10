@@ -188,11 +188,11 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     func stateARSceneview(_ state: ARSceneState) {
         switch state {
         case .waitingWorldMapRecognition:
-            print("RECONHECENDO O MUNNNNNNNNNNNNNNNNNNNNNDOOOOOOOOOOOOOOOOOOOOOOO")
+            print("RECONHECENDO ............................")
         case .excessiveMotion:
             print("FICA QUIETOOOOO")
         case .done:
-            print("PRONNNNTOOOOO LIBERA A PORRA DO APP PRA COLOCAR ON NODES !!!! ")
+            print("DOOOOOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEEEEEEEEE")
         }
     }
     
