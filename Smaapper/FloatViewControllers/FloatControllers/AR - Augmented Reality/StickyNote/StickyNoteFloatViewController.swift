@@ -65,7 +65,7 @@ class StickyNoteFloatViewController: FloatViewController {
         return ARGeometryBuilder()
             .setPlane { build in
                 build
-                    .setSize(0.08, 0.08)
+                    .setSize(0.01, 0.01)
             }
     }
     
@@ -108,7 +108,8 @@ class StickyNoteFloatViewController: FloatViewController {
             .setMaterial(material)
         
         if let position = getPosition(position) {
-            let stickyNoteARNode = createARNode(geometryPlane).setPosition(position)
+            let stickyNoteARNode = createARNode(geometryPlane)
+                .setPosition(position)
             stickyNoteARNode.setIdentifier(screen.noteTextField.getText)
             return stickyNoteARNode
         }
@@ -118,6 +119,9 @@ class StickyNoteFloatViewController: FloatViewController {
     
     private func getPosition(_ position: simd_float4x4?) -> simd_float4x4? {
         if let position { return position }
+        
+//        return screen.cameraARKit.get
+        
         return screen.cameraARKit.getPositionByCam(centimetersAhead: 8)
     }
     
@@ -135,8 +139,12 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func enabledOrDisableRedoButton() {
-        
         screen.redoButtonStickyAR.setHidden(false)
+    }
+    
+    private func recreatingStickyNoteOnWorldMap(_ anchor: ARAnchor) {
+        let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
+        configStickyNoteToAR(stickyView, anchor.transform)
     }
     
 }
@@ -168,20 +176,11 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
-    func requestCameraElevation(isElevation: Bool) {
-        if isElevation {
-            print("tirar a mensagem de posicionar a camera pra cima")
-            return
-        }
-        
-        print("coloca a porra da camera pra cima")
-        
-    }
     
     func stateARSceneview(_ state: ARSceneState) {
         switch state {
         case .waitingWorldMapRecognition:
-        print("RECONHECENDO O MUNNNNNNNNNNNNNNNNNNNNNDOOOOOOOOOOOOOOOOOOOOOOO")
+            print("RECONHECENDO O MUNNNNNNNNNNNNNNNNNNNNNDOOOOOOOOOOOOOOOOOOOOOOO")
         case .excessiveMotion:
             print("FICA QUIETOOOOO")
         case .done:
@@ -211,9 +210,6 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     }
     
     
-    private func recreatingStickyNoteOnWorldMap(_ anchor: ARAnchor) {
-        let stickyView = screen.recreateStickyNote(anchor.name ?? K.String.empty)
-        configStickyNoteToAR(stickyView, anchor.transform)
-    }
+
 }
 

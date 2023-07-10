@@ -49,7 +49,7 @@ class StickyNoteView: ViewBuilder {
         let arKit = ARSceneViewBuilder()
             .setImageTarget(createImageTarget())
             .setEnabledTargetDraggable(false)
-            .setAlignmentTarget(.middle, -30)
+            .setAlignmentTarget(.top, 174)
             .setBorder { build in
                 build
                     .setCornerRadius(20)
