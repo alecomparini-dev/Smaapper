@@ -98,7 +98,6 @@
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0282A8032A599EE000487F01 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0282A8022A599EDF00487F01 /* ARKit.framework */; };
-		0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0284368B2A1D298000B596DA /* CurrentWindow.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
 		02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431402A534AAE00A1D7EC /* StickyNoteView.swift */; };
@@ -147,7 +146,6 @@
 		02D5815E2A229F1400150AF9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5815D2A229F1400150AF9 /* Theme.swift */; };
 		02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581642A22A1B100150AF9 /* ThemeProtocol.swift */; };
 		02D581672A22A25900150AF9 /* ThemeDarkDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */; };
-		02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581682A23A2DC00150AF9 /* ValidatePercent.swift */; };
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
@@ -297,7 +295,6 @@
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0282A8022A599EDF00487F01 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
-		0284368B2A1D298000B596DA /* CurrentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWindow.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
 		02B431402A534AAE00A1D7EC /* StickyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteView.swift; sourceTree = "<group>"; };
@@ -346,7 +343,6 @@
 		02D5815D2A229F1400150AF9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		02D581642A22A1B100150AF9 /* ThemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProtocol.swift; sourceTree = "<group>"; };
 		02D581662A22A25900150AF9 /* ThemeDarkDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeDarkDefault.swift; sourceTree = "<group>"; };
-		02D581682A23A2DC00150AF9 /* ValidatePercent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatePercent.swift; sourceTree = "<group>"; };
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
@@ -970,8 +966,6 @@
 			isa = PBXGroup;
 			children = (
 				02D71C372A3C86A500DCA291 /* NumberFormatter */,
-				0284368B2A1D298000B596DA /* CurrentWindow.swift */,
-				02D581682A23A2DC00150AF9 /* ValidatePercent.swift */,
 				02D71C332A3BB9D100DCA291 /* Utils.swift */,
 			);
 			path = Utils;
@@ -1712,7 +1706,6 @@
 				02D06E882A5627610020A10B /* ARGeometryBuilder.swift in Sources */,
 				02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */,
 				02C5F44A2A0C1B1700D75D9F /* GenericService.swift in Sources */,
-				02D581692A23A2DC00150AF9 /* ValidatePercent.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
 				02FB2C9F2A45D1BB00C7FC98 /* HangmanCoordinator.swift in Sources */,
@@ -1821,7 +1814,6 @@
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
 				02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */,
 				02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */,
-				0284368C2A1D298000B596DA /* CurrentWindow.swift in Sources */,
 				02E974182A339B3E00BF14EE /* WeatherCoordinator.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,
 				02E974212A3788A200BF14EE /* ProportionFloatViewController.swift in Sources */,

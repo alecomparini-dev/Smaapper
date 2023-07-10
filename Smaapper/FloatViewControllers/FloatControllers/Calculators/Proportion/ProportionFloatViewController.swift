@@ -96,10 +96,10 @@ class ProportionFloatViewController: FloatViewController {
     
     private func getDoubleValueOfTextField(_ text: String?) -> Double {
         if var textResult = text {
-            if Utils.decimalSeparator != K.String.dot {
+            if NumberFormatterBuilder.get.decimalSeparator != K.String.dot {
                 textResult = textResult.replacingOccurrences(of: K.String.dot, with: K.String.empty)
             }
-            return Double(textResult.replacingOccurrences(of: Utils.decimalSeparator, with: K.String.dot)) ?? .zero
+            return Double(textResult.replacingOccurrences(of: NumberFormatterBuilder.get.decimalSeparator, with: K.String.dot)) ?? .zero
         }
         return .zero
     }
