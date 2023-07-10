@@ -235,6 +235,12 @@ class ARSceneViewBuilder: ViewBuilder {
     
     func runSceneView(loadWorldMapData worldMapData: Data) throws {
         if worldMapData.isEmpty {
+            Task {
+                do {
+                    configuration?.initialWorldMap = try await getCurrentWorldMap()
+                } catch {}
+                
+            }
             runSceneView()
             return
         }
@@ -448,7 +454,58 @@ class ARSceneViewBuilder: ViewBuilder {
             arSceneView?.scene.rootNode.addChildNode(node)
         }
     }
+    
+    private func invokeRequestCameraElevationIfNeeds(_ camera: ARCamera) {
+        if Control.isCameraElevationControl {return}
+        if !isCameraInVerticalPosition(camera) {
+            Control.isCameraElevationControl = false
+            delegate?.requestCameraElevation(isElevation: false)
+            return
+        } else {
+            delegate?.requestCameraElevation(isElevation: true)
+            Control.isCameraElevationControl = true
+        }
+    }
+    
+    private func callInsufficientFeatures(_ camera: ARCamera) {
+        Control.isReadyToSalveWorldMap = false
+        invokeRequestCameraElevationIfNeeds(camera)
+    }
+    
+    private func callExcessiveMotion() {
+        delegate?.stateARSceneview(.excessiveMotion)
+    }
+    
+    private func callCameraNormal() {
+        invokeARSceneViewDone()
+        Control.isReadyToSalveWorldMap = true
+    }
+    
+    private func invokeARSceneViewDone() {
+        delegate?.stateARSceneview(.done)
+    }
+    
+    private func callCameraLimited(_ reason: ARCamera.TrackingState.Reason, _ camera: ARCamera) {
+        switch reason {
+            case .excessiveMotion:
+                callExcessiveMotion()
+            
+            case .insufficientFeatures:
+                callInsufficientFeatures(camera)
+
+            case .relocalizing:
+                callRelocalizing(camera)
+            
+            default:
+                break
+        }
+    }
         
+    private func callRelocalizing(_ camera: ARCamera) {
+        Control.isReadyToSalveWorldMap = false
+        delegate?.stateARSceneview(.waitingWorldMapRecognition)
+        invokeRequestCameraElevationIfNeeds(camera)
+    }
 }
 
 
@@ -472,39 +529,14 @@ extension ARSceneViewBuilder: ARSessionDelegate {
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
-        case .notAvailable:
-            break
-        
-        case .limited( let reason ):
-            switch reason {
-                case .excessiveMotion:
-                    delegate?.stateARSceneview(.excessiveMotion)
-                    break
-                
-                case .insufficientFeatures:
-                    Control.isReadyToSalveWorldMap = false
-                    if !isCameraInVerticalPosition(camera) {
-                        Control.isCameraElevationControl = false
-                        delegate?.requestCameraElevation(isElevation: false)
-                        return
-                    }
-
-                case .relocalizing:
-                    Control.isReadyToSalveWorldMap = false
-                    delegate?.stateARSceneview(.waitingWorldMapRecognition)
-                    if !isCameraInVerticalPosition(camera) {
-                        Control.isCameraElevationControl = false
-                        delegate?.requestCameraElevation(isElevation: false)
-                    }
-                    
-                default:
-                    break
-                }
+            case .notAvailable:
+                break
             
-        case .normal:
-            delegate?.stateARSceneview(.done)
-            Control.isReadyToSalveWorldMap = true
-            break
+            case .limited( let reason ):
+                callCameraLimited(reason, camera)
+                
+            case .normal:
+                callCameraNormal()
         }
     }
         
@@ -519,7 +551,6 @@ extension ARSceneViewBuilder: ARSessionDelegate {
 extension ARSceneViewBuilder: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if anchor is ARPlaneAnchor {
-//            print("plano")
             return
         }
         print(anchor.identifier)
