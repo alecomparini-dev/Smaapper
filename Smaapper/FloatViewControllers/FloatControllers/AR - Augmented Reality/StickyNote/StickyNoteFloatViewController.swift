@@ -65,7 +65,7 @@ class StickyNoteFloatViewController: FloatViewController {
         return ARGeometryBuilder()
             .setPlane { build in
                 build
-                    .setSize(0.01, 0.01)
+                    .setSize(0.08, 0.08)
             }
     }
     
@@ -119,9 +119,6 @@ class StickyNoteFloatViewController: FloatViewController {
     
     private func getPosition(_ position: simd_float4x4?) -> simd_float4x4? {
         if let position { return position }
-        
-//        return screen.cameraARKit.get
-        
         return screen.cameraARKit.getPositionByCam(centimetersAhead: 8)
     }
     
@@ -188,11 +185,11 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     func stateARSceneview(_ state: ARSceneState) {
         switch state {
         case .waitingWorldMapRecognition:
-            print("RECONHECENDO O MUNNNNNNNNNNNNNNNNNNNNNDOOOOOOOOOOOOOOOOOOOOOOO")
+            print("RECONHECENDO ............................")
         case .excessiveMotion:
             print("FICA QUIETOOOOO")
         case .done:
-            print("PRONNNNTOOOOO LIBERA A PORRA DO APP PRA COLOCAR ON NODES !!!! ")
+            print("DOOOOOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEEEEEEEEE")
         }
     }
     
