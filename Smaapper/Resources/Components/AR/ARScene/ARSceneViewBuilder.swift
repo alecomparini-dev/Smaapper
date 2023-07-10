@@ -22,6 +22,7 @@ protocol ARSceneViewBuilderDelegate: AnyObject {
     func saveWorldMap(_ worldMap: Data?, _ error: Error?)
     func loadAnchorWorldMap(_ anchor: ARAnchor)
     func stateARSceneview(_ state: ARSceneState)
+    func requestCameraElevation(isElevation: Bool)
 }
 
 
@@ -34,21 +35,32 @@ class ARSceneViewBuilder: ViewBuilder {
         case bottom
     }
     
-    private var monitoringWorldMap = false
+    private var isCameraElevationControl = true
     
     private var arSceneView: ARSCNView?
-    private var configuration: ARWorldTrackingConfiguration = ARWorldTrackingConfiguration()
+    private var configuration: ARWorldTrackingConfiguration?
     
     private var snapshotARSceneView: UIImageView = UIImageView()
     private var positionTarget: ( aligment: Alignment, padding: CGFloat)?
     private var options: ARSession.RunOptions = []
+    private var anchorsLoadWorldMap: [ARAnchor]?
     
-    private var anchorsLoadWorldMap: [ARAnchor] = []
-    
-
     override init() {
         super.init()
         initialization()
+    }
+    
+    deinit {
+        print("chamou essa DESGRAÇAAAAAAAAAAAAAAAAAAAAAA")
+    }
+    
+    private func freeMemory() {
+        configuration = nil
+        delegate = nil
+        anchorsLoadWorldMap = nil
+        arSceneView?.delegate = nil
+        arSceneView?.session.delegate = nil
+        arSceneView = nil
     }
     
     private func initialization() {
@@ -74,9 +86,9 @@ class ARSceneViewBuilder: ViewBuilder {
     
     private func createConfiguration() {
         configuration = ARWorldTrackingConfiguration()
-        configuration.isCollaborationEnabled = true
-        if configuration.planeDetection.isEmpty {
-            configuration.planeDetection = [.vertical, .horizontal]
+        configuration?.isCollaborationEnabled = true
+        if configuration?.planeDetection.isEmpty ?? true {
+            configuration?.planeDetection = [.vertical, .horizontal]
         }
     }
     
@@ -133,39 +145,11 @@ class ARSceneViewBuilder: ViewBuilder {
         return getPositionOnPlaneByTouch(positionTouch: positionTarget, alignment)
     }
     
-    func caraio(_ centimetersAhead: Float? = 0) {
-        if let cameraTransform = arSceneView?.session.currentFrame?.camera.transform {
-            
-            print("TOP 1", arSceneView!.frame.height - targetImage.view.center.y)
-            print("TOP 2", (arSceneView!.frame.height/2) - targetImage.view.center.y)
-            
-            print("height", arSceneView!.frame.height)
-            print("Y", targetImage.view.center.y)
-            
-            var translation = matrix_identity_float4x4
-            translation.columns.3.z = -((8) / 100.0)
-            
-            translation.columns.3.x = -((0.73) / 100.0)
-            
-            let nodeTransform = matrix_multiply(cameraTransform, translation)
-
-
-            // Criar o nó com a posição desejada
-            let node = SCNNode()
-            node.simdTransform = nodeTransform
-            node.geometry = SCNSphere(radius: 0.005)
-            node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-
-            // Adicionar o nó à cena
-            arSceneView?.scene.rootNode.addChildNode(node)
-        }
-    }
-    
     func getPositionByCam(centimetersAhead: Float? = 1) -> simd_float4x4? {
         if let cameraTransform = arSceneView?.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
-            caraio(centimetersAhead)
+//            calculatePositionFromTarget(centimetersAhead)
             return matrix_multiply(cameraTransform, translation)
         }
         return nil
@@ -176,7 +160,7 @@ class ARSceneViewBuilder: ViewBuilder {
 
     @discardableResult
     func setPlaneDetection(_ planeDetection: ARWorldTrackingConfiguration.PlaneDetection) -> Self {
-        self.configuration.planeDetection = planeDetection
+        self.configuration?.planeDetection = planeDetection
         return self
     }
 
@@ -243,10 +227,28 @@ class ARSceneViewBuilder: ViewBuilder {
 
     
 //  MARK: - ACTIONS
+
+    func show() {
+        
+    }
+    
+    func close() {
+        
+    }
+    
+    func pause() {
+        
+    }
+    
+    func resume() {
+        
+    }
+    
+    
     
     func runSceneView() {
         start()
-        arSceneView?.session.run(self.configuration, options: self.options)
+        runSession()
     }
     
     func runSceneView(loadWorldMapData worldMapData: Data) throws {
@@ -264,6 +266,7 @@ class ARSceneViewBuilder: ViewBuilder {
             addSnapShotToPauseAR()
             await arSceneView?.session.pause()
             removeARSceneView()
+            freeMemory()
         }
     }
     
@@ -288,12 +291,20 @@ class ARSceneViewBuilder: ViewBuilder {
         do {
             if let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: worldMapData) {
                 if !worldMap.anchors.isEmpty {
-                    self.configuration.initialWorldMap = worldMap
+                    self.configuration?.initialWorldMap = worldMap
                 }
-                self.arSceneView?.session.run(self.configuration, options: [.resetTracking, .removeExistingAnchors])
+                setOptions([.resetTracking, .removeExistingAnchors])
+                runSession()
             }
         } catch {
             throw Error.worldMap(typeError: .invalidWorldMap , error: "Invalid worldMap \(error.localizedDescription)" )
+        }
+    }
+    
+    private func runSession() {
+        print(self.configuration!.initialWorldMap?.anchors.count ?? "" )
+        if let configuration {
+            self.arSceneView?.session.run(configuration, options: self.options)
         }
     }
     
@@ -357,7 +368,6 @@ class ARSceneViewBuilder: ViewBuilder {
         DispatchQueue.main.async { [weak self] in
             guard let self else {return}
             arSceneView?.removeFromSuperview()
-            arSceneView = nil
         }
     }
     
@@ -433,6 +443,28 @@ class ARSceneViewBuilder: ViewBuilder {
         }
         return false
     }
+    
+    
+    private func calculatePositionFromTarget(_ centimetersAhead: Float? = 0) {
+        if let cameraTransform = arSceneView?.session.currentFrame?.camera.transform {
+            print("TOP 1", arSceneView!.frame.height - targetImage.view.center.y)
+            print("TOP 2", (arSceneView!.frame.height/2) - targetImage.view.center.y)
+        
+            print("height", arSceneView!.frame.height)
+            print("Y", targetImage.view.center.y)
+            
+            var translation = matrix_identity_float4x4
+            translation.columns.3.z = -((8) / 100.0)
+            translation.columns.3.x = -((0.73) / 100.0)
+            let nodeTransform = matrix_multiply(cameraTransform, translation)
+
+            let node = SCNNode()
+            node.simdTransform = nodeTransform
+            node.geometry = SCNSphere(radius: 0.005)
+            node.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            arSceneView?.scene.rootNode.addChildNode(node)
+        }
+    }
         
 }
 
@@ -442,11 +474,32 @@ class ARSceneViewBuilder: ViewBuilder {
 extension ARSceneViewBuilder: ARSessionDelegate {
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        if isCameraElevationControl {return}
+        if isCameraInVerticalPosition(frame.camera) {
+            delegate?.requestCameraElevation(isElevation: true)
+            isCameraElevationControl = true
+            return
+        }
         
     }
     
-    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+    private func retryRelocalizing(_ session: ARSession) {
+        if #available(iOS 16.0, *) {
+            if session.currentFrame?.camera.trackingState == .limited(.relocalizing) {
+                setOptions([.resetTracking, .removeExistingAnchors])
+                runSession()
+            }
+            return
+        }
         
+    }
+    
+    func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
+        print("chamou isso aqui : SESSIONSHOULDATTEMPTRELOCALIZATION")
+        return true
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         switch camera.trackingState {
         case .notAvailable:
             break
@@ -454,24 +507,28 @@ extension ARSceneViewBuilder: ARSessionDelegate {
         case .limited( let reason ):
             switch reason {
                 case .excessiveMotion:
-                    print("excessiveMotion")
                     delegate?.stateARSceneview(.excessiveMotion)
                     break
                 
                 case .insufficientFeatures:
-                    print("insufficientFeatures")
                     if !isCameraInVerticalPosition(camera) {
-//                        delegate?.requestCameraElevation(isElevation: false)
+                        isCameraElevationControl = false
+                        delegate?.requestCameraElevation(isElevation: false)
                         return
                     }
 
                 case .relocalizing:
-                    print("relocalizing")
                     delegate?.stateARSceneview(.waitingWorldMapRecognition)
                     if !isCameraInVerticalPosition(camera) {
-//                        delegate?.requestCameraElevation(isElevation: false)
-                        return
+                        isCameraElevationControl = false
+                        delegate?.requestCameraElevation(isElevation: false)
                     }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.retryRelocalizing(session)
+                }
+                
+                
+                    
                 default:
                     break
                 }
@@ -493,9 +550,10 @@ extension ARSceneViewBuilder: ARSessionDelegate {
 extension ARSceneViewBuilder: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if anchor is ARPlaneAnchor {
+            print("plano")
             return
         }
-//        print(anchor.identifier)
+        print(anchor.identifier)
     }
     
     func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

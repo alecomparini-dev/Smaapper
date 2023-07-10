@@ -176,6 +176,14 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 //  MARK: - EXTENSION TapeMeasureViewDelegate
 
 extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
+    func requestCameraElevation(isElevation: Bool) {
+        if isElevation {
+            print("retira mensagem de colocar a camera levantada porra")
+            return
+        }
+        print("LEVANTA A PORRA DA CAMERA")
+    }
+    
     
     func stateARSceneview(_ state: ARSceneState) {
         switch state {

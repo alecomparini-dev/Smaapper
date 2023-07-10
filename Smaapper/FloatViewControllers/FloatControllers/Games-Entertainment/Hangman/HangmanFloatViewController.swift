@@ -73,7 +73,7 @@ class HangmanFloatViewController: FloatViewController {
     private func calculatePositionFloatView() {
         var y: CGFloat = K.Hangman.FloatView.y
         if #available(iOS 11.0, *) {
-            let window = Utils.currentWindow
+            let window = Utils.Window.currentWindow
             if let topSafeAreaInset = window?.safeAreaInsets.top {
                 y = topSafeAreaInset
             }

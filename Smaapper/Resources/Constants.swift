@@ -110,7 +110,7 @@ struct K {
         struct FloatView {
             static let x: CGFloat = 10
             static let y: CGFloat = 50
-            static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
+            static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
             static let height: CGFloat = 500
         }
         
@@ -129,7 +129,7 @@ struct K {
         struct FloatView {
             static let x: CGFloat = 10
             static let y: CGFloat = 50
-            static let width: CGFloat = (Utils.currentWindow?.screen.bounds.width ?? 300)-20
+            static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
             static let height: CGFloat = 500
         }
         
