@@ -97,13 +97,15 @@
 		0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE02A18089800E44F04 /* FloatViewController.swift */; };
 		0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */; };
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
-		0282A8032A599EE000487F01 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0282A8022A599EDF00487F01 /* ARKit.framework */; };
+		0282A8062A5C7D2A00487F01 /* PersistenceDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282A8052A5C7D2A00487F01 /* PersistenceDataBuilder.swift */; };
+		0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282A8082A5C862300487F01 /* PersistenceDataProtocol.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
 		02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431402A534AAE00A1D7EC /* StickyNoteView.swift */; };
 		02B431432A534ABB00A1D7EC /* StickyNoteFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431422A534ABB00A1D7EC /* StickyNoteFloatViewController.swift */; };
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
+		02BBC7D92A5C9D7700F70A14 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BBC7D82A5C9D7700F70A14 /* RealmProvider.swift */; };
 		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
@@ -117,7 +119,6 @@
 		02D06E622A54CD9D0020A10B /* AlcoholOrGasolineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E612A54CD9C0020A10B /* AlcoholOrGasolineView.swift */; };
 		02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */; };
 		02D06E662A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */; };
-		02D06E692A54DB680020A10B /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D06E682A54DB680020A10B /* Speech.framework */; };
 		02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */; };
 		02D06E6F2A55931D0020A10B /* ConstantsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */; };
 		02D06E712A55AAE10020A10B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E702A55AAE10020A10B /* UIView+Extension.swift */; };
@@ -188,6 +189,7 @@
 		02FB2CAD2A45F18E00C7FC98 /* WaveDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */; };
 		02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */; };
 		02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB22A46037300C7FC98 /* FallDollView.swift */; };
+		3B585C548617FC1F42219F4B /* Pods_Smaapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AB4BB8863040B38141A5BB /* Pods_Smaapper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,13 +296,15 @@
 		0281DAE02A18089800E44F04 /* FloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewController.swift; sourceTree = "<group>"; };
 		0281DAE72A18441000E44F04 /* ClockNeumorphism.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNeumorphism.swift; sourceTree = "<group>"; };
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
-		0282A8022A599EDF00487F01 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		0282A8052A5C7D2A00487F01 /* PersistenceDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDataBuilder.swift; sourceTree = "<group>"; };
+		0282A8082A5C862300487F01 /* PersistenceDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDataProtocol.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
 		02B431402A534AAE00A1D7EC /* StickyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteView.swift; sourceTree = "<group>"; };
 		02B431422A534ABB00A1D7EC /* StickyNoteFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteFloatViewController.swift; sourceTree = "<group>"; };
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
+		02BBC7D82A5C9D7700F70A14 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -314,7 +318,6 @@
 		02D06E612A54CD9C0020A10B /* AlcoholOrGasolineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineView.swift; sourceTree = "<group>"; };
 		02D06E632A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineFloatViewController.swift; sourceTree = "<group>"; };
 		02D06E652A54D2780020A10B /* AlcoholOrGasolineCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholOrGasolineCoordinator.swift; sourceTree = "<group>"; };
-		02D06E682A54DB680020A10B /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		02D06E6C2A55913E0020A10B /* TextFieldClearableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldClearableBuilder.swift; sourceTree = "<group>"; };
 		02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsComponent.swift; sourceTree = "<group>"; };
 		02D06E702A55AAE10020A10B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -385,6 +388,9 @@
 		02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveDollView.swift; sourceTree = "<group>"; };
 		02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmsDownDollView.swift; sourceTree = "<group>"; };
 		02FB2CB22A46037300C7FC98 /* FallDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDollView.swift; sourceTree = "<group>"; };
+		0C2FAD6F23BFE1882358616D /* Pods-Smaapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.release.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.release.xcconfig"; sourceTree = "<group>"; };
+		933A37C720AB0A008A96061D /* Pods-Smaapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.debug.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.debug.xcconfig"; sourceTree = "<group>"; };
+		A6AB4BB8863040B38141A5BB /* Pods_Smaapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smaapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,8 +398,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0282A8032A599EE000487F01 /* ARKit.framework in Frameworks */,
-				02D06E692A54DB680020A10B /* Speech.framework in Frameworks */,
+				3B585C548617FC1F42219F4B /* Pods_Smaapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +465,8 @@
 				0234A5EF29F9F30F008392EC /* Smaapper */,
 				0234A60629F9F310008392EC /* SmaapperTests */,
 				0234A5EE29F9F30F008392EC /* Products */,
-				02D06E672A54DB680020A10B /* Frameworks */,
+				642C37DFFC0D617DE11AD20A /* Pods */,
+				41E29674B96932031923F4CF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -501,6 +507,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0282A8042A5C7D1100487F01 /* PersistenceData */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0272FB972A5351B900EF4AE5 /* AR */,
 				0281DAD92A15376D00E44F04 /* Base */,
@@ -962,6 +969,24 @@
 			path = ClockNeumorphism;
 			sourceTree = "<group>";
 		};
+		0282A8042A5C7D1100487F01 /* PersistenceData */ = {
+			isa = PBXGroup;
+			children = (
+				0282A8072A5C861200487F01 /* Protocol */,
+				02BBC7D72A5C9D1A00F70A14 /* Providers */,
+				0282A8052A5C7D2A00487F01 /* PersistenceDataBuilder.swift */,
+			);
+			path = PersistenceData;
+			sourceTree = "<group>";
+		};
+		0282A8072A5C861200487F01 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0282A8082A5C862300487F01 /* PersistenceDataProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		0284368A2A1D296700B596DA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +1020,14 @@
 				02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */,
 			);
 			path = TextFieldPassword;
+			sourceTree = "<group>";
+		};
+		02BBC7D72A5C9D1A00F70A14 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				02BBC7D82A5C9D7700F70A14 /* RealmProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
@@ -1115,15 +1148,6 @@
 				02D5814C2A20057700150AF9 /* TapGesture.swift */,
 			);
 			path = TapGesture;
-			sourceTree = "<group>";
-		};
-		02D06E672A54DB680020A10B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				0282A8022A599EDF00487F01 /* ARKit.framework */,
-				02D06E682A54DB680020A10B /* Speech.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		02D06E6A2A55905C0020A10B /* TextFieldClearable */ = {
@@ -1549,6 +1573,23 @@
 			path = Doll;
 			sourceTree = "<group>";
 		};
+		41E29674B96932031923F4CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6AB4BB8863040B38141A5BB /* Pods_Smaapper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		642C37DFFC0D617DE11AD20A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				933A37C720AB0A008A96061D /* Pods-Smaapper.debug.xcconfig */,
+				0C2FAD6F23BFE1882358616D /* Pods-Smaapper.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1556,9 +1597,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0234A61729F9F310008392EC /* Build configuration list for PBXNativeTarget "Smaapper" */;
 			buildPhases = (
+				80DF9A78D8EEC0A41CA685F5 /* [CP] Check Pods Manifest.lock */,
 				0234A5E929F9F30F008392EC /* Sources */,
 				0234A5EA29F9F30F008392EC /* Frameworks */,
 				0234A5EB29F9F30F008392EC /* Resources */,
+				6EC5B7953257658FE4CCB520 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1647,6 +1690,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6EC5B7953257658FE4CCB520 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80DF9A78D8EEC0A41CA685F5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Smaapper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0234A5E929F9F30F008392EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1726,6 +1811,8 @@
 				02D06E8A2A563B2C0020A10B /* ARNodeBuilder.swift in Sources */,
 				0234A91729F9FD3A008392EC /* tests.swift in Sources */,
 				026CF17D2A4B2238009CEE6E /* HangmanWord.swift in Sources */,
+				02BBC7D92A5C9D7700F70A14 /* RealmProvider.swift in Sources */,
+				0282A8062A5C7D2A00487F01 /* PersistenceDataBuilder.swift in Sources */,
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */,
@@ -1791,6 +1878,7 @@
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
 				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
+				0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */,
 				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,
@@ -1974,6 +2062,7 @@
 		};
 		0234A61829F9F310008392EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 933A37C720AB0A008A96061D /* Pods-Smaapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1987,7 +2076,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2003,6 +2092,7 @@
 		};
 		0234A61929F9F310008392EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2FAD6F23BFE1882358616D /* Pods-Smaapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2016,7 +2106,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
