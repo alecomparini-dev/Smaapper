@@ -204,7 +204,6 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
         if let worldMapData {
             K.worldMapData = worldMapData
             print("salvou:", worldMapData.count)
-            
         }
 
     }
