@@ -8,5 +8,6 @@
 import Foundation
 
 enum RealmError: Swift.Error {
-    case write(id: Int = 2000, error: String)
+    case insert(id: Int = 2000, error: String)
+    case findByCustomColumn(id: Int = 2001, error: String)
 }
