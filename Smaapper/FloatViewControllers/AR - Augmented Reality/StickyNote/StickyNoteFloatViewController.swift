@@ -240,26 +240,32 @@ class WorldMapData: Object, Identifiable {
 extension StickyNoteFloatViewController {
     
     func testWithRealm() {
-//        testInsert()
-//        testFetch()
-//        testFetchById()
-//        testFetchCustomColumn()
-//        testFetchCustomColumn2()
-        testDELETE()
+        Task {
+//            await testInsert()
+//            await testFetch()
+//            await testFetchById()
+//            await testFetchCustomColumn()
+//            await testFetchCustomColumn2()
+//            await testUPDATE()
+//            await testDELETE()
+        }
+        
+
+        
         
     }
     
     
     
-    func testInsert() {
-        let worldMapData = WorldMapData(userID: UUID(), environmentName: "Minha Casa", worldMapData: K.worldMapData)
+    func testInsert() async {
+        let worldMapData = WorldMapData(userID: UUID(), environmentName: "TESTE COM ASYNC", worldMapData: K.worldMapData)
         
         do {
             let realmProvider = try RealmDBProvider<WorldMapData>()
             print(realmProvider.getFileRealm())
             
             let persistence = DBManager<WorldMapData>(provider: realmProvider)
-            let id = try persistence.provider.insert(worldMapData)
+            let id = try await persistence.provider.insert(worldMapData)
             
             print("ID PORRA", id)
 
@@ -268,40 +274,42 @@ extension StickyNoteFloatViewController {
         }
     }
     
-    func testFetch() {
+    func testFetch() async {
         do {
             let realmProvider = try RealmDBProvider<WorldMapData>()
             let persistence = DBManager<WorldMapData>(provider: realmProvider)
-            let worldData = try persistence.provider.fetch()
+            let worldData = try await persistence.provider.fetch()
             print(#function, worldData.count)
         } catch {
             
         }
     }
     
-    func testFetchById() {
-        let ids: [String] = ["62d11052-3da8-4a16-9bc4-2e6ae81da401", "5b922a2d-351e-478e-aca5-20b20eeb70bc" ]
+    func testFetchById() async {
+        let ids: [String] = ["62d11052-3da8-4a16-9bc4-2e6ae81da401", "5b922a2d-351e-478e-aca5-20b20eeb70bc" , "0d6e810b-aca3-4bf7-a828-745e0c2ea72b", "a881fe82-7a42-462c-9a55-a9a29ef20eac"]
         
         ids.forEach { id in
             if let id = UUID(uuidString: id) {
-                do {
-                    let realmProvider = try RealmDBProvider<WorldMapData>()
-                    let persistence = DBManager<WorldMapData>(provider: realmProvider)
-                    let worldData = try persistence.provider.findByID(id)
-                    print(#function, worldData ?? "")
-                } catch {
-                    
+                Task {
+                    do {
+                        let realmProvider = try RealmDBProvider<WorldMapData>()
+                        let persistence = DBManager<WorldMapData>(provider: realmProvider)
+                        let worldData = try await persistence.provider.findByID(id)
+                        print(#function, worldData ?? "")
+                    } catch {
+                        
+                    }
                 }
             }
         }
     }
     
     
-    func testFetchCustomColumn() {
+    func testFetchCustomColumn() async {
         do {
             let realmProvider = try RealmDBProvider<WorldMapData>()
             let persistence = DBManager<WorldMapData>(provider: realmProvider)
-            let worldData = try persistence.provider.findByColumn(column: "environmentName", value: "CARAIO")
+            let worldData = try await persistence.provider.findByColumn(column: "environmentName", value: "Minha Casa")
             print(#function,"QUANTIDADE:", worldData.count)
             worldData.forEach { item in
                 print(#function, item.userID)
@@ -311,12 +319,12 @@ extension StickyNoteFloatViewController {
         }
     }
     
-    func testFetchCustomColumn2() {
+    func testFetchCustomColumn2() async {
         let id = "0342d72b-f97d-4d95-b9cc-b0e6dd1a98f5"
         do {
             let realmProvider = try RealmDBProvider<WorldMapData>()
             let persistence = DBManager<WorldMapData>(provider: realmProvider)
-            let worldData = try persistence.provider.findByColumn(column: "userID", value: UUID(uuidString: id))
+            let worldData = try await persistence.provider.findByColumn(column: "userID", value: UUID(uuidString: id))
             worldData.forEach { item in
                 print(#function,item)
             }
@@ -326,18 +334,18 @@ extension StickyNoteFloatViewController {
     }
     
     
-    func testUPDATE() {
+    func testUPDATE() async {
         let id = "bb16e73b-770e-438e-bdbb-0ab1b5e23cd1"
         if let id = UUID(uuidString: id) {
             do {
                 let realmProvider = try RealmDBProvider<WorldMapData>()
                 let persistence = DBManager<WorldMapData>(provider: realmProvider)
                 
-                let worldData = try persistence.provider.findByID(id)
+                let worldData = try await persistence.provider.findByID(id)
                 guard let worldData else {return}
                 let newWorldMap = WorldMapData(value: worldData)
                 newWorldMap.environmentName = "TOP DEMAIS"
-                try persistence.provider.update(newWorldMap)
+                try await persistence.provider.update(newWorldMap)
                 
             } catch {
                 
@@ -347,17 +355,17 @@ extension StickyNoteFloatViewController {
     
     
     
-    func testDELETE() {
+    func testDELETE() async {
         let id = "c4fc6984-2c54-4bcb-a9da-b426b98ed87a"
         if let id = UUID(uuidString: id) {
             do {
                 let realmProvider = try RealmDBProvider<WorldMapData>()
                 let persistence = DBManager<WorldMapData>(provider: realmProvider)
                 
-                let worldData = try persistence.provider.findByID(id)
+                let worldData = try await persistence.provider.findByID(id)
                 guard let worldData else {return}
                 
-                try persistence.provider.delete(worldData)
+                try await persistence.provider.delete(worldData)
                 
             } catch {
                 

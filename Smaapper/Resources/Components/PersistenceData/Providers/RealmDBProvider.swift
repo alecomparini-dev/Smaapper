@@ -30,36 +30,36 @@ where T: Object {
     
 //  MARK: - METHODS PROTOCOL PersistenceDataProtocol(Inheritance Provider)
     
-    override func insert(_ entity: Entity) throws -> UUID {
+    override func insert(_ entity: Entity) async throws -> UUID {
         try self.realm.write {
             self.realm.add(entity)
         }
         return entity.id
     }
     
-    override func update(_ entity: Entity) throws {
+    override func update(_ entity: Entity) async throws {
         try realm.write {
             realm.add(entity, update: .modified)
         }
     }
 
-    override func delete(_ entity: Entity) throws {
+    override func delete(_ entity: Entity) async throws {
         try realm.write {
             realm.delete(entity)
         }
     }
 
-    override func fetch() throws -> [Entity] {
+    override func fetch() async throws -> [Entity] {
         let results = realm.objects(Entity.self)
         return Array(results)
     }
 
-    override func findByID(_ id: UUID) throws -> Entity? {
+    override func findByID(_ id: UUID) async throws -> Entity? {
         let result = realm.object(ofType: Entity.self, forPrimaryKey: id)
         return result
     }
 
-    override func findByColumn<DataType>(column: String, value: DataType) throws -> [Entity] {
+    override func findByColumn<DataType>(column: String, value: DataType) async throws -> [Entity] {
         let results = realm.objects(Entity.self).filter("\(column) == %@", value)
         return Array(results)
     }
