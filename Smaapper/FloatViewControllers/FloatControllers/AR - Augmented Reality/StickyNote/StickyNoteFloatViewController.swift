@@ -40,10 +40,8 @@ class StickyNoteFloatViewController: FloatViewController {
         UtilsFloatView.setShadowActiveFloatView(screen)
         do {
             try screen.cameraARKit.runSceneView(loadWorldMapData: K.worldMapData)
-        } catch let Error.worldMap(typeError, error) {
-            print(typeError, error)
-        } catch {
-            
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -194,7 +192,7 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     }
     
     
-    func saveWorldMap(_ worldMapData: Data?, _ error: Error?) {
+    func saveWorldMap(_ worldMapData: Data?, _ error: WorldMapError?) {
         if error != nil {
             print("ERRO:", error ?? "")
             return

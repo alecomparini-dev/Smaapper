@@ -12,49 +12,40 @@ import Realm
 protocol PersistenceDataProtocol {
     associatedtype Entity
 
-    func insert(_ entity: Entity) async throws -> String
+    func insert(_ entity: Entity) async throws -> UUID
     func update(_ entity: Entity) async throws
     func delete(_ entity: Entity) async throws
     func fetch() async throws -> [Entity]
     func findBy(id: Any) async throws -> Entity
-    
 }
 
 
 
 class Provider<T>: PersistenceDataProtocol {
     typealias Entity = T
+
+    init() throws { }
     
-    func delete(_ model: T) async throws {}
+    func insert(_ entity: T) async throws -> UUID {
+        fatalError("The method insert, needs to be implemented by the subclasses ")
+    }
+    
+    func update(_ entity: T) async throws {
+        fatalError("The method update, needs to be implemented by the subclasses ")
+    }
+    
+    func delete(_ entity: T) async throws {
+        fatalError("The method delete, needs to be implemented by the subclasses ")
+    }
+    
     func fetch() async throws -> [T] {
-        return []
+        fatalError("The method fetch, needs to be implemented by the subclasses ")
     }
-    func insert(_ entity: T) async throws -> String {
-        return ""
-    }
-    func update(_ entity: T) async throws {}
+    
     func findBy(id: Any) async throws -> T {
-        return T.self as! T
+        fatalError("The method findBy, needs to be implemented by the subclasses ")
     }
 }
 
 
 
-class RealmProv<Entity: Object>: Provider<Entity> {
-    
-    private(set) var realm: Realm = try! Realm()
-    
-    override func delete(_ model: Entity) async throws {
-    }
-    
-    override func fetch() async throws -> [Entity] {
-        return try await withCheckedThrowingContinuation { continuation in
-            let results = realm.objects(Entity.self)
-            let entities = Array(results)
-            continuation.resume(returning: entities)
-        }
-    }
-    
-    
-    
-}
