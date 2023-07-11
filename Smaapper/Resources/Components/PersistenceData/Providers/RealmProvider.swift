@@ -6,40 +6,32 @@
 //
 
 import RealmSwift
+import Realm
 
 
-class RealmPersistence<T> {
-    typealias Entity = T
-        
-    private let realm: Realm
-    
-    init() throws {
-        realm = try Realm()
-    }
-    
-}
+/*
+ 1 - tudo que for gravar usar o ID do usuário
+ 2 - Para pegar o arquivo do Realm (Realm.Configuration.defaultConfiguration.fileURL)
+ */
 
-extension RealmPersistence: PersistenceData {
-    func fetch() async throws -> [T] {
-        return []
-    }
-    
-    
-    func insert(_ model: Entity) async throws -> String {
-        return ""
-    }
-    
-    func update(_ model: Entity) async throws {
-                
-    }
-    
-    func delete(_ model: Entity) async throws {
-        
-    }
-    
-    func findBy(id: Any) async throws -> T {
-        return T.self as! T
-    }
-    
-    
-}
+
+//class RealmProvider<Entity: Object>: Repository<Entity>  {
+//
+//    private(set) var realm: Realm = try! Realm()
+//    
+//    override func delete(_ model: Entity) {   
+//    }
+//    
+//    override func fetch() async throws -> [Entity] {
+//        return try await withCheckedThrowingContinuation { continuation in
+//            let results = realm.objects(Entity.self)
+//            let entities = Array(results)
+//            continuation.resume(returning: entities)
+//        }
+//    }
+//
+//}
+
+
+
+
