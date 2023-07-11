@@ -827,17 +827,10 @@
 			path = TappedButtonView;
 			sourceTree = "<group>";
 		};
-		025EA53D2A5DBDE50008AC89 /* Errors */ = {
-			isa = PBXGroup;
-			children = (
-				02BBC7DE2A5D854000F70A14 /* WorldMapError.swift */,
-			);
-			path = Errors;
-			sourceTree = "<group>";
-		};
 		025EA5422A5E08B10008AC89 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				02BBC7DE2A5D854000F70A14 /* WorldMapError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -932,7 +925,6 @@
 		0272FB972A5351B900EF4AE5 /* AR */ = {
 			isa = PBXGroup;
 			children = (
-				025EA53D2A5DBDE50008AC89 /* Errors */,
 				02D06E722A55C90C0020A10B /* ARScene */,
 				02D06E732A55C9180020A10B /* ARMaterial */,
 				02D06E742A55C9280020A10B /* ARGeometry */,
