@@ -19,7 +19,7 @@ enum ARSceneState {
 
 protocol ARSceneViewBuilderDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
-    func saveWorldMap(_ worldMap: Data?, _ error: Error?)
+    func saveWorldMap(_ worldMap: Data?, _ error: WorldMapError?)
     func loadAnchorWorldMap(_ anchor: ARAnchor)
     func stateARSceneview(_ state: ARSceneState)
     func requestCameraElevation(isElevation: Bool)
@@ -285,7 +285,7 @@ class ARSceneViewBuilder: ViewBuilder {
                 runSession()
             }
         } catch {
-            throw Error.worldMap(typeError: .invalidWorldMap , error: "Invalid worldMap \(error.localizedDescription)" )
+            throw WorldMapError.invalidWorldMap(error: "Invalid worldMap \(error.localizedDescription)" )
         }
     }
     
@@ -302,7 +302,7 @@ class ARSceneViewBuilder: ViewBuilder {
             self?.getCurrentWorldMap() { [weak self] worldMap,error in
                 guard let self else {return}
                 if let error {
-                    delegate?.saveWorldMap(nil, Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription))
+                    delegate?.saveWorldMap(nil, WorldMapError.getCurrentWordlMap(error: error.localizedDescription))
                     return
                 }
                 
@@ -311,7 +311,7 @@ class ARSceneViewBuilder: ViewBuilder {
                         let worldMapData = try convertWorldMapToData(worldMap)
                         self.delegate?.saveWorldMap(worldMapData, nil)
                     } catch let error {
-                        delegate?.saveWorldMap(nil, Error.worldMap(typeError: .convertToData, error: error.localizedDescription))
+                        delegate?.saveWorldMap(nil, WorldMapError.convertToData(error: error.localizedDescription))
                     }
                     return
                 }
@@ -328,9 +328,9 @@ class ARSceneViewBuilder: ViewBuilder {
             if let worldMap = try await arSceneView?.session.currentWorldMap() {
                 return worldMap
             }
-            throw Error.worldMap(typeError: .worldMapEmptyOrNil, error: "WorldMap is nil")
+            throw WorldMapError.worldMapEmptyOrNil()
         } catch let error {
-            throw Error.worldMap(typeError: .getWordlMap, error: error.localizedDescription)
+            throw WorldMapError.getCurrentWordlMap(error: error.localizedDescription)
         }
     }
     
@@ -338,7 +338,7 @@ class ARSceneViewBuilder: ViewBuilder {
         do {
             return try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
         } catch {
-            throw Error.worldMap(typeError: .convertToData, error: error.localizedDescription)
+            throw WorldMapError.convertToData(error: error.localizedDescription)
         }
     }
     

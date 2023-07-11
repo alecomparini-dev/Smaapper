@@ -9,33 +9,32 @@ import Foundation
 import RealmSwift
 
 
-
-class PersistenceDataBuilder<T>: PersistenceDataProtocol  {
-    typealias Entity = T
+class PersistenceDataBuilder<Entity>: PersistenceDataProtocol  {
+    typealias Entity = Entity
     
-    private var provider: Provider<T>
+    private var provider: Provider<Entity>
     
-    init(provider: Provider<T>) {
+    init(provider: Provider<Entity>) {
         self.provider = provider
     }
     
-    func insert(_ entity: Entity) async throws -> String {
-        try await provider.insert(entity)
+    func insert(_ entity: Entity) async throws -> UUID {
+        return try await provider.insert(entity)
     }
     
     func update(_ entity: Entity) async throws {
         try await provider.update(entity)
     }
     
-    func delete(_ entity: T) async throws {
+    func delete(_ entity: Entity) async throws {
         try await provider.delete(entity)
     }
     
-    func fetch() async throws -> [T] {
+    func fetch() async throws -> [Entity] {
         return try await provider.fetch()
     }
 
-    func findBy(id: Any) async throws -> T {
+    func findBy(id: Any) async throws -> Entity {
         return try await provider.findBy(id: id)
     }
 
@@ -43,22 +42,18 @@ class PersistenceDataBuilder<T>: PersistenceDataProtocol  {
 }
 
 
-class WorldMap: Object {
-    @Persisted var worldData: Data
+class WorldMapData: Object {
+    @Persisted(primaryKey: true) var id: UUID = UUID()
+    @Persisted var environmentName: String
+    @Persisted var worldMapData: Data
+    
+    convenience init(environmentName: String, worldMapData: Data) {
+        self.init()
+        self.environmentName = environmentName
+        self.worldMapData = worldMapData
+    }
 }
 
-class teste {
-    
-    init() {
-        start()
-    }
-    
-    func start() {
-        
-    }
-    
-    
-}
 
 
 

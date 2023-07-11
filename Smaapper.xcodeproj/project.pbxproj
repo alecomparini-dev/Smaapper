@@ -106,6 +106,8 @@
 		02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */; };
 		02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */; };
 		02BBC7D92A5C9D7700F70A14 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BBC7D82A5C9D7700F70A14 /* RealmProvider.swift */; };
+		02BBC7DF2A5D854000F70A14 /* WorldMapError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BBC7DE2A5D854000F70A14 /* WorldMapError.swift */; };
+		02BBC7E12A5D865100F70A14 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BBC7E02A5D865100F70A14 /* RealmError.swift */; };
 		02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */; };
 		02C5F4312A0BC79900D75D9F /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4302A0BC79900D75D9F /* Row.swift */; };
 		02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */; };
@@ -305,6 +307,8 @@
 		02B792662A1EE427006CEE8E /* TextFieldImageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldImageBuilder.swift; sourceTree = "<group>"; };
 		02B792692A1EE588006CEE8E /* TextFieldPasswordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordBuilder.swift; sourceTree = "<group>"; };
 		02BBC7D82A5C9D7700F70A14 /* RealmProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
+		02BBC7DE2A5D854000F70A14 /* WorldMapError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapError.swift; sourceTree = "<group>"; };
+		02BBC7E02A5D865100F70A14 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		02BE514E2A29379A00901669 /* FloatViewControllerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerActions.swift; sourceTree = "<group>"; };
 		02C5F4302A0BC79900D75D9F /* Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		02C5F4342A0BE6F400D75D9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -436,7 +440,6 @@
 			children = (
 				02E9743B2A37C25400BF14EE /* CustomFloatView */,
 				02E974392A379EAF00BF14EE /* FloatControllers */,
-				02E974222A37890B00BF14EE /* Utils */,
 			);
 			path = FloatViewControllers;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F4452A0C1A7200D75D9F /* Service */,
 				02527C612A51B32F00F868AE /* Extensions */,
+				02E974222A37890B00BF14EE /* Utilities */,
 				02C5F43F2A0BF3AF00D75D9F /* Resources */,
 				0234A5FE29F9F310008392EC /* Info.plist */,
 			);
@@ -507,7 +511,7 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				0282A8042A5C7D1100487F01 /* PersistenceData */,
+				02BBC7DC2A5D835E00F70A14 /* Constants */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0272FB972A5351B900EF4AE5 /* AR */,
 				0281DAD92A15376D00E44F04 /* Base */,
@@ -528,6 +532,7 @@
 				0234A8E429F9FD3A008392EC /* Label */,
 				02F45AF92A046F630096A75A /* List */,
 				026F797B2A0172AE003947A6 /* Neumorphism */,
+				0282A8042A5C7D1100487F01 /* PersistenceData */,
 				02F45AF62A043F760096A75A /* Resize */,
 				0234A8BB29F9FD3A008392EC /* Shadow */,
 				024F18AA2A11257000A39584 /* Stack */,
@@ -536,7 +541,6 @@
 				02D5815C2A229F0300150AF9 /* Theme */,
 				0284368A2A1D296700B596DA /* Utils */,
 				0234A95B29FB3E39008392EC /* View */,
-				02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1030,6 +1034,39 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		02BBC7DA2A5D7A4600F70A14 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				02BBC7DB2A5D7A5400F70A14 /* WorldMapData */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		02BBC7DB2A5D7A5400F70A14 /* WorldMapData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WorldMapData;
+			sourceTree = "<group>";
+		};
+		02BBC7DC2A5D835E00F70A14 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				02D06E6E2A55931D0020A10B /* ConstantsComponent.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		02BBC7DD2A5D848F00F70A14 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				02D06E8B2A577A870020A10B /* Errors.swift */,
+				02BBC7DE2A5D854000F70A14 /* WorldMapError.swift */,
+				02BBC7E02A5D865100F70A14 /* RealmError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1064,6 +1101,7 @@
 		02C5F4412A0BF4D100D75D9F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				02BBC7DA2A5D7A4600F70A14 /* DataModel */,
 				02C5F4442A0BF7C900D75D9F /* Codable */,
 			);
 			path = Models;
@@ -1090,6 +1128,7 @@
 		02C5F4452A0C1A7200D75D9F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				02BBC7DD2A5D848F00F70A14 /* Errors */,
 				026CF1762A4B1703009CEE6E /* HangmanService */,
 				02C5F4462A0C1A8800D75D9F /* HomeService */,
 				02C5F4492A0C1B1700D75D9F /* GenericService.swift */,
@@ -1314,13 +1353,12 @@
 			path = Proportion;
 			sourceTree = "<group>";
 		};
-		02E974222A37890B00BF14EE /* Utils */ = {
+		02E974222A37890B00BF14EE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				02E974232A37892900BF14EE /* UtilsFloatView.swift */,
-				02D06E8B2A577A870020A10B /* Errors.swift */,
 			);
-			path = Utils;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		02E974272A379B7D00BF14EE /* AlcoholOrGasoline */ = {
@@ -1785,6 +1823,7 @@
 				02C5F4482A0C1A9500D75D9F /* HomeService.swift in Sources */,
 				020D0E542A1E73A6007F3992 /* DropdownMenuFooter.swift in Sources */,
 				02DC8DB92A50709200561516 /* Constants.swift in Sources */,
+				02BBC7E12A5D865100F70A14 /* RealmError.swift in Sources */,
 				02E974412A37D25600BF14EE /* QuizView.swift in Sources */,
 				0234A94929FA9E8E008392EC /* Gradient.swift in Sources */,
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,
@@ -1831,6 +1870,7 @@
 				02D06E622A54CD9D0020A10B /* AlcoholOrGasolineView.swift in Sources */,
 				02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */,
 				026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */,
+				02BBC7DF2A5D854000F70A14 /* WorldMapError.swift in Sources */,
 				02C5F4312A0BC79900D75D9F /* Row.swift in Sources */,
 				0281DAE82A18441000E44F04 /* ClockNeumorphism.swift in Sources */,
 				0234A91C29F9FD3A008392EC /* StartOfConstraintsPositionFlow.swift in Sources */,
