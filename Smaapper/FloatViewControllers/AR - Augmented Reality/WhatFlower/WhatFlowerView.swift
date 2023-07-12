@@ -1,20 +1,20 @@
 //
-//  TapeMeasureView.swift
+//  WhatFlowerView.swift
 //  Smaapper
 //
-//  Created by Alessandro Comparini on 02/07/23.
+//  Created by Alessandro Comparini on 12/07/23.
 //
 
 import UIKit
 
-protocol TapeMeasureViewDelegate: AnyObject {
+protocol WhatFlowerViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
 }
 
 
-class TapeMeasureView: ViewBuilder {
-    weak var delegate: TapeMeasureViewDelegate?
+class WhatFlowerView: ViewBuilder {
+    weak var delegate: WhatFlowerViewDelegate?
     
     override init() {
         super.init()
@@ -27,8 +27,12 @@ class TapeMeasureView: ViewBuilder {
         configConstraints()
     }
     
+    deinit {
+        print(#function, #fileID)
+    }
     
-//  MARK: - LAZY Area
+    
+    //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: K.TapeMeasure.Images.logo, title: K.TapeMeasure.title, target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
@@ -55,38 +59,7 @@ class TapeMeasureView: ViewBuilder {
         return arKit
     }()
     
-    lazy var startButtonImage: IconButtonBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "ruler"))
-        let btn = IconButtonBuilder(img.view, "start")
-            .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setImageWeight(.thin)
-            .setImageSize(22)
-            .setTitleSize(14)
-            .setImagePadding(0)
-            .setBorder({ build in
-                build
-                    .setCornerRadius(10)
-            })
-            .setNeumorphism { build in
-                build
-                    .setReferenceColor(Theme.shared.currentTheme.secondary)
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 80)
-                    .setBlur(to: .light, percent: 3)
-                    .setBlur(to: .dark, percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .apply()
-            }
-            .setConstraints { build in
-                build
-                    .setBottom.setTrailing.equalToSuperView(15)
-                    .setWidth.equalToConstant(60)
-                    .setHeight.equalToConstant(50)
-            }
-        return btn
-    }()
-    
+
     
 //  MARK: - OBJCT Area
     @objc private func minimizeWindow() {
@@ -118,13 +91,11 @@ class TapeMeasureView: ViewBuilder {
     private func addElements() {
         titleView.add(insideTo: self.view)
         cameraARKit.add(insideTo: self.view)
-        startButtonImage.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         cameraARKit.applyConstraint()
-        startButtonImage.applyConstraint()
     }
     
 }

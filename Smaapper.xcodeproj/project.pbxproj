@@ -82,6 +82,8 @@
 		025EA5542A5EFF0D0008AC89 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5532A5EFF0D0008AC89 /* FirebaseAuth */; };
 		025EA5562A5EFF0D0008AC89 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5552A5EFF0D0008AC89 /* FirebaseCrashlytics */; };
 		025EA5582A5EFF0D0008AC89 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5572A5EFF0D0008AC89 /* FirebaseFirestoreSwift */; };
+		025EA55F2A5F12A10008AC89 /* WhatFlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */; };
+		025EA5612A5F12E00008AC89 /* WhatFlowerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -197,7 +199,7 @@
 		02FB2CAD2A45F18E00C7FC98 /* WaveDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */; };
 		02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */; };
 		02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CB22A46037300C7FC98 /* FallDollView.swift */; };
-		112FE778015C341E3D0F3E41 /* Pods_Smaapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 565BB29DF0DDE8F5D0D54CFE /* Pods_Smaapper.framework */; };
+		8ADFA2AF42C59C053A6BFA45 /* Pods_Smaapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB2D2760A0E535C9C3A662CF /* Pods_Smaapper.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,6 +300,8 @@
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
 		025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerView.swift; sourceTree = "<group>"; };
+		025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerFloatViewController.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -413,9 +417,9 @@
 		02FB2CAC2A45F18E00C7FC98 /* WaveDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveDollView.swift; sourceTree = "<group>"; };
 		02FB2CAE2A45F39300C7FC98 /* ArmsDownDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArmsDownDollView.swift; sourceTree = "<group>"; };
 		02FB2CB22A46037300C7FC98 /* FallDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallDollView.swift; sourceTree = "<group>"; };
-		565BB29DF0DDE8F5D0D54CFE /* Pods_Smaapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smaapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB67CD825C3803C644CF5F5F /* Pods-Smaapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.debug.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.debug.xcconfig"; sourceTree = "<group>"; };
-		F674A8E189E40E5F626FEEE4 /* Pods-Smaapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.release.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.release.xcconfig"; sourceTree = "<group>"; };
+		10D618CBF6E55B3177FD3825 /* Pods-Smaapper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.debug.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.debug.xcconfig"; sourceTree = "<group>"; };
+		CB2D2760A0E535C9C3A662CF /* Pods_Smaapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smaapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBC5DE83A73D0F4FD37F03C2 /* Pods-Smaapper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Smaapper.release.xcconfig"; path = "Target Support Files/Pods-Smaapper/Pods-Smaapper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -427,7 +431,7 @@
 				025EA5522A5EFF0D0008AC89 /* FirebaseAnalyticsSwift in Frameworks */,
 				025EA5562A5EFF0D0008AC89 /* FirebaseCrashlytics in Frameworks */,
 				025EA5542A5EFF0D0008AC89 /* FirebaseAuth in Frameworks */,
-				112FE778015C341E3D0F3E41 /* Pods_Smaapper.framework in Frameworks */,
+				8ADFA2AF42C59C053A6BFA45 /* Pods_Smaapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,7 +502,7 @@
 				0234A60629F9F310008392EC /* SmaapperTests */,
 				0234A5EE29F9F30F008392EC /* Products */,
 				642C37DFFC0D617DE11AD20A /* Pods */,
-				FC67C3C26BE93288C3FDBAED /* Frameworks */,
+				3AB0ADA793DB99BA92A830D0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1432,6 +1436,8 @@
 		02E9742B2A379BD500BF14EE /* WhatFlower */ = {
 			isa = PBXGroup;
 			children = (
+				025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */,
+				025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */,
 			);
 			path = WhatFlower;
 			sourceTree = "<group>";
@@ -1638,21 +1644,21 @@
 			path = Doll;
 			sourceTree = "<group>";
 		};
+		3AB0ADA793DB99BA92A830D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB2D2760A0E535C9C3A662CF /* Pods_Smaapper.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		642C37DFFC0D617DE11AD20A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EB67CD825C3803C644CF5F5F /* Pods-Smaapper.debug.xcconfig */,
-				F674A8E189E40E5F626FEEE4 /* Pods-Smaapper.release.xcconfig */,
+				10D618CBF6E55B3177FD3825 /* Pods-Smaapper.debug.xcconfig */,
+				CBC5DE83A73D0F4FD37F03C2 /* Pods-Smaapper.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		FC67C3C26BE93288C3FDBAED /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				565BB29DF0DDE8F5D0D54CFE /* Pods_Smaapper.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1662,13 +1668,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0234A61729F9F310008392EC /* Build configuration list for PBXNativeTarget "Smaapper" */;
 			buildPhases = (
-				DE2EB149B1DB7EA906D4E53C /* [CP] Check Pods Manifest.lock */,
+				B1231E0A93EC765D01A271B8 /* [CP] Check Pods Manifest.lock */,
 				0234A5E929F9F30F008392EC /* Sources */,
 				0234A5EA29F9F30F008392EC /* Frameworks */,
 				0234A5EB29F9F30F008392EC /* Resources */,
 				025EA55C2A5F01C50008AC89 /* Embed Frameworks */,
-				D4BDAAA4D8967B7BBACFF0B4 /* [CP] Embed Pods Frameworks */,
 				025EA55D2A5F0C7E0008AC89 /* ShellScript */,
+				ED28E2879D0F3014618E05DD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1770,6 +1776,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		025EA55D2A5F0C7E0008AC89 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -1787,24 +1794,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
-		D4BDAAA4D8967B7BBACFF0B4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE2EB149B1DB7EA906D4E53C /* [CP] Check Pods Manifest.lock */ = {
+		B1231E0A93EC765D01A271B8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1826,6 +1816,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		ED28E2879D0F3014618E05DD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Smaapper/Pods-Smaapper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1834,6 +1841,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */,
+				025EA55F2A5F12A10008AC89 /* WhatFlowerView.swift in Sources */,
 				02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */,
 				02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
@@ -1958,6 +1966,7 @@
 				02B431432A534ABB00A1D7EC /* StickyNoteFloatViewController.swift in Sources */,
 				02527C632A51B35200F868AE /* Double+Extension.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
+				025EA5612A5F12E00008AC89 /* WhatFlowerFloatViewController.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				024957F02A41F84F0077C36D /* PercentageOperation.swift in Sources */,
 				021848BD2A26C213007E68A4 /* Draggable.swift in Sources */,
@@ -2101,7 +2110,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -2163,7 +2172,7 @@
 		};
 		0234A61829F9F310008392EC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB67CD825C3803C644CF5F5F /* Pods-Smaapper.debug.xcconfig */;
+			baseConfigurationReference = 10D618CBF6E55B3177FD3825 /* Pods-Smaapper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2192,12 +2201,13 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "-Wno-Realm";
 			};
 			name = Debug;
 		};
 		0234A61929F9F310008392EC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F674A8E189E40E5F626FEEE4 /* Pods-Smaapper.release.xcconfig */;
+			baseConfigurationReference = CBC5DE83A73D0F4FD37F03C2 /* Pods-Smaapper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2225,6 +2235,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};
