@@ -77,6 +77,7 @@
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */; };
 		025EA5442A5E25D60008AC89 /* WorldMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5432A5E25D60008AC89 /* WorldMapData.swift */; };
+		025EA5462A5EE2BE0008AC89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -279,6 +280,7 @@
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
+		025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				02E974222A37890B00BF14EE /* Utilities */,
 				02C5F43F2A0BF3AF00D75D9F /* Resources */,
 				0234A5FE29F9F310008392EC /* Info.plist */,
+				025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */,
 			);
 			path = Smaapper;
 			sourceTree = "<group>";
@@ -1719,6 +1722,7 @@
 				02FB2C9D2A45C81700C7FC98 /* HangmanWords.json in Resources */,
 				0234A5FD29F9F310008392EC /* LaunchScreen.storyboard in Resources */,
 				0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */,
+				025EA5462A5EE2BE0008AC89 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
