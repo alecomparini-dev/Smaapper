@@ -33,6 +33,7 @@ class StickyNoteFloatViewController: FloatViewController {
                               width: K.Sticky.FloatView.width ,
                               height: K.Sticky.FloatView.height))
         configDelegate()
+                
     }
     
     override func viewDidSelectFloatView() {
