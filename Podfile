@@ -8,5 +8,4 @@ target 'Smaapper' do
   # Pods for Smaapper
   pod 'RealmSwift', '~>10.41'
 
-
 end
