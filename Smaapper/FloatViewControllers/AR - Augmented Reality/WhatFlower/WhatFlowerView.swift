@@ -34,7 +34,10 @@ class WhatFlowerView: ViewBuilder {
     
     //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: K.TapeMeasure.Images.logo, title: K.TapeMeasure.title, target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
+        let view = TitleFloatView(logo: K.WhatFlower.Images.logo,
+                                  title: K.WhatFlower.title,
+                                  target: self, closeClosure: #selector(closeWindow),
+                                  minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView(12)
@@ -44,9 +47,14 @@ class WhatFlowerView: ViewBuilder {
     }()
     
     lazy var cameraARKit: ARSceneViewBuilder = {
+        let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatFlower.Images.target))
+            .setWeight(.thin)
         let arKit = ARSceneViewBuilder()
-            .setAlignmentTarget(.top, 100)
-            .setPlaneDetection([.vertical, .horizontal])
+            .setImageTarget(imgTarget)
+            .setAlignmentTarget(.middle, -20)
+//            .setPlaneDetection([.vertical, .horizontal])
+            .setEnabledTargetDraggable(false)
+            
             .setBorder { build in
                 build
                     .setCornerRadius(20)

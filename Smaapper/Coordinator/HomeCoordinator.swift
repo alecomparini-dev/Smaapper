@@ -68,7 +68,11 @@ extension HomeCoordinator: HomeFloatViewControllerDelegate {
             case AlcoholOrGasolineFloatViewController.identifierApp:
                 let coodinator = AlcoholOrGasolineCoordinator(floatNavigationController)
                 coodinator.start(where: component)
-            
+
+            case WhatFlowerFloatViewController.identifierApp:
+                let coodinator = WhatFlowerCoordinator(floatNavigationController)
+                coodinator.start(where: component)
+
             default:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)
