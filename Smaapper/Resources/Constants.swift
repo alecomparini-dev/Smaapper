@@ -28,17 +28,7 @@ struct K {
         static let nine = "9"
     }
     
-    
-    
-//  MARK: - CAMERA ARKIT
-    struct CameraARKit {
-        static let sizeTarget: CGFloat = 50
-        struct Images {
-            static let imageTarget = "viewfinder"
-            static let imageBallTarget = "circle.fill"
-        }
-    }
-    
+
     
 //  MARK: - CAMERA ARKIT
     struct Proportion {
@@ -122,7 +112,7 @@ struct K {
 
     
     //  MARK: - WHAT BEER
-        struct WhatFlower {
+        struct WhatBeer {
             static let identifierApp = "what_beer"
             static let title = "What Beer"
             
@@ -134,7 +124,7 @@ struct K {
             }
             
             struct Images {
-                static let logo = "beer.fill"
+                static let logo = "vial.viewfinder"
                 static let target = "plus"
             }
         }

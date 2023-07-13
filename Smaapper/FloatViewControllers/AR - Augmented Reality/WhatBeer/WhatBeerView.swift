@@ -27,15 +27,11 @@ class WhatBeerView: ViewBuilder {
         configConstraints()
     }
     
-    deinit {
-        print(#function, #fileID)
-    }
-    
     
     //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
-        let view = TitleFloatView(logo: K.WhatFlower.Images.logo,
-                                  title: K.WhatFlower.title,
+        let view = TitleFloatView(logo: K.WhatBeer.Images.logo,
+                                  title: K.WhatBeer.title,
                                   target: self, closeClosure: #selector(closeWindow),
                                   minimizeClosure: #selector(minimizeWindow))
             .setConstraints { build in
@@ -47,14 +43,12 @@ class WhatBeerView: ViewBuilder {
     }()
     
     lazy var cameraARKit: ARSceneViewBuilder = {
-        let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatFlower.Images.target))
+        let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
             .setWeight(.thin)
         let arKit = ARSceneViewBuilder()
             .setImageTarget(imgTarget)
-            .setAlignmentTarget(.middle, -20)
-//            .setPlaneDetection([.vertical, .horizontal])
+            .setAlignmentTarget(.middle, -30)
             .setEnabledTargetDraggable(false)
-            
             .setBorder { build in
                 build
                     .setCornerRadius(20)

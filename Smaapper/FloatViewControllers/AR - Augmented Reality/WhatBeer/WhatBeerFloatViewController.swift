@@ -8,7 +8,7 @@
 import UIKit
 
 class WhatBeerFloatViewController: FloatViewController {
-    static let identifierApp = K.WhatFlower.identifierApp
+    static let identifierApp = K.WhatBeer.identifierApp
     
     lazy var screen: WhatBeerView = {
         let view = WhatBeerView()
@@ -22,10 +22,10 @@ class WhatBeerFloatViewController: FloatViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setEnabledDraggable(true)
-        setFrameWindow(CGRect(x: K.WhatFlower.FloatView.x,
-                              y: K.WhatFlower.FloatView.y,
-                              width: K.WhatFlower.FloatView.width ,
-                              height: K.WhatFlower.FloatView.height))
+        setFrameWindow(CGRect(x: K.WhatBeer.FloatView.x,
+                              y: K.WhatBeer.FloatView.y,
+                              width: K.WhatBeer.FloatView.width ,
+                              height: K.WhatBeer.FloatView.height))
         configDelegate()
     }
     

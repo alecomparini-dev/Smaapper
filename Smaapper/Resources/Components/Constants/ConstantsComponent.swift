@@ -9,6 +9,18 @@ import Foundation
 
 struct C {
     
+    struct String {
+        static let empty = ""
+    }
+    
+    struct ARSceneView {
+        static let sizeTarget: CGFloat = 50
+        struct Images {
+            static let imageTarget = "viewfinder"
+            static let imageBallTarget = "circle.fill"
+        }
+    }
+    
     struct TextField {
         struct Clearable {
             static let paddingRight: CGFloat = 15
