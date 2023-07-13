@@ -15,8 +15,8 @@ class WhatFlowerCoordinator: Coordinator {
     }
     
     func start(where component: UIView) {
-        let controller = WhatFlowerFloatViewController()
-        controller.setCustomAttribute(WhatFlowerFloatViewController.identifierApp)
+        let controller = WhatBeerFloatViewController()
+        controller.setCustomAttribute(WhatBeerFloatViewController.identifierApp)
         floatNavigationController.present(controller, where: component )
     }
 

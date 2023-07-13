@@ -119,9 +119,9 @@
                                 "rightImage": "chevron.forward"
                             },
                             {
-                                "id": "what_flower",
-                                "title": "What Flower",
-                                "leftImage": "leaf.fill",
+                                "id": "what_beer",
+                                "title": "What Beer",
+                                "leftImage": "mug.fill",
                                 "rightImage": "chevron.forward"
                             },
                             {

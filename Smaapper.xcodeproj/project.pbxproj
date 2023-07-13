@@ -82,9 +82,10 @@
 		025EA5542A5EFF0D0008AC89 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5532A5EFF0D0008AC89 /* FirebaseAuth */; };
 		025EA5562A5EFF0D0008AC89 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5552A5EFF0D0008AC89 /* FirebaseCrashlytics */; };
 		025EA5582A5EFF0D0008AC89 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 025EA5572A5EFF0D0008AC89 /* FirebaseFirestoreSwift */; };
-		025EA55F2A5F12A10008AC89 /* WhatFlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */; };
-		025EA5612A5F12E00008AC89 /* WhatFlowerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */; };
+		025EA55F2A5F12A10008AC89 /* WhatBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */; };
+		025EA5612A5F12E00008AC89 /* WhatBeerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */; };
 		025EA5662A5F276A0008AC89 /* WhatFlowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */; };
+		025EA5752A60A8C40008AC89 /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5742A60A8C40008AC89 /* Beer.mlmodel */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -141,7 +142,7 @@
 		02D06E862A5626ED0020A10B /* ARSphereBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */; };
 		02D06E882A5627610020A10B /* ARGeometryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E872A5627610020A10B /* ARGeometryBuilder.swift */; };
 		02D06E8A2A563B2C0020A10B /* ARNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */; };
-		02D06E8C2A577A870020A10B /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E8B2A577A870020A10B /* Errors.swift */; };
+		02D06E8C2A577A870020A10B /* SmaapperError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E8B2A577A870020A10B /* SmaapperError.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -301,9 +302,10 @@
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
 		025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerView.swift; sourceTree = "<group>"; };
-		025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerFloatViewController.swift; sourceTree = "<group>"; };
+		025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerView.swift; sourceTree = "<group>"; };
+		025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerFloatViewController.swift; sourceTree = "<group>"; };
 		025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerCoordinator.swift; sourceTree = "<group>"; };
+		025EA5742A60A8C40008AC89 /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -360,7 +362,7 @@
 		02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSphereBuilder.swift; sourceTree = "<group>"; };
 		02D06E872A5627610020A10B /* ARGeometryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGeometryBuilder.swift; sourceTree = "<group>"; };
 		02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNodeBuilder.swift; sourceTree = "<group>"; };
-		02D06E8B2A577A870020A10B /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		02D06E8B2A577A870020A10B /* SmaapperError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmaapperError.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -867,6 +869,14 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		025EA5692A60A0C90008AC89 /* CoreML */ = {
+			isa = PBXGroup;
+			children = (
+				025EA5742A60A8C40008AC89 /* Beer.mlmodel */,
+			);
+			path = CoreML;
+			sourceTree = "<group>";
+		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1098,7 +1108,7 @@
 		02BBC7DD2A5D848F00F70A14 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				02D06E8B2A577A870020A10B /* Errors.swift */,
+				02D06E8B2A577A870020A10B /* SmaapperError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -1126,6 +1136,7 @@
 			children = (
 				0234A88929F9FD3A008392EC /* Components */,
 				02FB2C9A2A45C7DE00C7FC98 /* Files */,
+				025EA5692A60A0C90008AC89 /* CoreML */,
 				0234A5F929F9F310008392EC /* Assets.xcassets */,
 				0234A5F029F9F30F008392EC /* AppDelegate.swift */,
 				0234A5FB29F9F310008392EC /* LaunchScreen.storyboard */,
@@ -1436,13 +1447,13 @@
 			path = BMICalculator;
 			sourceTree = "<group>";
 		};
-		02E9742B2A379BD500BF14EE /* WhatFlower */ = {
+		02E9742B2A379BD500BF14EE /* WhatBeer */ = {
 			isa = PBXGroup;
 			children = (
-				025EA55E2A5F12A10008AC89 /* WhatFlowerView.swift */,
-				025EA5602A5F12E00008AC89 /* WhatFlowerFloatViewController.swift */,
+				025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */,
+				025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */,
 			);
-			path = WhatFlower;
+			path = WhatBeer;
 			sourceTree = "<group>";
 		};
 		02E9742C2A379BF100BF14EE /* ARDice */ = {
@@ -1500,7 +1511,7 @@
 				02B4313F2A534A8500A1D7EC /* StickyNote */,
 				02BBC7E42A5D9BCA00F70A14 /* TapeMeasure */,
 				02E974352A379D2B00BF14EE /* InvisibleDevice */,
-				02E9742B2A379BD500BF14EE /* WhatFlower */,
+				02E9742B2A379BD500BF14EE /* WhatBeer */,
 				02E9742C2A379BF100BF14EE /* ARDice */,
 			);
 			path = "AR - Augmented Reality";
@@ -1844,7 +1855,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0234A94629F9FD3A008392EC /* HomeViewController.swift in Sources */,
-				025EA55F2A5F12A10008AC89 /* WhatFlowerView.swift in Sources */,
+				025EA55F2A5F12A10008AC89 /* WhatBeerView.swift in Sources */,
 				02C5F43A2A0BE74D00D75D9F /* RowDropdownMenuModel.swift in Sources */,
 				02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */,
 				0281DAD62A1409CD00E44F04 /* DockCell.swift in Sources */,
@@ -1914,6 +1925,7 @@
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
 				02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */,
 				02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */,
+				025EA5752A60A8C40008AC89 /* Beer.mlmodel in Sources */,
 				02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				02FB2C972A45C33900C7FC98 /* HangmanView.swift in Sources */,
@@ -1930,7 +1942,7 @@
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
 				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
-				02D06E8C2A577A870020A10B /* Errors.swift in Sources */,
+				02D06E8C2A577A870020A10B /* SmaapperError.swift in Sources */,
 				02FB2C992A45C35E00C7FC98 /* HangmanFloatViewController.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
@@ -1970,7 +1982,7 @@
 				02B431432A534ABB00A1D7EC /* StickyNoteFloatViewController.swift in Sources */,
 				02527C632A51B35200F868AE /* Double+Extension.swift in Sources */,
 				0234A93D29F9FD3A008392EC /* Button.swift in Sources */,
-				025EA5612A5F12E00008AC89 /* WhatFlowerFloatViewController.swift in Sources */,
+				025EA5612A5F12E00008AC89 /* WhatBeerFloatViewController.swift in Sources */,
 				02F45AFB2A046F720096A75A /* List.swift in Sources */,
 				024957F02A41F84F0077C36D /* PercentageOperation.swift in Sources */,
 				021848BD2A26C213007E68A4 /* Draggable.swift in Sources */,
