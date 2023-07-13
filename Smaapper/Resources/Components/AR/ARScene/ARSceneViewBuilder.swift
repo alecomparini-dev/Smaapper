@@ -55,12 +55,12 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func freeMemory() {
+        arSceneView = nil
         configuration = nil
 //        delegate = nil
         anchorsLoadWorldMap = nil
         arSceneView?.delegate = nil
         arSceneView?.session.delegate = nil
-        arSceneView = nil
     }
     
     private func initialization() {
@@ -100,9 +100,9 @@ class ARSceneViewBuilder: ViewBuilder {
     
 //  MARK: - LAZY Area
     lazy var targetImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageTarget))
+        let img = ImageViewBuilder(UIImage(systemName: C.ARSceneView.Images.imageTarget))
             .setTintColor(Theme.shared.currentTheme.onSurface)
-            .setSize(K.CameraARKit.sizeTarget)
+            .setSize(C.ARSceneView.sizeTarget)
             .setWeight(.thin)
             .setConstraints { build in
                 build
@@ -117,7 +117,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }()
     
     lazy var targetBallImage: ImageViewBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: K.CameraARKit.Images.imageBallTarget))
+        let img = ImageViewBuilder(UIImage(systemName: C.ARSceneView.Images.imageBallTarget))
             .setTintColor(Theme.shared.currentTheme.onSurface.withAlphaComponent(0.8))
             .setSize(6)
             .setWeight(.thin)
@@ -196,7 +196,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     @discardableResult
-    func setImageTarget(_ img: ImageViewBuilder, _ size: CGFloat = K.CameraARKit.sizeTarget) -> Self {
+    func setImageTarget(_ img: ImageViewBuilder, _ size: CGFloat = C.ARSceneView.sizeTarget) -> Self {
         self.targetImage.setImage(img.view.image)
         self.targetBallImage.setHidden(true)
         targetImage.setSize(size)
@@ -251,13 +251,14 @@ class ARSceneViewBuilder: ViewBuilder {
             await invokeSaveWorldMap()
             addSnapShotToPauseAR()
             await arSceneView?.session.pause()
-            removeARSceneView()
             freeMemory()
         }
+        targetImage.setHidden(true)
+        removeARSceneView()
     }
     
     func addNode(_ node: ARNodeBuilder) {
-        let anchor = ARAnchor(name: node.name ?? K.String.empty, transform: node.simdTransform)
+        let anchor = ARAnchor(name: node.name ?? C.String.empty, transform: node.simdTransform)
         node.setAnchor(anchor)
         arSceneView?.session.add(anchor: anchor)
         arSceneView?.scene.rootNode.addChildNode(node)
@@ -283,12 +284,12 @@ class ARSceneViewBuilder: ViewBuilder {
                 runSession()
             }
         } catch {
-            throw WorldMapError.invalidWorldMap(error: "Invalid worldMap \(error.localizedDescription)" )
+            throw WorldMapError.invalidWorldMap(error: error.localizedDescription)
         }
     }
     
     private func runSession() {
-        print(self.configuration?.initialWorldMap?.anchors.count ?? "" )
+        print(self.configuration?.initialWorldMap?.anchors.count ?? C.String.empty )
         if let configuration {
             self.arSceneView?.session.run(configuration, options: self.options)
         }
@@ -352,10 +353,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func removeARSceneView() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else {return}
-            arSceneView?.removeFromSuperview()
-        }
+        arSceneView?.removeFromSuperview()
     }
     
     private func addSnapShotToPauseAR() {
