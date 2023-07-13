@@ -130,7 +130,6 @@ class ARSceneViewBuilder: ViewBuilder {
     
     
 //  MARK: - GET Area
-    
     func getPositionOnPlaneByTouch(positionTouch: CGPoint, _ alignment: ARRaycastQuery.TargetAlignment) -> simd_float4x4? {
         if let raycastQuery = arSceneView?.raycastQuery(from: positionTouch, allowing: .existingPlaneGeometry, alignment: alignment) {
             if let castResult = arSceneView?.session.raycast(raycastQuery).first {
@@ -149,7 +148,6 @@ class ARSceneViewBuilder: ViewBuilder {
         if let cameraTransform = arSceneView?.session.currentFrame?.camera.transform {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -((centimetersAhead ?? 0.0) / 100.0)
-//            calculatePositionFromTarget(centimetersAhead)
             return matrix_multiply(cameraTransform, translation)
         }
         return nil
@@ -348,7 +346,7 @@ class ARSceneViewBuilder: ViewBuilder {
                 let worldMap = try await getCurrentWorldMap()
                 completion(worldMap, nil)
             } catch let error {
-                completion(nil, error as? Error)
+                completion(nil, error)
             }
         }
     }

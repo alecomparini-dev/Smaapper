@@ -20,10 +20,10 @@ class HomeService: GenericService {
                 let result = try JSONDecoder().decode(DropdownMenuData.self, from: jsonData)
                 completion(result, nil)
             } catch {
-                completion(nil, Error.fileDecodingFailed(error: fileNameJson , error))
+                completion(nil, SmaapperError.fileDecodingFailed(error: fileNameJson , error))
             }
         } else {
-            completion(nil, Error.fileNotFound(error: fileNameJson))
+            completion(nil, SmaapperError.fileNotFound(error: fileNameJson))
         }
     }
     

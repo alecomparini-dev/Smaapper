@@ -1,5 +1,5 @@
 //
-//  WhatFlowerFloatViewController.swift
+//  WhatBeerFloatViewController.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 12/07/23.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class WhatFlowerFloatViewController: FloatViewController {
+class WhatBeerFloatViewController: FloatViewController {
     static let identifierApp = K.WhatFlower.identifierApp
     
-    lazy var screen: WhatFlowerView = {
-        let view = WhatFlowerView()
+    lazy var screen: WhatBeerView = {
+        let view = WhatBeerView()
         return view
     }()
     
@@ -52,7 +52,7 @@ class WhatFlowerFloatViewController: FloatViewController {
 
 //  MARK: - EXTENSION WhatFlowerViewDelegate
 
-extension WhatFlowerFloatViewController: WhatFlowerViewDelegate {
+extension WhatBeerFloatViewController: WhatBeerViewDelegate {
     
     func closeWindow() {
         self.dismiss()

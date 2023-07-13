@@ -121,10 +121,10 @@ struct K {
     }
 
     
-    //  MARK: - WHAT FLOWER
+    //  MARK: - WHAT BEER
         struct WhatFlower {
-            static let identifierApp = "what_flower"
-            static let title = "What Flower"
+            static let identifierApp = "what_beer"
+            static let title = "What Beer"
             
             struct FloatView {
                 static let x: CGFloat = 10
@@ -134,7 +134,7 @@ struct K {
             }
             
             struct Images {
-                static let logo = "leaf.fill"
+                static let logo = "beer.fill"
                 static let target = "plus"
             }
         }
