@@ -109,7 +109,7 @@ struct K {
         
         struct FloatView {
             static let x: CGFloat = 10
-            static let y: CGFloat = 50
+            static let y: CGFloat = (Utils.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
             static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
             static let height: CGFloat = 500
         }
@@ -121,6 +121,24 @@ struct K {
     }
 
     
+    //  MARK: - WHAT FLOWER
+        struct WhatFlower {
+            static let identifierApp = "what_flower"
+            static let title = "What Flower"
+            
+            struct FloatView {
+                static let x: CGFloat = 10
+                static let y: CGFloat = (Utils.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
+                static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
+                static let height: CGFloat = 500
+            }
+            
+            struct Images {
+                static let logo = "leaf.fill"
+                static let target = "plus"
+            }
+        }
+    
 //  MARK: - TAPE MEASURE
     struct TapeMeasure {
         static let identifierApp = "tape_measure"
@@ -128,7 +146,7 @@ struct K {
         
         struct FloatView {
             static let x: CGFloat = 10
-            static let y: CGFloat = 50
+            static let y: CGFloat = (Utils.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
             static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
             static let height: CGFloat = 500
         }
