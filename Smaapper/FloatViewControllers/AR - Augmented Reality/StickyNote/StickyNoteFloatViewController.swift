@@ -181,37 +181,25 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     }
     
     
-    func stateARSceneview(_ state: ARSceneState) {
+    func stateARSceneView(_ state: ARSceneState) {
         switch state {
-        case .waitingWorldMapRecognition:
-            print("RECONHECENDO ............................")
-        case .excessiveMotion:
-            print("FICA QUIETOOOOO")
-        case .done:
-            print("DOOOOOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEEEEEEEEE")
+            case .waitingWorldMapRecognition:
+                print("RECONHECENDO ............................")
+                
+            case .excessiveMotion:
+                print("FICA QUIETOOOOO")
+                
+            case .done:
+                print("DOOOOOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEEEEEEEEE")
+                
+            case .sessionInterrupted:
+                print("SESSAO INTERROMPIDA CARAIO")
+            
         }
     }
     
-    
-    func saveWorldMap(_ worldMapData: Data?, _ error: WorldMapError?) {
-        if error != nil {
-            print("ERRO:", error ?? "")
-            return
-        }
-        if let worldMapData {
-            K.worldMapData = worldMapData
-            print("salvou:", worldMapData.count)
-        }
+    func positionTouch(_ position: CGPoint) {}
 
-    }
-    
-    func positionTouch(_ position: CGPoint) {
-        
-    }
-
-    func loadAnchorWorldMap(_ anchor: ARAnchor) {
-        recreatingStickyNoteOnWorldMap(anchor)
-    }
     
 }
 

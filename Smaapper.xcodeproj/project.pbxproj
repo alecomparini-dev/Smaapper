@@ -522,6 +522,7 @@
 		0234A5EF29F9F30F008392EC /* Smaapper */ = {
 			isa = PBXGroup;
 			children = (
+				02536DB02A61721500C0720C /* Constants */,
 				026F797E2A02A53B003947A6 /* Controllers */,
 				021848B12A262577007E68A4 /* FloatViewControllers */,
 				02E9740F2A336A2600BF14EE /* Coordinator */,
@@ -549,8 +550,6 @@
 		0234A88929F9FD3A008392EC /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				025EA5422A5E08B10008AC89 /* Errors */,
-				02BBC7DC2A5D835E00F70A14 /* Constants */,
 				0234A8B729F9FD3A008392EC /* Alert */,
 				0272FB972A5351B900EF4AE5 /* AR */,
 				0281DAD92A15376D00E44F04 /* Base */,
@@ -558,11 +557,13 @@
 				0234A88A29F9FD3A008392EC /* Border */,
 				0234A8EE29F9FD3A008392EC /* Button */,
 				0281DAE52A1843C200E44F04 /* ClockNeumorphism */,
+				02BBC7DC2A5D835E00F70A14 /* Constants */,
 				0234A8A129F9FD3A008392EC /* Constraints */,
 				020D0E592A1EADA1007F3992 /* Dock */,
 				021848B92A26A4F4007E68A4 /* Draggable */,
 				026F79782A00775E003947A6 /* DropdownMenu */,
 				0234A8BE29F9FD3A008392EC /* Enum */,
+				025EA5422A5E08B10008AC89 /* Errors */,
 				0234A89C29F9FD3A008392EC /* Extension */,
 				02E974102A33949900BF14EE /* FloatNavigationController */,
 				0281DADF2A18087800E44F04 /* FloatViewController */,
@@ -853,6 +854,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		02536DB02A61721500C0720C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				02DC8DB82A50709200561516 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		025E84862A41D50300C2D944 /* TappedButtonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,7 +1150,6 @@
 				0234A5F029F9F30F008392EC /* AppDelegate.swift */,
 				0234A5FB29F9F310008392EC /* LaunchScreen.storyboard */,
 				0234A5F229F9F30F008392EC /* SceneDelegate.swift */,
-				02DC8DB82A50709200561516 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
