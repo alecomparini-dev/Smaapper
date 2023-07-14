@@ -37,10 +37,11 @@ class ARSceneViewBuilder: ViewBuilder {
         static var isCameraElevationControl = true
         static var sessionInterrupted: ARSession?
     }
+    
+    private(set) var isPaused: Bool = false
         
     private var arSceneView: ARSCNView?
     private var configuration: ARWorldTrackingConfiguration?
-    
     private var snapshotARSceneView: UIImageView = UIImageView()
     private var positionTarget: ( aligment: Alignment, padding: CGFloat)?
     private var options: ARSession.RunOptions = []
@@ -154,6 +155,10 @@ class ARSceneViewBuilder: ViewBuilder {
         return try convertWorldMapToData(worldMap)
     }
     
+    func getPrint() -> UIImage? {
+        return arSceneView?.snapshot()
+    }
+    
     
 //  MARK: - SET Properties
 
@@ -228,6 +233,7 @@ class ARSceneViewBuilder: ViewBuilder {
 //  MARK: - ACTIONS
 
     func runSceneView() {
+        isPaused = false
         start()
         runSession()
     }
@@ -243,10 +249,10 @@ class ARSceneViewBuilder: ViewBuilder {
     
     func pauseSceneView()  {
         arSceneView?.session.pause()
-        freeMemory()
         addSnapShotToPauseAR()
-        targetImage.setHidden(true)
         removeARSceneView()
+        targetImage.setHidden(true)
+        isPaused = true
     }
     
     func addNode(_ node: ARNodeBuilder) {
@@ -288,7 +294,7 @@ class ARSceneViewBuilder: ViewBuilder {
             if let worldMap = try await arSceneView?.session.currentWorldMap() {
                 return worldMap
             }
-            throw WorldMapError.worldMapEmptyOrNil()
+            throw WorldMapError.worldMapEmptyOrNil
         } catch let error {
             throw WorldMapError.getCurrentWordlMap(error: error.localizedDescription)
         }
@@ -312,6 +318,7 @@ class ARSceneViewBuilder: ViewBuilder {
 
     private func removeARSceneView() {
         arSceneView?.removeFromSuperview()
+        freeMemory()
     }
     
     private func addSnapShotToPauseAR() {
