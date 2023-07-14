@@ -197,8 +197,8 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     @discardableResult
-    func setImageTarget(_ img: ImageViewBuilder, _ size: CGFloat = C.ARSceneView.sizeTarget) -> Self {
-        self.targetImage.setImage(img.view.image)
+    func setImageTarget(image: ImageViewBuilder, size: CGFloat = C.ARSceneView.sizeTarget) -> Self {
+        self.targetImage.setImage(image.view.image)
         self.targetBallImage.setHidden(true)
         targetImage.setSize(size)
         return self

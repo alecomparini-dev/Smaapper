@@ -56,7 +56,7 @@ class WhatBeerView: ViewBuilder {
         let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
             .setWeight(.thin)
         let arKit = ARSceneViewBuilder()
-            .setImageTarget(imgTarget)
+            .setImageTarget(image: imgTarget, size: 25)
             .setAlignmentTarget(.middle, -20)
             .setEnabledTargetDraggable(false)
             .setBorder { build in
