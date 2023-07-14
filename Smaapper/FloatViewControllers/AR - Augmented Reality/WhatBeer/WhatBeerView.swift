@@ -87,12 +87,11 @@ class WhatBeerView: ViewBuilder {
             .setNeumorphism { build in
                 build
                     .setReferenceColor(Theme.shared.currentTheme.secondary.withAlphaComponent(0.9))
-                    .setShape(.concave)
+                    .setShape(.convex)
                     .setLightPosition(.leftTop)
                     .setIntensity(to: .light, percent: 80)
                     .setIntensity(to: .dark, percent: 90)
-                    .setBlur( percent: 5)
-                    .setDistance(to: .light, percent: 5)
+                    .setDistance(percent: 0)
                     .apply()
             }
             .setConstraints { build in

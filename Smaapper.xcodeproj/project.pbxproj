@@ -74,6 +74,8 @@
 		02527C632A51B35200F868AE /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C622A51B35200F868AE /* Double+Extension.swift */; };
 		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
 		02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */; };
+		02536DB42A61BA4500C0720C /* CoreMLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02536DB32A61BA4500C0720C /* CoreMLError.swift */; };
+		02536DB62A61E63400C0720C /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 02536DB52A61E63400C0720C /* Beer.mlmodel */; };
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */; };
 		025EA5442A5E25D60008AC89 /* WorldMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5432A5E25D60008AC89 /* WorldMapData.swift */; };
@@ -85,7 +87,6 @@
 		025EA55F2A5F12A10008AC89 /* WhatBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */; };
 		025EA5612A5F12E00008AC89 /* WhatBeerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */; };
 		025EA5662A5F276A0008AC89 /* WhatFlowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */; };
-		025EA5752A60A8C40008AC89 /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5742A60A8C40008AC89 /* Beer.mlmodel */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -142,7 +143,7 @@
 		02D06E862A5626ED0020A10B /* ARSphereBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */; };
 		02D06E882A5627610020A10B /* ARGeometryBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E872A5627610020A10B /* ARGeometryBuilder.swift */; };
 		02D06E8A2A563B2C0020A10B /* ARNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */; };
-		02D06E8C2A577A870020A10B /* SmaapperError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E8B2A577A870020A10B /* SmaapperError.swift */; };
+		02D06E8C2A577A870020A10B /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06E8B2A577A870020A10B /* FileError.swift */; };
 		02D5813D2A1F9F4C00150AF9 /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */; };
 		02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */; };
 		02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D581402A1FAC8700150AF9 /* LabelActions.swift */; };
@@ -298,6 +299,8 @@
 		02527C622A51B35200F868AE /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
+		02536DB32A61BA4500C0720C /* CoreMLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLError.swift; sourceTree = "<group>"; };
+		02536DB52A61E63400C0720C /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
@@ -305,7 +308,6 @@
 		025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerView.swift; sourceTree = "<group>"; };
 		025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerFloatViewController.swift; sourceTree = "<group>"; };
 		025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerCoordinator.swift; sourceTree = "<group>"; };
-		025EA5742A60A8C40008AC89 /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -362,7 +364,7 @@
 		02D06E852A5626ED0020A10B /* ARSphereBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSphereBuilder.swift; sourceTree = "<group>"; };
 		02D06E872A5627610020A10B /* ARGeometryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARGeometryBuilder.swift; sourceTree = "<group>"; };
 		02D06E892A563B2C0020A10B /* ARNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARNodeBuilder.swift; sourceTree = "<group>"; };
-		02D06E8B2A577A870020A10B /* SmaapperError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmaapperError.swift; sourceTree = "<group>"; };
+		02D06E8B2A577A870020A10B /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		02D5813C2A1F9F4C00150AF9 /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
 		02D5813E2A1FAA5E00150AF9 /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
 		02D581402A1FAC8700150AF9 /* LabelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelActions.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				02C5F4412A0BF4D100D75D9F /* Models */,
 				02C5F4452A0C1A7200D75D9F /* Service */,
 				02527C612A51B32F00F868AE /* Extensions */,
+				02BBC7DD2A5D848F00F70A14 /* Errors */,
 				02E974222A37890B00BF14EE /* Utilities */,
 				02C5F43F2A0BF3AF00D75D9F /* Resources */,
 				0234A5FE29F9F310008392EC /* Info.plist */,
@@ -881,7 +884,7 @@
 		025EA5692A60A0C90008AC89 /* CoreML */ = {
 			isa = PBXGroup;
 			children = (
-				025EA5742A60A8C40008AC89 /* Beer.mlmodel */,
+				02536DB52A61E63400C0720C /* Beer.mlmodel */,
 			);
 			path = CoreML;
 			sourceTree = "<group>";
@@ -1117,7 +1120,8 @@
 		02BBC7DD2A5D848F00F70A14 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				02D06E8B2A577A870020A10B /* SmaapperError.swift */,
+				02D06E8B2A577A870020A10B /* FileError.swift */,
+				02536DB32A61BA4500C0720C /* CoreMLError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -1192,7 +1196,6 @@
 		02C5F4452A0C1A7200D75D9F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				02BBC7DD2A5D848F00F70A14 /* Errors */,
 				026CF1762A4B1703009CEE6E /* HangmanService */,
 				02C5F4462A0C1A8800D75D9F /* HomeService */,
 				02C5F4492A0C1B1700D75D9F /* GenericService.swift */,
@@ -1880,6 +1883,7 @@
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */,
 				02E9744D2A37F2EA00BF14EE /* BMICalculatorView.swift in Sources */,
+				02536DB62A61E63400C0720C /* Beer.mlmodel in Sources */,
 				02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */,
 				02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
@@ -1933,7 +1937,6 @@
 				020D0E522A1E6E5D007F3992 /* BaseBuilder.swift in Sources */,
 				02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */,
 				02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */,
-				025EA5752A60A8C40008AC89 /* Beer.mlmodel in Sources */,
 				02D581412A1FAC8700150AF9 /* LabelActions.swift in Sources */,
 				02F45AF82A043F820096A75A /* Resize.swift in Sources */,
 				02FB2C972A45C33900C7FC98 /* HangmanView.swift in Sources */,
@@ -1950,7 +1953,7 @@
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
 				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
-				02D06E8C2A577A870020A10B /* SmaapperError.swift in Sources */,
+				02D06E8C2A577A870020A10B /* FileError.swift in Sources */,
 				02FB2C992A45C35E00C7FC98 /* HangmanFloatViewController.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
@@ -2006,6 +2009,7 @@
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
+				02536DB42A61BA4500C0720C /* CoreMLError.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
 				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
