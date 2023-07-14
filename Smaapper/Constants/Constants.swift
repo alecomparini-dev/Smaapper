@@ -126,6 +126,7 @@ struct K {
             struct Images {
                 static let logo = "vial.viewfinder"
                 static let target = "plus"
+                static let captureButton = "camera.viewfinder"
             }
         }
     

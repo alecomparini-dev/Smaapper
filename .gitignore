@@ -1,5 +1,6 @@
 *.vscode
 
+Smaapper/GoogleService-Info.plist
 .DS_Store
 Smaapper/*.DS_Store
 */.DS_Store

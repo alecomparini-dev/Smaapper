@@ -92,7 +92,7 @@ class ButtonBuilder: BaseBuilder {
         let fontSize = self.button.titleLabel?.font.pointSize
         button.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { attrTransformer in
             var attr = attrTransformer
-            attr.font = UIFont.systemFont(ofSize: fontSize ?? 0, weight: weight)
+            attr.font = UIFont.systemFont(ofSize: fontSize ?? .zero, weight: weight)
             return attr
         }
         return self

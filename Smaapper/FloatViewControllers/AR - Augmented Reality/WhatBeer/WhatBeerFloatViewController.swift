@@ -62,4 +62,8 @@ extension WhatBeerFloatViewController: WhatBeerViewDelegate {
         self.minimize
     }
     
+    func captureTapped() {
+        
+    }
+    
 }

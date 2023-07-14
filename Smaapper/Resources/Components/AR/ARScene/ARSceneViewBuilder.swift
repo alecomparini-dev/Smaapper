@@ -14,14 +14,12 @@ enum ARSceneState {
     case waitingWorldMapRecognition
     case excessiveMotion
     case done
-    
+    case sessionInterrupted
 }
 
 protocol ARSceneViewBuilderDelegate: AnyObject {
     func positionTouch(_ position: CGPoint)
-    func saveWorldMap(_ worldMap: Data?, _ error: WorldMapError?)
-    func loadAnchorWorldMap(_ anchor: ARAnchor)
-    func stateARSceneview(_ state: ARSceneState)
+    func stateARSceneView(_ state: ARSceneState)
     func requestCameraElevation(isElevation: Bool)
 }
 
@@ -37,10 +35,9 @@ class ARSceneViewBuilder: ViewBuilder {
     
     struct Control {
         static var isCameraElevationControl = true
-        static var isReadyToSalveWorldMap = false
+        static var sessionInterrupted: ARSession?
     }
-    
-    
+        
     private var arSceneView: ARSCNView?
     private var configuration: ARWorldTrackingConfiguration?
     
@@ -57,7 +54,6 @@ class ARSceneViewBuilder: ViewBuilder {
     private func freeMemory() {
         arSceneView = nil
         configuration = nil
-//        delegate = nil
         anchorsLoadWorldMap = nil
         arSceneView?.delegate = nil
         arSceneView?.session.delegate = nil
@@ -153,6 +149,11 @@ class ARSceneViewBuilder: ViewBuilder {
         return nil
     }
     
+    func getWorldMapData() async throws -> Data {
+        let worldMap = try await getCurrentWorldMap()
+        return try convertWorldMapToData(worldMap)
+    }
+    
     
 //  MARK: - SET Properties
 
@@ -233,12 +234,6 @@ class ARSceneViewBuilder: ViewBuilder {
     
     func runSceneView(loadWorldMapData worldMapData: Data) throws {
         if worldMapData.isEmpty {
-            Task {
-                do {
-                    configuration?.initialWorldMap = try await getCurrentWorldMap()
-                } catch {}
-                
-            }
             runSceneView()
             return
         }
@@ -247,12 +242,9 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     func pauseSceneView()  {
-        Task {
-            await invokeSaveWorldMap()
-            addSnapShotToPauseAR()
-            await arSceneView?.session.pause()
-            freeMemory()
-        }
+        arSceneView?.session.pause()
+        freeMemory()
+        addSnapShotToPauseAR()
         targetImage.setHidden(true)
         removeARSceneView()
     }
@@ -262,13 +254,6 @@ class ARSceneViewBuilder: ViewBuilder {
         node.setAnchor(anchor)
         arSceneView?.session.add(anchor: anchor)
         arSceneView?.scene.rootNode.addChildNode(node)
-        Task {
-            await invokeSaveWorldMap()
-        }
-    }
-    
-    func forceSaveWorldMap() {
-        Task { await invokeSaveWorldMap() }
     }
     
  
@@ -295,30 +280,6 @@ class ARSceneViewBuilder: ViewBuilder {
         }
     }
     
-    private func invokeSaveWorldMap() async {
-        if !Control.isReadyToSalveWorldMap { return }
-        return await withCheckedContinuation( { [weak self] (continuation: CheckedContinuation) in
-            self?.getCurrentWorldMap() { [weak self] worldMap,error in
-                guard let self else {return}
-                if let error {
-                    delegate?.saveWorldMap(nil, WorldMapError.getCurrentWordlMap(error: error.localizedDescription))
-                    return
-                }
-                
-                if let worldMap {
-                    do {
-                        let worldMapData = try convertWorldMapToData(worldMap)
-                        self.delegate?.saveWorldMap(worldMapData, nil)
-                    } catch let error {
-                        delegate?.saveWorldMap(nil, WorldMapError.convertToData(error: error.localizedDescription))
-                    }
-                    return
-                }
-            }
-            continuation.resume()
-        })
-    }
-    
     
 //  MARK: - PRIVATE Area
 
@@ -333,6 +294,13 @@ class ARSceneViewBuilder: ViewBuilder {
         }
     }
     
+    private func getSesstion() -> ARSession {
+        if let session = Control.sessionInterrupted {
+            return session
+        }
+        return arSceneView?.session ?? ARSession()
+    }
+    
     private func convertWorldMapToData(_ worldMap: ARWorldMap) throws -> Data {
         do {
             return try NSKeyedArchiver.archivedData(withRootObject: worldMap, requiringSecureCoding: true)
@@ -341,29 +309,16 @@ class ARSceneViewBuilder: ViewBuilder {
         }
     }
     
-    private func getCurrentWorldMap(completion: @escaping (_ worldMap: ARWorldMap?, _ error: Error? ) -> Void) {
-        Task {
-            do {
-                let worldMap = try await getCurrentWorldMap()
-                completion(worldMap, nil)
-            } catch let error {
-                completion(nil, error)
-            }
-        }
-    }
-    
+
     private func removeARSceneView() {
         arSceneView?.removeFromSuperview()
     }
     
     private func addSnapShotToPauseAR() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self else {return}
-            guard let snapshot = arSceneView?.snapshot() else { return }
-            snapshotARSceneView = UIImageView(image: snapshot)
-            snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
-            view.addSubview(snapshotARSceneView)
-        }
+        guard let snapshot = arSceneView?.snapshot() else { return }
+        snapshotARSceneView = UIImageView(image: snapshot)
+        snapshotARSceneView.frame = arSceneView?.bounds ?? self.view.bounds
+        view.addSubview(snapshotARSceneView)
     }
     
     private func repositionTarget() {
@@ -464,21 +419,19 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private func callInsufficientFeatures(_ camera: ARCamera) {
-        Control.isReadyToSalveWorldMap = false
         invokeRequestCameraElevationIfNeeds(camera)
     }
     
     private func callExcessiveMotion() {
-        delegate?.stateARSceneview(.excessiveMotion)
+        delegate?.stateARSceneView(.excessiveMotion)
     }
     
     private func callCameraNormal() {
         invokeARSceneViewDone()
-        Control.isReadyToSalveWorldMap = true
     }
     
     private func invokeARSceneViewDone() {
-        delegate?.stateARSceneview(.done)
+        delegate?.stateARSceneView(.done)
     }
     
     private func callCameraLimited(_ reason: ARCamera.TrackingState.Reason, _ camera: ARCamera) {
@@ -498,8 +451,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
         
     private func callRelocalizing(_ camera: ARCamera) {
-        Control.isReadyToSalveWorldMap = false
-        delegate?.stateARSceneview(.waitingWorldMapRecognition)
+        delegate?.stateARSceneView(.waitingWorldMapRecognition)
         invokeRequestCameraElevationIfNeeds(camera)
     }
 }
@@ -537,8 +489,10 @@ extension ARSceneViewBuilder: ARSessionDelegate {
     }
         
     func sessionWasInterrupted(_ session: ARSession) {
-        Task { await invokeSaveWorldMap() }
+        Control.sessionInterrupted = session
+        delegate?.stateARSceneView(.sessionInterrupted)
     }
+    
 }
 
 

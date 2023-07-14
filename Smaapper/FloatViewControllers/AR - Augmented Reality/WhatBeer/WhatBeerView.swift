@@ -10,6 +10,7 @@ import UIKit
 protocol WhatBeerViewDelegate: AnyObject {
     func closeWindow()
     func minimizeWindow()
+    func captureTapped()
 }
 
 
@@ -42,16 +43,26 @@ class WhatBeerView: ViewBuilder {
         return view
     }()
     
+
+//TODO:- BOM EXEMPLO PARA TENTAR CORRIGIR O PROBLEMA DA BORDA E DO SHADOW
+//            .setShadow({ build in
+//                build
+//                    .setColor(Theme.shared.currentTheme.surfaceContainerHighest)
+//                    .setOffset(width: 0, height: -5)
+//                    .setRadius(8)
+//                    .apply()
+//            })
     lazy var cameraARKit: ARSceneViewBuilder = {
         let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
             .setWeight(.thin)
         let arKit = ARSceneViewBuilder()
             .setImageTarget(imgTarget)
-            .setAlignmentTarget(.middle, -30)
+            .setAlignmentTarget(.middle, -20)
             .setEnabledTargetDraggable(false)
             .setBorder { build in
                 build
                     .setCornerRadius(20)
+                    .setWhichCornersWillBeRounded([.bottom])
             }
             .setConstraints { build in
                 build
@@ -61,6 +72,40 @@ class WhatBeerView: ViewBuilder {
         return arKit
     }()
     
+    lazy var captureImage: ButtonImageBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.captureButton))
+            .setContentMode(.center)
+        let btn = ButtonImageBuilder(img.view)
+            .setTintColor(Theme.shared.currentTheme.onSurface)
+            .setImageWeight(.thin)
+            .setImageSize(22)
+            .setImagePadding(0)
+            .setBorder({ build in
+                build
+                    .setCornerRadius(10)
+            })
+            .setNeumorphism { build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.secondary.withAlphaComponent(0.9))
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 80)
+                    .setIntensity(to: .dark, percent: 90)
+                    .setBlur( percent: 5)
+                    .setDistance(to: .light, percent: 5)
+                    .apply()
+            }
+            .setConstraints { build in
+                build
+                    .setBottom.setTrailing.equalToSuperView(15)
+                    .setWidth.setHeight.equalToConstant(50)
+            }
+            .setActions { build in
+                build
+                    .setTarget(self, #selector(captureTapped), .touchUpInside)
+            }
+        return btn
+    }()
 
     
 //  MARK: - OBJCT Area
@@ -70,6 +115,10 @@ class WhatBeerView: ViewBuilder {
     
     @objc private func closeWindow() {
         delegate?.closeWindow()
+    }
+    
+    @objc private func captureTapped() {
+        delegate?.captureTapped()
     }
     
     
@@ -93,11 +142,13 @@ class WhatBeerView: ViewBuilder {
     private func addElements() {
         titleView.add(insideTo: self.view)
         cameraARKit.add(insideTo: self.view)
+        captureImage.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         cameraARKit.applyConstraint()
+        captureImage.applyConstraint()
     }
     
 }
