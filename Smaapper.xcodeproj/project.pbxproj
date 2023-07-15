@@ -75,7 +75,6 @@
 		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
 		02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */; };
 		02536DB42A61BA4500C0720C /* CoreMLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02536DB32A61BA4500C0720C /* CoreMLError.swift */; };
-		02536DBA2A6221F900C0720C /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 02536DB92A6221F900C0720C /* Beer.mlmodel */; };
 		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
 		025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */; };
 		025EA5442A5E25D60008AC89 /* WorldMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5432A5E25D60008AC89 /* WorldMapData.swift */; };
@@ -87,6 +86,7 @@
 		025EA55F2A5F12A10008AC89 /* WhatBeerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */; };
 		025EA5612A5F12E00008AC89 /* WhatBeerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */; };
 		025EA5662A5F276A0008AC89 /* WhatFlowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */; };
+		025F0E682A63273900DF2A5A /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E672A63273900DF2A5A /* Beer.mlmodel */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -300,7 +300,6 @@
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
 		02536DB32A61BA4500C0720C /* CoreMLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLError.swift; sourceTree = "<group>"; };
-		02536DB92A6221F900C0720C /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
@@ -308,6 +307,7 @@
 		025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerView.swift; sourceTree = "<group>"; };
 		025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerFloatViewController.swift; sourceTree = "<group>"; };
 		025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerCoordinator.swift; sourceTree = "<group>"; };
+		025F0E672A63273900DF2A5A /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -884,7 +884,7 @@
 		025EA5692A60A0C90008AC89 /* CoreML */ = {
 			isa = PBXGroup;
 			children = (
-				02536DB92A6221F900C0720C /* Beer.mlmodel */,
+				025F0E672A63273900DF2A5A /* Beer.mlmodel */,
 			);
 			path = CoreML;
 			sourceTree = "<group>";
@@ -1883,7 +1883,7 @@
 				0234A91D29F9FD3A008392EC /* StartOfConstraintsSizeFlow.swift in Sources */,
 				025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */,
 				02E9744D2A37F2EA00BF14EE /* BMICalculatorView.swift in Sources */,
-				02536DBA2A6221F900C0720C /* Beer.mlmodel in Sources */,
+				025F0E682A63273900DF2A5A /* Beer.mlmodel in Sources */,
 				02B792672A1EE427006CEE8E /* TextFieldImageBuilder.swift in Sources */,
 				02D5814D2A20057700150AF9 /* TapGesture.swift in Sources */,
 				0234A90F29F9FD3A008392EC /* UIView+Extension+Component.swift in Sources */,
