@@ -92,15 +92,29 @@ class WhatBeerFloatViewController: FloatViewController {
     
     private func createRequestModel(_ model: VNCoreMLModel) -> VNCoreMLRequest{
         let request = VNCoreMLRequest(model: model) { request, error in
+            var identifier:[String] = []
             if let results = request.results as? [VNClassificationObservation] {
-                print(results)
                 results.forEach { result in
-//                    print(result.identifier, result.confidence)
-                    if result.confidence > 0.90 {
-                        print("############### \(result.identifier) !!!!")
+                    print("\(result.identifier): ", result.confidence)
+                    switch result.confidence {
+                    case 0.98...1.0:
+                        identifier.append(result.identifier)
+                    case 0.95...0.979:
+                        identifier.append(result.identifier)
+                    case 0.90...0.949:
+                        identifier.append(result.identifier)
+                        
+                    default:
+                        break
+                    }
+                    if result.confidence > 0.98 {
+                        
                     }
                 }
             }
+            
+            print(identifier)
+            
         }
         return request
     }
