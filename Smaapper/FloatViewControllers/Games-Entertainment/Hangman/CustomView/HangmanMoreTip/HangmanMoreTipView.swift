@@ -71,6 +71,8 @@ class HangmanMoreTipView: View {
         return btn
     }()
     
+    
+    
 //  MARK: - @OBJC Area
     @objc private func closeMoreTipTapped() {
         delegate?.closeMoreTipTapped()
