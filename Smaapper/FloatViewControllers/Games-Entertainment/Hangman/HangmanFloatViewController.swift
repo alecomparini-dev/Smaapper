@@ -382,7 +382,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func showMoreTipsView() {
         screen.createHangmanMoreTipViewController(getCurrentWord().tips)
-        screen.hangmanMoreTipViewController?.delegate = self
+        screen.hangmanMoreTipViewController?.setDelegate(self)
     }
     
     private func positionMoreTip() {
@@ -472,7 +472,7 @@ extension HangmanFloatViewController: HangmanKeyboardViewDelegate {
 
 
 //  MARK: - EXTENSION HangmanKeyboardViewDelegate
-extension HangmanFloatViewController: HangmanMoreTipViewControllerDelegate {
+extension HangmanFloatViewController: HangmanMoreTipViewDelegate {
     func didSelectRow(_ section: Int, _ row: Int) {
         
     }
