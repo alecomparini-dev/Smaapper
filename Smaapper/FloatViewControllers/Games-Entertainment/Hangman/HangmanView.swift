@@ -16,7 +16,7 @@ protocol HangmanViewDelegate: AnyObject {
 class HangmanView: ViewBuilder {
     
     weak var delegate: HangmanViewDelegate?
-    private(set) weak var hangmanMoreTipViewController: HangmanMoreTipViewController?
+    private(set) var hangmanMoreTipViewController: HangmanMoreTipViewController?
     
     override init() {
         super.init()
@@ -30,7 +30,8 @@ class HangmanView: ViewBuilder {
     }
     
     deinit {
-        print("cario aqui tb")
+        hangmanMoreTipViewController = nil
+        delegate = nil
     }
     
     

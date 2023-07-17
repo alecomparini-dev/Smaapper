@@ -7,14 +7,7 @@
 
 import UIKit
 
-protocol HangmanMoreTipViewControllerDelegate: AnyObject {
-    func didSelectRow(_ section: Int, _ row: Int )
-    func closeMoreTipTapped()
-}
-
 class HangmanMoreTipViewController: ViewBuilder {
-    
-    weak var delegate: HangmanMoreTipViewControllerDelegate?
     
     private var tips: [String] = []
     
@@ -32,8 +25,13 @@ class HangmanMoreTipViewController: ViewBuilder {
     private func initialization() {
         loadCustomView()
         configListTip()
-        configDelegate()
     }
+
+//  MARK: - SET DELEGATE
+    func setDelegate(_ delegate: HangmanMoreTipViewDelegate) {
+        customView.delegate = delegate
+    }
+    
     
 //  MARK: - PRIVATE Area
     private func loadCustomView() {
@@ -73,22 +71,6 @@ class HangmanMoreTipViewController: ViewBuilder {
         }
     }
     
-    private func configDelegate() {
-        customView.delegate = self
-    }
     
 }
 
-
-//  MARK: - EXTENSION Delegate - HangmanMoreTipViewDelegate
-extension HangmanMoreTipViewController:HangmanMoreTipViewDelegate {
-    func didSelectRow(_ section: Int, _ row: Int) {
-        delegate?.didSelectRow(section, row)
-    }
-    
-    func closeMoreTipTapped() {
-        delegate?.closeMoreTipTapped()
-    }
-    
-    
-}
