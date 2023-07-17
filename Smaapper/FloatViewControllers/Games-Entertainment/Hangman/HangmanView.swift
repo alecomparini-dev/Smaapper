@@ -16,7 +16,7 @@ protocol HangmanViewDelegate: AnyObject {
 class HangmanView: ViewBuilder {
     
     weak var delegate: HangmanViewDelegate?
-    private(set) var hangmanMoreTipViewController: HangmanMoreTipViewController?
+    private(set) weak var hangmanMoreTipViewController: HangmanMoreTipViewController?
     
     override init() {
         super.init()
@@ -28,6 +28,11 @@ class HangmanView: ViewBuilder {
         addElements()
         configConstraints()
     }
+    
+    deinit {
+        print("cario aqui tb")
+    }
+    
     
     
 //  MARK: - LAZY Area

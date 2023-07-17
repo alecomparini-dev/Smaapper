@@ -87,6 +87,9 @@
 		025EA5612A5F12E00008AC89 /* WhatBeerFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */; };
 		025EA5662A5F276A0008AC89 /* WhatFlowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */; };
 		025F0E682A63273900DF2A5A /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E672A63273900DF2A5A /* Beer.mlmodel */; };
+		025F0E6C2A6570A800DF2A5A /* ShowResultPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E6B2A6570A800DF2A5A /* ShowResultPredictionView.swift */; };
+		025F0E6F2A65769500DF2A5A /* WhatBeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */; };
+		025F0E712A6579B400DF2A5A /* ShowResultPredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E702A6579B400DF2A5A /* ShowResultPredictionViewController.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -193,7 +196,7 @@
 		02F45AFD2A046F910096A75A /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F45AFC2A046F910096A75A /* ListCell.swift */; };
 		02FB2C972A45C33900C7FC98 /* HangmanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2C962A45C33900C7FC98 /* HangmanView.swift */; };
 		02FB2C992A45C35E00C7FC98 /* HangmanFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2C982A45C35E00C7FC98 /* HangmanFloatViewController.swift */; };
-		02FB2C9D2A45C81700C7FC98 /* HangmanWords.json in Resources */ = {isa = PBXBuildFile; fileRef = 02FB2C9C2A45C81700C7FC98 /* HangmanWords.json */; };
+		02FB2C9D2A45C81700C7FC98 /* HangmanWordsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 02FB2C9C2A45C81700C7FC98 /* HangmanWordsData.json */; };
 		02FB2C9F2A45D1BB00C7FC98 /* HangmanCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2C9E2A45D1BB00C7FC98 /* HangmanCoordinator.swift */; };
 		02FB2CA22A45D92200C7FC98 /* GallowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CA12A45D92200C7FC98 /* GallowsView.swift */; };
 		02FB2CA42A45E11300C7FC98 /* GallowsDollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FB2CA32A45E11300C7FC98 /* GallowsDollView.swift */; };
@@ -308,6 +311,9 @@
 		025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerFloatViewController.swift; sourceTree = "<group>"; };
 		025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerCoordinator.swift; sourceTree = "<group>"; };
 		025F0E672A63273900DF2A5A /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
+		025F0E6B2A6570A800DF2A5A /* ShowResultPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultPredictionView.swift; sourceTree = "<group>"; };
+		025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerData.swift; sourceTree = "<group>"; };
+		025F0E702A6579B400DF2A5A /* ShowResultPredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultPredictionViewController.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -414,7 +420,7 @@
 		02F45AFC2A046F910096A75A /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		02FB2C962A45C33900C7FC98 /* HangmanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanView.swift; sourceTree = "<group>"; };
 		02FB2C982A45C35E00C7FC98 /* HangmanFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanFloatViewController.swift; sourceTree = "<group>"; };
-		02FB2C9C2A45C81700C7FC98 /* HangmanWords.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HangmanWords.json; sourceTree = "<group>"; };
+		02FB2C9C2A45C81700C7FC98 /* HangmanWordsData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = HangmanWordsData.json; sourceTree = "<group>"; };
 		02FB2C9E2A45D1BB00C7FC98 /* HangmanCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanCoordinator.swift; sourceTree = "<group>"; };
 		02FB2CA12A45D92200C7FC98 /* GallowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsView.swift; sourceTree = "<group>"; };
 		02FB2CA32A45E11300C7FC98 /* GallowsDollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallowsDollView.swift; sourceTree = "<group>"; };
@@ -889,6 +895,31 @@
 			path = CoreML;
 			sourceTree = "<group>";
 		};
+		025F0E692A656F9E00DF2A5A /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E6A2A65701600DF2A5A /* ShowResultPredictionView */,
+			);
+			name = CustomView;
+			sourceTree = "<group>";
+		};
+		025F0E6A2A65701600DF2A5A /* ShowResultPredictionView */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E6B2A6570A800DF2A5A /* ShowResultPredictionView.swift */,
+				025F0E702A6579B400DF2A5A /* ShowResultPredictionViewController.swift */,
+			);
+			name = ShowResultPredictionView;
+			sourceTree = "<group>";
+		};
+		025F0E6D2A65712000DF2A5A /* WhatBeer */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */,
+			);
+			path = WhatBeer;
+			sourceTree = "<group>";
+		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1148,7 +1179,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A88929F9FD3A008392EC /* Components */,
-				02FB2C9A2A45C7DE00C7FC98 /* Files */,
+				02FB2C9A2A45C7DE00C7FC98 /* Json */,
 				025EA5692A60A0C90008AC89 /* CoreML */,
 				0234A5F929F9F310008392EC /* Assets.xcassets */,
 				0234A5F029F9F30F008392EC /* AppDelegate.swift */,
@@ -1461,6 +1492,7 @@
 		02E9742B2A379BD500BF14EE /* WhatBeer */ = {
 			isa = PBXGroup;
 			children = (
+				025F0E692A656F9E00DF2A5A /* CustomView */,
 				025EA55E2A5F12A10008AC89 /* WhatBeerView.swift */,
 				025EA5602A5F12E00008AC89 /* WhatBeerFloatViewController.swift */,
 			);
@@ -1610,19 +1642,20 @@
 			path = Hangman;
 			sourceTree = "<group>";
 		};
-		02FB2C9A2A45C7DE00C7FC98 /* Files */ = {
+		02FB2C9A2A45C7DE00C7FC98 /* Json */ = {
 			isa = PBXGroup;
 			children = (
+				025F0E6D2A65712000DF2A5A /* WhatBeer */,
 				02FB2C9B2A45C7E800C7FC98 /* HangmanWords */,
 				02C5F44B2A0C1C9300D75D9F /* DropdownMenu */,
 			);
-			path = Files;
+			path = Json;
 			sourceTree = "<group>";
 		};
 		02FB2C9B2A45C7E800C7FC98 /* HangmanWords */ = {
 			isa = PBXGroup;
 			children = (
-				02FB2C9C2A45C81700C7FC98 /* HangmanWords.json */,
+				02FB2C9C2A45C81700C7FC98 /* HangmanWordsData.json */,
 			);
 			path = HangmanWords;
 			sourceTree = "<group>";
@@ -1782,7 +1815,7 @@
 			files = (
 				024F18AE2A11527000A39584 /* DropdownMenuData-Orig.json in Resources */,
 				02C5F44D2A0C1CAA00D75D9F /* DropdownMenuData.json in Resources */,
-				02FB2C9D2A45C81700C7FC98 /* HangmanWords.json in Resources */,
+				02FB2C9D2A45C81700C7FC98 /* HangmanWordsData.json in Resources */,
 				0234A5FD29F9F310008392EC /* LaunchScreen.storyboard in Resources */,
 				0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */,
 				025EA5462A5EE2BE0008AC89 /* GoogleService-Info.plist in Resources */,
@@ -1954,6 +1987,7 @@
 				026F797D2A0172D0003947A6 /* NeumorphismBuilder.swift in Sources */,
 				0234A91F29F9FD3A008392EC /* Choose.swift in Sources */,
 				02D06E8C2A577A870020A10B /* FileError.swift in Sources */,
+				025F0E712A6579B400DF2A5A /* ShowResultPredictionViewController.swift in Sources */,
 				02FB2C992A45C35E00C7FC98 /* HangmanFloatViewController.swift in Sources */,
 				024F18A92A0FDB4F00A39584 /* CategoriesViewController.swift in Sources */,
 				0234A90329F9FD3A008392EC /* BorderBuilder.swift in Sources */,
@@ -2005,6 +2039,7 @@
 				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
 				026C147F2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift in Sources */,
 				02D06E862A5626ED0020A10B /* ARSphereBuilder.swift in Sources */,
+				025F0E6C2A6570A800DF2A5A /* ShowResultPredictionView.swift in Sources */,
 				02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */,
 				02D5813F2A1FAA5E00150AF9 /* ImageViewBuilder.swift in Sources */,
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
@@ -2021,6 +2056,7 @@
 				02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */,
 				026CF16A2A49D78E009CEE6E /* HangmanKeyboardLetterView.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
+				025F0E6F2A65769500DF2A5A /* WhatBeerData.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */,

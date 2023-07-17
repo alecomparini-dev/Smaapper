@@ -73,14 +73,12 @@ class WhatBeerFloatViewController: FloatViewController {
         throw CoreMLError.convertToCIImage(error: "Unable to capture image.")
     }
     
-    
     private func convertToCIImage(_ image: UIImage) throws -> CIImage {
         if let ciImage = CIImage(image: image){
             return ciImage
         }
         throw CoreMLError.convertToCIImage(error: "Unable to convert image to CIImage")
     }
-    
     
     private func loadBeerModel() throws -> VNCoreMLModel {
         do {
@@ -95,7 +93,6 @@ class WhatBeerFloatViewController: FloatViewController {
             var identifier:[String] = []
             if let results = request.results as? [VNClassificationObservation] {
                 results.forEach { result in
-                    print("\(result.identifier): ", result.confidence)
                     switch result.confidence {
                     case 0.98...1.0:
                         identifier.append(result.identifier)
@@ -103,17 +100,16 @@ class WhatBeerFloatViewController: FloatViewController {
                         identifier.append(result.identifier)
                     case 0.90...0.949:
                         identifier.append(result.identifier)
-                        
+                    case 0.80...0.899:
+                        identifier.append(result.identifier)
                     default:
                         break
                     }
-                    if result.confidence > 0.98 {
-                        
-                    }
                 }
             }
-            
+            print("##############################################################################")
             print(identifier)
+            print("##############################################################################")
             
         }
         return request

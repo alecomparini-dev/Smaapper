@@ -11,15 +11,14 @@ import UIKit
 class HangmanFloatViewController: FloatViewController {
     static let identifierApp = K.Hangman.identifierApp
     
-    private let viewModel: HangmanViewModel = HangmanViewModel()
+    private var lastPlayedWord: String = "arbitrio"
     
+    private var viewModel: HangmanViewModel? = HangmanViewModel()
     private let errorCountToEndGame: Int8 = K.Hangman.errorCountToEndGame
     private let quantityLetterByLine = K.Hangman.quantityLetterByLine
-    
     private var indicesToReveal: [Int] = []
     private var errorLetters: Int8 = 0
     private var successLetterIndex: Set<Int> = []
-    private var lastPlayedWord: String = "arbitrio"
     private var lettersInWord: [HangmanLetterInWordView] = []
     private var indexMatchInWordFromChosenLetter: [Int] = []
     private var isEndGame: Bool = false
@@ -52,6 +51,17 @@ class HangmanFloatViewController: FloatViewController {
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
         removeShadow()
+    }
+    
+    deinit {
+        print("chamou este também")
+        chosenLetterFromKeyboard = nil
+        hangmanWords = []
+        viewModel = nil
+        indicesToReveal = []
+        successLetterIndex = []
+        lettersInWord = []
+        indexMatchInWordFromChosenLetter = []
     }
     
     
@@ -94,7 +104,7 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func fetchWords() {
-        viewModel.fetchWordsFromLastPlayedWordInJson(.file, self.lastPlayedWord) { [weak self] result, error in
+        viewModel?.fetchWordsFromLastPlayedWordInJson(.file, self.lastPlayedWord) { [weak self] result, error in
             guard let self else {return}
             if error != nil {
                 print(#function, #file, error?.localizedDescription ?? "")
