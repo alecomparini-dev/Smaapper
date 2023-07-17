@@ -44,6 +44,11 @@ class WhatBeerView: ViewBuilder {
     }()
     
 
+    lazy var cameraARKit: ARSceneViewBuilder = {
+        let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
+            .setWeight(.thin)
+        let arKit = ARSceneViewBuilder()
+
 //TODO:- BOM EXEMPLO PARA TENTAR CORRIGIR O PROBLEMA DA BORDA E DO SHADOW
 //            .setShadow({ build in
 //                build
@@ -52,10 +57,6 @@ class WhatBeerView: ViewBuilder {
 //                    .setRadius(8)
 //                    .apply()
 //            })
-    lazy var cameraARKit: ARSceneViewBuilder = {
-        let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
-            .setWeight(.thin)
-        let arKit = ARSceneViewBuilder()
             .setImageTarget(image: imgTarget, size: 25)
             .setAlignmentTarget(.middle, -20)
             .setEnabledTargetDraggable(false)
@@ -105,6 +106,11 @@ class WhatBeerView: ViewBuilder {
             }
         return btn
     }()
+    
+//    lazy var showResult: <#type name#> = {
+//        <#statements#>
+//        return <#value#>
+//    }()
 
     
 //  MARK: - OBJCT Area

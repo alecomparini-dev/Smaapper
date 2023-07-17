@@ -23,7 +23,7 @@ class FloatViewController: BaseBuilder {
     private(set) var originalCenter: CGPoint = .zero
     private(set) var active: Bool = false
     
-    private unowned var manager: FloatViewControllerManager = FloatViewControllerManager.instance
+    private weak var manager: FloatViewControllerManager? = FloatViewControllerManager.instance
     private var _actions: FloatViewControllerActions?
     
     private var _view: View = View()
@@ -33,6 +33,17 @@ class FloatViewController: BaseBuilder {
             self._view = newValue
             super.component = self._view
         }
+    }
+    
+    deinit {
+        print("ESSE CHAMOU MESMO")
+        self.manager = nil
+        self._actions = nil
+        self.customAttribute = nil
+        self._superView = nil
+        sizeWindow = nil
+        frameWindow = nil
+        textFields = []
     }
     
     init(frame: CGRect ) {
@@ -52,6 +63,8 @@ class FloatViewController: BaseBuilder {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+
     
     
 //  MARK: - PRESENT and DISMISS FloatWindow
@@ -90,61 +103,61 @@ class FloatViewController: BaseBuilder {
     func viewDidLoad() {
         addFloatWindow()
         setHierarchyVisualization()
-        manager.addFloatView(self)
+        manager?.addFloatView(self)
         configTouchForActivateWindow()
-        manager.enableDeactivationFloatViewWhenTappedSuperview(superView)
-        manager.delegate?.viewDidLoad(self)
+        manager?.enableDeactivationFloatViewWhenTappedSuperview(superView)
+        manager?.delegate?.viewDidLoad(self)
     }
 
     func viewWillAppear() {
-        manager.delegate?.viewWillAppear(self)
+        manager?.delegate?.viewWillAppear(self)
     }
     
 
     func viewWillLayoutSubviews() {
-        manager.delegate?.viewWillLayoutSubviews(self)
+        manager?.delegate?.viewWillLayoutSubviews(self)
     }
     
     func viewDidLayoutSubviews(){
-        manager.delegate?.viewDidLayoutSubviews(self)
+        manager?.delegate?.viewDidLayoutSubviews(self)
     }
     
     func viewDidAppear() {
         setPositionFloatView()
         self.view.isHidden = false
-        manager.delegate?.viewDidAppear(self)
+        manager?.delegate?.viewDidAppear(self)
     }
     
     
 //  MARK: - DRAGGING
     func viewWillDrag() {
-        manager.delegate?.viewWillDrag(self)
+        manager?.delegate?.viewWillDrag(self)
     }
     
     func viewDragging() {
-        manager.delegate?.viewDragging(self)
+        manager?.delegate?.viewDragging(self)
     }
     
     func viewDidDrag(){
         setPositionFloatView()
-        manager.delegate?.viewDidDrag(self)
+        manager?.delegate?.viewDidDrag(self)
     }
 
     
 //  MARK: - ACTIVE / DEACTIVE
 
     func viewShouldSelectFloatView() {
-        manager.delegate?.viewShouldSelectFloatView(self)
+        manager?.delegate?.viewShouldSelectFloatView(self)
     }
     
     func viewDidSelectFloatView() {
         configRepositionFloatViewWhenShowKeyboard()
-        manager.delegate?.viewDidSelectFloatView(self)
+        manager?.delegate?.viewDidSelectFloatView(self)
     }
     
     func viewDidDeselectFloatView() {
         unregisterKeyboardNotifications()
-        manager.delegate?.viewDidDeselectFloatView(self)
+        manager?.delegate?.viewDidDeselectFloatView(self)
     }
     
     
@@ -156,38 +169,38 @@ class FloatViewController: BaseBuilder {
     
     func viewWillMinimize() {
         setPositionFloatView()
-        manager.delegate?.viewWillMinimize(self)
+        manager?.delegate?.viewWillMinimize(self)
     }
     
     func viewDidMinimize() {
         view.isHidden = true
         isMinimized = true
-        manager.removeDeactivationFloatViewWhenTappedSuperview()
-        manager.delegate?.viewDidMinimize(self)
+        manager?.removeDeactivationFloatViewWhenTappedSuperview()
+        manager?.delegate?.viewDidMinimize(self)
     }
     
     func viewWillRestore() {
         view.isHidden = false
-        manager.delegate?.viewWillRestore(self)
+        manager?.delegate?.viewWillRestore(self)
     }
 
     func viewDidRestore() {
         isMinimized = false
-        manager.enableDeactivationFloatViewWhenTappedSuperview(superView)
-        manager.delegate?.viewDidRestore(self)
+        manager?.enableDeactivationFloatViewWhenTappedSuperview(superView)
+        manager?.delegate?.viewDidRestore(self)
     }
     
 
 //  MARK: - Disappear Window
     func viewWillDisappear() {
-        manager.delegate?.viewWillDisappear(self)
+        manager?.delegate?.viewWillDisappear(self)
     }
 
     func viewDidDisappear() {
         removeFloatView()
-        manager.delegate?.viewDidDisappear(self)
-        manager.verifyAllClosedWindows()
-        manager.removeDeactivationFloatViewWhenTappedSuperview()
+        manager?.delegate?.viewDidDisappear(self)
+        manager?.verifyAllClosedWindows()
+        manager?.removeDeactivationFloatViewWhenTappedSuperview()
     }
     
     
@@ -274,7 +287,7 @@ class FloatViewController: BaseBuilder {
     
     var select: Void {
         if active { return }
-        manager.floatViewSelected()?.deselect
+        manager?.floatViewSelected()?.deselect
         viewShouldSelectFloatView()
         bringToFront
         active = true
@@ -296,7 +309,7 @@ class FloatViewController: BaseBuilder {
     }
     
     private func removeFloatView() {
-        manager.removeWindowToManager(self)
+        manager?.removeWindowToManager(self)
         self.view.removeFromSuperview()
         _actions = nil
         _superView = nil

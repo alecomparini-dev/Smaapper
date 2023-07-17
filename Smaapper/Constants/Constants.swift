@@ -157,6 +157,11 @@ struct K {
         static let quantityLetterByLine: Int = 10
         static let angleDollFailure: Double = 75
         
+        struct Service {
+            static let fileNameJson = "HangmanWordsData"
+            static let extensionJson = "json"
+        }
+        
         struct FloatView {
             static let x: CGFloat = 30
             static let y: CGFloat = 30

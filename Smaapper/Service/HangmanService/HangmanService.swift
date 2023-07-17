@@ -9,12 +9,8 @@ import Foundation
 
 class HangmanService: GenericService {
     
-    private let fileNameJson = "HangmanWords"
-    private let extensionJson = "json"
-    
-    
     func fetchWordsFromLastPlayedWordInJson(lastPlayedWord: String, completion: @escaping (_ result: [HangmanWord], _ error: Error?) -> Void) {
-        if let jsonFileUrl = Bundle.main.url(forResource: fileNameJson, withExtension: extensionJson) {
+        if let jsonFileUrl = Bundle.main.url(forResource: K.Hangman.Service.fileNameJson, withExtension: K.Hangman.Service.extensionJson) {
             do {
                 let jsonData = try Data(contentsOf: jsonFileUrl)
                 let result = try JSONDecoder().decode(HangmanData.self, from: jsonData)
@@ -25,10 +21,10 @@ class HangmanService: GenericService {
                 }
                 completion(hangmanWord, nil)
             } catch {
-                completion([], FileError.fileDecodingFailed(error: fileNameJson , error))
+                completion([], FileError.fileDecodingFailed(error: K.Hangman.Service.fileNameJson , error))
             }
         } else {
-            completion([], FileError.fileNotFound(error: fileNameJson))
+            completion([], FileError.fileNotFound(error: K.Hangman.Service.fileNameJson))
         }
     }
     
