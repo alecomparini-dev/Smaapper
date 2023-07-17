@@ -92,6 +92,7 @@
 		025F0E782A65BDD600DF2A5A /* WhatBeerData.json in Resources */ = {isa = PBXBuildFile; fileRef = 025F0E772A65BDD600DF2A5A /* WhatBeerData.json */; };
 		025F0E7B2A65BE9600DF2A5A /* WhatBeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7A2A65BE9600DF2A5A /* WhatBeerData.swift */; };
 		025F0E7D2A65BF6100DF2A5A /* OriginatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */; };
+		025F0E802A65D7DE00DF2A5A /* AnimationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7F2A65D7DE00DF2A5A /* AnimationBuilder.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -318,6 +319,7 @@
 		025F0E772A65BDD600DF2A5A /* WhatBeerData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WhatBeerData.json; sourceTree = "<group>"; };
 		025F0E7A2A65BE9600DF2A5A /* WhatBeerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerData.swift; sourceTree = "<group>"; };
 		025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginatedData.swift; sourceTree = "<group>"; };
+		025F0E7F2A65D7DE00DF2A5A /* AnimationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationBuilder.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				0234A8B729F9FD3A008392EC /* Alert */,
+				025F0E7E2A65D7CA00DF2A5A /* Animation */,
 				0272FB972A5351B900EF4AE5 /* AR */,
 				0281DAD92A15376D00E44F04 /* Base */,
 				0281DADC2A16682B00E44F04 /* Blur */,
@@ -931,6 +934,14 @@
 				025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */,
 			);
 			path = WhatBeerData;
+			sourceTree = "<group>";
+		};
+		025F0E7E2A65D7CA00DF2A5A /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E7F2A65D7DE00DF2A5A /* AnimationBuilder.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
@@ -2062,6 +2073,7 @@
 				0234A91A29F9FD3A008392EC /* ConstraintsModel.swift in Sources */,
 				02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */,
 				0234A91329F9FD3A008392EC /* EndOfConstraintsAlignmentFlow.swift in Sources */,
+				025F0E802A65D7DE00DF2A5A /* AnimationBuilder.swift in Sources */,
 				024957F22A420F260077C36D /* Calculation.swift in Sources */,
 				02D581572A2120F200150AF9 /* WeatherForecastView.swift in Sources */,
 				0234A91829F9FD3A008392EC /* ConstraintsProtocol.swift in Sources */,
