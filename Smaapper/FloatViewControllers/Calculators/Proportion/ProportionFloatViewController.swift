@@ -10,6 +10,10 @@ import UIKit
 class ProportionFloatViewController: FloatViewController {
     static let identifierApp = K.Proportion.identifierApp
     
+    private var okBtnInteration: ButtonInteractionView?
+    private var refreshBtnInteraction: ButtonInteractionView?
+    private var copyBtnInteraction: ButtonInteractionView?
+    
     private var proportionA: Double = .zero
     private var proportionB: Double = .zero
     private var proportionC: Double = .zero
@@ -32,6 +36,7 @@ class ProportionFloatViewController: FloatViewController {
                               height: K.Proportion.FloatView.height))
         setEnabledDraggable(true)
         configDelegate()
+        configButtonInteraction()
     }
     
     override func viewDidSelectFloatView() {
@@ -46,6 +51,12 @@ class ProportionFloatViewController: FloatViewController {
     
     
 //  MARK: - PRIVATE Area
+    
+    private func configButtonInteraction() {
+        self.okBtnInteration = ButtonInteractionView(screen.okButton.view)
+        self.refreshBtnInteraction = ButtonInteractionView(screen.refreshButton.view)
+        self.copyBtnInteraction = ButtonInteractionView(screen.copyButton.view)
+    }
     
     private func configDelegate() {
         screen.delegate = self
@@ -140,14 +151,17 @@ extension ProportionFloatViewController: ProportionViewDelegate {
     }
     
     func okButton() {
+        okBtnInteration?.tapped
         calculateResult()
     }
 
     func copyButton() {
+        copyBtnInteraction?.tapped
         UIPasteboard.general.string = screen.painel.resultLabel.view.text
     }
     
     func refreshButton() {
+        refreshBtnInteraction?.tapped
         showOkButton()
         clearTextFields()
         restartResult()
