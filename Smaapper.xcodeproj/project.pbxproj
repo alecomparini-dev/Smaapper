@@ -88,8 +88,10 @@
 		025EA5662A5F276A0008AC89 /* WhatFlowerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */; };
 		025F0E682A63273900DF2A5A /* Beer.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E672A63273900DF2A5A /* Beer.mlmodel */; };
 		025F0E6C2A6570A800DF2A5A /* ShowResultPredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E6B2A6570A800DF2A5A /* ShowResultPredictionView.swift */; };
-		025F0E6F2A65769500DF2A5A /* WhatBeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */; };
 		025F0E712A6579B400DF2A5A /* ShowResultPredictionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E702A6579B400DF2A5A /* ShowResultPredictionViewController.swift */; };
+		025F0E782A65BDD600DF2A5A /* WhatBeerData.json in Resources */ = {isa = PBXBuildFile; fileRef = 025F0E772A65BDD600DF2A5A /* WhatBeerData.json */; };
+		025F0E7B2A65BE9600DF2A5A /* WhatBeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7A2A65BE9600DF2A5A /* WhatBeerData.swift */; };
+		025F0E7D2A65BF6100DF2A5A /* OriginatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -312,8 +314,10 @@
 		025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatFlowerCoordinator.swift; sourceTree = "<group>"; };
 		025F0E672A63273900DF2A5A /* Beer.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = Beer.mlmodel; path = "../../../../../CORE ML/Model Trained/Beer.mlmodel"; sourceTree = "<group>"; };
 		025F0E6B2A6570A800DF2A5A /* ShowResultPredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultPredictionView.swift; sourceTree = "<group>"; };
-		025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerData.swift; sourceTree = "<group>"; };
 		025F0E702A6579B400DF2A5A /* ShowResultPredictionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowResultPredictionViewController.swift; sourceTree = "<group>"; };
+		025F0E772A65BDD600DF2A5A /* WhatBeerData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WhatBeerData.json; sourceTree = "<group>"; };
+		025F0E7A2A65BE9600DF2A5A /* WhatBeerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerData.swift; sourceTree = "<group>"; };
+		025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginatedData.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -912,12 +916,21 @@
 			name = ShowResultPredictionView;
 			sourceTree = "<group>";
 		};
-		025F0E6D2A65712000DF2A5A /* WhatBeer */ = {
+		025F0E742A65BD9F00DF2A5A /* WhatBeerData */ = {
 			isa = PBXGroup;
 			children = (
-				025F0E6E2A65769500DF2A5A /* WhatBeerData.swift */,
+				025F0E772A65BDD600DF2A5A /* WhatBeerData.json */,
 			);
-			path = WhatBeer;
+			path = WhatBeerData;
+			sourceTree = "<group>";
+		};
+		025F0E792A65BE7100DF2A5A /* WhatBeerData */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E7A2A65BE9600DF2A5A /* WhatBeerData.swift */,
+				025F0E7C2A65BF6100DF2A5A /* OriginatedData.swift */,
+			);
+			path = WhatBeerData;
 			sourceTree = "<group>";
 		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
@@ -1124,14 +1137,6 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
-		02BBC7DA2A5D7A4600F70A14 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				02BBC7DB2A5D7A5400F70A14 /* WorldMapData */,
-			);
-			path = DataModel;
-			sourceTree = "<group>";
-		};
 		02BBC7DB2A5D7A5400F70A14 /* WorldMapData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1200,8 +1205,10 @@
 		02C5F4412A0BF4D100D75D9F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				02BBC7DA2A5D7A4600F70A14 /* DataModel */,
-				02C5F4442A0BF7C900D75D9F /* Codable */,
+				025F0E792A65BE7100DF2A5A /* WhatBeerData */,
+				02C5F4432A0BF62500D75D9F /* DropdownMenuData */,
+				026CF1792A4B2211009CEE6E /* HangmanData */,
+				02BBC7DB2A5D7A5400F70A14 /* WorldMapData */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1213,15 +1220,6 @@
 				02C5F4392A0BE74D00D75D9F /* RowDropdownMenuModel.swift */,
 			);
 			path = DropdownMenuData;
-			sourceTree = "<group>";
-		};
-		02C5F4442A0BF7C900D75D9F /* Codable */ = {
-			isa = PBXGroup;
-			children = (
-				026CF1792A4B2211009CEE6E /* HangmanData */,
-				02C5F4432A0BF62500D75D9F /* DropdownMenuData */,
-			);
-			path = Codable;
 			sourceTree = "<group>";
 		};
 		02C5F4452A0C1A7200D75D9F /* Service */ = {
@@ -1645,7 +1643,7 @@
 		02FB2C9A2A45C7DE00C7FC98 /* Json */ = {
 			isa = PBXGroup;
 			children = (
-				025F0E6D2A65712000DF2A5A /* WhatBeer */,
+				025F0E742A65BD9F00DF2A5A /* WhatBeerData */,
 				02FB2C9B2A45C7E800C7FC98 /* HangmanWords */,
 				02C5F44B2A0C1C9300D75D9F /* DropdownMenu */,
 			);
@@ -1818,6 +1816,7 @@
 				02FB2C9D2A45C81700C7FC98 /* HangmanWordsData.json in Resources */,
 				0234A5FD29F9F310008392EC /* LaunchScreen.storyboard in Resources */,
 				0234A5FA29F9F310008392EC /* Assets.xcassets in Resources */,
+				025F0E782A65BDD600DF2A5A /* WhatBeerData.json in Resources */,
 				025EA5462A5EE2BE0008AC89 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2045,6 +2044,7 @@
 				02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */,
 				020D0E582A1E9CE0007F3992 /* ButtonBuilder.swift in Sources */,
 				02536DB42A61BA4500C0720C /* CoreMLError.swift in Sources */,
+				025F0E7D2A65BF6100DF2A5A /* OriginatedData.swift in Sources */,
 				02D5815E2A229F1400150AF9 /* Theme.swift in Sources */,
 				0281DAE12A18089800E44F04 /* FloatViewController.swift in Sources */,
 				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
@@ -2056,7 +2056,6 @@
 				02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */,
 				026CF16A2A49D78E009CEE6E /* HangmanKeyboardLetterView.swift in Sources */,
 				0234A91929F9FD3A008392EC /* StartOfConstraintsFlow.swift in Sources */,
-				025F0E6F2A65769500DF2A5A /* WhatBeerData.swift in Sources */,
 				02BE514F2A29379A00901669 /* FloatViewControllerActions.swift in Sources */,
 				0234A91529F9FD3A008392EC /* ApplyConstraints.swift in Sources */,
 				02D06E642A54CEEB0020A10B /* AlcoholOrGasolineFloatViewController.swift in Sources */,
@@ -2073,6 +2072,7 @@
 				0234A92029F9FD3A008392EC /* Warning.swift in Sources */,
 				02D581652A22A1B100150AF9 /* ThemeProtocol.swift in Sources */,
 				02FB2CB32A46037300C7FC98 /* FallDollView.swift in Sources */,
+				025F0E7B2A65BE9600DF2A5A /* WhatBeerData.swift in Sources */,
 				02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */,
 				02E974182A339B3E00BF14EE /* WeatherCoordinator.swift in Sources */,
 				020D0E4E2A1E5B0E007F3992 /* DropdownMenuBuilder.swift in Sources */,

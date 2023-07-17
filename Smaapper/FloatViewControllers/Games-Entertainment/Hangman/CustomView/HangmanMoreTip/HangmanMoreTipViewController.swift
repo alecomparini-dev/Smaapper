@@ -11,7 +11,7 @@ class HangmanMoreTipViewController: ViewBuilder {
     
     private var tips: [String] = []
     
-    lazy var customView: HangmanMoreTipView = {
+    lazy var hangmanMoreTipView: HangmanMoreTipView = {
         let view = HangmanMoreTipView()
         return view
     }()
@@ -23,25 +23,25 @@ class HangmanMoreTipViewController: ViewBuilder {
     }
     
     private func initialization() {
-        loadCustomView()
+        configHangmanMoreTipview()
         configListTip()
     }
 
 //  MARK: - SET DELEGATE
     func setDelegate(_ delegate: HangmanMoreTipViewDelegate) {
-        customView.delegate = delegate
+        hangmanMoreTipView.delegate = delegate
     }
     
     
 //  MARK: - PRIVATE Area
-    private func loadCustomView() {
-        self.view = customView
+    private func configHangmanMoreTipview() {
+        self.view = hangmanMoreTipView
     }
     
     private func configListTip() {
         let section = createSection()
-        customView.tipList.populateSection(section)
-        customView.tipList.isShow = true
+        hangmanMoreTipView.tipList.populateSection(section)
+        hangmanMoreTipView.tipList.isShow = true
         createRow(section)
     }
     
@@ -67,7 +67,7 @@ class HangmanMoreTipViewController: ViewBuilder {
                     .setColor(Theme.shared.currentTheme.onSurface)
                     .view,
                 rightView: nil)
-            customView.tipList.populateRowInSection(section, row)
+            hangmanMoreTipView.tipList.populateRowInSection(section, row)
         }
     }
     

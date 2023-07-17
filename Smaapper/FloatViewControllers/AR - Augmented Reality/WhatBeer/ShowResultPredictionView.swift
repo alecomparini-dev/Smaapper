@@ -12,12 +12,12 @@ protocol ShowResultPredictionViewDelegate: AnyObject {
 }
 
 class ShowResultPredictionView: View {
-    
     weak var delegate: ShowResultPredictionViewDelegate?
     
-    override init() {
+    init(_ result: String) {
         super.init()
         initialization()
+        setBackgroundColor(.red.withAlphaComponent(0.5))
     }
     
     required init?(coder: NSCoder) {
@@ -32,14 +32,14 @@ class ShowResultPredictionView: View {
 //  MARK: - LAZY Area
     
     lazy var beerLabel: LabelBuilder = {
-        let label = LabelBuilder("HEINEKEN")
+        let label = LabelBuilder()
             .setFont(UIFont.systemFont(ofSize: 25))
             .setColor(Theme.shared.currentTheme.onSurface)
             .setTextAlignment(.center)
             .setConstraints { build in
                 build
                     .setPinTop.equalToSuperView
-                    .setHeight.equalToConstant(30)
+                    .setHeight.equalToConstant(60)
             }
         return label
     }()
@@ -77,6 +77,7 @@ class ShowResultPredictionView: View {
         return btn
     }()
     
+    
 //  MARK: - @OBJC Area
     @objc private func closeMoreTipTapped() {
         delegate?.closeResultPrediction()
@@ -84,11 +85,13 @@ class ShowResultPredictionView: View {
     
 //  MARK: - PRIVATE Area
     private func addElements() {
+        beerLabel.add(insideTo: self)
         resultList.add(insideTo: self)
         closeMoreTipButton.add(insideTo: self)
     }
     
     private func configConstraints() {
+        beerLabel.applyConstraint()
         resultList.applyConstraint()
         closeMoreTipButton.applyConstraint()
     }

@@ -35,7 +35,6 @@ class HangmanView: ViewBuilder {
     }
     
     
-    
 //  MARK: - LAZY Area
     lazy var titleView: ViewBuilder = {
         let view = TitleFloatView(logo: "", title: "", target: self, closeClosure: #selector(closeWindow), minimizeClosure: #selector(minimizeWindow))
@@ -187,8 +186,7 @@ class HangmanView: ViewBuilder {
     
 //  MARK: - PRIVATE Area
     
-    
-    private func createHangmanGallowsView() -> GallowsView{
+    private func createHangmanGallowsView() -> GallowsView {
         let view = GallowsView()
             .setConstraints { build in
                 build
@@ -199,7 +197,7 @@ class HangmanView: ViewBuilder {
         return view
     }
     
-    private func createHangmanWordView() -> HangmanWordView{
+    private func createHangmanWordView() -> HangmanWordView {
         let view = HangmanWordView()
             .setConstraints { build in
                 build

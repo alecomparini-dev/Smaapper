@@ -107,10 +107,16 @@ class WhatBeerView: ViewBuilder {
         return btn
     }()
     
-//    lazy var showResult: <#type name#> = {
-//        <#statements#>
-//        return <#value#>
-//    }()
+    lazy var showResult: ViewBuilder = {
+        let view = ViewBuilder()
+            .setHidden(true)
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(titleView.view, .bottom, 5)
+                    .setPinBottom.equalToSuperView
+            }
+        return view
+    }()
 
     
 //  MARK: - OBJCT Area
@@ -148,12 +154,14 @@ class WhatBeerView: ViewBuilder {
         titleView.add(insideTo: self.view)
         cameraARKit.add(insideTo: self.view)
         captureImage.add(insideTo: self.view)
+        showResult.add(insideTo: self.view)
     }
     
     private func configConstraints() {
         titleView.applyConstraint()
         cameraARKit.applyConstraint()
         captureImage.applyConstraint()
+        showResult.applyConstraint()
     }
     
 }

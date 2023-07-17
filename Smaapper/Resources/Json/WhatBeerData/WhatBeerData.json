@@ -1,0 +1,146 @@
+{
+    "heineken": {
+        "alcohol": 5.0,
+        "manufacturer": "Heineken N.V.",
+        "originated": {
+            "city": "Amsterdã",
+            "country": "Holanda"
+        },
+        "allergic": [
+            "Contém derivados de cevada",
+            "Contém Glúten"
+        ]
+    },
+    "brahmaDuploMalte": {
+        "alcohol": 5.5,
+        "manufacturer": "Ambev",
+        "originated": {
+            "city": "São Paulo",
+            "country": "Brasil"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "amstel": {
+        "alcohol": 5.0,
+        "manufacturer": "Amstel Brouwerij B.V.",
+        "originated": {
+            "city": "Amsterdã",
+            "country": "Holanda"
+        },
+        "allergic": [
+            "Contém derivados de cevada",
+            "Contém Glúten"
+        ]
+    },
+    "original": {
+        "alcohol": 4.8,
+        "manufacturer": "Grupo Petrópolis",
+        "originated": {
+            "city": "Petrópolis",
+            "country": "Brasil"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "antarctica": {
+        "alcohol": 4.5,
+        "manufacturer": "Ambev",
+        "originated": {
+            "city": "São Paulo",
+            "country": "Brasil"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "budweiser": {
+        "alcohol": 5.0,
+        "manufacturer": "Anheuser-Busch InBev",
+        "originated": {
+            "city": "Saint Louis",
+            "country": "Estados Unidos"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "eisenbhan": {
+        "alcohol": 4.8,
+        "manufacturer": "Cervejaria Sudbrack Ltda.",
+        "originated": {
+            "city": "Blumenau",
+            "country": "Brasil"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "skol": {
+        "alcohol": 4.7,
+        "manufacturer": "Ambev",
+        "originated": {
+            "city": "São Paulo",
+            "country": "Brasil"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "spaten": {
+        "alcohol": 5.2,
+        "manufacturer": "Spaten-Franziskaner-Bräu",
+        "originated": {
+            "city": "Munique",
+            "country": "Alemanha"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "stellaArtois": {
+        "alcohol": 5.0,
+        "manufacturer": "Anheuser-Busch InBev",
+        "originated": {
+            "city": "Leuven",
+            "country": "Bélgica"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "corona": {
+        "alcohol": 4.5,
+        "manufacturer": "Grupo Modelo",
+        "originated": {
+            "city": "Cidade do México",
+            "country": "México"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    },
+    "becks": {
+        "alcohol": 5.0,
+        "manufacturer": "Brauerei Beck & Co.",
+        "originated": {
+            "city": "Bremen",
+            "country": "Alemanha"
+        },
+        "allergic": [
+            "Contém cevada",
+            "Contém Glúten"
+        ]
+    }
+}
