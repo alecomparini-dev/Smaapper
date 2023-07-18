@@ -9,7 +9,35 @@ import UIKit
 
 class WhatBeerViewModel {
     
+    private let service: WhatBeerService = WhatBeerService()
     
+    func fetchWhatBeer(_ type: TypeFetch) async throws -> WhatBeerData? {
+        switch type {
+            case .file:
+                return try await service.fetchWhatBeerInJson()
+                
+            case .api:
+                break
+                
+            case .localStorage:
+                break
+        }
+        return nil
+    }
+    
+    func fetchBeer(_ type: TypeFetch, _ keyBeer: String) async throws -> BeerData? {
+        switch type {
+            case .file:
+                return try await service.fetchBeerInJson(keyBeer)
+                
+            case .api:
+                break
+                
+            case .localStorage:
+                break
+        }
+        return nil
+    }
     
     
 }

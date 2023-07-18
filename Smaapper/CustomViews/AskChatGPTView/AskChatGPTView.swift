@@ -87,7 +87,7 @@ class AskChatGPTView: ViewBuilder {
                     .setTrailing.equalToSuperView(-20)
                     .setHeight.equalToConstant(45)
             }
-    }()
+    }()    
     
     lazy var goChatGPTIconButton: IconButtonBuilder = {
         return IconButtonBuilder(UIImageView(image: UIImage(systemName: "arrow.up.right")))

@@ -19,6 +19,10 @@ class WhatBeerFloatViewController: FloatViewController {
         return view
     }()
     
+    deinit {
+        showResultBeerView = nil
+    }
+    
     override func loadView() {
         view = screen.view
     }
@@ -181,6 +185,7 @@ class WhatBeerFloatViewController: FloatViewController {
     }
 
     private func configCloseResultBeer() {
+        screen.cameraARKit.pauseSceneView()
         screen.cameraARKit.runSceneView()
         hideViewResultBeerAnimation { [weak self] in
             guard let self else {return}
@@ -188,7 +193,6 @@ class WhatBeerFloatViewController: FloatViewController {
         }
     }
 
-    
     
 //  MARK: - ANIMATION Area
     private func showViewResultBeerAnimation() {

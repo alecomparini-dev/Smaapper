@@ -29,11 +29,23 @@ struct K {
     }
     
 
-//  MARK: - ALCOHOL
+//  MARK: - HOME SCREEN
     struct Home {
+        static let idShadowEnableFloatButton = "shadowFloatButtonID"
+        static let profileTitle = "Profile"
+        static let settingTitle = "Settings"
+        static let recentTitle = "Recent"
+        
         struct Service {
             static let fileNameJson = "DropdownMenuData"
             static let extensionJson = "json"
+        }
+        
+        struct Images {
+            static let profile = "person"
+            static let recent = "rectangle.stack"
+            static let settings = "gearshape"
+            static let menuButton = "rectangle.3.group"
         }
     }
     

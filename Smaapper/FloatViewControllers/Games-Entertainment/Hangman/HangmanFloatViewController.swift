@@ -104,7 +104,7 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     private func fetchWords() {
-        viewModel?.fetchWordsFromLastPlayedWordInJson(.file, self.lastPlayedWord) { [weak self] result, error in
+        viewModel?.fetchWordsFromLastPlayedWord(.file, self.lastPlayedWord) { [weak self] result, error in
             guard let self else {return}
             if error != nil {
                 print(#function, #file, error?.localizedDescription ?? "")

@@ -39,7 +39,7 @@ class ARSceneViewBuilder: ViewBuilder {
     }
     
     private(set) var isPaused: Bool = false
-        
+    private var shouldAttemptRelocalization: Bool = true
     private var arSceneView: ARSCNView?
     private var configuration: ARWorldTrackingConfiguration?
     private var snapshotARSceneView: UIImageView = UIImageView()
@@ -212,6 +212,12 @@ class ARSceneViewBuilder: ViewBuilder {
     @discardableResult
     func setPreferredFramesPerSecond(_ framesPerSecond: Int) -> Self {
         self.arSceneView?.preferredFramesPerSecond = framesPerSecond
+        return self
+    }
+    
+    @discardableResult
+    func setShouldAttemptRelocalization(_ flag: Bool ) -> Self {
+        self.shouldAttemptRelocalization = flag
         return self
     }
     
@@ -479,7 +485,7 @@ extension ARSceneViewBuilder: ARSessionDelegate {
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
         print("chamou isso aqui : SESSIONSHOULDATTEMPTRELOCALIZATION")
-        return true
+        return shouldAttemptRelocalization
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {

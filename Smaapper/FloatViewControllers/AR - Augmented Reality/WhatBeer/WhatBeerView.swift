@@ -13,7 +13,6 @@ protocol WhatBeerViewDelegate: AnyObject {
     func captureTapped()
 }
 
-
 class WhatBeerView: ViewBuilder {
     weak var delegate: WhatBeerViewDelegate?
     
@@ -43,23 +42,14 @@ class WhatBeerView: ViewBuilder {
         return view
     }()
     
-
     lazy var cameraARKit: ARSceneViewBuilder = {
         let imgTarget = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.target))
             .setWeight(.thin)
         let arKit = ARSceneViewBuilder()
-
-//TODO:- BOM EXEMPLO PARA TENTAR CORRIGIR O PROBLEMA DA BORDA E DO SHADOW
-//            .setShadow({ build in
-//                build
-//                    .setColor(Theme.shared.currentTheme.surfaceContainerHighest)
-//                    .setOffset(width: 0, height: -5)
-//                    .setRadius(8)
-//                    .apply()
-//            })
             .setImageTarget(image: imgTarget, size: 25)
             .setAlignmentTarget(.middle, -20)
             .setEnabledTargetDraggable(false)
+            .setShouldAttemptRelocalization(false)
             .setBorder { build in
                 build
                     .setCornerRadius(20)

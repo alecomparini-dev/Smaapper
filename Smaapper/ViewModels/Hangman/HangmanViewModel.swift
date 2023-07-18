@@ -12,7 +12,7 @@ class HangmanViewModel {
     
     private let service: HangmanService = HangmanService()
     
-    func fetchWordsFromLastPlayedWordInJson(_ type: TypeFetch, _ lastPlayedWord: String,  completion: @escaping (_ result: [HangmanWord], _ error: Error?) -> Void) {
+    func fetchWordsFromLastPlayedWord(_ type: TypeFetch, _ lastPlayedWord: String,  completion: @escaping (_ result: [HangmanWord], _ error: Error?) -> Void) {
         switch type {
             
         case .file:
