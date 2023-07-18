@@ -174,7 +174,7 @@
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
-		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
+		02D71C342A3BB9D100DCA291 /* UtilsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */; };
 		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
 		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
 		02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */; };
@@ -187,7 +187,7 @@
 		02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9741B2A37612A00BF14EE /* HomeViewDockController.swift */; };
 		02E9741F2A37887B00BF14EE /* ProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9741E2A37887B00BF14EE /* ProportionView.swift */; };
 		02E974212A3788A200BF14EE /* ProportionFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974202A3788A200BF14EE /* ProportionFloatViewController.swift */; };
-		02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974232A37892900BF14EE /* UtilsFloatView.swift */; };
+		02E974242A37892900BF14EE /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974232A37892900BF14EE /* Utils.swift */; };
 		02E974262A378AFE00BF14EE /* ProportionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974252A378AFE00BF14EE /* ProportionCoordinator.swift */; };
 		02E9743E2A37C55E00BF14EE /* TitleFloatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */; };
 		02E974412A37D25600BF14EE /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E974402A37D25600BF14EE /* QuizView.swift */; };
@@ -406,7 +406,7 @@
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
-		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsComponent.swift; sourceTree = "<group>"; };
 		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
 		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
 		02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipView.swift; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 		02E9741B2A37612A00BF14EE /* HomeViewDockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDockController.swift; sourceTree = "<group>"; };
 		02E9741E2A37887B00BF14EE /* ProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProportionView.swift; sourceTree = "<group>"; };
 		02E974202A3788A200BF14EE /* ProportionFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProportionFloatViewController.swift; sourceTree = "<group>"; };
-		02E974232A37892900BF14EE /* UtilsFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsFloatView.swift; sourceTree = "<group>"; };
+		02E974232A37892900BF14EE /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		02E974252A378AFE00BF14EE /* ProportionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProportionCoordinator.swift; sourceTree = "<group>"; };
 		02E9743D2A37C55E00BF14EE /* TitleFloatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFloatView.swift; sourceTree = "<group>"; };
 		02E974402A37D25600BF14EE /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 				02C9C9E92A0A774F00AA1370 /* TapGesture */,
 				0234A8E729F9FD3A008392EC /* TextField */,
 				02D5815C2A229F0300150AF9 /* Theme */,
-				0284368A2A1D296700B596DA /* Utils */,
+				0284368A2A1D296700B596DA /* UtilsComponent */,
 				0234A95B29FB3E39008392EC /* View */,
 			);
 			path = Components;
@@ -1141,13 +1141,13 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		0284368A2A1D296700B596DA /* Utils */ = {
+		0284368A2A1D296700B596DA /* UtilsComponent */ = {
 			isa = PBXGroup;
 			children = (
 				02D71C372A3C86A500DCA291 /* NumberFormatter */,
-				02D71C332A3BB9D100DCA291 /* Utils.swift */,
+				02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */,
 			);
-			path = Utils;
+			path = UtilsComponent;
 			sourceTree = "<group>";
 		};
 		02B4313F2A534A8500A1D7EC /* StickyNote */ = {
@@ -1502,7 +1502,7 @@
 		02E974222A37890B00BF14EE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				02E974232A37892900BF14EE /* UtilsFloatView.swift */,
+				02E974232A37892900BF14EE /* Utils.swift */,
 				025F0E8C2A6709D800DF2A5A /* FetchDataInJson.swift */,
 			);
 			path = Utilities;
@@ -2088,7 +2088,7 @@
 				02E9744B2A37F11A00BF14EE /* UpcomingHolidaysCoordinator.swift in Sources */,
 				02D581492A1FE15900150AF9 /* ListBuilder.swift in Sources */,
 				025EA5442A5E25D60008AC89 /* WorldMapData.swift in Sources */,
-				02E974242A37892900BF14EE /* UtilsFloatView.swift in Sources */,
+				02E974242A37892900BF14EE /* Utils.swift in Sources */,
 				026C147F2A3CF5A300F8D3E6 /* DefaultFloatViewButton.swift in Sources */,
 				02D06E862A5626ED0020A10B /* ARSphereBuilder.swift in Sources */,
 				025F0E6C2A6570A800DF2A5A /* ShowResultBeerView.swift in Sources */,
@@ -2103,7 +2103,7 @@
 				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */,
-				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
+				02D71C342A3BB9D100DCA291 /* UtilsComponent.swift in Sources */,
 				025F0E8B2A67015000DF2A5A /* WhatBeerViewModel.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,

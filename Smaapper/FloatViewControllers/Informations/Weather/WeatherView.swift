@@ -76,7 +76,7 @@ class WeatherView: ViewBuilder {
     }
     
     private func configNeumorphism() {
-        UtilsFloatView.configNeumorphisFloatView(self)
+        Utils.configNeumorphisFloatView(self)
     }
     
     private func addElements() {

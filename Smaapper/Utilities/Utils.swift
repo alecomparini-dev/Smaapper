@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UtilsFloatView {
+class Utils {
 
     static func configNeumorphisFloatView(_ view: ViewBuilder) {
         view.setNeumorphism { build in

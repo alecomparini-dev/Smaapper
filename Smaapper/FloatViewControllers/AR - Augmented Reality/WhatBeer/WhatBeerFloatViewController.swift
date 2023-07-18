@@ -35,13 +35,13 @@ class WhatBeerFloatViewController: FloatViewController {
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
-        UtilsFloatView.setShadowActiveFloatView(screen)
+        Utils.setShadowActiveFloatView(screen)
         screen.cameraARKit.runSceneView()
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
-        UtilsFloatView.removeShadowActiveFloatView(screen)
+        Utils.removeShadowActiveFloatView(screen)
         screen.cameraARKit.pauseSceneView()
     }
     

@@ -41,12 +41,12 @@ class ProportionFloatViewController: FloatViewController {
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
-        UtilsFloatView.setShadowActiveFloatView(screen)
+        Utils.setShadowActiveFloatView(screen)
     }
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
-        UtilsFloatView.removeShadowActiveFloatView(screen)
+        Utils.removeShadowActiveFloatView(screen)
     }
     
     

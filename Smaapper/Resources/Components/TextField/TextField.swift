@@ -30,10 +30,10 @@ class TextField: UITextField {
     static private var currentMainWindow: UIWindow?
     
     static private func hideKeyboardWhenViewTapped() {
-        let mainWindow = Utils.Window.currentWindow
+        let mainWindow = UtilsComponent.Window.currentWindow
         if (mainWindow == currentMainWindow) { return }
         mainWindow?.hideKeyboardWhenViewTapped()
-        Utils.Window.rootView?.hideKeyboardWhenViewTapped()
+        UtilsComponent.Window.rootView?.hideKeyboardWhenViewTapped()
         currentMainWindow = mainWindow
     }
     

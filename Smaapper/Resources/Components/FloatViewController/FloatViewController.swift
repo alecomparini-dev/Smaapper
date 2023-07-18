@@ -400,7 +400,7 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - KEYBOARD
     private func configRepositionFloatViewWhenShowKeyboard() {
-        self.textFields = Utils.TextField.allTextFieldsInView(self.view)
+        self.textFields = UtilsComponent.TextField.allTextFieldsInView(self.view)
         if textFields.count > 0 {
             registerKeyboardNotifications()
         }
