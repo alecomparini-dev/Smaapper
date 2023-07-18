@@ -9,7 +9,10 @@ import UIKit
 
 class ShowResultBeerViewController: ViewBuilder {
     
+    private let viewModel: WhatBeerViewModel = WhatBeerViewModel()
     private let result: String
+    
+    private var beer: BeerData?
     
     lazy var showResultView: ShowResultBeerView = {
         let view = ShowResultBeerView(self.result)
@@ -24,17 +27,48 @@ class ShowResultBeerViewController: ViewBuilder {
     
     private func initialization() {
         configShowResultBeerView()
-        showResultView.beerLabel.setText(self.result)
+        fetchResultBeer()
     }
     
-    private func configShowResultBeerView() {
-        self.view = showResultView
-    }   
-
-
+    
 //  MARK: - SET DELEGATE
     func setDelegate(_ delegate: ShowResultBeerViewDelegate) {
         showResultView.delegate = delegate
     }
+
+    
+//  MARK: - PRIVATE Area
+    private func configShowResultBeerView() {
+        self.view = showResultView
+    }
+    
+    private func fetchResultBeer() {
+        Task {
+            do {
+                self.beer = try await viewModel.fetchBeer(.file, result)
+                print(beer ?? "" )
+                DispatchQueue.main.async { [weak self] in
+                    self?.refreshInterface()
+                }
+            } catch let error {
+                print("Error fetch Beer", error.localizedDescription)
+            }
+            
+        }
+    }
+    
+    private func refreshInterface() {
+        setBeerLabel()
+        populateResultList()
+    }
+    
+    private func setBeerLabel() {
+        showResultView.beerLabel.setText(self.beer?.title ?? "")
+    }
+    
+    private func populateResultList() {
+        
+    }
+    
     
 }

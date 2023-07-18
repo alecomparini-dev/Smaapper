@@ -17,7 +17,7 @@ protocol HomeViewDelegate: AnyObject {
 class HomeView: ViewBuilder {
     
     private weak var delegate: HomeViewDelegate?
-    private let idShadowEnableFloatButton = "shadowFloatButtonID"
+    private let idShadowEnableFloatButton = K.Home.idShadowEnableFloatButton
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,11 +114,6 @@ class HomeView: ViewBuilder {
         return view
     }()
     
-    lazy var chatGPTTextField: TextFieldImageBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "message.and.waveform.fill"))
-        let tf = TextFieldImageBuilder(img.view)
-        return tf
-    }()
     
     
     //  MARK: - DROPDOW MENU
@@ -137,7 +132,6 @@ class HomeView: ViewBuilder {
             .setAutoCloseMenuWhenTappedOut(excludeComponents: [menuButton.view])
             .setRowHeight(45)
             .setPaddingMenu(top: 15, left: 15, bottom: 10, right: 15)
-            .setPaddingColuns(left: 5, right: 5) // --> Ainda nao funciona
             .setBorder({ build in
                 build
                     .setCornerRadius(18)
@@ -165,7 +159,8 @@ class HomeView: ViewBuilder {
     }()
     
     lazy var profileDropdownMenuFooterIconButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "person")).view, "Profile")
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: K.Home.Images.profile)).view, K.Home.profileTitle)
+            .setImagePadding(5)
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
@@ -174,41 +169,30 @@ class HomeView: ViewBuilder {
     }()
     
     lazy var recentDropdownMenuFooterIconButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "rectangle.stack")).view)
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: K.Home.Images.recent)).view)
+            .setImagePadding(5)
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTitleSize(12)
-            .setTitle("Recent", .normal)
+            .setTitle(K.Home.recentTitle, .normal)
             .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
     
     lazy var settingsDropdownMenuFooterIconButton: IconButtonBuilder = {
-        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: "gearshape")).view, "Settings")
+        return IconButtonBuilder(ImageViewBuilder(UIImage(systemName: K.Home.Images.settings)).view, K.Home.settingTitle)
+            .setImagePadding(5)
             .setImageWeight(.medium)
             .setImageSize(18)
             .setTitleColor(Theme.shared.currentTheme.onPrimary, .normal)
             .setTitleSize(12)
             .setImageColor(Theme.shared.currentTheme.onPrimary)
     }()
-    
-    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
-        delegate?.dropdownMenuTapped(rowTapped)
-    }
-
-    private func openMenu() {
-        delegate?.openMenu()
-    }
-    
-    private func closeMenu() {
-        delegate?.closeMenu()
-    }
-    
+        
     
     //  MARK: - MENU FLOAT BUTTON
-    
     lazy var menuButton: ButtonImageBuilder = {
-        let img = UIImageView(image: UIImage(systemName: "rectangle.3.group"))
+        let img = UIImageView(image: UIImage(systemName: K.Home.Images.menuButton))
         return ButtonImageBuilder(img)
             .setFloatButton()
             .setImageColor(Theme.shared.currentTheme.onSurface)
@@ -224,9 +208,6 @@ class HomeView: ViewBuilder {
                     .setBlur(to: .light, percent: 5)
                     .apply()
             }
-//            .setBorder({ build in
-//                build.setCornerRadius(14)
-//            })
             .setConstraints { build in
                 build
                     .setBottom.equalToSafeArea(-10)
@@ -239,14 +220,12 @@ class HomeView: ViewBuilder {
             }
     }()
     
-    @objc
-    private func menuButtonTapped() {
+    @objc private func menuButtonTapped() {
         delegate?.menuButtonTapped()
     }
     
     
     //  MARK: - DOCK
-    
     lazy var dock: DockBuilder = {
         return DockBuilder( )
             .setSize(CGSize(width: 40 , height: 40))
@@ -380,9 +359,7 @@ class HomeView: ViewBuilder {
         dock.applyConstraint()
         askChatGPTView.applyConstraint()
         viewFloatWindow.applyConstraint()
-    
     }
-    
     
     private func addBackgroundColor() {
         self.setGradient { build in
@@ -393,5 +370,16 @@ class HomeView: ViewBuilder {
         }
     }
     
+    private func dropdownMenuTapped(_ rowTapped:(section: Int, row: Int)) {
+        delegate?.dropdownMenuTapped(rowTapped)
+    }
+
+    private func openMenu() {
+        delegate?.openMenu()
+    }
+    
+    private func closeMenu() {
+        delegate?.closeMenu()
+    }
     
 }

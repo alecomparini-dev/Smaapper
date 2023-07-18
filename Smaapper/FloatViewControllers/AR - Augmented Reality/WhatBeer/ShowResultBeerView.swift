@@ -35,12 +35,14 @@ class ShowResultBeerView: View {
     lazy var beerLabel: LabelBuilder = {
         let label = LabelBuilder()
             .setFont(UIFont.systemFont(ofSize: 25))
+            .setNumberOfLines(2)
             .setColor(Theme.shared.currentTheme.onSurface)
             .setTextAlignment(.center)
             .setConstraints { build in
                 build
-                    .setPinTop.equalToSuperView
-                    .setHeight.equalToConstant(60)
+                    .setTop.equalToSuperView(10)
+                    .setTrailing.setLeading.equalToSuperView(40)
+                    .setHeight.equalToConstant(35)
             }
         return label
     }()
