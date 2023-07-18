@@ -29,6 +29,7 @@ class ButtonInteractionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
 //  MARK: - SET Properties
     @discardableResult
     func setColor(_ color: UIColor ) -> Self {
