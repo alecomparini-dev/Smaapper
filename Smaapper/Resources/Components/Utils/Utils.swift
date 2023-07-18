@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Utils {
+class Utils {
     
     struct Validate {
         static func percent(_ percent: CGFloat) -> Bool {

@@ -28,6 +28,7 @@ class TextField: UITextField {
      }
     
     static private var currentMainWindow: UIWindow?
+    
     static private func hideKeyboardWhenViewTapped() {
         let mainWindow = Utils.Window.currentWindow?.window
         if (mainWindow == currentMainWindow) { return }
@@ -70,8 +71,7 @@ class TextField: UITextField {
         TextField.hideKeyboardWhenViewTapped()
     }
     
-    @objc
-    func textFieldEditingDidEndOnExit(_ textField: UITextField) {
+    @objc func textFieldEditingDidEndOnExit(_ textField: UITextField) {
         textField.resignFirstResponder()
     }
     
