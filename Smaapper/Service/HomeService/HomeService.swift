@@ -9,23 +9,16 @@ import Foundation
 
 class HomeService: GenericService {
     
-    private let fileNameJson = "DropdownMenuData"
-    private let extensionJson = "json"
+    private let fileNameJson = K.Home.Service.fileNameJson
+    private let extensionJson = K.Home.Service.extensionJson
     
-    
-    func getDropdownDataFromJson(completion: @escaping completion<DropdownMenuData>) {
-        if let jsonFileUrl = Bundle.main.url(forResource: fileNameJson, withExtension: extensionJson) {
-            do {
-                let jsonData = try Data(contentsOf: jsonFileUrl)
-                let result = try JSONDecoder().decode(DropdownMenuData.self, from: jsonData)
-                completion(result, nil)
-            } catch {
-                completion(nil, FileError.fileDecodingFailed(error: fileNameJson , error))
-            }
-        } else {
-            completion(nil, FileError.fileNotFound(error: fileNameJson))
+    func getDropdownDataFromJson(completion: @escaping completionService<DropdownMenuData>) {
+        do {
+            let result: DropdownMenuData = try FetchDataInJson().fetch(fileNameJson, extensionJson)
+            completion(result, nil)
+        } catch {
+            completion(nil, error)
         }
     }
-    
     
 }

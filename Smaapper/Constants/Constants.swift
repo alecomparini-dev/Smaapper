@@ -29,6 +29,14 @@ struct K {
     }
     
 
+//  MARK: - ALCOHOL
+    struct Home {
+        struct Service {
+            static let fileNameJson = "DropdownMenuData"
+            static let extensionJson = "json"
+        }
+    }
+    
     
 //  MARK: - CAMERA ARKIT
     struct Proportion {
@@ -111,24 +119,29 @@ struct K {
     }
 
     
-    //  MARK: - WHAT BEER
-        struct WhatBeer {
-            static let identifierApp = "what_beer"
-            static let title = "What Beer"
-            
-            struct FloatView {
-                static let x: CGFloat = 10
-                static let y: CGFloat = (Utils.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
-                static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
-                static let height: CGFloat = 500
-            }
-            
-            struct Images {
-                static let logo = "vial.viewfinder"
-                static let target = "plus"
-                static let captureButton = "camera.viewfinder"
-            }
+//  MARK: - WHAT BEER
+    struct WhatBeer {
+        static let identifierApp = "what_beer"
+        static let title = "What Beer"
+        
+        struct Service {
+            static let fileNameJson = "WhatBeerData"
+            static let extensionJson = "json"
         }
+        
+        struct FloatView {
+            static let x: CGFloat = 10
+            static let y: CGFloat = (Utils.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
+            static let width: CGFloat = (Utils.Window.currentWindow?.screen.bounds.width ?? 300)-20
+            static let height: CGFloat = 500
+        }
+        
+        struct Images {
+            static let logo = "vial.viewfinder"
+            static let target = "plus"
+            static let captureButton = "camera.viewfinder"
+        }
+    }
     
 //  MARK: - TAPE MEASURE
     struct TapeMeasure {

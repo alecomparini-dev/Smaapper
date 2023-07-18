@@ -22,7 +22,6 @@ class UtilsFloatView {
         }
     }
 
-    
     static func setShadowActiveFloatView(_ view: ViewBuilder) {
         view.setShadow { build in
             build
