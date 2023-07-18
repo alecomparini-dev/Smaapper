@@ -7,15 +7,21 @@
 
 import Foundation
 
-typealias WhatBeerData = [String: WhatBeerDataValue]
+typealias WhatBeerData = [String: BeerData]
 
 
 // MARK: - WhatBeerDataValue
-struct WhatBeerDataValue: Codable {
+struct BeerData: Codable {
+    let title: String
     let alcohol: Double
     let manufacturer: String
-    let originated: OriginatedData
+    let originated: OriginatedBeerData
+    let nutritionalValues: NutritionalValuesBeerData
     let allergic: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case title, alcohol, manufacturer, originated
+        case nutritionalValues = "nutritional_values"
+        case allergic
+    }
 }
-
-

@@ -112,12 +112,12 @@ class WhatBeerView: ViewBuilder {
             .setHidden(true)
             .setConstraints { build in
                 build
-                    .setTop.equalTo(titleView.view, .bottom, 5)
-                    .setPinBottom.equalToSuperView
+                    .setTop.equalTo(cameraARKit.view, .top, 35)
+                    .setPinBottom.equalToSuperView(35)
             }
         return view
     }()
-
+    
     
 //  MARK: - OBJCT Area
     @objc private func minimizeWindow() {

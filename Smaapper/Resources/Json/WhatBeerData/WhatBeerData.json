@@ -1,145 +1,205 @@
 {
     "heineken": {
+        "title": "Heineken",
         "alcohol": 5.0,
         "manufacturer": "Heineken N.V.",
         "originated": {
             "city": "Amsterdã",
             "country": "Holanda"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 130
+        },
         "allergic": [
-            "Contém derivados de cevada",
+            "Contém derivados de Cevada",
             "Contém Glúten"
         ]
     },
     "brahmaDuploMalte": {
+        "title": "Brahma Duplo Malte",
         "alcohol": 5.5,
         "manufacturer": "Ambev",
         "originated": {
             "city": "São Paulo",
             "country": "Brasil"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 145
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "amstel": {
+        "title": "Amstel",
         "alcohol": 5.0,
         "manufacturer": "Amstel Brouwerij B.V.",
         "originated": {
             "city": "Amsterdã",
             "country": "Holanda"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 140
+        },
         "allergic": [
-            "Contém derivados de cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "original": {
+        "title": "Original",
         "alcohol": 4.8,
         "manufacturer": "Grupo Petrópolis",
         "originated": {
             "city": "Petrópolis",
             "country": "Brasil"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 150
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "antarctica": {
+        "title": "Antarctica",
         "alcohol": 4.5,
         "manufacturer": "Ambev",
         "originated": {
             "city": "São Paulo",
             "country": "Brasil"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 135
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "budweiser": {
+        "title": "Budweiser",
         "alcohol": 5.0,
         "manufacturer": "Anheuser-Busch InBev",
         "originated": {
             "city": "Saint Louis",
             "country": "Estados Unidos"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 145
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "eisenbhan": {
+        "title": "Eisenbhan",
         "alcohol": 4.8,
         "manufacturer": "Cervejaria Sudbrack Ltda.",
         "originated": {
             "city": "Blumenau",
             "country": "Brasil"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 140
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "skol": {
+        "title": "Skol",
         "alcohol": 4.7,
         "manufacturer": "Ambev",
         "originated": {
             "city": "São Paulo",
             "country": "Brasil"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 140
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "spaten": {
+        "title": "Spaten",
         "alcohol": 5.2,
         "manufacturer": "Spaten-Franziskaner-Bräu",
         "originated": {
             "city": "Munique",
             "country": "Alemanha"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 150
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "stellaArtois": {
+        "title": "Stella Artois",
         "alcohol": 5.0,
         "manufacturer": "Anheuser-Busch InBev",
         "originated": {
             "city": "Leuven",
             "country": "Bélgica"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 140
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "corona": {
+        "title": "Corona",
         "alcohol": 4.5,
         "manufacturer": "Grupo Modelo",
         "originated": {
             "city": "Cidade do México",
             "country": "México"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 150
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     },
     "becks": {
+        "title": "Becks",
         "alcohol": 5.0,
         "manufacturer": "Brauerei Beck & Co.",
         "originated": {
             "city": "Bremen",
             "country": "Alemanha"
         },
+        "nutritional_values": {
+            "reference": "100 ml",
+            "calories": 145
+        },
         "allergic": [
-            "Contém cevada",
+            "Contém Cevada",
             "Contém Glúten"
         ]
     }

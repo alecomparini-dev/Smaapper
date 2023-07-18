@@ -35,17 +35,6 @@ class FloatViewController: BaseBuilder {
         }
     }
     
-    deinit {
-        print("ESSE CHAMOU MESMO")
-        self.manager = nil
-        self._actions = nil
-        self.customAttribute = nil
-        self._superView = nil
-        sizeWindow = nil
-        frameWindow = nil
-        textFields = []
-    }
-    
     init(frame: CGRect ) {
         super.init(self._view)
         self.frameWindow = frame
@@ -64,7 +53,15 @@ class FloatViewController: BaseBuilder {
         fatalError("init(coder:) has not been implemented")
     }
     
-
+    deinit {
+        self._actions = nil
+        self.customAttribute = nil
+        self._superView = nil
+        self.manager = nil
+        sizeWindow = nil
+        frameWindow = nil
+        textFields = []
+    }
     
     
 //  MARK: - PRESENT and DISMISS FloatWindow
