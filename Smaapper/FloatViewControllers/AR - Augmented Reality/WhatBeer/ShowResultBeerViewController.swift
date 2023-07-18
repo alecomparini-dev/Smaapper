@@ -7,12 +7,12 @@
 
 import UIKit
 
-class ShowResultPredictionViewController: ViewBuilder {
+class ShowResultBeerViewController: ViewBuilder {
     
     private let result: String
     
-    lazy var showResultView: ShowResultPredictionView = {
-        let view = ShowResultPredictionView(self.result)
+    lazy var showResultView: ShowResultBeerView = {
+        let view = ShowResultBeerView(self.result)
         return view
     }()
     
@@ -20,21 +20,20 @@ class ShowResultPredictionViewController: ViewBuilder {
         self.result = result
         super.init()
         initialization()
-        setBackgroundColor(.red.withAlphaComponent(0.5))
     }
     
     private func initialization() {
-        configShowResultPredictionView()
+        configShowResultBeerView()
         showResultView.beerLabel.setText(self.result)
     }
     
-    private func configShowResultPredictionView() {
+    private func configShowResultBeerView() {
         self.view = showResultView
-    }
+    }   
 
 
 //  MARK: - SET DELEGATE
-    func setDelegate(_ delegate: ShowResultPredictionViewDelegate) {
+    func setDelegate(_ delegate: ShowResultBeerViewDelegate) {
         showResultView.delegate = delegate
     }
     

@@ -1,5 +1,5 @@
 //
-//  ShowResultPredictionView.swift
+//  ShowResultBeerView.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 17/07/23.
@@ -7,17 +7,16 @@
 
 import UIKit
 
-protocol ShowResultPredictionViewDelegate: AnyObject {
-    func closeResultPrediction()
+protocol ShowResultBeerViewDelegate: AnyObject {
+    func closeResultBeer()
 }
 
-class ShowResultPredictionView: View {
-    weak var delegate: ShowResultPredictionViewDelegate?
+class ShowResultBeerView: View {
+    weak var delegate: ShowResultBeerViewDelegate?
     
     init(_ result: String) {
         super.init()
         initialization()
-        setBackgroundColor(.red.withAlphaComponent(0.5))
     }
     
     required init?(coder: NSCoder) {
@@ -27,7 +26,9 @@ class ShowResultPredictionView: View {
     private func initialization() {
         addElements()
         configConstraints()
+        configStyleView()
     }
+    
     
 //  MARK: - LAZY Area
     
@@ -80,8 +81,9 @@ class ShowResultPredictionView: View {
     
 //  MARK: - @OBJC Area
     @objc private func closeMoreTipTapped() {
-        delegate?.closeResultPrediction()
+        delegate?.closeResultBeer()
     }
+    
     
 //  MARK: - PRIVATE Area
     private func addElements() {
@@ -96,5 +98,20 @@ class ShowResultPredictionView: View {
         closeMoreTipButton.applyConstraint()
     }
     
+    private func configStyleView() {
+        configBackgroundColor()
+        configBorder()
+    }
+
+    private func configBorder() {
+        makeBorder { make in
+            make
+                .setCornerRadius(20)
+        }
+    }
+    
+    private func configBackgroundColor() {
+        setBackgroundColor(Theme.shared.currentTheme.backgroundColor.withAlphaComponent(0.9))
+    }
     
 }

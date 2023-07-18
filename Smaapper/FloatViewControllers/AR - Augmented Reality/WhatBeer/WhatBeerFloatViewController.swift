@@ -11,7 +11,7 @@ import Vision
 class WhatBeerFloatViewController: FloatViewController {
     static let identifierApp = K.WhatBeer.identifierApp
     
-    private var showResult: ShowResultPredictionViewController?
+    private var showResultBeerView: ShowResultBeerViewController?
     private var animation: CAAnimationBuilder?
     
     lazy var screen: WhatBeerView = {
@@ -103,59 +103,95 @@ class WhatBeerFloatViewController: FloatViewController {
         return request
     }
     
-    private func completionSuccessProcessImage(_ request: VNRequest) {
-        var identifier:[String] = []
+    private func getResultRequest(_ request: VNRequest) -> [String] {
+        var identifiers:[String] = []
         if let results = request.results as? [VNClassificationObservation] {
             results.forEach { result in
                 switch result.confidence {
                 case 0.98...1.0:
-                    identifier.append(result.identifier)
+                    identifiers.append(result.identifier)
                 case 0.95...0.979:
-                    identifier.append(result.identifier)
+                    identifiers.append(result.identifier)
                 case 0.90...0.949:
-                    identifier.append(result.identifier)
+                    identifiers.append(result.identifier)
                 case 0.80...0.899:
-                    identifier.append(result.identifier)
+                    identifiers.append(result.identifier)
                 default:
                     break
                 }
             }
         }
-        
-        if identifier.isEmpty {
-            print("Nao identificado, tentar novamente")
-            identifier.append("ERRO")
-//            return
-        }
-        
-        if identifier.count > 1 {
-            print("criar fluxo para mais de um chop identificado")
-            return
-        }
+        return identifiers
+    }
     
-        if let result = identifier.first {
+    private func flowForUnidentifiedBeer() {
+        print("criar fluxo para solicitar nova tentiva")
+    }
+    
+    private func flowForMultipleIdentifiedBeers(_ result: [String]) {
+        print("criar fluxo para mais de um chop identificado")
+    }
+    
+    private func flowForSingleIdentifiedBeer(_ result: [String]) {
+        if let result = result.first {
             configShowResult(result)
         }
+    }
+    
+    private func completionSuccessProcessImage(_ request: VNRequest) {
+        let result = getResultRequest(request)
         
+        switch result.count {
+            case .zero:
+                flowForUnidentifiedBeer()
+            case 1:
+                flowForSingleIdentifiedBeer(result)
+            default:
+                flowForMultipleIdentifiedBeers(result)
+        }
     }
     
     private func configShowResult(_ result: String) {
         screen.showResult.setHidden(false)
-        createShowResultPrediction(result)
-        createAnimation()
+        createShowResultBeer(result)
+        showViewResultBeerAnimation()
     }
     
-    private func createShowResultPrediction(_ result: String) {
-        let showResult = ShowResultPredictionViewController(result)
-        showResult.add(insideTo: screen.showResult.view)
-        showResult.setConstraints { build in
+    private func configDelegateShowResultBeer() {
+        showResultBeerView?.setDelegate(self)
+    }
+    
+    private func createShowResultBeer(_ result: String) {
+        self.showResultBeerView = ShowResultBeerViewController(result)
+        addShowResultBeer()
+        configShowResultBeerConstraints()
+        configDelegateShowResultBeer()
+    }
+    
+    private func addShowResultBeer() {
+        showResultBeerView?.add(insideTo: screen.showResult.view)
+    }
+    
+    private func configShowResultBeerConstraints() {
+        showResultBeerView?.setConstraints { build in
             build
-                .setPin.equalToSuperView(50)
+                .setPin.equalToSuperView
                 .apply()
         }
     }
+
+    private func configCloseResultBeer() {
+        screen.cameraARKit.runSceneView()
+        hideViewResultBeerAnimation { [weak self] in
+            guard let self else {return}
+            animation = nil
+        }
+    }
+
     
-    private func createAnimation() {
+    
+//  MARK: - ANIMATION Area
+    private func showViewResultBeerAnimation() {
         animation = CAAnimationBuilder()
             .setTransitionAnimation { build in
                 build
@@ -167,10 +203,21 @@ class WhatBeerFloatViewController: FloatViewController {
             }
     }
     
+    private func hideViewResultBeerAnimation(completion: @escaping () -> Void) {
+        animation?.transition?
+            .setSubtype(.fromLeft)
+            .play(screen.showResult.view, completion: completion)
+        
+        showResultBeerView?.view.removeFromSuperview()
+        screen.showResult.setHidden(true)
+    }
+    
+
+    
 }
 
-//  MARK: - EXTENSION WhatBeerViewDelegate
 
+//  MARK: - EXTENSION WhatBeerViewDelegate
 extension WhatBeerFloatViewController: WhatBeerViewDelegate {
     
     func closeWindow() {
@@ -189,5 +236,16 @@ extension WhatBeerFloatViewController: WhatBeerViewDelegate {
         }
         screen.cameraARKit.pauseSceneView()
     }
+    
+}
+
+
+//  MARK: - EXTENSION ShowResultBeerViewDelegate
+extension WhatBeerFloatViewController: ShowResultBeerViewDelegate {
+    
+    func closeResultBeer() {
+        configCloseResultBeer()
+    }
+    
     
 }

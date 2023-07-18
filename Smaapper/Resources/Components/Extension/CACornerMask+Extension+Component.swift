@@ -8,6 +8,7 @@
 import UIKit
 
 extension CACornerMask {
+    
     var toRectCorner: UIRectCorner {
         var corner: UIRectCorner = []
         
@@ -26,7 +27,7 @@ extension CACornerMask {
         if contains(.layerMaxXMaxYCorner) {
             corner.insert(.bottomRight)
         }
-        
         return corner
     }
+    
 }

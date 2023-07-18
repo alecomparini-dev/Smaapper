@@ -8,10 +8,12 @@
 import UIKit
 
 class CATransitionAnimation: CATransition {
+    typealias completionAnimation = () -> Void
     
     private var id: String = kCATransition
     private var layer: CALayer?
-
+    private var completion: completionAnimation?
+    
     override init() {
         super.init()
         initialization()
@@ -27,8 +29,8 @@ class CATransitionAnimation: CATransition {
     }
     
     
-//  MARK: - SET Properties
-
+    //  MARK: - SET Properties
+    
     @discardableResult
     func setID(_ id: String) -> Self {
         self.id = id
@@ -66,20 +68,30 @@ class CATransitionAnimation: CATransition {
     }
     
     
-//  MARK: - PLAY Animation
+    //  MARK: - PLAY Animation
     @discardableResult
-    func play(_ layer: CALayer) -> Self {
+    func play(_ layer: CALayer, completion: completionAnimation? = nil) -> Self {
         self.layer = layer
+        self.completion = completion
         layer.add(self, forKey: id)
         return self
     }
-
+    
     @discardableResult
-    func play(_ component: UIView) -> Self {
-        play(component.layer)
+    func play(_ component: UIView, completion: completionAnimation? = nil) -> Self {
+        play(component.layer, completion: completion)
         return self
     }
     
+    
+//  MARK: - ACTIONS Area
+    func removeCAAnimation(id: String) {
+        layer?.removeAnimation(forKey: id)
+    }
+    
+    func removeAllAnimation(id: String) {
+        layer?.removeAllAnimations()
+    }
 }
 
 
@@ -89,13 +101,12 @@ extension CATransitionAnimation: CAAnimationDelegate {
     func animationDidStart(_ anim: CAAnimation) {}
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        print("entrou chamou")
         if flag {
             if let layer {
-                print("removeu")
                 layer.removeAnimation(forKey: self.id)
             }
         }
+        self.completion?()
     }
     
 }
