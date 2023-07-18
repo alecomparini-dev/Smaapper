@@ -174,7 +174,7 @@
 		02D5816B2A23BBC500150AF9 /* GradientBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */; };
 		02D71C2B2A38D9E200DCA291 /* PainelProportionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */; };
 		02D71C2E2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */; };
-		02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* Utils.swift */; };
+		02D71C342A3BB9D100DCA291 /* UtilsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */; };
 		02D71C392A3C86BD00DCA291 /* NumberFormatterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */; };
 		02DC8DB22A4DC51800561516 /* UtilsDoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB12A4DC51800561516 /* UtilsDoll.swift */; };
 		02DC8DB52A4F043200561516 /* HangmanMoreTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */; };
@@ -406,7 +406,7 @@
 		02D5816A2A23BBC500150AF9 /* GradientBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBuilder.swift; sourceTree = "<group>"; };
 		02D71C2A2A38D9E200DCA291 /* PainelProportionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PainelProportionView.swift; sourceTree = "<group>"; };
 		02D71C2D2A3A189C00DCA291 /* TextFieldConfigKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldConfigKeyboard.swift; sourceTree = "<group>"; };
-		02D71C332A3BB9D100DCA291 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsComponent.swift; sourceTree = "<group>"; };
 		02D71C382A3C86BD00DCA291 /* NumberFormatterBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterBuilder.swift; sourceTree = "<group>"; };
 		02DC8DB12A4DC51800561516 /* UtilsDoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsDoll.swift; sourceTree = "<group>"; };
 		02DC8DB42A4F043200561516 /* HangmanMoreTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanMoreTipView.swift; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 				02C9C9E92A0A774F00AA1370 /* TapGesture */,
 				0234A8E729F9FD3A008392EC /* TextField */,
 				02D5815C2A229F0300150AF9 /* Theme */,
-				0284368A2A1D296700B596DA /* Utils */,
+				0284368A2A1D296700B596DA /* UtilsComponent */,
 				0234A95B29FB3E39008392EC /* View */,
 			);
 			path = Components;
@@ -1141,13 +1141,13 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		0284368A2A1D296700B596DA /* Utils */ = {
+		0284368A2A1D296700B596DA /* UtilsComponent */ = {
 			isa = PBXGroup;
 			children = (
 				02D71C372A3C86A500DCA291 /* NumberFormatter */,
-				02D71C332A3BB9D100DCA291 /* Utils.swift */,
+				02D71C332A3BB9D100DCA291 /* UtilsComponent.swift */,
 			);
-			path = Utils;
+			path = UtilsComponent;
 			sourceTree = "<group>";
 		};
 		02B4313F2A534A8500A1D7EC /* StickyNote */ = {
@@ -2103,7 +2103,7 @@
 				026CF1722A4A4832009CEE6E /* HangmanLetterInWordView.swift in Sources */,
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */,
-				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
+				02D71C342A3BB9D100DCA291 /* UtilsComponent.swift in Sources */,
 				025F0E8B2A67015000DF2A5A /* WhatBeerViewModel.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,

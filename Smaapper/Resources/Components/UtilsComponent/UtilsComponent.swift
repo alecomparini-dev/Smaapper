@@ -1,5 +1,5 @@
 //
-//  Utils.swift
+//  UtilsComponent.swift
 //  Smaapper
 //
 //  Created by Alessandro Comparini on 15/06/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Utils {
+class UtilsComponent {
     
     struct Validate {
         static func percent(_ percent: CGFloat) -> Bool {
@@ -30,7 +30,7 @@ class Utils {
         }
         
         static var rootView: UIView? {
-            if let rootView = Utils.Window.currentWindow?.rootViewController?.view {
+            if let rootView = UtilsComponent.Window.currentWindow?.rootViewController?.view {
                 return rootView
             }
             return nil
@@ -46,7 +46,7 @@ class Utils {
                 if let textField = subview as? UITextField {
                     textFields.append(textField)
                 } else {
-                    textFields += Utils.TextField.allTextFieldsInView(subview)
+                    textFields += UtilsComponent.TextField.allTextFieldsInView(subview)
                 }
             }
             return textFields

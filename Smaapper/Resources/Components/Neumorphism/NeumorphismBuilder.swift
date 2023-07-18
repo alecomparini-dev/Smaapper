@@ -210,7 +210,7 @@ class NeumorphismBuilder {
     
 //  MARK: - Private Function Area
     private func validatePercent(_ property: String , _ percent: CGFloat, _ defaultPercent: CGFloat ) -> Bool {
-        if !Utils.Validate.percent(percent)  {
+        if !UtilsComponent.Validate.percent(percent)  {
             print("Allowed values for \(property) 0.0...100.0%. Default \(defaultPercent)%")
             return false
         }
