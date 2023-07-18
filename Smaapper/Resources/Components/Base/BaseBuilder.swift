@@ -17,6 +17,7 @@ class BaseBuilder: NSObject {
     private(set) var neumorphism: NeumorphismBuilder?
     private(set) var gradient: GradientBuilder?
     private(set) var blur: BlurBuilder?
+    private(set) var caAnimation: CAAnimationBuilder?
     
     private weak var _component: UIView?
     
@@ -107,7 +108,7 @@ class BaseBuilder: NSObject {
         component.isHidden = hide
         return self
     }
-    
+        
     
 //  MARK: - CONSTRAINTS AREA
     

@@ -12,6 +12,7 @@ class WhatBeerFloatViewController: FloatViewController {
     static let identifierApp = K.WhatBeer.identifierApp
     
     private var showResult: ShowResultPredictionViewController?
+    private var animation: CAAnimationBuilder?
     
     lazy var screen: WhatBeerView = {
         let view = WhatBeerView()
@@ -139,56 +140,32 @@ class WhatBeerFloatViewController: FloatViewController {
     }
     
     private func configShowResult(_ result: String) {
-        createShowResult(result)
-        animateTransitionWithCATransition()
-    }
-    
-    private func createShowResult(_ result: String) {
-        showResult = ShowResultPredictionViewController(result)
-    }
-    
-    
-    func animateTransitionWithCATransition() {
-        guard let showResult else {return}
-        
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        transition.type = .push
-        transition.subtype = .fromRight
-        
-        // Adicione a nova view à hierarquia antes da animação
         screen.showResult.setHidden(false)
+        createShowResultPrediction(result)
+        createAnimation()
+    }
+    
+    private func createShowResultPrediction(_ result: String) {
+        let showResult = ShowResultPredictionViewController(result)
         showResult.add(insideTo: screen.showResult.view)
         showResult.setConstraints { build in
             build
                 .setPin.equalToSuperView(50)
                 .apply()
         }
-        screen.showResult.view.layer.add(transition, forKey: kCATransition)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.removeAnimate()
-        }
     }
-
     
-    
-    func removeAnimate() {
-        guard let showResult else {return}
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        transition.type = .push
-        transition.subtype = .fromLeft
-        
-        screen.showResult.view.layer.add(transition, forKey: kCATransition)
-        
-        showResult.view.removeFromSuperview()
-        screen.showResult.setHidden(true)
-        
+    private func createAnimation() {
+        animation = CAAnimationBuilder()
+            .setTransitionAnimation { build in
+                build
+                    .setDuration(0.5)
+                    .setType(.push)
+                    .setTimingFunction(.easeInEaseOut)
+                    .setSubtype(.fromRight)
+                    .play(screen.showResult.view)
+            }
     }
-
     
 }
 
@@ -210,7 +187,6 @@ extension WhatBeerFloatViewController: WhatBeerViewDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
-        
         screen.cameraARKit.pauseSceneView()
     }
     
