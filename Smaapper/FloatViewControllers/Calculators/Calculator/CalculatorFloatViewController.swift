@@ -61,11 +61,11 @@ class CalculatorFloatViewController: FloatViewController {
     }
     
     private func setShadow() {
-        UtilsFloatView.setShadowActiveFloatView(screen)
+        Utils.setShadowActiveFloatView(screen)
     }
     
     private func removeShadow() {
-        UtilsFloatView.removeShadowActiveFloatView(screen)
+        Utils.removeShadowActiveFloatView(screen)
     }
     
     private func setDisplay(_ number: String) {

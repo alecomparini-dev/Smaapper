@@ -38,7 +38,7 @@ class StickyNoteFloatViewController: FloatViewController {
     
     override func viewDidSelectFloatView() {
         super.viewDidSelectFloatView()
-        UtilsFloatView.setShadowActiveFloatView(screen)
+        Utils.setShadowActiveFloatView(screen)
         do {
             try screen.cameraARKit.runSceneView(loadWorldMapData: K.worldMapData)
         } catch let error {
@@ -48,7 +48,7 @@ class StickyNoteFloatViewController: FloatViewController {
     
     override func viewDidDeselectFloatView() {
         super.viewDidDeselectFloatView()
-        UtilsFloatView.removeShadowActiveFloatView(screen)
+        Utils.removeShadowActiveFloatView(screen)
         screen.cameraARKit.pauseSceneView()
     }
     
