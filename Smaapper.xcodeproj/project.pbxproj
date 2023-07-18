@@ -95,6 +95,9 @@
 		025F0E802A65D7DE00DF2A5A /* CAAnimationBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E7F2A65D7DE00DF2A5A /* CAAnimationBuilder.swift */; };
 		025F0E832A65E7A800DF2A5A /* CATransitionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E822A65E7A800DF2A5A /* CATransitionAnimation.swift */; };
 		025F0E852A66DB1D00DF2A5A /* NutritionalValuesBeerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E842A66DB1D00DF2A5A /* NutritionalValuesBeerData.swift */; };
+		025F0E882A6700D600DF2A5A /* WhatBeerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E872A6700D600DF2A5A /* WhatBeerService.swift */; };
+		025F0E8B2A67015000DF2A5A /* WhatBeerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E8A2A67015000DF2A5A /* WhatBeerViewModel.swift */; };
+		025F0E8D2A6709D800DF2A5A /* FetchDataInJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025F0E8C2A6709D800DF2A5A /* FetchDataInJson.swift */; };
 		026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */; };
 		026C14792A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */; };
 		026C147B2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */; };
@@ -324,6 +327,9 @@
 		025F0E7F2A65D7DE00DF2A5A /* CAAnimationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAAnimationBuilder.swift; sourceTree = "<group>"; };
 		025F0E822A65E7A800DF2A5A /* CATransitionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CATransitionAnimation.swift; sourceTree = "<group>"; };
 		025F0E842A66DB1D00DF2A5A /* NutritionalValuesBeerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionalValuesBeerData.swift; sourceTree = "<group>"; };
+		025F0E872A6700D600DF2A5A /* WhatBeerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerService.swift; sourceTree = "<group>"; };
+		025F0E8A2A67015000DF2A5A /* WhatBeerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatBeerViewModel.swift; sourceTree = "<group>"; };
+		025F0E8C2A6709D800DF2A5A /* FetchDataInJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataInJson.swift; sourceTree = "<group>"; };
 		026C14762A3CEC5C00F8D3E6 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		026C14782A3CEC6D00F8D3E6 /* CalculatorFloatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorFloatViewController.swift; sourceTree = "<group>"; };
 		026C147A2A3CEDD400F8D3E6 /* CalculatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorCoordinator.swift; sourceTree = "<group>"; };
@@ -958,6 +964,22 @@
 			path = CAAnimations;
 			sourceTree = "<group>";
 		};
+		025F0E862A6700C500DF2A5A /* WhatBeerService */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E872A6700D600DF2A5A /* WhatBeerService.swift */,
+			);
+			path = WhatBeerService;
+			sourceTree = "<group>";
+		};
+		025F0E892A67013500DF2A5A /* WhatBeer */ = {
+			isa = PBXGroup;
+			children = (
+				025F0E8A2A67015000DF2A5A /* WhatBeerViewModel.swift */,
+			);
+			path = WhatBeer;
+			sourceTree = "<group>";
+		};
 		026C14752A3CEC3B00F8D3E6 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1199,6 +1221,7 @@
 		02C5F43E2A0BF39C00D75D9F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				025F0E892A67013500DF2A5A /* WhatBeer */,
 				026CF1732A4B15F7009CEE6E /* Hangman */,
 				02C5F4402A0BF44400D75D9F /* Home */,
 			);
@@ -1250,6 +1273,7 @@
 		02C5F4452A0C1A7200D75D9F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				025F0E862A6700C500DF2A5A /* WhatBeerService */,
 				026CF1762A4B1703009CEE6E /* HangmanService */,
 				02C5F4462A0C1A8800D75D9F /* HomeService */,
 				02C5F4492A0C1B1700D75D9F /* GenericService.swift */,
@@ -1479,6 +1503,7 @@
 			isa = PBXGroup;
 			children = (
 				02E974232A37892900BF14EE /* UtilsFloatView.swift */,
+				025F0E8C2A6709D800DF2A5A /* FetchDataInJson.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1979,6 +2004,7 @@
 				02C9C9E22A05392400AA1370 /* Section.swift in Sources */,
 				02D06E882A5627610020A10B /* ARGeometryBuilder.swift in Sources */,
 				02C5F4352A0BE6F400D75D9F /* HomeViewModel.swift in Sources */,
+				025F0E8D2A6709D800DF2A5A /* FetchDataInJson.swift in Sources */,
 				02C5F44A2A0C1B1700D75D9F /* GenericService.swift in Sources */,
 				0234A95D29FB3E47008392EC /* View.swift in Sources */,
 				0234A90E29F9FD3A008392EC /* UIColor+Extension+Component.swift in Sources */,
@@ -2005,6 +2031,7 @@
 				0234A92329F9FD3A008392EC /* ShowsScroll.swift in Sources */,
 				02D5814B2A1FF01800150AF9 /* ListActions.swift in Sources */,
 				02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */,
+				025F0E882A6700D600DF2A5A /* WhatBeerService.swift in Sources */,
 				02B7926A2A1EE588006CEE8E /* TextFieldPasswordBuilder.swift in Sources */,
 				026CF16E2A4A140B009CEE6E /* HangmanWordView.swift in Sources */,
 				020D0E612A1ECD20007F3992 /* DockActions.swift in Sources */,
@@ -2077,6 +2104,7 @@
 				02E974122A3394C700BF14EE /* FloatNavigationController.swift in Sources */,
 				0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */,
 				02D71C342A3BB9D100DCA291 /* Utils.swift in Sources */,
+				025F0E8B2A67015000DF2A5A /* WhatBeerViewModel.swift in Sources */,
 				021848BB2A26A511007E68A4 /* DraggableBuilder.swift in Sources */,
 				026CF1682A49CBE1009CEE6E /* HangmanKeyboardView.swift in Sources */,
 				02D06E6D2A55913E0020A10B /* TextFieldClearableBuilder.swift in Sources */,

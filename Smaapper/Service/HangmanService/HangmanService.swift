@@ -9,22 +9,19 @@ import Foundation
 
 class HangmanService: GenericService {
     
+    private let fileNameJson = K.Hangman.Service.fileNameJson
+    private let extensionJson = K.Hangman.Service.extensionJson
+    
     func fetchWordsFromLastPlayedWordInJson(lastPlayedWord: String, completion: @escaping (_ result: [HangmanWord], _ error: Error?) -> Void) {
-        if let jsonFileUrl = Bundle.main.url(forResource: K.Hangman.Service.fileNameJson, withExtension: K.Hangman.Service.extensionJson) {
-            do {
-                let jsonData = try Data(contentsOf: jsonFileUrl)
-                let result = try JSONDecoder().decode(HangmanData.self, from: jsonData)
-                
-                var hangmanWord: [HangmanWord] = result.words
-                if let indexOfLastPlayedWord: Int = getIndexOfLastPlayedWord(result, lastPlayedWord) {
-                    hangmanWord = result.words.suffix(result.words.count - (indexOfLastPlayedWord+1))
-                }
-                completion(hangmanWord, nil)
-            } catch {
-                completion([], FileError.fileDecodingFailed(error: K.Hangman.Service.fileNameJson , error))
+        do {
+            let result: HangmanData = try FetchDataInJson().fetch(fileNameJson, extensionJson)
+            var hangmanWord: [HangmanWord] = result.words
+            if let indexOfLastPlayedWord: Int = getIndexOfLastPlayedWord(result, lastPlayedWord) {
+                hangmanWord = result.words.suffix(result.words.count - (indexOfLastPlayedWord+1))
             }
-        } else {
-            completion([], FileError.fileNotFound(error: K.Hangman.Service.fileNameJson))
+            completion(hangmanWord, nil)
+        } catch {
+            completion([], error)
         }
     }
     

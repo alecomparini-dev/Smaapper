@@ -31,7 +31,7 @@ class ShowResultBeerView: View {
     
     
 //  MARK: - LAZY Area
-    
+
     lazy var beerLabel: LabelBuilder = {
         let label = LabelBuilder()
             .setFont(UIFont.systemFont(ofSize: 25))

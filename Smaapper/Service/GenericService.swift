@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum TypeFetch {
     case file
     case api
@@ -16,5 +15,5 @@ enum TypeFetch {
 }
 
 protocol GenericService: AnyObject {
-    typealias completion<T> = (_ result: T?, _ error: Error?) -> Void
+    typealias completionService<T> = (_ result: T?, _ error: Error?) -> Void
 }
