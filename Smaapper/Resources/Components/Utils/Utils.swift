@@ -30,7 +30,7 @@ class Utils {
         }
         
         static var rootView: UIView? {
-            if let rootView = Utils.Window.currentWindow?.window?.rootViewController?.view {
+            if let rootView = Utils.Window.currentWindow?.rootViewController?.view {
                 return rootView
             }
             return nil
