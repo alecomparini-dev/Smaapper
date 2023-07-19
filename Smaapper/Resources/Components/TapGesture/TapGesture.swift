@@ -38,7 +38,6 @@ class TapGesture: UITapGestureRecognizer {
     private func initialization() {
         self.addTarget(self, action: #selector(objcTapGesture(_:)))
         self.component?.addGestureRecognizer(self)
-//        delegate = self
     }
     
     

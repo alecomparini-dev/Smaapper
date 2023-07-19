@@ -51,6 +51,7 @@ class TextFieldClearableBuilder: TextFieldImageBuilder {
         super.setDelegate(self)
     }
     
+    
 //  MARK: - ACTIONS THIS COMPONENT
 
     private func clearTextTapped() {
