@@ -71,7 +71,7 @@ class ShowResultBeerViewController: ViewBuilder {
         let sectionInformation = createSection("Info")
         let sectionOriginated = createSection("Original de")
         let sectionNutritional = createSection("Inf. Nutricional")
-        let sectionAllergic = createSection("Alérgicos")
+        let sectionAllergic = createSection("Alergênicos")
         
         showResultView.resultList.populateSection(sectionInformation)
         createRow(sectionInformation, "Teor Alcólico: \(beer.alcohol)% vol. alc.")
