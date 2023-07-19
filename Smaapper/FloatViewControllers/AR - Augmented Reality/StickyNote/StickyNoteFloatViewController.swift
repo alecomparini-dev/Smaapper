@@ -131,7 +131,7 @@ class StickyNoteFloatViewController: FloatViewController {
     }
     
     private func removeStickNoteAR() {
-
+        //TODO: Implementar
     }
     
     private func enabledOrDisableRedoButton() {
