@@ -100,7 +100,7 @@ class WhatBeerFloatViewController: FloatViewController {
             guard let self else {return}
             if error != nil {
                 print("Mensagem para retentar porque deu falha", error?.localizedDescription ?? "")
-//                return
+                return
             }
             completionSuccessProcessImage(request)
         }

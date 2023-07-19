@@ -34,37 +34,67 @@ class ShowResultBeerView: View {
 
     lazy var beerLabel: LabelBuilder = {
         let label = LabelBuilder()
-            .setFont(UIFont.systemFont(ofSize: 25))
+            .setFont(UIFont.systemFont(ofSize: 28))
             .setNumberOfLines(2)
             .setColor(Theme.shared.currentTheme.onSurface)
-            .setTextAlignment(.center)
+            .setTextAlignment(.natural)
             .setConstraints { build in
                 build
-                    .setTop.equalToSuperView(10)
-                    .setTrailing.setLeading.equalToSuperView(40)
-                    .setHeight.equalToConstant(35)
+                    .setTop.equalToSuperView(15)
+                    .setLeading.equalToSuperView(15)
+                    .setTrailing.equalToSuperView(40)
             }
         return label
     }()
     
+    lazy var underLineTitle: ViewBuilder = {
+       var view = ViewBuilder()
+            .setGradient({ build in
+                build
+                    .setGradientColors(Theme.shared.currentTheme.primaryGradient)
+                    .setAxialGradient(.leftToRight)
+                    .apply()
+            })
+            .setBorder({ build in
+                build.setCornerRadius(2)
+            })
+            .setShadow({ build in
+                build
+                    .setOffset(width: 3, height: 3)
+                    .setColor(.black.withAlphaComponent(0.8))
+                    .setOpacity(1)
+                    .setRadius(3)
+                    .apply()
+            })
+            .setConstraints { build in
+                build
+                    .setTop.equalTo(beerLabel.view, .bottom, 2)
+                    .setLeading.equalTo(beerLabel.view, .leading, 1)
+                    .setHeight.equalToConstant(2)
+                    .setWidth.equalToConstant(60)
+            }
+        return view
+    }()
+    
     lazy var resultList: ListBuilder = {
         let list = ListBuilder(.grouped)
-            .setSeparatorStyle(.singleLine)
-            .setRowHeight(45)
-            .setSectionHeaderHeight(40)
+            .setBackgroundColorCell(Theme.shared.currentTheme.surfaceContainerLow.withAlphaComponent(0.7))
+            .setSeparatorStyle(.none)
+            .setRowHeight(48)
+            .setSectionHeaderHeight(55)
             .setSectionFooterHeight(0)
             .setWidthLeftColumnCell(10)
             .setShowsVerticalScrollIndicator(false)
             .setConstraints { build in
                 build
-                    .setTop.equalTo(beerLabel.view, .bottom, 5)
+                    .setTop.equalTo(beerLabel.view, .bottom, 15)
                     .setPinBottom.equalToSuperView(10)
             }
         return list
     }()
     
-    lazy var closeMoreTipButton: ButtonImageBuilder = {
-        let img = ImageViewBuilder(UIImage(systemName: "xmark"))
+    lazy var closeResultBeerButton: ButtonImageBuilder = {
+        let img = ImageViewBuilder(UIImage(systemName: K.WhatBeer.Images.closeResultBeer))
         let btn = ButtonImageBuilder(img.view)
             .setImageSize(15)
             .setImageColor(Theme.shared.currentTheme.onSurfaceVariant)
@@ -86,18 +116,24 @@ class ShowResultBeerView: View {
         delegate?.closeResultBeer()
     }
     
+//  MARK: - PUBLIC Area
+    func configResultListConstraint() {
+        resultList.applyConstraint()
+    }
+    
     
 //  MARK: - PRIVATE Area
     private func addElements() {
         beerLabel.add(insideTo: self)
+        underLineTitle.add(insideTo: self)
         resultList.add(insideTo: self)
-        closeMoreTipButton.add(insideTo: self)
+        closeResultBeerButton.add(insideTo: self)
     }
     
     private func configConstraints() {
         beerLabel.applyConstraint()
-        resultList.applyConstraint()
-        closeMoreTipButton.applyConstraint()
+        underLineTitle.applyConstraint()
+        closeResultBeerButton.applyConstraint()
     }
     
     private func configStyleView() {

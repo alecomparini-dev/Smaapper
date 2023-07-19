@@ -144,7 +144,7 @@ struct K {
         struct FloatView {
             static let x: CGFloat = 10
             static let y: CGFloat = (UtilsComponent.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
-            static let width: CGFloat = (UtilsComponent.Window.currentWindow?.screen.bounds.width ?? 300)-20
+            static let width: CGFloat = (UtilsComponent.Window.currentWindow?.screen.bounds.width ?? 360)-20
             static let height: CGFloat = 500
         }
         
@@ -152,6 +152,7 @@ struct K {
             static let logo = "vial.viewfinder"
             static let target = "plus"
             static let captureButton = "camera.viewfinder"
+            static let closeResultBeer = "xmark"
         }
     }
     
@@ -163,7 +164,7 @@ struct K {
         struct FloatView {
             static let x: CGFloat = 10
             static let y: CGFloat = (UtilsComponent.Window.currentWindow?.safeAreaInsets.top ?? 30) + 10
-            static let width: CGFloat = (UtilsComponent.Window.currentWindow?.screen.bounds.width ?? 300)-20
+            static let width: CGFloat = (UtilsComponent.Window.currentWindow?.screen.bounds.width ?? 360)-20
             static let height: CGFloat = 500
         }
         

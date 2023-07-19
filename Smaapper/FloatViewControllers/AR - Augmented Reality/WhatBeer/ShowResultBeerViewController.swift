@@ -35,7 +35,7 @@ class ShowResultBeerViewController: ViewBuilder {
     func setDelegate(_ delegate: ShowResultBeerViewDelegate) {
         showResultView.delegate = delegate
     }
-
+    
     
 //  MARK: - PRIVATE Area
     private func configShowResultBeerView() {
@@ -46,20 +46,19 @@ class ShowResultBeerViewController: ViewBuilder {
         Task {
             do {
                 self.beer = try await viewModel.fetchBeer(.file, result)
-                print(beer ?? "" )
                 DispatchQueue.main.async { [weak self] in
                     self?.refreshInterface()
                 }
             } catch let error {
                 print("Error fetch Beer", error.localizedDescription)
             }
-            
         }
     }
     
     private func refreshInterface() {
         setBeerLabel()
         populateResultList()
+        showResultView.configResultListConstraint()
     }
     
     private func setBeerLabel() {
@@ -67,8 +66,69 @@ class ShowResultBeerViewController: ViewBuilder {
     }
     
     private func populateResultList() {
+        guard let beer else {return}
         
+        let sectionInformation = createSection("Info")
+        let sectionOriginated = createSection("Original de")
+        let sectionNutritional = createSection("Inf. Nutricional")
+        let sectionAllergic = createSection("Alérgicos")
+        
+        showResultView.resultList.populateSection(sectionInformation)
+        createRow(sectionInformation, "Teor Alcólico: \(beer.alcohol)% vol. alc.")
+        createRow(sectionInformation, "Fabricante: \(beer.manufacturer)")
+        
+        showResultView.resultList.populateSection(sectionOriginated)
+        createRow(sectionOriginated, "\(beer.originated.city) / \(beer.originated.country) ")
+        
+        showResultView.resultList.populateSection(sectionNutritional)
+        createRow(sectionNutritional, "Referência: \(beer.nutritionalValues.reference)")
+        createRow(sectionNutritional, "Calorias: \(beer.nutritionalValues.calories) kcal")
+        
+        showResultView.resultList.populateSection(sectionAllergic)
+        beer.allergic.forEach { item in
+            createRow(sectionAllergic, item)
+        }
+        
+        showResultView.resultList.isShow = true
     }
+    
+    private func createSection(_ label: String) -> Section {
+        let section = Section(
+            leftView: UIView(frame: .zero),
+            middleView: LabelBuilder(label)
+                .setFont(UIFont.systemFont(ofSize: 21, weight: .bold))
+                .setColor(Theme.shared.currentTheme.onSurfaceVariant)
+                .view
+        )
+        return section
+    }
+    
+    private func createRow(_ section: Section, _ text: String) {
+        let row = Row(
+            leftView: UIView(),
+            middleView:
+                LabelBuilder(text)
+                .setNumberOfLines(2)
+                .setFont(UIFont.systemFont(ofSize: 15, weight: .regular))
+                .setColor(Theme.shared.currentTheme.onSurface)
+                .view,
+            rightView: nil)
+        showResultView.resultList.populateRowInSection(section, row)
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 }
