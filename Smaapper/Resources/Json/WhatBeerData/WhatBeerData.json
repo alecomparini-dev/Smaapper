@@ -2,14 +2,14 @@
     "heineken": {
         "title": "Heineken",
         "alcohol": 5.0,
-        "manufacturer": "Heineken N.V.",
+        "manufacturer": "Heineken International",
         "originated": {
             "city": "Amsterdã",
             "country": "Holanda"
         },
         "nutritional_values": {
             "reference": "100 ml",
-            "calories": 130
+            "calories": 42
         },
         "allergic": [
             "Contém derivados de Cevada",
@@ -18,15 +18,16 @@
     },
     "brahmaDuploMalte": {
         "title": "Brahma Duplo Malte",
-        "alcohol": 5.5,
+        "alcohol": 4.7,
         "manufacturer": "Ambev",
         "originated": {
             "city": "São Paulo",
             "country": "Brasil"
         },
         "nutritional_values": {
-            "reference": "100 ml",
-            "calories": 145
+            "reference": "200 ml",
+            "calories": 80,
+            "carbo": 6.0
         },
         "allergic": [
             "Contém Cevada",
@@ -52,10 +53,10 @@
     },
     "original": {
         "title": "Original",
-        "alcohol": 4.8,
-        "manufacturer": "Grupo Petrópolis",
+        "alcohol": 5.0,
+        "manufacturer": "Ambev",
         "originated": {
-            "city": "Petrópolis",
+            "city": "São Paulo",
             "country": "Brasil"
         },
         "nutritional_values": {
@@ -94,7 +95,7 @@
         },
         "nutritional_values": {
             "reference": "100 ml",
-            "calories": 145
+            "calories": 40
         },
         "allergic": [
             "Contém Cevada",
@@ -171,15 +172,15 @@
     },
     "coronaExtra": {
         "title": "Corona Extra",
-        "alcohol": 4.5,
+        "alcohol": 4.6,
         "manufacturer": "Grupo Modelo",
         "originated": {
             "city": "Cidade do México",
             "country": "México"
         },
         "nutritional_values": {
-            "reference": "100 ml",
-            "calories": 150
+            "reference": "330 ml",
+            "calories": 137
         },
         "allergic": [
             "Contém Cevada",
@@ -187,16 +188,16 @@
         ]
     },
     "becks": {
-        "title": "Becks",
+        "title": "Beck's",
         "alcohol": 5.0,
-        "manufacturer": "Brauerei Beck & Co.",
+        "manufacturer": "AB Inbev",
         "originated": {
             "city": "Bremen",
             "country": "Alemanha"
         },
         "nutritional_values": {
             "reference": "100 ml",
-            "calories": 145
+            "calories": 40
         },
         "allergic": [
             "Contém Cevada",
