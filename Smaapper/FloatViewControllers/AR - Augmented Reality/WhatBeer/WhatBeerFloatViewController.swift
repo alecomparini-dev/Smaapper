@@ -144,7 +144,6 @@ class WhatBeerFloatViewController: FloatViewController {
     
     private func completionSuccessProcessImage(_ request: VNRequest) {
         let result = getResultRequest(request)
-        
         switch result.count {
             case .zero:
                 flowForUnidentifiedBeer()
@@ -215,8 +214,6 @@ class WhatBeerFloatViewController: FloatViewController {
         showResultBeerView?.view.removeFromSuperview()
         screen.showResult.setHidden(true)
     }
-    
-
     
 }
 
