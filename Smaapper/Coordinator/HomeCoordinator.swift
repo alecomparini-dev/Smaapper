@@ -10,25 +10,32 @@ import UIKit
 
 class HomeCoordinator: Coordinator {
     var floatNavigationController: FloatNavigationController
+    private let homeController = HomeViewController()
     
     required init(_ floatNavigationController: FloatNavigationController) {
         self.floatNavigationController = floatNavigationController
     }
     
     func start() {
-        let controller = HomeViewController()
-        controller.delegateFloatViewController = self
-        floatNavigationController.pushViewController(controller, animated: true)
+        homeController.delegate = self
+        floatNavigationController.pushViewController(homeController, animated: true)
     }
     
 }
 
-extension HomeCoordinator: HomeFloatViewControllerDelegate {
+
+//  MARK: - EXTENSION HomeViewControllerDelegate
+
+extension HomeCoordinator: HomeViewControllerDelegate {
+    func openCategoriesController(_ categories: DropdownMenuData) {
+        let coodinator = CategoriesCoordinator(floatNavigationController,
+                                               categories: categories,
+                                               controllerDelegate: homeController)
+        coodinator.start()
+    }
     
     func openFloatViewController(_ idApp: String, where component: UIView) {
-        
         switch idApp {
-            
             case WeatherFloatViewController.identifierApp:
                 let coodinator = WeatherCoordinator(floatNavigationController)
                 coodinator.start(where: component)

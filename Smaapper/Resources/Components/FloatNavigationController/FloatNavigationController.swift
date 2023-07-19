@@ -18,7 +18,7 @@ class FloatNavigationController: UINavigationController {
     }
 
     func pushViewController(_ viewController: FloatViewController, animated: Bool) {
-        print("aqui é o PUSHVIEWW !!")
+        print("PUSHVIEWW !!")
     }
 
     

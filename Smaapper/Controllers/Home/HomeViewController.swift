@@ -7,35 +7,29 @@
 
 import UIKit
 
-protocol HomeFloatViewControllerDelegate: AnyObject {
+protocol HomeViewControllerDelegate: AnyObject {
     func openFloatViewController(_ idApp: String, where: UIView)
+    func openCategoriesController(_ categories: DropdownMenuData)
 }
 
 class HomeViewController: UIViewController {
-    
-    var delegateFloatViewController: HomeFloatViewControllerDelegate?
-    
-    private let floatManager = FloatViewControllerManager.instance
-    private var adjustTrailingDock = NSLayoutConstraint()
+    var delegate: HomeViewControllerDelegate?
     
     static let favoritesID = K.Home.favoritesID
     static let categoriesID = K.Home.categoriesID
     
+    private let viewModel = HomeViewModel(service: HomeService())
+    private let floatManager = FloatViewControllerManager.instance
+    private var adjustTrailingDock = NSLayoutConstraint()
     private var dockController = HomeViewDockController()
     private var removeDockItemAtFloatViewIndex: Int?
-    
-    private let viewModel = HomeViewModel(service: HomeService())
-    private var categoriesVC: CategoriesViewController?
     private var resultDropdownMenu: DropdownMenuData?
     private var weather: WeatherFloatViewController?
-    
     private var categories: DropdownMenuData = []
-    
     private var indexSection: Int = .zero
     private var indexRow: Int = .zero
-    private var rowTappedDropdownMenu: (section: Int, row: Int) = (.zero,.zero)
+    private var rowTappedDropdownMenu: (section: Int, row: Int) = (.zero, .zero)
     private var rowTappedCategory: (section: Int, row: Int)?
-    
     
     lazy var homeScreen: HomeView = {
         let home = HomeView(frame: .zero)
@@ -55,9 +49,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let rowTappedCategory {
-            addFloatViewController(rowTappedCategory)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,7 +57,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    //  MARK: - Private Function Area
+//  MARK: - PRIVATE Function Area
     
     private func configDockController() {
         self.dockController = HomeViewDockController(homeScreen.dock)
@@ -92,8 +83,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    //  MARK: - Populate DropdowMenu
-    
+//  MARK: - POPULATE DropdowMenu
     private func fetchDropdownMenu() {
         viewModel.fetchDropdownMenu(.file) { result, error in
             if error != nil {
@@ -180,31 +170,14 @@ class HomeViewController: UIViewController {
         return nil
     }
     
-    private func showCategoriesViewController(_ subMenu: DropdownMenuData) {
-        categoriesVC = CategoriesViewController(subMenu)
-        configCategoriesDelegate()
-        if let categoriesVC {
-            categoriesVC.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(categoriesVC, animated: true)
-        }
-    }
-    
-    private func configCategoriesDelegate() {
-        if let categoriesVC {
-            categoriesVC.delegate = self
-        }
-    }
-    
     private func openCategories() {
-        guard let resultDropdownMenu else {return}
-        guard let items = resultDropdownMenu[rowTappedDropdownMenu.section].items else { return }
+        guard let resultDropdownMenu,
+              let items = resultDropdownMenu[rowTappedDropdownMenu.section].items else { return }
         if items[rowTappedDropdownMenu.row].title == HomeViewController.categoriesID {
             self.categories = items[rowTappedDropdownMenu.row].subMenu ?? []
-            showCategoriesViewController(categories)
+            delegate?.openCategoriesController(categories)
         }
     }
-    
-
     
     private func getIcon(_ index: Int) -> String {
         let win = floatManager.listFloatView[index]
@@ -220,42 +193,47 @@ class HomeViewController: UIViewController {
         return filteredItems?.leftImage ?? K.String.empty
     }
     
-    
-    //  MARK: - FLOATWINDOW Area
-    
     private func addFloatViewController(_ category: (section: Int, row: Int)) {
         let idApp: String = getIdAppByCategory(category)
         hideElementsOnScreen()
-        delegateFloatViewController?.openFloatViewController(idApp, where: homeScreen.viewFloatWindow.view)
+        delegate?.openFloatViewController(idApp, where: homeScreen.viewFloatWindow.view)
     }
     
     private func getIdAppByCategory(_ category: (section: Int, row: Int)) -> String {
         return self.categories[category.section].items?[category.row].id ?? K.String.empty
     }
     
+    private func verifyShowElementsOnScreen() {
+        if FloatViewControllerManager.instance.isAllMinimized() {
+            showElementsOnScreen()
+            return
+        }
+        hideElementsOnScreen()
+    }
+
+    private func hideElementsOnScreen() {
+        homeScreen.clock.setOpacity(0.6)
+        homeScreen.weather.setHidden(true)
+        homeScreen.askChatGPTView.setHidden(true)
+    }
     
-    lazy var textField: TextFieldBuilder = {
-        let txt = TextFieldBuilder()
-            .setKeyboard({ buid in
-                buid
-                    .setKeyboardType(.decimalPad)
-            })
-            .setBorder({ build in
-                build
-                    .setWidth(1)
-            })
-            .setConstraints { build in
-                build
-                    .setAlignmentCenterXY.equalToSuperView
-                    .setSize.equalToConstant(50)
-            }
-        return txt
-    }()
+    private func showElementsOnScreen() {
+        homeScreen.clock.setOpacity(1)
+        homeScreen.weather.setHidden(false)
+        homeScreen.askChatGPTView.setHidden(false)
+    }
+    
+    private func activeFloatView(_ indexItem: Int)  {
+        let floatView = floatManager.listFloatView[indexItem]
+        if floatView.isMinimized {
+            floatView.restore
+            return
+        }
+        floatView.select
+    }
     
 }
     
-
-
 
 //  MARK: - EXTENSION HomeViewDelegate
 
@@ -285,8 +263,14 @@ extension HomeViewController: HomeViewDelegate {
 extension HomeViewController: CategoriesViewControllerDelegate {
     
     func selectedCategory(_ section: Int, _ row: Int) {
-        openCloseDropdownMenu()
         rowTappedCategory = (section,row)
+        openCloseDropdownMenu()
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {return}
+            if let rowTappedCategory {
+                addFloatViewController(rowTappedCategory)
+            }
+        }
     }
 
 }
@@ -349,32 +333,11 @@ extension HomeViewController: FloatViewControllerManagerDelegate {
     func allClosedWindows() {
         showElementsOnScreen()
     }
-    
-    private func verifyShowElementsOnScreen() {
-        if FloatViewControllerManager.instance.isAllMinimized() {
-            showElementsOnScreen()
-            return
-        }
-        hideElementsOnScreen()
-    }
-
-    private func hideElementsOnScreen() {
-        homeScreen.clock.setOpacity(0.6)
-        homeScreen.weather.setHidden(true)
-        homeScreen.askChatGPTView.setHidden(true)
-    }
-    
-    private func showElementsOnScreen() {
-        homeScreen.clock.setOpacity(1)
-        homeScreen.weather.setHidden(false)
-        homeScreen.askChatGPTView.setHidden(false)
-    }
 
 }
 
 
 //  MARK: - Extension DOCK DELEGATE
-
 extension HomeViewController: DockDelegate {
     
     func numberOfItemsCallback() -> Int {
@@ -404,18 +367,6 @@ extension HomeViewController: DockDelegate {
     
     func didDeselectItemAt(_ indexItem: Int) {
         dockController.removeShadowItemDock(indexItem)
-    }
-    
-    
-    private func activeFloatView(_ indexItem: Int)  {
-        let floatView = floatManager.listFloatView[indexItem]
-        
-        if floatView.isMinimized {
-            floatView.restore
-            return
-        }
-        
-        floatView.select
     }
 
 }

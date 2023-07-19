@@ -120,6 +120,7 @@
 		0281DAEA2A18445700E44F04 /* ClockNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0281DAE92A18445700E44F04 /* ClockNumbers.swift */; };
 		0282A8062A5C7D2A00487F01 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282A8052A5C7D2A00487F01 /* DBManager.swift */; };
 		0282A8092A5C862300487F01 /* PersistenceDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0282A8082A5C862300487F01 /* PersistenceDataProtocol.swift */; };
+		028A71032A684AE900910549 /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028A71022A684AE900910549 /* CategoriesCoordinator.swift */; };
 		02AAD6AB2A28CB3C009381C3 /* ViewActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */; };
 		02AAD6AE2A28D99B009381C3 /* FloatViewControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */; };
 		02B431412A534AAE00A1D7EC /* StickyNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B431402A534AAE00A1D7EC /* StickyNoteView.swift */; };
@@ -352,6 +353,7 @@
 		0281DAE92A18445700E44F04 /* ClockNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockNumbers.swift; sourceTree = "<group>"; };
 		0282A8052A5C7D2A00487F01 /* DBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		0282A8082A5C862300487F01 /* PersistenceDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceDataProtocol.swift; sourceTree = "<group>"; };
+		028A71022A684AE900910549 /* CategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinator.swift; sourceTree = "<group>"; };
 		02AAD6AA2A28CB3C009381C3 /* ViewActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewActions.swift; sourceTree = "<group>"; };
 		02AAD6AD2A28D99B009381C3 /* FloatViewControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatViewControllerManager.swift; sourceTree = "<group>"; };
 		02B431402A534AAE00A1D7EC /* StickyNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyNoteView.swift; sourceTree = "<group>"; };
@@ -1477,6 +1479,7 @@
 				02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */,
 				0272FB952A534C1E00EF4AE5 /* StickyNoteCoordinator.swift */,
 				025EA5652A5F276A0008AC89 /* WhatFlowerCoordinator.swift */,
+				028A71022A684AE900910549 /* CategoriesCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1957,6 +1960,7 @@
 				02FB2CA92A45E26B00C7FC98 /* DefaultDollView.swift in Sources */,
 				02FB2CAF2A45F39300C7FC98 /* ArmsDownDollView.swift in Sources */,
 				02D06E7B2A55D9AC0020A10B /* TextFieldActions.swift in Sources */,
+				028A71032A684AE900910549 /* CategoriesCoordinator.swift in Sources */,
 				02FB2CA22A45D92200C7FC98 /* GallowsView.swift in Sources */,
 				02BBC7E82A5D9BCA00F70A14 /* TapeMeasureFloatViewController.swift in Sources */,
 				026C14772A3CEC5C00F8D3E6 /* CalculatorView.swift in Sources */,
