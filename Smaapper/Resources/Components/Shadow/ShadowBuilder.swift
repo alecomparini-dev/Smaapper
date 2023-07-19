@@ -11,14 +11,14 @@ class ShadowBuilder {
     
     private(set) var component: UIView
     private let shadow: CAShapeLayer
-    private var shadowAt: UInt32 = 0
+    private var shadowAt: UInt32 = .zero
     private var isBringToFront: Bool = false
     private var cornerRadius: CGFloat?
     private var shadowHeight: CGFloat?
     private var shadowWidth: CGFloat?
     
-//  MARK: - Initializers
     
+//  MARK: - Initializers
     init(_ component: UIView) {
         self.component = component
         self.shadow = CAShapeLayer()

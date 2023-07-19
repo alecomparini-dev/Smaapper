@@ -20,7 +20,6 @@ class TextFieldConfigKeyboard {
     
     private var completionDoneKeyboard: completionKeyboardAlias?
     private var callBackListTextFields: callBackListTextFieldsAlias?
-    
     private var isDoneButtonAlreadyIncluded = false
     private var toolbar: UIToolbar?
     

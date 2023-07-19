@@ -21,7 +21,7 @@ where T: Object {
     
 //  MARK: - GET AREA
     func getFileRealm() -> String {
-        if let fileRealm = Realm.Configuration.defaultConfiguration.fileURL{
+        if let fileRealm = Realm.Configuration.defaultConfiguration.fileURL {
             return String(describing: fileRealm)
         }
         return ""
