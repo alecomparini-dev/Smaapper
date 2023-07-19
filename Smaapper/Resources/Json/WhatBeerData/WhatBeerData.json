@@ -59,8 +59,8 @@
             "country": "Brasil"
         },
         "nutritional_values": {
-            "reference": "100 ml",
-            "calories": 150
+            "reference": "200 ml",
+            "calories": 152
         },
         "allergic": [
             "Contém Cevada",
@@ -169,8 +169,8 @@
             "Contém Glúten"
         ]
     },
-    "corona": {
-        "title": "Corona",
+    "coronaExtra": {
+        "title": "Corona Extra",
         "alcohol": 4.5,
         "manufacturer": "Grupo Modelo",
         "originated": {

@@ -174,10 +174,10 @@ extension StickyNoteFloatViewController: StickyNoteViewDelegate {
 extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
     func requestCameraElevation(isElevation: Bool) {
         if isElevation {
-            print("retira mensagem de colocar a camera levantada porra")
+            print("retira mensagem de colocar a camera levantada")
             return
         }
-        print("LEVANTA A PORRA DA CAMERA")
+        print("LEVANTA DA CAMERA")
     }
     
     
@@ -187,13 +187,13 @@ extension StickyNoteFloatViewController: ARSceneViewBuilderDelegate {
                 print("RECONHECENDO ............................")
                 
             case .excessiveMotion:
-                print("FICA QUIETOOOOO")
+                print("para de mexer")
                 
             case .done:
                 print("DOOOOOOOOOOOOOOOONNNNNNNNNNNNNNEEEEEEEEEEEEEEEEE")
                 
             case .sessionInterrupted:
-                print("SESSAO INTERROMPIDA CARAIO")
+                print("SESSAO INTERROMPIDA")
             
         }
     }
