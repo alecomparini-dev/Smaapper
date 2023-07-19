@@ -35,6 +35,8 @@ struct K {
         static let profileTitle = "Profile"
         static let settingTitle = "Settings"
         static let recentTitle = "Recent"
+        static let favoritesID = "Favorites"
+        static let categoriesID = "Categories"
         
         struct Service {
             static let fileNameJson = "DropdownMenuData"
@@ -46,6 +48,9 @@ struct K {
             static let recent = "rectangle.stack"
             static let settings = "gearshape"
             static let menuButton = "rectangle.3.group"
+            static let chevronToSubMenu = "chevron.forward"
+            static let heartToFavorites = "heart.fill"
+            
         }
     }
     

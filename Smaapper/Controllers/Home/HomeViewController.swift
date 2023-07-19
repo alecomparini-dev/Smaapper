@@ -18,8 +18,8 @@ class HomeViewController: UIViewController {
     private let floatManager = FloatViewControllerManager.instance
     private var adjustTrailingDock = NSLayoutConstraint()
     
-    static let favoritesID = "Favorites"
-    static let categoriesID = "Categories"
+    static let favoritesID = K.Home.favoritesID
+    static let categoriesID = K.Home.categoriesID
     
     private var dockController = HomeViewDockController()
     private var removeDockItemAtFloatViewIndex: Int?
@@ -31,9 +31,9 @@ class HomeViewController: UIViewController {
     
     private var categories: DropdownMenuData = []
     
-    private var indexSection = 0
-    private var indexRow = 0
-    private var rowTappedDropdownMenu: (section: Int, row: Int) = (0,0)
+    private var indexSection: Int = .zero
+    private var indexRow: Int = .zero
+    private var rowTappedDropdownMenu: (section: Int, row: Int) = (.zero,.zero)
     private var rowTappedCategory: (section: Int, row: Int)?
     
     
@@ -97,7 +97,7 @@ class HomeViewController: UIViewController {
     private func fetchDropdownMenu() {
         viewModel.fetchDropdownMenu(.file) { result, error in
             if error != nil {
-                print(#function, #file, error?.localizedDescription ?? "")
+                print(#function, #file, error?.localizedDescription ?? K.String.empty)
                 return
             }
             
@@ -120,7 +120,7 @@ class HomeViewController: UIViewController {
     }
     
     private func populateSection(_ sectionText: String? ) -> Section {
-        let middleSectionView = homeScreen.createMiddleSectionView(sectionText ?? "")
+        let middleSectionView = homeScreen.createMiddleSectionView(sectionText ?? K.String.empty)
         let section = Section(middleView: middleSectionView)
         homeScreen.dropdownMenu.populateSection(section)
         return section
@@ -167,7 +167,7 @@ class HomeViewController: UIViewController {
     
     private func addChevronToSubMenu(_ subMenu: DropdownMenuData ) -> UIView? {
         if !subMenu.isEmpty {
-            return homeScreen.createRightRowView("chevron.forward", Theme.shared.currentTheme.onSurfaceVariant)
+            return homeScreen.createRightRowView(K.Home.Images.chevronToSubMenu, Theme.shared.currentTheme.onSurfaceVariant)
         }
         return nil
     }
@@ -175,7 +175,7 @@ class HomeViewController: UIViewController {
     private func addHeartToFavorites() -> UIView? {
         guard let resultDropdownMenu else { return nil }
         if (resultDropdownMenu[self.indexSection].section == HomeViewController.favoritesID) {
-            return homeScreen.createRightRowView("heart.fill", Theme.shared.currentTheme.onSurface)
+            return homeScreen.createRightRowView(K.Home.Images.heartToFavorites, Theme.shared.currentTheme.onSurface)
         }
         return nil
     }
@@ -217,7 +217,7 @@ class HomeViewController: UIViewController {
             .compactMap { $0.items?.compactMap { $0 } }
             .flatMap { $0 }
             .filter { $0.id == idApp }.first
-        return filteredItems?.leftImage ?? ""
+        return filteredItems?.leftImage ?? K.String.empty
     }
     
     
@@ -230,7 +230,7 @@ class HomeViewController: UIViewController {
     }
     
     private func getIdAppByCategory(_ category: (section: Int, row: Int)) -> String {
-        return self.categories[category.section].items?[category.row].id ?? ""
+        return self.categories[category.section].items?[category.row].id ?? K.String.empty
     }
     
     
