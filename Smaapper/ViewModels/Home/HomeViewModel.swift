@@ -20,7 +20,7 @@ class HomeViewModel {
         switch type {
             
         case .file:
-            service.getDropdownDataFromJson( completion: completion)
+            service.getDropdownDataFromJSON( completion: completion)
         
         case .api:
             break
