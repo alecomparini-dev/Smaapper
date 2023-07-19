@@ -12,7 +12,7 @@ class HomeService: GenericService {
     private let fileNameJson = K.Home.Service.fileNameJson
     private let extensionJson = K.Home.Service.extensionJson
     
-    func getDropdownDataFromJson(completion: @escaping completionService<DropdownMenuData>) {
+    func getDropdownDataFromJSON(completion: @escaping completionService<DropdownMenuData>) {
         do {
             let result: DropdownMenuData = try FetchDataInJson().fetch(fileNameJson, extensionJson)
             completion(result, nil)

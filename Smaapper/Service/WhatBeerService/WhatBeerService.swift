@@ -14,13 +14,13 @@ class WhatBeerService {
     private let fileNameJson = K.WhatBeer.Service.fileNameJson
     private let extensionJson = K.WhatBeer.Service.extensionJson
     
-    func fetchWhatBeerInJson() async throws -> WhatBeerData {
+    func fetchWhatBeerFromJSON() async throws -> WhatBeerData {
         return try await withCheckedThrowingContinuation({ continuation in
             fetchWhatBeerContinuation(continuation: continuation)
         })
     }
     
-    func fetchBeerInJson(_ keyBeer: String) async throws -> BeerData? {
+    func fetchBeerFromJSON(_ keyBeer: String) async throws -> BeerData? {
         return try await withCheckedThrowingContinuation({ continuation in
             fetchBeerContinuation(keyBeer, continuation: continuation)
         })

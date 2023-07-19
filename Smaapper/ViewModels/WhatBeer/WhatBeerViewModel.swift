@@ -18,7 +18,7 @@ class WhatBeerViewModel {
     func fetchWhatBeer(_ type: TypeFetch) async throws -> WhatBeerData? {
         switch type {
             case .file:
-                return try await service.fetchWhatBeerInJson()
+                return try await service.fetchWhatBeerFromJSON()
                 
             case .api:
                 break
@@ -32,7 +32,7 @@ class WhatBeerViewModel {
     func fetchBeer(_ type: TypeFetch, _ keyBeer: String) async throws -> BeerData? {
         switch type {
             case .file:
-                return try await service.fetchBeerInJson(keyBeer)
+                return try await service.fetchBeerFromJSON(keyBeer)
                 
             case .api:
                 break
