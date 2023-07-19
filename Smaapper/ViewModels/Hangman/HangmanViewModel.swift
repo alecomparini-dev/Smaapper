@@ -10,7 +10,11 @@ import UIKit
 
 class HangmanViewModel {
     
-    private let service: HangmanService = HangmanService()
+    private let service: HangmanService
+    
+    init(service: HangmanService) {
+        self.service = service
+    }
     
     func fetchWordsFromLastPlayedWord(_ type: TypeFetch, _ lastPlayedWord: String,  completion: @escaping (_ result: [HangmanWord], _ error: Error?) -> Void) {
         switch type {
