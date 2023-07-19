@@ -38,4 +38,10 @@ struct C {
             }
         }
     }
+    
+    struct Neumorphism {
+        static let darkShadowID = "darkShadowID"
+        static let lightShadowID = "lightShadowID"
+        static let shapeID = "shapeID"
+    }
 }

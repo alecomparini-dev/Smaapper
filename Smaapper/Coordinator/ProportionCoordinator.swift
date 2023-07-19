@@ -21,7 +21,9 @@ class ProportionCoordinator: Coordinator {
         floatNavigationController.present(controller, where: component )
     }
 
-    func start() {}
+    func start() {
+        
+    }
     
 }
 

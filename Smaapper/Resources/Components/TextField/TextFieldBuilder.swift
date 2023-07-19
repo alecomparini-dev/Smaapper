@@ -17,13 +17,11 @@ class TextFieldBuilder: BaseBuilder {
     }
     
     var actions: TextFieldActions?
-    
-    private var textFieldConfigKeyboard: TextFieldConfigKeyboard?
-    private let _textField: TextField
-    
     var textField: TextField { self._textField }
     var view: TextField { self._textField }
     
+    private var textFieldConfigKeyboard: TextFieldConfigKeyboard?
+    private let _textField: TextField
     private var attributesPlaceholder: [NSAttributedString.Key: Any] = [:]
     private var toolbar: UIToolbar?
     

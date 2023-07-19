@@ -9,21 +9,18 @@ import UIKit
 
 
 class BaseActions {
-    
     typealias touchBaseActionAlias = (_ component: UIView, _ tapGesture: TapGesture?) -> Void
     
     private var baseBuilder: BaseBuilder
     private(set) var tapGesture: TapGestureBuilder?
     private(set) var draggable: DraggableBuilder?
 
-    
     init(_ baseBuilder: BaseBuilder) {
         self.baseBuilder = baseBuilder
     }
     
     
 //  MARK: - SET Actions
-    
     @discardableResult
     func setTouch(_ closure: @escaping touchBaseActionAlias, _ cancelsTouchesInView: Bool = true) -> Self {
         self.setTapGesture { build in

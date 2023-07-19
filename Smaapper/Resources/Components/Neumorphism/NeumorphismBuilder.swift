@@ -30,26 +30,25 @@ class NeumorphismBuilder {
     }
     
     
-    private let darkShadowID = "darkShadowID"
-    private let lightShadowID = "lightShadowID"
-    private let shapeID = "shapeID"
+    private let darkShadowID: String = C.Neumorphism.darkShadowID
+    private let lightShadowID: String = C.Neumorphism.lightShadowID
+    private let shapeID: String = C.Neumorphism.shapeID
     
     private let lightShadeColorPercentage: CGFloat = 60
     private let darkShadeColorPercentage: CGFloat = -85
     private let lightShapeColorByColorReferencePercentage: CGFloat = 70
     private let darkShapeColorByColorReferencePercentage: CGFloat = -30
-
+    private let component: UIView
     
-    private var component: UIView
     private var referenceColor: UIColor?
     private var lightShadowColor: UIColor?
     private var darkShadowColor: UIColor?
-    private var darkShadowDistance: CGFloat = 0
-    private var lightShadowDistance: CGFloat = 0
-    private var lightShadowBlur: CGFloat = 0
-    private var darkShadowBlur: CGFloat = 0
-    private var lightShadowIntensity: Float = 0
-    private var darkShadowIntensity: Float = 0
+    private var darkShadowDistance: CGFloat = .zero
+    private var lightShadowDistance: CGFloat = .zero
+    private var lightShadowBlur: CGFloat = .zero
+    private var darkShadowBlur: CGFloat = .zero
+    private var lightShadowIntensity: Float = .zero
+    private var darkShadowIntensity: Float = .zero
     private var shape: Shape = .flat
     private var lightPosition: LightPosition = .leftTop
     

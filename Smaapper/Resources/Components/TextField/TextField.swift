@@ -54,7 +54,6 @@ class TextField: UITextField {
     
     
 //  MARK: - ACTIONS THIS COMPONENT
-    
     private func validateKeyboardDecimal(_ character: String) -> Bool {
         guard let text = self.text else { return true}
         let separators: [String] = [K.String.dot, K.String.comma]

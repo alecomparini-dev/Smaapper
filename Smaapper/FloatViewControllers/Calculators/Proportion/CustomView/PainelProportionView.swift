@@ -73,7 +73,7 @@ class PainelProportionView: ViewBuilder {
     }()
 
     lazy var resultLabel: LabelBuilder = {
-        let label = LabelBuilder("0.0")
+        let label = LabelBuilder(K.String.zeroDouble)
             .setFont(UIFont.systemFont(ofSize: 17, weight: .semibold))
             .setColor(Theme.shared.currentTheme.onSurface)
             .setNumberOfLines(2)

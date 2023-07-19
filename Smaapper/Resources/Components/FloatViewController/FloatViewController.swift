@@ -9,24 +9,23 @@ import UIKit
 
 class FloatViewController: BaseBuilder {
     
-    private let _hierarchy: CGFloat = 1000
-    private var _isShow = false
     private weak var _superView: UIView?
-    
-    private var sizeWindow: CGSize? = nil
-    private var frameWindow: CGRect? = nil
-    private var textFields: [UITextField] = []
-    
+    private weak var manager: FloatViewControllerManager? = FloatViewControllerManager.instance
+
     private(set) var id: UUID = UUID()
     private(set) var customAttribute: Any?
     private(set) var isMinimized: Bool = false
     private(set) var originalCenter: CGPoint = .zero
     private(set) var active: Bool = false
-    
-    private weak var manager: FloatViewControllerManager? = FloatViewControllerManager.instance
+
+    private let _hierarchy: CGFloat = 1000
+    private var _isShow = false
+    private var sizeWindow: CGSize? = nil
+    private var frameWindow: CGRect? = nil
+    private var textFields: [UITextField] = []
     private var _actions: FloatViewControllerActions?
-    
     private var _view: View = View()
+    
     var view: View {
         get { self._view }
         set {
@@ -94,7 +93,7 @@ class FloatViewController: BaseBuilder {
     }
     
     
-//  MARK: - LIFE CIRCLE
+//  MARK: - LIFE CYCLE
     func loadView() { }
     
     func viewDidLoad() {
@@ -110,7 +109,6 @@ class FloatViewController: BaseBuilder {
         manager?.delegate?.viewWillAppear(self)
     }
     
-
     func viewWillLayoutSubviews() {
         manager?.delegate?.viewWillLayoutSubviews(self)
     }
@@ -202,7 +200,6 @@ class FloatViewController: BaseBuilder {
     
     
 //  MARK: - SET Properties
-    
     @discardableResult
     func setEnabledDraggable(_ enabled: Bool) -> Self {
         setActions { build in
@@ -340,10 +337,6 @@ class FloatViewController: BaseBuilder {
         self.view.frame = CGRect(x: 50, y: 100, width: sizeWindow.width, height: sizeWindow.height)
     }
     
-    private func calculatePositionWindow() -> CGRect {
-        return CGRect()
-    }
-    
     private func configFrameWindow(_ frame: CGRect) {
         self.view.frame = frame
     }
@@ -415,15 +408,13 @@ class FloatViewController: BaseBuilder {
         NotificationCenter.default.removeObserver(self)
     }
     
-
-    
     
 //  MARK: - OBJC Area
-    @objc func keyboardWillShow(_ notification: Notification) {
+    @objc private func keyboardWillShow(_ notification: Notification) {
         configRepositionFloatViewIfNeeded(notification)
     }
     
-    @objc func keyboardWillHide() {
+    @objc private func keyboardWillHide() {
         viewWillLayoutSubviews()
         repositionFloatViewHideKeyboard()
         viewDidLayoutSubviews()
@@ -431,7 +422,6 @@ class FloatViewController: BaseBuilder {
 
     
 //  MARK: - ANIMATIONS
-    
     private func removeWindowAnimation(_ closure: @escaping () -> Void ) {
         UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 0
