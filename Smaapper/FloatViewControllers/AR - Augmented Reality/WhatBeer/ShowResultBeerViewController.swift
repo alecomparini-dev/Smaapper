@@ -9,7 +9,7 @@ import UIKit
 
 class ShowResultBeerViewController: ViewBuilder {
     
-    private let viewModel: WhatBeerViewModel = WhatBeerViewModel()
+    private let viewModel: WhatBeerViewModel = WhatBeerViewModel(service: WhatBeerService())
     private let result: String
     
     private var beer: BeerData?

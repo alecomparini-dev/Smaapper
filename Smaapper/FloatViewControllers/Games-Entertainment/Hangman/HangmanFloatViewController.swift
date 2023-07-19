@@ -13,7 +13,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private var lastPlayedWord: String = "arbitrio"
     
-    private var viewModel: HangmanViewModel? = HangmanViewModel()
+    private var viewModel: HangmanViewModel? = HangmanViewModel(service: HangmanService())
     private let errorCountToEndGame: Int8 = K.Hangman.errorCountToEndGame
     private let quantityLetterByLine = K.Hangman.quantityLetterByLine
     private var indicesToReveal: [Int] = []

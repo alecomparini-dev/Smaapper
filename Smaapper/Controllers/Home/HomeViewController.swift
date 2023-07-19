@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
     private var dockController = HomeViewDockController()
     private var removeDockItemAtFloatViewIndex: Int?
     
-    private let viewModel = HomeViewModel()
+    private let viewModel = HomeViewModel(service: HomeService())
     private var categoriesVC: CategoriesViewController?
     private var resultDropdownMenu: DropdownMenuData?
     private var weather: WeatherFloatViewController?

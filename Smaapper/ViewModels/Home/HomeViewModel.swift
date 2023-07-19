@@ -10,7 +10,11 @@ import UIKit
 
 class HomeViewModel {
     
-    private let service: HomeService = HomeService()
+    private let service: HomeService
+    
+    init(service: HomeService) {
+        self.service = service
+    }
     
     func fetchDropdownMenu(_ type: TypeFetch, completion: @escaping (_ result: DropdownMenuData?, _ error: Error?) -> Void) {
         switch type {

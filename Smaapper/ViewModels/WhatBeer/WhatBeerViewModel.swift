@@ -9,7 +9,11 @@ import UIKit
 
 class WhatBeerViewModel {
     
-    private let service: WhatBeerService = WhatBeerService()
+    private let service: WhatBeerService
+    
+    init(service: WhatBeerService) {
+        self.service = service
+    }
     
     func fetchWhatBeer(_ type: TypeFetch) async throws -> WhatBeerData? {
         switch type {
