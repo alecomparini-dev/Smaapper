@@ -158,10 +158,7 @@ class FloatViewController: BaseBuilder {
     
 //  MARK: - MINIMIZE AND RESTORED
     
-    func viewMinimize() {
-        viewWillMinimize()
-    }
-    
+
     func viewWillMinimize() {
         setPositionFloatView()
         manager?.delegate?.viewWillMinimize(self)

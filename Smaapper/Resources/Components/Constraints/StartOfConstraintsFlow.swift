@@ -35,11 +35,13 @@ class StartOfConstraintsFlow: StartOfConstraintsFlowProtocol {
         constraintVM.mainAttribute(.bottom)
         return StartOfConstraintsPositionFlow<ConstraintsPositionY>(self)
     }
+    
     var setLeading: StartOfConstraintsPositionFlow<ConstraintsPositionX> {
         configStartFlow()
         constraintVM.mainAttribute(.leading)
         return StartOfConstraintsPositionFlow<ConstraintsPositionX>(self)
     }
+    
     var setTrailing: StartOfConstraintsPositionFlow<ConstraintsPositionX> {
         configStartFlow()
         constraintVM.mainAttribute(.trailing)
