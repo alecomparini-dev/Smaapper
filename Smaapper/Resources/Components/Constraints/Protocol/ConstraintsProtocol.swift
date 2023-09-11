@@ -6,8 +6,10 @@ protocol StartOfConstraintsFlowProtocol {
     var setBottom: StartOfConstraintsPositionFlow<ConstraintsPositionY> { get }
     var setLeading: StartOfConstraintsPositionFlow<ConstraintsPositionX> { get }
     var setTrailing: StartOfConstraintsPositionFlow<ConstraintsPositionX> { get }
+    
     var setWidth: StartOfConstraintsSizeFlowProtocol { get }
     var setHeight: StartOfConstraintsSizeFlowProtocol { get }
+    
     var setHorizontalAlignmentX: StartOfConstraintsAlignmentFlowProtocol { get }
     var setVerticalAlignmentY: StartOfConstraintsAlignmentFlowProtocol { get }
 }

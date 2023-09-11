@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum TypeFetch {
-    case file
-    case api
-    case localStorage
+enum TypeFetch: String {
+    case file = "file"
+    case api = "api"
+    case localStorage = "localStorage"
 }
 
 protocol GenericService: AnyObject {

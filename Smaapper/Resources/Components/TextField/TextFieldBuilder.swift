@@ -88,6 +88,7 @@ class TextFieldBuilder: BaseBuilder {
     @discardableResult
     func setPlaceHolderColor(_ placeHolderColor: UIColor) -> Self {
         self.attributesPlaceholder.updateValue(placeHolderColor, forKey: .foregroundColor)
+        
         _textField.attributedPlaceholder = NSAttributedString (
             string: _textField.placeholder ?? K.String.empty ,
             attributes: self.attributesPlaceholder)

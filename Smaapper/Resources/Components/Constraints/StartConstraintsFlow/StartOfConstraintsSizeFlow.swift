@@ -40,7 +40,6 @@ class StartOfConstraintsSizeFlow: StartOfConstraintsSizeFlowProtocol {
     }
     
     
-    
 //  MARK: - CONSTRAINTS SIZE FLOW
     
     var setWidth: StartOfConstraintsSizeFlowProtocol {

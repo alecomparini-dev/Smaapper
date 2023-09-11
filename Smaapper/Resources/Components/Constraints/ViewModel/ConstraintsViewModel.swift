@@ -34,33 +34,41 @@ class ConstraintsViewModel {
     
     var relation: ConstraintsRelations { model.relation }
     
+    
+    
     func equalTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
         updateRelations(.equalTo, element, attribute, constant)
     }
     func equalTo(_ element: UIView, _ constant: CGFloat? = nil) {
         updateRelations(.equalTo, element, nil, constant)
     }
+    
     func greaterThanOrEqualTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
         updateRelations(.greaterThanOrEqualTo, element, attribute, constant)
     }
+    
     func lessThanOrEqualTo(_ element: UIView, _ attribute: ConstraintsAttribute? = nil, _ constant: CGFloat? = nil) {
         updateRelations(.lessThanOrEqualTo, element, attribute, constant)
     }
     
 
+    
 //  MARK: - SAFE AREA
     func equalToSafeArea(_ constant: CGFloat = 0) {
         model.typeElement = .safeArea
         updateRelations(.equalTo, constant)
     }
+    
     func lessThanOrEqualToSafearea(_ constant: CGFloat = 0) {
         model.typeElement = .safeArea
         updateRelations(.lessThanOrEqualTo, constant)
     }
+    
     func greaterThanOrEqualToSafearea(_ constant: CGFloat = 0) {
         model.typeElement = .safeArea
         updateRelations(.greaterThanOrEqualTo, constant)
     }
+    
     
 
 //  MARK: - SUPERVIEW
@@ -68,10 +76,12 @@ class ConstraintsViewModel {
         model.typeElement = .superView
         updateRelations(.equalTo, constant)
     }
+    
     func lessThanOrEqualToSuperView(_ constant: CGFloat = 0) {
         model.typeElement = .superView
         updateRelations(.lessThanOrEqualTo, constant)
     }
+    
     func greaterThanOrEqualToSuperView(_ constant: CGFloat = 0) {
         model.typeElement = .superView
         updateRelations(.greaterThanOrEqualTo, constant)
@@ -88,7 +98,6 @@ class ConstraintsViewModel {
     func greaterThanOrEqualToConstant(_ constant: CGFloat) {
         updateRelations(.greaterThanOrEqualTo, constant)
     }
-    
     
     var toItem: UIView? {
         get { model.toItem }

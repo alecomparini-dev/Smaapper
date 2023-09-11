@@ -13,7 +13,6 @@ extension UIColor {
         return UIColor(red: red.toCGFloat/255, green: green.toCGFloat/255, blue: blue.toCGFloat/255, alpha: alpha.toCGFloat )
     }
     
-    
     @nonobjc class func RGB(_ red: Int, _ green: Int, _ blue: Int) -> UIColor {
         return RGBA(red, green, blue, 1.0 )
     }
