@@ -75,7 +75,7 @@
 		02527C652A51B49800F868AE /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C642A51B49800F868AE /* Int+Extension.swift */; };
 		02527C712A52154500F868AE /* TapeMeasureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */; };
 		02536DB42A61BA4500C0720C /* CoreMLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02536DB32A61BA4500C0720C /* CoreMLError.swift */; };
-		025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */; };
+		025E84882A41D57A00C2D944 /* ButtonInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025E84872A41D57A00C2D944 /* ButtonInteraction.swift */; };
 		025EA5412A5E03580008AC89 /* DBProviderStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */; };
 		025EA5442A5E25D60008AC89 /* WorldMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025EA5432A5E25D60008AC89 /* WorldMapData.swift */; };
 		025EA5462A5EE2BE0008AC89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */; };
@@ -312,7 +312,7 @@
 		02527C642A51B49800F868AE /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		02527C702A52154500F868AE /* TapeMeasureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeMeasureCoordinator.swift; sourceTree = "<group>"; };
 		02536DB32A61BA4500C0720C /* CoreMLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLError.swift; sourceTree = "<group>"; };
-		025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteractionView.swift; sourceTree = "<group>"; };
+		025E84872A41D57A00C2D944 /* ButtonInteraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInteraction.swift; sourceTree = "<group>"; };
 		025EA5402A5E03580008AC89 /* DBProviderStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBProviderStrategy.swift; sourceTree = "<group>"; };
 		025EA5432A5E25D60008AC89 /* WorldMapData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapData.swift; sourceTree = "<group>"; };
 		025EA5452A5EE2BE0008AC89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -893,7 +893,7 @@
 		025E84862A41D50300C2D944 /* TappedButtonView */ = {
 			isa = PBXGroup;
 			children = (
-				025E84872A41D57A00C2D944 /* ButtonInteractionView.swift */,
+				025E84872A41D57A00C2D944 /* ButtonInteraction.swift */,
 			);
 			path = TappedButtonView;
 			sourceTree = "<group>";
@@ -2015,7 +2015,7 @@
 				02FB2C9F2A45D1BB00C7FC98 /* HangmanCoordinator.swift in Sources */,
 				02E974452A37D30600BF14EE /* QuizCoordinator.swift in Sources */,
 				024957EC2A41F7130077C36D /* MultiplicationOperation.swift in Sources */,
-				025E84882A41D57A00C2D944 /* ButtonInteractionView.swift in Sources */,
+				025E84882A41D57A00C2D944 /* ButtonInteraction.swift in Sources */,
 				0281DADE2A16683A00E44F04 /* BlurBuilder.swift in Sources */,
 				02E974492A37EFB400BF14EE /* UpcomingHolidaysFloatViewController.swift in Sources */,
 				02E9741C2A37612A00BF14EE /* HomeViewDockController.swift in Sources */,

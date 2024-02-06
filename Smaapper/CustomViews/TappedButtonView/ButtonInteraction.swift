@@ -7,26 +7,22 @@
 
 import UIKit
 
-class ButtonInteractionView: UIView {
-    private let identifier =  String(describing: ButtonInteractionView.self)
+class ButtonInteraction: NSObject {
+    private let identifier =  String(describing: ButtonInteraction.self)
     private let keyPath = "shadowOpacity"
     
     private var shadowTapped: ShadowBuilder?
     private var shadowLayer: CALayer = CALayer()
     private var animation: CABasicAnimation = CABasicAnimation()
-    private let component: UIView
     
     private(set) var isPressed: Bool = false
     private var colorInteraction: UIColor = Theme.shared.currentTheme.primary.adjustBrightness(20)
     private var enabledInteraction: Bool = true
     
+    private let component: UIView
+    
     init(_ component: UIView) {
         self.component = component
-        super.init(frame: .zero)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     
@@ -107,7 +103,7 @@ class ButtonInteractionView: UIView {
         }
     }
     
-    func removeShadowOpacityAnimation() {
+    private func removeShadowAnimation() {
         shadowLayer.removeAnimation(forKey: identifier)
     }
     
@@ -115,7 +111,7 @@ class ButtonInteractionView: UIView {
 
 
 //  MARK: - EXTENSION CAAnimationDelegate
-extension ButtonInteractionView: CAAnimationDelegate {
+extension ButtonInteraction: CAAnimationDelegate {
     
     func animationDidStart(_ anim: CAAnimation) {
         
@@ -123,8 +119,8 @@ extension ButtonInteractionView: CAAnimationDelegate {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         removeShadowTapped()
-        removeShadowOpacityAnimation()
         shadowLayer.shadowOpacity = 0
+        removeShadowAnimation()
     }
     
 }

@@ -11,6 +11,7 @@
                 "a"
             ],
             "subject": "Psicologia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Capacidade de se adaptar e se recuperar diante de adversidades",
                 "Força emocional e mental",
@@ -29,6 +30,7 @@
                 "a"
             ],
             "subject": "Astronomia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Investiga a formação de estrelas, planetas e galáxias",
                 "Explora a expansão do universo",
@@ -47,6 +49,7 @@
                 "o"
             ],
             "subject": "Física",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Estado em que as forças se compensam",
                 "Ponto de estabilidade",
@@ -65,6 +68,7 @@
                 "ção"
             ],
             "subject": "Sociologia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Processo de conquista de autonomia e liberdade",
                 "Libertação de restrições e opressões",
@@ -83,6 +87,7 @@
                 "a"
             ],
             "subject": "Filosofia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Percepção e conhecimento de si mesmo e do mundo",
                 "Estado de estar desperto e alerta",
@@ -100,6 +105,7 @@
                 "a"
             ],
             "subject": "Música",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Combinação agradável de sons",
                 "Equilíbrio e proporção entre notas",
@@ -118,6 +124,7 @@
                 "a"
             ],
             "subject": "Economia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Grande quantidade ou riqueza de recursos",
                 "Prosperidade e fartura",
@@ -135,6 +142,7 @@
                 "ção"
             ],
             "subject": "Tecnologia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Introdução de novas ideias, métodos ou tecnologias",
                 "Renovação e melhoria de processos",
@@ -153,6 +161,7 @@
                 "a"
             ],
             "subject": "Engenharia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Capacidade de um material suportar forças e pressões",
                 "Propriedade de não se deformar ou romper facilmente",
@@ -171,6 +180,7 @@
                 "ção"
             ],
             "subject": "Economia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Integração e interconexão mundial",
                 "Interdependência econômica e cultural entre países",
@@ -187,6 +197,7 @@
                 "ra"
             ],
             "subject": "Mitologia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Criatura mítica com partes de diferentes animais",
                 "Representação de ilusão ou fantasia",
@@ -204,6 +215,7 @@
                 "ro"
             ],
             "subject": "Tempo",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "De curta duração ou passageiro",
                 "Que dura apenas por um breve período",
@@ -221,6 +233,7 @@
                 "o"
             ],
             "subject": "Filosofia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Liberdade de agir e decidir por si mesmo",
                 "Autonomia e livre vontade",
@@ -239,7 +252,8 @@
                 "to",
                 "na"
             ],
-            "subject": "Linguística",
+            "subject": "Português",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Palavra com acento tônico na antepenúltima sílaba",
                 "Regra de acentuação gráfica",
@@ -258,6 +272,7 @@
                 "mo"
             ],
             "subject": "História",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Erro de colocar algo fora de seu contexto temporal",
                 "Inadequação temporal",
@@ -276,6 +291,7 @@
                 "a"
             ],
             "subject": "Política",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Domínio ou supremacia de um grupo sobre outros",
                 "Controle político, econômico ou cultural",
@@ -293,6 +309,7 @@
                 "ma"
             ],
             "subject": "Ciência",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Modelo, padrão ou exemplo a ser seguido",
                 "Conceito fundamental de uma teoria científica",
@@ -311,6 +328,7 @@
                 "ta"
             ],
             "subject": "Literatura",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Aquele que caminha nas nuvens",
                 "Sonhador, idealista",
@@ -329,6 +347,7 @@
                 "de"
             ],
             "subject": "Inteligência",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Agudeza mental e perspicácia",
                 "Capacidade de raciocínio rápido e astuto",
@@ -345,6 +364,7 @@
                 "ção"
             ],
             "subject": "Psicologia",
+            "initialTip": "Capacidade de se adaptar e se recuperar diante de adversidades",
             "tips": [
                 "Certeza profunda e firmeza de pensamento",
                 "Crença forte e inabalável",

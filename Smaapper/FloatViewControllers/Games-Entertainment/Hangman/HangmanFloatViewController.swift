@@ -11,11 +11,13 @@ import UIKit
 class HangmanFloatViewController: FloatViewController {
     static let identifierApp = K.Hangman.identifierApp
     
-    private var lastPlayedWord: String = "arbitrio"
+    private var lastPlayedWord: String = "resiliencia"
     
     private var viewModel: HangmanViewModel? = HangmanViewModel(service: HangmanService())
     private let errorCountToEndGame: Int8 = K.Hangman.errorCountToEndGame
+    
     private let quantityLetterByLine = K.Hangman.quantityLetterByLine
+    
     private var indicesToReveal: [Int] = []
     private var errorLetters: Int8 = 0
     private var successLetterIndex: Set<Int> = []
@@ -54,7 +56,6 @@ class HangmanFloatViewController: FloatViewController {
     }
     
     deinit {
-        print("chamou este também")
         chosenLetterFromKeyboard = nil
         hangmanWords = []
         viewModel = nil
@@ -82,11 +83,9 @@ class HangmanFloatViewController: FloatViewController {
     
     private func calculatePositionFloatView() {
         var y: CGFloat = K.Hangman.FloatView.y
-        if #available(iOS 11.0, *) {
-            let window = UtilsComponent.Window.currentWindow
-            if let topSafeAreaInset = window?.safeAreaInsets.top {
-                y = topSafeAreaInset
-            }
+        let window = UtilsComponent.Window.currentWindow
+        if let topSafeAreaInset = window?.safeAreaInsets.top {
+            y = topSafeAreaInset
         }
         setFrameWindow(CGRect(x: K.Hangman.FloatView.x,
                               y: y,
@@ -124,7 +123,7 @@ class HangmanFloatViewController: FloatViewController {
         setTipLabel()
     }
     
-    private func getCurrentWord() -> HangmanWord{
+    private func getCurrentWord() -> HangmanWord{ 
         return hangmanWords[currentIndexPlayedWord]
     }
     
@@ -137,12 +136,13 @@ class HangmanFloatViewController: FloatViewController {
         if currentIndexPlayedWord < (hangmanWords.count-1) {
             return false
         }
-        print("end word - end game")
+        debugPrint("end word - end game")
         return true
     }
     
     private func positionLetters() {
         let indexToBreakLine = calculateIndexToBreakLine()
+        
         self.lettersInWord.enumerated().forEach { index,letter in
             if index < indexToBreakLine {
                 addLetterStackHorizontal1(letter)
@@ -165,6 +165,7 @@ class HangmanFloatViewController: FloatViewController {
     
     private func calculateIndexToBreakLine() -> Int {
         if getCurrentWord().word.count <= quantityLetterByLine {return quantityLetterByLine}
+        
         let syllabesWord = getCurrentWord().syllables
         let indexToBreakLine = syllabesWord.reduce(0) { partialResult, syllabe in
             let result = partialResult + syllabe.count

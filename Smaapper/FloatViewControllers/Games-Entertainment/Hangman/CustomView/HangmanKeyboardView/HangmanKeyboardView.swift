@@ -118,8 +118,11 @@ class HangmanKeyboardView: ViewBuilder {
 //  MARK: - LAZY HINT
 
     lazy var moreTipButton: DefaultFloatViewButton = {
+        let img = ImageViewBuilder(UIImage(systemName: "lightbulb.fill"))
+            .setContentMode(.center)
         let btn = DefaultFloatViewButton(Theme.shared.currentTheme.secondary, "More tip ...")
         btn.button.setTitleColor(Theme.shared.currentTheme.onSurface, .normal)
+            .setImageButton(img.view)
             .setTintColor(Theme.shared.currentTheme.onPrimary)
             .setTitleSize(14)
             .setActions { build in

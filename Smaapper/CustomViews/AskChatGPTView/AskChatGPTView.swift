@@ -92,7 +92,7 @@ class AskChatGPTView: ViewBuilder {
     lazy var goChatGPTIconButton: IconButtonBuilder = {
         return IconButtonBuilder(UIImageView(image: UIImage(systemName: "arrow.up.right")))
             .setImageSize(12)
-            .setImageColor(Theme.shared.currentTheme.onPrimary)
+            .setImageColor(Theme.shared.currentTheme.onPrimary )
             .setImageWeight(.bold)
             .setGradient { build in
                 build

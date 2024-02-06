@@ -9,8 +9,8 @@ import UIKit
 
 class BlurBuilder {
     
-    private var blurView: UIVisualEffectView?
     private var blurEffect: UIBlurEffect?
+    private var blurVisualEffectView: UIVisualEffectView?
     private var vibrancyView: UIVisualEffectView?
     private var opacity: CGFloat = 0.98
     
@@ -53,8 +53,12 @@ class BlurBuilder {
     
     private func configBlur() {
         configBackgroundColor()
-        configBlurView()
-        blurView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        createBlurVisualEffectView()
+        addBlurOnComponent()
+        configConstraintsBlurView()
+        blurVisualEffectView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        configAlphaBlur()
+        
         if vibrancyEnabled {
             configVibrancyView()
         }
@@ -67,31 +71,23 @@ class BlurBuilder {
     
 //  MARK: - BLUR AREA
 
-    private func configBlurView() {
-        createBlurView()
-        addBlurOnComponent()
-        configConstraintsBlurView()
-        configAlphaBlur()
-    }
-    
     private func configAlphaBlur() {
-        blurView?.alpha = self.opacity
+        blurVisualEffectView?.alpha = self.opacity
     }
     
-    private func createBlurView() {
-        self.blurView = UIVisualEffectView(effect: self.blurEffect)
+    private func createBlurVisualEffectView() {
+        self.blurVisualEffectView = UIVisualEffectView(effect: self.blurEffect)
     }
     
     private func addBlurOnComponent () {
-        guard let blurView = self.blurView else { return }
+        guard let blurView = self.blurVisualEffectView else { return }
         component?.addSubview(blurView)
     }
     
     private func configConstraintsBlurView() {
-        guard let component else {return}
-        self.blurView?.makeConstraints({ make in
+        self.blurVisualEffectView?.makeConstraints({ make in
             make
-                .setPin.equalTo(component)
+                .setPin.equalToSuperView
                 .apply()
         })
     }
@@ -114,15 +110,15 @@ class BlurBuilder {
     
     private func addVibrancyView() {
         if let vibrancyView {
-            blurView?.contentView.addSubview(vibrancyView)
+            blurVisualEffectView?.contentView.addSubview(vibrancyView)
         }
     }
     
     private func configConstraintsVibrancyView() {
-        guard let vibrancyView, let blurView else {return}
+        guard let vibrancyView, let blurVisualEffectView else {return}
         vibrancyView.makeConstraints { make in
             make
-                .setPin.equalTo(blurView)
+                .setPin.equalTo(blurVisualEffectView)
                 .apply()
         }
         
