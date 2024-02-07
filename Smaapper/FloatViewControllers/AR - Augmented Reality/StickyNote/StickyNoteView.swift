@@ -27,6 +27,7 @@ class StickyNoteView: ViewBuilder {
         configStyles()
         addElements()
         configConstraints()
+        applyNeumorphism() 
     }
     
     
@@ -99,15 +100,7 @@ class StickyNoteView: ViewBuilder {
                 build
                     .setCornerRadius(8)
             })
-            .setNeumorphism({ build in
-                build
-                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerHighest)
-                    .setShape(.concave)
-                    .setIntensity(to: .light, percent: 80)
-                    .setBlur(to: .light, percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .apply()
-            })
+            
             .setConstraints { build in
                 build
                     .setLeading.equalToSuperView(15)
@@ -282,6 +275,20 @@ class StickyNoteView: ViewBuilder {
                                          width: K.Sticky.AR.Frame.Top.width,
                                          height: K.Sticky.AR.Frame.Top.height))
             .setBackgroundColor(K.Sticky.corSticky.adjustBrightness(-20))
+    }
+    
+    private func applyNeumorphism() {
+        DispatchQueue.main.async { [weak self] in
+            self?.noteTextField.setNeumorphism({ build in
+                build
+                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerHighest)
+                    .setShape(.concave)
+                    .setIntensity(to: .light, percent: 80)
+                    .setBlur(to: .light, percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .apply()
+            })
+        }
     }
     
 

@@ -106,7 +106,6 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
         addShadowOnFooter()
     }
     
-    
     private func addShadowOnFooter() {
         _dropdownFooter.stackView
             .setShadow({ build in
@@ -119,7 +118,6 @@ class DropdownMenuFooterBuilder: DropdownMenuBuilder {
                     .setShadowHeight(10)
                     .apply()
             })
-        
     }
     
     private func configConstraints() {

@@ -25,6 +25,7 @@ class CategoriesView: UIView {
     private func initialization() {
         addElements()
         applyConstraints()
+        applyNeumorphism()
     }
     
     required init?(coder: NSCoder) {
@@ -135,17 +136,6 @@ class CategoriesView: UIView {
                     .setLeading.setTrailing.equalToSafeArea(40)
                     .setHeight.equalToConstant(40)
             }
-            .setNeumorphism({ build in
-                build.setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
-                    .setShape(.concave)
-                    .setLightPosition(.leftTop)
-                    .setIntensity(to: .light, percent: 100)
-                    .setBlur(to: .light, percent: 3)
-                    .setBlur(to: .dark , percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .setDistance(to: .dark, percent: 5)
-                    .apply()
-            })
         return tf
     }()
         
@@ -251,6 +241,8 @@ class CategoriesView: UIView {
         }
     }
     
+    
+    
 //  MARK: - Private Functions Area
     
     private func addElements() {
@@ -271,6 +263,21 @@ class CategoriesView: UIView {
         list.applyConstraint()
     }
     
+    private func applyNeumorphism() {
+        DispatchQueue.main.async { [weak self] in
+            self?.searchTextField.setNeumorphism({ build in
+                build.setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 100)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark , percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .dark, percent: 5)
+                    .apply()
+            })
+        }
+    }
 
     
 }

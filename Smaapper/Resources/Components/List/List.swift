@@ -103,6 +103,7 @@ extension List: UITableViewDataSource {
         return self.sections[section].rows.count
     }
     
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = ListCell()
         cell.setupCell(self.sections[section].leftView,

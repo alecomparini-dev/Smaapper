@@ -173,6 +173,7 @@ class HomeViewController: UIViewController {
     private func openCategories() {
         guard let resultDropdownMenu,
               let items = resultDropdownMenu[rowTappedDropdownMenu.section].items else { return }
+        
         if items[rowTappedDropdownMenu.row].title == HomeViewController.categoriesID {
             self.categories = items[rowTappedDropdownMenu.row].subMenu ?? []
             delegate?.openCategoriesController(categories)

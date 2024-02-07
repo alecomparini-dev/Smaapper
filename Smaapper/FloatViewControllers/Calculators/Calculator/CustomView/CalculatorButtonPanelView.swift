@@ -502,102 +502,102 @@ class CalculatorButtonPanelView: ViewBuilder {
     
     @objc private func oneTapped() {
         delegate?.calculatorButton(.one)
-        ButtonInteractionView(number1.outlineView.view).tapped
+        ButtonInteraction(number1.outlineView.view).tapped
     }
 
     @objc private func twoTapped() {
         delegate?.calculatorButton(.two)
-        ButtonInteractionView(number2.outlineView.view).tapped
+        ButtonInteraction(number2.outlineView.view).tapped
     }
     
     @objc private func threeTapped() {
         delegate?.calculatorButton(.three)
-        ButtonInteractionView(number3.outlineView.view).tapped
+        ButtonInteraction(number3.outlineView.view).tapped
     }
 
     @objc private func fourTapped() {
         delegate?.calculatorButton(.four)
-        ButtonInteractionView(number4.outlineView.view).tapped
+        ButtonInteraction(number4.outlineView.view).tapped
     }
 
     @objc private func fiveTapped() {
         delegate?.calculatorButton(.five)
-        ButtonInteractionView(number5.outlineView.view).tapped
+        ButtonInteraction(number5.outlineView.view).tapped
     }
 
     @objc private func sixTapped() {
         delegate?.calculatorButton(.six)
-        ButtonInteractionView(number6.outlineView.view).tapped
+        ButtonInteraction(number6.outlineView.view).tapped
     }
 
     @objc private func sevenTapped() {
         delegate?.calculatorButton(.seven)
-        ButtonInteractionView(number7.outlineView.view).tapped
+        ButtonInteraction(number7.outlineView.view).tapped
     }
 
     @objc private func eightTapped() {
         delegate?.calculatorButton(.eight)
-        ButtonInteractionView(number8.outlineView.view).tapped
+        ButtonInteraction(number8.outlineView.view).tapped
     }
 
     @objc private func nineTapped() {
         delegate?.calculatorButton(.nine)
-        ButtonInteractionView(number9.outlineView.view).tapped
+        ButtonInteraction(number9.outlineView.view).tapped
     }
 
     @objc private func zeroTapped() {
         delegate?.calculatorButton(.zero)
-        ButtonInteractionView(number0.outlineView.view).tapped
+        ButtonInteraction(number0.outlineView.view).tapped
     }
 
     @objc private func additionTapped() {
         delegate?.calculatorButton(.addition)
-        ButtonInteractionView(addition.outlineView.view).tapped
+        ButtonInteraction(addition.outlineView.view).tapped
     }
 
     @objc private func subtractionTapped() {
         delegate?.calculatorButton(.subtraction)
-        ButtonInteractionView(subtraction.outlineView.view).tapped
+        ButtonInteraction(subtraction.outlineView.view).tapped
     }
 
     @objc private func multiplicationTapped() {
         delegate?.calculatorButton(.multiplication)
-        ButtonInteractionView(multiplication.outlineView.view).tapped
+        ButtonInteraction(multiplication.outlineView.view).tapped
     }
 
     @objc private func divisionTapped() {
         delegate?.calculatorButton(.division)
-        ButtonInteractionView(division.outlineView.view).tapped
+        ButtonInteraction(division.outlineView.view).tapped
     }
 
     @objc private func equalsTapped() {
         delegate?.calculatorButton(.equals)
-        ButtonInteractionView(equals.view).tapped
+        ButtonInteraction(equals.view).tapped
     }
 
     @objc private func clearTapped() {
         delegate?.calculatorButton(.clear)
-        ButtonInteractionView(clear.view).tapped
+        ButtonInteraction(clear.view).tapped
     }
 
     @objc private func plusMinusTapped() {
         delegate?.calculatorButton(.plusMinus)
-        ButtonInteractionView(plusMinus.view).tapped
+        ButtonInteraction(plusMinus.view).tapped
     }
 
     @objc private func percentageTapped() {
         delegate?.calculatorButton(.percentage)
-        ButtonInteractionView(percentage.view).tapped
+        ButtonInteraction(percentage.view).tapped
     }
 
     @objc private func decimalSeparatorTapped() {
         delegate?.calculatorButton(.decimalSeparator)
-        ButtonInteractionView(decimalSeparator.view).tapped
+        ButtonInteraction(decimalSeparator.view).tapped
     }
 
     @objc private func backspaceTapped() {
         delegate?.calculatorButton(.backspace)
-        ButtonInteractionView(backspace.view).tapped
+        ButtonInteraction(backspace.view).tapped
     }
 
 

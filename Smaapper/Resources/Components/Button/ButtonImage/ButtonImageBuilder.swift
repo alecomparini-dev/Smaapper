@@ -11,7 +11,6 @@ import UIKit
 
 class ButtonImageBuilder: ButtonBuilder {
     
-    private var imgWithConfiguration: ImageView?
     
 //  MARK: - Initializers
 

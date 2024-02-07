@@ -44,7 +44,7 @@ class DockActions {
     }
     
     @discardableResult
-    func setEventDock(event: EventDock ,closure: @escaping eventDockClosureAlias) -> Self {
+    func setEventDock(event: EventDock, closure: @escaping eventDockClosureAlias) -> Self {
         switch event {
             case .showDock:
                 self.showDockClosure = closure
@@ -56,7 +56,7 @@ class DockActions {
     }
     
     @discardableResult
-    func setEventItemDock(event: EventItemDock ,closure: @escaping indexItemDockAlias) -> Self {
+    func setEventItemDock(event: EventItemDock, closure: @escaping indexItemDockAlias) -> Self {
         switch event {
             case .activatedItem:
                 self.activatedItemDock = closure

@@ -10,9 +10,9 @@ import UIKit
 class ProportionFloatViewController: FloatViewController {
     static let identifierApp = K.Proportion.identifierApp
     
-    private var okBtnInteration: ButtonInteractionView?
-    private var refreshBtnInteraction: ButtonInteractionView?
-    private var copyBtnInteraction: ButtonInteractionView?
+    private var okBtnInteration: ButtonInteraction?
+    private var refreshBtnInteraction: ButtonInteraction?
+    private var copyBtnInteraction: ButtonInteraction?
     
     private var proportionA: Double = .zero
     private var proportionB: Double = .zero
@@ -53,9 +53,9 @@ class ProportionFloatViewController: FloatViewController {
 //  MARK: - PRIVATE Area
     
     private func configButtonInteraction() {
-        self.okBtnInteration = ButtonInteractionView(screen.okButton.view)
-        self.refreshBtnInteraction = ButtonInteractionView(screen.refreshButton.view)
-        self.copyBtnInteraction = ButtonInteractionView(screen.copyButton.view)
+        self.okBtnInteration = ButtonInteraction(screen.okButton.view)
+        self.refreshBtnInteraction = ButtonInteraction(screen.refreshButton.view)
+        self.copyBtnInteraction = ButtonInteraction(screen.copyButton.view)
     }
     
     private func configDelegate() {

@@ -17,7 +17,7 @@ class HangmanKeyboardLetterView: ViewBuilder {
     
     private let color: UIColor
     private(set) var text: String
-    private(set) var buttonInteration: ButtonInteractionView?
+    private(set) var buttonInteration: ButtonInteraction?
     
     init(_ text: String, _ color: UIColor) {
         self.text = text
@@ -59,7 +59,7 @@ class HangmanKeyboardLetterView: ViewBuilder {
     }
     
     private func configButtonInteraction() {
-        self.buttonInteration = ButtonInteractionView(self.gallowsLetter.outlineView.view)
+        self.buttonInteration = ButtonInteraction(self.gallowsLetter.outlineView.view)
         
     }
     

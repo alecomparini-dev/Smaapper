@@ -19,6 +19,7 @@ class AskChatGPTView: ViewBuilder {
     private func initialization() {
         addElements()
         configConstraints()
+        applyNeumorphism()
     }
     
     lazy var askChatGPTLabel: LabelBuilder = {
@@ -71,15 +72,6 @@ class AskChatGPTView: ViewBuilder {
                 build
                     .setCornerRadius(10)
             }
-            .setNeumorphism({ build in
-                build
-                    .setReferenceColor(Theme.shared.currentTheme.surfaceContainerLow.adjustBrightness(17))
-                    .setShape(.concave)
-                    .setIntensity(to: .light, percent: 80)
-                    .setBlur(to: .light, percent: 5)
-                    .setDistance(to: .light, percent: 3)
-                    .apply()
-            })
             .setConstraints { build in
                 build
                     .setTop.equalTo(underLineView.view, .bottom , 17)
@@ -92,7 +84,7 @@ class AskChatGPTView: ViewBuilder {
     lazy var goChatGPTIconButton: IconButtonBuilder = {
         return IconButtonBuilder(UIImageView(image: UIImage(systemName: "arrow.up.right")))
             .setImageSize(12)
-            .setImageColor(Theme.shared.currentTheme.onPrimary)
+            .setImageColor(Theme.shared.currentTheme.onPrimary )
             .setImageWeight(.bold)
             .setGradient { build in
                 build
@@ -137,6 +129,22 @@ class AskChatGPTView: ViewBuilder {
         self.chatGPTTextField.applyConstraint()
         self.goChatGPTIconButton.applyConstraint()
         
+    }
+    
+    private func applyNeumorphism() {
+        DispatchQueue.main.async { [weak self] in
+            self?.chatGPTTextField.setNeumorphism({ build in
+                build.setReferenceColor(Theme.shared.currentTheme.surfaceContainer)
+                    .setShape(.concave)
+                    .setLightPosition(.leftTop)
+                    .setIntensity(to: .light, percent: 100)
+                    .setBlur(to: .light, percent: 3)
+                    .setBlur(to: .dark , percent: 5)
+                    .setDistance(to: .light, percent: 3)
+                    .setDistance(to: .dark, percent: 5)
+                    .apply()
+            })
+        }
     }
     
     
