@@ -43,6 +43,12 @@ class CategoriesViewController: UIViewController {
         configDelegate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        screen.applyNeumorphism()
+    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
