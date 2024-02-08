@@ -56,3 +56,28 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-
 - [ ] Movie/Series Recommendations
 
 
+---
+## DESENVOLVIMENTO
+- Foi utilizado o Firebase somente para Crashlycts
+- E foi utilizado o Realm como banco de dados local.
+
+#### DEPENDÊNCIAS: 
+- #### SDKs TERCEIROS:
+  - Firebase
+  - Realm
+ 
+- #### Gerenciador de Dependência:
+  - SPM(Swift Package Manager) para o Firebase
+  - Cocoapods para Realm
+
+#### ARQUITETURA
+- MVVM-C
+
+#### PATTERNS (em estudo)
+- Builder
+
+#### TESTE UNITÁRIOS
+- Não foi realizado testes unitários neste projeto
+
+
+
