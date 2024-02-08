@@ -24,7 +24,7 @@
 - [ ] Unit Converter
 - [ ] Tip Calculator
 
-https://github.com/alecomparini-dev/Smaapper/assets/76792477/36b42b9e-d429-4238-9a12-bdbec3bde496
+https://github.com/alecomparini-dev/Smaapper/assets/76792477/749b0472-6184-4cbc-99bd-59066aa30ac5
 
 
 #### # AR - Augmented Reality:
@@ -34,12 +34,9 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/36b42b9e-d429-4238-
 - [x] What Beer
 - [ ] What Color
 
+https://github.com/alecomparini-dev/Smaapper/assets/76792477/0cea088d-6553-4bc5-9c98-7a36c4e47a7b
 
-https://github.com/alecomparini-dev/Smaapper/assets/76792477/8f759343-4988-460f-aa85-0c7d45c25c37
-
-https://github.com/alecomparini-dev/Smaapper/assets/76792477/c22c1668-3adb-435f-9e83-982d88e5b3cd
-
-
+https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-a704-3a59a30ffbc6
 
 
 #### # Games/Entertainment:
