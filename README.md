@@ -5,7 +5,7 @@
 </h3>
 
 ## FEATURE
-> A ideia deste projeto era juntar vários pequenos apps, entre joguinhos, entretenimentos, informações e ferramentas do cotidiano e colocar tudo em um único lugar.
+> A ideia deste projeto era juntar vários pequenos apps, entre joguinhos e entretenimentos, informações, ferramentas do cotidiano e colocar tudo em um único lugar.
 - As categorias estariam divididas da seguinte forma:
 #### # Utilities
 - [ ] Alcohol or Gasoline
@@ -26,7 +26,6 @@
 
 https://github.com/alecomparini-dev/Smaapper/assets/76792477/749b0472-6184-4cbc-99bd-59066aa30ac5
 
-
 #### # AR - Augmented Reality:
 - [x] Sticky Note
 - [ ] Tape Measure
@@ -37,7 +36,6 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/749b0472-6184-4cbc-
 https://github.com/alecomparini-dev/Smaapper/assets/76792477/0cea088d-6553-4bc5-9c98-7a36c4e47a7b
 
 https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-a704-3a59a30ffbc6
-
 
 #### # Games/Entertainment:
 - [ ] Quiz
