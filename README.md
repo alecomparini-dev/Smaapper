@@ -4,4 +4,7 @@
   <br>
 </h3>
 
+## FEATURE
+> A ideia deste projeto era juntar vários pequenos apps, entre joguinhos, entretenimentos, curiosidades, ferramentas do cotidiano e colocar tudo em um único lugar. 
+
 
