@@ -1,9 +1,16 @@
 <h3 align="center">
   <br>
-  <img src="https://github.com/alecomparini-dev/Smaapper/assets/76792477/016b94aa-81da-41c8-b6d5-367442615552" width="600">
+  <img src="https://github.com/alecomparini-dev/Smaapper/assets/76792477/13409a2f-8232-4a5c-aaff-0f361ad511d3" width="600">
+  
   <br>
+
 </h3>
 
+
+
+
+
+---
 ## FEATURE
 > A ideia deste projeto era juntar vários pequenos apps, entre joguinhos e entretenimentos, informações, ferramentas do cotidiano e colocar tudo em um único lugar.
 - As categorias estariam divididas da seguinte forma:
@@ -56,9 +63,11 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-
 
 ---
 ## DESENVOLVIMENTO
-- Foi utilizado o Firebase para Crashlytics
-- Foi utilizado o Realm como banco de dados local.
-- Para o stickNote foi utilizado o ArKit e para o reconhecimento das marcas de cervejas foi utilizado o CoreML.
+- Neste projeto foi utilizado
+  - Firebase para Crashlytics
+  - Realm como banco de dados local.
+  - Para o StickNote foi utilizado o ArKit
+  - Para o reconhecimento das marcas de cervejas foi utilizado o **CoreML**.
 
 #### DEPENDÊNCIAS: 
 - #### SDKs TERCEIROS:
@@ -76,7 +85,8 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-
 - Builder
 
 #### TESTE UNITÁRIOS
-- Não foi realizado testes unitários neste projeto
+- Não foram feitos testes unitários para este projeto. Exemplo de testes unitários [veja neste projeto](https://github.com/alecomparini-dev/Hangman)
+
 
 
 
