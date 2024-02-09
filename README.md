@@ -57,9 +57,11 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-
 
 ---
 ## DESENVOLVIMENTO
-- Foi utilizado o Firebase para Crashlytics
-- Foi utilizado o Realm como banco de dados local.
-- Para o stickNote foi utilizado o ArKit e para o reconhecimento das marcas de cervejas foi utilizado o CoreML.
+- Neste projeto foi utilizado
+  - Firebase para Crashlytics
+  - Realm como banco de dados local.
+  - Para o StickNote foi utilizado o ArKit
+  - Para o reconhecimento das marcas de cervejas foi utilizado o **CoreML**.
 
 #### DEPENDÊNCIAS: 
 - #### SDKs TERCEIROS:
