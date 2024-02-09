@@ -1,8 +1,14 @@
 <h3 align="center">
   <br>
-  <img src="https://github.com/alecomparini-dev/Smaapper/assets/76792477/016b94aa-81da-41c8-b6d5-367442615552" width="600">
+  <img src="https://github.com/alecomparini-dev/Smaapper/assets/76792477/13409a2f-8232-4a5c-aaff-0f361ad511d3" width="600">
+  
   <br>
+
 </h3>
+
+
+
+
 
 ---
 ## FEATURE
