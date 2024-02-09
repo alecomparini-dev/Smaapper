@@ -85,7 +85,7 @@ https://github.com/alecomparini-dev/Smaapper/assets/76792477/bf30c305-fb02-4f6c-
 - Builder
 
 #### TESTE UNITÁRIOS
-- Não foram feitos testes unitários para este projeto. Exemplo de testes unitários [veja neste projeto](https://github.com/alecomparini-dev/Hangman)
+- Não foram feitos testes unitários para este projeto. Exemplo de testes unitários [aqui](https://github.com/alecomparini-dev/Hangman)
 
 
 
