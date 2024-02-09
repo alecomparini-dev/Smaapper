@@ -4,6 +4,7 @@
   <br>
 </h3>
 
+---
 ## FEATURE
 > A ideia deste projeto era juntar vários pequenos apps, entre joguinhos e entretenimentos, informações, ferramentas do cotidiano e colocar tudo em um único lugar.
 - As categorias estariam divididas da seguinte forma:
